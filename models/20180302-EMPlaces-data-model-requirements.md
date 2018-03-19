@@ -1,4 +1,4 @@
-# EMPlaces (structural) requirements
+# EMPlaces (structural) data model requirements
 
 - Preferred name (label)
 - Alternative representations of the preferred name (transliterations, translations)
@@ -60,39 +60,39 @@ Expect to have a proposal for interworking with these?
 
 
 
-## Notes on data model
+## Notes on data model diagrams
 
-- Note that current hierarchy is intended to be handled by the relation structure (?)  Be clearer about colour coding)
-- Ditto "Setting" (also, be clear how to distinguish as coredata may be updated automatically)
-- (Note: assuming no alternative structures for "core" data that isn't temporally qualified - we just agreed this (2018-03-19))
-- Do separate diagram for just core data??
-- Need to add "provenance": distinbguish between creator and subsequent contributions (provided by Timbuctoo core system; not adeed to data model).  But also label for initial original provenance: attach to reference gazetteer entry reesource.
-- Initial provenance: source of core data; plus label for display (attach label to reference gazetteer entry resource)
-- Copy changes from original image to annotation version
+- [x] Note that current hierarchy is intended to be handled by the relation structure (?)  Be clearer about colour coding.
+- [x] Ditto "Setting"
+- [x] (Note: assuming no alternative structures for "core" data that isn't temporally qualified - we just agreed this (2018-03-19))
+- [x] Need to add "provenance": distinbguish between creator and subsequent contributions (provided by Timbuctoo core system; not adeed to data model).  But also label for initial original provenance: attach to reference gazetteer entry resource.
+- [x] Related resource add label
+- [x] Initial provenance: link source of core data; plus label for display (attach label to reference gazetteer entry resource)
+- [x] Editorial note for hierarchies (attach to categories)
+- [x] Editorial note bibliography resources
+- [x] Maintain distinction between bibliographic entry and a source - simplest is link+label, but biblio may need to be more comprehensive
+- [x] "Editorial notes" -> "Description"
+- [x] Related resources: link+label
 
-- Annotations: label as type of annotation (e.g. name annotation, map annotation, etc.)
-- Annotations: also have editorial note (for maps, attestations, calendars)
-- Editorial note for hierarchies (attach to categories)
-- Editorial note bibliography resources
-- "Link-back" (usage)
+- [x] Annotations: label (in diagram) as type of annotation (e.g. name annotation, map annotation, etc.)
+- [x] Annotations: also have editorial note (for maps, attestations, calendars)
+- [x] Name attestations: add language of name
+- [x] Associate with source: name attestation, map reference, calendars in use
+- [ ] Add "Link-back"
 
-- Name attestations: add language of name
 
-- Maintain distinction between bibliographic entry and a web citation - simplest is link+label, but biblio may need to be more comprehensive (e.g. subclassing)
+QUESTION: should source and duration details be connected to thje annotation or to the annotation body?  Using the body feels more intuiitive, but it might make some annotation-agnostic processing harder to manage.  Maybe there is no such requirement?
 
-- Bibliography; which bits specific to location, which to larger units?  Distinguish bibliography and source
+- [ ] "Core" flag for place type
+- [ ] "Core" flag for place category
+- [ ] "Core" flag for relation type
+- [ ] "Core" flag for setting type
+- [ ] Do separate diagram for just core data??
 
-(In addition to data model diagram, also need a crossswalk explaining how information for UI elements would be accessed.)
 
-- "Editorial notes" -> "Description"
+- (Hierarchy read-across not for now (or only partial?))
+- (See search results under "layout tests" in Google drive)
+- (In addition to data model diagram, also need a crossswalk explaining how information for UI elements would be accessed.)
+- (Calendars - multiple calendars in use in region.  Will record predominant ones, with separate list of exceptions presented deduced from contained places.)
 
-- Calendars - multiple calendars in use in region ?  
-
-- Related resources: link+label
-
-- See search results under "layout tests" in Google drive
-
-- Read-across not for now (or only partial?)
-
-(search: Intermine?)
 
