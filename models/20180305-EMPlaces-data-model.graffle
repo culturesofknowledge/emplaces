@@ -60,7 +60,7 @@
 	<array>
 		<dict>
 			<key>Bounds</key>
-			<string>{{516.13817196040804, 166.3161762599932}, {104.24848937988281, 16}}</string>
+			<string>{{516.13817196040816, 162.48795300002098}, {104.24848937988281, 16}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -160,7 +160,7 @@ em:placeCategory}</string>
 			<key>Points</key>
 			<array>
 				<string>{566.92909556110999, 212.59840965270996}</string>
-				<string>{566.92907348392657, 141.73227310180664}</string>
+				<string>{566.92907348392657, 134.64565944671631}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -195,7 +195,7 @@ em:placeCategory}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{510.23618316650391, 85.039363861083984}, {113.38581848144531, 56.692909240722656}}</string>
+			<string>{{510.23618316650391, 77.952750205993652}, {113.38581848144531, 56.692909240722656}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -287,7 +287,7 @@ Place category \
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{474.8031120300293, 63.779523849487305}, {106.29920959472656, 35.433067321777344}}</string>
+			<string>{{474.8031120300293, 56.692910194396973}, {106.29920959472656, 35.433067321777344}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -6383,8 +6383,6 @@ description (derived from gazetteer)}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
-			<key>TextRelativeArea</key>
-			<string>{{0, 0}, {1, 1}}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
@@ -7280,7 +7278,7 @@ URI}</string>
 {\colortbl;\red255\green255\blue255;\red128\green64\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
-\f0\fs48 \cf2 Data model for EMPlaces using web annotations (draft 2018-03-07)}</string>
+\f0\fs48 \cf2 Data model for EMPlaces (draft 2018-03-07)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -8205,7 +8203,7 @@ em:Place}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2018-03-19 11:34:14 +0000</string>
+	<string>2018-03-19 13:56:46 +0000</string>
 	<key>Modifier</key>
 	<string>Graham Klyne</string>
 	<key>NotesVisible</key>
@@ -8241,7 +8239,7 @@ em:Place}</string>
 		<key>NSPaperName</key>
 		<array>
 			<string>string</string>
-			<string>7D7B813C-1DBC-497E-85C8-814E7CEC4D44</string>
+			<string>C572065F-C01A-4827-B8D0-2557AC6BCBA2</string>
 		</array>
 		<key>NSPaperSize</key>
 		<array>
@@ -8306,7 +8304,7 @@ em:Place}</string>
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{92, 4}, {1199, 773}}</string>
+		<string>{{700, 4}, {1199, 773}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -8320,7 +8318,7 @@ em:Place}</string>
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-8, 0}, {1171, 631}}</string>
+		<string>{{-8, 96}, {1171, 631}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
