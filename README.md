@@ -1,2 +1,2 @@
-# emplaces
+# EM Places
 Early Modern Places
