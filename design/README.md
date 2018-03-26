@@ -2,6 +2,6 @@
 
 ## Place Name
 
-![Place Name](img/place-name.png)
+![Place Name](https://github.com/culturesofknowledge/emplaces/blob/master/img/place-names.png)
 
 asdads
