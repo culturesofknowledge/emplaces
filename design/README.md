@@ -2,6 +2,6 @@
 
 ## Place Name
 
-![Place Name][img/place-name.png]
+![Place Name](img/place-name.png)
 
 asdads
