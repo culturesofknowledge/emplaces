@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-=======
-\<\<\<\<\<\<\< HEAD
 # em places
 Early Modern Places (EM Places) is a historical geo-gazetteer under development by the [Cultures of Knowledge][1] project. It is the first of [three planned Linked Data resources (EM People, EM Dates)][2] built on a common IT infrastructure platform ([Timbuctoo][3]). 
 
@@ -18,11 +15,6 @@ asdads
 asdads
 asdasd
 
-=======
->>>>>>> Stashed changes
-# EM Places
-Early Modern Places
-> > > > > > > origin/master
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
