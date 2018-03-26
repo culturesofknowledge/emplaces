@@ -12,7 +12,7 @@ Our third goal, is to provide _functionality to correctly credit, properly sourc
 
 Our fourth goal is to _make the EM Places source code and datasets easily accessible and reusable by others_. To this end, the EM Places application source code will be shared under open source and made available as a Docker container. All data in EM Places will be shared under open access over multiple channels: via manual, user initiated exports from the EM Places applications and periodic data dumps to external repositories in commonly used formats (CSV, Excel, GraphML, RDF-XML, GeoJSON) and programmatically via the EM Places API. In addition, we are working closely with the [Pelagios](http://commons.pelagios.org) and [World Historical Gazetteer](http://whgazetteer.org) project teams to ensure that EM Places data will be able to share its data in the [Pelagios Gazetteer Interconnection Format](https://github.com/pelagios/pelagios-cookbook/wiki/Pelagios-Gazetteer-Interconnection-Format) via a [Peripleo](https://github.com/pelagios/peripleo) compatible API.
 
-In the long-term, we plan to use EM Places as the datastore for place data for [Early Modern Letters Online](http://emlo.bodleian.ox.ac.uk) (EMLO) and to facilitate this type of reuse by other projects as well. 
+Our long-term goal is to use EM Places as the datastore for place data for [Early Modern Letters Online](http://emlo.bodleian.ox.ac.uk) (EMLO) and to facilitate this type of reuse by other projects as well. 
 
 ## Features
 The draft design document offers further details on the planned features for EM Places together with an initial set of schematic design mock-ups. 
