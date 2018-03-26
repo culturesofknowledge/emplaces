@@ -1,5 +1,4 @@
-# Individual Features
-
+# Display Features
 
 ## Place Name
 
@@ -47,7 +46,7 @@ Attestations are sourced instances of name variants to the preferred and alterna
 
 TBD how to represent the attestation source. Most will be named links, but others may need to refer to other kinds of sources. 
 
-An info link to a pop-up provides a means to explain the function of the attestation.
+An "info" link to a pop-up provides a means to explain the function of the attestation.
 
 ## Maps
 
@@ -57,9 +56,11 @@ An info link to a pop-up provides a means to explain the function of the attesta
 
 The required default map view will be an e.g. OpenStreetMap or Google etc. current view of a region surrounding the place with a flag dropped on the location using core data. 
 
-Optionally, it will be possible, via tabs, to view a small, finite number (e.g. 3) additional but historical, open-access geo-referenced maps of the region drawn from a provider such as https://www.davidrumsey.com or http://www.oldmapsonline.org or http://retromap.ru. 
+Optionally, it will be possible, via tabs, to view a small, finite number (e.g. 3) additional but historical, open-access geo-referenced maps of the region drawn from a provider such as https://www.davidrumsey.com or http://www.oldmapsonline.org or http://retromap.ru. It may be necessary, for space reasons, to open the historical maps in a new window/tab.
 
 TBD: Explore a library such as http://leafletjs.com which can display both vector and image tiled maps, or else (just for tiled maps) the IIIF compatible http://www.georeferencer.com. 
+
+An "info" link to a pop-up provides a means to explain the function of the widget. However, TBD is whether a similar, but separate means will be needed to indicate the sourcing for in particular the historical maps, perhaps via a "sources" link. 
 
 ## Calendars
 
@@ -67,7 +68,19 @@ TBD: Explore a library such as http://leafletjs.com which can display both vecto
 
 **Source:** Extended Data
 
+A simple visualization of the calendars in use between 1500 and 1800. In the initial release, the calendars potentially shown here will be (TBD) the Julian O.S., Julian N.S., Gregorian, Swedish, Ottoman and Hebrew. Dates will be expressed in full years, with only a simplified indication of uncertainty (e.g. c. 1683).
 
+An "info" link to a pop-up provides a means to explain the function of the widget. However, TBD is whether a similar, but separate means will be needed to indicate the sourcing for the calendar, perhaps via a "sources" link. 
+
+## Creator/Contributors/Provenance + License
+
+**Category:** Required
+
+**Source:** Generated
+
+An indication of the Creator of the record (i.e. the person or organization which created the initial record), the Initial Provenance (a credit line for the reference gazetteer which provided the core data for the record), and the Contributors (a comma separated list of names of the registered full-names of the contributors to the record). An indication of the license(s) under which data of this record can be released.
+
+TBD is the need to list one (CC0) or possibly two licenses to account for core and extended metatdata (CC0 + CC-BY). Probably this will need to be a single CC0 license.
 
 
 
