@@ -18,7 +18,7 @@ In the long-term, we plan to use EM Places as the datastore for place data for [
 **March 2018**: First public draft of an overview document describing the main features of the gazetteer its (display) UI elements. First public draft of a high-level data model. 
 
 ## Feedback and Comments
-We greatly value your interest and feedback on this project! Please record your comments (preferably) as new issues in the EM Places GitHub repository, or else contact Arno Bosse at arno.bosse@history.ox.ac.uk or @kintopp on Twitter.
+We greatly value your interest and feedback in this project. Please forward your comments to us (preferably) as new issues in the EM Places GitHub repository, or else by contacting Arno Bosse at arno.bosse@history.ox.ac.uk or @kintopp on Twitter.
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
