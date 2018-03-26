@@ -1,5 +1,5 @@
 # EM Places
-Early Modern Places (EM Places) is a historical geo-gazetteer under development by the [Cultures of Knowledge][1] project. It is the first of three Linked Data resources later also comprising [EM People and EM Dates][2] built on a [shared humanities infrastructure platform][3]. 
+Early Modern Places (EM Places) is a historical geo-gazetteer under development by the [Cultures of Knowledge][1] project with funding from the Andrew F. Mellon Foundation. It is the first of three Linked Data resources later also comprising [EM People and EM Dates][2] built on a [shared humanities infrastructure platform][3] in collaboration with the [Huygens Institute][8] (KNAW). 
 
 ## Goals
 EM Places is designed to meet several goals. 
@@ -22,3 +22,4 @@ Our fourth and final goal is to _make the EM Places source code and datasets eas
 [5]:	http://whgazetteer.org
 [6]:	https://github.com/pelagios/pelagios-cookbook/wiki/Pelagios-Gazetteer-Interconnection-Format
 [7]:	https://github.com/pelagios/peripleo
+[8]:  https://www.huygens.knaw.nl/?lang=en
