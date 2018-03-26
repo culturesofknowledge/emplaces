@@ -1,5 +1,6 @@
 # Individual Features
 
+
 ## Place Name
 
 **Category:** Required
@@ -10,7 +11,7 @@ The default/preferred place name and its alternate names come from the reference
 
 It will be useful to compare the list of alternative names in GeoNames with those in the Getty TGN. If these often diverge, then a merged set under the above criteria should be shown. 
 
-## Canonical UTI
+## Canonical URI
 
 **Category:** Required
 
@@ -48,11 +49,23 @@ TBD how to represent the attestation source. Most will be named links, but other
 
 An info link to a pop-up provides a means to explain the function of the attestation.
 
-## Attestations
+## Maps
 
 **Category:** Required + Optional
 
 **Source:** Core Data + Extended Data
+
+The required default map view will be an e.g. OpenStreetMap or Google etc. current view of a region surrounding the place with a flag dropped on the location using core data. 
+
+Optionally, it will be possible, via tabs, to view a small, finite number (e.g. 3) additional but historical, open-access geo-referenced maps of the region drawn from a provider such as https://www.davidrumsey.com or http://www.oldmapsonline.org or http://retromap.ru. 
+
+TBD: Explore a library such as http://leafletjs.com which can display both vector and image tiled maps, or else (just for tiled maps) the IIIF compatible http://www.georeferencer.com. 
+
+## Calendars
+
+**Category:** Required
+
+**Source:** Extended Data
 
 
 
