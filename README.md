@@ -16,7 +16,7 @@ Our fourth and final goal is to _make the EM Places source code and datasets eas
 March 2018: First public draft of an overview document describing the main features of the gazetteer its (display) UI elements. First public draft of a high-level data model. 
 
 ## Feedback and Comments
-We greatly value your interest and feedback on this project! Please record your comments (preferably) as new issues in the EM Places GitHub repository, or else contact Arno Bosse at arno.bosse@history.ox.ac.uk or @kintopp.
+We greatly value your interest and feedback on this project! Please record your comments (preferably) as new issues in the EM Places GitHub repository, or else contact Arno Bosse at arno.bosse@history.ox.ac.uk or @kintopp on Twitter.
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
