@@ -16,7 +16,7 @@ By contrast, _Extended metadata_ is data which will be provided and revised by C
 
 Not all records in EM Places will be found in the reference gazetteers. In such cases, a user with the necessary privileges will create a new record with manually entered core metadata.
 
-## Workflow
+### Workflow
 
 A typical workflow for a new record would request the user to first attempt to identify the place in a reference gazetteer (GeoNames) and to enter that ID in EM Places. On this basis, EM Places will pull the relevant core metadata and use it to populate the draft record in a staging area. If the required place cannot be found, a new record cannot be created until a user with higher privileges has confirmed that the place is not available in GeoNames and provided a draft record for the user with manually entered core metadata.
 
@@ -106,6 +106,10 @@ TBD is the need to list one (CC0) or possibly two licenses to account for core a
 
 ## Description
 
+This field will initially be (manually) populated with data from the Getty TGN and then revised as needed by users. 
+
+An "info" link to a pop-up provides a means to explain the function sourcing for its data. 
+
 ## Bibliography
 
 ## Related Resources
@@ -114,9 +118,25 @@ TBD is the need to list one (CC0) or possibly two licenses to account for core a
 
 ## Export
 
+**Category:** Required
+
+**Source:** Generated
+
+A means to manually export the current record (only) in a variety of formats, currently CSV, Excel, RDF-XML, GraphML, and GeoJSON.
+
 ## Share
+
+**Category:** Required
+
+**Source:** Generated
+
+A means to share a link to the current record on social media.
 
 ## Feedback
 
+**Category:** Required
 
+**Source:** Generated
+
+A means to be directed either to a comment form, referencing the current record, or else a simple mailto: link.
 
