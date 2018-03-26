@@ -25,14 +25,3 @@ The draft data model document provides an overview of the current data model for
 
 ## Feedback and Comments
 We greatly value your interest and feedback in this project. Please forward your comments to us (preferably) as new issues in this GitHub repository, or else by contacting Arno Bosse at arno.bosse@history.ox.ac.uk or @kintopp on Twitter.
-
-
-[1]:	culturesofknowledge.org
-[2]:	http://www.culturesofknowledge.org/?p=8455
-[3]:	https://github.com/HuygensING/timbuctoo
-[4]:	http://commons.pelagios.org
-[5]:	http://whgazetteer.org
-[6]:	https://github.com/pelagios/pelagios-cookbook/wiki/Pelagios-Gazetteer-Interconnection-Format
-[7]:	https://github.com/pelagios/peripleo
-[8]:  https://www.huygens.knaw.nl/?lang=en
-[9]:  http://emlo.bodleian.ox.ac.uk
