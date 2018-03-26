@@ -82,6 +82,21 @@ An indication of the Creator of the record (i.e. the person or organization whic
 
 TBD is the need to list one (CC0) or possibly two licenses to account for core and extended metatdata (CC0 + CC-BY). Probably this will need to be a single CC0 license.
 
+## Hierarchies
+
+## Description
+
+## Bibliography
+
+## Related Resources
+
+## Linkbacks
+
+## Export
+
+## Share
+
+## Feedback
 
 
 
