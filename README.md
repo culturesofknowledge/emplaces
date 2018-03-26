@@ -1,5 +1,5 @@
 # EM Places
-Early Modern Places (EM Places) is a historical geo-gazetteer under development by the [Cultures of Knowledge][1] project. It is the first of [three planned Linked Data resources (EM People, EM Dates)][2] built on a common IT infrastructure platform ([Timbuctoo][3]). 
+Early Modern Places (EM Places) is a historical geo-gazetteer under development by the [Cultures of Knowledge][1] project. It is the first of [three planned Linked Data resources][2] later including EM People and EM Dates built on the basis of a common humanities infrastructure platform ([Timbuctoo][3]). 
 
 ## Goals
 EM Places is designed to meet several goals. 
