@@ -1,3 +1,7 @@
+# GK's working notes for EMPlaces data model requirements
+
+Not definitive!  Not maintained!
+
 # EMPlaces (structural) data model requirements
 
 - Preferred name (label)

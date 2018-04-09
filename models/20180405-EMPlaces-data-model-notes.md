@@ -2,7 +2,7 @@
 
 ## Shapes
 
-- round-ended shapes designate classes or prototypical values, which in actual place descriptions appear as instances of the described class.  The underlying boxes to thye upper left of the main class symbol indicate UREIs or CURIEs (compact URIs) for one or more classes of which the designated value is a member.
+- round-ended shapes designate classes or prototypical values, which in actual place descriptions appear as instances of the described class.  The underlying boxes to thye upper left of the main class symbol indicate URIs or CURIEs (compact URIs) for one or more classes of which the designated value is a member.
 
 - rectangular shapes designate literal values, which in actual place descriptions appear as strings, numbers or other literal data values.
 
@@ -22,11 +22,13 @@ Colour is used in the diagrams to give a sense of the role and/or source of info
 
     A key property of this core data is that it may be automatically updated if the reference gazeteer entry is updated; as such it is not available for editing in EMPlaces cataloguing workflows.
 
+    @@TODO: if data displayed as core requires intervention to construct, how will this be recoirded so that upodates to the reference gazetteer can be applied automatically.
+
 -   Orange indicates EMPlaces additional data about a place that (generally) if not provided by a conventional gazetteer.  This data represents editorial contributions of EMPlaces to the information about a place.  The intent is that EMPlaces additional data will be provided where available, and is not necessarily poresent for every Place instance.
 
     Some entities are shown with both yellow and orange colouring.  This indicates that the same vocabulary terms may be used in the representation of both core and additional data about a place.
 
-    @@TODO: indicate a simple generic mechanism that reliably distinguishes core data instances from added data, so that thgey can be reliably superseded when gazetteer-provided informaton is refreshed.  Possibilities ofr this include: flag associated with value; type associated with core value; subtypes for core values; separate properties for core values; subproperties for core values; etc.
+    @@TODO: indicate a simple generic mechanism that distinguishes core data instances from added data, so that they can be reliably superseded when gazetteer-provided informaton is refreshed.  Possibilities ofr this include: flag associated with value; type associated with core value; subtypes for core values; separate properties for core values; subproperties for core values; etc.
 
 -   Green is used for spatial location information.
 
@@ -59,15 +61,23 @@ A string that is the preferred name for a place; this is the default name used w
 
 A string, possibly with a language code, that is an alernative name for a place.  Alternative names are generally alternative transliterations and language representations for the name of the place.
 
+## @@TODO: technical metadata
+
+Supplied by underlying systtem, covers:
+- creator
+- contributors
+- licenses (core, EMplaces)
+
+
 ## Description
 
 A description of a place.
 
-The description is initially populated from the reference gazeteer entry, but is editorialy controlled by EMPlaces.  Its focus is on the historical exiastence and context of the place, and may diverge from the gazetteer description.  As such, it is not intended to be updated when the other core data obtained from the reference gazetteer entry is refreshed.
+The description is initially populated from the reference gazeteer entry, but is editorialy controlled by EMPlaces.  Its focus is on the historical existence and context of the place, and may diverge from the gazetteer description.  As such, it is not intended to be updated when the other core data obtained from the reference gazetteer entry is refreshed.
 
 ## Qualified relation
 
-A Qualified relation represents a historical relationship between two places.  Specifically, the relationship ismone that generally exists only for a limited perod of time (e.g. the City of Opole being administratively part of the Duchy of Opole during the period 1281 to 1521).
+A Qualified relation represents a historical relationship between two places.  Specifically, the relationship is one that generally exists only for a limited perod of time (e.g. the City of Opole being administratively part of the Duchy of Opole during the period 1281 to 1521).
 
 Thus, in addition to being linked to the two related places, a Qualified relation is also linked to a Timespan during which the relationship existed, and a Relation type that indicates the type of relationship (e.g. administrative part, ecclesiastic part, etc.)
 
@@ -109,13 +119,17 @@ Represents a bounded region in space and time (cf. CIDOC CRM [E92 Spacetime Volu
 
 A formal bibliographic entry to some published work.
 
+@@TODO: adopt formal bibliographic structure; e.g. bibtex-json derived.
+
+@@TODO: can we get away with a minimal text format in V1?  Or a very reduced structured format?
+
 ## Source
 
 A reference to a source of a claim made buy an Annotation.  May be descriptive or informal (e.g. a URL).  May also convey contextual information about the appicability of the claim.
 
 ## Related resource
 
-Areference to a resource that is believed to contain relevant additional information about a place (or other entity).
+A reference to a resource that is believed to contain relevant additional information about a place (or other entity).
 
 @@TODO: use with `rdfs:seeAlso` instead of `em:relatedesource`?
 
@@ -144,11 +158,11 @@ May be connected to specific geographic or spatial location, or simply a referen
 
 ## `em:hasAnnotation` Annotation 
 
-This statement indicates an annoation associated with a place.  The annotation may carry different information about the place, dependent on the value of the associated Annotation type.
+This statement indicates an annotation associated with a place.  The annotation may carry different information about the place, dependent on the value of the associated Annotation type.
 
-`em:hasAnnotation` functions roughly as an inverse of `oa:hastarget`, and is defined to simplify JSON-LD representations of annotations associated with a place.  The annotation itself should also have an `oa:hastarget` property with the asscoated place as its object, to be a valid web annoation.
+`em:hasAnnotation` functions roughly as an inverse of `oa:hastarget`, and is defined to simplify JSON-LD representations of annotations associated with a place.  The annotation itself should also have an `oa:hasTarget` property with the asscoated place as its object, to be a valid web annoation.
 
-@@TODO: would it be better to associate an anotation container with the place (e.g. using `em:hasAnnotations`), or to treat the place itself as an annotation container?  Or maybe have a separate annotation container for all places?
+@@TODO: would it be better to associate an anotation container with the place (e.g. using `em:hasAnnotations`), or to treat the place itself as an annotation container?  Or maybe have a separate annotation container for all places?  Probably not: it just complicates things for no clear value.  It may make sense to have a separate annotation container for all place annotations, but that can be real;ized later if desired.
 
 ### `oa:hasTarget` Place
 
@@ -167,14 +181,22 @@ The purpose of the annotation type is to make it easy to find particiular annota
 The Annotation body conveys specific information associated with the associated place.  The structure of this information is definbed by the corresponding Annotation type value.
 
 @@TODO: should the annotation body also reference the place directly?  (This would make it stand more independently, maybe easier to process separately from the annotation itself, but could it also cause some semantic problems?)
+-- My current preference is "no" - rather, use the annotation to stand for the qualified relation.
 
 @@TODO: should the temporal information be attached to the annotation body, or to the annotation (as now)?
+-- Currently, I prefer attachment to the Annotation, but I should check that this doesn't break anything in OA.  (Ask Rob Sanderson?)
+-- Could this be considered to be a subproperty of AO "scope"?
 
 @@TODO: should the annotation type be attached to the annotation body, or to the annotation (as now)?
+-- I'm inclined to leave it on the Annotation.  But check this doesn't violate OA.
 
 @@TODO: should the annotation carry an editorial note: currently, that is attached to the annotation body.
+-- I'm inclined to move it to the Annotation.  But check this doesn't violate OA.
+-- OA allows multiple bodies per annotation.  Suggest the editorialnote is provided as a separate body with textual value.
 
-@@TODO: the above questions arise in part from tghinking about the "annotation" as being a reification of an association between the place and the annotation body, thereby allowing that association to be qualified in various ways.
+@@NOTE: AO defines a `source` property, but its use is more akin to prov:specializationOf.
+
+@@TODO: the above questions arise in part from thinking about the "annotation" as being a reification of an association between the place and the annotation body, thereby allowing that association to be qualified in various ways.
 
 @@TODO: the above questions also beg the question: "why annoations?".  A possible answer is that they provide a seamless way to incorporate 3rd-party data, externally stored and managed, into an overall description.  This could support a number of potential usage models for EWMPlaces and friends (researcher notebooks, 3rd party submissions for incorporaton, use-dependent trust models fopr annotation data, etc.)
 
@@ -214,6 +236,10 @@ NOTE: the calendar itself may be described by a textual description associated w
 ### `em:when` Timespan
 
 Indicates a period during which the calendar was used at the associated place.
+
+
+## Map
+
 
 
 # Properties
