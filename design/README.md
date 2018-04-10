@@ -1,12 +1,12 @@
-# Display Features
+# Draft Overview (Record Detail View)
 
-## Core and Extended Metadata
+## Core and Additional Metadata
 
-There two main sources of data in EM Places. _Core metadata_ is periodically drawn by API from reference gazetteers (GeoNames and Getty TGN) and will be comprised of the following fields:
+There two main sources of data in EM Places. _Core metadata_ is periodically drawn by API from a reference gazetteer (GeoNames) and will be comprised of:
 
-* Preferred Place Name (GeoNames)
-* Alternative Names (GeoNames: all entries are indexed, not all are displayed)
-* Latitude/Longitude (GeoNames: including polygons, if available)
+* Preferred Place Name
+* Alternative Names (all entries are indexed, not all are displayed)
+* Location (lat/long but also including polygons where available for regions)
 * Current administrative/political hierarchy (GeoNames)
 * Related Resources (TBD: links to other gazetteers)
 
@@ -139,4 +139,3 @@ A means to share a link to the current record on social media.
 **Source:** Generated
 
 A means to be directed either to a comment form, referencing the current record, or else a simple mailto: link.
-
