@@ -4,7 +4,7 @@ The descriptions below are best read alongside [images](/images) of the current 
 
 The following draft descriptions offer an overview of the different areas of functionality offered by the detail/display view for a single place record. The ‘Priority’ sub-heading is meant to track the relative importance of the feature as a development priority for the v.1 gazetteer.
 
-Please [get in touch with us][https://github.com/culturesofknowledge/emplaces#feedback-and-comments] with your comments and criticism – we value your feedback!
+Please [get in touch with us][2] with your comments and criticism – we value your feedback!
 
 ## Basic Concepts
 
@@ -191,3 +191,4 @@ A link to a simple comment form, referencing the current record and (if present)
 A means to share a link to the current record on social media. If possible, this should be implemented in a way which does not promote cross-site tracking of visitors to the gazetteer.
 
 [1]:	https://www.uni-bamberg.de/histgeo/forschung/aktuell/
+[2]:  https://github.com/culturesofknowledge/emplaces#feedback-and-comments/
