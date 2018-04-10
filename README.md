@@ -14,19 +14,27 @@ The fourth is to __make the EM Places source code and datasets easily accessible
 
 On this basis , work was begun earlier this year on a high-level data model and a prioritized description of the gazetteer’s features which could be used to fix its initial scope given the time and resources available to us for its development. These document are supported by a series of draft mock-ups of the gazetteer’s user-interface.
 
-## Features
-The draft design document offers an informal description on the planned features for EM Places together and an intial set of draft design mock-ups. More details will be provided here as the gazetteer’s features are finalized.
+## Design
+The draft design documents offer an informal description on the planned features for EM Places together with an initial set of interface mock-ups. More details will be provided here as the gazetteer’s features are finalized.
 
 ## Data Model
 An early draft of the proposed data model for EM Places and a set of data model diagrams. More details will be provided here as the data model set is finalized.
 
-## Current Status
+## Status
 **April 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
 
 **March 2018**: Private drafts of the gazetter's design document and data model.
 
+## Next ToDo Items
+- Collect and incorporate feedback
+- Fix the main v.1 features of the gazetteer; revise documentation
+- Test data model with sample data
+- Update data model; revise documentation
+- Refine the proposed search interface
+- Discuss editorial workflows; create initial interface mockups
+
 ## Feedback and Comments
-We are very interested in your feedback and comments on this project! Please get in touch by contacting Arno Bosse (Digital Project Manager, Cultures of Knowledge) by email arno.bosse@history.ox.ac.uk or via @kintopp on Twitter or by creating a new issue in this repository.
+We are keen to get your feedback and comments on this project. Please get in touch by contacting Arno Bosse (Digital Project Manager, [Cultures of Knowledge][8]) by email [arno.bosse@history.ox.ac.uk][9] via [@kintopp][10] on Twitter or by creating a new GitHub issue in the repository with your comment/question.
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
@@ -35,3 +43,6 @@ We are very interested in your feedback and comments on this project! Please get
 [5]:	https://github.com/pelagios/pelagios-cookbook/wiki/Pelagios-Gazetteer-Interconnection-Format
 [6]:	https://github.com/pelagios/peripleo
 [7]:	http://commons.pelagios.org
+[8]:	http://culturesofknowledge.org
+[9]:	mailto:arno.bosse@history.ox.ac.uk
+[10]:	http://twitter.com/kintopp

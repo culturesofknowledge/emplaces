@@ -1,8 +1,10 @@
-# Draft Feature Overview (Display View)
+# Overview (Display View)
 
-The informal descriptions below are intended to offer an overview of the different areas of functionality offered by the detail/display view for a single place record. The ‘Priority’ sub-heading is meant to track the relative importance of the feature as a development priority for the v.1 gazetteer.
+The descriptions below are best read alongside images of the current draft interface. 
 
-It will be helpful read the text alongside images of the draft interface (PDF, PNG). Following this much which is described below will (or should!) already be self-explanatory.  
+The following draft descriptions offer an overview of the different areas of functionality offered by the detail/display view for a single place record. The ‘Priority’ sub-heading is meant to track the relative importance of the feature as a development priority for the v.1 gazetteer.
+
+Please get in touch with us with your comments and criticism – we value your feedback!
 
 ## Basic Concepts
 
@@ -100,15 +102,47 @@ A visualization of the predominant calendars (Julian, Gregorian) in use between 
 
 Much remains to be discussed. Given the sparsity of data for these  transitions and the great danger of generalizing it may be useful to supplement (or replace?) the overview visualization with something like ‘Calendar Attestations’ to allow individual cases to be recorded. 
 
-## Creator/Contributors/Provenance + License
+## Related Resources
+
+**Priority:** Required
+
+**Source:** Core data + additional metadata
+
+A list of predominantly online resources and references (for traditional scholarly resources, contributors can make use of the Bibliography) some of which will be derived from core data (e.g. links to Wikipedia, WikiData, certain other gazetteers) but most of which will be manually entered. 
+
+## Linkbacks
+
+**Priority:** Required (form of implementation optional)
+
+**Source:** Core data + additional metadata
+
+A list of dynamic links to resources which can be queried programmatically for more information about a place. The data would be polled and updated at an appropriate interval. For example, X number of letters were sent from this place, and Y number of letters were received at this place. 
+
+If dynamic links can’t be implemented in v.1, then periodically refreshed, static data from a small set of important sources is acceptable as well.
+
+## Bibliography
+
+**Priority:** Required (form of implementation optional)
+
+**Source:** Core data + additional metadata
+
+A list of bibliographic resources (predominantly offline, scholarly). At minimum, an unstructured free text list would suffice for v.1. Ideally, a structured list, with the ability to apply place tags to each entry, so making it easier for subsequent contributors to find and select existing bibliographic entries in a consistent manner. This is intended to help avoid contributors working on different places in e.g. the same region and period repeatedly entering the same reference, possibly in different formats. 
+
+## Creator/Contributors/License
 
 **Priority:** Required
 
 **Source:** Generated
 
-An indication of the Creator of the record (i.e. the person or organization which created the initial record), the Initial Provenance (a credit line for the reference gazetteer which provided the core data for the record), and the Contributors (a comma separated list of names of the registered full-names of the contributors to the record). An indication of the license(s) under which data of this record can be released.
+An indication of the Creator of the record (i.e. the person or organization which created the initial record), one or more subsequent Contributors, a credit line for the reference gazetteer, and a notice of the licenses in use. We will require two licenses – CC0 for the reference gazetteer (core data), and CC-BY (v4 or possibly higher – since changes will be logged in Timbuctoo) for the remaining, additional metadata.
 
-TBD is the need to list one (CC0) or possibly two licenses to account for core and Additional metatdata (CC0 + CC-BY). Probably this will need to be a single CC0 license.
+## Export
+
+**Priority:** Required (form of implementation optional)
+
+**Source:** Generated
+
+A means to manually export the current record (only) in several common formats, currently thought to be CSV, Excel, Turtle, GraphML, and GeoJSON-LDT. The exact list will be dependant on the capabilities of the infrastructure at launch and (in the case of GeoJSON-LDT) whether this standard has been settled yet (if not, the broader standard, GeoJSON-LD can be used instead).
 
 ## Maps
 
@@ -120,35 +154,25 @@ The required (for current places) default map view will be an e.g. OpenStreetMap
 
 Optionally, it will be possible, via tabs, to view a finite number (e.g. max. 4) of historical, open-access geo-referenced and live-tiled maps of the place drawn from a provider such as https://www.davidrumsey.com or http://www.oldmapsonline.org or http://retromap.ru. Alternatively, one could substitute a single tile as a thumbnail for the historical map, and link this to the external historical map resource.
 
-## Historical Hierarchies
-
 ## Description
 
-This field will initially be (manually) populated with data from the Getty TGN and then revised as needed by users. 
-
-An "info" link to a pop-up provides a means to explain the function sourcing for its data. 
-
-## Bibliography
-
-## Related Resources
-
-## Linkbacks
-
-## Export
-
 **Priority:** Required
 
-**Source:** Generated
+**Source:** Additional metadata 
 
-A means to manually export the current record (only) in a variety of formats, currently CSV, Excel, RDF-XML, GraphML, and GeoJSON.
+This field will initially be (semi?)-automatically populated with data from the Getty TGN and then further revised as needed by users/editors.
 
-## Share
+## Historical Hierarchies
 
-**Priority:** Required
+**Priority:** Required (form of implementation optional)
 
-**Source:** Generated
+**Source:** Additional metadata 
 
-A means to share a link to the current record on social media.
+This section is best understood by looking at the draft interface mockup.
+
+Historical hierarchies show the historical administrative, ecclesiastical, judicial, and military hierarchies for both historical and current places. Initially, this will be limited to showing the period a certain relationship existed. For example, from an administrative/political perspective, the Silesian town of Opole fell under the Duchy of Opole from 1281-1521. In each part of the hierarchy (with the precise mode of display TBD) a user will also be able to view the period of existence of each place entity (e.g. the Bohemian Crown existed from 1348 to 1918). Together, a set of dated entities, linked in hierarchial order by a set of dated relations, forms one (from a possible four kinds of) hierarchy. In the case of ecclesiastical hierarchies, an additional row of tabs will be needed to show what kind of hierarchy (e.g. what confession) is being tracked. 
+
+Several aspects of historical hierarchies remain to be discussed, including, for example, how to establish an editorial policy for what could often be subjective or uncertain start/end dates for a relation or an entity.
 
 ## Feedback
 
@@ -156,6 +180,14 @@ A means to share a link to the current record on social media.
 
 **Source:** Generated
 
-A means to be directed either to a comment form, referencing the current record, or else a simple mailto: link.
+A link to a simple comment form, referencing the current record and (if present) a link to the logged-in users profile, or else a simple mailto: link, referencing the current record (e.g. in the subject field).
+
+## Share
+
+**Priority:** Required
+
+**Source:** Generated
+
+A means to share a link to the current record on social media. If possible, this should be implemented in a way which does not promote cross-site tracking of visitors to the gazetteer.
 
 [1]:	https://www.uni-bamberg.de/histgeo/forschung/aktuell/
