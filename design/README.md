@@ -24,13 +24,14 @@ By contrast, _additional metadata_ is primarily scholary and historical data (ov
 
 The term ‘current’ refers to a currently existing, physical place and as such will generally also be found in the reference gazetteer. Consequently, a current place will also have a current administrative hierarchy (e.g. ADM1, ADM2, ADM3..) and a physical location (lat/long) maintained for it by the reference gazetteer.  
 
-A ‘historical’ place will generally be a former (hence historical) place with a temporal validity (e.g. the Habsburg Monarchy, 1526-1804). Though, in principle, some historical places could be additionally be described as an aggregation of one or more physical regions, EM Places will not attempt to capture this form of location data (i.e. polygons for historical regions). Instead, we will link to external resources/projects with the necessary expertise in this area (e.g. to [FNZGIS][1] for Central/Eastern Europe). TBD is whether the location for a representative ‘capital’ of a historical place (e.g. Vienna for the Hapsburg Monarchy) should be recorded.
+A ‘historical’ place will generally be a former (hence historical) place with a temporal validity (e.g. the Habsburg Monarchy, 1526-1804). Though, in principle, some historical places could be additionally be described as an aggregation of one or more physical regions, EM Places will not attempt to capture this form of location data (i.e. polygons for historical regions). Instead, we will link to external resources/projects with the necessary expertise in this area (e.g. to [FNZGIS][1] for Central/Eastern Europe). 
 
 Consequently, a current place (e.g. Augsburg) will have a current (GeoNames derived) administrative hierarchy as well as several historical hierarchies associated with it (to account, for example, for when Augsburg was part of the Holy Roman Empire). However, a historical place (e.g. the Holy Roman Empire) while being part of (many) other historical hierarchies will never have a current hierarchy.
 
 ### Workflow
 
 **Priority:** Required
+
 **Source:** Core Data  (unless no reference gazetteer ID is present).
 
 The basic workflow for a new record will request the user to first identify the place in the reference gazetteer (GeoNames) and to enter its ID in EM Places. EM Places will then pull the relevant core metadata from GeoNames and use it to populate the draft record in a staging area. If the place cannot be found in the reference gazetteer, a new record cannot be created until a user with appropriate privileges has confirmed that no GeoNames ID is available. Following this, a new record can be created in the staging area with custom core metadata. After this, the record can be amended as usual with additional metadata. 
@@ -47,13 +48,13 @@ A workflow for supporting bulk imports via e.g. CSV files will also be provided.
 
 The default/preferred place name and its alternate names will come from the reference gazetteer. All alternative names and their labels will be stored and indexed but only some will be displayed. For example, while we will allow users to find places using e.g. a Chinese transliteration there may be no need to display this transliteration in the list of alternative names. For the display list, alternative names from a short list of major European languages and historical forms (i.e. Latin) should suffice. Next, the list of alternative names will be compared with one or more additional gazetteers (preferably Getty TGN). From these, a merged set of unique alternative names will be shown (to avoid havinh to list e.g. Rome, Rome, Rome for each GeoName supported language). The sources for the alternative names will be recorded and made accessible.
 
-## Canonical URI
+## Current Hierarchy
 
 **Priority:** Required
 
-**Source:** Generated
+**Source:** Core Data
 
-This should be a short form permanent URI based on the custom domain for EM Places (e.g. emplaces.info). It should be accompanied by a button allowing the URI to be copied to the clipboard on mouseclick.
+The administrative/political hierarchy for a current place provided by the reference gazetteer. By definition, a historical (i.e. former) place can’t display its administrative hierarchy here – instead, a placeholder message will refer the user to the section on ‘Historical Hierarchies’. 
 
 ## Location
 
@@ -69,7 +70,15 @@ The representative center point for a place displayed as decimal lat/long and de
 
 **Source:** Generated
 
-A simple means to represent the canonical URI as an academic citation, in several standard formats and copy it for reuse. 
+A simple means to represent the canonical URI as an academic citation, in several standard formats and copy it on mouseclick for reuse. 
+
+## Permanent URI
+
+**Priority:** Required
+
+**Source:** Generated
+
+This should be a short form permanent URI based on the custom domain for EM Places (e.g. emplaces.info). It should be accompanied by a button allowing the URI to be copied to the clipboard on mouseclick.
 
 ## Name Attestations
 
@@ -77,23 +86,9 @@ A simple means to represent the canonical URI as an academic citation, in severa
 
 **Source:** Additional metadata
 
-Attestations are sourced instances of name variants to the preferred and alternative names in core data. For example, if a scholar finds a reference to Siena in a manuscript written as 'Ciena' and (TBD via the editorial policy) this form is not already listed as an alternative name, then this toponym can be recorded here, along with the language, date, and source for the attestation. 
+Attestations are sourced instances of name variants of the preferred and alternative names in core data. For example, if a scholar finds a reference to Siena in a manuscript written 'Ciena' and (TBD via the editorial policy) this form is not already listed as an alternative name, then this toponym can be recorded here, along with the language, date, and source for the attestation. 
 
-TBD is how to represent the attestation source. 
-
-## Maps
-
-**Priority:** Required (current places) + Optional (historical places)
-
-**Source:** Core Data (current places) + Additional metadata (historical places)
-
-The required default map view will be an e.g. OpenStreetMap or Google etc. current view of a region surrounding the place with a flag dropped on the location using core data. 
-
-Optionally, it will be possible, via tabs, to view a small, finite number (e.g. 3) additional but historical, open-access geo-referenced maps of the region drawn from a provider such as https://www.davidrumsey.com or http://www.oldmapsonline.org or http://retromap.ru. It may be necessary, for space reasons, to open the historical maps in a new window/tab.
-
-TBD: Explore a library such as http://leafletjs.com which can display both vector and image tiled maps, or else (just for tiled maps) the IIIF compatible http://www.georeferencer.com. 
-
-An "info" link to a pop-up provides a means to explain the function of the widget. However, TBD is whether a similar, but separate means will be needed to indicate the sourcing for in particular the historical maps, perhaps via a "sources" link. 
+TBD structure for the source supporting the attestation. 
 
 ## Calendars
 
@@ -101,9 +96,9 @@ An "info" link to a pop-up provides a means to explain the function of the widge
 
 **Source:** Additional metadata
 
-A simple visualization of the calendars in use between 1500 and 1800. In the initial release, the calendars potentially shown here will be (TBD) the Julian O.S., Julian N.S., Gregorian, Swedish, Ottoman and Hebrew. Dates will be expressed in full years, with only a simplified indication of uncertainty (e.g. c. 1683).
+A visualization of the predominant calendars (Julian, Gregorian) in use between 1500 and 1800 at that place. One possibility for realizing this is via a hierarchy of inherited calendars. So, for example, in the absence of any more specific information, assume (but also make this clear in the interface) that the place transitioned from Julian to Gregorian in 1582. If a place or set of places (such as a region) transitioned at a different date, then note this, and have all places under it inherit this (and override the default 1852 transition). If a more specific place such as a town transitioned in a different manner, then note this for that town, and override the regional transition etc.
 
-An "info" link to a pop-up provides a means to explain the function of the widget. However, TBD is whether a similar, but separate means will be needed to indicate the sourcing for the calendar, perhaps via a "sources" link. 
+Much remains to be discussed. Given the sparsity of data for these  transitions and the great danger of generalizing it may be useful to supplement (or replace?) the overview visualization with something like ‘Calendar Attestations’ to allow individual cases to be recorded. 
 
 ## Creator/Contributors/Provenance + License
 
@@ -115,7 +110,17 @@ An indication of the Creator of the record (i.e. the person or organization whic
 
 TBD is the need to list one (CC0) or possibly two licenses to account for core and Additional metatdata (CC0 + CC-BY). Probably this will need to be a single CC0 license.
 
-## Hierarchies
+## Maps
+
+**Priority:** Required (current) + Optional (historical)
+
+**Source:** Core Data (current) + Additional metadata (historical)
+
+The required (for current places) default map view will be an e.g. OpenStreetMap view using the location provided by core data. 
+
+Optionally, it will be possible, via tabs, to view a finite number (e.g. max. 4) of historical, open-access geo-referenced and live-tiled maps of the place drawn from a provider such as https://www.davidrumsey.com or http://www.oldmapsonline.org or http://retromap.ru. Alternatively, one could substitute a single tile as a thumbnail for the historical map, and link this to the external historical map resource.
+
+## Historical Hierarchies
 
 ## Description
 
