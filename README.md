@@ -1,8 +1,8 @@
 # EM Places
-Early Modern Places (EM Places) is a historical geo-gazetteer under development by the [Cultures of Knowledge][1] project at Oxford University with funding from the Andrew W. Mellon Foundation. It is the first of what will eventually be three Linked Open Data resources also comprising [EM People and EM Dates][2] built on a [shared humanities infrastructure platform][3] in collaboration with the [Huygens Institute][4] (KNAW). 
+Early Modern Places (EM Places) is a historical geo-gazetteer under development by the [Cultures of Knowledge][1] project at Oxford University with funding from the Andrew W. Mellon Foundation. It is the first of what will eventually become [three Linked Open Data resources][2] also comprising Early Modern People and Early Modern Dates built on a [shared humanities infrastructure platform][3] in collaboration with the [Huygens Institute][4] (KNAW) in Amsterdam. 
 
 ## Goals
-EM Places is being designed to meet several goals: 
+EM Places is being designed to meet four goals: 
 
 The first is to be __a resource for identifying early modern places__ by means of their current and historical name variants. To this end, EM Places will combine current place (and alternative) place names, a current political/administrative hierarchy and location data from reference gazetteers (GeoNames, TGN Getty) and extend this with additional name attestations provided by contributors from historical sources (e.g. manuscripts or maps).
 
@@ -15,10 +15,10 @@ The fourth is to __make the EM Places source code and datasets easily accessible
 On this basis , work was begun earlier this year on a high-level data model and a prioritized description of the gazetteer’s features which could be used to fix its initial scope given the time and resources available to us for its development. These document are supported by a series of draft mock-ups of the gazetteer’s user-interface.
 
 ## Design
-The draft design documents offer an informal description on the planned features for EM Places together with an initial set of interface mock-ups. More details will be provided here as the gazetteer’s features are finalized.
+The [draft design documents](/design) offer an informal description on the planned features for EM Places together with an initial set of interface mock-ups. More details will be provided here as the gazetteer’s features are finalized.
 
 ## Data Model
-An early draft of the proposed data model for EM Places and a set of data model diagrams. More details will be provided here as the data model set is finalized.
+An early draft of the [proposed data model](/models) for EM Places and a set of data model diagrams. More details will be provided here as the data model set is finalized.
 
 ## Status
 **April 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
