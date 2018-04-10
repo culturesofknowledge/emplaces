@@ -15,7 +15,7 @@ The fourth is to __make the EM Places source code and datasets easily accessible
 On this basis , work was begun earlier this year on a high-level data model and a prioritized description of the gazetteer’s features which could be used to fix its initial scope given the time and resources available to us for its development. These document are supported by a series of draft mock-ups of the gazetteer’s user-interface.
 
 ## Design
-The [draft design documents](/design) offer an informal description on the planned features for EM Places together with an initial set of interface mock-ups. More details will be provided here as the gazetteer’s features are finalized.
+The draft [design documents](/design) offer an informal description on the planned features for EM Places together with an initial set of interface mock-ups. More details will be provided here as the gazetteer’s features are finalized.
 
 ## Data Model
 An early draft of the [proposed data model](/models) for EM Places and a set of data model diagrams. More details will be provided here as the data model set is finalized.
