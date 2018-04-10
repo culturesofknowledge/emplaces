@@ -1,4 +1,8 @@
-# Draft Overview (Record Detail View)
+# Draft Feature Overview (Detail View)
+
+The informal descriptions below are intended to give an overview  of the main areas of functionality of the detail view of a particular place record. ‘Priority’ and ‘Source’ are intended as initial guides for the relative importance of the feature as a developmentment priority for v1 and the source for the data shown.
+
+It will be helpful read the text alongside screenshots (PDF, PNG) of the draft interface for the detail view. 
 
 ## Core and Additional Metadata
 
@@ -10,29 +14,28 @@ There two main sources of data in EM Places. _Core metadata_ is periodically dra
 * Current administrative/political hierarchy (GeoNames)
 * Related Resources (TBD: links to other gazetteers)
 
-Core metadata will form the spine of the gazetteer. This is data which EM Places will accept 'as is' and will not be editing. It can  be replaced at regular intervals (e.g. quarterly) with minimal editorial oversight in order to benefit from corrections/additions upstream.
+Core metadata will form the spine of the gazetteer. This is data which EM Places will accept 'as is' and will not be editing. It can  be replaced at regular intervals (e.g. quarterly) with minimal oversight to benefit from corrections/additions upstream.
 
-By contrast, _Extended metadata_ is data which will be provided and revised by CofK staff and contributors on an ongoing basis or be otherwise set-up on a case by case basis from external data sources (Related Resources and Linkbacks).
+By contrast, _addtional metadata_ is data which will be provided and revised by CofK staff and contributors.
 
-Not all records in EM Places will be found in the reference gazetteers. In such cases, a user with the necessary privileges will create a new record with manually entered core metadata.
+### Workflow for adding records
 
-### Workflow
+The basic workflow for a new record would request the user to first identify the place in the reference gazetteer (GeoNames) and to enter its ID in EM Places. EM Places will then pull the relevant core metadata from GeoNames and use it to populate the draft record in a staging area. If the place cannot be found in the reference gazetteer, a new record cannot be created until a user with appropriate privileges has confirmed that the place is not available in GeoNames and provided a draft record with manually entered core metadata to which additional metadata can be added.
 
-A typical workflow for a new record would request the user to first attempt to identify the place in a reference gazetteer (GeoNames) and to enter that ID in EM Places. On this basis, EM Places will pull the relevant core metadata and use it to populate the draft record in a staging area. If the required place cannot be found, a new record cannot be created until a user with higher privileges has confirmed that the place is not available in GeoNames and provided a draft record for the user with manually entered core metadata.
+A bulk import workflow via CSV will
 
 ## Place Name
 
-**Category:** Required
-
+**Priority:** Required
 **Source:** Core Data
 
-The default/preferred place name and its alternate names come from the reference gazetteer. All alternative names and their labels should be stored and indexed but only some will be displayed. For example, while we can silently allow users to find places using a Chinese transliteration there is no need to display the transliteration in the list of alternative names. For these, names in a TBD list of major European languages and historical forms will suffice.
+The default/preferred place name and its alternate names come from the reference gazetteer. All alternative names and their labels will be stored and indexed but only some will be displayed. For example, while we can silently allow users to find places using a Chinese transliteration there is no need to display this transliteration in the list of alternative names. For these, names in a short list of major European languages and historical forms will suffice.
 
-It will be useful to compare the list of alternative names in GeoNames with those in the Getty TGN. If these often diverge, then a merged set under the above criteria should be shown. 
+The list of alternative names in GeoNames will be compared with a comparable, if available, in Getty TGN (and possibly additional gazetteers). From these, a merged set of unique alternative names will be shown. Sources for the alternative names will be 
 
 ## Canonical URI
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Generated
 
@@ -40,7 +43,7 @@ This should be a short form permanent URI based on the custom domain for EM Plac
 
 ## Latitude/Longitude
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Core Data
 
@@ -48,7 +51,7 @@ The representative center point for a place displayed as decimal lat/long and de
 
 ## Citation
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Generated
 
@@ -58,7 +61,7 @@ It may be possible to combine this with the canonical URI.
 
 ## Attestations
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Extended Data
 
@@ -70,7 +73,7 @@ An "info" link to a pop-up provides a means to explain the function of the attes
 
 ## Maps
 
-**Category:** Required + Optional
+**Priority:** Required + Optional
 
 **Source:** Core Data + Extended Data
 
@@ -84,7 +87,7 @@ An "info" link to a pop-up provides a means to explain the function of the widge
 
 ## Calendars
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Extended Data
 
@@ -94,7 +97,7 @@ An "info" link to a pop-up provides a means to explain the function of the widge
 
 ## Creator/Contributors/Provenance + License
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Generated
 
@@ -118,7 +121,7 @@ An "info" link to a pop-up provides a means to explain the function sourcing for
 
 ## Export
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Generated
 
@@ -126,7 +129,7 @@ A means to manually export the current record (only) in a variety of formats, cu
 
 ## Share
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Generated
 
@@ -134,7 +137,7 @@ A means to share a link to the current record on social media.
 
 ## Feedback
 
-**Category:** Required
+**Priority:** Required
 
 **Source:** Generated
 
