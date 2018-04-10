@@ -1,12 +1,14 @@
-# Draft Feature Overview (Detail View)
+# Draft Feature Overview (Display View)
 
-The informal descriptions below are intended to give an overview  of the main areas of functionality of the detail view of a particular place record. ‘Priority’ and ‘Source’ are intended as initial guides for the relative importance of the feature as a developmentment priority for v1 and the source for the data shown.
+The informal descriptions below are intended to offer an overview of the different areas of functionality offered by the detail/display view for a single place record. The ‘Priority’ sub-heading is meant to track the relative importance of the feature as a development priority for the v.1 gazetteer.
 
-It will be helpful read the text alongside screenshots (PDF, PNG) of the draft interface for the detail view. 
+It will be helpful read the text alongside images of the draft interface (PDF, PNG). Following this much which is described below will (or should!) already be self-explanatory.  
 
-## Core and Additional Metadata
+## Basic Concepts
 
-There two main sources of data in EM Places. _Core metadata_ is periodically drawn by API from a reference gazetteer (GeoNames) and will be comprised of:
+### Core and Additional Metadata
+
+There are two main sources for data in EM Places. _Core metadata_ is periodically drawn by API from the reference gazetteer (currently: GeoNames) and will be comprised of:
 
 * Preferred Place Name
 * Alternative Names (all entries are indexed, not all are displayed)
@@ -14,24 +16,36 @@ There two main sources of data in EM Places. _Core metadata_ is periodically dra
 * Current administrative/political hierarchy (GeoNames)
 * Related Resources (TBD: links to other gazetteers)
 
-Core metadata will form the spine of the gazetteer. This is data which EM Places will accept 'as is' and will not be editing. It can  be replaced at regular intervals (e.g. quarterly) with minimal oversight to benefit from corrections/additions upstream.
+Core metadata will form the spine of the gazetteer. This is data which EM Places will accept 'as is' and will not be editing. It can be replaced at regular intervals (e.g. quarterly) with minimal oversight to benefit from corrections/additions upstream.
 
-By contrast, _addtional metadata_ is data which will be provided and revised by CofK staff and contributors.
+By contrast, _additional metadata_ is primarily scholary and historical data (over and beyond core metadata) which will be provided and revised by CofK staff and contributors. 
 
-### Workflow for adding records
+### Current and Historical Places
 
-The basic workflow for a new record would request the user to first identify the place in the reference gazetteer (GeoNames) and to enter its ID in EM Places. EM Places will then pull the relevant core metadata from GeoNames and use it to populate the draft record in a staging area. If the place cannot be found in the reference gazetteer, a new record cannot be created until a user with appropriate privileges has confirmed that the place is not available in GeoNames and provided a draft record with manually entered core metadata to which additional metadata can be added.
+The term ‘current’ refers to a currently existing, physical place and as such will generally also be found in the reference gazetteer. Consequently, a current place will also have a current administrative hierarchy (e.g. ADM1, ADM2, ADM3..) and a physical location (lat/long) maintained for it by the reference gazetteer.  
 
-A bulk import workflow via CSV will
+A ‘historical’ place will generally be a former (hence historical) place with a temporal validity (e.g. the Habsburg Monarchy, 1526-1804). Though, in principle, some historical places could be additionally be described as an aggregation of one or more physical regions, EM Places will not attempt to capture this form of location data (i.e. polygons for historical regions). Instead, we will link to external resources/projects with the necessary expertise in this area (e.g. to [FNZGIS][1] for Central/Eastern Europe). TBD is whether the location for a representative ‘capital’ of a historical place (e.g. Vienna for the Hapsburg Monarchy) should be recorded.
 
-## Place Name
+Consequently, a current place (e.g. Augsburg) will have a current (GeoNames derived) administrative hierarchy as well as several historical hierarchies associated with it (to account, for example, for when Augsburg was part of the Holy Roman Empire). However, a historical place (e.g. the Holy Roman Empire) while being part of (many) other historical hierarchies will never have a current hierarchy.
+
+### Workflow
 
 **Priority:** Required
+**Source:** Core Data  (unless no reference gazetteer ID is present).
+
+The basic workflow for a new record will request the user to first identify the place in the reference gazetteer (GeoNames) and to enter its ID in EM Places. EM Places will then pull the relevant core metadata from GeoNames and use it to populate the draft record in a staging area. If the place cannot be found in the reference gazetteer, a new record cannot be created until a user with appropriate privileges has confirmed that no GeoNames ID is available. Following this, a new record can be created in the staging area with custom core metadata. After this, the record can be amended as usual with additional metadata. 
+
+We expect that the vast majority of place names will be found in GeoNames. However, core data for all historical places (e.g. Bohemian Crown) and most buildings (e.g. Christ Church, Oxford) will need to be created by hand. 
+
+A workflow for supporting bulk imports via e.g. CSV files will also be provided. 
+
+## Place Names
+
+**Priority:** Required
+
 **Source:** Core Data
 
-The default/preferred place name and its alternate names come from the reference gazetteer. All alternative names and their labels will be stored and indexed but only some will be displayed. For example, while we can silently allow users to find places using a Chinese transliteration there is no need to display this transliteration in the list of alternative names. For these, names in a short list of major European languages and historical forms will suffice.
-
-The list of alternative names in GeoNames will be compared with a comparable, if available, in Getty TGN (and possibly additional gazetteers). From these, a merged set of unique alternative names will be shown. Sources for the alternative names will be 
+The default/preferred place name and its alternate names will come from the reference gazetteer. All alternative names and their labels will be stored and indexed but only some will be displayed. For example, while we will allow users to find places using e.g. a Chinese transliteration there may be no need to display this transliteration in the list of alternative names. For the display list, alternative names from a short list of major European languages and historical forms (i.e. Latin) should suffice. Next, the list of alternative names will be compared with one or more additional gazetteers (preferably Getty TGN). From these, a merged set of unique alternative names will be shown (to avoid havinh to list e.g. Rome, Rome, Rome for each GeoName supported language). The sources for the alternative names will be recorded and made accessible.
 
 ## Canonical URI
 
@@ -39,15 +53,15 @@ The list of alternative names in GeoNames will be compared with a comparable, if
 
 **Source:** Generated
 
-This should be a short form permanent URI based on the custom domain for EM Places (e.g. emplaces.info). It should be accompanied by a javascript link to allow the URI to be copied to the clipboard on mouseclick.
+This should be a short form permanent URI based on the custom domain for EM Places (e.g. emplaces.info). It should be accompanied by a button allowing the URI to be copied to the clipboard on mouseclick.
 
-## Latitude/Longitude
+## Location
 
 **Priority:** Required
 
 **Source:** Core Data
 
-The representative center point for a place displayed as decimal lat/long and degrees (image just shows decimal). It should be accompanied by a javascript link to allow the URI to be copied to the clipboard on mouseclick. 
+The representative center point for a place displayed as decimal lat/long and degrees (image just shows decimal). It should be accompanied by a button allowing the URI to be copied to the clipboard on mouseclick.
 
 ## Citation
 
@@ -55,27 +69,23 @@ The representative center point for a place displayed as decimal lat/long and de
 
 **Source:** Generated
 
-A means to represent and make available for copying to the clipboard the canonical URI as an academic citation, in several standard formats. Other than in the image, it will better to show the citation format, so that users can have faith that it is being represented correctly. In other words, a list of major academic citation formats which shows the full citation on mouseclick. BibTex will not be needed here, since this is a single citation.
+A simple means to represent the canonical URI as an academic citation, in several standard formats and copy it for reuse. 
 
-It may be possible to combine this with the canonical URI.
-
-## Attestations
+## Name Attestations
 
 **Priority:** Required
 
-**Source:** Extended Data
+**Source:** Additional metadata
 
-Attestations are sourced instances of name variants to the preferred and alternative names in core data. For example, if a scholar finds a reference to Siena in a manuscript written as 'Ciena' and (TBD via editorial policy) this form is not already listed as an alternative name, then this data point can be recorded here, along with the language, date, and source for the attestation. 
+Attestations are sourced instances of name variants to the preferred and alternative names in core data. For example, if a scholar finds a reference to Siena in a manuscript written as 'Ciena' and (TBD via the editorial policy) this form is not already listed as an alternative name, then this toponym can be recorded here, along with the language, date, and source for the attestation. 
 
-TBD how to represent the attestation source. Most will be named links, but others may need to refer to other kinds of sources. 
-
-An "info" link to a pop-up provides a means to explain the function of the attestation.
+TBD is how to represent the attestation source. 
 
 ## Maps
 
-**Priority:** Required + Optional
+**Priority:** Required (current places) + Optional (historical places)
 
-**Source:** Core Data + Extended Data
+**Source:** Core Data (current places) + Additional metadata (historical places)
 
 The required default map view will be an e.g. OpenStreetMap or Google etc. current view of a region surrounding the place with a flag dropped on the location using core data. 
 
@@ -89,7 +99,7 @@ An "info" link to a pop-up provides a means to explain the function of the widge
 
 **Priority:** Required
 
-**Source:** Extended Data
+**Source:** Additional metadata
 
 A simple visualization of the calendars in use between 1500 and 1800. In the initial release, the calendars potentially shown here will be (TBD) the Julian O.S., Julian N.S., Gregorian, Swedish, Ottoman and Hebrew. Dates will be expressed in full years, with only a simplified indication of uncertainty (e.g. c. 1683).
 
@@ -103,7 +113,7 @@ An "info" link to a pop-up provides a means to explain the function of the widge
 
 An indication of the Creator of the record (i.e. the person or organization which created the initial record), the Initial Provenance (a credit line for the reference gazetteer which provided the core data for the record), and the Contributors (a comma separated list of names of the registered full-names of the contributors to the record). An indication of the license(s) under which data of this record can be released.
 
-TBD is the need to list one (CC0) or possibly two licenses to account for core and extended metatdata (CC0 + CC-BY). Probably this will need to be a single CC0 license.
+TBD is the need to list one (CC0) or possibly two licenses to account for core and Additional metatdata (CC0 + CC-BY). Probably this will need to be a single CC0 license.
 
 ## Hierarchies
 
@@ -142,3 +152,5 @@ A means to share a link to the current record on social media.
 **Source:** Generated
 
 A means to be directed either to a comment form, referencing the current record, or else a simple mailto: link.
+
+[1]:	https://www.uni-bamberg.de/histgeo/forschung/aktuell/
