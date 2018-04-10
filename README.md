@@ -12,13 +12,11 @@ The third is to __properly credit, source, and cite all contributions__ to the g
 
 The fourth is to __make the EM Places source code and datasets easily accessible and reusable by others__. To this end, the EM Places  source code, which will be based on the Huygens Institute's Timbuctoo infrastructure will be shared under open source and made accessible for reuse on the basis of Docker containers. All data in EM Places will be shared under open access over multiple channels: in the form of user initiated exports from the EM Places applications itself and as periodic data dumps to external repositories in multiple formats (e.g. CSV, Excel, GraphML, Turtle, GeoJSON-LD) and via the EM Places public API. In addition, EM Places will be able to share its data in the (currently in discussion) enhanced versions of the [Pelagios Gazetteer Interconnection Format][5] and [Peripleo][6] standards maintained by the [Pelagios Community][7].
 
-On this basis , work was begun earlier this year on a high-level data model and a prioritized description of the gazetteer’s features which could be used to fix its initial scope given the time and resources available to us for its development. These document are supported by a series of draft mock-ups of the gazetteer’s user-interface.
-
 ## Design
-The draft [design documents](/design) offer an informal description on the planned features for EM Places together with an initial set of interface mock-ups. More details will be provided here as the gazetteer’s features are finalized.
+The draft [design documents](/design) offer an informal description of the planned features for EM Places together with a first set of interface mock-ups. More details will be added here as the gazetteer’s features are finalized.
 
 ## Data Model
-An early draft of the [proposed data model](/models) for EM Places and a set of data model diagrams. More details will be provided here as the data model set is finalized.
+An early draft of the [proposed data model](/models) for EM Places and a set of data model diagrams. More details will be added here as the data model set is finalized.
 
 ## Status
 **April 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
