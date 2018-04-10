@@ -23,7 +23,7 @@ An early draft of the proposed data model for EM Places and a set of data model 
 ## Current Status
 **April 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
 
-**March 2018**: Private drafts of the gazetter;s design document and data model.
+**March 2018**: Private drafts of the gazetter's design document and data model.
 
 ## Feedback and Comments
 We are very interested in your feedback and comments on this project! Please get in touch by contacting Arno Bosse (Digital Project Manager, Cultures of Knowledge) by email arno.bosse@history.ox.ac.uk or via @kintopp on Twitter or by creating a new issue in this repository.
