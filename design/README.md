@@ -1,6 +1,6 @@
 # Overview (Display View)
 
-The descriptions below are best read alongside images of the current draft interface. 
+The descriptions below are best read alongside [images](/images) of the current draft interface. 
 
 The following draft descriptions offer an overview of the different areas of functionality offered by the detail/display view for a single place record. The ‘Priority’ sub-heading is meant to track the relative importance of the feature as a development priority for the v.1 gazetteer.
 
@@ -168,7 +168,7 @@ This field will initially be (semi?)-automatically populated with data from the 
 
 **Source:** Additional metadata 
 
-This section is best understood by looking at the draft interface mockup.
+This section is best understood by looking at the draft [interface mockups](/images).
 
 Historical hierarchies show the historical administrative, ecclesiastical, judicial, and military hierarchies for both historical and current places. Initially, this will be limited to showing the period a certain relationship existed. For example, from an administrative/political perspective, the Silesian town of Opole fell under the Duchy of Opole from 1281-1521. In each part of the hierarchy (with the precise mode of display TBD) a user will also be able to view the period of existence of each place entity (e.g. the Bohemian Crown existed from 1348 to 1918). Together, a set of dated entities, linked in hierarchial order by a set of dated relations, forms one (from a possible four kinds of) hierarchy. In the case of ecclesiastical hierarchies, an additional row of tabs will be needed to show what kind of hierarchy (e.g. what confession) is being tracked. 
 
