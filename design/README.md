@@ -191,4 +191,4 @@ A link to a simple comment form, referencing the current record and (if present)
 A means to share a link to the current record on social media. If possible, this should be implemented in a way which does not promote cross-site tracking of visitors to the gazetteer.
 
 [1]:	https://www.uni-bamberg.de/histgeo/forschung/aktuell/
-[2]:  https://github.com/culturesofknowledge/emplaces#feedback-and-comments/
+[2]:  https://github.com/culturesofknowledge/emplaces#feedback-and-comments
