@@ -1,10 +1,16 @@
 # EMPlaces data model notes
 
+@@NOTES:
+- reorganize titles of annotation diagrams
+
+
 ## Shapes
 
-- round-ended shapes designate classes or prototypical values, which in actual place descriptions appear as instances of the described class.  The underlying boxes to thye upper left of the main class symbol indicate URIs or CURIEs (compact URIs) for one or more classes of which the designated value is a member.
+- large round-ended shapes designate classes, or entitity types, which in actual place descriptions appear as instances of the described class.  The underlying rectangles to the upper left of the main class symbol indicate URIs or CURIEs (compact URIs) for one or more classes of which the designated value is a member.
 
-- rectangular shapes designate literal values, which in actual place descriptions appear as strings, numbers or other literal data values.
+- large rectangular shapes designate literal values, which in actual place descriptions appear as strings, numbers or other literal data values.
+
+- @@TODO: add "instance" shape
 
 ## Relationships (properties, connections)
 
@@ -18,15 +24,13 @@
 
 Colour is used in the diagrams to give a sense of the role and/or source of information in EMPlaces descriptions:
 
--   Yellow indicates "core data" which is derived from a reference gazetteer.  The "Reference gazeteer entry", indicated by property "em:coreDataRef" whose subject is the Place concerned.  The general intent is that core data will be present for all place descriptions.
+-   Yellow indicates "core data" which is derived from a reference gazetteer.  The "Reference gazeteer entry", which is indicated by property "em:coreDataRef" whose subject is the Place concerned.  The general intent is that core data will be present for all place descriptions.
 
-    A key property of this core data is that it may be automatically updated if the reference gazeteer entry is updated; as such it is not available for editing in EMPlaces cataloguing workflows.
+    A key property of this core data is that it may be automatically updated if the reference gazeteer entry is updated; as such it should not normally be edited ("messed with") in EMPlaces cataloguing workflows.  (In the case of a historical place that does not exist in the reference gazetteer, this core data will need to be created manually.)
 
     @@TODO: if data displayed as core requires intervention to construct, how will this be recoirded so that upodates to the reference gazetteer can be applied automatically.
 
 -   Orange indicates EMPlaces additional data about a place that (generally) if not provided by a conventional gazetteer.  This data represents editorial contributions of EMPlaces to the information about a place.  The intent is that EMPlaces additional data will be provided where available, and is not necessarily poresent for every Place instance.
-
-    Some entities are shown with both yellow and orange colouring.  This indicates that the same vocabulary terms may be used in the representation of both core and additional data about a place.
 
     @@TODO: indicate a simple generic mechanism that distinguishes core data instances from added data, so that they can be reliably superseded when gazetteer-provided informaton is refreshed.  Possibilities ofr this include: flag associated with value; type associated with core value; subtypes for core values; separate properties for core values; subproperties for core values; etc.
 
@@ -34,20 +38,40 @@ Colour is used in the diagrams to give a sense of the role and/or source of info
 
 -   Blue/lilac is used for temporal information.
 
+Some entities are shown with both yellow and orange colouring.  This indicates that the corresponding entity types may be used to represent either core data or additional data about a place.
+
 
 # Classes
 
 ## Place (`em:Place`)
 
-This class represents the central idea described by EMPlaces.  Instances of this class represent a place, in the sense used by Pleiades: "constructed by human experience"
+This class represents the central idea described by EMPlaces.  Instances of this class represent a place, in the sense used by Pleiades: "constructed by human experience".
+
+See also:
+- https://pleiades.stoa.org/help/conceptual-overview
+- https://pleiades.stoa.org/help/pleiades-data-model/
+- 
+
 
 ## Place type (_term TBD_)
 
-A value that indicates a type of a place (e.g. city, battlefield, country, etc.).  A place may (and generally does) have more than one type.
+A value that indicates a type of a place (e.g. city,  battlefield, country, etc.).  For core data populated from GeoNames, these would be GeoName feature class codes (A, ADM1, ADM2, etc.).  A place may (and generally does) have more than one type.
+
+(We suggest that values used are based on Getty AAT terms)
 
 ## Place category (_term TBD_)
 
 Place types may be associated with categories (e.g. administrative, ecclesiastical, etc.)  These associations with categories are initially intended to describe groupings of place types that are associated with various hierarchies.  But the notion is quite general, and other uses may emerge over time (e.g. a "geographical feature" category might cover mountains, lakes, rivers, seas, islands, etc., for which there is no specific hierarchy).
+
+A current place must have a type in the adminsitrative category.
+
+Initial category values will be:
+
+- Administrative
+- Ecclesiastical
+- Military
+- Judicial
+
 
 ## Reference gazetteer entry
 
@@ -73,17 +97,19 @@ Supplied by underlying systtem, covers:
 
 A description of a place.
 
-The description is initially populated from the reference gazeteer entry, but is editorialy controlled by EMPlaces.  Its focus is on the historical existence and context of the place, and may diverge from the gazetteer description.  As such, it is not intended to be updated when the other core data obtained from the reference gazetteer entry is refreshed.
+The description may be initially populated from the reference gazeteer entry, but is editorialy controlled by EMPlaces.  Its focus is on the historical existence and context of the place, and may diverge from the gazetteer description.  As such, it is not intended to be updated when the other core data obtained from the reference gazetteer entry is refreshed.
 
 ## Qualified relation
 
-A Qualified relation represents a historical relationship between two places.  Specifically, the relationship is one that generally exists only for a limited perod of time (e.g. the City of Opole being administratively part of the Duchy of Opole during the period 1281 to 1521).
+@@TODO: note current hierarchy is core; historical is additional@@
+
+A Qualified relation represents a historical relationship between two places.  Specifically, the relationship is one that exists only for a limited perod of time (e.g. the City of Opole being administratively part of the Duchy of Opole during the period 1281 to 1521).
 
 Thus, in addition to being linked to the two related places, a Qualified relation is also linked to a Timespan during which the relationship existed, and a Relation type that indicates the type of relationship (e.g. administrative part, ecclesiastic part, etc.)
 
-The primary intent of these Qualified relations is to represent multiple time-varying hierarchical relationships between places (something that is not provided by most exsting gazetteers).  But the mechaism here is quire general, and other uses, not necessarily hierarchical in nature, could be adopted in due course (e.g. treaties, communication links).
+The primary intent of these Qualified relations is to represent multiple time-varying hierarchical relationships between places.  But the mechanism here is quire general, and other uses, not necessarily hierarchical in nature, could be adopted in due course (e.g. treaties, communication links).
 
-See also: Relation type, Place type and Place catagory.
+See also: Relation type, Place type and Place category.
 
 ## Relation type
 
@@ -111,21 +137,29 @@ A place type may belong to several cvatagories.
 
 The intent of this value is to provide a means to identifty the various place types that may appear in a given hierarchy:  in this use, the place categiory identifies a hierarchy.  But the mechanism provided is quite general, and could be used to identify other groupings of place types (e.g. habitations).
 
+@@TODO: model Place categories as RDF classes, whose members are Place type values?
+
 ## Setting
+
+@@TODO: note concept derived from Grossner's Topotime work@@
 
 Represents a bounded region in space and time (cf. CIDOC CRM [E92 Spacetime Volume](http://www.cidoc-crm.org/lrmoo/entity/e92-spacetime-volume/version-6.2))
 
 ## Bibliographic entry
 
-A formal bibliographic entry to some published work.
+A bibliographic entry (preferably structured) to some published work.
 
-@@TODO: adopt formal bibliographic structure; e.g. bibtex-json derived.
+@@TODO: adopt bibliographic structure; e.g. bibtex-json derived.
 
 @@TODO: can we get away with a minimal text format in V1?  Or a very reduced structured format?
 
 ## Source
 
-A reference to a source of a claim made buy an Annotation.  May be descriptive or informal (e.g. a URL).  May also convey contextual information about the appicability of the claim.
+A reference to a source of a claim made by an Annotation.  May also convey contextual information about the applicability of the claim.
+
+@@applied to name attestations:  label, language, link to /something/
+
+@@move down to annotations section
 
 ## Related resource
 
@@ -141,18 +175,20 @@ May be with reference to a specific calendar dates, or more generally to some id
 
 ## Location
 
-Provides information that physically locates a Place in some way.
+Provides information about the physical location of a Place.
 
-May be connected to specific geographic or spatial location, or simply a reference to some unspecified location
+@@@@ rework: atial location specified or reference to locatiopns @@@@  May be connected to specific geographic or spatial location, or simply a reference to some unspecified location.
 
 @@TODO: try to be clear about the distinction between Place (as "constructed by human experience") and Location.
 
-@@TODO: refer to existing work.  Intend to not invent here.
+@@TODO: refer to existing work.  Intend to not invent here.  (e.g. Topotime, Pleiades)
 
 
 # Annotations general model
 
 @@@describe general approach; per-annotation details come later
+
+@@TODO: reference standard!!!!
 
 ## Annotations general structure
 
@@ -175,6 +211,8 @@ See also `em:hasAnnotation` Annotation.
 The purpose of the annotation type is to make it easy to find particiular annotation values associated with a place.
 
 @@TODO: is this the appropriate property?  Maybe `oa:purpose` (doesn't seem quite right), some new property, or an additional `rdf:type associated` with the annotation body?
+
+@@TODO: instead of `oa:motivatedBy`, use `rdf:type`.  Hence annotation types arethemselves `rdfs:Class`es
 
 ### `oa:hasBody` Annotation body
 
@@ -213,6 +251,10 @@ Indicates the source of information for the claim represented by this annotation
 
 # Specific Annotation details
 
+## Name attestation
+
+@@@TODO
+
 ## Calendar in use
 
 Annotation type: `em:CalendarInUse`
@@ -227,7 +269,7 @@ A short string or phrase used as a label for the calendar; e.g., "Julian", "Greg
 
 An arbitrary resource identifying and describing the calendar.  May be content negotiated to retrieve different formats.  Ideally, content negotion can provide a linked data representation, but this may not always be possible.  At least, the URI of this resource should be a way of uniquely identifying the calendar concerned.
 
-### `rdfs:comment` Editorial note
+### `rdfs:comment` Description
 
 A textual description of the calendar's applicability to the associated place.
 
@@ -238,10 +280,25 @@ NOTE: the calendar itself may be described by a textual description associated w
 Indicates a period during which the calendar was used at the associated place.
 
 
-## Map
+## Map reference
+
+@@@TODO
+
+## Canonical URI
+
+@@@TODO
+
+## Linkback
+
+A linkback annotation records a reference to the associated place from some external or separate published data.  For example, if a third party has published some additional data about an EMPlaces place, it may share a reference to that additional data via a published linkback annotation.
+
+The data model does not constrain how a linkback is published; e.g., it may be part of the EMPlaces data, or the additional data service, or via some third-party annotation store.
+
+@@@TODO
 
 
 
 # Properties
 
 @@TODO?
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rdf:RDF xmlns:cc="http://creativecommons.org/ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gn="http://www.geonames.org/ontology#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:wgs84_pos="http://www.w3.org/2003/01/geo/wgs84_pos#">
+<gn:Feature rdf:about="http://sws.geonames.org/3090048/">
+<rdfs:isDefinedBy rdf:resource="http://sws.geonames.org/3090048/about.rdf"/>
+<gn:name>Opole</gn:name>
+<gn:alternateName xml:lang="ko">오폴레</gn:alternateName>
+<gn:alternateName xml:lang="ja">オポーレ</gn:alternateName>
+<gn:alternateName xml:lang="th">ออปอเล</gn:alternateName>
+<gn:alternateName xml:lang="da">Opole</gn:alternateName>
+<gn:alternateName xml:lang="en">Opole</gn:alternateName>
+<gn:alternateName xml:lang="eo">Opole</gn:alternateName>
+<gn:alternateName xml:lang="fi">Opole</gn:alternateName>
+<gn:alternateName xml:lang="fr">Opole</gn:alternateName>
+<gn:alternateName xml:lang="hu">Opole</gn:alternateName>
+<gn:alternateName xml:lang="id">Opole</gn:alternateName>
+<gn:alternateName xml:lang="it">Opole</gn:alternateName>
+<gn:alternateName xml:lang="jv">Opole</gn:alternateName>
+<gn:alternateName xml:lang="lv">Opole</gn:alternateName>
+<gn:alternateName xml:lang="na">Opole</gn:alternateName>
+<gn:alternateName xml:lang="nl">Opole</gn:alternateName>
+<gn:alternateName xml:lang="pl">Opole</gn:alternateName>
+<gn:alternateName xml:lang="pt">Opole</gn:alternateName>
+<gn:alternateName xml:lang="ro">Opole</gn:alternateName>
+<gn:alternateName xml:lang="sl">Opole</gn:alternateName>
+<gn:alternateName xml:lang="sv">Opole</gn:alternateName>
+<gn:alternateName>Opole</gn:alternateName>
+<gn:alternateName xml:lang="csb">Òpòle</gn:alternateName>
+<gn:alternateName xml:lang="lt">Opolė</gn:alternateName>
+<gn:alternateName xml:lang="cs">Opolí</gn:alternateName>
+<gn:alternateName>Oppein</gn:alternateName>
+<gn:alternateName xml:lang="de">Oppeln</gn:alternateName>
+<gn:alternateName xml:lang="nds">Oppeln</gn:alternateName>
+<gn:alternateName>Oppeln</gn:alternateName>
+<gn:alternateName xml:lang="szl">Uopole</gn:alternateName>
+<gn:alternateName xml:lang="ar">أبولوسكي</gn:alternateName>
+<gn:alternateName xml:lang="pnb">اوپول</gn:alternateName>
+<gn:alternateName xml:lang="fa">اوپوله</gn:alternateName>
+<gn:alternateName xml:lang="he">אופולה</gn:alternateName>
+<gn:alternateName xml:lang="be">Горад Аполе</gn:alternateName>
+<gn:alternateName xml:lang="bg">Ополе</gn:alternateName>
+<gn:alternateName xml:lang="ru">Ополе</gn:alternateName>
+<gn:alternateName xml:lang="sr">Ополе</gn:alternateName>
+<gn:alternateName xml:lang="uk">Ополе</gn:alternateName>
+<gn:alternateName xml:lang="zh">奥波莱</gn:alternateName>
+<gn:featureClass rdf:resource="http://www.geonames.org/ontology#P"/>
+<gn:featureCode rdf:resource="http://www.geonames.org/ontology#P.PPLA"/>
+<gn:countryCode>PL</gn:countryCode>
+<gn:population>127676</gn:population>
+<wgs84_pos:lat>50.67211</wgs84_pos:lat>
+<wgs84_pos:long>17.92533</wgs84_pos:long>
+<gn:parentFeature rdf:resource="http://sws.geonames.org/7532413/"/>
+<gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
+<gn:parentADM1 rdf:resource="http://sws.geonames.org/3337495/"/>
+<gn:parentADM2 rdf:resource="http://sws.geonames.org/7530818/"/>
+<gn:parentADM3 rdf:resource="http://sws.geonames.org/7532413/"/>
+<gn:nearbyFeatures rdf:resource="http://sws.geonames.org/3090048/nearby.rdf"/>
+<gn:locationMap rdf:resource="http://www.geonames.org/3090048/opole.html"/>
+<gn:wikipediaArticle rdf:resource="http://en.wikipedia.org/wiki/Opole"/>
+<rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Opole"/>
+<gn:wikipediaArticle rdf:resource="http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5"/>
+</gn:Feature>
+<foaf:Document rdf:about="http://sws.geonames.org/3090048/about.rdf">
+<foaf:primaryTopic rdf:resource="http://sws.geonames.org/3090048/"/>
+<cc:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
+<cc:attributionURL rdf:resource="http://sws.geonames.org/3090048/"/>
+<cc:attributionName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GeoNames</cc:attributionName>
+<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2006-01-15</dcterms:created>
+<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2015-09-05</dcterms:modified>
+</foaf:Document>
+</rdf:RDF>
