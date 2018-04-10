@@ -4,7 +4,7 @@ The descriptions below are best read alongside [images](/images) of the current 
 
 The following draft descriptions offer an overview of the different areas of functionality offered by the detail/display view for a single place record. The ‘Priority’ sub-heading is meant to track the relative importance of the feature as a development priority for the v.1 gazetteer.
 
-Please get in touch with us with your comments and criticism – we value your feedback!
+Please [get in touch with us][https://github.com/culturesofknowledge/emplaces#feedback-and-comments] with your comments and criticism – we value your feedback!
 
 ## Basic Concepts
 
