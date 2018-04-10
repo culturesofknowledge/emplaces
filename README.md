@@ -2,7 +2,7 @@
 Early Modern Places (EM Places) is a historical geo-gazetteer under development by the [Cultures of Knowledge][1] project at Oxford University with funding from the Andrew W. Mellon Foundation. It is the first of what will eventually be three Linked Open Data resources also comprising [EM People and EM Dates][2] built on a [shared humanities infrastructure platform][3] in collaboration with the [Huygens Institute][4] (KNAW). 
 
 ## Goals
-EM Places is designed to meet several goals. 
+EM Places is being designed to meet several goals: 
 
 The first is to be __a resource for identifying early modern places__ by means of their current and historical name variants. To this end, EM Places will combine current place (and alternative) place names, a current political/administrative hierarchy and location data from reference gazetteers (GeoNames, TGN Getty) and extend this with additional name attestations provided by contributors from historical sources (e.g. manuscripts or maps).
 
