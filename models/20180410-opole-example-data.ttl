@@ -1,82 +1,91 @@
 #@@TODO: preface stuff, prefixes, etc
 
+@prexix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prexix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prexix owl: <http://www.w3.org/2002/07/owl#> .
+
 @prefix geonames <http://sws.geonames.org/> .
 
 @prexix gn: <http://www.geonames.org/ontology#> .
 @prexix cc: <http://creativecommons.org/ns#> .
 @prexix dcterms: <http://purl.org/dc/terms/> .
 @prexix foaf: <http://xmlns.com/foaf/0.1/> .
-@prexix owl: <http://www.w3.org/2002/07/owl#> .
-@prexix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prexix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prexix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
-ex:Opole
+ex:Opole a em:Place ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;
+    em:coreDataRef  <http://sws.geonames.org/geonames:3090048/> ;
+
+    # Core data
+
     em preferredName Opole ;
-    em:coreDataRef geonames:3090048 ;
     em:canonicalURI ex:Opole ;
     em:alternateName "Opole" ;
     em:alternateName "Oppein" ;
     em:alternateName "Oppeln" ;
-    em:alternateName "오폴레"@ko
-    em:alternateName "オポーレ"@ja
-    em:alternateName "ออปอเล"@th
-    em:alternateName "Opole"@da
-    em:alternateName "Opole"@en
-    em:alternateName "Opole"@eo
-    em:alternateName "Opole"@fi
-    em:alternateName "Opole"@fr
-    em:alternateName "Opole"@hu
-    em:alternateName "Opole"@id
-    em:alternateName "Opole"@it
-    em:alternateName "Opole"@jv
-    em:alternateName "Opole"@lv
-    em:alternateName "Opole"@na
-    em:alternateName "Opole"@nl
-    em:alternateName "Opole"@pl
-    em:alternateName "Opole"@pt
-    em:alternateName "Opole"@ro
-    em:alternateName "Opole"@sl
-    em:alternateName "Opole"@sv
-    em:alternateName "Òpòle"@csb
-    em:alternateName "Opolė"@lt
-    em:alternateName "Opolí"@cs
-    em:alternateName "Oppeln"@de
-    em:alternateName "Oppeln"@nds
-    em:alternateName "Uopole"@szl
-    em:alternateName "أبولوسكي"@ar
-    em:alternateName "اوپول"@pnb
-    em:alternateName "اوپوله"@fa
-    em:alternateName "אופולה"@he
-    em:alternateName "Горад Аполе"@be
-    em:alternateName "Ополе"@bg
-    em:alternateName "Ополе"@ru
-    em:alternateName "Ополе"@sr
-    em:alternateName "Ополе"@uk
-    em:alternateName "奥波莱"@zh
+    em:alternateName "오폴레"@ko ;
+    em:alternateName "オポーレ"@ja ;
+    em:alternateName "ออปอเล"@th ;
+    em:alternateName "Opole"@da ;
+    em:alternateName "Opole"@en ;
+    em:alternateName "Opole"@eo ;
+    em:alternateName "Opole"@fi ;
+    em:alternateName "Opole"@fr ;
+    em:alternateName "Opole"@hu ;
+    em:alternateName "Opole"@id ;
+    em:alternateName "Opole"@it ;
+    em:alternateName "Opole"@jv ;
+    em:alternateName "Opole"@lv ;
+    em:alternateName "Opole"@na ;
+    em:alternateName "Opole"@nl ;
+    em:alternateName "Opole"@pl ;
+    em:alternateName "Opole"@pt ;
+    em:alternateName "Opole"@ro ;
+    em:alternateName "Opole"@sl ;
+    em:alternateName "Opole"@sv ;
+    em:alternateName "Òpòle"@csb ;
+    em:alternateName "Opolė"@lt ;
+    em:alternateName "Opolí"@cs ;
+    em:alternateName "Oppeln"@de ;
+    em:alternateName "Oppeln"@nds ;
+    em:alternateName "Uopole"@szl ;
+    em:alternateName "أبولوسكي"@ar ;
+    em:alternateName "اوپول"@pnb ;
+    em:alternateName "اوپوله"@fa ;
+    em:alternateName "אופולה"@he ;
+    em:alternateName "Горад Аполе"@be ;
+    em:alternateName "Ополе"@bg ;
+    em:alternateName "Ополе"@ru ;
+    em:alternateName "Ополе"@sr ;
+    em:alternateName "Ополе"@uk ;
+    em:alternateName "奥波莱"@zh ;
+    em:placeType gm:P ;
+    em:placeType gm:PPLA ;
+    em:where
+      [ a em:Setting ;
+        em:location
+          [ a em:Location ;
+            wgs84_pos:lat  "50.67211"^^double ;
+            wgs84_pos:long "17.92533"^^double ;
+          ]
+        # no information available from Geonames for duration
+      ]
+    em:hasRelation
 
-
-<gn:featureClass rdf:resource="http://www.geonames.org/ontology#P"/>
-<gn:featureCode rdf:resource="http://www.geonames.org/ontology#P.PPLA"/>
 <gn:countryCode>PL</gn:countryCode>
-<gn:population>127676</gn:population>
-<wgs84_pos:lat>50.67211</wgs84_pos:lat>
-<wgs84_pos:long>17.92533</wgs84_pos:long>
 <gn:parentFeature rdf:resource="http://sws.geonames.org/7532413/"/>
 <gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
 <gn:parentADM1 rdf:resource="http://sws.geonames.org/3337495/"/>
 <gn:parentADM2 rdf:resource="http://sws.geonames.org/7530818/"/>
 <gn:parentADM3 rdf:resource="http://sws.geonames.org/7532413/"/>
+
 <gn:nearbyFeatures rdf:resource="http://sws.geonames.org/3090048/nearby.rdf"/>
+
 <gn:locationMap rdf:resource="http://www.geonames.org/3090048/opole.html"/>
-<gn:wikipediaArticle rdf:resource="http://en.wikipedia.org/wiki/Opole"/>
 <rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Opole"/>
+<gn:wikipediaArticle rdf:resource="http://en.wikipedia.org/wiki/Opole"/>
 <gn:wikipediaArticle rdf:resource="http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5"/>
 </gn:Feature>
-<foaf:Document rdf:about="http://sws.geonames.org/3090048/about.rdf">
-<foaf:primaryTopic rdf:resource="http://sws.geonames.org/3090048/"/>
-<cc:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
-<cc:attributionURL rdf:resource="http://sws.geonames.org/3090048/"/>
-<cc:attributionName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GeoNames</cc:attributionName>
+
 
 
