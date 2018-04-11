@@ -1,16 +1,16 @@
 # Overview (Display View)
 
-The descriptions below are best read alongside [images](/images) of the current draft interface. 
+The descriptions below are best read alongside [images][1] of the current draft interface. 
 
 The following draft descriptions offer an overview of the different areas of functionality offered by the detail/display view for a single place record. The ‘Priority’ sub-heading is meant to track the relative importance of the feature as a development priority for the v.1 gazetteer.
 
-Please [get in touch with us][2] with your comments and criticism – we value your feedback!
+Please [get in touch with us][2] with your comments and feedback. N.B. All of the proposed features, descriptions and priorities below are tentative and subject to change.
 
 ## Basic Concepts
 
 ### Core and Additional Metadata
 
-There are two main sources for data in EM Places. _Core metadata_ is periodically drawn by API from the reference gazetteer (currently: GeoNames) and will be comprised of:
+There are two main sources for data in EM Places. _Core metadata_ is periodically drawn by API from one or more reference gazetteers (GeoNames, Getty TGN) and will be comprised of:
 
 * Preferred Place Name
 * Alternative Names (all entries are indexed, not all are displayed)
@@ -26,13 +26,13 @@ By contrast, _additional metadata_ is primarily scholary and historical data (ov
 
 The term ‘current’ refers to a currently existing, physical place and as such will generally also be found in the reference gazetteer. Consequently, a current place will also have a current administrative hierarchy (e.g. ADM1, ADM2, ADM3..) and a physical location (lat/long) maintained for it by the reference gazetteer.  
 
-A ‘historical’ place will generally be a former (hence historical) place with a temporal validity (e.g. the Habsburg Monarchy, 1526-1804). Though, in principle, some historical places could be additionally be described as an aggregation of one or more physical regions, EM Places will not attempt to capture this form of location data (i.e. polygons for historical regions). Instead, we will link to external resources/projects with the necessary expertise in this area (e.g. to [FNZGIS][1] for Central/Eastern Europe). 
+A ‘historical’ place will generally be a former (hence historical) place with a temporal validity (e.g. the Habsburg Monarchy, 1526-1804). Though, in principle, some historical places could be additionally be described as an aggregation of one or more physical regions, EM Places will not attempt to capture this form of location data (i.e. polygons for historical regions). Instead, we will link to external resources/projects with the necessary expertise in this area (e.g. to [FNZGIS][3] for Central/Eastern Europe). 
 
 Consequently, a current place (e.g. Augsburg) will have a current (GeoNames derived) administrative hierarchy as well as several historical hierarchies associated with it (to account, for example, for when Augsburg was part of the Holy Roman Empire). However, a historical place (e.g. the Holy Roman Empire) while being part of (many) other historical hierarchies will never have a current hierarchy.
 
 ### Workflow
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Core Data  (unless no reference gazetteer ID is present).
 
@@ -44,7 +44,7 @@ A workflow for supporting bulk imports via e.g. CSV files will also be provided.
 
 ## Place Names
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Core Data
 
@@ -52,15 +52,15 @@ The default/preferred place name and its alternate names will come from the refe
 
 ## Current Hierarchy
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Core Data
 
-The administrative/political hierarchy for a current place provided by the reference gazetteer. By definition, a historical (i.e. former) place can’t display its administrative hierarchy here – instead, a placeholder message will refer the user to the section on ‘Historical Hierarchies’. 
+The administrative/political hierarchy for a current place provided by the reference gazetteer. By definition, a historical (i.e. former) place can’t display its administrative hierarchy here – instead, a placeholder message will refer the user to the section on ‘Historical Hierarchies’. If feasible, unlabeled places for an administrative hierarchy level from GeoNames will be matched to its label in Getty TGN. For example, a hierarchy level for a place categorized ADM4 in GeoNames will be matched against a label (“County”) applied to that level in Getty.
 
 ## Location
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Core Data
 
@@ -68,7 +68,7 @@ The representative center point for a place displayed as decimal lat/long and de
 
 ## Citation
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Generated
 
@@ -76,7 +76,7 @@ A simple means to represent the canonical URI as an academic citation, in severa
 
 ## Permanent URI
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Generated
 
@@ -84,7 +84,7 @@ This should be a short form permanent URI based on the custom domain for EM Plac
 
 ## Name Attestations
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Additional metadata
 
@@ -94,7 +94,7 @@ TBD structure for the source supporting the attestation.
 
 ## Calendars
 
-**Priority:** Required
+**Priority:** High (form of implementation TBD)
 
 **Source:** Additional metadata
 
@@ -104,7 +104,7 @@ Much remains to be discussed. Given the sparsity of data for these  transitions 
 
 ## Related Resources
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Core data + additional metadata
 
@@ -112,7 +112,7 @@ A list of predominantly online resources and references (for traditional scholar
 
 ## Linkbacks
 
-**Priority:** Required (form of implementation optional)
+**Priority:** Medium (form of implementation TBD)
 
 **Source:** Core data + additional metadata
 
@@ -122,7 +122,7 @@ If dynamic links can’t be implemented in v.1, then periodically refreshed, sta
 
 ## Bibliography
 
-**Priority:** Required (form of implementation optional)
+**Priority:** Medium (form of implementation TBD)
 
 **Source:** Core data + additional metadata
 
@@ -130,7 +130,7 @@ A list of bibliographic resources (predominantly offline, scholarly). At minimum
 
 ## Creator/Contributors/License
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Generated
 
@@ -138,7 +138,7 @@ An indication of the Creator of the record (i.e. the person or organization whic
 
 ## Export
 
-**Priority:** Required (form of implementation optional)
+**Priority:** High (form of implementation TBD)
 
 **Source:** Generated
 
@@ -146,7 +146,7 @@ A means to manually export the current record (only) in several common formats, 
 
 ## Maps
 
-**Priority:** Required (current) + Optional (historical)
+**Priority:** High (current) + Medium/Low (historical)
 
 **Source:** Core Data (current) + Additional metadata (historical)
 
@@ -156,7 +156,7 @@ Optionally, it will be possible, via tabs, to view a finite number (e.g. max. 4)
 
 ## Description
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Additional metadata 
 
@@ -164,11 +164,11 @@ This field will initially be (semi?)-automatically populated with data from the 
 
 ## Historical Hierarchies
 
-**Priority:** Required (form of implementation optional)
+**Priority:** High (form of implementation TBD)
 
 **Source:** Additional metadata 
 
-This section is best understood by looking at the draft [interface mockups](/images).
+This section is best understood by looking at the draft [interface mockups][4].
 
 Historical hierarchies show the historical administrative, ecclesiastical, judicial, and military hierarchies for both historical and current places. Initially, this will be limited to showing the period a certain relationship existed. For example, from an administrative/political perspective, the Silesian town of Opole fell under the Duchy of Opole from 1281-1521. In each part of the hierarchy (with the precise mode of display TBD) a user will also be able to view the period of existence of each place entity (e.g. the Bohemian Crown existed from 1348 to 1918). Together, a set of dated entities, linked in hierarchial order by a set of dated relations, forms one (from a possible four kinds of) hierarchy. In the case of ecclesiastical hierarchies, an additional row of tabs will be needed to show what kind of hierarchy (e.g. what confession) is being tracked. 
 
@@ -176,7 +176,7 @@ Several aspects of historical hierarchies remain to be discussed, including, for
 
 ## Feedback
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Generated
 
@@ -184,11 +184,13 @@ A link to a simple comment form, referencing the current record and (if present)
 
 ## Share
 
-**Priority:** Required
+**Priority:** High
 
 **Source:** Generated
 
 A means to share a link to the current record on social media. If possible, this should be implemented in a way which does not promote cross-site tracking of visitors to the gazetteer.
 
-[1]:	https://www.uni-bamberg.de/histgeo/forschung/aktuell/
-[2]:  https://github.com/culturesofknowledge/emplaces#feedback-and-comments
+[1]:	/images
+[2]:	https://github.com/culturesofknowledge/emplaces#feedback-and-comments
+[3]:	https://www.uni-bamberg.de/histgeo/forschung/aktuell/
+[4]:	/images
