@@ -88,8 +88,13 @@ ex:Opole_P a em:Place ;
           [ a em:Location ;
             wgs84_pos:lat  "50.67211"^^double ;
             wgs84_pos:long "17.92533"^^double ;
-          ]
+          ] ;
         # no information available from Geonames for duration
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
       ] ;
 
     em:hasRelation
@@ -110,7 +115,7 @@ ex:Opole_P a em:Place ;
           [ a em:Timespan ; @@@@
             rdfs:label "Current as of 2018-04-25" ;
             @@@@
-          ]
+          ] ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
@@ -125,10 +130,9 @@ ex:Opole_P a em:Place ;
 
     @@@@
 
-    # End of data for Opole_P
+    # End
 
-    em:canonicalURI ex:Opole_P
-    .
+    em:canonicalURI ex:Opole_P .
 
     # <gn:parentFeature rdf:resource="http://sws.geonames.org/7532413/"/>
     # <gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/> # Poland
@@ -140,32 +144,28 @@ ex:Opole_P a em:Place ;
 # Opole - A.ADM3
 
 ex:Opole_ADM3 a em:Place ;
-    em:canonicalURI ex:Opole_ADM3 ;
     rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ; # document
-    em:coreDataRef  <http://sws.geonames.org/7532413/> ;           # place
-
-    # Core data (derived from GeoNames /reference gazetteer)
+    em:coreDataRef   <http://sws.geonames.org/7532413/> ;           # place
 
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:ADM3 ;          # from gn:featureCode
 
     em:preferredName "Opole" ;
 
-
-
-
-
-<gn:countryCode>PL</gn:countryCode>
-<wgs84_pos:lat>50.6562</wgs84_pos:lat>
-<wgs84_pos:long>17.9306</wgs84_pos:long>
-<gn:parentFeature rdf:resource="http://sws.geonames.org/7530818/"/>
-<gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
-<gn:parentADM1 rdf:resource="http://sws.geonames.org/3337495/"/>
-<gn:parentADM2 rdf:resource="http://sws.geonames.org/7530818/"/>
-<gn:childrenFeatures rdf:resource="http://sws.geonames.org/7532413/contains.rdf"/>
-<gn:locationMap rdf:resource="http://www.geonames.org/7532413/opole.html"/>
-<rdfs:seeAlso rdf:resource="http://en.wikipedia.org/wiki/Opole"/>
-<rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Opole"/>
+    em:where
+      [ a em:Setting ;
+        em:location
+          [ a em:Location ;
+            wgs84_pos:lat  "50.6562"^^double ;
+            wgs84_pos:long "17.9306"^^double ;
+          ] ;
+        # no information available from Geonames for duration
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
+      ] ;
 
     em:hasRelation
       [ a em:QualifiedRelation ;
@@ -173,31 +173,62 @@ ex:Opole_ADM3 a em:Place ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
       ] ;
 
+    em:hasAnnotation
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget ex:Opole_ADM3 ;
+        oa:hasBody 
+          [ rdfs:label "Current map for Opole_ADM3" ;
+            em:link <http://www.geonames.org/7532413/opole.html>
+          ] ;
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7532413/about.rdf>     # from gn:locationMap
+          ] ;
+      ]
+
+    rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole> ;
+
+    em:canonicalURI  ex:Opole_ADM3 .
+
+    # <gn:parentFeature rdf:resource="http://sws.geonames.org/7530818/"/>
+    # <gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
+    # <gn:parentADM1 rdf:resource="http://sws.geonames.org/3337495/"/>
+    # <gn:parentADM2 rdf:resource="http://sws.geonames.org/7530818/"/>
+    # <gn:childrenFeatures rdf:resource="http://sws.geonames.org/7532413/contains.rdf"/>
+    # <gn:countryCode>PL</gn:countryCode>
 
 # Opole - A.ADM2
 
 ex:Opole_ADM2 a em:Place ;
-    em:canonicalURI ex:Opole_ADM2 ;
     rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ; # document
     em:coreDataRef  <http://sws.geonames.org/7530818/> ;           # place
-
-    # Core data (derived from GeoNames)
 
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:ADM2 ;          # from gn:featureCode
 
     em:preferredName "Opole" ;          # from gn:name
 
-<gn:countryCode>PL</gn:countryCode>
-<wgs84_pos:lat>50.65622</wgs84_pos:lat>
-<wgs84_pos:long>17.93066</wgs84_pos:long>
-<gn:parentFeature rdf:resource="http://sws.geonames.org/3082777/"/>
-<gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
-<gn:parentADM1 rdf:resource="http://sws.geonames.org/3337495/"/>
-<gn:childrenFeatures rdf:resource="http://sws.geonames.org/7530818/contains.rdf"/>
-<gn:locationMap rdf:resource="http://www.geonames.org/7530818/opole.html"/>
-<rdfs:seeAlso rdf:resource="http://en.wikipedia.org/wiki/Opole"/>
-<rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Opole"/>
+    em:where
+      [ a em:Setting ;
+        em:location
+          [ a em:Location ;
+            wgs84_pos:lat  "50.65622"^^double ;
+            wgs84_pos:long "17.93066"^^double ;
+          ] ;
+        # no information available from Geonames for duration
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
+      ] ;
 
     em:hasRelation
       [ a em:QualifiedRelation ;
@@ -205,11 +236,40 @@ ex:Opole_ADM2 a em:Place ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
       ] ;
 
+    em:hasAnnotation
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget ex:Opole_ADM2 ;
+        oa:hasBody 
+          [ rdfs:label "Current map for Opole_ADM2" ;
+            em:link <http://www.geonames.org/7530818/opole.html>
+          ] ;
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7530818/about.rdf>     # from gn:locationMap
+          ] ;
+      ]
+
+    rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole> ;
+
+    em:canonicalURI ex:Opole_ADM2 .
+
+    # <gn:parentFeature rdf:resource="http://sws.geonames.org/3082777/"/>
+    # <gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
+    # <gn:parentADM1 rdf:resource="http://sws.geonames.org/3337495/"/>
+    # <gn:childrenFeatures rdf:resource="http://sws.geonames.org/7530818/contains.rdf"/>
+    # <gn:countryCode>PL</gn:countryCode>
+
 
 # Opole Voivodeship - A.ADM1
 
 ex:Opole_Voivodeship_ADM1 a em:Place ;
-    em:canonicalURI ex:Opole_Voivodeship_ADM1 ;
     rdfs:isDefinedBy <http://sws.geonames.org/3337495/a
 
     # Core data (derived from GeoNames)
@@ -219,41 +279,44 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
 
     em:preferredName "Opole Voivodeship" ;  # from gn:name
 
-<gn:alternateName xml:lang="es">Opole</gn:alternateName>
-<gn:alternateName xml:lang="nl">Opole</gn:alternateName>
-<gn:alternateName xml:lang="lt">Opolės vaivadija</gn:alternateName>
-<gn:alternateName xml:lang="en">Opole Voivodeship</gn:alternateName>
-<gn:alternateName xml:lang="et">Opole vojevoodkond</gn:alternateName>
-<gn:alternateName xml:lang="sv">Opole vojvodskap</gn:alternateName>
-<gn:alternateName xml:lang="eo">Opolio</gn:alternateName>
-<gn:alternateName xml:lang="csb">Òpòlsczé wòjewództwò</gn:alternateName>
-<gn:alternateName xml:lang="cs">Opolské vojvodství</gn:alternateName>
-<gn:alternateName xml:lang="sk">Opolské vojvodstvo</gn:alternateName>
-<gn:alternateName xml:lang="sv">Opplen</gn:alternateName>
-<gn:alternateName xml:lang="pt">Província de Opole</gn:alternateName>
-<gn:alternateName xml:lang="id">Provinsi Opole</gn:alternateName>
-<gn:alternateName xml:lang="ro">Voievodatul Opole</gn:alternateName>
-<gn:alternateName xml:lang="ca">Voivodat d'Opole</gn:alternateName>
-<gn:alternateName xml:lang="it">Voivodato di Opole</gn:alternateName>
-<gn:alternateName xml:lang="pt">Voivodia de Opole</gn:alternateName>
-<gn:alternateName xml:lang="fr">Voïvodie d'Opole</gn:alternateName>
-<gn:alternateName xml:lang="de">Woiwodschaft Oppeln</gn:alternateName>
-<gn:alternateName xml:lang="pl">Województwo opolskie</gn:alternateName>
-<gn:alternateName>Województwo Opolskie</gn:alternateName>
-<gn:alternateName xml:lang="ru">Опольское воеводство</gn:alternateName>
-<gn:alternateName xml:lang="ja">オポーレ県</gn:alternateName>
+    em:alternateName "Województwo Opolskie" ;
+    em:alternateName "Opole"@es ;
+    em:alternateName "Opole"@nl ;
+    em:alternateName "Opolės vaivadija"@lt ;
+    em:alternateName "Opole Voivodeship"@en ;
+    em:alternateName "Opole vojevoodkond"@et ;
+    em:alternateName "Opole vojvodskap"@sv ;
+    em:alternateName "Opolio"@eo ;
+    em:alternateName "Òpòlsczé wòjewództwò"@csb ;
+    em:alternateName "Opolské vojvodství"@cs ;
+    em:alternateName "Opolské vojvodstvo"@sk ;
+    em:alternateName "Opplen"@sv ;
+    em:alternateName "Província de Opole"@pt ;
+    em:alternateName "Provinsi Opole"@id ;
+    em:alternateName "Voievodatul Opole"@ro ;
+    em:alternateName "Voivodat d'Opole"@ca ;
+    em:alternateName "Voivodato di Opole"@it ;
+    em:alternateName "Voivodia de Opole"@pt ;
+    em:alternateName "Voïvodie d'Opole"@fr ;
+    em:alternateName "Woiwodschaft Oppeln"@de ;
+    em:alternateName "Województwo opolskie"@pl ;
+    em:alternateName "Опольское воеводство"@ru ;
+    em:alternateName "オポーレ県"@ja ;
 
-<gn:countryCode>PL</gn:countryCode>
-<gn:population>1031097</gn:population>
-<wgs84_pos:lat>50.66667</wgs84_pos:lat>
-<wgs84_pos:long>17.9</wgs84_pos:long>
-
-<gn:parentFeature rdf:resource="http://sws.geonames.org/3066138/"/>
-<gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
-<gn:locationMap rdf:resource="http://www.geonames.org/3337495/wojewodztwo-opolskie.html"/>
-
-<rdfs:seeAlso rdf:resource="http://en.wikipedia.org/wiki/Opole_Voivodeship"/>
-<rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Opole_Voivodeship"/>
+    em:where
+      [ a em:Setting ;
+        em:location
+          [ a em:Location ;
+            wgs84_pos:lat  "50.66667"^^double ;
+            wgs84_pos:long "17.9"^^double ;
+          ] ;
+        # no information available from Geonames for duration
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
+      ] ;
 
     em:hasRelation
       [ a em:QualifiedRelation ;
@@ -261,10 +324,38 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
       ] ;
 
+    em:hasAnnotation
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget ex:Opole_ADM1 ;
+        oa:hasBody 
+          [ rdfs:label "Current map for Opole Voivodeship" ;
+            em:link <http://www.geonames.org/3337495/wojewodztwo-opolskie.html>
+          ] ;
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3337495/about.rdf>     # from gn:locationMap
+          ] ;
+      ]
+
+    rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole_Voivodeship> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole_Voivodeship> ;
+
+    em:canonicalURI ex:Opole_Voivodeship_ADM1 .
+
+    # <gn:parentFeature rdf:resource="http://sws.geonames.org/3066138/"/>
+    # <gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
+    # <gn:countryCode>PL</gn:countryCode>
+    # <gn:population>1031097</gn:population>
+
 # Poland - A.PCLI
 
 ex:Poland_PCLI a em:Place ;
-    em:canonicalURI ex:Poland_PCLI ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
     em:coreDataRef  <http://sws.geonames.org/798544/> ;
 
@@ -276,159 +367,191 @@ ex:Poland_PCLI a em:Place ;
     gn:countryCode   "PL" ;
     em:preferredName "Poland" ;
 
+    em:alternateName "Poland" ;
+    em:alternateName "Lengyelország" ;
+    em:alternateName "Lenkija" ;
+    em:alternateName "Polen" ;
+    em:alternateName "Polija" ;
+    em:alternateName "Polish People’s Republic" ;
+    em:alternateName "Pologne" ;
+    em:alternateName "Polonia" ;
+    em:alternateName "Polsha" ;
+    em:alternateName "Polska" ;
+    em:alternateName "Polska Rzeczpospolita Ludowa" ;
+    em:alternateName "Polsko" ;
+    em:alternateName "Poola" ;
+    em:alternateName "폴란드"@ko ;
+    em:alternateName "ܦܘܠܢܕ"@arc ;
+    em:alternateName "ፖላንድ"@am ;
+    em:alternateName "ໂປແລນ"@lo ;
+    em:alternateName "ポーランド"@ja ;
+    em:alternateName "ប៉ូលូញ"@km ;
+    em:alternateName "โปแลนด์"@th ;
+    em:alternateName "ประเทศโปแลนด์"@th ;
+    em:alternateName "An Pholainn"@ga ;
+    em:alternateName "A Phòlainn"@gd ;
+    em:alternateName "Ba Lan"@vi ;
+    em:alternateName "Booland"@so ;
+    em:alternateName "Gwlad Pwyl"@cy ;
+    em:alternateName "Lengyelország"@hu ;
+    em:alternateName "Lenkija"@lt ;
+    em:alternateName "Poalen"@fy ;
+    em:alternateName "Polaland"@ang ;
+    em:alternateName "Polän"@vo ;
+    em:alternateName "poland"@tl ;
+    em:alternateName "Poland"@ms ;
+    em:alternateName "Poland"@sco ;
+    em:alternateName "Poland"@sw ;
+    em:alternateName "Polandia"@id ;
+    em:alternateName "Polandia"@ilo ;
+    em:alternateName "Polandia"@jv ;
+    em:alternateName "Pole"@af ;
+    em:alternateName "Pole"@li ;
+    em:alternateName "Polen"@da ;
+    em:alternateName "Polen"@de ;
+    em:alternateName "Polen"@lb ;
+    em:alternateName "Polen"@nb ;
+    em:alternateName "Polen"@nds ;
+    em:alternateName "Polen"@nl ;
+    em:alternateName "Polen"@nn ;
+    em:alternateName "Polen"@no ;
+    em:alternateName "Polen"@se ;
+    em:alternateName "Polen"@sv ;
+    em:alternateName "Polija"@lv ;
+    em:alternateName "Polio"@eo ;
+    em:alternateName "Poljska"@bs ;
+    em:alternateName "Poljska"@hbs ;
+    em:alternateName "Poljska"@hr ;
+    em:alternateName "Poljska"@sl ;
+    em:alternateName "Pólland"@fo ;
+    em:alternateName "Pólland"@is ;
+    em:alternateName "Pollando"@eo ;
+    em:alternateName "Pologne"@frp ;
+    em:alternateName "Polóña"@gn ;
+    em:alternateName "Polongne"@nrm ;
+    em:alternateName "Polonha"@oc ;
+    em:alternateName "Poloni"@kw ;
+    em:alternateName "Poloni"@sq ;
+    em:alternateName "Polonia"@an ;
+    em:alternateName "Polonia"@ast ;
+    em:alternateName "Polonia"@br ;
+    em:alternateName "Polonia"@eu ;
+    em:alternateName "Polonia"@ia ;
+    em:alternateName "Polonia"@io ;
+    em:alternateName "Polonia"@it ;
+    em:alternateName "Polonia"@la ;
+    em:alternateName "Polonia"@lij ;
+    em:alternateName "Polonia"@nov ;
+    em:alternateName "Polonia"@ro ;
+    em:alternateName "Polonia"@sc ;
+    em:alternateName "Polonia"@sq ;
+    em:alternateName "Polónia"@pt ;
+    em:alternateName "Polónia"@tet ;
+    em:alternateName "Polònia"@ca ;
+    em:alternateName "Polònia"@pms ;
+    em:alternateName "Polônia"@pt ;
+    em:alternateName "Polonia - Polska"@gl ;
+    em:alternateName "Polonie"@fur ;
+    em:alternateName "Polonja"@mt ;
+    em:alternateName "Polonya"@diq ;
+    em:alternateName "Polonya"@ku ;
+    em:alternateName "Polonya"@pam ;
+    em:alternateName "Polonya"@tl ;
+    em:alternateName "Polonya"@tr ;
+    em:alternateName "Polonya"@war ;
+    em:alternateName "Polşa"@az ;
+    em:alternateName "Polsha"@uz ;
+    em:alternateName "Pólska"@hsb ;
+    em:alternateName "polskas"@jbo ;
+    em:alternateName "Polsko"@cs ;
+    em:alternateName "Poľsko"@sk ;
+    em:alternateName "Pòlskô"@csb ;
+    em:alternateName "Pol’šu"@olo ;
+    em:alternateName "Polujo"@eo ;
+    em:alternateName "Poola"@et ;
+    em:alternateName "Pooln"@vls ;
+    em:alternateName "Poran"@na ;
+    em:alternateName "Pulonia"@scn ;
+    em:alternateName "Pulonnia"@nap ;
+    em:alternateName "Pulska"@qu ;
+    em:alternateName "Pulunya"@qu ;
+    em:alternateName "Puola"@fi ;
+    em:alternateName "Republic of Poland"@en ;
+    em:alternateName "Rzeczpospolita Polska"@pl ;
+    em:alternateName "Yn Pholynn"@gv ;
+    em:alternateName "بولندا"@ar ;
+    em:alternateName "پولنډ"@ps ;
+    em:alternateName "لهستان"@fa ;
+    em:alternateName "لەھىستان"@ug ;
+    em:alternateName "פוילן"@yi ;
+    em:alternateName "פולין"@he ;
+    em:alternateName "Πολωνία"@el ;
+    em:alternateName "Лаҳистон"@tg ;
+    em:alternateName "Полония"@ro ;
+    em:alternateName "Полска"@mk ;
+    em:alternateName "Полша"@bg ;
+    em:alternateName "Пол҄ьска"@cu ;
+    em:alternateName "Польшæ"@os ;
+    em:alternateName "Польша"@be ;
+    em:alternateName "Польша"@cv ;
+    em:alternateName "Польша"@ru ;
+    em:alternateName "Польща"@uk ;
+    em:alternateName "Пољска"@sr ;
+    em:alternateName "Լեհաստան"@hy ;
+    em:alternateName "პოლონეთი"@ka ;
+    em:alternateName "पोलैंड"@hi ;
+    em:alternateName "போலந்து"@ta ;
+    em:alternateName "পোল্যাণ্ড"@bn ;
+    em:alternateName "波兰"@zh ;
 
-<gn:alternateName>Poland</gn:alternateName>
-<gn:alternateName>Lengyelország</gn:alternateName>
-<gn:alternateName>Lenkija</gn:alternateName>
-<gn:alternateName>Polen</gn:alternateName>
-<gn:alternateName>Polija</gn:alternateName>
-<gn:alternateName>Polish People’s Republic</gn:alternateName>
-<gn:alternateName>Pologne</gn:alternateName>
-<gn:alternateName>Polonia</gn:alternateName>
+    em:where
+      [ a em:Setting ;
+        em:location
+          [ a em:Location ;
+            wgs84_pos:lat  "52"^^double ;
+            wgs84_pos:long "20"^^double ;
+          ] ;
+        # no information available from Geonames for duration
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
+      ] ;
 
-<gn:alternateName xml:lang="ko">폴란드</gn:alternateName>
-<gn:alternateName xml:lang="arc">ܦܘܠܢܕ</gn:alternateName>
-<gn:alternateName xml:lang="am">ፖላንድ</gn:alternateName>
-<gn:alternateName xml:lang="lo">ໂປແລນ</gn:alternateName>
-<gn:alternateName xml:lang="ja">ポーランド</gn:alternateName>
-<gn:alternateName xml:lang="km">ប៉ូលូញ</gn:alternateName>
-<gn:alternateName xml:lang="th">โปแลนด์</gn:alternateName>
-<gn:alternateName xml:lang="th">ประเทศโปแลนด์</gn:alternateName>
-<gn:alternateName xml:lang="ga">An Pholainn</gn:alternateName>
-<gn:alternateName xml:lang="gd">A Phòlainn</gn:alternateName>
-<gn:alternateName xml:lang="vi">Ba Lan</gn:alternateName>
-<gn:alternateName xml:lang="so">Booland</gn:alternateName>
-<gn:alternateName xml:lang="cy">Gwlad Pwyl</gn:alternateName>
-<gn:alternateName xml:lang="hu">Lengyelország</gn:alternateName>
-<gn:alternateName xml:lang="lt">Lenkija</gn:alternateName>
-<gn:alternateName xml:lang="fy">Poalen</gn:alternateName>
-<gn:alternateName xml:lang="ang">Polaland</gn:alternateName>
-<gn:alternateName xml:lang="vo">Polän</gn:alternateName>
-<gn:alternateName xml:lang="tl">poland</gn:alternateName>
-<gn:alternateName xml:lang="ms">Poland</gn:alternateName>
-<gn:alternateName xml:lang="sco">Poland</gn:alternateName>
-<gn:alternateName xml:lang="sw">Poland</gn:alternateName>
-<gn:alternateName xml:lang="id">Polandia</gn:alternateName>
-<gn:alternateName xml:lang="ilo">Polandia</gn:alternateName>
-<gn:alternateName xml:lang="jv">Polandia</gn:alternateName>
-<gn:alternateName xml:lang="af">Pole</gn:alternateName>
-<gn:alternateName xml:lang="li">Pole</gn:alternateName>
-<gn:alternateName xml:lang="da">Polen</gn:alternateName>
-<gn:alternateName xml:lang="de">Polen</gn:alternateName>
-<gn:alternateName xml:lang="lb">Polen</gn:alternateName>
-<gn:alternateName xml:lang="nb">Polen</gn:alternateName>
-<gn:alternateName xml:lang="nds">Polen</gn:alternateName>
-<gn:alternateName xml:lang="nl">Polen</gn:alternateName>
-<gn:alternateName xml:lang="nn">Polen</gn:alternateName>
-<gn:alternateName xml:lang="no">Polen</gn:alternateName>
-<gn:alternateName xml:lang="se">Polen</gn:alternateName>
-<gn:alternateName xml:lang="sv">Polen</gn:alternateName>
-<gn:alternateName xml:lang="lv">Polija</gn:alternateName>
-<gn:alternateName xml:lang="eo">Polio</gn:alternateName>
-<gn:alternateName xml:lang="bs">Poljska</gn:alternateName>
-<gn:alternateName xml:lang="hbs">Poljska</gn:alternateName>
-<gn:alternateName xml:lang="hr">Poljska</gn:alternateName>
-<gn:alternateName xml:lang="sl">Poljska</gn:alternateName>
-<gn:alternateName xml:lang="fo">Pólland</gn:alternateName>
-<gn:alternateName xml:lang="is">Pólland</gn:alternateName>
-<gn:alternateName xml:lang="eo">Pollando</gn:alternateName>
-<gn:alternateName xml:lang="frp">Pologne</gn:alternateName>
-<gn:alternateName xml:lang="gn">Polóña</gn:alternateName>
-<gn:alternateName xml:lang="nrm">Polongne</gn:alternateName>
-<gn:alternateName xml:lang="oc">Polonha</gn:alternateName>
-<gn:alternateName xml:lang="kw">Poloni</gn:alternateName>
-<gn:alternateName xml:lang="sq">Poloni</gn:alternateName>
-<gn:alternateName xml:lang="an">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="ast">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="br">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="eu">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="ia">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="io">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="it">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="la">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="lij">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="nov">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="ro">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="sc">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="sq">Polonia</gn:alternateName>
-<gn:alternateName xml:lang="pt">Polónia</gn:alternateName>
-<gn:alternateName xml:lang="tet">Polónia</gn:alternateName>
-<gn:alternateName xml:lang="ca">Polònia</gn:alternateName>
-<gn:alternateName xml:lang="pms">Polònia</gn:alternateName>
-<gn:alternateName xml:lang="pt">Polônia</gn:alternateName>
-<gn:alternateName xml:lang="gl">Polonia - Polska</gn:alternateName>
-<gn:alternateName xml:lang="fur">Polonie</gn:alternateName>
-<gn:alternateName xml:lang="mt">Polonja</gn:alternateName>
-<gn:alternateName xml:lang="diq">Polonya</gn:alternateName>
-<gn:alternateName xml:lang="ku">Polonya</gn:alternateName>
-<gn:alternateName xml:lang="pam">Polonya</gn:alternateName>
-<gn:alternateName xml:lang="tl">Polonya</gn:alternateName>
-<gn:alternateName xml:lang="tr">Polonya</gn:alternateName>
-<gn:alternateName xml:lang="war">Polonya</gn:alternateName>
-<gn:officialName xml:lang="rn">Polonye</gn:officialName>
-<gn:alternateName xml:lang="az">Polşa</gn:alternateName>
-<gn:alternateName xml:lang="uz">Polsha</gn:alternateName>
-<gn:alternateName>Polsha</gn:alternateName>
-<gn:alternateName>Polska</gn:alternateName>
-<gn:alternateName>Polska Rzeczpospolita Ludowa</gn:alternateName>
-<gn:alternateName>Polsko</gn:alternateName>
-<gn:alternateName>Poola</gn:alternateName>
-<gn:alternateName xml:lang="hsb">Pólska</gn:alternateName>
-<gn:alternateName xml:lang="jbo">polskas</gn:alternateName>
-<gn:alternateName xml:lang="cs">Polsko</gn:alternateName>
-<gn:alternateName xml:lang="sk">Poľsko</gn:alternateName>
-<gn:alternateName xml:lang="csb">Pòlskô</gn:alternateName>
-<gn:alternateName xml:lang="olo">Pol’šu</gn:alternateName>
-<gn:alternateName xml:lang="eo">Polujo</gn:alternateName>
-<gn:alternateName xml:lang="et">Poola</gn:alternateName>
-<gn:alternateName xml:lang="vls">Pooln</gn:alternateName>
-<gn:alternateName xml:lang="na">Poran</gn:alternateName>
-<gn:alternateName xml:lang="scn">Pulonia</gn:alternateName>
-<gn:alternateName xml:lang="nap">Pulonnia</gn:alternateName>
-<gn:alternateName xml:lang="qu">Pulska</gn:alternateName>
-<gn:alternateName xml:lang="qu">Pulunya</gn:alternateName>
-<gn:alternateName xml:lang="fi">Puola</gn:alternateName>
-<gn:alternateName xml:lang="en">Republic of Poland</gn:alternateName>
-<gn:alternateName xml:lang="pl">Rzeczpospolita Polska</gn:alternateName>
-<gn:alternateName xml:lang="gv">Yn Pholynn</gn:alternateName>
-<gn:alternateName xml:lang="ar">بولندا</gn:alternateName>
-<gn:alternateName xml:lang="ps">پولنډ</gn:alternateName>
-<gn:alternateName xml:lang="fa">لهستان</gn:alternateName>
-<gn:alternateName xml:lang="ug">لەھىستان</gn:alternateName>
-<gn:alternateName xml:lang="yi">פוילן</gn:alternateName>
-<gn:alternateName xml:lang="he">פולין</gn:alternateName>
-<gn:alternateName xml:lang="el">Πολωνία</gn:alternateName>
-<gn:alternateName xml:lang="tg">Лаҳистон</gn:alternateName>
-<gn:alternateName xml:lang="ro">Полония</gn:alternateName>
-<gn:alternateName xml:lang="mk">Полска</gn:alternateName>
-<gn:alternateName xml:lang="bg">Полша</gn:alternateName>
-<gn:alternateName xml:lang="cu">Пол҄ьска</gn:alternateName>
-<gn:alternateName xml:lang="os">Польшæ</gn:alternateName>
-<gn:alternateName xml:lang="be">Польша</gn:alternateName>
-<gn:alternateName xml:lang="cv">Польша</gn:alternateName>
-<gn:alternateName xml:lang="ru">Польша</gn:alternateName>
-<gn:alternateName xml:lang="uk">Польща</gn:alternateName>
-<gn:alternateName xml:lang="sr">Пољска</gn:alternateName>
-<gn:alternateName xml:lang="hy">Լեհաստան</gn:alternateName>
-<gn:alternateName xml:lang="ka">პოლონეთი</gn:alternateName>
-<gn:alternateName xml:lang="hi">पोलैंड</gn:alternateName>
-<gn:alternateName xml:lang="ta">போலந்து</gn:alternateName>
-<gn:alternateName xml:lang="bn">পোল্যাণ্ড</gn:alternateName>
-<gn:alternateName xml:lang="zh">波兰</gn:alternateName>
+    em:hasAnnotation
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget ex:Opole_ADM1 ;
+        oa:hasBody 
+          [ rdfs:label "Current map for Poland" ;
+            em:link <http://www.geonames.org/798544/republic-of-poland.html>
+          ] ;
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ] ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/798544/about.rdf>     # from gn:locationMap
+          ] ;
+      ]
 
-<wgs84_pos:lat>52</wgs84_pos:lat>
-<wgs84_pos:long>20</wgs84_pos:long>
+    rdfs:seeAlso <http://en.wikipedia.org/wiki/Poland> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Poland> ;
+    rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BE%D0%BD%D0%B8%D1%8F> ;
+    rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8C%D1%88%D0%B0> ;
 
-<gn:parentFeature rdf:resource="http://sws.geonames.org/6695072/"/>
-<gn:parentFeature rdf:resource="http://sws.geonames.org/7729884/"/>
+    em:canonicalURI ex:Poland_PCLI .
 
-<gn:childrenFeatures rdf:resource="http://sws.geonames.org/798544/contains.rdf"/>
-<gn:neighbouringFeatures rdf:resource="http://sws.geonames.org/798544/neighbours.rdf"/>
-<gn:locationMap rdf:resource="http://www.geonames.org/798544/republic-of-poland.html"/>
-<rdfs:seeAlso rdf:resource="http://en.wikipedia.org/wiki/Poland"/>
-<rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Poland"/>
-<rdfs:seeAlso rdf:resource="http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BE%D0%BD%D0%B8%D1%8F"/>
-<rdfs:seeAlso rdf:resource="http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8C%D1%88%D0%B0"/>
+    # <gn:parentFeature rdf:resource="http://sws.geonames.org/6695072/"/>
+    # <gn:parentFeature rdf:resource="http://sws.geonames.org/7729884/"/>
+    # <gn:childrenFeatures rdf:resource="http://sws.geonames.org/798544/contains.rdf"/>
+    # <gn:neighbouringFeatures rdf:resource="http://sws.geonames.org/798544/neighbours.rdf"/>
+
+# The following is raw RDF data from GeoNames for parejnt features, 
+# which has not been encoded in the hierarchical data.
 
 
 # # European Union - A.ZN
