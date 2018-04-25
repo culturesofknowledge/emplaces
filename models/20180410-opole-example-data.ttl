@@ -26,7 +26,8 @@
 #
 # 4. gn:wikipediaArticle references have been coded as rdfs:seeAlso
 #
-
+# 5. GeoNames includes multiple parent links which have not been included here.
+#
 
 # Opole - P.PPLA
 
@@ -97,11 +98,34 @@ ex:Opole_P a em:Place ;
         em:relationType em:P_PART_OF_A ;    # relates populated place to parent admin div
       ] ;
 
-    # <gn:locationMap rdf:resource="http://www.geonames.org/3090048/opole.html"/>
+    em:hasAnnotation
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget ex:Opole_P ;
+        oa:hasBody 
+          [ rdfs:label "Current map for Opole" ;
+            em:link <http://www.geonames.org/3090048/opole.html>
+          ] ;
+        em:when
+          [ a em:Timespan ; @@@@
+            rdfs:label "Current as of 2018-04-25" ;
+            @@@@
+          ]
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
+          ] ;
+      ]
 
     rdfs:seeAlso <http://dbpedia.org/resource/Opole"> ;
     rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole"> ;
     rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5"> ;
+
+    # Non-core data - EMPlaces editorial additions
+
+    @@@@
+
+    # End of data for Opole_P
 
     em:canonicalURI ex:Opole_P
     .
