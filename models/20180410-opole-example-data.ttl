@@ -29,6 +29,64 @@
 # 5. GeoNames includes multiple parent links which have not been included here.
 #
 
+
+# Place categories
+
+gn:P a skos:Concept ; 
+    rdfs:label "Populated place" ;
+    rdfs:comment "Populated place - from GeoNames (feature class)." .
+
+gn:A  a skos:Concept ; 
+    rdfs:label   "Administrative division" ;
+    rdfs:comment "Administrative division - from GeoNames (feature class)." .
+
+# Place types
+
+gn:P.PPL a skos:Concept ;
+    skos:narrower gn:P ;
+    rdfs:label    "Populated place" ;
+    rdfs:comment  "A populated place (town, city, village, etc.).  From GeoNames (feature code)." .
+
+gn:P.PPLA a skos:Concept ;
+    skos:narrower gn:P ;
+    rdfs:label    "Seat of 1st-order admin div" ;
+    rdfs:comment  "Populated place that is a seat of a first-order administrative division.  From GeoNames (feature code)." .
+
+gn:A.PCLI a skos:Concept ;
+    skos:narrower gn:A ;
+    rdfs:label    "Independent political entity" ;
+    rdfs:comment  "An independent political entity, typically a country.  From GeoNames (feature code)."
+
+gn:A.ADM1 a skos:Concept ;
+    skos:narrower gn:A ;
+    rdfs:label    "First-order admin division" ;
+    rdfs:comment  "A primary administrative division of a country, such as a state in the United States.  From GeoNames (feature code)."
+
+gn:A.ADM2 a skos:Concept ;
+    skos:narrower gn:A ;
+    rdfs:label    "Seconf-order admin division" ;
+    rdfs:comment  "A subdivision of a first-order administrative division.  From GeoNames (feature code)."
+
+gn:A.ADM3 a skos:Concept ;
+    skos:narrower gn:A ;
+    rdfs:label    "Third-order admin division" ;
+    rdfs:comment  "A subdivision of a second-order administrative division.  From GeoNames (feature code)."
+
+# Place relations
+
+em:P_PART_OF_A a em:RelationType ;
+    em:fromType   em:P ;
+    em:toType     em:A ;
+    rdfs:label    "Administered by" ;
+    rdfs:comment  "Relates a populated place to its administrative division." .
+
+
+em:A_PART_OF_A a em:RelationType ;
+    em:fromType   em:A ;
+    em:toType     em:A ;
+    rdfs:label    "Subdivision of" ;
+    rdfs:comment  "Relates a subdivision of an administrative division to its parent division." .
+
 # Opole - P.PPLA
 
 ex:Opole_P a em:Place ;
@@ -38,7 +96,7 @@ ex:Opole_P a em:Place ;
     # Core data (derived from GeoNames /reference gazetteer)
 
     em:placeCategory gn:P ;             # from gn:featureClass
-    em:placeType     gn:PPLA ;          # from gn:featureCode
+    em:placeType     gn:P.PPLA ;        # from gn:featureCode
 
     em:preferredName "Opole" ;          # from gn:name
 
@@ -148,7 +206,7 @@ ex:Opole_ADM3 a em:Place ;
     em:coreDataRef   <http://sws.geonames.org/7532413/> ;           # place
 
     em:placeCategory gn:A ;             # from gn:featureClass
-    em:placeType     gn:ADM3 ;          # from gn:featureCode
+    em:placeType     gn:A.ADM3 ;        # from gn:featureCode
 
     em:preferredName "Opole" ;
 
@@ -211,7 +269,7 @@ ex:Opole_ADM2 a em:Place ;
     em:coreDataRef  <http://sws.geonames.org/7530818/> ;           # place
 
     em:placeCategory gn:A ;             # from gn:featureClass
-    em:placeType     gn:ADM2 ;          # from gn:featureCode
+    em:placeType     gn:A.ADM2 ;        # from gn:featureCode
 
     em:preferredName "Opole" ;          # from gn:name
 
@@ -275,7 +333,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
     # Core data (derived from GeoNames)
 
     em:placeCategory gn:A ;             # from gn:featureClass
-    em:placeType     gn:ADM1 ;          # from gn:featureCode
+    em:placeType     gn:A.ADM1 ;        # from gn:featureCode
 
     em:preferredName "Opole Voivodeship" ;  # from gn:name
 
@@ -362,7 +420,7 @@ ex:Poland_PCLI a em:Place ;
     # Core data (derived from GeoNames)
 
     em:placeCategory gn:A ;             # from gn:featureClass
-    em:placeType     gn:PCLI ;          # from gn:featureCode
+    em:placeType     gn:A.PCLI ;        # from gn:featureCode
 
     gn:countryCode   "PL" ;
     em:preferredName "Poland" ;
@@ -737,13 +795,5 @@ ex:Poland_PCLI a em:Place ;
 # <rdfs:seeAlso rdf:resource="http://en.wikipedia.org/wiki/Earth"/>
 # <rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Earth"/>
 # </gn:Feature>
-# <foaf:Document rdf:about="http://sws.geonames.org/6295630/about.rdf">
-# <foaf:primaryTopic rdf:resource="http://sws.geonames.org/6295630/"/>
-# <cc:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
-# <cc:attributionURL rdf:resource="http://sws.geonames.org/6295630/"/>
-# <cc:attributionName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GeoNames</cc:attributionName>
-# <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2006-10-17</dcterms:created>
-# <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2016-05-23</dcterms:modified>
-# </foaf:Document>
 # </rdf:RDF>
 
