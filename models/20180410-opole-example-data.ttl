@@ -28,7 +28,30 @@
 #
 # 5. GeoNames includes multiple parent links which have not been included here.
 #
+# 6. The handling of Timespan values for current values (e.g. current hierarchy)
+#    has not been fully decided.  At least three approaches are possible:
+#    (a) use a semantically vacuous "Current" timespan (i.e. from which no formal 
+#        inferences may be drawn because no specific date information is provided,
+#        but which may still be useful for ionfrmation retrieval purposes).
+#        (Or maybe we can infer that the claim holds at some time after all the 
+#        historical places, and with higj probability still holds at the time the
+#        data is inspected.)
+#    (b) use a current date value based on the date the trecord is created; over
+#        time, the value may need to be updated if it is to be of any use.
+#    (c) say nothing (i.e. omit the em:when property altogether).  We cannot draw 
+#        any formal inference from such absence of information because of the RDF
+#        open-world model.
+#    On balance, I favour (a).
+#
+# 7. The representation of Timespan information needs to be fixed.  I favour using
+#    something that aligns with the linked pasts work, but it's not clear if that 
+#    will include linked data representations in the foreseeable future.
 
+# Timespan for "current" data
+
+em:Current a em:Timespan ; #@@@@
+    rdfs:label   "Current at time of entry (or as of 2018)" ;
+    rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." .
 
 # Place categories
 
@@ -147,12 +170,7 @@ ex:Opole_P a em:Place ;
             wgs84_pos:lat  "50.67211"^^double ;
             wgs84_pos:long "17.92533"^^double ;
           ] ;
-        # no information available from Geonames for duration
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
       ] ;
 
     em:hasRelation
@@ -169,11 +187,7 @@ ex:Opole_P a em:Place ;
           [ rdfs:label "Current map for Opole" ;
             em:link <http://www.geonames.org/3090048/opole.html>
           ] ;
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
@@ -217,12 +231,7 @@ ex:Opole_ADM3 a em:Place ;
             wgs84_pos:lat  "50.6562"^^double ;
             wgs84_pos:long "17.9306"^^double ;
           ] ;
-        # no information available from Geonames for duration
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
       ] ;
 
     em:hasRelation
@@ -239,11 +248,7 @@ ex:Opole_ADM3 a em:Place ;
           [ rdfs:label "Current map for Opole_ADM3" ;
             em:link <http://www.geonames.org/7532413/opole.html>
           ] ;
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7532413/about.rdf>     # from gn:locationMap
@@ -280,12 +285,7 @@ ex:Opole_ADM2 a em:Place ;
             wgs84_pos:lat  "50.65622"^^double ;
             wgs84_pos:long "17.93066"^^double ;
           ] ;
-        # no information available from Geonames for duration
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
       ] ;
 
     em:hasRelation
@@ -302,11 +302,7 @@ ex:Opole_ADM2 a em:Place ;
           [ rdfs:label "Current map for Opole_ADM2" ;
             em:link <http://www.geonames.org/7530818/opole.html>
           ] ;
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7530818/about.rdf>     # from gn:locationMap
@@ -368,12 +364,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
             wgs84_pos:lat  "50.66667"^^double ;
             wgs84_pos:long "17.9"^^double ;
           ] ;
-        # no information available from Geonames for duration
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
       ] ;
 
     em:hasRelation
@@ -390,11 +381,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
           [ rdfs:label "Current map for Opole Voivodeship" ;
             em:link <http://www.geonames.org/3337495/wojewodztwo-opolskie.html>
           ] ;
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3337495/about.rdf>     # from gn:locationMap
@@ -569,12 +556,7 @@ ex:Poland_PCLI a em:Place ;
             wgs84_pos:lat  "52"^^double ;
             wgs84_pos:long "20"^^double ;
           ] ;
-        # no information available from Geonames for duration
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
       ] ;
 
     em:hasAnnotation
@@ -585,11 +567,7 @@ ex:Poland_PCLI a em:Place ;
           [ rdfs:label "Current map for Poland" ;
             em:link <http://www.geonames.org/798544/republic-of-poland.html>
           ] ;
-        em:when
-          [ a em:Timespan ; @@@@
-            rdfs:label "Current as of 2018-04-25" ;
-            @@@@
-          ] ;
+        em:when em:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/798544/about.rdf>     # from gn:locationMap
