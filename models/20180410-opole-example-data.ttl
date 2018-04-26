@@ -1,16 +1,22 @@
-#@@TODO: preface stuff, prefixes, etc
+# Sample data for EMPlaces, describing Opole
+# Data format is Turtle (http://www.w3.org/TR/turtle/)
 
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+#@@TODO: finalize preface stuff, prefixes, etc
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-@prefix geonames <http://sws.geonames.org/> .
+@prefix cc:        <http://creativecommons.org/ns#> .
+@prefix dcterms:   <http://purl.org/dc/terms/> .
+@prefix foaf:      <http://xmlns.com/foaf/0.1/> .
 
-@prefix gn: <http://www.geonames.org/ontology#> .
-@prefix cc: <http://creativecommons.org/ns#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geonames   <http://sws.geonames.org/> .
+@prefix gn:        <http://www.geonames.org/ontology#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+@prefix em:        <http://emplaces.namespace.example.org/> .   #@@@@ TBD
 
 # Notes:
 #
@@ -46,6 +52,16 @@
 # 7. The representation of Timespan information needs to be fixed.  I favour using
 #    something that aligns with the linked pasts work, but it's not clear if that 
 #    will include linked data representations in the foreseeable future.
+#
+# 8. I am using SKOS concepts to represent various type values, e.g. place types 
+#    and categories.  This allows for some structuring of type information.
+#    An alternative was to use RDF types, but Rob Sanderson observed [1] that using 
+#    subtypes with annotations could cause difficulties for some implementations,
+#    and it's not clear that the ontological commtment inherrent in subtyping 
+#    serves any useful purpose.
+#    [1] (in 2018-04-12 personal email)
+#
+
 
 # Timespan for "current" data
 
@@ -586,7 +602,7 @@ ex:Poland_PCLI a em:Place ;
     # <gn:childrenFeatures rdf:resource="http://sws.geonames.org/798544/contains.rdf"/>
     # <gn:neighbouringFeatures rdf:resource="http://sws.geonames.org/798544/neighbours.rdf"/>
 
-# The following is raw RDF data from GeoNames for parejnt features, 
+# The following is raw RDF data from GeoNames for parent features, 
 # which has not been encoded in the hierarchical data.
 
 
