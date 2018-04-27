@@ -40,7 +40,7 @@ We are keen to get your feedback and comments on EM Places. Please get in touch 
 Arno Bosse (Oxford - Project Management), Howard Hotson (Oxford - Director), Graham Klyne (Oxford – Data Modelling), Miranda Lewis (Oxford - Editor), Jauco Noordzij (Huygens – Systems Development), Marnix van Berchum (Huygens - Project Management), Mat Wilcoxson (Oxford – Systems Development).
 
 ## Acknowledgements
-We would like to acknowledge the advice and inspiration we have drawn from the staff and projects at several related initiatives, including [Das Geschichtliche Orts-Verzeichnis (GOV)][15], das [Herder-Institut für historische Ostmitteleuropaforschung][20], [Pelagios][8], [Getty TGN][16], [GeoNames][17], [WikiData][18], and the [World Historical Gazetteer][19].
+We would like to acknowledge the advice and inspiration we have drawn from the staff and projects at several related initiatives, including [GeoNames][17], [Das Geschichtliche Orts-Verzeichnis (GOV)][15], the [Getty TGN][16], the [Herder-Institut für historische Ostmitteleuropaforschung][20], the [Pelagios Project][8], [WikiData][18], and the [World Historical Gazetteer][19].
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
