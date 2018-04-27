@@ -37,7 +37,7 @@ An early draft of the [proposed data model][11] for EM Places and a set of data 
 We are keen to get your feedback and comments on EM Places. Please get in touch by contacting Arno Bosse (Digital Project Manager, [Cultures of Knowledge][12]) by email [arno.bosse@history.ox.ac.uk][13] via [@kintopp][14] on Twitter or by creating a new GitHub issue in the repository with your comment/question.
 
 ## Team
-Arno Bosse (Oxford - Project Management), Graham Klyne (Oxford – Data Modelling), Miranda Lewis (Oxford - Editor), Jauco Noordzij (Huygens – Systems Development), Marnix van Berchum (Huygens - Project Management), Mat Wilcoxson (Oxford – Systems Development).
+Arno Bosse (Oxford - Project Management), Howard Hotson (Oxford - Director), Graham Klyne (Oxford – Data Modelling), Miranda Lewis (Oxford - Editor), Jauco Noordzij (Huygens – Systems Development), Marnix van Berchum (Huygens - Project Management), Mat Wilcoxson (Oxford – Systems Development).
 
 ## Acknowledgements
 We would like to acknowledge the advice and inspiration we have drawn from the staff and projects at several related initiatives, including [Das Geschichtliche Orts-Verzeichnis (GOV)][15], das [Herder-Institut für historische Ostmitteleuropaforschung][20], [Pelagios][8], [Getty TGN][16], [GeoNames][17], [WikiData][18], and the [World Historical Gazetteer][19].
