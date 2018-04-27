@@ -1,6 +1,6 @@
 # Design Notes
 
-This directory contains informal design descriptions for [Display][1](draft), [Search][2](TBA), and [Edit][3](TBA) related areas of functionality of the gazetteer.
+This directory contains informal design descriptions for the [display][1] (draft), [search][2] (tba), and [edit][3] (tba) related areas of functionality of the gazetteer.
 
 N.B.: All sections are currently WORK-IN-PROGRESS.
 
