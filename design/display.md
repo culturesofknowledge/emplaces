@@ -1,6 +1,6 @@
 # Overview (Display View)
 
-The draft description below offers an informal overview of the functionality of the gazetteer. It is _best read alongside the [interface mockup][1]_ of the detail/display view for a typical place record. 
+The draft description below offers an informal overview of the functionality of the gazetteer. It is best read alongside the [interface mockup][1] of the detail/display view for a typical place record. 
 
 Note: The ‘Priority’ sub-headings are intended as a simple means for tracking the relative importance of individual features as development priorities for the v.1 gazetteer.
 
@@ -25,7 +25,7 @@ The term ‘current’ refers to still currently existing places and as such wil
 
 In contrast, a ‘historical’ place is no longer extant (hence historical) entity with a defined temporal validity (e.g. the Habsburg Monarchy, 1526-1804). EM Places will not attempt to capture spatial data on historical regions (i.e. polygons). Instead, we will either provide a single representative lat/long location (e.g. Vienna) or external link, where available to external resources/projects with the necessary expertise and data (e.g. to [FNZGIS][3] for Central/Eastern Europe).
 
-Let us take, for example, the town of Opole in Poland. This is a currently extant place, and would be listed with alternative name and location data from our reference gazetteers (at present, GeoNames and Getty TGN). Amongst its alternative names (toponyms) will be a historical name, Oppeln. EM Places will merely record the name as an attribute of the main entry on Opole, since the alternative name data will have come from a reference gazetteer (GeoNames) which does not provide further historical context for alternative names.
+Let's take, for example, the town of Opole in Poland. This is a currently extant place, and would be listed with alternative name and location data from our reference gazetteers (at present, GeoNames and Getty TGN). Amongst its alternative names (toponyms) will be a historical name, Oppeln. EM Places will merely record the name as an attribute of the main entry on Opole, since the alternative name data will have come from a reference gazetteer (GeoNames) which does not provide further historical context for alternative names.
 
 Optionally, the record for a current place can also include additional historical information and contexts, such as data on historical calendar use, further attestations of toponyms, or various kinds of hierarchies associated with it (e.g. ecclesiastical, offering data on parishes, dioceses etc.). These additional contexts can be shared with EM Places by individual researchers and projects. When this additional data is itself a place (e.g. the Bohemian Crown, 1490-1742) then this place is recorded in EM Places as separate, historical place entity, linked to the current places with which it is associated.
 
@@ -47,22 +47,6 @@ This core metadata will form the spine of the gazetteer. This is data which EM P
 
 By contrast, _additional metadata_ is primarily further historical context and data (i.e. over and beyond core metadata) contributed to the gazetteer by individual researchers and projects, which will need to be reviewed by EM Places editors. Examples of additional metadata would include data on historical calendars, historical hierarchies, bibliographic entries, and historical maps.
 
-### Workflow
-
-**Priority:** Essential (individual records); High (bulk import)
-
-**Source:** Core data, additional data
-
-The basic workflow for a single record not yet in EM Places will request that a contributor first identify the place in a reference gazetteer (GeoNames or Getty TGN) and enter its ID in EM Places. EM Places will then pull the relevant core metadata from the reference gazetteer APIs and use this to populate a draft record for that place in a private staging area. Following this, the user will optionally be able to contribute additional metadata, and save the draft record, which will queue it for review by an editor.
-
-If a place cannot be found by the user in the reference gazetteer, a draft record cannot be created until an editor with appropriate privileges has confirmed this, and created the necessary core data manually (for example, a small village, or a building, not found in our reference gazetteers).Once this is done, the draft record can be made accessible to the user, who is then able to contribute additional metadata as before.
-
-We expect that the vast majority of new place names will be found in GeoNames. However, core data for all historical places will aways beed to be created by hand, by a user with the necessary editing privileges. Core data for a historical place be more limited, but (by editorial policy) all new historical places should be accompanied by least one full administrative hierarchy in order to put the new historical place entity into context. 
-
-For example, if the historical place 'Duchy of Opele' is created for the first time, then this new entry should be accompanied by additional, new entries (as needed) for e.g. the 'Governorate of the Duchy of Silesia', the 'Bohemian Crown', and the 'Holy Roman Empire' as well. 
-
-A separate workflow based on this outline will be provided for bulk imports via templates in e.g. Excel or CSV format. 
-
 ## Preferred Place Name; alternative names
 
 **Priority:** High
@@ -70,7 +54,6 @@ A separate workflow based on this outline will be provided for bulk imports via 
 **Source:** Core Data
 
 The default/preferred place name and its alternate names will come from the reference gazetteers. All alternative names and their labels will be stored and indexed but only some will be displayed. For example, while we will allow users to search for and find places using a Chinese transliteration there may be no need to display this transliteration in the list of alternative names. For the display list, alternative names from a short list of major European languages and historical forms (i.e. Latin) should suffice. Next, the list of alternative names will be compared with one or more additional gazetteers (preferably Getty TGN). From these, a merged set of unique alternative names will be shown. This is to avoid having to list multiple, identical instances of 'Rome' for each of the many languages supported by GeoNames. The (typically) language label(s) for an alternative name should be revealed on mouseover.
-
 
 ## Current Hierarchy
 
