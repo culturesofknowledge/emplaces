@@ -15,10 +15,10 @@ The fourth is to __make the EM Places source code and datasets easily accessible
 Our intent is to prepare EM Places in a transparent and collaborative manner as possible to allow it to become a useful resource for the [Pelagios Community][8] and an active participant in the proposed [Linked Pasts Network][9].
 
 ## Design
-The draft [design documents][10] offer an informal description of the planned features for EM Places together with a first set of interface mock-ups. More details will be added here as the gazetteer’s features are finalized.
+The draft [design documents][10] (display, search, edit) offer an informal description of the planned features for EM Places together with a first set of interface mock-ups. More details will be added here as the gazetteer’s features are finalized.
 
 ## Data Model
-An early draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model set is finalized.
+An draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model is refined.
 
 ## Status
 **April 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
@@ -40,7 +40,7 @@ We are keen to get your feedback and comments on EM Places. Please get in touch 
 Arno Bosse (Oxford - Project Management), Howard Hotson (Oxford - Director), Graham Klyne (Oxford – Data Modelling), Miranda Lewis (Oxford - Editor), Jauco Noordzij (Huygens – Systems Development), Marnix van Berchum (Huygens - Project Management), Mat Wilcoxson (Oxford – Systems Development).
 
 ## Acknowledgements
-We would like to acknowledge the inspiration we have drawn and the feedback we received from the staff at several related initiatives, including [GeoNames][17], [Das Geschichtliche Orts-Verzeichnis (GOV)][15], the [Getty TGN][16], the [Herder Institute for Historical Research on East Central Europe][20], the [Pelagios Project][8], [WikiData][18], and the [World Historical Gazetteer][19].
+We would like to acknowledge the help and inspiration we have we have received from related initiatives, including [GeoNames][17], [Das Geschichtliche Orts-Verzeichnis (GOV)][15], the [Getty TGN][16], the [Herder Institute for Historical Research on East Central Europe][20], the [Pelagios Project][8], [WikiData][18], and the [World Historical Gazetteer][19].
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455

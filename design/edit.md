@@ -1,14 +1,14 @@
 # Overview (Edit)
 
-TBA
+TBA.
 
 ## Concepts and Principles
 
-TBA
+TBA.
 
 ### Workflow
 
-**Priority:** Essential (individual records); High (bulk import)
+**Priority:** High (individual records); Medium (bulk import)
 
 **Source:** Core data, additional data
 
@@ -21,3 +21,16 @@ We expect that the vast majority of new place names will be found in GeoNames. H
 For example, if the historical place 'Duchy of Opele' is created for the first time, then this new entry should be accompanied by additional, new entries (as needed) for e.g. the 'Governorate of the Duchy of Silesia', the 'Bohemian Crown', and the 'Holy Roman Empire' as well. 
 
 A separate workflow based on this outline will be provided for bulk imports via templates in e.g. Excel or CSV format. 
+
+### User Permissions
+
+**Priority:** High 
+
+**Source:** Core data, additional data
+
+Details TBA – a preliminary set of definitions was defined for this purpose at the EM Places kick-off meeting in Amsterdam in 2017. 
+
+
+### Editing Interface
+
+TBA.
