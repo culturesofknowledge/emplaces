@@ -48,6 +48,12 @@ By contrast, _additional metadata_ is primarily further historical context and d
 
 See also the section on 'Includes' below, for an early discussion of what may need to become a third class of metadata (or a sub-class of 'additional). 
 
+### Uncertainties
+
+Data on calendars, and on historical hierarchies (only) will need to be optionally marked as any combination of 'Uncertain', 'Inferred', and 'Approximate'.
+
+TBD how to indicate this in the interface (possibly using a set of symbols, and possibly only in the associated 'Source' pop-up).
+
 ## Preferred Place Name; alternative names
 
 **Priority:** High
@@ -56,7 +62,7 @@ See also the section on 'Includes' below, for an early discussion of what may ne
 
 The default/preferred place name and its alternate names will come from the reference gazetteers. All alternative names and their labels will be stored and indexed but only some will be displayed. 
 
-For example, while we will allow users to search for and find places using a Persian transliteration of a place (Opole: اوپوله) there is no need to display this particular transliteration in the list of alternative names. For the display list, alternative names will be drawn from a short list of major European languages and historical forms (i.e. Latin). Next, the list of alternative names will be compared with one or more additional gazetteers. From this these lists, a merged set of unique alternative names will finally be shown. This is to avoid having to list multiple, identical instances of e.g 'Opole' for the many language transliterations supported by GeoNames. The language label(s) for an alternative name should be revealed on mouseover.
+For example, while we can allow users to search for and find places using a Persian transliteration of a place (Opole: اوپوله) there is no need to display this particular transliteration in the list of alternative names. For the display list, alternative names will be drawn from a short list of major European languages and historical forms (i.e. Latin). Next, the list of alternative names will be compared with one or more additional gazetteers. From this these lists, a merged set of unique alternative names will finally be shown. This is to avoid having to list multiple, identical instances of e.g 'Opole' for the many language transliterations supported by GeoNames. The language label(s) for an alternative name should be revealed on mouseover.
 
 ## Current Hierarchy
 
@@ -218,6 +224,15 @@ A link to a simple comment form, referencing the current record and (if present)
 **Source:** Generated
 
 A means to share a link to the current record on social media. If possible, this should be implemented in a way which does not promote cross-site tracking of visitors to the gazetteer.
+
+### Info and Sources pop-ups
+
+**Priority:** High
+
+**Source:** Additional metadata 
+
+Many sections in the individual record display will include 'Info' and/or 'Sources' links. Clicking this could, as one possibility, show a pop-up with text on that section. In the case of Sources, this could include both an unstructured text area, and a structured bibliographic area. 
+ 
 
 [1]:	/images/display.pdf
 [2]:	https://github.com/culturesofknowledge/emplaces#feedback-and-comments
