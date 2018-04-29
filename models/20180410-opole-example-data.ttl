@@ -63,6 +63,14 @@
 #    serves any useful purpose.
 #    [1] (in 2018-04-12 personal email)
 #
+#
+# TODO:
+#   Fix structure and vocabulary for bibliography (started)
+#       - Candidates: Bibo, Fabio(SPAR), BibFrame, @@@ 
+#   Historical hierarchies
+#   Fix vocabularies for timespans (PeriodO)
+#   Uncertainties, approximations, etc
+#   Record metadata (maybe later when we see what Timbuctoo provides)
 
 
 # Timespan for "current" data
@@ -233,6 +241,71 @@ ex:Opole_P a em:Place ;
 
         Located on Oder River; passed to Bohemia in 1327, to Habsburgs in 1742 & returned to Poland in 1945; is important port between Wrocław & Upper Silesia; economy depends on cement factories & iron foundries; noted for many historic buildings.
         """ ;
+
+    # Bibliography
+
+@@@@ what follows is exploratory, incomplete 
+
+    em:reference
+      [ a bib:BibEntry ;
+        bib:type  bib_type:book ;
+        bib:title "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" ;
+        bib:author
+          [ bib:name "Emmerling, Ryszard" ],
+          [ bib:name "Zajączkowska, Urszula" ] ;
+        bib:publication_details
+          [ bib:publisher "SLASKIE WYDAWNICTWO" ; bib:address "Opole" ] ;
+        bib:year "2003" ;
+        bib:identifier
+          [ bib:type "ISBN" ;
+            bib:id "8391537137" ;
+          ] ;
+
+      ]
+
+Emmerling, Ryszard; Zajączkowska, Urszula 2003: Oppeln/Opole.
+Die Hauptstadt der Wojewodschaft Oppeln, Opole.
+
+@book{8391537137,
+  Author = {Emmerling, Ryszard; Zajączkowska, Urszula},
+  Title = {Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln},
+  Publisher = {SLASKIE WYDAWNICTWO},
+  Year = {2003},
+  ISBN = {8391537137},
+}
+
+
+Dziewulski, Władysław; Hawranek, Franciszek (ed.) 1975: Opole. Monografia miasta.
+
+Gediga, Bogusław 1995: Oppeln/Opole im 11. und 12. Jahrhundert als Beispiel eines frühstädtischen Zentrums in Oberschlesien; in: Wünsch, Thomas (ed.): Stadtgeschichte Oberschlesiens. Studien zur städtischen Entwicklung und Kultur einer ostmitteleuropäischen Region vom Mittelalter bis zum Vorabend der Industrialisierung, Berlin 1995 (Tagungsreihe der Stiftung Haus Oberschlesien, 5).
+
+Hefner, Krystian; Kreft, Wolfgang 2011: Opole/Oppeln, Marburg (=Historisch-topographischer Atlas schlesischer Städte 2).
+
+Idzikowski, Franz 1863: Geschichte der Stadt Oppeln, Oppeln.
+
+Linek, Bernard; Tarka, Krzysztof (ed.) 2008: Opole na przestrzeni wieków. Historiografia wobec nowych metod badania dziejów miasta, Opole.
+
+Szafran-Szadkowska, Lucyna 1995: Najstarsze dzieje Opola, Opole.
+
+Veldtrup, Dieter 1995: Prosopographische Studien zur Geschichte Oppelns als herzoglicher Residenzstadt im Mittelalter, Berlin (=Stiftung Haus Oberschlesien : Schriften der Stiftung Haus Oberschlesien, Landeskundliche Reihe 7).
+
+
+
+    # Related resources
+
+    em:relatedResource
+      [ em:link <https://dolny-slask.org.pl> ],
+      [ em:link <http://www.dokumentyslaska.pl> ],
+      [ em:link <https://www.herder-institut.de/en/research-projects/current-projects/town-atlas-silesia.html> ],
+      [ em:link <http://ome-lexikon.uni-oldenburg.de> ],
+      [ rdfs:label "Babik, Zbigniew 2001: Najstarsza warstwa nazewnicza na ziemiach polskich w granicach wczesnośredniowiecznej Słowiańszczyzny, Kraków." ],
+      [ rdfs:label "Behuneck, Adolf 1855: Alphabetisch-tabellarisches Verzeichniss sämmtlicher Städte, Flecken, Dörfer und anderer Orte Schlesiens sowie sämmtlicher Städte und derjenigen Ortschaften Preussens, in denen Gerichtssitze sind, oder Gerichtstage abgehalten werden, Steinau."] ;
+
+    # Historical hierarchies
+
+    em:hasRelation
+
+        @@@@
 
     # Historical name attestations
 
@@ -460,6 +533,30 @@ ex:Opole_P a em:Place ;
     # Historical calendar data
 
     em:hasAnnotation
+
+      [ a oa:Annotation ;
+        oa:motivatedBy em:CALENDAR_IN_USE ;
+        oa:hasTarget   ex:Opole_P ;
+        oa:hasBody 
+          [ a em:Calendar ;
+            # Old style (OS) begins year on 25-Mar
+            # New style (NS) begins year on 01-Jan
+            rdfs:label   "Julian (OS)" ;  # assumed old style
+            em:link      em:Julian_old ;
+          ] ;
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "Until 1584" ;
+            @@@@to       "1584" ;
+          ]
+        em:source
+          [ rdfs:label   "Assumed from adoption of Papal Bull (Gregorian) in 1584" ;
+            rdfs:comment "Assumed from adoption of Papal Bull (Gregorian) in 1584" ;
+            em:link      <@@@> ;
+          ] ;
+        rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
+      ],
+
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
         oa:hasTarget   ex:Opole_P ;
@@ -472,11 +569,11 @@ ex:Opole_P a em:Place ;
           [ a em:Timespan ; #@@@@
             rdfs:label   "Since 23-Feb-1584" ;
             @@@@from     "1584-02-23" ;
-          ]
+          ] ;
         em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            rdfs:comment "@@@" ;
-            em:link      <@@@> ;
+          [ rdfs:label   "@@@@TBD" ;
+            rdfs:comment "@@@@Evidence details to be supplied" ;
+            em:link      <@@@> ; #@@@@ is this needed?
           ] ;
         rdfs:comment "Gregorian since 23/02/1584" ;
       ] ;
@@ -636,7 +733,7 @@ ex:Opole_P a em:Place ;
 
 ex:Opole_ADM3 a em:Place ;
     rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ; # document
-    em:coreDataRef   <http://sws.geonames.org/7532413/> ;           # place
+    em:coreDataRef   <http://sws.geonames.org/7532413/> ;          # place
 
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM3 ;        # from gn:featureCode
@@ -762,7 +859,7 @@ ex:Opole_ADM2 a em:Place ;
 
 
 ex:Opole_Voivodeship_ADM1 a em:Place ;
-    rdfs:isDefinedBy <http://sws.geonames.org/3337495/a
+    rdfs:isDefinedBy <http://sws.geonames.org/3337495/>
 
     # Core data (derived from GeoNames)
 
