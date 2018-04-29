@@ -244,7 +244,7 @@ ex:Opole_P a em:Place ;
 
     # Bibliography
 
-@@@@ what follows is exploratory, incomplete 
+@@@@ what follows in this bibliography section is exploratory, incomplete and contains notes copied here for convenient reference while working through the details
 
     em:reference
       [ a bib:BibEntry ;
@@ -305,7 +305,7 @@ Veldtrup, Dieter 1995: Prosopographische Studien zur Geschichte Oppelns als herz
 
     em:hasRelation
 
-        @@@@
+        @@@@TODO
 
     # Historical name attestations
 
