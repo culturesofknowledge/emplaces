@@ -15,7 +15,7 @@ The fourth is to __make the EM Places source code and datasets easily accessible
 Our intent is to prepare EM Places in a transparent and collaborative manner as possible to allow it to become a useful resource for the [Pelagios Community][8] and an active participant in the proposed [Linked Pasts Network][9].
 
 ## Design
-The draft [design documents][10] (display, search, edit) offer an informal description of the planned features for EM Places together with a first set of interface mock-ups. More details will be added here as the gazetteer’s features are finalized.
+The draft [design documents][10] (display, search, edit) offer an informal description of the planned features for EM Places together with a first set of [interface mock-ups][21]. More details will be added here as the gazetteer’s features are finalized.
 
 ## Data Model
 An draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model is refined.
@@ -62,4 +62,5 @@ We would like to acknowledge the help and inspiration we have we have received f
 [18]:	https://www.wikidata.org
 [19]:	http://whgazetteer.org
 [20]:	https://www.herder-institut.de/startseite.html
+[21]:	/images
 
