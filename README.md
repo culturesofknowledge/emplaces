@@ -40,7 +40,7 @@ We are keen to get your feedback and comments on EM Places. Please get in touch 
 Arno Bosse (Oxford - Project Management), Howard Hotson (Oxford - Director), Graham Klyne (Oxford – Data Modelling), Miranda Lewis (Oxford - Editor), Jauco Noordzij (Huygens – Systems Development), Marnix van Berchum (Huygens - Project Management), Mat Wilcoxson (Oxford – Systems Development).
 
 ## Acknowledgements
-We would like to acknowledge the help and inspiration we have we have received from related initiatives, including [GeoNames][17], [Das Geschichtliche Orts-Verzeichnis (GOV)][15], the [Getty TGN][16], the [Herder Institute for Historical Research on East Central Europe][20], the [Pelagios Project][8], [WikiData][18], and the [World Historical Gazetteer][19].
+We would like to acknowledge the inspiration we drew, and the help we received from several related projects, including the 'Space and Time' working group in the [COST Action 'Reassembling the Republic of Letters'][22], [GeoNames][17], [Das Geschichtliche Orts-Verzeichnis (GOV)][15], the [Getty TGN][16], the [Herder Institute for Historical Research on East Central Europe][20], the [Pelagios Project][8], [WikiData][18], and the [World Historical Gazetteer][19].
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
@@ -63,4 +63,4 @@ We would like to acknowledge the help and inspiration we have we have received f
 [19]:	http://whgazetteer.org
 [20]:	https://www.herder-institut.de/startseite.html
 [21]:	/images
-
+[22]:	http://republicofletters.net
