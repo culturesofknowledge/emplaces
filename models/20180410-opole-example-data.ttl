@@ -8,18 +8,19 @@
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-@prefix cc:        <http://creativecommons.org/ns#> .
-@prefix dcterms:   <http://purl.org/dc/terms/> .
-@prefix foaf:      <http://xmlns.com/foaf/0.1/> .
-@prefix bibo:      <http://purl.org/ontology/bibo/> .
+@prefix cc:         <http://creativecommons.org/ns#> .
+@prefix dcterms:    <http://purl.org/dc/terms/> .
+@prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+@prefix bibo:       <http://purl.org/ontology/bibo/> .
 
-@prefix geonames   <http://sws.geonames.org/> .                 # GeoNames place IDs
-@prefix gn:        <http://www.geonames.org/ontology#> .        # GeoNames vocabulary terms
-@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geonames    <http://sws.geonames.org/> .                 # GeoNames place IDs
+@prefix gn:         <http://www.geonames.org/ontology#> .        # GeoNames vocabulary terms
+@prefix wgs84_pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
-@prefix em:        <http://emplaces.namespace.example.org/> .   #@@@@ TBD
+@prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
+@prefix emt:        <http://emplaces.namespace.example.org/temporal/> .
 
-@prefix ex:        <http://emplaces.data.example.org/> .        #@@@@ TBD
+@prefix ex:         <http://emplaces.data.example.org/> .        #@@@@ TBD
 
 # Notes:
 #
@@ -66,16 +67,21 @@
 #
 #
 # TODO:
-#   Fix vocabularies for timespans (PeriodO)
 #   Uncertainties, approximations, etc
 #   Record metadata (maybe later when we see what Timbuctoo provides)
 #   Record timespans as identified resources (rather than inline blank nodes)
+#
 
 # Timespan for "current" data
 
-em:Current a em:Timespan ; #@@@@
-    rdfs:label   "Current at time of entry (or as of 2018)" ;
+emt:Current a emt:TimePeriod ;
+    rdfs:label   "Current, as of 2018" ;
     rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." .
+    emt:timespan
+      [ a emt:Timespan ;
+        emt:latestStart: "2018" ;
+        emt:earliestEnd: "2018" ;
+      ] .
 
 # Place categories
 
@@ -246,7 +252,7 @@ ex:Opole_P a em:Place ;
             wgs84_pos:lat  "50.67211"^^double ;
             wgs84_pos:long "17.92533"^^double ;
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
       ] ;
 
     em:hasRelation
@@ -263,7 +269,7 @@ ex:Opole_P a em:Place ;
           [ rdfs:label "Current map for Opole" ;
             em:link <http://www.geonames.org/3090048/opole.html>
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
@@ -308,10 +314,12 @@ ex:Opole_P a em:Place ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Opole_Duchy ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1281-1521" ;
-            @@@@from     "1281" ;
-            @@@@to       "1521" ;
+            emt:timespan
+              [ emt:start  "1281" ;
+                emt:end    "1521" ;
+              ]
           ] ;
         # em:source ????
       ] ,
@@ -319,10 +327,12 @@ ex:Opole_P a em:Place ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Opole_Raciborz_Duchy ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1521-1809" ;
-            @@@@from     "1521" ;
-            @@@@to       "1809" ;
+            emt:timespan
+              [ emt:start  "1521" ;
+                emt:end    "1809" ;
+              ]
           ] ;
         # em:source ????
       ] ,
@@ -330,10 +340,12 @@ ex:Opole_P a em:Place ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Opole_County ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1742-1945" ;
-            @@@@from     "1742" ;
-            @@@@to       "1945" ;
+            emt:timespan
+              [ emt:start  "1742" ;
+                emt:end    "1945" ;
+              ]
           ] ;
         # em:source ????
       ] ;
@@ -352,9 +364,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Polish" ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1146-(today)" ;
-            @@@@from     "1146" ;
+            emt:timespan
+              [ emt:start  "1146" ;
+                # emt:end    "@@@@" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -374,10 +389,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Latin" ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1222-1431" ;
-            @@@@from     "1222" ;
-            @@@@to       "1431" ;
+            emt:timespan
+              [ emt:start  "1222" ;
+                emt:end    "1431" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -396,10 +413,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Latin/PL" ; #@@@@ what does this mean?
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1228-1483" ;
-            @@@@from     "1228" ;
-            @@@@to       "@@@@" ;
+            emt:timespan
+              [ emt:start  "1228" ;
+                # emt:end    "@@@@" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -418,10 +437,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "(Latin; DE: 1384)" ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1226-1487" ;
-            @@@@from     "1226" ;
-            @@@@to       "1487" ;
+            emt:timespan
+              [ emt:start  "1226" ;
+                emt:end    "1487" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -442,10 +463,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1322-1417" ;
-            @@@@from     "1322" ;
-            @@@@to       "1417" ;
+            emt:timespan
+              [ emt:start  "1322" ;
+                emt:end    "1417" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -464,10 +487,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1433" ;
-            @@@@from     "1433" ;
-            @@@@to       "1433" ;
+            emt:timespan
+              [ emt:start  "1433" ;
+                emt:end    "1433" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -485,10 +510,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1454" ;
-            @@@@from     "1454" ;
-            @@@@to       "1454" ;
+            emt:timespan
+              [ emt:start  "1454" ;
+                emt:end    "1454" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -506,10 +533,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1455" ;
-            @@@@from     "1455" ;
-            @@@@to       "1455" ;
+            emt:timespan
+              [ emt:start  "1455" ;
+                emt:end    "1455" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -528,10 +557,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1477-1945" ;
-            @@@@from     "1477" ;
-            @@@@to       "1945" ;
+            emt:timespan
+              [ emt:start  "1477" ;
+                emt:end    "1945" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -549,10 +580,12 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Polish (mistake)" ; #@@@@ what does this mean?
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1830" ;
-            @@@@from     "1830" ;
-            @@@@to       "1830" ;
+            emt:timespan
+              [ emt:start  "1830" ;
+                emt:end    "1830" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
@@ -576,9 +609,12 @@ ex:Opole_P a em:Place ;
             em:link      em:Julian_old ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "Until 1584" ;
-            @@@@to       "1584" ;
+            emt:timespan
+              [ # emt:start  "@@@@" ;
+                emt:end    "1584" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Assumed from adoption of Papal Bull (Gregorian) in 1584" ;
@@ -597,9 +633,12 @@ ex:Opole_P a em:Place ;
             em:link      em:Gregorian ;
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "Since 23-Feb-1584" ;
-            @@@@from     "1584-02-23" ;
+            emt:timespan
+              [ emt:start  "1584-02-23 ;
+                # emt:end    "@@@@" ;
+              ]
           ] ;
         em:source
           [ rdfs:label   "@@@@TBD" ;
@@ -624,10 +663,12 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/613891568775/view>
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1561" ;
-            @@@@from     "1561" ;
-            @@@@to       "1561" ;
+            emt:timespan
+              [ emt:start  "1561" ;
+                emt:end    "1561" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak / David Rumsey Map Collection" ;
@@ -645,10 +686,12 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/769642035679/view>
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1608" ;
-            @@@@from     "1608" ;
-            @@@@to       "1608" ;
+            emt:timespan
+              [ emt:start  "1608" ;
+                emt:end    "1608" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak / David Rumsey Map Collection" ;
@@ -666,10 +709,12 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/306903845600/view>
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1740" ;
-            @@@@from     "1740" ;
-            @@@@to       "1740" ;
+            emt:timespan
+              [ emt:start  "1740" ;
+                emt:end    "1740" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak / David Rumsey Map Collection" ;
@@ -687,10 +732,12 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/608622104523/view>
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1777" ;
-            @@@@from     "1777" ;
-            @@@@to       "1777" ;
+            emt:timespan
+              [ emt:start  "1777" ;
+                emt:end    "1777" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak / David Rumsey Map Collection" ;
@@ -709,10 +756,12 @@ ex:Opole_P a em:Place ;
             em:link      <http://retromap.ru/m.php#l=1617871&z=8&y=50.495040&x=17.865997>
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1787" ;
-            @@@@from     "1787" ;
-            @@@@to       "1787" ;
+            emt:timespan
+              [ emt:start  "1787" ;
+                emt:end    "1787" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak / David Rumsey Map Collection" ;
@@ -730,10 +779,12 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/17345888797/view>
           ] ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1794" ;
-            @@@@from     "1794" ;
-            @@@@to       "1794" ;
+            emt:timespan
+              [ emt:start  "1794" ;
+                emt:end    "1794" ;
+              ]
           ]
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak / David Rumsey Map Collection" ;
@@ -822,7 +873,7 @@ ex:Opole_ADM3 a em:Place ;
             wgs84_pos:lat  "50.6562"^^double ;
             wgs84_pos:long "17.9306"^^double ;
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
       ] ;
 
     em:hasRelation
@@ -839,7 +890,7 @@ ex:Opole_ADM3 a em:Place ;
           [ rdfs:label "Current map for Opole_ADM3" ;
             em:link <http://www.geonames.org/7532413/opole.html>
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7532413/about.rdf>     # from gn:locationMap
@@ -886,7 +937,7 @@ ex:Opole_ADM2 a em:Place ;
             wgs84_pos:lat  "50.65622"^^double ;
             wgs84_pos:long "17.93066"^^double ;
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
       ] ;
 
     em:hasRelation
@@ -903,7 +954,7 @@ ex:Opole_ADM2 a em:Place ;
           [ rdfs:label "Current map for Opole_ADM2" ;
             em:link <http://www.geonames.org/7530818/opole.html>
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7530818/about.rdf>     # from gn:locationMap
@@ -974,7 +1025,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
             wgs84_pos:lat  "50.66667"^^double ;
             wgs84_pos:long "17.9"^^double ;
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
       ] ;
 
     em:hasRelation
@@ -991,7 +1042,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
           [ rdfs:label "Current map for Opole Voivodeship" ;
             em:link <http://www.geonames.org/3337495/wojewodztwo-opolskie.html>
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3337495/about.rdf>     # from gn:locationMap
@@ -1176,7 +1227,7 @@ ex:Poland_PCLI a em:Place ;
             wgs84_pos:lat  "52"^^double ;
             wgs84_pos:long "20"^^double ;
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
       ] ;
 
     em:hasAnnotation
@@ -1187,7 +1238,7 @@ ex:Poland_PCLI a em:Place ;
           [ rdfs:label "Current map for Poland" ;
             em:link <http://www.geonames.org/798544/republic-of-poland.html>
           ] ;
-        em:when em:Current ;
+        em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/798544/about.rdf>     # from gn:locationMap
@@ -1244,20 +1295,24 @@ ex:Opole_Duchy a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM3H ;       # from gn:featureCode
     em:when 
-      [ a em:Timespan ; #@@@@
+      [ a emt:TimePeriod ;
         rdfs:label   "1281-1809" ;      # (at least, inferred from relations)
-        @@@@from     "1281" ;
-        @@@@to       "1809" ;
+        emt:timespan
+          [ emt:start  "1281" ;
+            emt:end    "1809" ;
+          ]
       ] ;
     em:hasRelation
       [ a em:QualifiedRelation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Bohemian_Crown ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1348-1806" ;
-            @@@@from     "1348" ;
-            @@@@to       "1806" ;
+            emt:timespan
+              [ emt:start  "1348" ;
+                emt:end    "1806" ;
+              ]
           ] ;
         # em:source ????
       ] ,
@@ -1265,10 +1320,12 @@ ex:Opole_Duchy a em:Place ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:War_and_Domain_Chamber_Wroclaw ;   # Not defined in this sample
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1742-1809" ;
-            @@@@from     "1742" ;
-            @@@@to       "1809" ;
+            emt:timespan
+              [ emt:start  "1742" ;
+                emt:end    "1809" ;
+              ]
           ] ;
         # em:source ????
       ] .
@@ -1279,10 +1336,12 @@ ex:Opole_Raciborz_Duchy a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM3H ;       # from gn:featureCode
     em:when 
-      [ a em:Timespan ; #@@@@
+      [ a emt:TimePeriod ;
         rdfs:label   "1348-1806" ;
-        @@@@from     "1348" ;
-        @@@@to       "1806" ;
+        emt:timespan
+          [ emt:start  "1348" ;
+            emt:end    "1806" ;
+          ]
       ] ;
     # em:source ????
     em:hasRelation
@@ -1290,10 +1349,12 @@ ex:Opole_Raciborz_Duchy a em:Place ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Bohemian_Crown ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1348-1806" ;
-            @@@@from     "1348" ;
-            @@@@to       "1806" ;
+            emt:timespan
+              [ emt:start  "1348" ;
+                emt:end    "1806" ;
+              ]
           ] ;
         # em:source ????
       ] .
@@ -1304,10 +1365,12 @@ ex:Opole_County a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM4H ;       # from gn:featureCode
     em:when 
-      [ a em:Timespan ; #@@@@
+      [ a emt:TimePeriod ;
         rdfs:label   "1521-1945" ;
-        @@@@from     "1521" ;
-        @@@@to       "1945" ;
+        emt:timespan
+          [ emt:start  "1521" ;
+            emt:end    "1945" ;
+          ]
       ] ;
     # em:source ????
     em:hasRelation
@@ -1315,10 +1378,12 @@ ex:Opole_County a em:Place ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Opole_Duchy ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1521-1809" ;
-            @@@@from     "1521" ;
-            @@@@to       "1809" ;
+            emt:timespan
+              [ emt:start  "1521" ;
+                emt:end    "1809" ;
+              ]
           ] ;
         # em:source ????
       ] .
@@ -1329,10 +1394,12 @@ ex:Bohemian_Crown a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM2H ;       # from gn:featureCode
     em:when 
-      [ a em:Timespan ; #@@@@
+      [ a emt:TimePeriod ;
         rdfs:label   "1348-1806" ;
-        @@@@from     "1348" ;
-        @@@@to       "1806" ;
+        emt:timespan
+          [ emt:start  "1348" ;
+            emt:end    "1806" ;
+          ]
       ] ;
     # em:source ????
     em:hasRelation
@@ -1340,10 +1407,12 @@ ex:Bohemian_Crown a em:Place ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Habsburg_Monarchy ;    # Not defined in this sample
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1348-1804" ;
-            @@@@from     "1348" ;
-            @@@@to       "1804" ;
+            emt:timespan
+              [ emt:start  "1348" ;
+                emt:end    "1804" ;
+              ]
           ] ;
         # em:source ????
       ] ,
@@ -1351,10 +1420,12 @@ ex:Bohemian_Crown a em:Place ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Holy_Roman_Empire ;
         em:when 
-          [ a em:Timespan ; #@@@@
+          [ a emt:TimePeriod ;
             rdfs:label   "1348-1806" ;
-            @@@@from     "1348" ;
-            @@@@to       "1806" ;
+            emt:timespan
+              [ emt:start  "1348" ;
+                emt:end    "1806" ;
+              ]
           ] ;
         # em:source ????
       ] .
@@ -1365,10 +1436,12 @@ ex:Holy_Roman_Empire a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.PCLH ;        # from gn:featureCode
     em:when 
-      [ a em:Timespan ; #@@@@
+      [ a emt:TimePeriod ;
         rdfs:label   "1348-1806" ;
-        @@@@from     "1348" ;
-        @@@@to       "1806" ;
+        emt:timespan
+          [ emt:start  "1348" ;
+            emt:end    "1806" ;
+          ]
       ] .
 
 

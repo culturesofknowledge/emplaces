@@ -14,7 +14,7 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [x] Fix structure and vocabulary for bibliography
         - Candidates: Bibo, Fabio(SPAR), BibFrame, @@@ 
     - [x] Historical hierarchies
-    - [ ] Fix vocabularies for timespans (PeriodO?)
+    - [x] Fix vocabularies for timespans (PeriodO?)
     - [ ] Uncertainties, approximations, etc
     - [ ] Record metadata (maybe later when we see what Timbuctoo provides)
 - [ ] Decide how to flag "core data" in structures used for both core and additional data (needed for refresh of core data from source).  It seems what is really needed is a reference source indication.
