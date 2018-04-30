@@ -1,8 +1,8 @@
-# Notes on timespan representationproposed for linked pasts
+# Notes on timespan representation proposed for Linked-pasts
 
-The original project to use JSON-LD to capture temporally qualified place descriptions appears to have been withdrawn in faviur of focusing on a pure JSON representation.
+The original project to use JSON-LD to capture temporally qualified place descriptions appears to have been withdrawn in favour of focusing on a pure JSON representation.
 
-IThe communbity of interest for EMPlaces has a good deal overlap with that for linked-pasts, so it makes sense to at least try and use the same semantics, even if we are more focused on a linked data representation.
+The community of interest for EMPlaces has a good deal overlap with that for Linked-pasts, so it makes sense to at least try and use the same semantics, even if we are more focused on a linked data representation.
 
 To this end, I'm working through https://github.com/LinkedPasts/lp-network/blob/master/PGIFv2/pgif_v2e_annotated.txt to capture the proposed structure that is used as the value of a `when` attribute, and proposing an RDF representation based on that structure.
 
@@ -109,13 +109,13 @@ The last example/template here (line 205) pretty much captures the proposed stru
 
 Some notes for representation as RDF:
 
-1.  The names used for keys aboive can be used direftly as local parts of a CURIE.  For the time being, I'll define a porefix "emt", but we may subsequently be able to use a value in common with linked pasts.  e.g.
+1.  The names used for keys above can be used directly as local parts of a CURIE.  For the time being, I'll define a prefix "emt", but we may subsequently be able to use a value in common with linked pasts.  e.g.
 
         @prefix emt: <http://emplaces.namespace.example.org/temporal/> .
 
-2.  The above structure uses `timespans` and `periods` with a list of values.  I assume the union of the indicated values is intended.  A simple representation in RDF using multiple property instances would yield an intersection.  The nearest RDF representation, which could be represented as above using JSON-LD, would be to use an rdf:List structure.  Unfortunately this leads to rather more complex RDF in what seems to be the very common case of a single value, so I propose to use singular properties `emt:timespan` and `emt:period` for now.
+2.  The above structure uses `timespans` and `periods` with a list of values.  I assume the union of the indicated values is intended.  A simple representation in RDF using multiple property instances would yield an intersection.  The nearest RDF representation, which could be represented as above using JSON-LD, would be to use an `rdf:List` structure.  Unfortunately this leads to rather more complex RDF in what seems to be the very common case of a single value, so I propose to use singular properties `emt:timespan` and `emt:period` for now.
 
-    In future, when we have a need for union time periods, the plural names could be used with rdf:List values, possibly combined with a singular timespan describing a single period that subsumes the individual values inthe list.
+    In future, when we have a need for union time periods, the plural names could be used with `rdf:List` values, possibly combined with a singular timespan describing a single period that subsumes the individual values inthe list.
 
     It may turn out be that a singular `period` is less useful.  Cases I (vaguely) recall seeing have two or more named periods that together represent a contiguous timespan.  The simple singular timespan may turn out to be most useful for presentation and sorting purposes (somewhat like quantified periods in PeriodO?).
 
@@ -125,11 +125,11 @@ Some notes for representation as RDF:
 
     Rather than inventing a new syntax for this, I would prefer to use the ISO8601 representation (https://en.wikipedia.org/wiki/ISO_8601#Durations), which is also defined as an XML schema data type (http://www.w3.org/TR/xmlschema-2/#duration), hence is available as an RDF literal data type.
 
-    E.g. 3 monthns would be `P3M`
+    E.g. 3 months would be `P3M`
 
     I note this is almost compatible with the proposed syntax, except that a preceding `P` is required.
 
-5. Thinking in terms of RDF semantics, I would note that interpreting the absence of `end` as "now" could lead to some potential problems with formal reasoning.  If one infers conclusions that are based on the premise that a period extends to the present time, then subsequently add an `end` with an earlier date, RDF semantics would require that the original conclusions are still logically valid, which might be dsifferent to what is intended.  A logically sounder approach is to consider that lack of an `end` property simply means "unknown"
+5. Thinking in terms of RDF semantics, I would note that interpreting the absence of `end` as "now" could lead to some potential problems with formal reasoning.  If one infers conclusions that are based on the premise that a period extends to the present time, then subsequently add an `end` with an earlier date, RDF semantics would require that the original conclusions are still logically valid, which might be dsifferent to what is intended.  A logically sounder approach (when using RDF) is to consider that lack of an `end` property simply means "unknown".
 
 
 
@@ -142,7 +142,7 @@ From the above, the period information for the example of [Opole](20180410-opole
      :
     ex:Opole_P a em:Place ;
          :
-        emt:when 
+        em:when 
           [ a emt:TimePeriod ;
             rdfs:label "1322-1417" ;
             emt:timespan
