@@ -243,38 +243,9 @@ ex:Opole_P a em:Place ;
         Located on Oder River; passed to Bohemia in 1327, to Habsburgs in 1742 & returned to Poland in 1945; is important port between Wrocław & Upper Silesia; economy depends on cement factories & iron foundries; noted for many historic buildings.
         """ ;
 
-    # Bibliography
+    # Reference bibliography
 
-    # For the time being, I'm proposing Bibo as the vocabulary for publication details, 
-    # as it seems to capture an appropriate level of detail, and draws upon widely-used 
-    # FOAF and DCTERMS vocabularies.
-    #
-    # Another candidate might be FABIO, but that appears to generate more complex RDF than we need.
-    #
-    # This sample has been assembled by adapting examples found on the web; 
-    # it should be checked against the Bibo spec.
-
-    em:reference
-      [ a bibo:Book ;
-        dcterms:title "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" ;
-        bibo:authorList (ex:Ryszard_Emmerling, ex:Urszula_Zajaczkowska) ;
-        dcterms:publisher ex:Slaskie_Wydawnictwo ;
-        dcterms:date "2003" ;
-        bibo:isbn10 "8391537137" ;
-        bibo:isbn13 "978-8391537138" ;
-        dcterms:source "https://www.amazon.com/Opole-Capital-of-Opolskie-Province/dp/B0021JGAOI" ;
-        # Emmerling, Ryszard; Zajączkowska, Urszula 2003: Oppeln/Opole.
-        # Die Hauptstadt der Wojewodschaft Oppeln, Opole.
-      ] ;
-
-    # More bibliography to be added...
-    # Dziewulski, Władysław; Hawranek, Franciszek (ed.) 1975: Opole. Monografia miasta.
-    # Gediga, Bogusław 1995: Oppeln/Opole im 11. und 12. Jahrhundert als Beispiel eines frühstädtischen Zentrums in Oberschlesien; in: Wünsch, Thomas (ed.): Stadtgeschichte Oberschlesiens. Studien zur städtischen Entwicklung und Kultur einer ostmitteleuropäischen Region vom Mittelalter bis zum Vorabend der Industrialisierung, Berlin 1995 (Tagungsreihe der Stiftung Haus Oberschlesien, 5).
-    # Hefner, Krystian; Kreft, Wolfgang 2011: Opole/Oppeln, Marburg (=Historisch-topographischer Atlas schlesischer Städte 2).
-    # Idzikowski, Franz 1863: Geschichte der Stadt Oppeln, Oppeln.
-    # Linek, Bernard; Tarka, Krzysztof (ed.) 2008: Opole na przestrzeni wieków. Historiografia wobec nowych metod badania dziejów miasta, Opole.
-    # Szafran-Szadkowska, Lucyna 1995: Najstarsze dzieje Opola, Opole.
-    # Veldtrup, Dieter 1995: Prosopographische Studien zur Geschichte Oppelns als herzoglicher Residenzstadt im Mittelalter, Berlin (=Stiftung Haus Oberschlesien : Schriften der Stiftung Haus Oberschlesien, Landeskundliche Reihe 7).
+    em:reference ex:Opole_Emmerling_Zajaczkowska ;
 
     # Related resources
 
@@ -705,6 +676,26 @@ ex:Opole_P a em:Place ;
     # <gn:parentADM3 rdf:resource="http://sws.geonames.org/7532413/"/>
 
 # Bibliographic recources referenced
+#
+# For the time being, I'm proposing Bibo as the vocabulary for publication details, 
+# as it seems to capture an appropriate level of detail, and draws upon widely-used 
+# FOAF and DCTERMS vocabularies.
+#
+# Another candidate might be FABIO, but that appears to generate more complex RDF than we need.
+#
+# This sample has been assembled by adapting examples found on the web; 
+# it should be checked against the Bibo spec.
+
+ex:Opole_Emmerling_Zajaczkowska a bibo:Book ;
+    # Emmerling, Ryszard; Zajączkowska, Urszula 2003: Oppeln/Opole.
+    # Die Hauptstadt der Wojewodschaft Oppeln, Opole.
+    dcterms:title "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" ;
+    bibo:authorList (ex:Ryszard_Emmerling ex:Urszula_Zajaczkowska) ;
+    dcterms:publisher ex:Slaskie_Wydawnictwo ;
+    dcterms:date "2003" ;
+    bibo:isbn10 "8391537137" ;
+    bibo:isbn13 "978-8391537138" ;
+    dcterms:source "https://www.amazon.com/Opole-Capital-of-Opolskie-Province/dp/B0021JGAOI" .
 
 ex:Ryszard_Emmerling a foaf:Person ;
     rdfs:label "Ryszard Emmerling" ;
@@ -719,6 +710,15 @@ ex:Urszula_Zajaczkowska a foaf:Person ;
 ex:Slaskie_Wydawnictwo
     a foaf:Organization ;
     foaf:name "Wydawnictwo Śląskie" .
+
+# More bibliography to be added...
+# Dziewulski, Władysław; Hawranek, Franciszek (ed.) 1975: Opole. Monografia miasta.
+# Gediga, Bogusław 1995: Oppeln/Opole im 11. und 12. Jahrhundert als Beispiel eines frühstädtischen Zentrums in Oberschlesien; in: Wünsch, Thomas (ed.): Stadtgeschichte Oberschlesiens. Studien zur städtischen Entwicklung und Kultur einer ostmitteleuropäischen Region vom Mittelalter bis zum Vorabend der Industrialisierung, Berlin 1995 (Tagungsreihe der Stiftung Haus Oberschlesien, 5).
+# Hefner, Krystian; Kreft, Wolfgang 2011: Opole/Oppeln, Marburg (=Historisch-topographischer Atlas schlesischer Städte 2).
+# Idzikowski, Franz 1863: Geschichte der Stadt Oppeln, Oppeln.
+# Linek, Bernard; Tarka, Krzysztof (ed.) 2008: Opole na przestrzeni wieków. Historiografia wobec nowych metod badania dziejów miasta, Opole.
+# Szafran-Szadkowska, Lucyna 1995: Najstarsze dzieje Opola, Opole.
+# Veldtrup, Dieter 1995: Prosopographische Studien zur Geschichte Oppelns als herzoglicher Residenzstadt im Mittelalter, Berlin (=Stiftung Haus Oberschlesien : Schriften der Stiftung Haus Oberschlesien, Landeskundliche Reihe 7).
 
 
 #   ==========================================================================
