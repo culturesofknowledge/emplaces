@@ -1,11 +1,8 @@
+@prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix dc: <http://purl.org/dc/terms/> .
-@prefix dc11: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix bibo: <http://purl.org/ontology/bibo/> .
-@prefix ns0: <http://rdvocab.info/elements/> .
-@prefix ns1: <http://lists.talis.com/schema/bibliographic#> .
 
 @prefix ex: <http://lists.lib.plymouth.ac.uk/resources/> .
 
@@ -30,15 +27,12 @@ ex:cn501060/authors
 
 ex:cn501060
   a <http://purl.org/vocab/resourcelist/schema#Resource>, bibo:Book ;
-  dc:title "Financial accounting and reporting" ;
+  dcterms:title "Financial accounting and reporting" ;
   bibo:authorList ex:cn501060/authors ;
   bibo:isbn10 "0273760882" ;
   bibo:isbn13 "9780273760887" ;
-  dc:publisher <http://lists.lib.plymouth.ac.uk/organisations/45ED74E9-6109-944D-022E-C573482119F9> ;
-  ns0:placeOfPublication "Harlow" ;
-  dc:date "2012" ;
-  dc:source "http://lists.lib.plymouth.ac.uk/catalog/records/isbn/0273760882" ;
-  dc11:subject "Accounting.", "Accounting Problems, exercises, etc." ;
-  bibo:edition "15th ed" ;
-  ns1:localControlNumber "998995790001281" .
+  dcterms:publisher <http://lists.lib.plymouth.ac.uk/organisations/45ED74E9-6109-944D-022E-C573482119F9> ;
+  dcterms:date "2012" ;
+  dcterms:source "http://lists.lib.plymouth.ac.uk/catalog/records/isbn/0273760882" ;
+  bibo:edition "15th ed" .
 
