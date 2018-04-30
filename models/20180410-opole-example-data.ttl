@@ -13,8 +13,8 @@
 @prefix foaf:      <http://xmlns.com/foaf/0.1/> .
 @prefix bibo:      <http://purl.org/ontology/bibo/> .
 
-@prefix geonames   <http://sws.geonames.org/> .
-@prefix gn:        <http://www.geonames.org/ontology#> .
+@prefix geonames   <http://sws.geonames.org/> .                 # GeoNames place IDs
+@prefix gn:        <http://www.geonames.org/ontology#> .        # GeoNames vocabulary terms
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
 @prefix em:        <http://emplaces.namespace.example.org/> .   #@@@@ TBD
@@ -26,12 +26,12 @@
 # 1. I have hand-constructed readable names for the URIs here for easier discussion.
 #    For real data it may be better to use auto-generated IDs (similar to GeoNames)
 #
-# 2. rdfs:isDefinedBy is cvopiued from GeoNames. 
+# 2. rdfs:isDefinedBy is copied from GeoNames. 
 #    It may not be the best property to use, as it is really a relationship with 
 #    the Geonames Id; the EMPlaces place might be a semantically distinct entity.
 #
-# 3. Geonames continues its Hierarchy up to EU, Eastern Europe, Europe and Earth.
-#    These have not been included here (but could be)
+# 3. Geonames continues its hierarchy up to EU, Eastern Europe, Europe and Earth.
+#    These have not been included here (but could be).
 #
 # 4. gn:wikipediaArticle references have been coded as rdfs:seeAlso
 #
@@ -53,26 +53,23 @@
 #    On balance, I favour (a).
 #
 # 7. The representation of Timespan information needs to be fixed.  I favour using
-#    something that aligns with the linked pasts work, but it's not clear if that 
+#    something that aligns with the linked pasts network, but it's not clear if that 
 #    will include linked data representations in the foreseeable future.
 #
 # 8. I am using SKOS concepts to represent various type values, e.g. place types 
 #    and categories.  This allows for some structuring of type information.
 #    An alternative was to use RDF types, but Rob Sanderson observed [1] that using 
 #    subtypes with annotations could cause difficulties for some implementations,
-#    and it's not clear that the ontological commtment inherrent in subtyping 
+#    and it's not clear that the ontological commitment inherent in subtyping 
 #    serves any useful purpose.
 #    [1] (in 2018-04-12 personal email)
 #
 #
 # TODO:
-#   Fix structure and vocabulary for bibliography (started)
-#       - Candidates: Bibo, Fabio(SPAR), BibFrame, @@@ 
-#   Historical hierarchies
 #   Fix vocabularies for timespans (PeriodO)
 #   Uncertainties, approximations, etc
 #   Record metadata (maybe later when we see what Timbuctoo provides)
-
+#   Record timespans as identified resources (rather than inline blank nodes)
 
 # Timespan for "current" data
 
@@ -102,6 +99,11 @@ gn:P.PPLA a skos:Concept ;
     rdfs:label    "Seat of 1st-order admin div" ;
     rdfs:comment  "Populated place that is a seat of a first-order administrative division.  From GeoNames (feature code)." .
 
+gn:P.PPLH a skos:Concept ;
+    skos:narrower gn:P ;
+    rdfs:label    "Former populated place" ;
+    rdfs:comment  "A former populated place that no longer exists.  From GeoNames (feature code)." .
+
 gn:A.PCLI a skos:Concept ;
     skos:narrower gn:A ;
     rdfs:label    "Independent political entity" ;
@@ -114,7 +116,7 @@ gn:A.ADM1 a skos:Concept ;
 
 gn:A.ADM2 a skos:Concept ;
     skos:narrower gn:A ;
-    rdfs:label    "Seconf-order admin division" ;
+    rdfs:label    "Second-order admin division" ;
     rdfs:comment  "A subdivision of a first-order administrative division.  From GeoNames (feature code)."
 
 gn:A.ADM3 a skos:Concept ;
@@ -122,20 +124,54 @@ gn:A.ADM3 a skos:Concept ;
     rdfs:label    "Third-order admin division" ;
     rdfs:comment  "A subdivision of a second-order administrative division.  From GeoNames (feature code)."
 
+gn:A.PCLH a skos:Concept ;
+    skos:narrower gn:A ;
+    rdfs:label    "Former independent political entity" ;
+    rdfs:comment  "A former independent political entity, typically a country.  From GeoNames (feature code)."
+
+gn:A.ADM1H a skos:Concept ;
+    skos:narrower gn:A ;
+    rdfs:label    "Former first-order admin division" ;
+    rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
+
+gn:A.ADM2H a skos:Concept ;
+    skos:narrower gn:A ;
+    rdfs:label    "Former second-order admin division" ;
+    rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
+
+gn:A.ADM3H a skos:Concept ;
+    skos:narrower gn:A ;
+    rdfs:label    "Former Third-order admin division" ;
+    rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
+
+#@@@@TODO: discuss this.  
+#   I'm trying to avoid having to create extra historical places corresponding to 
+#   a current P.  See em:AH_PART_OF_AH below.
+em:P_OR_A a skos:Concept ;
+    skos:broader gn:A ;
+    skos:broader gn:P ;
+    rdfs:label    "Former populated place or admin division" ;
+    rdfs:comment  "Former populated place or administrative division, used in historical administrative relations" .
+
 # Place relations
 
 em:P_PART_OF_A a em:RelationType ;
-    em:fromType   em:P ;
-    em:toType     em:A ;
+    em:fromType   gn:P ;
+    em:toType     gn:A ;
     rdfs:label    "Administered by" ;
     rdfs:comment  "Relates a populated place to its administrative division." .
 
-
 em:A_PART_OF_A a em:RelationType ;
-    em:fromType   em:A ;
-    em:toType     em:A ;
+    em:fromType   gn:A ;
+    em:toType     gn:A ;
     rdfs:label    "Subdivision of" ;
     rdfs:comment  "Relates a subdivision of an administrative division to its parent division." .
+
+em:AH_PART_OF_AH a em:RelationType ;
+    em:fromType   em:P_OR_A ;
+    em:toType     gn:A ;
+    rdfs:label    "Former part of" ;
+    rdfs:comment  "Records a historical relationship between a historical place or administrative division and its parent division." .
 
 
 
@@ -150,8 +186,11 @@ em:A_PART_OF_A a em:RelationType ;
 
 
 ex:Opole_P a em:Place ;
-    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ; # document
-    em:coreDataRef  <http://sws.geonames.org/3090048/> ;           # place
+    # Added label to distinguish from other places with same name
+    # (initial default to preferred name?)
+    rdfs:label       "City of Opole"                                # Label for place
+    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
+    em:coreDataRef   <http://sws.geonames.org/3090048/> ;           # place
 
     # Core data (derived from GeoNames /reference gazetteer)
 
@@ -259,9 +298,45 @@ ex:Opole_P a em:Place ;
 
     # Historical hierarchies
 
+    # City of Opole --1281-1521--> Duchy of Opole
+    # City of Opole --1521-1809--> Duchy of Opole and Racibórz
+    # City of Opole --1742-1945--> County of Opole
+
     em:hasRelation
 
-        @@@@TODO
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:Opole_Duchy ;
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1281-1521" ;
+            @@@@from     "1281" ;
+            @@@@to       "1521" ;
+          ] ;
+        # em:source ????
+      ] ,
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:Opole_Raciborz_Duchy ;
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1521-1809" ;
+            @@@@from     "1521" ;
+            @@@@to       "1809" ;
+          ] ;
+        # em:source ????
+      ] ,
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:Opole_County ;
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1742-1945" ;
+            @@@@from     "1742" ;
+            @@@@to       "1945" ;
+          ] ;
+        # em:source ????
+      ] ;
 
     # Historical name attestations
 
@@ -1131,6 +1206,170 @@ ex:Poland_PCLI a em:Place ;
     # <gn:childrenFeatures rdf:resource="http://sws.geonames.org/798544/contains.rdf"/>
     # <gn:neighbouringFeatures rdf:resource="http://sws.geonames.org/798544/neighbours.rdf"/>
 
+
+
+#   ==========================================================================
+#   ==========================================================================
+#
+#   Histrorical administrative divisions
+#
+#   ==========================================================================
+#   ==========================================================================
+
+# City of Opole --1281-1521--> Duchy of Opole
+# City of Opole --1521-1809--> Duchy of Opole and Racibórz
+# City of Opole --1742-1945--> County of Opole
+#
+# Duchy of Opole --1348-1806--> Bohemian Crown
+# Duchy of Opole --1742-1809--> War and Domain Chamber Wroclaw
+#
+# Duchy of Opole and Racibórz --1348-1742--> Bohemian Crown  ????
+# Duchy of Opole and Racibórz --1348-1806--> Bohemian Crown  ????
+#
+# War and Domain Chamber Wroclaw --1742-1806--> Kingdom of Prussia
+#
+# County of Opole --1521-1809--> Duchy of Opole
+#
+# Bohemian Crown --1348-1804--> Habsburg Monarchy
+# Bohemian Crown --1348-1806--> Holy Roman Empire
+#
+# Habsburg Monarchy --1348-1804--> Holy Roman Empire
+#
+# Kingdom of Prussia --1701-1806--> Holy Roman Empire
+
+# Note: historical admin orders (1/2/3) are arbitarily chosen @@TODO: discuss
+
+ex:Opole_Duchy a em:Place ;
+    rdfs:label       "Duchy of Opole" ;
+    em:placeCategory gn:A ;             # from gn:featureClass
+    em:placeType     gn:A.ADM3H ;       # from gn:featureCode
+    em:when 
+      [ a em:Timespan ; #@@@@
+        rdfs:label   "1281-1809" ;      # (at least, inferred from relations)
+        @@@@from     "1281" ;
+        @@@@to       "1809" ;
+      ] ;
+    em:hasRelation
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:Bohemian_Crown ;
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1348-1806" ;
+            @@@@from     "1348" ;
+            @@@@to       "1806" ;
+          ] ;
+        # em:source ????
+      ] ,
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:War_and_Domain_Chamber_Wroclaw ;   # Not defined in this sample
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1742-1809" ;
+            @@@@from     "1742" ;
+            @@@@to       "1809" ;
+          ] ;
+        # em:source ????
+      ] .
+
+
+ex:Opole_Raciborz_Duchy a em:Place ;
+    rdfs:label       "Duchy of Opole and Racibórz" ;
+    em:placeCategory gn:A ;             # from gn:featureClass
+    em:placeType     gn:A.ADM3H ;       # from gn:featureCode
+    em:when 
+      [ a em:Timespan ; #@@@@
+        rdfs:label   "1348-1806" ;
+        @@@@from     "1348" ;
+        @@@@to       "1806" ;
+      ] ;
+    # em:source ????
+    em:hasRelation
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:Bohemian_Crown ;
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1348-1806" ;
+            @@@@from     "1348" ;
+            @@@@to       "1806" ;
+          ] ;
+        # em:source ????
+      ] .
+
+
+ex:Opole_County a em:Place ;
+    rdfs:label       "County of Opole" ;
+    em:placeCategory gn:A ;             # from gn:featureClass
+    em:placeType     gn:A.ADM4H ;       # from gn:featureCode
+    em:when 
+      [ a em:Timespan ; #@@@@
+        rdfs:label   "1521-1945" ;
+        @@@@from     "1521" ;
+        @@@@to       "1945" ;
+      ] ;
+    # em:source ????
+    em:hasRelation
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:Opole_Duchy ;
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1521-1809" ;
+            @@@@from     "1521" ;
+            @@@@to       "1809" ;
+          ] ;
+        # em:source ????
+      ] .
+
+
+ex:Bohemian_Crown a em:Place ;
+    rdfs:label       "Bohemian Crown" ;
+    em:placeCategory gn:A ;             # from gn:featureClass
+    em:placeType     gn:A.ADM2H ;       # from gn:featureCode
+    em:when 
+      [ a em:Timespan ; #@@@@
+        rdfs:label   "1348-1806" ;
+        @@@@from     "1348" ;
+        @@@@to       "1806" ;
+      ] ;
+    # em:source ????
+    em:hasRelation
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:Habsburg_Monarchy ;    # Not defined in this sample
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1348-1804" ;
+            @@@@from     "1348" ;
+            @@@@to       "1804" ;
+          ] ;
+        # em:source ????
+      ] ,
+      [ a em:QualifiedRelation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ex:Holy_Roman_Empire ;
+        em:when 
+          [ a em:Timespan ; #@@@@
+            rdfs:label   "1348-1806" ;
+            @@@@from     "1348" ;
+            @@@@to       "1806" ;
+          ] ;
+        # em:source ????
+      ] .
+
+
+ex:Holy_Roman_Empire a em:Place ;
+    rdfs:label       "Holy Roman Empire" ;
+    em:placeCategory gn:A ;             # from gn:featureClass
+    em:placeType     gn:A.PCLH ;        # from gn:featureCode
+    em:when 
+      [ a em:Timespan ; #@@@@
+        rdfs:label   "1348-1806" ;
+        @@@@from     "1348" ;
+        @@@@to       "1806" ;
+      ] .
 
 
 #   ==========================================================================

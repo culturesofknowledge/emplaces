@@ -1,21 +1,22 @@
 # Linked data model for EMPlaces
 
-This directory contains [diagrams](PDFs) and [documentation](20180405-EMPlaces-data-model-notes.md) of a proposed linked data model for EMPlaces.
+This directory contains [diagrams](PDFs) and [documentation](20180405-EMPlaces-data-model-notes.md) and [sample data](20180410-opole-example-data.ttl) for a proposed linked data model for EMPlaces.
+
+See also [links](Links.md) for related information.
 
 NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 
-(In due course, the documentation itself will be moved into this page)
-
+(In due course, the documentation itself may be moved into this page)
 
 # TODO
 
 - [ ] Finish assembling example data for Opole
-    - Fix structure and vocabulary for bibliography (started)
+    - [x] Fix structure and vocabulary for bibliography
         - Candidates: Bibo, Fabio(SPAR), BibFrame, @@@ 
-    - Historical hierarchies
-    - Fix vocabularies for timespans (PeriodO?)
-    - Uncertainties, approximations, etc
-    - Record metadata (maybe later when we see what Timbuctoo provides)
+    - [x] Historical hierarchies
+    - [ ] Fix vocabularies for timespans (PeriodO?)
+    - [ ] Uncertainties, approximations, etc
+    - [ ] Record metadata (maybe later when we see what Timbuctoo provides)
 - [ ] Decide how to flag "core data" in structures used for both core and additional data (needed for refresh of core data from source).  It seems what is really needed is a reference source indication.
     - Thought: maybe handle under record metadata by providing property+source information for core place data?
 - [x] Decide on structure for place categories and annotation types (using skos:Concepts)
@@ -35,9 +36,9 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 
 - [ ] Preferred name:
 
-- [ ] ... characterize calendars (inherited calendars; need to materualize for indexing; need source indication that it is inherited)
-    - general issue here about materialization of inferred/implied/deduced information.
-    - note that name attestations are *additions* to the primary info; no such for calendars.
-    - note 2 kinds of Julian calendars
+- [ ] Characterize calendars (inherited calendars; need to materialize for indexing; need source indication that it is inherited)
+    - [ ] general issue here about materialization of inferred/implied/deduced information.
+    - [ ] note that name attestations are *additions* to the primary info; no such for calendars.
+    - [x] note 2 kinds of Julian calendars
 - [ ] ...
 

@@ -85,7 +85,7 @@ Expect to have a proposal for interworking with these?
 - [ ] Add "Link-back"
 
 
-QUESTION: should source and duration details be connected to thje annotation or to the annotation body?  Using the body feels more intuiitive, but it might make some annotation-agnostic processing harder to manage.  Maybe there is no such requirement?
+QUESTION: should source and duration details be connected to the annotation or to the annotation body?  Using the body feels more intuiitive, but it might make some annotation-agnostic processing harder to manage.  Maybe there is no such requirement?
 
 - [ ] "Core" flag for place type
 - [ ] "Core" flag for place category
