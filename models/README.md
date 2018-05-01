@@ -21,7 +21,7 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - Thought: maybe handle under record metadata by providing property+source information for core place data?
 - [x] Decide on structure for place categories and annotation types (using skos:Concepts)
 - [x] Check that proposed Web Annotation extensions don't break anything (email with Robert Sanderson)
-- [ ] Pin down location/timespan vocabularies (the structure here follows ideas from Topotime/GeoJSON-LDT (also a work-in-progress?) but the vocabularies haven't yet been checked.)
+- [x] Pin down location/timespan vocabularies (the structure here follows ideas from Topotime/GeoJSON-LDT (also a work-in-progress?) but the vocabularies haven't yet been checked.)
 - [ ] Update [Data model notes](./20180405-EMPlaces-data-model-notes.md); resolve any remaining TODOs there
 - [ ] Update [diagrams](./PDFs/)
     -  multiple reference gazetteers - use TGN for labels

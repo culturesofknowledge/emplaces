@@ -10,7 +10,7 @@ To this end, I'm working through https://github.com/LinkedPasts/lp-network/blob/
 
 Also note the related work of PeriodO, which is less concerned with quantified timespan representations as creating a catalogue of documented references to named or otherwise identified periods.  My intent/hope is that a timespan representation can alteranatively refer to a PeriodO entry.
 
-## Timespan reporesentation
+## Time period representation
 
 Looking at https://github.com/LinkedPasts/lp-network/blob/master/PGIFv2/pgif_v2e_annotated.txt, as of commit https://github.com/LinkedPasts/lp-network/commit/3d8a31ee46689f6c604027f011f29ce7967efa4e#diff-a8b77c1f52cf7884b93c4b857b1232f1.
 

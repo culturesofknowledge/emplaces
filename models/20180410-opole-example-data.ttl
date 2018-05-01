@@ -597,7 +597,6 @@ ex:Opole_P a em:Place ;
     # Historical calendar data
 
     em:hasAnnotation
-
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
         oa:hasTarget   ex:Opole_P ;
@@ -623,7 +622,6 @@ ex:Opole_P a em:Place ;
           ] ;
         rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
       ],
-
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
         oa:hasTarget   ex:Opole_P ;
@@ -641,17 +639,18 @@ ex:Opole_P a em:Place ;
               ]
           ] ;
         em:source
-          [ rdfs:label   "@@@@TBD" ;
-            rdfs:comment "@@@@Evidence details to be supplied" ;
-            em:link      <@@@> ; #@@@@ is this needed?
+          [ rdfs:label   "Tomsa, Jan: Počìtánì času (Základy teorie kalendáře). Praha 1995" ;
+            # em:link      <@@@> ;
+          ],
+          [ rdfs:label   "Bláhová, Marie: Historická chronologie. Praha 2001" ;
+            # em:link      <@@@> ;
           ] ;
-        rdfs:comment "Gregorian since 23/02/1584" ;
+        rdfs:comment "Gregorian since 23/02/1584. The actual switch took place on 12.2.1584. The next day then became the 23.2.1584." ;
       ] ;
 
     # Historical map data
 
     em:hasAnnotation
-
       # 1561: https://davidrumsey.georeferencer.com/maps/613891568775/view
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
@@ -674,7 +673,6 @@ ex:Opole_P a em:Place ;
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak / David Rumsey Map Collection" ;
           ] ;
       ],
-
       # 1608: https://davidrumsey.georeferencer.com/maps/769642035679/view
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
