@@ -46,7 +46,7 @@ This core metadata will form the spine of the gazetteer. This is data which EM P
 
 By contrast, _additional metadata_ is primarily further historical context and data (i.e. over and beyond core metadata) contributed to the gazetteer by individual researchers and projects, which will need to be reviewed by EM Places editors. Examples of additional metadata would include data on historical calendars, historical hierarchies, bibliographic entries, and historical maps.
 
-See also the section on 'Includes' below, for an early discussion of what may need to become a third class of metadata (or a sub-class of 'additional). 
+See also the section on 'Related Places' below, for an early discussion of what may need to become a third class of metadata.
 
 ### Uncertainties
 
@@ -122,20 +122,26 @@ A visualization of the predominant calendars (Julian, Gregorian) in use between 
 
 We will not attempt to record variances from regionbal calendar use patterns at smaller scales such as individual towns. For example, we will not note as an exception or override if we are presented with a record of someone living in the town of Calais in 1632 (with the Gregorian calendar in use in France), writing to someone else in England in the Julian calendar. Our assumption is that the choice to use the Julian in this instance was dependant on the addresse and/or place of receipt (England did not change to the Gregorian calendar until 1752), not the place of sending.
 
-## Includes
+## Related Places
 
 **Priority:** High (form of implementation TBD)
 
 **Source:** Additional metadata (TBD)
 
-In some cases, we may wish to capture information on places (current or historical) below the level of an inhabited place. For example, a set of buildings representing an institution (e.g. Christ Church College) or an individual building or locale (e.g. an inn, or a street). For these and similar kinds of places, especially if they are historical, we may have very little data – perhaps not even enough to create a full core data record. 
+In some cases, we may wish to capture information on places (current or historical) below the level of an inhabited place. For example, a set of buildings representing an institution (e.g. Christ Church College) or an individual building or locale (e.g. an inn, or a street). For these and similar kinds of places, especially if they are historical, we may have very little data – often not even enough to create a full core data record. 
 
-To accomodate this, we are proposing that this class of places could be grouped under the full/regular record of the place (conceptually, or spatially) enclosing it. Thus, for example, Christ Church College, would be included under the entry for Oxford etc. Such places will be listed under a separate section in the full entry for the 'containing' place as separate links. For example, in a section titled (as in the current mockup) 'Includes'. 
+To accomodate this, we are proposing that this class of places could be grouped under the full/regular record of the place (conceptually, or spatially) enclosing it. Thus, for example, Christ Church College, would be included under the entry for Oxford etc. Such places will be listed under a separate section in the full entry for the 'containing' place as separate links. For example, in a section titled (as in the current mockup) 'Related Places' (in a deliberate parallel to 'Related Resources' which point to external, related Linked Data resources not indexed by EM Places). 
 
-Following such a link will lead to a separate page, where the metadata for that place will be shown. The intent is to allow contributors to EM Places to offer metadata on places in a structure close to the form in which it was collected. If a researcher, for example, wishes to share with EM Places, data on a set of streets in London, then we should try to accomodate this data structure as far as feasible. 
+Such a link, presented in a simplified tabular format (following the example of GOV – e.g. for [Opele][7]) will lead to a separate page, where the metadata for that place will be shown. The justification for this is to allow contributors to share their metadata on places so that in can be indexed by EM Places in a structure that related to the structure in which it was collected. If a researcher, for example, wishes to share with EM Places, data on a set of streets in London, then we should try to accomodate their original data structure as far as feasible. 
 
-Further discussion is required.
+The tabular list (see [current mockup][1]) could, for example, be structured as follows:
 
+__Place:				Feature:		Relationship:__
+St. Adalbert			Church			Contained within
+
+The feature type would be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary and matched (in the editorial interface) with the appropriate [GeoNames feature code][9], where applicable. Doing so will make this data easier to integrate into other projects in the future.
+
+A possible alternative to allowing select projects whose data we incorporate into EM Places to carry over their own data model is to offer them a defined, but generic and flexible structure which allows them sufficiently wide latitude for interpretation, e.g. Dublin Core. This approach has worked quite well for Omeka Classic (and it would be interesting to review if this has been changed in [Omeka-S][8]). 
 
 ## Related Resources
 
@@ -143,7 +149,7 @@ Further discussion is required.
 
 **Source:** Core data + additional metadata
 
-A list of what we expect will be predominantly online resources (for traditional scholarly references, contributors can make use of the bibliography section) at least some of which will be derived  automatically from our reference gazetteers (e.g. links to Wikipedia, WikiData, certain other gazetteers) but most of which will be manually entered. 
+A list of what we expect will be predominantly online, digital resources (for traditional scholarly references, contributors can make use of the bibliography section). Some of the URIs to these resources can be derived  automatically from our reference gazetteers (e.g. links to Wikipedia, WikiData, certain other gazetteers) but most of which will be suggested by contributors and confirmed by editors. 
 
 ## Linkbacks
 
@@ -154,6 +160,8 @@ A list of what we expect will be predominantly online resources (for traditional
 A list of dynamic links to resources which can be queried programmatically for more information about a place in the gazetteer. The data would be polled and updated at an appropriate interval. For example, X number of letters were sent from this place, and Y number of letters were received at this place. 
 
 If dynamic links can’t be implemented in v.1, then periodically refreshed, static data from a small set of important sources is acceptable as well.
+
+Alternatively, we could include these under Related Resources. But if we do that, we'd need to classify the website, and this could be difficult to impossible to achieve in practice. There are too many kinds of places which could be listed here for straightforward classification.
 
 ## Bibliography
 
@@ -234,10 +242,14 @@ A means to share a link to the current record on social media. If possible, this
 Many sections in the individual record display will include 'Info' and/or 'Sources' links. Clicking this could, as one possibility, show a pop-up with text on that section. In the case of Sources, this could include both an unstructured text area, and a structured bibliographic area. 
  
 
-[1]:	/images/display.pdf
+[1]:	/images/current_display.pdf
 [2]:	https://github.com/culturesofknowledge/emplaces#feedback-and-comments
 [3]:	https://www.uni-bamberg.de/histgeo/forschung/aktuell/
 [4]:	/images
 [5]:	http://emlo.bodleian.ox.ac.uk
 [6]:	http://www.culturesofknowledge.org/?p=8455
+[7]:	http://gov.genealogy.net/item/show/OPPELNJO80XQ
+[8]:	https://omeka.org/s/
+[9]:	http://www.geonames.org/export/codes.html
+[10]:	https://www.getty.edu/research/tools/vocabularies/aat/
 
