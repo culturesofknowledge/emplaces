@@ -185,7 +185,9 @@ A listing (machine readable) of the Creator of the record (i.e. the person or or
 
 **Source:** Generated
 
-A means to manually export the current record (only) in several common formats, currently assumed to be CSV, Excel, Turtle, GraphML, and GeoJSON-LD. 
+A means to manually export the current record (only) in several common formats, currently assumed to be CSV, Excel, Turtle, GraphML, and GeoJSON. 
+
+Note: GeoJSON is required for Pelagios compatibility via [PGIFv2 format][11].
 
 ## Maps
 
@@ -252,4 +254,6 @@ Many sections in the individual record display will include 'Info' and/or 'Sourc
 [8]:	https://omeka.org/s/
 [9]:	http://www.geonames.org/export/codes.html
 [10]:	https://www.getty.edu/research/tools/vocabularies/aat/
+[11]:	https://github.com/LinkedPasts/lp-network/tree/master/PGIFv2
+
 
