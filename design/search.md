@@ -36,6 +36,12 @@ By and large, GOV (following approach #1) offers the better solution. If we prov
 
 We can also learn from GOV at the detail view. A simpler version of GOV's Subordinate Places listing in the detail view (i.e. very similar to the Name Attestation listing) could serve as a flexible means to show not just places 'contained within' but (in the future) potentially other relation types. This section could be called 'Related Places' (in distinction to the already planned 'Related Resources'). For more details, see the current [draft design notes][7].
 
+### Facets
+
+TBD. 
+
+A potential concern are dates. If a facet limits results to a certain date or date range, to what will this apply? For current places accompanied by current hierarchies, perhaps not at all. But in the case of historical hierarchies a date can mean i) the temporal extent of the entity, ii) the temporal extent of the relationship between two entities, iii) the temporal extent of a a particular historical hierarchy, iv) different kinds of historical hierarchies (admin, ecclesiastical, judicial and/or military). A date can also apply to a Name Attestation, a Calendar, a historical map, and possibly (depending on implementation and data available) to Related Places. Looking further afield (i.e. advanced search), a date can also refer to a bibliographic item.
+
 
 ### Advanced Search (TBD)
 
