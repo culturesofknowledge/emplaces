@@ -129,7 +129,7 @@
 			function appendMetadataPart(parent, title, value) {
 				var element = document.createElement("p");
 				var label = document.createElement("b");
-				label.appendChild(document.createTextNode(title + ":"));
+				label.appendChild(document.createTextNode(title + ": "));
 				element.appendChild(label);
 				element.appendChild(document.createTextNode(value));
 				parent.appendChild(element);
