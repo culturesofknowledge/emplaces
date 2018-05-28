@@ -15,7 +15,7 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
         - Candidates: Bibo, Fabio(SPAR), BibFrame, @@@ 
     - [x] Historical hierarchies
     - [x] Fix vocabularies for timespans (PeriodO?)
-    - [ ] Uncertainties, approximations, etc
+    - [x] Uncertainties, approximations, etc
     - [ ] Record metadata (maybe later when we see what Timbuctoo provides)
 - [ ] Decide how to flag "core data" in structures used for both core and additional data (needed for refresh of core data from source).  It seems what is really needed is a reference source indication.
     - Thought: maybe handle under record metadata by providing property+source information for core place data?
@@ -26,7 +26,8 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 - [ ] Update [diagrams](./PDFs/)
     -  multiple reference gazetteers - use TGN for labels
 - [ ] Crosswalk between UI and data model
-- [ ] Dealing with uncertainty
+- [x] Dealing with uncertainty
+    - See example, em:competence
     - How to represent?  
        - Confidence flag (high/medium/low)? Not really going to work for us?
        - Permutation of (Uncertain, Inferred, Approximate) per EMLO.  But be explicit in all cases.
@@ -35,11 +36,14 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - For dates: Uncertain, Inferred, Approximate (implicit the timespan value)
 - [ ] ... "related place"??? not available from reference gazetteer source ...
     - located within infomation (additional/alternative hierarchy to admin div)
-- [ ] Preferred name:
-- [ ] Characterize calendars (inherited calendars; need to materialize for indexing; need source indication that it is inherited)
-    - [ ] general issue here about materialization of inferred/implied/deduced information.
-    - [ ] note that name attestations are *additions* to the primary info; no such for calendars.
-    - [x] note 2 kinds of Julian calendars
+- [ ] Preferred name: ??? (lost notes?)
+- [x] Characterize calendars (inherited calendars; need to materialize for indexing; need source indication that it is inherited)
+    - Handled by em:competence
+    - general issue here about materialization of inferred/implied/deduced information.
+    - note that name attestations are *additions* to the primary info; no such for calendars.
+- [ ]note 2 kinds of Julian calendars
+    - currently using "Old style" and "New style", but this is probably not enough.
+    - suggestion that we might add start-of-year date to calendar details, but even that isn't always enough: in some cases 25 Dec start of year occurs in the year BEFORE that indicated?
 - [ ] ...
 
 
