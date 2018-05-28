@@ -42,3 +42,9 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [x] note 2 kinds of Julian calendars
 - [ ] ...
 
+
+
+# Notes
+
+- Should Qualified relation have an optional "em:source" value?
+

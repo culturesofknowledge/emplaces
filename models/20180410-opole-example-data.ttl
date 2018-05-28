@@ -201,6 +201,42 @@ em:AH_PART_OF_AH a em:RelationType ;
     .
 
 
+# Information competence (certainty)
+#
+# Information in a qualified relation or annotation may be uncertain.  These properties and values
+# are used to qualify these claims.  Information that is directly attached to an em:Place 
+# (i.e. not as a qualified relationor annotation) is considered to be definitive.
+#
+# Specifically, annotations for calendar-in-use and alternate name attestations should have 
+# associated competence values.
+#
+# Approximate date ranges are represented by range values in the corresponding Timespan value.
+
+em:competence a rdf:Property ;
+    rdfs:label "Certainty, or quality, of information" ;
+    rdfs:comment "Records the quality or certaintly of some information.  Note that in the absence of an explcit value, no competence should be assumed." ;
+    rdfs:range em:Competence_value ;
+    .
+
+em:DEFINITIVE a em:Competence_value ;
+    rdfs:label   "Definitive" ;
+    rdfs:comment "The associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be appropiate source references."
+    .
+
+em:INFERRED a em:Competence_value ;
+    rdfs:label   "Inferred" ;
+    rdfs:comment "The associated value has been inferred from (poreferably?) definitive informaton."
+    .
+
+em:UNCERTAIN a em:Competence_value ;
+    rdfs:label   "Uncertain" ;
+    rdfs:comment "The associated value is uncertain."
+    .
+
+em:APPROXIMATE a em:Competence_value ;
+    rdfs:label   "Approximate" ;
+    rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges."
+    .
 
 #   ==========================================================================
 #   ==========================================================================
@@ -209,7 +245,6 @@ em:AH_PART_OF_AH a em:RelationType ;
 #
 #   ==========================================================================
 #   ==========================================================================
-
 
 
 ex:Opole_P a em:Place ;
@@ -280,6 +315,7 @@ ex:Opole_P a em:Place ;
       [ a em:QualifiedRelation ;
         em:relationTo ex:Opole_ADM3 ;       # from gn:parentFeature, gn:parentADM3
         em:relationType em:P_PART_OF_A ;    # relates populated place to parent admin div
+        em:competence em:DEFINITIVE ;
       ] ;
 
     em:hasAnnotation
@@ -343,6 +379,7 @@ ex:Opole_P a em:Place ;
               ]
           ] ;
         # em:source ????
+        em:competence em:DEFINITIVE ;
       ] ,
       [ a em:QualifiedRelation ;
         em:relationType em:AH_PART_OF_AH ;
@@ -356,6 +393,7 @@ ex:Opole_P a em:Place ;
               ]
           ] ;
         # em:source ????
+        em:competence em:DEFINITIVE ;
       ] ,
       [ a em:QualifiedRelation ;
         em:relationType em:AH_PART_OF_AH ;
@@ -369,6 +407,7 @@ ex:Opole_P a em:Place ;
               ]
           ] ;
         # em:source ????
+        em:competence em:DEFINITIVE ;
       ] ;
 
     # Historical name attestations
@@ -398,6 +437,7 @@ ex:Opole_P a em:Place ;
             # em:link      <@@@> ;
           ] ;
         rdfs:comment "1146-(today) [Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau]" ;
+        em:competence em:DEFINITIVE ;
       ] ,
 
       [ a oa:Annotation ;
@@ -422,6 +462,7 @@ ex:Opole_P a em:Place ;
             em:link      <http://www.dokumentyslaska.pl> ;
           ] ;
         rdfs:comment "1222-1431 [http://www.dokumentyslaska.pl]" ;
+        em:competence em:DEFINITIVE ;
       ] ,
 
       [ a oa:Annotation ;
@@ -446,6 +487,7 @@ ex:Opole_P a em:Place ;
             em:link      <http://www.dokumentyslaska.pl> ;
           ] ;
         rdfs:comment "Opolie (Latin/PL) 1228-1483 [http://www.dokumentyslaska.pl]" ;
+        em:competence em:DEFINITIVE ;
       ] ,
 
       [ a oa:Annotation ;
@@ -471,6 +513,7 @@ ex:Opole_P a em:Place ;
             em:link      <http://www.dokumentyslaska.pl> ;
           ] ;
         rdfs:comment "Oppol (Latin; DE: 1384) 1226-1487 [Liber fundationis episcopatus Vratislaviensis; [http://www.dokumentyslaska.pl]" ;
+        em:competence em:DEFINITIVE ;
       ] ,
 
       [ a oa:Annotation ;
@@ -495,6 +538,7 @@ ex:Opole_P a em:Place ;
             em:link      <http://www.dokumentyslaska.pl> ;
           ] ;
         rdfs:comment "Opul (DE) 1322-1417 [http://www.dokumentyslaska.pl]" ;
+        em:competence em:DEFINITIVE ;
       ] ,
 
       [ a oa:Annotation ;
@@ -518,6 +562,7 @@ ex:Opole_P a em:Place ;
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
           ] ;
         rdfs:comment "Oppoln (DE) 1433" ;
+        em:competence em:DEFINITIVE ;
       ] ,
 
       [ a oa:Annotation ;
@@ -565,6 +610,7 @@ ex:Opole_P a em:Place ;
             em:link      <http://www.dokumentyslaska.pl> ;
           ] ;
         rdfs:comment "Oppul (DE) 1455 [http://www.dokumentyslaska.pl]" ;
+        em:competence em:DEFINITIVE ;
       ] ,
 
       [ a oa:Annotation ;
@@ -588,6 +634,7 @@ ex:Opole_P a em:Place ;
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
           ] ;
         rdfs:comment "Oppeln (DE) 1477-1945" ;
+        em:competence em:DEFINITIVE ;
       ] ,
 
       [ a oa:Annotation ;
@@ -612,6 +659,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Mistake?" ;
           ] ;
         rdfs:comment "Oppolie (PL, mistake) 1830" ;
+        em:competence em:DEFINITIVE ;
       ] ;
 
     # Historical calendar data
@@ -641,6 +689,7 @@ ex:Opole_P a em:Place ;
             em:link      <@@@> ;
           ] ;
         rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
+        em:competence em:INFERRED ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
@@ -666,6 +715,7 @@ ex:Opole_P a em:Place ;
             # em:link      <@@@> ;
           ] ;
         rdfs:comment "Gregorian since 23/02/1584. The actual switch took place on 12.2.1584. The next day then became the 23.2.1584." ;
+        em:competence em:DEFINITIVE ;
       ] ;
 
     # Historical map data
@@ -898,6 +948,7 @@ ex:Opole_ADM3 a em:Place ;
       [ a em:QualifiedRelation ;
         em:relationTo ex:Opole_ADM2 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
+        em:competence em:DEFINITIVE ;
       ] ;
 
     em:hasAnnotation
@@ -962,6 +1013,7 @@ ex:Opole_ADM2 a em:Place ;
       [ a em:QualifiedRelation ;
         em:relationTo ex:Opole_ADM1 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
+        em:competence em:DEFINITIVE ;
       ] ;
 
     em:hasAnnotation
@@ -1050,6 +1102,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
       [ a em:QualifiedRelation ;
         em:relationTo ex:Poland_PCLI ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
+        em:competence em:DEFINITIVE ;
       ] ;
 
     em:hasAnnotation
@@ -1333,6 +1386,7 @@ ex:Opole_Duchy a em:Place ;
               ]
           ] ;
         # em:source ????
+        em:competence em:DEFINITIVE ;
       ] ,
       [ a em:QualifiedRelation ;
         em:relationType em:AH_PART_OF_AH ;
@@ -1375,6 +1429,7 @@ ex:Opole_Raciborz_Duchy a em:Place ;
               ]
           ] ;
         # em:source ????
+        em:competence em:DEFINITIVE ;
       ]
     .
 
@@ -1405,6 +1460,7 @@ ex:Opole_County a em:Place ;
               ]
           ] ;
         # em:source ????
+        em:competence em:DEFINITIVE ;
       ] 
     .
 
@@ -1435,6 +1491,7 @@ ex:Bohemian_Crown a em:Place ;
               ]
           ] ;
         # em:source ????
+        em:competence em:DEFINITIVE ;
       ] ,
       [ a em:QualifiedRelation ;
         em:relationType em:AH_PART_OF_AH ;
