@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+                <meta charset="utf-8"/>
+	</head>
+	<body>
+		<script>
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4) {
+					var responseData = JSON.parse(xhr.response); 
+					var dataDiv = document.getElementById("data");
+					processData(dataDiv, responseData.data.dataSets.uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest.em_Place);
+				}
+			}
+			var query = "query emlo {  dataSets {    uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest {      em_Place (uri:\"http://emplaces.data.example.org/Opole_P\"){        em_preferredName {          value        }        em_alternateNameList {          items {            ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_value_rdf_langString {              value            }          }        }        em_where {          em_when {            emt_timespan {              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_emt_Timespan {                emt_latestStart_ {                  value                }                emt_earliestEnd_ {                  value                }              }            }          }          em_location {            wgs84_pos_lat {              value            }            wgs84_pos_long {              value            }          }        }        em_canonicalURI {          uri        }        em_hasAnnotationList {          items {            oa_hasBody {              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_em_PlaceName {                rdf_type {                  uri                }                em_name {                  value                }                em_language {                  value                }                 }              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_em_Calendar {                rdf_type {                  uri                }                title {                  value                }              }              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_em_MapResource {                rdf_type {                  uri                }                title {                  value                }              }            }            em_sourceList {              items {                rdfs_label {                  value                }              }            }            em_when {              rdfs_label {                value              }              emt_timespan {								... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_emt_Timespan {                  emt_latestStart_ {                    value                  }                  emt_earliestEnd_ {                    value                  }                }              }            }          }        }        em_hasRelationList {          items {            em_relationTo {              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_em_Place {                title {                  value                }                em_placeType {                  ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_skos_Concept {                    title{                      value                    }                  }                }              }            }            em_relationType {              title {               	value              }            }          }        }        rdfs_seeAlsoList {          items {            title {              value            }          }        }        em_coreDataRef {          title {            value          }        }        em_editorialNote {          value        }      }    }  }}"
+
+			xhr.open("POST","https://repository.huygens.knaw.nl/v5/graphql", true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.send(JSON.stringify({
+				"operationName": "emlo",
+				"query": query,
+				"variables": null
+			}));
+			
+			function processData(dataDiv, data) {
+				dataDiv.appendChild(createTextElement("h1", data.em_preferredName.value));
+				dataDiv.appendChild(createTextElement("i", data.em_alternateNameList.items.map(item => item.value).join(", ")));
+				appendElementWithLabel(dataDiv, "Current Hierarchy", createTextElement("p", ""));
+				appendElementWithLabel(dataDiv, "Location", formatLocation(data.em_where));
+				appendElementWithLabel(dataDiv, "Citation", createTextElement("p", ""));
+				appendElementWithLabel(dataDiv, "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
+				appendElementWithLabel(dataDiv, "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items.filter(an => an.oa_hasBody)
+																.filter(an => an.oa_hasBody.rdf_type)
+																.filter(an => an.oa_hasBody.rdf_type.uri === "http://emplaces.namespace.example.org/PlaceName")));
+			}
+
+			function appendElementWithLabel(parent, label, value) {
+				var element = document.createElement("div");
+				element.appendChild(createTextElement("h2", label));
+				element.appendChild(value);
+				parent.appendChild(element);
+			}
+			
+			function createTextElement(elementName, value) {
+				var element = document.createElement(elementName);
+				element.appendChild(document.createTextNode(value));
+				return element;
+			}
+			function formatLocation(location) {
+				var coordinates = location.em_location;
+				return createTextElement("p", coordinates.wgs84_pos_lat.value + "," + coordinates.wgs84_pos_long.value);
+			}
+			function createPlaceNameTable(input) {
+				return createTable(input.filter(an => an.oa_hasBody).filter(an => an.oa_hasBody.rdf_type).filter(an => an.oa_hasBody.rdf_type.uri === "http://emplaces.namespace.example.org/PlaceName").map(an => {
+					var flatten = new Object();
+					var body = an.oa_hasBody;
+					flatten.Name =  body.em_name.value;
+					flatten.Language = "(" + body.em_language.value + ")"; 
+					flatten.Date = an.em_when.rdfs_label.value; 
+					flatten.Source =  an.em_sourceList.items.map(source => source.rdfs_label.value).join("<br>");
+					return flatten;
+				}));
+			}
+			function createTable(items) {
+				var headers = Object.keys(items[0]);
+				console.log(items);
+				var table = document.createElement("table");				
+				var headerRow = document.createElement("tr");
+				table.appendChild(headerRow);
+				headers.forEach(header => headerRow.appendChild(createTextElement("th", header)));
+				items.forEach(item => {
+					var row = document.createElement("tr");
+					table.appendChild(row);
+					headers.forEach( header => row.appendChild(createTextElement("td", item[header])));
+				});
+				return table;	
+			}
+		</script>
+		<div id="data">
+		</div>
+	</body>
+</html>
