@@ -30,9 +30,7 @@
 				appendElementWithLabel(dataDiv, "Location", formatLocation(data.em_where));
 				appendElementWithLabel(dataDiv, "Citation", createTextElement("p", ""));
 				appendElementWithLabel(dataDiv, "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
-				appendElementWithLabel(dataDiv, "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items.filter(an => an.oa_hasBody)
-																.filter(an => an.oa_hasBody.rdf_type)
-																.filter(an => an.oa_hasBody.rdf_type.uri === "http://emplaces.namespace.example.org/PlaceName")));
+				appendElementWithLabel(dataDiv, "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items));
 			}
 
 			function appendElementWithLabel(parent, label, value) {
