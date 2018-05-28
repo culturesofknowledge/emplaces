@@ -52,3 +52,41 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 
 - Should Qualified relation have an optional "em:source" value?
 
+
+# Identifying "core" values in place data
+
+1. em:coreDataRef indicates the main source of core data
+
+    @@ allow multiple em:coreDataRef values?
+    @@ use em:primaryDataRef and em:secondaryDataRef?  (e.g. to allow for label data extracted from TGN.)
+
+2. Some properties are always core: em:preferredName, em:alternateName, 
+
+3. Some properties may be core or additional
+
+        em:placeType
+        em:hasRelation
+        em:where
+        em:hasAnnotation
+
+    Apart from em:placeType, these all refer to entities that can be tagged.
+
+    a. For em:hasRelation, attach em:source to the qualified relation value
+
+    b. For em:where, attach em:source to the setting value
+
+    c. For em:hasRelation, use em:source attached to the qualified relation value
+
+    d. What to do about em:placeType?
+
+        * use subproperty of em:placeType; e.g. em:CorePlaceType
+        * record mutually exclusive group(s) of core place type values, and update accordingly
+        * use separate place type entities per-source, attach em:source to the place type description
+
+    e. When updating details from agiven source, all existing details tagged with that same source are replaced (i.e. removed first).
+
+
+4. Places themselves may be core or additional (e.g. current vs historical)
+
+Is this really an important issue for now?  If we are responsible for the code that extracts core data in the first place, we will know what needs replacing.  Longer term, we shouldn't depend on such knowledge, so I suggest adding appropriate em:source data from the outset.
+
