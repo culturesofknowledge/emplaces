@@ -30,12 +30,12 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - How to represent?  
        - Confidence flag (high/medium/low)? Not really going to work for us?
        - Permutation of (Uncertain, Inferred, Approximate) per EMLO.  But be explicit in all cases.
-    - Where to represent: calendars, hierarchical relations
+    - Where to represent: calendars, date of hierarchical relations
+    - For places: Uncertain, Inferred
+    - For dates: Uncertain, Inferred, Approximate (implicit the timespan value)
 - [ ] ... "related place"??? not available from reference gazetteer source ...
     - located within infomation (additional/alternative hierarchy to admin div)
-
 - [ ] Preferred name:
-
 - [ ] Characterize calendars (inherited calendars; need to materialize for indexing; need source indication that it is inherited)
     - [ ] general issue here about materialization of inferred/implied/deduced information.
     - [ ] note that name attestations are *additions* to the primary info; no such for calendars.
