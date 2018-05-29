@@ -69,8 +69,10 @@
 #
 #
 # TODO:
-#   Record metadata (maybe later when we see what Timbuctoo provides)
+#   Record metadata design (creator, contributor, license, etc. - waiting to see what Timbuctoo provides)
+#   Review format for timespan data; consider alignment with emerging LPiF activity
 #   Record timespans as identified resources (rather than inline blank nodes)
+#   Finalize some URIs to be used
 #
 
 # Timespan for "current" data
