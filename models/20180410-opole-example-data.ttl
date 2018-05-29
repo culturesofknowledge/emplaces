@@ -3,20 +3,20 @@
 
 #@@TODO: finalize preface stuff, prefixes, etc
 
-@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl:  <http://www.w3.org/2002/07/owl#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-@prefix oa:   <http://www.w3.org/ns/oa#> .
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:        <http://www.w3.org/2002/07/owl#> .
+@prefix skos:       <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+@prefix oa:         <http://www.w3.org/ns/oa#> .
 
 @prefix cc:         <http://creativecommons.org/ns#> .
 @prefix dcterms:    <http://purl.org/dc/terms/> .
 @prefix foaf:       <http://xmlns.com/foaf/0.1/> .
 @prefix bibo:       <http://purl.org/ontology/bibo/> .
 
-@prefix geonames:    <http://sws.geonames.org/> .                # GeoNames place IDs
-@prefix gn:         <http://www.geonames.org/ontology#> .        # GeoNames vocabulary terms
+@prefix geonames:   <http://sws.geonames.org/> .                # GeoNames place IDs
+@prefix gn:         <http://www.geonames.org/ontology#> .       # GeoNames vocabulary terms
 @prefix wgs84_pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
 @prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
@@ -53,7 +53,7 @@
 #    (c) say nothing (i.e. omit the em:when property altogether).  We cannot draw 
 #        any formal inference from such absence of information because of the RDF
 #        open-world model.
-#    On balance, I favour (a).
+#    On balance, I favour (a), which is represented below as em:Current.
 #
 # 7. The representation of Timespan information needs to be fixed.  I favour using
 #    something that aligns with the linked pasts network, but it's not clear if that 
@@ -69,14 +69,13 @@
 #
 #
 # TODO:
-#   Uncertainties, approximations, etc
 #   Record metadata (maybe later when we see what Timbuctoo provides)
 #   Record timespans as identified resources (rather than inline blank nodes)
 #
 
 # Timespan for "current" data
 
-emt:Current a emt:TimePeriod ;
+emt:Current a em:Time_period ;
     rdfs:label   "Current, as of 2018" ;
     rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
     emt:timespan
@@ -179,21 +178,21 @@ em:P_OR_A a skos:Concept ;
 
 # Place relations
 
-em:P_PART_OF_A a em:RelationType ;
+em:P_PART_OF_A a em:Relation_type ;
     em:fromType   gn:P ;
     em:toType     gn:A ;
     rdfs:label    "Administered by" ;
     rdfs:comment  "Relates a populated place to its administrative division." 
     .
 
-em:A_PART_OF_A a em:RelationType ;
+em:A_PART_OF_A a em:Relation_type ;
     em:fromType   gn:A ;
     em:toType     gn:A ;
     rdfs:label    "Subdivision of" ;
     rdfs:comment  "Relates a subdivision of an administrative division to its parent division." 
     .
 
-em:AH_PART_OF_AH a em:RelationType ;
+em:AH_PART_OF_AH a em:Relation_type ;
     em:fromType   em:P_OR_A ;
     em:toType     gn:A ;
     rdfs:label    "Former part of" ;
@@ -238,6 +237,19 @@ em:APPROXIMATE a em:Competence_value ;
     rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges."
     .
 
+# Core vs non-core data
+
+em:Place a rdfs:Class ;
+    em:coreProperty em:preferredName, em:alternateName, em:placeCategory, em:corePlaceType ;
+    .
+
+# Use em:corePlaceType for place type info that is obtained, and may be refreshed,
+# from the reference gazetteer(s)
+em:corePlaceType rdfs:subPropertyOf em:placeType .
+
+# em:coreDataRef indicates source for core data
+em:coreDataRef rdfs:subPropertyOf em:source .
+
 #   ==========================================================================
 #   ==========================================================================
 #
@@ -246,18 +258,23 @@ em:APPROXIMATE a em:Competence_value ;
 #   ==========================================================================
 #   ==========================================================================
 
-
 ex:Opole_P a em:Place ;
     # Added label to distinguish from other places with same name
     # (initial default to preferred name?)
     rdfs:label       "City of Opole" ;                              # Label for place
-    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
-    em:coreDataRef   <http://sws.geonames.org/3090048/> ;           # place
+    em:coreDataRef
+      [ rdfs:label "GeoNames data" ;
+        em:link <http://sws.geonames.org/3090048/about.rdf>
+      ] ;
+    em:alternateURI
+      [ rdfs:label "GeoNames URI" ;
+        em:link <http://sws.geonames.org/3090048/>
+      ] ;
 
     # Core data (derived from GeoNames /reference gazetteer)
 
     em:placeCategory gn:P ;             # from gn:featureClass
-    em:placeType     gn:P.PPLA ;        # from gn:featureCode
+    em:corePlaceType gn:P.PPLA ;        # from gn:featureCode
 
     em:preferredName "Opole" ;          # from gn:name
 
@@ -309,13 +326,23 @@ ex:Opole_P a em:Place ;
             wgs84_pos:long "17.92533"^^xsd:double ;
           ] ;
         em:when emt:Current ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/3090048/about.rdf>
+          ] ;
       ] ;
 
     em:hasRelation
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationTo ex:Opole_ADM3 ;       # from gn:parentFeature, gn:parentADM3
         em:relationType em:P_PART_OF_A ;    # relates populated place to parent admin div
         em:competence em:DEFINITIVE ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/3090048/about.rdf>
+          ] ;
       ] ;
 
     em:hasAnnotation
@@ -329,6 +356,7 @@ ex:Opole_P a em:Place ;
         em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
             em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
           ] ;
       ] ;
@@ -367,11 +395,11 @@ ex:Opole_P a em:Place ;
 
     em:hasRelation
 
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Opole_Duchy ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1281-1521" ;
             emt:timespan
               [ emt:start  "1281" ;
@@ -381,11 +409,11 @@ ex:Opole_P a em:Place ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ,
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Opole_Raciborz_Duchy ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1521-1809" ;
             emt:timespan
               [ emt:start  "1521" ;
@@ -395,11 +423,11 @@ ex:Opole_P a em:Place ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ,
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Opole_County ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1742-1945" ;
             emt:timespan
               [ emt:start  "1742" ;
@@ -424,7 +452,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Polish" ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1146-(today)" ;
             emt:timespan
               [ emt:start  "1146" ;
@@ -450,7 +478,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Latin" ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1222-1431" ;
             emt:timespan
               [ emt:start  "1222" ;
@@ -475,7 +503,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Latin/PL" ; #@@@@ what does this mean?
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1228-1483" ;
             emt:timespan
               [ emt:start  "1228" ;
@@ -500,7 +528,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "(Latin; DE: 1384)" ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1226-1487" ;
             emt:timespan
               [ emt:start  "1226" ;
@@ -526,7 +554,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1322-1417" ;
             emt:timespan
               [ emt:start  "1322" ;
@@ -551,7 +579,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1433" ;
             emt:timespan
               [ emt:start  "1433" ;
@@ -575,7 +603,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1454" ;
             emt:timespan
               [ emt:start  "1454" ;
@@ -598,7 +626,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1455" ;
             emt:timespan
               [ emt:start  "1455" ;
@@ -623,7 +651,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "German" ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1477-1945" ;
             emt:timespan
               [ emt:start  "1477" ;
@@ -647,7 +675,7 @@ ex:Opole_P a em:Place ;
             rdfs:comment "Polish (mistake)" ; #@@@@ what does this mean?
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1830" ;
             emt:timespan
               [ emt:start  "1830" ;
@@ -676,7 +704,7 @@ ex:Opole_P a em:Place ;
             em:link      em:Julian_old ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "Until 1584" ;
             emt:timespan
               [ # emt:start  "@@@@" ;
@@ -700,7 +728,7 @@ ex:Opole_P a em:Place ;
             em:link      em:Gregorian ;
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "Since 23-Feb-1584" ;
             emt:timespan
               [ emt:start  "1584-02-23" ;
@@ -732,7 +760,7 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/613891568775/view>
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1561" ;
             emt:timespan
               [ emt:start  "1561" ;
@@ -754,7 +782,7 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/769642035679/view>
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1608" ;
             emt:timespan
               [ emt:start  "1608" ;
@@ -777,7 +805,7 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/306903845600/view>
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1740" ;
             emt:timespan
               [ emt:start  "1740" ;
@@ -800,7 +828,7 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/608622104523/view>
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1777" ;
             emt:timespan
               [ emt:start  "1777" ;
@@ -824,7 +852,7 @@ ex:Opole_P a em:Place ;
             em:link      <http://retromap.ru/m.php#l=1617871&z=8&y=50.495040&x=17.865997>
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1787" ;
             emt:timespan
               [ emt:start  "1787" ;
@@ -847,7 +875,7 @@ ex:Opole_P a em:Place ;
             em:link      <https://davidrumsey.georeferencer.com/maps/17345888797/view>
           ] ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1794" ;
             emt:timespan
               [ emt:start  "1794" ;
@@ -881,7 +909,7 @@ ex:Opole_P a em:Place ;
 # This sample has been assembled by adapting examples found on the web; 
 # it should be checked against the Bibo spec.
 
-ex:Opole_Emmerling_Zajaczkowska a bibo:Book ;
+ex:Opole_Emmerling_Zajaczkowska a em:Bib_entry, bibo:Book ;
     # Emmerling, Ryszard; Zajączkowska, Urszula 2003: Oppeln/Opole.
     # Die Hauptstadt der Wojewodschaft Oppeln, Opole.
     dcterms:title "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" ;
@@ -927,10 +955,18 @@ ex:Slaskie_Wydawnictwo a foaf:Organization ;
 
 ex:Opole_ADM3 a em:Place ;
     rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ; # document
-    em:coreDataRef   <http://sws.geonames.org/7532413/> ;          # place
+    em:coreDataRef
+      [ rdfs:label "GeoNames data" ;
+        em:link <http://sws.geonames.org/7532413/about.rdf>
+      ] ;
+    em:alternateURI
+      [ rdfs:label "GeoNames URI" ;
+        em:link <http://sws.geonames.org/7532413/>
+      ] ;
+
 
     em:placeCategory gn:A ;             # from gn:featureClass
-    em:placeType     gn:A.ADM3 ;        # from gn:featureCode
+    em:corePlaceType gn:A.ADM3 ;        # from gn:featureCode
 
     em:preferredName "Opole" ;
 
@@ -942,13 +978,23 @@ ex:Opole_ADM3 a em:Place ;
             wgs84_pos:long "17.9306"^^xsd:double ;
           ] ;
         em:when emt:Current ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/7532413/about.rdf>
+          ] ;
       ] ;
 
     em:hasRelation
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationTo ex:Opole_ADM2 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/7532413/about.rdf>
+          ] ;
       ] ;
 
     em:hasAnnotation
@@ -962,6 +1008,7 @@ ex:Opole_ADM3 a em:Place ;
         em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
             em:link <http://sws.geonames.org/7532413/about.rdf>     # from gn:locationMap
           ] ;
       ] ;
@@ -988,15 +1035,19 @@ ex:Opole_ADM3 a em:Place ;
 #   ==========================================================================
 #   ==========================================================================
 
-
-
 ex:Opole_ADM2 a em:Place ;
     rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ; # document
-    em:coreDataRef  <http://sws.geonames.org/7530818/> ;           # place
+    em:coreDataRef
+      [ rdfs:label "GeoNames data" ;
+        em:link <http://sws.geonames.org/7530818/about.rdf>
+      ] ;
+    em:alternateURI
+      [ rdfs:label "GeoNames URI" ;
+        em:link <http://sws.geonames.org/7530818/>
+      ] ;
 
     em:placeCategory gn:A ;             # from gn:featureClass
-    em:placeType     gn:A.ADM2 ;        # from gn:featureCode
-
+    em:corePlaceType gn:A.ADM2 ;        # from gn:featureCode
     em:preferredName "Opole" ;          # from gn:name
 
     em:where
@@ -1007,13 +1058,23 @@ ex:Opole_ADM2 a em:Place ;
             wgs84_pos:long "17.93066"^^xsd:double ;
           ] ;
         em:when emt:Current ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/7530818/about.rdf>
+          ] ;
       ] ;
 
     em:hasRelation
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationTo ex:Opole_ADM1 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/7530818/about.rdf>
+          ] ;
       ] ;
 
     em:hasAnnotation
@@ -1027,6 +1088,7 @@ ex:Opole_ADM2 a em:Place ;
         em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
             em:link <http://sws.geonames.org/7530818/about.rdf>     # from gn:locationMap
           ] ;
       ] ;
@@ -1052,16 +1114,21 @@ ex:Opole_ADM2 a em:Place ;
 #   ==========================================================================
 #   ==========================================================================
 
-
-
 ex:Opole_Voivodeship_ADM1 a em:Place ;
-    rdfs:isDefinedBy <http://sws.geonames.org/3337495/> ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ; # document
+    em:coreDataRef
+      [ rdfs:label "GeoNames data" ;
+        em:link <http://sws.geonames.org/3337495/about.rdf>
+      ] ;
+    em:alternateURI
+      [ rdfs:label "GeoNames URI" ;
+        em:link <http://sws.geonames.org/3337495/>
+      ] ;
 
     # Core data (derived from GeoNames)
 
-    em:placeCategory gn:A ;             # from gn:featureClass
-    em:placeType     gn:A.ADM1 ;        # from gn:featureCode
-
+    em:placeCategory gn:A ;                 # from gn:featureClass
+    em:corePlaceType gn:A.ADM1 ;            # from gn:featureCode
     em:preferredName "Opole Voivodeship" ;  # from gn:name
 
     em:alternateName "Województwo Opolskie" ;
@@ -1096,12 +1163,22 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
             wgs84_pos:long "17.9"^^xsd:double ;
           ] ;
         em:when emt:Current ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/3337495/about.rdf>
+          ] ;
       ] ;
 
     em:hasRelation
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationTo ex:Poland_PCLI ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/3337495/about.rdf>
+          ] ;
         em:competence em:DEFINITIVE ;
       ] ;
 
@@ -1116,6 +1193,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
         em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
             em:link <http://sws.geonames.org/3337495/about.rdf>     # from gn:locationMap
           ] ;
       ] ;
@@ -1144,12 +1222,19 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
 
 ex:Poland_PCLI a em:Place ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
-    em:coreDataRef  <http://sws.geonames.org/798544/> ;
+    em:coreDataRef
+      [ rdfs:label "GeoNames data" ;
+        em:link <http://sws.geonames.org/798544/about.rdf>
+      ] ;
+    em:alternateURI
+      [ rdfs:label "GeoNames URI" ;
+        em:link <http://sws.geonames.org/798544/>
+      ] ;
 
     # Core data (derived from GeoNames)
 
     em:placeCategory gn:A ;             # from gn:featureClass
-    em:placeType     gn:A.PCLI ;        # from gn:featureCode
+    em:corePlaceType gn:A.PCLI ;        # from gn:featureCode
 
     gn:countryCode   "PL" ;
     em:preferredName "Poland" ;
@@ -1299,6 +1384,11 @@ ex:Poland_PCLI a em:Place ;
             wgs84_pos:long "20"^^xsd:double ;
           ] ;
         em:when emt:Current ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
+            em:link <http://sws.geonames.org/798544/about.rdf>
+          ] ;
       ] ;
 
     em:hasAnnotation
@@ -1312,6 +1402,7 @@ ex:Poland_PCLI a em:Place ;
         em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
+            # NOTE: source link same as core data ref, indicates core data
             em:link <http://sws.geonames.org/798544/about.rdf>     # from gn:locationMap
           ] ;
       ] ;
@@ -1366,7 +1457,7 @@ ex:Opole_Duchy a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM3H ;       # from gn:featureCode
     em:when 
-      [ a emt:TimePeriod ;
+      [ a em:Time_period ;
         rdfs:label   "1281-1809" ;      # (at least, inferred from relations)
         emt:timespan
           [ emt:start  "1281" ;
@@ -1374,11 +1465,11 @@ ex:Opole_Duchy a em:Place ;
           ]
       ] ;
     em:hasRelation
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Bohemian_Crown ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
             emt:timespan
               [ emt:start  "1348" ;
@@ -1388,11 +1479,11 @@ ex:Opole_Duchy a em:Place ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ,
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:War_and_Domain_Chamber_Wroclaw ;   # Not defined in this sample
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1742-1809" ;
             emt:timespan
               [ emt:start  "1742" ;
@@ -1408,7 +1499,7 @@ ex:Opole_Raciborz_Duchy a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM3H ;       # from gn:featureCode
     em:when 
-      [ a emt:TimePeriod ;
+      [ a em:Time_period ;
         rdfs:label   "1348-1806" ;
         emt:timespan
           [ emt:start  "1348" ;
@@ -1417,11 +1508,11 @@ ex:Opole_Raciborz_Duchy a em:Place ;
       ] ;
     # em:source ????
     em:hasRelation
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Bohemian_Crown ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
             emt:timespan
               [ emt:start  "1348" ;
@@ -1439,7 +1530,7 @@ ex:Opole_County a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM4H ;       # from gn:featureCode
     em:when 
-      [ a emt:TimePeriod ;
+      [ a em:Time_period ;
         rdfs:label   "1521-1945" ;
         emt:timespan
           [ emt:start  "1521" ;
@@ -1448,11 +1539,11 @@ ex:Opole_County a em:Place ;
       ] ;
     # em:source ????
     em:hasRelation
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo ex:Opole_Duchy ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1521-1809" ;
             emt:timespan
               [ emt:start  "1521" ;
@@ -1470,7 +1561,7 @@ ex:Bohemian_Crown a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM2H ;       # from gn:featureCode
     em:when 
-      [ a emt:TimePeriod ;
+      [ a em:Time_period ;
         rdfs:label   "1348-1806" ;
         emt:timespan
           [ emt:start  "1348" ;
@@ -1479,11 +1570,11 @@ ex:Bohemian_Crown a em:Place ;
       ] ;
     # em:source ????
     em:hasRelation
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:Habsburg_Monarchy ;    # Not defined in this sample
+        em:relationTo   ex:Habsburg_Monarchy ;    # Not defined in this sample
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1348-1804" ;
             emt:timespan
               [ emt:start  "1348" ;
@@ -1493,11 +1584,11 @@ ex:Bohemian_Crown a em:Place ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ,
-      [ a em:QualifiedRelation ;
+      [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:Holy_Roman_Empire ;
+        em:relationTo   ex:Holy_Roman_Empire ;
         em:when 
-          [ a emt:TimePeriod ;
+          [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
             emt:timespan
               [ emt:start  "1348" ;
@@ -1514,7 +1605,7 @@ ex:Holy_Roman_Empire a em:Place ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.PCLH ;        # from gn:featureCode
     em:when 
-      [ a emt:TimePeriod ;
+      [ a em:Time_period ;
         rdfs:label   "1348-1806" ;
         emt:timespan
           [ emt:start  "1348" ;
