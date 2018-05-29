@@ -11,6 +11,10 @@
 			td {
 				padding-right: 5em;
 			}
+			.column {
+				float: left;
+				width: 50%;
+			}
 		</style>
 	</head>
 	<body>
@@ -34,18 +38,31 @@
 			}));
 			
 			function processData(dataDiv, data) {
-				dataDiv.appendChild(createTextElement("h1", data.em_preferredName.value));
-				dataDiv.appendChild(createTextElement("i", data.em_alternateNameList.items.map(item => item.value).join(", ")));
-				appendElementWithLabel(dataDiv, "Current Hierarchy", createTextElement("p", ""));
-				appendElementWithLabel(dataDiv, "Location", formatLocation(data.em_where));
-				appendElementWithLabel(dataDiv, "Citation", createTextElement("p", ""));
-				appendElementWithLabel(dataDiv, "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
-				appendElementWithLabel(dataDiv, "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items));
-				appendElementWithLabel(dataDiv, "Calendars", createCalendars(data.em_hasAnnotationList.items));
-				appendElementWithLabel(dataDiv, "Related Places", createRelatedPlaces(data.em_hasRelationList.items));
-				appendElementWithLabel(dataDiv, "Related Resources", createUnorderedList(data.rdfs_seeAlsoList.items.map(item => item.title.value)));
-				appendElementWithLabel(dataDiv, "Bibliography", createTextElement("p", ""));
-				appendMetadata(dataDiv, data);
+				var leftColumn = document.createElement("div");
+				leftColumn.className = "column";
+				dataDiv.appendChild(leftColumn);
+				
+				leftColumn.appendChild(createTextElement("h1", data.em_preferredName.value));
+				leftColumn.appendChild(createTextElement("i", data.em_alternateNameList.items.map(item => item.value).join(", ")));
+				appendElementWithLabel(leftColumn, "Current Hierarchy", createTextElement("p", ""));
+				appendElementWithLabel(leftColumn, "Location", formatLocation(data.em_where));
+				appendElementWithLabel(leftColumn, "Citation", createTextElement("p", ""));
+				appendElementWithLabel(leftColumn, "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
+				appendElementWithLabel(leftColumn, "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items));
+				appendElementWithLabel(leftColumn, "Calendars", createCalendars(data.em_hasAnnotationList.items));
+				appendElementWithLabel(leftColumn, "Related Places", createRelatedPlaces(data.em_hasRelationList.items));
+				appendElementWithLabel(leftColumn, "Related Resources", createUnorderedList(data.rdfs_seeAlsoList.items.map(item => item.title.value)));
+				appendElementWithLabel(leftColumn, "Bibliography", createTextElement("p", ""));
+				appendMetadata(leftColumn, data);
+				
+				var rightColumn = document.createElement("div");
+				rightColumn.className = "column";
+				dataDiv.appendChild(rightColumn);
+			
+				appendElementWithLabel(rightColumn, "Maps", createMaps(data.em_hasAnnotationList.items));
+				appendElementWithLabel(rightColumn, "Description", createTextElement("p", data.em_editorialNote.value));
+				appendElementWithLabel(rightColumn, "Historical Hierarchies", createTextElement("p", ""));
+				appendElementWithLabel(rightColumn, "Feedback", createTextElement("p", "Please email us your comments. We welcome contributions from individual scholars and projects."));
 			}
 
 			function appendElementWithLabel(parent, label, value) {
@@ -133,6 +150,10 @@
 				element.appendChild(label);
 				element.appendChild(document.createTextNode(value));
 				parent.appendChild(element);
+			}
+			
+			function createMaps(input) {
+				return createTextElement("p", "");
 			}
 		</script>
 		<div id="data">
