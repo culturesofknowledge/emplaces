@@ -3,6 +3,10 @@
 	<head>
                 <meta charset="utf-8"></meta>
 		<style>
+			#maps {
+				height: 20em;
+				width: 40em;
+			}
 			th {
 				background-color: #EEE;
 				text-align: left;
@@ -29,46 +33,40 @@
 			}
 			var query = "query emlo {  dataSets {    uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest {      em_Place (uri:\"http://emplaces.data.example.org/Opole_P\"){        em_preferredName {          value        }        em_alternateNameList {          items {            ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_value_rdf_langString {              value            }          }        }        em_where {          em_when {            emt_timespan {              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_emt_Timespan {                emt_latestStart_ {                  value                }                emt_earliestEnd_ {                  value                }              }            }          }          em_location {            wgs84_pos_lat {              value            }            wgs84_pos_long {              value            }          }        }        em_canonicalURI {          uri        }        em_hasAnnotationList {          items {            oa_hasBody {              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_em_PlaceName {                rdf_type {                  uri                }                em_name {                  value                }                em_language {                  value                }                 }              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_em_Calendar {                rdf_type {                  uri                }                rdfs_label {                  value                }              }              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_em_MapResource {                rdf_type {                  uri                }                title {                  value                }              }            }            em_sourceList {              items {                rdfs_label {                  value                }              }            }            em_when {              rdfs_label {                value              }              emt_timespan {								... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_emt_Timespan {                  emt_latestStart_ {                    value                  }                  emt_earliestEnd_ {                    value                  }                }              }            }          }        }        em_hasRelationList {          items {            em_relationTo {              ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_em_Place {                title {                  value                }                em_placeType {                  ... on uce2a3bf7348ceaed31feb7c9d44618d20f742ba7__emlo_smalltest_skos_Concept {                    title{                      value                    }                  }                }              }            }            em_relationType {              title {               	value              }            }          }        }        rdfs_seeAlsoList {          items {            title {              value            }          }        }        em_coreDataRef {          title {            value          }        }        em_editorialNote {          value        }      }    }  }}"
 
-			xhr.open("POST","https://repository.huygens.knaw.nl/v5/graphql", true);
-			xhr.setRequestHeader("Content-type", "application/json");
-			xhr.send(JSON.stringify({
-				"operationName": "emlo",
-				"query": query,
-				"variables": null
-			}));
-			
 			function processData(dataDiv, data) {
-				var leftColumn = document.createElement("div");
-				leftColumn.className = "column";
-				dataDiv.appendChild(leftColumn);
-				
-				leftColumn.appendChild(createTextElement("h1", data.em_preferredName.value));
-				leftColumn.appendChild(createTextElement("i", data.em_alternateNameList.items.map(item => item.value).join(", ")));
-				appendElementWithLabel(leftColumn, "Current Hierarchy", createTextElement("p", ""));
-				appendElementWithLabel(leftColumn, "Location", formatLocation(data.em_where));
-				appendElementWithLabel(leftColumn, "Citation", createTextElement("p", ""));
-				appendElementWithLabel(leftColumn, "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
-				appendElementWithLabel(leftColumn, "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items));
-				appendElementWithLabel(leftColumn, "Calendars", createCalendars(data.em_hasAnnotationList.items));
-				appendElementWithLabel(leftColumn, "Related Places", createRelatedPlaces(data.em_hasRelationList.items));
-				appendElementWithLabel(leftColumn, "Related Resources", createUnorderedList(data.rdfs_seeAlsoList.items.map(item => item.title.value)));
-				appendElementWithLabel(leftColumn, "Bibliography", createTextElement("p", ""));
-				appendMetadata(leftColumn, data);
-				
-				var rightColumn = document.createElement("div");
-				rightColumn.className = "column";
-				dataDiv.appendChild(rightColumn);
 			
-				appendElementWithLabel(rightColumn, "Maps", createMaps(data.em_hasAnnotationList.items));
-				appendElementWithLabel(rightColumn, "Description", createTextElement("p", data.em_editorialNote.value));
-				appendElementWithLabel(rightColumn, "Historical Hierarchies", createTextElement("p", ""));
-				appendElementWithLabel(rightColumn, "Feedback", createTextElement("p", "Please email us your comments. We welcome contributions from individual scholars and projects."));
+				appendTextElement(document.getElementById("title"), "h1", data.em_preferredName.value);
+				appendTextElement(document.getElementById("alternateNames"),"i", data.em_alternateNameList.items.map(item => item.value).join(", "));
+				appendElementWithLabel(document.getElementById("currentHierarchy"), "Current Hierarchy", createTextElement("p", ""));
+				appendElementWithLabel(document.getElementById("location"), "Location", formatLocation(data.em_where));
+				appendElementWithLabel(document.getElementById("citation"), "Citation", createTextElement("p", ""));
+				appendElementWithLabel(document.getElementById("permanentUri"), "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
+				appendElementWithLabel(document.getElementById("nameAttestations"), "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items));
+				appendElementWithLabel(document.getElementById("calendars"), "Calendars", createCalendars(data.em_hasAnnotationList.items));
+				appendElementWithLabel(document.getElementById("relatedPlaces"), "Related Places", createRelatedPlaces(data.em_hasRelationList.items));
+				appendElementWithLabel(document.getElementById("relatedResources"), "Related Resources", createUnorderedList(data.rdfs_seeAlsoList.items.map(item => item.title.value)));
+				appendElementWithLabel(document.getElementById("bibliography"), "Bibliography", createTextElement("p", ""));
+				appendMetadata(document.getElementById("metadata"), data);
+				
+				
+				//appendElementWithLabel(document.getElementById("maps"), "Maps", createMaps(data.em_where));
+				updateMap(map, data.em_where);
+				appendElementWithLabel(document.getElementById("description"), "Description", createTextElement("p", data.em_editorialNote.value));
+				appendElementWithLabel(document.getElementById("historicalHierarchies"), "Historical Hierarchies", createTextElement("p", ""));
+				appendElementWithLabel(document.getElementById("feedback"), "Feedback", createTextElement("p", "Please email us your comments. We welcome contributions from individual scholars and projects."));
+				
 			}
 
 			function appendElementWithLabel(parent, label, value) {
 				var element = document.createElement("div");
 				element.appendChild(createTextElement("h2", label));
 				element.appendChild(value);
+				parent.appendChild(element);
+			}
+			
+			function appendTextElement(parent, elementName, value) {
+				var element = document.createElement(elementName);
+				element.appendChild(document.createTextNode(value));
 				parent.appendChild(element);
 			}
 			
@@ -152,11 +150,52 @@
 				parent.appendChild(element);
 			}
 			
-			function createMaps(input) {
-				return createTextElement("p", "");
+			function updateMap(map, location) {
+				var coordinates = location.em_location;
+				map.setCenter({"lat": coordinates.wgs84_pos_lat.value * 1, "lng": coordinates.wgs84_pos_long.value * 1});
+			}
+			var map;
+			function initMap() {
+				map = new google.maps.Map(document.getElementById("maps"), {
+					center: { "lat": 52.373056, "lng": 4.893333 },
+					zoom: 11 
+				});
+				xhr.open("POST","https://repository.huygens.knaw.nl/v5/graphql", true);
+	                        xhr.setRequestHeader("Content-type", "application/json");
+        	                xhr.send(JSON.stringify({
+                	                "operationName": "emlo",
+                        	        "query": query,
+                                	"variables": null
+	                        }));
+
 			}
 		</script>
+		<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+		 async defer></script>
 		<div id="data">
+			<div id="leftColumn" class="column">
+				<div id="title"></div>
+				<div id="alternateNames"></div>
+				<div id="currentHierarchy"></div>
+				<div id="location"></div>
+				<div id="citation"></div>
+				<div id="permanentUri"></div>
+				<div id="nameAttestations"></div>
+				<div id="calendars"></div>
+				<div id="relatedPlaces"></div>
+				<div id="relatedResources"></div>
+				<div id="bibliography"></div>
+				<div id="metadata"></div>
+			</div>	
+			<div id="rightColumn" class="column">
+				<div>
+					<h2>Maps</h2>
+					<div id="maps"></div>
+				</div>
+				<div id="description"></div>
+				<div id="historicalHierarchies"></div>
+				<div id="feedback"></div>
+			</div>
 		</div>
 	</body>
 </html>
