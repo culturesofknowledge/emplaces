@@ -20,7 +20,7 @@
 @prefix wgs84_pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
 @prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
-@prefix emt:        <http://emplaces.namespace.example.org/temporal/> .
+@prefix emt:        <http://emplaces.namespace.example.org/timespan/> .
 
 @prefix ex:         <http://emplaces.data.example.org/> .        #@@@@ TBD
 
@@ -53,7 +53,7 @@
 #    (c) say nothing (i.e. omit the em:when property altogether).  We cannot draw 
 #        any formal inference from such absence of information because of the RDF
 #        open-world model.
-#    On balance, I favour (a), which is represented below as em:Current.
+#    On balance, I favour (a), which is represented below as emt:Current.
 #
 # 7. The representation of Timespan information needs to be fixed.  I favour using
 #    something that aligns with the linked pasts network, but it's not clear if that 
@@ -80,10 +80,10 @@
 emt:Current a em:Time_period ;
     rdfs:label   "Current, as of 2018" ;
     rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
-    emt:timespan
-      [ a emt:Timespan ;
-        emt:latestStart: "2018" ;
-        emt:earliestEnd: "2018" ;
+    em:timespan
+      [ a em:Time_span ;
+        em:latestStart: "2018" ;
+        em:earliestEnd: "2018" ;
       ]
     .
 
@@ -403,9 +403,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1281-1521" ;
-            emt:timespan
-              [ emt:start  "1281" ;
-                emt:end    "1521" ;
+            em:timespan
+              [ em:start  "1281" ;
+                em:end    "1521" ;
               ]
           ] ;
         # em:source ????
@@ -417,9 +417,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1521-1809" ;
-            emt:timespan
-              [ emt:start  "1521" ;
-                emt:end    "1809" ;
+            em:timespan
+              [ em:start  "1521" ;
+                em:end    "1809" ;
               ]
           ] ;
         # em:source ????
@@ -431,9 +431,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1742-1945" ;
-            emt:timespan
-              [ emt:start  "1742" ;
-                emt:end    "1945" ;
+            em:timespan
+              [ em:start  "1742" ;
+                em:end    "1945" ;
               ]
           ] ;
         # em:source ????
@@ -448,7 +448,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Opole" ;
             em:language  "pl" ;
             rdfs:comment "Polish" ;
@@ -456,9 +456,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1146-(today)" ;
-            emt:timespan
-              [ emt:start  "1146" ;
-                # emt:end    "@@@@" ;
+            em:timespan
+              [ em:start  "1146" ;
+                # em:end    "@@@@" ;
               ]
           ] ;
         em:source
@@ -474,7 +474,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Opol" ;
             em:language  "la" ;
             rdfs:comment "Latin" ;
@@ -482,9 +482,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1222-1431" ;
-            emt:timespan
-              [ emt:start  "1222" ;
-                emt:end    "1431" ;
+            em:timespan
+              [ em:start  "1222" ;
+                em:end    "1431" ;
               ]
           ] ;
         em:source
@@ -499,7 +499,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Opolie" ;
             em:language  "la" ;
             rdfs:comment "Latin/PL" ; #@@@@ what does this mean?
@@ -507,9 +507,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1228-1483" ;
-            emt:timespan
-              [ emt:start  "1228" ;
-                # emt:end    "@@@@" ;
+            em:timespan
+              [ em:start  "1228" ;
+                # em:end    "@@@@" ;
               ]
           ] ;
         em:source
@@ -524,7 +524,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Oppol" ;
             em:language  "la" ;
             rdfs:comment "(Latin; DE: 1384)" ;
@@ -532,9 +532,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1226-1487" ;
-            emt:timespan
-              [ emt:start  "1226" ;
-                emt:end    "1487" ;
+            em:timespan
+              [ em:start  "1226" ;
+                em:end    "1487" ;
               ]
           ] ;
         em:source
@@ -550,7 +550,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Opul" ;
             em:language  "de" ;
             rdfs:comment "German" ;
@@ -558,9 +558,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1322-1417" ;
-            emt:timespan
-              [ emt:start  "1322" ;
-                emt:end    "1417" ;
+            em:timespan
+              [ em:start  "1322" ;
+                em:end    "1417" ;
               ]
           ] ;
         em:source
@@ -575,7 +575,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Oppoln" ;
             em:language  "de" ;
             rdfs:comment "German" ;
@@ -583,9 +583,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1433" ;
-            emt:timespan
-              [ emt:start  "1433" ;
-                emt:end    "1433" ;
+            em:timespan
+              [ em:start  "1433" ;
+                em:end    "1433" ;
               ]
           ] ;
         em:source
@@ -599,7 +599,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Oppelln" ;
             em:language  "de" ;
             rdfs:comment "German" ;
@@ -607,9 +607,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1454" ;
-            emt:timespan
-              [ emt:start  "1454" ;
-                emt:end    "1454" ;
+            em:timespan
+              [ em:start  "1454" ;
+                em:end    "1454" ;
               ]
           ] ;
         em:source
@@ -622,7 +622,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Oppul" ;
             em:language  "de" ;
             rdfs:comment "German" ;
@@ -630,9 +630,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1455" ;
-            emt:timespan
-              [ emt:start  "1455" ;
-                emt:end    "1455" ;
+            em:timespan
+              [ em:start  "1455" ;
+                em:end    "1455" ;
               ]
           ] ;
         em:source
@@ -647,7 +647,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Oppeln" ;
             em:language  "de" ;
             rdfs:comment "German" ;
@@ -655,9 +655,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1477-1945" ;
-            emt:timespan
-              [ emt:start  "1477" ;
-                emt:end    "1945" ;
+            em:timespan
+              [ em:start  "1477" ;
+                em:end    "1945" ;
               ]
           ] ;
         em:source
@@ -671,7 +671,7 @@ ex:Opole_P a em:Place ;
         oa:motivatedBy em:NAME_ATTESTATION ;
         oa:hasTarget   ex:Opole_P ;
         oa:hasBody 
-          [ a em:PlaceName ;
+          [ a em:Place_name ;
             em:name      "Oppolie" ;
             em:language  "pl" ;
             rdfs:comment "Polish (mistake)" ; #@@@@ what does this mean?
@@ -679,9 +679,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1830" ;
-            emt:timespan
-              [ emt:start  "1830" ;
-                emt:end    "1830" ;
+            em:timespan
+              [ em:start  "1830" ;
+                em:end    "1830" ;
               ]
           ] ;
         em:source
@@ -708,9 +708,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "Until 1584" ;
-            emt:timespan
-              [ # emt:start  "@@@@" ;
-                emt:end    "1584" ;
+            em:timespan
+              [ # em:start  "@@@@" ;
+                em:end    "1584" ;
               ]
           ] ;
         em:source
@@ -732,9 +732,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "Since 23-Feb-1584" ;
-            emt:timespan
-              [ emt:start  "1584-02-23" ;
-                # emt:end    "@@@@" ;
+            em:timespan
+              [ em:start  "1584-02-23" ;
+                # em:end    "@@@@" ;
               ]
           ] ;
         em:source
@@ -764,9 +764,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1561" ;
-            emt:timespan
-              [ emt:start  "1561" ;
-                emt:end    "1561" ;
+            em:timespan
+              [ em:start  "1561" ;
+                em:end    "1561" ;
               ]
           ] ;
         em:source
@@ -786,9 +786,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1608" ;
-            emt:timespan
-              [ emt:start  "1608" ;
-                emt:end    "1608" ;
+            em:timespan
+              [ em:start  "1608" ;
+                em:end    "1608" ;
               ]
           ] ;
         em:source
@@ -809,9 +809,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1740" ;
-            emt:timespan
-              [ emt:start  "1740" ;
-                emt:end    "1740" ;
+            em:timespan
+              [ em:start  "1740" ;
+                em:end    "1740" ;
               ]
           ] ;
         em:source
@@ -832,9 +832,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1777" ;
-            emt:timespan
-              [ emt:start  "1777" ;
-                emt:end    "1777" ;
+            em:timespan
+              [ em:start  "1777" ;
+                em:end    "1777" ;
               ]
           ] ;
         em:source
@@ -856,9 +856,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1787" ;
-            emt:timespan
-              [ emt:start  "1787" ;
-                emt:end    "1787" ;
+            em:timespan
+              [ em:start  "1787" ;
+                em:end    "1787" ;
               ]
           ] ;
         em:source
@@ -879,9 +879,9 @@ ex:Opole_P a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1794" ;
-            emt:timespan
-              [ emt:start  "1794" ;
-                emt:end    "1794" ;
+            em:timespan
+              [ em:start  "1794" ;
+                em:end    "1794" ;
               ]
           ] ;
         em:source
@@ -979,7 +979,7 @@ ex:Opole_ADM3 a em:Place ;
             wgs84_pos:lat  "50.6562"^^xsd:double ;
             wgs84_pos:long "17.9306"^^xsd:double ;
           ] ;
-        em:when emt:Current ;
+        em:when em:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
             # NOTE: source link same as core data ref, indicates core data
@@ -1461,9 +1461,9 @@ ex:Opole_Duchy a em:Place ;
     em:when 
       [ a em:Time_period ;
         rdfs:label   "1281-1809" ;      # (at least, inferred from relations)
-        emt:timespan
-          [ emt:start  "1281" ;
-            emt:end    "1809" ;
+        em:timespan
+          [ em:start  "1281" ;
+            em:end    "1809" ;
           ]
       ] ;
     em:hasRelation
@@ -1473,9 +1473,9 @@ ex:Opole_Duchy a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
-            emt:timespan
-              [ emt:start  "1348" ;
-                emt:end    "1806" ;
+            em:timespan
+              [ em:start  "1348" ;
+                em:end    "1806" ;
               ]
           ] ;
         # em:source ????
@@ -1487,9 +1487,9 @@ ex:Opole_Duchy a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1742-1809" ;
-            emt:timespan
-              [ emt:start  "1742" ;
-                emt:end    "1809" ;
+            em:timespan
+              [ em:start  "1742" ;
+                em:end    "1809" ;
               ]
           ] ;
         # em:source ????
@@ -1503,9 +1503,9 @@ ex:Opole_Raciborz_Duchy a em:Place ;
     em:when 
       [ a em:Time_period ;
         rdfs:label   "1348-1806" ;
-        emt:timespan
-          [ emt:start  "1348" ;
-            emt:end    "1806" ;
+        em:timespan
+          [ em:start  "1348" ;
+            em:end    "1806" ;
           ]
       ] ;
     # em:source ????
@@ -1516,9 +1516,9 @@ ex:Opole_Raciborz_Duchy a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
-            emt:timespan
-              [ emt:start  "1348" ;
-                emt:end    "1806" ;
+            em:timespan
+              [ em:start  "1348" ;
+                em:end    "1806" ;
               ]
           ] ;
         # em:source ????
@@ -1534,9 +1534,9 @@ ex:Opole_County a em:Place ;
     em:when 
       [ a em:Time_period ;
         rdfs:label   "1521-1945" ;
-        emt:timespan
-          [ emt:start  "1521" ;
-            emt:end    "1945" ;
+        em:timespan
+          [ em:start  "1521" ;
+            em:end    "1945" ;
           ]
       ] ;
     # em:source ????
@@ -1547,9 +1547,9 @@ ex:Opole_County a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1521-1809" ;
-            emt:timespan
-              [ emt:start  "1521" ;
-                emt:end    "1809" ;
+            em:timespan
+              [ em:start  "1521" ;
+                em:end    "1809" ;
               ]
           ] ;
         # em:source ????
@@ -1565,9 +1565,9 @@ ex:Bohemian_Crown a em:Place ;
     em:when 
       [ a em:Time_period ;
         rdfs:label   "1348-1806" ;
-        emt:timespan
-          [ emt:start  "1348" ;
-            emt:end    "1806" ;
+        em:timespan
+          [ em:start  "1348" ;
+            em:end    "1806" ;
           ]
       ] ;
     # em:source ????
@@ -1578,9 +1578,9 @@ ex:Bohemian_Crown a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1348-1804" ;
-            emt:timespan
-              [ emt:start  "1348" ;
-                emt:end    "1804" ;
+            em:timespan
+              [ em:start  "1348" ;
+                em:end    "1804" ;
               ]
           ] ;
         # em:source ????
@@ -1592,9 +1592,9 @@ ex:Bohemian_Crown a em:Place ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
-            emt:timespan
-              [ emt:start  "1348" ;
-                emt:end    "1806" ;
+            em:timespan
+              [ em:start  "1348" ;
+                em:end    "1806" ;
               ]
           ] ;
         # em:source ????
@@ -1609,9 +1609,9 @@ ex:Holy_Roman_Empire a em:Place ;
     em:when 
       [ a em:Time_period ;
         rdfs:label   "1348-1806" ;
-        emt:timespan
-          [ emt:start  "1348" ;
-            emt:end    "1806" ;
+        em:timespan
+          [ em:start  "1348" ;
+            em:end    "1806" ;
           ]
       ] 
     .
