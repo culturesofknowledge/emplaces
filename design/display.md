@@ -1,10 +1,6 @@
 # Overview (Display View)
 
-The draft description below offers an informal overview of the functionality of the gazetteer. It is best read alongside the [interface mockup][1] of the detail/display view for a typical place record. 
-
-Note: The ‘Priority’ sub-headings are intended as a simple means for tracking the relative importance of individual features as development priorities for the v.1 gazetteer.
-
-Please [get in touch with us][2] with your comments and feedback.
+The draft description below offers an informal overview of the functionality of the gazetteer. It is best read alongside the [interface mockup][1] of the detail/display view for a typical place record. We welcome anyone interested in the project to [get in touch with us][2] with comments and feedback.
 
 ## Concepts and Principles
 
@@ -14,19 +10,19 @@ EM Places is centered on the 16-18th centuries. As such, historical contexts and
 
 ### Sources and Contributors
 
-The initial release of EM Places will be limited to c. 50-100 sample records serving as representative examples of full entries and and as a means to demonstrate the gazetteer's features to contributors. The records will be selected, in large part, from those places in [Early Modern Letters Online (EMLO)][5] with the greatest number of letters sent, received, or mentioned.
+The initial release of EM Places will probably be limited to c. 50-100 sample records serving as representative examples of full entries and and as a means to demonstrate the gazetteer's features to contributors. The records will be selected, in large part, from those places in [Early Modern Letters Online (EMLO)][5] with the greatest number of letters sent, received, or mentioned. An alternative approach is to match a small number (again, c. 50-100) complete sample records with a larger group (e.g. 5-6K) of minimal place entries.
 
 Over time, we expect to add records to EM Places in much the same way as we have grown EMLO's database – that is, slowly and incrementally, in a way which allows us to meet, wherever possible, the particular needs of our individual and institutional contributors. Although EM Places will draw on reference gazetteers for certain core data (e.g. locations) it is not designed to be a bulk aggregator of place data. Our emphasis will be on much fewer, but richer records, directed towards the needs of early modern scholars.  
 
 ### Current and Historical Place Entities
 
-Our use of ‘current’ refers to still currently existing places and thus generally also  found in our reference gazetteers (GeoNames, Getty TGN). Consequently, a current place will also have a current administrative hierarchy (e.g. ADM1, ADM2, ADM3..) and a physical location (i.e. lat/long)  maintained for it outside of EM Places by our reference gazetteer(s).  
+Our use of ‘current’ refers to still currently existing places and thus generally also found in our reference gazetteers (GeoNames, Getty TGN). Consequently, a current place will also have a current administrative hierarchy (e.g. ADM1, ADM2, ADM3..) and a physical location (i.e. lat/long)  maintained for it outside of EM Places by our reference gazetteer(s).  
 
-In contrast, a ‘historical’ place is no longer extant entity with a temporal validity (e.g. the Habsburg Monarchy, 1526-1804). EM Places will not attempt to capture spatial data on historical regions (i.e. polygons). Instead, we will either provide a single representative lat/long location (e.g. Vienna) or external link, where available to external resources/projects with the necessary expertise and data (e.g. to [FNZGIS][3] for Central/Eastern Europe).
+In contrast, a ‘historical’ place is no longer extant entity with a temporal validity (e.g. the Habsburg Monarchy, 1526-1804). EM Places will not attempt to capture spatial data on historical regions (i.e. polygons). Instead, we will either provide a single representative lat/long location (e.g. Vienna) or external link, where available to external resources/projects with the necessary expertise and data (e.g. to [FNZGIS][3] for Central/Eastern Europe). A second, alternative approach is to provide low resolution bitmap maps of historical places where these are available (e.g. a [EurAtlas map][12] of the Holy Roman Empire in 1700).
 
-Let's take, for example, the town of Opole in Poland. This is a currently extant place, and would be listed with alternative name and location data from our reference gazetteers. Amongst its alternative names (toponyms) is a historical name, Oppeln. EM Places will   record 'Oppeln' without attempting to contextualize it historically. This is because our alternative name data for current places will come from reference gazetteers which themselves typically do not offer this data (see section below on Core vs. Additional Metadata).
+Let's take, for example, the town of Opole in Poland. This is a currently extant place, and would be listed with alternative name and location data from our reference gazetteers. Amongst its alternative names (toponyms) is a historical name, Oppeln. EM Places will   record 'Oppeln' as an toponym without attempting to contextualize it historically. This is because our alternative name data for current places will come from reference gazetteers which themselves typically do not offer this data (see section below on Core vs. Additional Metadata).
 
-However, the record for a current place can optionally include additional historical information and contexts, such as data on historical calendar use, further attestations of toponyms, or various kinds of hierarchies associated with it (e.g. ecclesiastical, offering data on parishes, dioceses etc.). These additional contexts can be shared with EM Places by individual researchers and projects. When this is itself a place (e.g. the Bohemian Crown, 1490-1742) it is recorded in the gazetteer as a separate, historical place entity, linked to the current places with which it is associated. For example, in the period 1490-1521 the town of Opole (current place) was a part of the (historical place) 'Duchy of Opole' which itself was part of the (historical place) Governorate of the Duchy of Silesia etc. culminating in the (historical place) 'Holy Roman Empire'. 
+However, the record for a current place can optionally include additional historical information and contexts, such as data on historical calendar use, further attestations of toponyms, or various kinds of hierarchies associated with it (e.g. ecclesiastical, offering data on parishes, dioceses etc.). These additional contexts can be shared with EM Places by individual researchers and projects. When this is itself a place (e.g. the Bohemian Crown, 1490-1742) it is recorded in the gazetteer as a separate, historical place entity, linked to the current places with which it is associated. For example, in the period 1490-1521 the town of Opole (current place) was a part of the (historical place) 'Duchy of Opole' which itself was part of the (historical place) Governorate of the 'Duchy of Silesia' etc. culminating in the (historical place) 'Holy Roman Empire'. 
 
 In summary, all 'current places' in EM Places will have a current hierarchy and location (taken from reference gazetteers) and, optionally, can be associated with several more 'historical places' and contexts (e.g. calendars), contributed to the gazetteer by scholars and projects. 
 
@@ -34,65 +30,47 @@ Ultimately, the intent of EM Places (and alongside it, EM People, and EM Dates) 
 
 ### Core and Additional Metadata
 
-There are two main sources for data in EM Places. _Core metadata_ is periodically drawn by API from reference gazetteers (currently: GeoNames, Getty TGN) and will be comprised of:
+We envision several sources for data in EM Places. _Core metadata_ is periodically drawn by API from reference gazetteers (currently: GeoNames, Getty TGN) and will be comprised of:
 
 * Preferred Place Name
 * Alternative Names (all entries are indexed, not all languages are displayed)
 * Location (lat/long is displayed, and polygons where available for regions)
-* Current administrative/political hierarchy and labels
-* Related Resources (corresponding entries in other gazetteers)
+* Current administrative/political hierarchy (with labels under consideration for a future version)
+* Authorities (corresponding entries in other gazetteers)
 
 This core metadata will form the spine of the gazetteer. This is data which EM Places will accept 'as is' without editing (though, as noted above, not everything indexed for search purposes will also be displayed in the individual place entry – GeoNames records  alternative names in many languages). The intent is that EM Places will be able to refresh this data at regular intervals (e.g. bi-annually) with minimal editorial oversight in order to benefit from corrections/additions upstream.
 
-By contrast, _additional metadata_ is primarily further historical context and data (i.e. over and beyond core metadata) contributed to the gazetteer by individual researchers and projects, which will need to be reviewed by EM Places editors. Examples of additional metadata would include data on historical calendars, historical hierarchies, bibliographic entries, and historical maps.
+By contrast, _additional metadata_ is primarily further historical context and data (i.e. over and beyond core metadata) contributed to the gazetteer by individual researchers and projects, which will first need to be reviewed by EM Places editors. Examples of additional metadata would include data on historical calendars, historical hierarchies, bibliographic entries, and historical maps.
 
-See also the section on 'Related Places' below, for an early discussion of what may need to become a third class of metadata.
+See also the section on 'Related Places' below, for an early discussion of what may become a third class of additional metadata.
 
-### Uncertainties
+### Uncertainties (TBD)
 
-Data on calendars, and on historical hierarchies (only) will need to be optionally marked as any combination of 'Uncertain', 'Inferred', and 'Approximate'.
-
-TBD how to indicate this in the interface (possibly using a set of symbols, and possibly only in the associated 'Source' pop-up).
+Data on calendars, and on historical hierarchies (only) will need to be optionally marked as any combination of 'Uncertain', 'Inferred', and 'Approximate'. TBD how to indicate this in the interface (possibly using a set of symbols, and possibly only in the associated 'Source' pop-up).
 
 ## Preferred Place Name; alternative names
 
-**Priority:** High
-
-**Source:** Core Data
-
-The default/preferred place name and its alternate names will come from the reference gazetteers. All alternative names and their labels will be stored and indexed but only some will be displayed. 
+The default/preferred place name and its alternate names will come from the reference gazetteer. All alternative names and their labels will be stored and indexed but only some will be displayed. 
 
 For example, while we can allow users to search for and find places using a Persian transliteration of a place (Opole: اوپوله) there is no need to display this particular transliteration in the list of alternative names. For the display list, alternative names will be drawn from a short list of major European languages and historical forms (i.e. Latin). Next, the list of alternative names will be compared with one or more additional gazetteers. From this these lists, a merged set of unique alternative names will finally be shown. This is to avoid having to list multiple, identical instances of e.g 'Opole' for the many language transliterations supported by GeoNames. The language label(s) for an alternative name should be revealed on mouseover.
 
 ## Current Hierarchy
 
-**Priority:** High
+The administrative/political hierarchy ('polity') for a current place provided by the reference gazetteer(s). Note that GeoNames only provides data for ADM1, ADM2 etc. It does not attempt to label these as states, provinces, counties etc. However, Getty TGN does provide this information. Unfortunately, Getty and GeoNames sometimes disagree on the depth of the hierarchy making automatic matching of Getty labels to GeoNames hierarchies difficult. For this reason v1 will not attempt to match places with labels. We may return to this in a future revision of EM Places or perhaps make us of generic labels (as appears to have been done by Mapzen for their ['Who's on First'][13] open-access dataset – see, for example, [their entry for Opele][14]).  
 
-**Source:** Core Data
-
-The administrative/political hierarchy for a current place provided by the reference gazetteer. Note that GeoNames only provides data for ADM1, ADM2 etc. It does not attempt to label these as states, provinces, counties etc. However, Getty TGN does provide this information. Therefore, when these are imported, an attempt should be made to automatically match these, and flag them to an editor for subsequent review. 
-
-By definition, a historical (i.e. former) place can’t display its administrative hierarchy here – instead, a placeholder message will refer the user to the section on ‘Historical Hierarchies’. 
+By definition, a historical (i.e. former) place can’t display its administrative hierarchy here – instead, a placeholder message could refer the user to the section on ‘Historical Hierarchies’. Alternatively, we may use this area to highlight the period of the historical place
 
 Further discussion is required on what will constitute core data for historical places. 
 
 ## Location
 
-**Priority:** High
+The representative center for a place displayed as decimal lat/long and degrees (image just shows decimal). It should be accompanied by a link allowing the URI to be copied as decimal lat/long on mouseclick. What will be copied should be revealed on mouseover. 
 
-**Source:** Core Data
-
-The representative center point for a place displayed as decimal lat/long and degrees (image just shows decimal). It should be accompanied by a link allowing the URI to be copied as decimal lat/long on mouseclick. What will be copied should be revealed on mouseover. 
-
-We will not attempt to override what GeoNames considers to be the representative point for a current place. 
+We will not attempt to override what GeoNames considers to be the representative point for a current place. For a historical place, an editor will decide where to locate the center (e.g. Vienna for the Habsburg Empire). TBD how to capture a representative historical location can changing over time. We also need to think about what to do if we were to have temporal polygons for historcal places.
 
 ## Citation
 
-**Priority:** High
-
-**Source:** Generated
-
-A simple means to represent the canonical URI as an academic citation, in several standard bibliographic formats and copy it on mouseclick for reuse. What will be copied should be revealed on mouseover, allowing the user to see in advance what the entry will look like in the different citation styles.
+A simple means to represent the canonical URI as an academic citation, in several standard bibliographic formats and copy it on mouseclick for reuse. What will be copied should be revealed on mouseover, allowing the user to see in advance what the entry will look like in the different citation styles. We had initially considered using [BibTeX][15] as a generic bibliography interchange format. However, [RIS][16] and/or [CSL][17] are more curent and may be more appropriate.
 
 ## Permanent URI
 
@@ -255,5 +233,10 @@ Many sections in the individual record display will include 'Info' and/or 'Sourc
 [9]:	http://www.geonames.org/export/codes.html
 [10]:	https://www.getty.edu/research/tools/vocabularies/aat/
 [11]:	https://github.com/LinkedPasts/lp-network/tree/master/PGIFv2
-
+[12]: http://euratlas.com
+[13]: https://github.com/whosonfirst
+[14]: https://spelunker.whosonfirst.org/id/101752159/
+[15]: http://www.bibtex.org
+[16]: https://en.wikipedia.org/wiki/RIS_(file_format)
+[17]: https://citationstyles.org
 
