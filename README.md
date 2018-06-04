@@ -21,9 +21,9 @@ The draft [design documents][10] (display, search, edit) offer an informal descr
 An draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model is refined.
 
 ## Status
-**April 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
+**June 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
 
-**March 2018**: Private drafts of the gazetter's design document and data model.
+**March - May 2018**: Private drafts of the gazetter's design document and data model.
 
 ## Next ToDo Items
 - Collect and incorporate community feedback
