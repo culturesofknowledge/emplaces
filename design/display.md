@@ -74,17 +74,9 @@ A simple means to represent the canonical URI as an academic citation, in severa
 
 ## Permanent URI
 
-**Priority:** High
-
-**Source:** Generated
-
-This should be a short form permanent URI based on the custom domain for EM Places (emplaces.info). It should allow the URI to be copied to the clipboard on mouseclick and reveal what will be copied on mouseover.
+This should be a short form permanent URI based on the custom domain for EM Places (probably emplaces.info). It should allow the URI to be copied to the clipboard on mouseclick and reveal what will be copied on mouseover.
 
 ## Name Attestations
-
-**Priority:** High
-
-**Source:** Additional metadata
 
 Attestations are sourced instances of name variants of the preferred and alternative names in core data. For example, if a scholar finds a reference to Siena in a manuscript written 'Ciena' and (TBD via the editorial policy) this is not already listed as an alternative name in our reference gazetteers, then this toponym can be recorded here, along with the language, date, and source for the attestation. 
 
@@ -92,19 +84,13 @@ TBD structure for the source supporting the attestation. If possible, we will re
 
 ## Calendars
 
-**Priority:** High (form of implementation TBD)
-
-**Source:** Additional metadata
-
 A visualization of the predominant calendars (Julian, Gregorian) in use between 1500 and 1800 at that place. This value will be pre-populated via a hierarchy of inherited calendars. So, for example, in the absence of any more specific information in use in a region, we will assume (but also make this clear in the interface) that the place transitioned, for example, from Julian to Gregorian in 1582 (the year of Gregory XIII's papal bull). If a place or set of places (such as a region) transitioned at a different date, then note this, and have all places under it inherit this (and override the default 1852 transition). If a more specific place such as a town transitioned in a different manner, then note this for that town, and override the regional transition etc.
 
 We will not attempt to record variances from regionbal calendar use patterns at smaller scales such as individual towns. For example, we will not note as an exception or override if we are presented with a record of someone living in the town of Calais in 1632 (with the Gregorian calendar in use in France), writing to someone else in England in the Julian calendar. Our assumption is that the choice to use the Julian in this instance was dependant on the addresse and/or place of receipt (England did not change to the Gregorian calendar until 1752), not the place of sending.
 
+TBD are labels or symbols for recording different variants of one calendar. For example, Julian calendar with January 1 as the start of the year and Julian with a March 25 start of year.
+
 ## Related Places
-
-**Priority:** High (form of implementation TBD)
-
-**Source:** Additional metadata (TBD)
 
 In some cases, we may wish to capture information on places (current or historical) below the level of an inhabited place. For example, a set of buildings representing an institution (e.g. Christ Church College) or an individual building or locale (e.g. an inn, or a street). For these and similar kinds of places, especially if they are historical, we may have very little data – often not even enough to create a full core data record. 
 
@@ -112,66 +98,36 @@ To accomodate this, we are proposing that this class of places could be grouped 
 
 Such a link, presented in a simplified tabular format (following the example of GOV – e.g. for [Opele][7]) will lead to a separate page, where the metadata for that place will be shown. The justification for this is to allow contributors to share their metadata on places so that in can be indexed by EM Places in a structure that related to the structure in which it was collected. If a researcher, for example, wishes to share with EM Places, data on a set of streets in London, then we should try to accomodate their original data structure as far as feasible. 
 
+The current intent is for a simple wikidata-style interface where a contributor or editor selects a property from a preset list and enters a value. See [this blogpost][18] for an analogous example of how this could work. 
+
 The tabular list (see [current mockup][1]) could, for example, be structured as follows:
 
 __Place:				Feature:		Relationship:__
-St. Adalbert			Church			Contained within
+St. Adalbert			Church			type-of-relationship (e.g. PartOf)
 
-The feature type would be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary and matched (in the editorial interface) with the appropriate [GeoNames feature code][9], where applicable. Doing so will make this data easier to integrate into other projects in the future.
-
-A possible alternative to allowing select projects whose data we incorporate into EM Places to carry over their own data model is to offer them a defined, but generic and flexible structure which allows them sufficiently wide latitude for interpretation, e.g. Dublin Core. This approach has worked quite well for Omeka Classic (and it would be interesting to review if this has been changed in [Omeka-S][8]). 
+The feature type might be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary and matched (in the editorial interface) with the appropriate [GeoNames feature code][9], where applicable. Doing so will make this data easier to integrate into other projects in the future.
 
 ## Related Resources
 
-**Priority:** High
-
-**Source:** Core data + additional metadata
-
 A list of what we expect will be predominantly online, digital resources (for traditional scholarly references, contributors can make use of the bibliography section). Some of the URIs to these resources can be derived  automatically from our reference gazetteers (e.g. links to Wikipedia, WikiData, certain other gazetteers) but most of which will be suggested by contributors and confirmed by editors. 
 
-## Linkbacks
-
-**Priority:** Medium (form of implementation TBD)
-
-**Source:** Core data + additional metadata
-
-A list of dynamic links to resources which can be queried programmatically for more information about a place in the gazetteer. The data would be polled and updated at an appropriate interval. For example, X number of letters were sent from this place, and Y number of letters were received at this place. 
-
-If dynamic links can’t be implemented in v.1, then periodically refreshed, static data from a small set of important sources is acceptable as well.
-
-Alternatively, we could include these under Related Resources. But if we do that, we'd need to classify the website, and this could be difficult to impossible to achieve in practice. There are too many kinds of places which could be listed here for straightforward classification.
+This could also include dynamic links to resources which can be queried over an API for more information about a place in the gazetteer. The data would be polled and updated at an appropriate interval. For example, X number of letters were sent from this place, and Y number of letters were received at this place. 
 
 ## Bibliography
 
-**Priority:** Medium (form of implementation TBD)
-
-**Source:** Core data + additional metadata
-
 A list of bibliographic resources (predominantly offline, scholarly references). At minimum, an unstructured free text list would suffice for v.1. However, our assumption is that this can be a simply structured list, and with the ability to apply place tags to each entry, making it much easier for subsequent contributors to find and select existing bibliographic entries in a consistent manner. This helps avoid contributors working independently on different places (in e.g. the same region and period) repeatedly entering the same reference in different records, possibly in different formats. 
 
-## Creator/Contributors/License
-
-**Priority:** High
-
-**Source:** Generated
+## Creators & Licenses
 
 A listing (machine readable) of the Creator of the record (i.e. the person or organization which created the initial record), one or more subsequent Contributors, a credit line for the reference gazetteers, and a notice of the licenses in use. We will require two licenses – CC0 for the reference gazetteer (core data), and CC-BY (v4 or possibly higher – since changes will be logged in Timbuctoo) for the remaining, additional metadata.
 
 ## Export
 
-**Priority:** High (form of implementation TBD)
-
-**Source:** Generated
-
 A means to manually export the current record (only) in several common formats, currently assumed to be CSV, Excel, Turtle, GraphML, and GeoJSON. 
 
-Note: GeoJSON is required for Pelagios compatibility via [PGIFv2 format][11].
+Note: GeoJSON is required for Pelagios compatibility via [LPIF format][11].
 
 ## Maps
-
-**Priority:** High (current) + Medium/Low (historical)
-
-**Source:** Core Data (current) + Additional metadata (historical)
 
 The required (for current places) default map view will be an e.g. OpenStreetMap view using the location provided by core data. 
 
@@ -179,45 +135,21 @@ Optionally, it will be possible, via tabs, to view a finite number of (e.g. 4) h
 
 ## Description
 
-**Priority:** High
-
-**Source:** Additional metadata 
-
 This field will initially be (semi?)-automatically populated with data from the Getty TGN and then further revised as needed by users/editors.
 
-## Historical Hierarchies
-
-**Priority:** High (form of implementation TBD)
-
-**Source:** Additional metadata 
+## Historical Hierarchies 
 
 This section is best understood by looking at the draft [interface mockups][4].
 
 Historical hierarchies show the historical administrative, ecclesiastical, judicial, and military hierarchies for both historical and current places. Initially, this will show the period a certain relationship existed. For example, from an administrative/political perspective, the Silesian town of Opole fell under the Duchy of Opole from 1281-1521. In each part of the hierarchy (with the precise mode of display TBD, for example via mouseover) a user will also be able to view the period of existence of each place entity (e.g. the Bohemian Crown existed from 1348 to 1918). Together, a set of dated entities, linked in hierarchial order by a set of dated relations, forms one (from a possible four kinds of) historical hierarchy. In the case of ecclesiastical hierarchies, an additional row of tabs will be needed to show what kind of hierarchy (e.g. what religion and/or confession) is being tracked. 
 
-Further discussion is needed on the necessary editorial policies. We expect that administrative and ecclesiastical data will be easier to collect from contributors than judicial and military. 
+Further discussion is needed on the necessary editorial policies. We expect that administrative and ecclesiastical data will be easier to collect from contributors than judicial and military. As a result, displaying data on the latter two categories might not be included in the initial release.
 
 ## Feedback
 
-**Priority:** High
-
-**Source:** Generated
-
 A link to a simple comment form, referencing the current record and (if present) a link to the logged-in users profile, or else a mailto: link, referencing the current record (e.g. in the subject field).
 
-## Share
-
-**Priority:** High
-
-**Source:** Generated
-
-A means to share a link to the current record on social media. If possible, this should be implemented in a way which does not promote cross-site tracking of visitors to the gazetteer.
-
 ### Info and Sources pop-ups
-
-**Priority:** High
-
-**Source:** Additional metadata 
 
 Many sections in the individual record display will include 'Info' and/or 'Sources' links. Clicking this could, as one possibility, show a pop-up with text on that section. In the case of Sources, this could include both an unstructured text area, and a structured bibliographic area. 
  
@@ -232,11 +164,12 @@ Many sections in the individual record display will include 'Info' and/or 'Sourc
 [8]:	https://omeka.org/s/
 [9]:	http://www.geonames.org/export/codes.html
 [10]:	https://www.getty.edu/research/tools/vocabularies/aat/
-[11]:	https://github.com/LinkedPasts/lp-network/tree/master/PGIFv2
+[11]:	http://linkedpasts.org
 [12]: http://euratlas.com
 [13]: https://github.com/whosonfirst
 [14]: https://spelunker.whosonfirst.org/id/101752159/
 [15]: http://www.bibtex.org
 [16]: https://en.wikipedia.org/wiki/RIS_(file_format)
 [17]: https://citationstyles.org
+[18]: http://blogs.bodleian.ox.ac.uk/digital/2017/03/23/wikimedia-for-public-engagement/
 
