@@ -12,7 +12,7 @@ The third is to __fully credit, source, and cite all contributions__ to the gaze
 
 The fourth is to __make the EM Places source code and datasets easily accessible and reusable by others__. To this end, the EM Places source code, based on the Huygens’ [Timbuctoo][5] technical infrastructure, will be shared under open source and made accessible for reuse. All data in EM Places will be shared under open access over multiple channels: in the form of user initiated exports from the applications itself, on external repositories, and via the EM Places API. Separately, EM Places will be able to share its data in the [Linked Pasts Interconnection Format][24] in response to [Peripleo][7] API queries. 
 
-Our intent is to prepare EM Places in a transparent and collaborative manner as possible to allow it to become a useful resource for the [Pelagios Community][8] and an active participant in the proposed [Linked Pasts Network][9].
+Our intent is to prepare EM Places in a transparent and collaborative manner as possible to allow it to become a useful resource for the [Pelagios Community][8] and an active participant in the proposed [Linked Pasts Network][25].
 
 ## Design
 The draft [design documents][10] (display, search, edit) offer an informal description of the planned features for EM Places together with a first set of [interface mock-ups][21]. More details will be added here as the gazetteer’s features are finalized.
@@ -66,4 +66,4 @@ We would like to acknowledge the inspiration we drew, and the help we received f
 [22]:	http://republicofletters.net
 [23]:	http://www.republicofletters.net/index.php/portfolio_page/dariusz-gierczak/
 [24]: https://github.com/LinkedPasts/lpif
-
+[25]: http://linkedpasts.org
