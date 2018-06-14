@@ -1,5 +1,6 @@
 # Sample data for EMPlaces, describing Opole
 # Data format is Turtle (http://www.w3.org/TR/turtle/)
+# Validated by http://ttl.summerofcode.be/
 
 #@@TODO: finalize preface stuff, prefixes, etc
 
@@ -206,7 +207,7 @@ em:AH_PART_OF_AH a em:Relation_type ;
 #
 # Information in a qualified relation or annotation may be uncertain.  These properties and values
 # are used to qualify these claims.  Information that is directly attached to an em:Place 
-# (i.e. not as a qualified relationor annotation) is considered to be definitive.
+# (i.e. not as a qualified relation or annotation) is considered to be definitive.
 #
 # Specifically, annotations for calendar-in-use and alternate name attestations should have 
 # associated competence values.
@@ -215,7 +216,7 @@ em:AH_PART_OF_AH a em:Relation_type ;
 
 em:competence a rdf:Property ;
     rdfs:label "Certainty, or quality, of information" ;
-    rdfs:comment "Records the quality or certaintly of some information.  Note that in the absence of an explcit value, no competence should be assumed." ;
+    rdfs:comment "Records the quality or certaintly of some information.  Note that in the absence of an explicit value, no competence should be assumed." ;
     rdfs:range em:Competence_value ;
     .
 
@@ -226,7 +227,13 @@ em:DEFINITIVE a em:Competence_value ;
 
 em:INFERRED a em:Competence_value ;
     rdfs:label   "Inferred" ;
-    rdfs:comment "The associated value has been inferred from (poreferably?) definitive informaton."
+    rdfs:comment "The associated value has been inferred from (preferably?) definitive informaton."
+    .
+
+em:ASSUMED a em:Competence_value ;
+    # Assumed data is like uncertain, but maybe with better foundation?
+    rdfs:label   "Assumed" ;
+    rdfs:comment "The associated value is assumed from context."
     .
 
 em:UNCERTAIN a em:Competence_value ;
@@ -245,11 +252,12 @@ em:Place a rdfs:Class ;
     em:coreProperty em:preferredName, em:alternateName, em:placeCategory, em:corePlaceType ;
     .
 
-# Use em:corePlaceType for place type info that is obtained, and may be refreshed,
-# from the reference gazetteer(s)
+# Use em:corePlaceType for place type info that is obtained, and 
+# may be refreshed,from the reference gazetteer(s)
 em:corePlaceType rdfs:subPropertyOf em:placeType .
 
-# em:coreDataRef indicates source for core data
+# em:coreDataRef indicates source (reference gazetteer) for core data
+# Use em:source for other gazetteer references
 em:coreDataRef rdfs:subPropertyOf em:source .
 
 #   ==========================================================================
@@ -719,7 +727,7 @@ ex:Opole_P a em:Place ;
             em:link      <@@@> ;
           ] ;
         rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
-        em:competence em:INFERRED ;
+        em:competence em:ASSUMED ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
