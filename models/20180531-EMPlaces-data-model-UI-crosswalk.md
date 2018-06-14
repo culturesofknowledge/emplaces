@@ -4,7 +4,7 @@ UI sample for [Opole](../images/current_display.pdf).
 
 Data model sample for [Opole](20180410-opole-example-data.ttl).
 
-The crosswalk is presented here using SPARQL query patterns that could be used to access information for the cvarious UI elements.  This is not meant to implie that they should be implemented using SPARQL: in this instanmce, I';m just using SPARQL as a ind of formal specification for designating bits of the data model.
+The crosswalk is presented here using SPARQL query patterns that could be used to access information for the cvarious UI elements.  This is not meant to imply that they should be implemented using SPARQL: in this instance, I'm just using SPARQL as a kind of formal specification for designating bits of the data model.
 
 In each case, the variable `?place` is assumed to be bound to the root node for the place description.  So in the Opole example, that would be `ex:Opole_P`.
 
@@ -17,6 +17,13 @@ In each case, the variable `?place` is assumed to be bound to the root node for 
 NOTE: we probably have to do som,e work here, as the intent is not to list *every* elternate name from  Geonames, but to apply some heuristic so that a useful selection is displayed.  In any case, duplicate values should be eliminated.
 
     { ?place em:alternateName ?alternate_name }
+
+@@NOTE This is currently under review, considering instead using:
+
+    { ?place em:displayName ?display_name }
+
+This would mean that selecting the appropriate names would be a task for data wrangling by Oxford rather than selection in the Timbuctoo web interface.
+
 
 ## Current hierarchy
 
@@ -186,7 +193,15 @@ Calendar-in-use details are based on web Annotations.  The general pattern is th
 
 ## Related resources
 
-    { ?place rdfs:seeAlso ?related_resource }
+The intent here is that a related resource may be a descriptive label, a link, or both.
+If no label provided, use the em:link value as the label.
+If no link provided, present as plain text rather than as a hyperlink.
+
+    { ?place em:relatedResource
+      [ rdfs:label ?related_resource_label ;  # OPTIONAL
+        em:link    ?related_resource_label ;  # OPTIONAL
+      ]
+    }
 
 ## Bibliography
 

@@ -328,6 +328,15 @@ ex:Opole_P a em:Place ;
     em:alternateName "Ополе"@uk ;
     em:alternateName "奥波莱"@zh ;
 
+    em:displayName "Opole" ;
+    em:displayName "Oppein" ;
+    em:displayName "Oppeln" ;
+    em:displayName "Òpòle" ;
+    em:displayName "Opolė" ;
+    em:displayName "Opolí" ;
+    em:displayName "Uopole" ;
+    em:displayName "Ополе" ;
+
     em:where
       [ a em:Setting ;
         em:location
