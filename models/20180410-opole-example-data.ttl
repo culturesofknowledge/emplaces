@@ -202,7 +202,6 @@ em:AH_PART_OF_AH a em:Relation_type ;
     rdfs:comment  "Records a historical relationship between a historical place or administrative division and its parent division." 
     .
 
-
 # Information competence (certainty)
 #
 # Information in a qualified relation or annotation may be uncertain.  These properties and values

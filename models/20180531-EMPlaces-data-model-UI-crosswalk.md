@@ -38,7 +38,7 @@ This pattern accesses the administrative division parent of a populated place:
     { ?place em:hasRelation
         [ em:relationType em:P_PART_OF_A ;
           em:relationTo   ?administrative_division ;
-          em:source
+          em:source         # OPTIONAL, may be repeated
             [ rdfs:label  ?parent_source_label ;
               em:link     ?parent_source_url
             ] ;
@@ -230,6 +230,31 @@ If no link provided, present as plain text rather than as a hyperlink.
 ## Historical hierarchies
 
 ### Administrative
+
+    { ?place em:hasRelation
+      [ a em:Qualified_relation ;
+        em:relationType em:AH_PART_OF_AH ;
+        em:relationTo ?parent_adm ;
+        em:when 
+          [ a em:Time_period ;
+            rdfs:label ?period_label ;
+            em:timespan                             # OPTIONAL
+              [ a em:Time_span ;                    # OPTIONAL
+                em:start ?period_start_year ;       # OPTIONAL, integer value
+                em:end   ?period_end_year ;         # OPTIONAL, integer value
+                em:latestStart ?latest_start_year ; # OPTIONAL, integer value
+                em:earliestEnd ?earliest_end_year ; # OPTIONAL, integer value
+              ]
+          ] ;
+        em:source                                   # OPTIONAL
+          [ rdfs:label ?relation_source_label ;     # OPTIONAL if em:link present
+            em:link    ?relation_source_link ;      # OPTIONAL
+          ]
+        em:competence ?competence ;                 # OPTIONAL
+      ]
+    }
+
+This pattern, where `?place` is bound to a current or historical place, accesses its immediate parents in a historical administrative hierarchy.  Note there may be several such parents with overlapping or non-overlapping time periods.  The pattern can be re-applied to the parents (i.e. values returned as ?parent_adm) to build up a adminstrative hierarchy graph.
 
 ### Eccliastical
 
