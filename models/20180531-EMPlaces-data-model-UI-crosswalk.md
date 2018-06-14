@@ -14,15 +14,17 @@ In each case, the variable `?place` is assumed to be bound to the root node for 
 
 ## Alternate names
 
-NOTE: we probably have to do som,e work here, as the intent is not to list *every* elternate name from  Geonames, but to apply some heuristic so that a useful selection is displayed.  In any case, duplicate values should be eliminated.
+@@NOTE: we probably have to do some work here, as the intent is not to list *every* alternate name from  GeoNames, but to apply some heuristic so that a useful selection is displayed.  In any case, duplicate values should be eliminated.
 
     { ?place em:alternateName ?alternate_name }
 
-@@NOTE This is currently under review, considering instead using:
+@@NOTE This is currently under review, using instead:
 
     { ?place em:displayName ?display_name }
 
 This would mean that selecting the appropriate names would be a task for data wrangling by Oxford rather than selection in the Timbuctoo web interface.
+
+
 
 
 ## Current hierarchy
