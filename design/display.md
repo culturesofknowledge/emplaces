@@ -70,7 +70,7 @@ We will not attempt to override what GeoNames considers to be the representative
 
 ## Citation
 
-A simple means to represent the canonical URI as an academic citation, in several standard bibliographic formats and copy it on mouseclick for reuse. What will be copied should be revealed on mouseover, allowing the user to see in advance what the entry will look like in the different citation styles. We had initially considered using [BibTeX][15] as a generic bibliography interchange format. However, [RIS][16] and/or [CSL][17] are more curent and may be more appropriate.
+A simple means to represent the canonical URI as an academic citation, in several standard bibliographic formats and copy it on mouseclick for reuse. What will be copied should be revealed on mouseover, allowing the user to see in advance what the entry will look like in the different citation styles. We had initially considered using [BibTeX][15] as the generic bibliography interchange format. However, [RIS][16] is more current and may be more appropriate. [CSL][17] could provide a means to convert amongst formats.
 
 ## Permanent URI
 
