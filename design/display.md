@@ -94,20 +94,21 @@ TBD are labels or symbols for recording different variants of one calendar. For 
 
 ## Related Places
 
-In some cases, we may wish to capture information on places (current or historical) below the level of an inhabited place. For example, a set of buildings representing an institution (e.g. Christ Church College) or an individual building or locale (e.g. an inn, or a street). For these and similar kinds of places, especially if they are historical, we may have very little data – often not even enough to create a full core data record. 
+In some cases, we may wish to capture information on places (current or historical) below the level of an inhabited place. For example, a set of buildings representing an institution (e.g. Christ Church College) or an individual building or locale (e.g. an inn, or a street). For these and similar kinds of places, especially if they are historical, we may have very little data – often not enough to create a full core data record. And even if we could, the format we've prepared for places is largely predicated on 'inhabited places'. It wouldn't be able to capture the kinds of properties relevant to a building (e.g. the name of the architect).
 
-To accomodate this, we are proposing that this class of places could be grouped under the full/regular record of the place (conceptually, or spatially) enclosing it. Thus, for example, Christ Church College, would be included under the entry for Oxford etc. Such places will be listed under a separate section in the full entry for the 'containing' place as separate links. For example, in a section titled (as in the current mockup) 'Related Places' (in a deliberate parallel to 'Related Resources' which point to external, related Linked Data resources not indexed by EM Places). 
+To accomodate this, we are proposing that this class of places be be grouped under the full/regular record of the place (conceptually, or spatially) enclosing it. Thus, for example, Christ Church College, would be included under the entry for Oxford etc. Such places will be listed in a separate tabular section of the full entry for the 'containing' place. For example, in a section titled (as in the current mockup) 'Related Places' (in a deliberate parallel to 'Related Resources' which point to external, related Linked Data resources not indexed by EM Places). 
 
-Such a link, presented in a simplified tabular format (following the example of GOV – e.g. for [Opele][7]) will lead to a separate page, where the metadata for that place will be shown. The justification for this is to allow contributors to share their metadata on places so that in can be indexed by EM Places in a structure that related to the structure in which it was collected. If a researcher, for example, wishes to share with EM Places, data on a set of streets in London, then we should try to accomodate their original data structure as far as feasible. 
+Each entry in this table (following the example of GOV – e.g. for [Opele][7]) will includne a link leading to a separate page, where the specific metadata for that class of place will be shown. The idea is to allow contributors more freedom to share their metadata in a manner closer to the form in which it was collected. If a researcher, for example, wishes to share with EM Places, a large set of data on a set of streets in London, then we should try to accomodate the original data structure by permitting the use of 'street relevant' properties. Conversely, smaller and/or less common contributions may need to make do with the already list of available properties. That is to say, the decision to extend the list of properties to accomodate the needs of a contributor should be possible, but subject to prior agreement.
 
-The current intent is for a simple wikidata-style interface where a contributor or editor selects a property from a preset list and enters a value. See [this blogpost][18] for an analogous example of how this could work. 
+The current intent is for a simple wikidata-style interface where a contributor or editor selects a property from a preset list and enters a value. See [this blogpost][18] for an analogous example of how this could work. The tabular list (see [current mockup][1]) could, for example, consist of the follows:
 
-The tabular list (see [current mockup][1]) could, for example, be structured as follows:
+| Place  | Type |  Relationship  |
+| ------------- | ------------- |------------- |
+| Our Lady of Sorrows and St. Adalbert  | Parish Church  |  PartOf  | 
 
-__Place:				Feature:		Relationship:__
-St. Adalbert			Church			type-of-relationship (e.g. PartOf)
+The feature 'type' might be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary (here, ['Parish Church'][19] and matched, where applicable, with the appropriate [GeoNames feature code][9] so that this this data becomes easier to integrate by other, less granular gazetteers.
 
-The feature type might be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary and matched (in the editorial interface) with the appropriate [GeoNames feature code][9], where applicable. Doing so will make this data easier to integrate into other projects in the future.
+TBA: Example data on St. Adalbert drawn from [National Heritage Board of Poland][20] website to be added to the [Opole sample RDF](/models/20180410-opole-example-data.ttl) file.
 
 ## Related Resources
 
@@ -174,4 +175,6 @@ Many sections in the individual record display will include 'Info' and/or 'Sourc
 [16]: https://en.wikipedia.org/wiki/RIS_(file_format)
 [17]: https://citationstyles.org
 [18]: http://blogs.bodleian.ox.ac.uk/digital/2017/03/23/wikimedia-for-public-engagement/
+[19]: http://vocab.getty.edu/page/aat/300108377
+[20]: https://zabytek.pl/en/obiekty/opole-kosciol-parafialny-pw-matki-boskiej-bolesnej-i-sw-wojc
 
