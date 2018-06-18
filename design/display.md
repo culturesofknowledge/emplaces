@@ -50,9 +50,9 @@ Data on calendars, and on historical hierarchies (only) will need to be optional
 
 ## Preferred Place Name; alternative names
 
-The default/preferred place name and its alternate names will come from the reference gazetteer. All alternative names and their labels will be stored and indexed but only some will be displayed. 
+The default/preferred place name and its alternate names (toponyms) will come from the reference gazetteer but only a subset of unique names will be displayed. 
 
-For example, while we can allow users to search for and find places using a Persian transliteration of a place (Opole: اوپوله) there is no need to display this particular transliteration in the list of alternative names. For the display list, alternative names will be drawn from a short list of major European languages and historical forms (i.e. Latin). Next, the list of alternative names will be compared with one or more additional gazetteers. From this these lists, a merged set of unique alternative names will finally be shown. This is to avoid having to list multiple, identical instances of e.g 'Opole' for the many language transliterations supported by GeoNames. The language label(s) for an alternative name should be revealed on mouseover.
+For example, while we can allow users to search for and find places using a Persian transliteration of a place (Opole: اوپوله) there is no need to display this particular transliteration in the list of alternative names. For the display list, alternative names will be drawn from a short list of major European languages and historical forms (i.e. Latin). Next, the list of alternative names will be compared with one or more additional gazetteers. From this these lists, a merged set of unique alternative names will finally be shown. This is to avoid having to list multiple, identical instances of e.g. 'Opole' for the many language transliterations supported by GeoNames.  
 
 ## Current Hierarchy
 
