@@ -46,7 +46,7 @@ See also the section on 'Related Places' below, for an early discussion of what 
 
 ### Uncertainties (TBD)
 
-Data on calendars, and on historical hierarchies (only) will need to be optionally marked as any combination of 'Uncertain', 'Inferred', and 'Approximate'. TBD how to indicate this in the interface (possibly using a set of symbols, and possibly only in the associated 'Source' pop-up).
+Data on calendars, and on historical hierarchies (only) will need to be optionally marked as any combination of 'Uncertain', 'Inferred', and 'Approximate'. TBD how to indicate this in the interface (possibly using a set of symbols, and possibly only in the associated 'Source' pop-up). We may also need to look into the use of 'Assumed' to handle our generic, fallback position for the effective date of the conversion to the Gregorian calendar in cases where no local specific information is available
 
 ## Preferred Place Name; alternative names
 
@@ -86,11 +86,11 @@ TBD structure for the source supporting the attestation. If possible, we will re
 
 ## Calendars
 
-A visualization of the predominant calendars (Julian, Gregorian) in use between 1500 and 1800 at that place. This value will be pre-populated via a hierarchy of inherited calendars. So, for example, in the absence of any more specific information in use in a region, we will assume (but also make this clear in the interface) that the place transitioned, for example, from Julian to Gregorian in 1582 (the year of Gregory XIII's papal bull). If a place or set of places (such as a region) transitioned at a different date, then note this, and have all places under it inherit this (and override the default 1852 transition). If a more specific place such as a town transitioned in a different manner, then note this for that town, and override the regional transition etc.
+A simple visualization of the predominant calendars (Julian, Gregorian) in use between 1500 and 1800 at that place. This value will be pre-populated via a hierarchy of inherited calendars. So, for example, in the absence of any more specific information in use in a region, we will assume (but also make this clear in the interface) that the place transitioned, for example, from Julian to Gregorian in 1582 (the year of Gregory XIII's papal bull). If a place or set of places (such as a region) transitioned at a different date, then note this, and have all places under it inherit this (and override the default 1852 transition). If a more specific place such as a town transitioned in a different manner, then note this for that town, and override the regional transition etc.
 
-We will not attempt to record variances from regionbal calendar use patterns at smaller scales such as individual towns. For example, we will not note as an exception or override if we are presented with a record of someone living in the town of Calais in 1632 (with the Gregorian calendar in use in France), writing to someone else in England in the Julian calendar. Our assumption is that the choice to use the Julian in this instance was dependant on the addresse and/or place of receipt (England did not change to the Gregorian calendar until 1752), not the place of sending.
+We will not attempt to record variances from regional calendar use patterns at smaller scales such as individual towns. For example, we will not note as an exception or override if we are presented with a record of someone living in the town of Calais in 1632 (with the Gregorian calendar in use in France), writing to someone else in England in the Julian calendar. Our assumption is that the choice to use the Julian in this instance was dependant on the addresse and/or place of receipt (England did not change to the Gregorian calendar until 1752), not the place of sending.
 
-TBD are labels or symbols for recording different variants of one calendar. For example, Julian calendar with January 1 as the start of the year and Julian with a March 25 start of year.
+TBD are labels or symbols for recording different variants of one calendar. For example, Julian calendar with January 1 as the start of the year and Julian with a March 25 start of year. The current plan is to specify this in parentheses after the name of the calendar. e.g. 'Julian (Mar 25)' means Julian calendar with the first day of the year on March 25. We'll need something similar for the most generic case where we have no data at all on the calendar and thus assume (for conversion purposes only) that the switch to the Gregorian took place on 15 October 1582.
 
 ## Related Places
 
