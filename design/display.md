@@ -46,13 +46,13 @@ See also the section on 'Related Places' below, for an early discussion of what 
 
 ### Uncertainties (TBD)
 
-Data on calendars, and on historical hierarchies (only) will need to be optionally marked as any combination of 'Uncertain', 'Inferred', and 'Approximate'. TBD how to indicate this in the interface (possibly using a set of symbols, and possibly only in the associated 'Source' pop-up).
+Data on calendars, and on historical hierarchies (only) will need to be optionally marked as any combination of 'Uncertain', 'Inferred', and 'Approximate'. TBD how to indicate this in the interface (possibly using a set of symbols, and possibly only in the associated 'Source' pop-up). We may also need to look into the use of 'Assumed' to handle our generic, fallback position for the effective date of the conversion to the Gregorian calendar in cases where no local specific information is available
 
 ## Preferred Place Name; alternative names
 
-The default/preferred place name and its alternate names will come from the reference gazetteer. All alternative names and their labels will be stored and indexed but only some will be displayed. 
+The default/preferred place name and its alternate names (toponyms) will come from the reference gazetteer but only a subset of unique names will be displayed. 
 
-For example, while we can allow users to search for and find places using a Persian transliteration of a place (Opole: اوپوله) there is no need to display this particular transliteration in the list of alternative names. For the display list, alternative names will be drawn from a short list of major European languages and historical forms (i.e. Latin). Next, the list of alternative names will be compared with one or more additional gazetteers. From this these lists, a merged set of unique alternative names will finally be shown. This is to avoid having to list multiple, identical instances of e.g 'Opole' for the many language transliterations supported by GeoNames. The language label(s) for an alternative name should be revealed on mouseover.
+For example, while we can allow users to search for and find places using a Persian transliteration of a place (Opole: اوپوله) there is no need to display this particular transliteration in the list of alternative names. For the display list, alternative names will be drawn from a short list of major European languages and historical forms (i.e. Latin). Next, the list of alternative names will be compared with one or more additional gazetteers. From this these lists, a merged set of unique alternative names will finally be shown. This is to avoid having to list multiple, identical instances of e.g. 'Opole' for the many language transliterations supported by GeoNames.  
 
 ## Current Hierarchy
 
@@ -70,11 +70,13 @@ We will not attempt to override what GeoNames considers to be the representative
 
 ## Citation
 
-A simple means to represent the canonical URI as an academic citation, in several standard bibliographic formats and copy it on mouseclick for reuse. What will be copied should be revealed on mouseover, allowing the user to see in advance what the entry will look like in the different citation styles. We had initially considered using [BibTeX][15] as a generic bibliography interchange format. However, [RIS][16] and/or [CSL][17] are more curent and may be more appropriate.
+A simple means to represent the canonical URI as an academic citation, in several standard bibliographic formats and copy it on mouseclick for reuse. What will be copied should be revealed on mouseover, allowing the user to see in advance what the entry will look like in the different citation styles. We had initially considered using [BibTeX][15] as the generic bibliography interchange format. However, [RIS][16] is more current and may be more appropriate. [CSL][17] could provide a means to convert amongst formats.
 
 ## Permanent URI
 
-This should be a short form permanent URI based on the custom domain for EM Places (probably emplaces.info). It should allow the URI to be copied to the clipboard on mouseclick and reveal what will be copied on mouseover.
+This should be a short form. Timbuctoo generated permanent URI based on the custom domain for EM Places (probably emplaces.info). It should allow the URI to be copied to the clipboard on mouseclick. We need to decide if we additionally want to offer e.g. a DOI or an ARK identifier. Amongst the issues to consider are whether the metadata required by such a service is suited to us (and whether we can then employ the same service for EM People as well). See further:
+
+ARK info: http://n2t.net/e/ark_ids.html (n2t,net is the resolver service) and DOI CataCite info: https://schema.datacite.org/meta/kernel-4.0/
 
 ## Name Attestations
 
@@ -84,28 +86,29 @@ TBD structure for the source supporting the attestation. If possible, we will re
 
 ## Calendars
 
-A visualization of the predominant calendars (Julian, Gregorian) in use between 1500 and 1800 at that place. This value will be pre-populated via a hierarchy of inherited calendars. So, for example, in the absence of any more specific information in use in a region, we will assume (but also make this clear in the interface) that the place transitioned, for example, from Julian to Gregorian in 1582 (the year of Gregory XIII's papal bull). If a place or set of places (such as a region) transitioned at a different date, then note this, and have all places under it inherit this (and override the default 1852 transition). If a more specific place such as a town transitioned in a different manner, then note this for that town, and override the regional transition etc.
+A simple visualization of the predominant calendars (Julian, Gregorian) in use between 1500 and 1800 at that place. This value will be pre-populated via a hierarchy of inherited calendars. So, for example, in the absence of any more specific information in use in a region, we will assume (but also make this clear in the interface) that the place transitioned, for example, from Julian to Gregorian in 1582 (the year of Gregory XIII's papal bull). If a place or set of places (such as a region) transitioned at a different date, then note this, and have all places under it inherit this (and override the default 1852 transition). If a more specific place such as a town transitioned in a different manner, then note this for that town, and override the regional transition etc.
 
-We will not attempt to record variances from regionbal calendar use patterns at smaller scales such as individual towns. For example, we will not note as an exception or override if we are presented with a record of someone living in the town of Calais in 1632 (with the Gregorian calendar in use in France), writing to someone else in England in the Julian calendar. Our assumption is that the choice to use the Julian in this instance was dependant on the addresse and/or place of receipt (England did not change to the Gregorian calendar until 1752), not the place of sending.
+We will not attempt to record variances from regional calendar use patterns at smaller scales such as individual towns. For example, we will not note as an exception or override if we are presented with a record of someone living in the town of Calais in 1632 (with the Gregorian calendar in use in France), writing to someone else in England in the Julian calendar. Our assumption is that the choice to use the Julian in this instance was dependant on the addresse and/or place of receipt (England did not change to the Gregorian calendar until 1752), not the place of sending.
 
-TBD are labels or symbols for recording different variants of one calendar. For example, Julian calendar with January 1 as the start of the year and Julian with a March 25 start of year.
+TBD are labels or symbols for recording different variants of one calendar. For example, Julian calendar with January 1 as the start of the year and Julian with a March 25 start of year. The current plan is to specify this in parentheses after the name of the calendar. e.g. 'Julian (Mar 25)' means Julian calendar with the first day of the year on March 25. We'll need something similar for the most generic case where we have no data at all on the calendar and thus assume (for conversion purposes only) that the switch to the Gregorian took place on 15 October 1582.
 
 ## Related Places
 
-In some cases, we may wish to capture information on places (current or historical) below the level of an inhabited place. For example, a set of buildings representing an institution (e.g. Christ Church College) or an individual building or locale (e.g. an inn, or a street). For these and similar kinds of places, especially if they are historical, we may have very little data – often not even enough to create a full core data record. 
+In some cases, we may wish to capture information on places (current or historical) below the level of an inhabited place. For example, a set of buildings representing an institution (e.g. Christ Church College) or an individual building or locale (e.g. an inn, or a street). For these and similar kinds of places, especially if they are historical, we may have very little data – often not enough to create a full core data record. And even if we could, the format we've prepared for places is largely predicated on 'inhabited places'. It wouldn't be able to capture the kinds of properties relevant to a building (e.g. the name of the architect).
 
-To accomodate this, we are proposing that this class of places could be grouped under the full/regular record of the place (conceptually, or spatially) enclosing it. Thus, for example, Christ Church College, would be included under the entry for Oxford etc. Such places will be listed under a separate section in the full entry for the 'containing' place as separate links. For example, in a section titled (as in the current mockup) 'Related Places' (in a deliberate parallel to 'Related Resources' which point to external, related Linked Data resources not indexed by EM Places). 
+To accomodate this, we are proposing that this class of places be be grouped under the full/regular record of the place (conceptually, or spatially) enclosing it. Thus, for example, Christ Church College, would be included under the entry for Oxford etc. Such places will be listed in a separate tabular section of the full entry for the 'containing' place. For example, in a section titled (as in the current mockup) 'Related Places' (in a deliberate parallel to 'Related Resources' which point to external, related Linked Data resources not indexed by EM Places). 
 
-Such a link, presented in a simplified tabular format (following the example of GOV – e.g. for [Opele][7]) will lead to a separate page, where the metadata for that place will be shown. The justification for this is to allow contributors to share their metadata on places so that in can be indexed by EM Places in a structure that related to the structure in which it was collected. If a researcher, for example, wishes to share with EM Places, data on a set of streets in London, then we should try to accomodate their original data structure as far as feasible. 
+Each entry in this table (following the example of GOV – e.g. for [Opele][7]) will includne a link leading to a separate page, where the specific metadata for that class of place will be shown. The idea is to allow contributors more freedom to share their metadata in a manner closer to the form in which it was collected. If a researcher, for example, wishes to share with EM Places, a large set of data on a set of streets in London, then we should try to accomodate the original data structure by permitting the use of 'street relevant' properties. Conversely, smaller and/or less common contributions may need to make do with the already list of available properties. That is to say, the decision to extend the list of properties to accomodate the needs of a contributor should be possible, but subject to prior agreement.
 
-The current intent is for a simple wikidata-style interface where a contributor or editor selects a property from a preset list and enters a value. See [this blogpost][18] for an analogous example of how this could work. 
+The current intent is for a simple wikidata-style interface where a contributor or editor selects a property from a preset list and enters a value. See [this blogpost][18] for an analogous example of how this could work. The tabular list (see [current mockup][1]) could, for example, consist of the follows:
 
-The tabular list (see [current mockup][1]) could, for example, be structured as follows:
+| Place  | Type |  Relationship  |
+| ------------- | ------------- |------------- |
+| Our Lady of Sorrows and St. Adalbert  | Parish Church  |  PartOf  | 
 
-__Place:				Feature:		Relationship:__
-St. Adalbert			Church			type-of-relationship (e.g. PartOf)
+The feature 'type' might be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary (here, ['Parish Church'][19] and matched, where applicable, with the appropriate [GeoNames feature code][9] so that this this data becomes easier to integrate by other, less granular gazetteers.
 
-The feature type might be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary and matched (in the editorial interface) with the appropriate [GeoNames feature code][9], where applicable. Doing so will make this data easier to integrate into other projects in the future.
+TBA: Example data on St. Adalbert drawn from [National Heritage Board of Poland][20] website to be added to the [Opole sample RDF](/models/20180410-opole-example-data.ttl) file.
 
 ## Related Resources
 
@@ -172,4 +175,6 @@ Many sections in the individual record display will include 'Info' and/or 'Sourc
 [16]: https://en.wikipedia.org/wiki/RIS_(file_format)
 [17]: https://citationstyles.org
 [18]: http://blogs.bodleian.ox.ac.uk/digital/2017/03/23/wikimedia-for-public-engagement/
+[19]: http://vocab.getty.edu/page/aat/300108377
+[20]: https://zabytek.pl/en/obiekty/opole-kosciol-parafialny-pw-matki-boskiej-bolesnej-i-sw-wojc
 
