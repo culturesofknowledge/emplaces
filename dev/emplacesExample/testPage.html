@@ -210,7 +210,7 @@
 				tabHeaders.append(tab);
 				var hierarchies = hierarchiesByType[hierarchyType];
 				hierarchies.forEach(hierarchy => {
-					hierarchyContent(requestedPlace, hierarchyType, hierarchy.em_relationTo, first, tabContent);
+					hierarchyContent(requestedPlace, hierarchyType, hierarchy, first, tabContent);
 
 					if (first) {
 						first = false;
@@ -222,38 +222,50 @@
 			return completeDiv;
 		}
 
-		function hierarchyContent(requestedPlace, type, relationTo, first, parent) {
+		function hierarchyContent(requestedPlace, type, hierarchyStart, first, parent) {
 			var hierarchy = []
-			createHierarchy(relationTo, type, hierarchy);
+			createHierarchy(hierarchyStart, type, hierarchy);
 			var reverse = hierarchy.reverse();
-			reverse.push(requestedPlace);
-			console.log(hierarchy);
 
 			var hierarchyDiv = document.createElement("div");
 			hierarchyDiv.className += " hierarchyTab";
-			hierarchyDiv.appendChild(createTextElement("h3", type));
+
+			hierarchyDiv.appendChild(createTextElement("h3", createHierarchyLabel(reverse)));
 
 			if (first) {
 				hierarchyDiv.className += " active";
 			}
 			reverse.forEach(place => {
-				var placeElement = createTextElement("p", place.title.value);
+				var placeElement = createTextElement("p", place.em_relationTo.title.value);
+				placeElement.className = "place";
 				hierarchyDiv.appendChild(placeElement);
+				var dateElement = createTextElement("p", place.em_when.rdfs_label.value);
+				dateElement.className = "date";
+				hierarchyDiv.appendChild(dateElement);
 			});
+			hierarchyDiv.appendChild(createTextElement("p", requestedPlace.title.value));
 			parent.appendChild(hierarchyDiv);
 
 		}
-		function hierarchyLabel(hierrachyArray) {
+		function createHierarchyLabel(hierrachyArray) {
+			console.log(hierrachyArray);
+			var beginYears = [];
+			var endYears = [];
+			hierrachyArray.map(rel => rel.em_when.rdfs_label.value).forEach(when => {
+				var splitted = when.split("-");
+				beginYears.push(splitted[0]);
+				endYears.push(splitted[1]);
+			});
 
+			return (beginYears.sort((a, b) => b - a)[0] + "-" + endYears.sort((a,b) => a - b)[0]);
 		}
 
 		function createHierarchy(start, hierarchyType, coll) {
 			coll.push(start);
-			if (start.em_hasRelationList) {
-				start.em_hasRelationList.items.filter(item => item.em_relationTo.em_placeCategory && item.em_relationTo.em_placeCategory.rdfs_label && item.em_relationTo.em_placeCategory.rdfs_label.value === hierarchyType).forEach(rel => {
-					createHierarchy(rel.em_relationTo, hierarchyType, coll);
+			if (start.em_relationTo.em_hasRelationList) {
+				start.em_relationTo.em_hasRelationList.items.filter(item => item.em_relationTo.em_placeCategory && item.em_relationTo.em_placeCategory.rdfs_label && item.em_relationTo.em_placeCategory.rdfs_label.value === hierarchyType).forEach(rel => {
+					createHierarchy(rel, hierarchyType, coll);
 				});
-
 			}
 		}
 
