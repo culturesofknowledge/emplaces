@@ -3630,8 +3630,8 @@ Place category \
 			<integer>35</integer>
 			<key>Points</key>
 			<array>
-				<string>{956.37860251079178, 542.43725426682875}</string>
-				<string>{875.50465728541428, 605.79452783717079}</string>
+				<string>{956.3786024692979, 542.43725424747174}</string>
+				<string>{875.50465723188165, 605.79452777597487}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -3744,8 +3744,8 @@ Place category \
 			<integer>37</integer>
 			<key>Points</key>
 			<array>
-				<string>{1064.1737472653783, 555.48939418627083}</string>
-				<string>{1077.4160222227702, 594.80265328316318}</string>
+				<string>{1064.2689039438296, 555.47157071277525}</string>
+				<string>{1077.5686395591501, 594.80226537053943}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -11075,7 +11075,7 @@ em:Place}</string>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{0, 0}, {1280, 777}}</string>
+		<string>{{0, 4}, {1280, 773}}</string>
 		<key>ListView</key>
 		<false/>
 		<key>OutlineWidth</key>
@@ -11089,7 +11089,7 @@ em:Place}</string>
 		<key>SidebarWidth</key>
 		<integer>230</integer>
 		<key>VisibleRegion</key>
-		<string>{{-48, 148}, {1252, 635}}</string>
+		<string>{{-48, 148}, {1252, 631}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>

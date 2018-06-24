@@ -24,9 +24,6 @@ In each case, the variable `?place` is assumed to be bound to the root node for 
 
 This would mean that selecting the appropriate names would be a task for data wrangling by Oxford rather than selection in the Timbuctoo web interface.
 
-
-
-
 ## Current hierarchy
 
 This uses the `em:Qualified_relation` structure, but needs to select on relation types that are specific to the current administrative hierarchy.  (Other relation types are used for historical hierarchies, which may be qualified by time span values.)
@@ -207,6 +204,8 @@ If no link provided, present as plain text rather than as a hyperlink.
 
 ## Bibliography
 
+(@@TBD)
+
 ## Place record metadata
 
 (@@TBD)
@@ -223,9 +222,15 @@ If no link provided, present as plain text rather than as a hyperlink.
 
 ### Current
 
+(@@TBD)
+
 ### Historic
 
+(@@TBD)
+
 ## Description
+
+    { ?place em:editorialNote ?description }
 
 ## Historical hierarchies
 

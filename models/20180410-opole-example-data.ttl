@@ -22,6 +22,7 @@
 
 @prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
 @prefix emt:        <http://emplaces.namespace.example.org/timespan/> .
+@prefix eml:        <http://emplaces.namespace.example.org/language/> .
 
 @prefix ex:         <http://emplaces.data.example.org/> .        #@@@@ TBD
 
@@ -71,9 +72,13 @@
 #
 # TODO:
 #   Record metadata design (creator, contributor, license, etc. - waiting to see what Timbuctoo provides)
-#   Review format for timespan data; consider alignment with emerging LPiF activity
 #   Record timespans as identified resources (rather than inline blank nodes)
 #   Finalize some URIs to be used
+#
+# FOR REVIEW:
+#   Finalize prefixes
+#   URIs for language codes (consider lexvo?)
+#   Review format for timespan data; consider alignment with emerging LPiF activity
 #
 
 # Timespan for "current" data
@@ -86,6 +91,23 @@ emt:Current a em:Time_period ;
         em:latestStart: "2018" ;
         em:earliestEnd: "2018" ;
       ]
+    .
+
+# Language resources
+
+eml:de a em:Language_value ;
+    em:tag "de" ; 
+    rdfs:label "German"
+    .
+    
+eml:pl a em:Language_value ;
+    em:tag "pl" ; 
+    rdfs:label "Polish"
+    .
+
+eml:la a em:Language_value ;
+    em:tag "la" ; 
+    rdfs:label "Latin"
     .
 
 # Place categories
@@ -466,7 +488,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opole" ;
-            em:language  "pl" ;
+            em:language  eml:pl ;
             rdfs:comment "Polish" ;
           ] ;
         em:when 
@@ -492,7 +514,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opol" ;
-            em:language  "la" ;
+            em:language  eml:la ;
             rdfs:comment "Latin" ;
           ] ;
         em:when 
@@ -517,7 +539,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opolie" ;
-            em:language  "la" ;
+            em:language  eml:la ;
             rdfs:comment "Latin/PL" ; #@@@@ what does this mean?
           ] ;
         em:when 
@@ -542,7 +564,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppol" ;
-            em:language  "la" ;
+            em:language  eml:la ;
             rdfs:comment "(Latin; DE: 1384)" ;
           ] ;
         em:when 
@@ -568,7 +590,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opul" ;
-            em:language  "de" ;
+            em:language  eml:de ;
             rdfs:comment "German" ;
           ] ;
         em:when 
@@ -593,7 +615,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppoln" ;
-            em:language  "de" ;
+            em:language  eml:de ;
             rdfs:comment "German" ;
           ] ;
         em:when 
@@ -617,7 +639,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppelln" ;
-            em:language  "de" ;
+            em:language  eml:de ;
             rdfs:comment "German" ;
           ] ;
         em:when 
@@ -640,7 +662,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppul" ;
-            em:language  "de" ;
+            em:language  eml:de ;
             rdfs:comment "German" ;
           ] ;
         em:when 
@@ -665,7 +687,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppeln" ;
-            em:language  "de" ;
+            em:language  eml:de ;
             rdfs:comment "German" ;
           ] ;
         em:when 
@@ -689,7 +711,7 @@ ex:Opole_P a em:Place ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppolie" ;
-            em:language  "pl" ;
+            em:language  eml:pl ;
             rdfs:comment "Polish (mistake)" ; #@@@@ what does this mean?
           ] ;
         em:when 
