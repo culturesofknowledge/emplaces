@@ -38,14 +38,15 @@
 		.tabHeader.active {
 			font-weight: bold;
 		}
-
-		.hierarchyTab {
+		
+		.hierarchyTabContents {
 			border: 1px solid black;
 			display: none;
 			text-align: center;
+			padding-left: 200px;
 		}
 
-		.hierarchyTab.active {
+		.hierarchyTabContents.active {
 			display: block;
 		}
 
@@ -53,7 +54,6 @@
 			display: block;
 			float: left;
 			width: 200px;
-			height: 300px;
 			padding: 5px;
 		}
 
@@ -275,7 +275,7 @@
 			labels.appendChild(linkLabel);
 
 			var hierarchyDiv = document.createElement("div");
-			hierarchyDiv.classList.add("hierarchyTab");
+			hierarchyDiv.classList.add("hierarchyTabContents");
 			hierarchyDiv.id = hierarchyId;
 
 			if (first) {
@@ -325,7 +325,7 @@
 			} 
 			event.originalTarget.classList.add("active");
 
-			var tabs = document.getElementsByClassName("hierarchyTab");
+			var tabs = document.getElementsByClassName("hierarchyTabContents");
 			for(var i = 0; i < tabs.length; i++) {
 				tabs[i].classList.remove("active");
 			} 
