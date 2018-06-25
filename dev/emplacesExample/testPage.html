@@ -22,6 +22,13 @@
 		td {
 			padding-right: 5em;
 		}
+		ul {
+			list-style: none;
+		}
+
+		ul li::before {
+			content: "+  "
+		}
 
 		.column {
 			float: left;
@@ -87,7 +94,7 @@
 
 			appendTextElement(document.getElementById("title"), "h1", data.em_preferredName.value);
 			appendTextElement(document.getElementById("alternateNames"), "i", data.em_alternateNameList.items.map(item => item.value).join(", "));
-			appendElementWithLabel(document.getElementById("currentHierarchy"), "Current Hierarchy", createCurrentHierarchy(data.em_hasRelationList.items.filter(item => item.em_relationType && item.em_relationType.title && item.em_relationType.title.value === "Part of")));
+			appendElementWithLabel(document.getElementById("currentHierarchy"), "Current Hierarchy", createCurrentHierarchy(data, data.em_hasRelationList.items.filter(item => !item.em_when)));
 			appendElementWithLabel(document.getElementById("location"), "Location", formatLocation(data.em_where));
 			appendElementWithLabel(document.getElementById("citation"), "Citation", createTextElement("p", ""));
 			appendElementWithLabel(document.getElementById("permanentUri"), "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
@@ -126,8 +133,25 @@
 			return element;
 		}
 
-		function createCurrentHierarchy(items) {
-			return document.createElement("p");
+		function createCurrentHierarchy(currentPlace, relatedPlaces) {
+			var hierarchy = [];
+			createHierarchy(relatedPlaces[0], null, hierarchy);
+
+			var reverse = hierarchy.reverse();
+			
+			var parentList = document.createElement("ul");
+			var firstList = parentList;
+			var prefParent;
+			reverse.forEach(rel => {
+				parentList.appendChild(createTextElement("li", rel.em_relationTo && rel.em_relationTo.title ? rel.em_relationTo.title.value : "{Name unknown}"));
+				prefParent = parentList;
+				parentList = document.createElement("ul");
+				prefParent.appendChild(parentList);
+			});
+			parentList.appendChild(createTextElement("li", currentPlace.title.value));
+			
+
+			return firstList;
 		}
 
 		function createTable(items) {
@@ -249,7 +273,6 @@
 					hierarchyContent(requestedPlace, hierarchyType, hierarchy, first, tabContent, labelsDiv);
 
 					if (first) {
-						console.log(tab);
 						tab.classList.add("active")
 						first = false;
 					}
@@ -309,7 +332,7 @@
 		function createHierarchy(start, hierarchyType, coll) {
 			coll.push(start);
 			if (start.em_relationTo.em_hasRelationList) {
-				start.em_relationTo.em_hasRelationList.items.filter(item => item.em_relationTo.em_placeCategory && item.em_relationTo.em_placeCategory.rdfs_label && item.em_relationTo.em_placeCategory.rdfs_label.value === hierarchyType).forEach(rel => {
+				start.em_relationTo.em_hasRelationList.items.filter(item => hierarchyType == null || (item.em_relationTo.em_placeCategory && item.em_relationTo.em_placeCategory.rdfs_label && item.em_relationTo.em_placeCategory.rdfs_label.value === hierarchyType)).forEach(rel => {
 					createHierarchy(rel, hierarchyType, coll);
 				});
 			}
