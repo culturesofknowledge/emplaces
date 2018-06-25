@@ -28,8 +28,15 @@
 			width: 50%;
 		}
 
-		.tabHeader {
+		.tabHeaders {
 			background-color: #EEE;
+			overflow: hidden;
+			cursor: pointer;
+			padding: 5px;
+		}
+
+		.tabHeader.active {
+			font-weight: bold;
 		}
 
 		.hierarchyTab {
@@ -219,10 +226,10 @@
 		function createHistoricalHierarchies(requestedPlace, historicalHierarchies) {
 			var completeDiv = document.createElement("div");
 			var tabHeaders = document.createElement("div");
-			tabHeaders.className += "tabHeader";
+			tabHeaders.classList.add("tabHeaders");
 			completeDiv.appendChild(tabHeaders);
 			var labelsDiv =  document.createElement("div");
-			labelsDiv.className += " hierarchyLabels";
+			labelsDiv.classList.add("hierarchyLabels");
 			var tabContent = document.createElement("div");
 			tabContent.appendChild(labelsDiv);
 			completeDiv.appendChild(tabContent);
@@ -235,12 +242,15 @@
 
 			for (hierarchyType in hierarchiesByType) {
 				var tab = createTextElement("p", hierarchyType);
+				tab.classList.add("tabHeader");
 				tabHeaders.append(tab);
 				var hierarchies = hierarchiesByType[hierarchyType];
 				hierarchies.forEach(hierarchy => {
 					hierarchyContent(requestedPlace, hierarchyType, hierarchy, first, tabContent, labelsDiv);
 
 					if (first) {
+						console.log(tab);
+						tab.classList.add("active")
 						first = false;
 					}
 				});
@@ -257,7 +267,7 @@
 
 			var hierarchyLabelValue = createHierarchyLabel(reverse);
 			var linkLabel = createTextElement("p", hierarchyLabelValue);
-			linkLabel.className += " hierarchyLink";
+			linkLabel.classList.add("hierarchyLink");
 			var hierarchyId = type + " " + hierarchyLabelValue
 			linkLabel.onclick = function(event) {
 				openTab(event, hierarchyId)
@@ -265,19 +275,19 @@
 			labels.appendChild(linkLabel);
 
 			var hierarchyDiv = document.createElement("div");
-			hierarchyDiv.className += " hierarchyTab";
+			hierarchyDiv.classList.add("hierarchyTab");
 			hierarchyDiv.id = hierarchyId;
 
 			if (first) {
-				hierarchyDiv.className += " active";
-				linkLabel.className += " active";
+				hierarchyDiv.classList.add("active");
+				linkLabel.classList.add("active");
 			}
 			reverse.forEach(place => {
 				var placeElement = createTextElement("p", place.em_relationTo.title.value);
-				placeElement.className = "place";
+				placeElement.classList.add("place");
 				hierarchyDiv.appendChild(placeElement);
 				var dateElement = createTextElement("p", place.em_when.rdfs_label.value);
-				dateElement.className = "date";
+				dateElement.classList.add("date");
 				hierarchyDiv.appendChild(dateElement);
 			});
 			hierarchyDiv.appendChild(createTextElement("p", requestedPlace.title.value));
