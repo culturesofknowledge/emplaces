@@ -98,6 +98,7 @@
 			appendElementWithLabel(document.getElementById("location"), "Location", formatLocation(data.em_where));
 			appendElementWithLabel(document.getElementById("citation"), "Citation", createTextElement("p", ""));
 			appendElementWithLabel(document.getElementById("permanentUri"), "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
+			appendElementWithLabel(document.getElementById("seeAlso"), "See Also", createTextElement("p",""));
 			appendElementWithLabel(document.getElementById("nameAttestations"), "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items));
 			appendElementWithLabel(document.getElementById("calendars"), "Calendars", createCalendars(data.em_hasAnnotationList.items));
 			appendElementWithLabel(document.getElementById("relatedPlaces"), "Related Places", createRelatedPlaces(data.em_hasRelationList.items));
@@ -202,13 +203,14 @@
 		}
 
 		function createRelatedPlaces(input) {
-			return createTable(input.map(relation => {
-				var flatten = new Object();
-				flatten.Name = relation.em_relationTo.title.value;
-				flatten.Type = relation.em_relationTo.em_placeType && relation.em_relationTo.em_placeType.title ? relation.em_relationTo.em_placeType.title.value : "";
-				flatten.Relationship = relation.em_relationType.title.value;
-				return flatten;
-			}));
+			return document.createElement("p");
+			// return createTable(input.map(relation => {
+			// 	var flatten = new Object();
+			// 	flatten.Name = relation.em_relationTo.title.value;
+			// 	flatten.Type = relation.em_relationTo.em_placeType && relation.em_relationTo.em_placeType.title ? relation.em_relationTo.em_placeType.title.value : "";
+			// 	flatten.Relationship = relation.em_relationType.title.value;
+			// 	return flatten;
+			// }));
 		}
 
 		function appendMetadata(parent, data) {
@@ -365,6 +367,7 @@
 			<div id="location"></div>
 			<div id="citation"></div>
 			<div id="permanentUri"></div>
+			<div id="seeAlso"></div>
 			<div id="nameAttestations"></div>
 			<div id="calendars"></div>
 			<div id="relatedPlaces"></div>
