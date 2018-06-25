@@ -4,6 +4,10 @@
 <head>
 	<meta charset="utf-8"></meta>
 	<style>
+		body {
+			font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+			color: #333;
+		}
 		#maps {
 			height: 20em;
 			width: 40em;
@@ -36,6 +40,22 @@
 
 		.hierarchyTab.active {
 			display: block;
+		}
+
+		.hierarchyLabels {
+			display: block;
+			float: left;
+			width: 200px;
+			height: 300px;
+			padding: 5px;
+		}
+
+		.hierarchyLink {
+			cursor: pointer;
+		}
+
+		.hierarchyLink.active{
+			font-weight: bold;
 		}
 
 		.date {
@@ -197,12 +217,14 @@
 		}
 
 		function createHistoricalHierarchies(requestedPlace, historicalHierarchies) {
-			//console.log(historicalHierarchies);
 			var completeDiv = document.createElement("div");
 			var tabHeaders = document.createElement("div");
 			tabHeaders.className += "tabHeader";
 			completeDiv.appendChild(tabHeaders);
+			var labelsDiv =  document.createElement("div");
+			labelsDiv.className += " hierarchyLabels";
 			var tabContent = document.createElement("div");
+			tabContent.appendChild(labelsDiv);
 			completeDiv.appendChild(tabContent);
 			var first = true;
 			var hierarchiesByType = historicalHierarchies.reduce(function (rv, v) {
@@ -216,7 +238,7 @@
 				tabHeaders.append(tab);
 				var hierarchies = hierarchiesByType[hierarchyType];
 				hierarchies.forEach(hierarchy => {
-					hierarchyContent(requestedPlace, hierarchyType, hierarchy, first, tabContent);
+					hierarchyContent(requestedPlace, hierarchyType, hierarchy, first, tabContent, labelsDiv);
 
 					if (first) {
 						first = false;
@@ -228,18 +250,27 @@
 			return completeDiv;
 		}
 
-		function hierarchyContent(requestedPlace, type, hierarchyStart, first, parent) {
+		function hierarchyContent(requestedPlace, type, hierarchyStart, first, parent, labels) {
 			var hierarchy = []
 			createHierarchy(hierarchyStart, type, hierarchy);
 			var reverse = hierarchy.reverse();
 
+			var hierarchyLabelValue = createHierarchyLabel(reverse);
+			var linkLabel = createTextElement("p", hierarchyLabelValue);
+			linkLabel.className += " hierarchyLink";
+			var hierarchyId = type + " " + hierarchyLabelValue
+			linkLabel.onclick = function(event) {
+				openTab(event, hierarchyId)
+			};
+			labels.appendChild(linkLabel);
+
 			var hierarchyDiv = document.createElement("div");
 			hierarchyDiv.className += " hierarchyTab";
-
-			hierarchyDiv.appendChild(createTextElement("h3", createHierarchyLabel(reverse)));
+			hierarchyDiv.id = hierarchyId;
 
 			if (first) {
 				hierarchyDiv.className += " active";
+				linkLabel.className += " active";
 			}
 			reverse.forEach(place => {
 				var placeElement = createTextElement("p", place.em_relationTo.title.value);
@@ -254,7 +285,6 @@
 
 		}
 		function createHierarchyLabel(hierrachyArray) {
-			console.log(hierrachyArray);
 			var beginYears = [];
 			var endYears = [];
 			hierrachyArray.map(rel => rel.em_when.rdfs_label.value).forEach(when => {
@@ -278,7 +308,18 @@
 	</script>
 
 	<script>
-		function openTab() {
+		function openTab(event, tabId) {
+			var links = document.getElementsByClassName("hierarchyLink");
+			for(var i = 0; i < links.length; i++) {
+				links[i].classList.remove("active");
+			} 
+			event.originalTarget.classList.add("active");
+
+			var tabs = document.getElementsByClassName("hierarchyTab");
+			for(var i = 0; i < tabs.length; i++) {
+				tabs[i].classList.remove("active");
+			} 
+			document.getElementById(tabId).classList.add("active");
 		}
 	</script>
 
