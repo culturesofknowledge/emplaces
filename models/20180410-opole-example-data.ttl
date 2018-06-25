@@ -1107,7 +1107,7 @@ ex:Opole_ADM2 a em:Place ;
 
     em:hasRelation
       [ a em:Qualified_relation ;
-        em:relationTo ex:Opole_ADM1 ;
+        em:relationTo ex:Opole_Voivodeship_ADM1 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
         em:source
@@ -1225,7 +1225,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_ADM1 ;
+        oa:hasTarget ex:Opole_Voivodeship_ADM1 ;
         oa:hasBody 
           [ rdfs:label "Current map for Opole Voivodeship" ;
             em:link <http://www.geonames.org/3337495/wojewodztwo-opolskie.html>
@@ -1434,7 +1434,7 @@ ex:Poland_PCLI a em:Place ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_ADM1 ;
+        oa:hasTarget ex:Poland_PCLI ;
         oa:hasBody 
           [ rdfs:label "Current map for Poland" ;
             em:link <http://www.geonames.org/798544/republic-of-poland.html>
