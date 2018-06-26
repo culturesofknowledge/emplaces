@@ -4,6 +4,10 @@
 <head>
 	<meta charset="utf-8"></meta>
 	<style>
+		body {
+			font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+			color: #333;
+		}
 		#maps {
 			height: 20em;
 			width: 40em;
@@ -18,23 +22,58 @@
 		td {
 			padding-right: 5em;
 		}
+		ul {
+			list-style: none;
+		}
+
+		ul li::before {
+			content: "+  "
+		}
 
 		.column {
 			float: left;
 			width: 50%;
 		}
 
-		.tabHeader {
+		.tabHeaders {
 			background-color: #EEE;
+			overflow: hidden;
+			cursor: pointer;
+			padding: 5px;
 		}
 
-		.hierarchyTab {
+		.tabHeader.active {
+			font-weight: bold;
+		}
+		
+		.hierarchyTabContents {
 			border: 1px solid black;
 			display: none;
+			text-align: center;
+			padding-left: 200px;
 		}
 
-		.hierarchyTab.active {
+		.hierarchyTabContents.active {
 			display: block;
+		}
+
+		.hierarchyLabels {
+			display: block;
+			float: left;
+			width: 200px;
+			padding: 5px;
+		}
+
+		.hierarchyLink {
+			cursor: pointer;
+		}
+
+		.hierarchyLink.active{
+			font-weight: bold;
+		}
+
+		.date {
+			color: #AAA;
 		}
 	</style>
 </head>
@@ -46,18 +85,20 @@
 			if (xhr.readyState === 4) {
 				var responseData = JSON.parse(xhr.response);
 				var dataDiv = document.getElementById("data");
-				processData(dataDiv, responseData.data.dataSets.ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole.em_Place);
+				processData(dataDiv, responseData.data.dataSets.ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625.em_Place);
 			}
 		}
-		var query = "query emlo2 {\n  dataSets {\n    ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole {\n      em_Place(uri: \"http://emplaces.data.example.org/Opole_P\") {\n        title {\n          value\n        }\n        em_preferredName {\n          value\n        }\n        em_alternateNameList {\n          items {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_value_rdf_langString {\n              value\n            }\n          }\n        }\n        em_where {\n          em_when {\n            emt_timespan {\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_emt_Timespan {\n                emt_latestStart_ {\n                  value\n                }\n                emt_earliestEnd_ {\n                  value\n                }\n              }\n            }\n          }\n          em_location {\n            wgs84_pos_lat {\n              value\n            }\n            wgs84_pos_long {\n              value\n            }\n          }\n        }\n        em_canonicalURI {\n          uri\n        }\n        em_hasAnnotationList {\n          items {\n            oa_hasBody {\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_PlaceName {\n                rdf_type {\n                  uri\n                }\n                em_name {\n                  value\n                }\n                em_language {\n                  value\n                }\n              }\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Calendar {\n                rdf_type {\n                  uri\n                }\n                rdfs_label {\n                  value\n                }\n              }\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_MapResource {\n                rdf_type {\n                  uri\n                }\n                title {\n                  value\n                }\n              }\n            }\n            em_sourceList {\n              items {\n                rdfs_label {\n                  value\n                }\n              }\n            }\n            em_when {\n              rdfs_label {\n                value\n              }\n              title {\n                value\n              }\n              emt_timespan {\n                ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_emt_Timespan {\n                  emt_latestStart_ {\n                    value\n                  }\n                  emt_earliestEnd_ {\n                    value\n                  }\n                }\n              }\n            }\n          }\n        }\n        em_hasRelationList {\n          items {\n            ... recursiveRelations\n          }\n        }\n        rdfs_seeAlsoList {\n          items {\n            title {\n              value\n            }\n          }\n        }\n        em_coreDataRef {\n          title {\n            value\n          }\n        }\n        em_editorialNote {\n          value\n        }\n        em_reference {\n          ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Bib_entry {\n            dcterms_title {\n              value\n            }\n          }\n          ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_bibo_Book {\n            dcterms_title {\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment recursiveRelations on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Qualified_relation {\n  ...relationFields\n  em_relationTo {\n    ...relatedPlace\n    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n      em_hasRelationList {\n        items {\n          ...relationFields\n          em_relationTo {\n            ...relatedPlace\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n              em_hasRelationList {\n                items {\n                  ...relationFields\n                  em_relationTo {\n                    ...relatedPlace\n                    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n                      em_hasRelationList {\n                        items {\n                          ...relationFields\n                          em_relationTo {\n                            ...relatedPlace\n                            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n                              em_hasRelationList {\n                                items {\n                                  ...relationFields\n                                  em_relationTo {\n                                    ...relatedPlace\n                                    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n                                      em_hasRelationList {\n                                        items {\n                                          ...relationFields\n                                          em_relationTo {\n                                            ...relatedPlace\n                                            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n                                              em_hasRelationList {\n                                                items {\n                                                  ...relationFields\n                                                  em_relationTo {\n                                                    ...relatedPlace\n                                                    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n                                                      em_hasRelationList {\n                                                        items {\n                                                          ...relationFields\n                                                          em_relationTo {\n                                                            ...relatedPlace\n                                                            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n                                                              em_hasRelationList {\n                                                                items {\n                                                                  ...relationFields\n                                                                  em_relationTo {\n                                                                    ...relatedPlace\n                                                                    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n                                                                      em_hasRelationList {\n                                                                        items {\n                                                                          ...relationFields\n                                                                          em_relationTo {\n                                                                            ...relatedPlace\n                                                                            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n                                                                              em_hasRelationList {\n                                                                                items {\n                                                                                  ...relationFields\n                                                                                }\n                                                                              }\n                                                                            }\n                                                                          }\n                                                                        }\n                                                                      }\n                                                                    }\n                                                                  }\n                                                                }\n                                                              }\n                                                            }\n                                                          }\n                                                        }\n                                                      }\n                                                    }\n                                                  }\n                                                }\n                                              }\n                                            }\n                                          }\n                                        }\n                                      }\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment relationFields on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Qualified_relation {\n  em_relationType {\n    title {\n      value\n    }\n  }\n  em_when {\n    rdfs_label {\n      value\n    }\n    emt_timespan {\n      ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_emt_Timespan {\n        emt_latestStart_ {\n          value\n        }\n        emt_earliestEnd_ {\n          value\n        }\n      }\n    }\n  }\n}\n\nfragment relatedPlace on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_em_Place {\n  title {\n    value\n  }\n  em_placeCategory {\n    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole_skos_Concept {\n      rdfs_label {\n        value\n      }\n    }\n  }\n}\n";
+		var query = "query emlo2 {\n  dataSets {\n    ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625 {\n      em_Place(uri: \"http://emplaces.data.example.org/Opole_P\") {\n        title {\n          value\n        }\n        em_preferredName {\n          value\n        }\n        em_alternateNameList {\n          items {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_value_rdf_langString {\n              value\n              type\n            }\n          }\n        }\n        em_where {\n          em_when {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Time_period {\n              em_timespan {\n                ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Time_span {\n                  em_latestStart_ {\n                    value\n                  }\n                  em_earliestEnd_ {\n                    value\n                  }\n                }\n              }\n            }\n          }\n          em_location {\n            wgs84_pos_lat {\n              value\n            }\n            wgs84_pos_long {\n              value\n            }\n          }\n        }\n        em_canonicalURI {\n          uri\n        }\n        em_hasAnnotationList {\n          items {\n            oa_hasBody {\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place_name {\n                rdf_type {\n                  uri\n                }\n                em_name {\n                  value\n                }\n                em_language {\n                  em_tag {\n                    value\n                  }\n                }\n              }\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Calendar {\n                rdf_type {\n                  uri\n                }\n                rdfs_label {\n                  value\n                }\n              }\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_MapResource {\n                rdf_type {\n                  uri\n                }\n                title {\n                  value\n                }\n              }\n            }\n            em_sourceList {\n              items {\n                rdfs_label {\n                  value\n                }\n              }\n            }\n            em_when {\n              rdfs_label {\n                value\n              }\n              title {\n                value\n              }\n              em_timespan {\n                ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Time_span {\n                  em_latestStart_ {\n                    value\n                  }\n                  em_earliestEnd_ {\n                    value\n                  }\n                }\n              }\n            }\n          }\n        }\n        em_hasRelationList {\n          items {\n            ...recursiveRelations\n          }\n        }\n        rdfs_seeAlsoList {\n          items {\n            title {\n              value\n            }\n            em_start {\n              value\n            }\n          }\n        }\n        em_coreDataRef {\n          title {\n            value\n          }\n        }\n        em_editorialNote {\n          value\n        }\n        em_reference {\n          ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Bib_entry {\n            dcterms_title {\n              value\n            }\n            dcterms_source {\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment recursiveRelations on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Qualified_relation {\n  ...relationFields\n  em_relationTo {\n    ...relatedPlace\n    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n      em_hasRelationList {\n        items {\n          ...relationFields\n          em_relationTo {\n            ...relatedPlace\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n              em_hasRelationList {\n                items {\n                  ...relationFields\n                  em_relationTo {\n                    ...relatedPlace\n                    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n                      em_hasRelationList {\n                        items {\n                          ...relationFields\n                          em_relationTo {\n                            ...relatedPlace\n                            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n                              em_hasRelationList {\n                                items {\n                                  ...relationFields\n                                  em_relationTo {\n                                    ...relatedPlace\n                                    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n                                      em_hasRelationList {\n                                        items {\n                                          ...relationFields\n                                          em_relationTo {\n                                            ...relatedPlace\n                                            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n                                              em_hasRelationList {\n                                                items {\n                                                  ...relationFields\n                                                  em_relationTo {\n                                                    ...relatedPlace\n                                                    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n                                                      em_hasRelationList {\n                                                        items {\n                                                          ...relationFields\n                                                          em_relationTo {\n                                                            ...relatedPlace\n                                                            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n                                                              em_hasRelationList {\n                                                                items {\n                                                                  ...relationFields\n                                                                  em_relationTo {\n                                                                    ...relatedPlace\n                                                                    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n                                                                      em_hasRelationList {\n                                                                        items {\n                                                                          ...relationFields\n                                                                          em_relationTo {\n                                                                            ...relatedPlace\n                                                                            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n                                                                              em_hasRelationList {\n                                                                                items {\n                                                                                  ...relationFields\n                                                                                }\n                                                                              }\n                                                                            }\n                                                                          }\n                                                                        }\n                                                                      }\n                                                                    }\n                                                                  }\n                                                                }\n                                                              }\n                                                            }\n                                                          }\n                                                        }\n                                                      }\n                                                    }\n                                                  }\n                                                }\n                                              }\n                                            }\n                                          }\n                                        }\n                                      }\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment relationFields on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Qualified_relation {\n  em_relationType {\n    title {\n      value\n    }\n  }\n  em_when {\n    rdfs_label {\n      value\n    }\n    em_timespan {\n      ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Time_span {\n        em_latestStart_ {\n          value\n        }\n        em_earliestEnd_ {\n          value\n        }\n      }\n    }\n  }\n}\n\nfragment relatedPlace on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_em_Place {\n  title {\n    value\n  }\n  em_preferredName {\n    value\n  }\n  em_placeCategory {\n    ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emlo_oppole20180625_skos_Concept {\n      rdfs_label {\n        value\n      }\n    }\n  }\n}\n";
+
 		function processData(dataDiv, data) {
 
 			appendTextElement(document.getElementById("title"), "h1", data.em_preferredName.value);
 			appendTextElement(document.getElementById("alternateNames"), "i", data.em_alternateNameList.items.map(item => item.value).join(", "));
-			appendElementWithLabel(document.getElementById("currentHierarchy"), "Current Hierarchy", createCurrentHierarchy(data.em_hasRelationList.items.filter(item => item.em_relationType && item.em_relationType.title && item.em_relationType.title.value === "Part of")));
+			appendElementWithLabel(document.getElementById("currentHierarchy"), "Current Hierarchy", createCurrentHierarchy(data, data.em_hasRelationList.items.filter(item => !item.em_when)));
 			appendElementWithLabel(document.getElementById("location"), "Location", formatLocation(data.em_where));
-			appendElementWithLabel(document.getElementById("citation"), "Citation", createTextElement("p", ""));
+			appendElementWithLabel(document.getElementById("citation"), "Citation", createCitations(data.em_reference));
 			appendElementWithLabel(document.getElementById("permanentUri"), "Permanent URI", createTextElement("p", data.em_canonicalURI.uri));
+			appendElementWithLabel(document.getElementById("seeAlso"), "See Also", createTextElement("p",""));
 			appendElementWithLabel(document.getElementById("nameAttestations"), "Name Attestations", createPlaceNameTable(data.em_hasAnnotationList.items));
 			appendElementWithLabel(document.getElementById("calendars"), "Calendars", createCalendars(data.em_hasAnnotationList.items));
 			appendElementWithLabel(document.getElementById("relatedPlaces"), "Related Places", createRelatedPlaces(data.em_hasRelationList.items));
@@ -93,12 +134,29 @@
 			return element;
 		}
 
-		function createCurrentHierarchy(items) {
-			return document.createElement("p");
+		function createCurrentHierarchy(currentPlace, relatedPlaces) {
+			var hierarchy = [];
+			createHierarchy(relatedPlaces[0], null, hierarchy);
+
+			var reverse = hierarchy.reverse();
+			
+			var parentList = document.createElement("ul");
+			var firstList = parentList;
+			var prefParent;
+			reverse.forEach(rel => {
+				parentList.appendChild(createTextElement("li", rel.em_relationTo && rel.em_relationTo.title ? rel.em_relationTo.title.value : "{Name unknown}"));
+				prefParent = parentList;
+				parentList = document.createElement("ul");
+				prefParent.appendChild(parentList);
+			});
+			parentList.appendChild(createTextElement("li", currentPlace.title.value));
+			
+
+			return firstList;
 		}
 
 		function createTable(items) {
-			var headers = Object.keys(items[0]);
+  		var headers = Object.keys(items[0]);
 			var table = document.createElement("table");
 			var headerRow = document.createElement("tr");
 			table.appendChild(headerRow);
@@ -133,11 +191,11 @@
 		}
 
 		function createPlaceNameTable(input) {
-			return createTable(input.filter(an => an.oa_hasBody).filter(an => an.oa_hasBody.rdf_type).filter(an => an.oa_hasBody.rdf_type.uri === "http://emplaces.namespace.example.org/PlaceName").map(an => {
+			return createTable(input.filter(an => an.oa_hasBody).filter(an => an.oa_hasBody.rdf_type).filter(an => an.oa_hasBody.rdf_type.uri === "http://emplaces.namespace.example.org/Place_name").map(an => {
 				var flatten = new Object();
 				var body = an.oa_hasBody;
 				flatten.Name = body.em_name.value;
-				flatten.Language = "(" + body.em_language.value + ")";
+				flatten.Language = "(" + body.em_language.em_tag.value + ")";
 				flatten.Date = an.em_when.rdfs_label.value;
 				flatten.Source = an.em_sourceList.items.map(source => source.rdfs_label.value).join("<br>");
 				return flatten;
@@ -145,13 +203,14 @@
 		}
 
 		function createRelatedPlaces(input) {
-			return createTable(input.map(relation => {
-				var flatten = new Object();
-				flatten.Name = relation.em_relationTo.title.value;
-				flatten.Type = relation.em_relationTo.em_placeType && relation.em_relationTo.em_placeType.title ? relation.em_relationTo.em_placeType.title.value : "";
-				flatten.Relationship = relation.em_relationType.title.value;
-				return flatten;
-			}));
+			return document.createElement("p");
+			// return createTable(input.map(relation => {
+			// 	var flatten = new Object();
+			// 	flatten.Name = relation.em_relationTo.title.value;
+			// 	flatten.Type = relation.em_relationTo.em_placeType && relation.em_relationTo.em_placeType.title ? relation.em_relationTo.em_placeType.title.value : "";
+			// 	flatten.Relationship = relation.em_relationType.title.value;
+			// 	return flatten;
+			// }));
 		}
 
 		function appendMetadata(parent, data) {
@@ -191,12 +250,14 @@
 		}
 
 		function createHistoricalHierarchies(requestedPlace, historicalHierarchies) {
-			//console.log(historicalHierarchies);
 			var completeDiv = document.createElement("div");
 			var tabHeaders = document.createElement("div");
-			tabHeaders.className += "tabHeader";
+			tabHeaders.classList.add("tabHeaders");
 			completeDiv.appendChild(tabHeaders);
+			var labelsDiv =  document.createElement("div");
+			labelsDiv.classList.add("hierarchyLabels");
 			var tabContent = document.createElement("div");
+			tabContent.appendChild(labelsDiv);
 			completeDiv.appendChild(tabContent);
 			var first = true;
 			var hierarchiesByType = historicalHierarchies.reduce(function (rv, v) {
@@ -207,12 +268,14 @@
 
 			for (hierarchyType in hierarchiesByType) {
 				var tab = createTextElement("p", hierarchyType);
+				tab.classList.add("tabHeader");
 				tabHeaders.append(tab);
 				var hierarchies = hierarchiesByType[hierarchyType];
 				hierarchies.forEach(hierarchy => {
-					hierarchyContent(requestedPlace, hierarchyType, hierarchy, first, tabContent);
+					hierarchyContent(requestedPlace, hierarchyType, hierarchy, first, tabContent, labelsDiv);
 
 					if (first) {
+						tab.classList.add("active")
 						first = false;
 					}
 				});
@@ -222,25 +285,34 @@
 			return completeDiv;
 		}
 
-		function hierarchyContent(requestedPlace, type, hierarchyStart, first, parent) {
+		function hierarchyContent(requestedPlace, type, hierarchyStart, first, parent, labels) {
 			var hierarchy = []
 			createHierarchy(hierarchyStart, type, hierarchy);
 			var reverse = hierarchy.reverse();
 
-			var hierarchyDiv = document.createElement("div");
-			hierarchyDiv.className += " hierarchyTab";
+			var hierarchyLabelValue = createHierarchyLabel(reverse);
+			var linkLabel = createTextElement("p", hierarchyLabelValue);
+			linkLabel.classList.add("hierarchyLink");
+			var hierarchyId = type + " " + hierarchyLabelValue
+			linkLabel.onclick = function(event) {
+				openTab(event, hierarchyId)
+			};
+			labels.appendChild(linkLabel);
 
-			hierarchyDiv.appendChild(createTextElement("h3", createHierarchyLabel(reverse)));
+			var hierarchyDiv = document.createElement("div");
+			hierarchyDiv.classList.add("hierarchyTabContents");
+			hierarchyDiv.id = hierarchyId;
 
 			if (first) {
-				hierarchyDiv.className += " active";
+				hierarchyDiv.classList.add("active");
+				linkLabel.classList.add("active");
 			}
 			reverse.forEach(place => {
 				var placeElement = createTextElement("p", place.em_relationTo.title.value);
-				placeElement.className = "place";
+				placeElement.classList.add("place");
 				hierarchyDiv.appendChild(placeElement);
 				var dateElement = createTextElement("p", place.em_when.rdfs_label.value);
-				dateElement.className = "date";
+				dateElement.classList.add("date");
 				hierarchyDiv.appendChild(dateElement);
 			});
 			hierarchyDiv.appendChild(createTextElement("p", requestedPlace.title.value));
@@ -248,7 +320,6 @@
 
 		}
 		function createHierarchyLabel(hierrachyArray) {
-			console.log(hierrachyArray);
 			var beginYears = [];
 			var endYears = [];
 			hierrachyArray.map(rel => rel.em_when.rdfs_label.value).forEach(when => {
@@ -263,16 +334,36 @@
 		function createHierarchy(start, hierarchyType, coll) {
 			coll.push(start);
 			if (start.em_relationTo.em_hasRelationList) {
-				start.em_relationTo.em_hasRelationList.items.filter(item => item.em_relationTo.em_placeCategory && item.em_relationTo.em_placeCategory.rdfs_label && item.em_relationTo.em_placeCategory.rdfs_label.value === hierarchyType).forEach(rel => {
+				start.em_relationTo.em_hasRelationList.items.filter(item => hierarchyType == null || (item.em_relationTo.em_placeCategory && item.em_relationTo.em_placeCategory.rdfs_label && item.em_relationTo.em_placeCategory.rdfs_label.value === hierarchyType)).forEach(rel => {
 					createHierarchy(rel, hierarchyType, coll);
 				});
 			}
 		}
 
+		function createCitations(rawCitation) {
+			var link = document.createElement("a");
+			link.setAttribute("href", rawCitation.dcterms_source.value);
+			link.setAttribute("target", "_blank");
+			link.appendChild(document.createTextNode(rawCitation.dcterms_title.value));
+			
+			return link;
+		}
+
 	</script>
 
 	<script>
-		function openTab() {
+		function openTab(event, tabId) {
+			var links = document.getElementsByClassName("hierarchyLink");
+			for(var i = 0; i < links.length; i++) {
+				links[i].classList.remove("active");
+			} 
+			event.originalTarget.classList.add("active");
+
+			var tabs = document.getElementsByClassName("hierarchyTabContents");
+			for(var i = 0; i < tabs.length; i++) {
+				tabs[i].classList.remove("active");
+			} 
+			document.getElementById(tabId).classList.add("active");
 		}
 	</script>
 
@@ -285,6 +376,7 @@
 			<div id="location"></div>
 			<div id="citation"></div>
 			<div id="permanentUri"></div>
+			<div id="seeAlso"></div>
 			<div id="nameAttestations"></div>
 			<div id="calendars"></div>
 			<div id="relatedPlaces"></div>
