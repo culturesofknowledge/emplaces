@@ -293,6 +293,7 @@ ex:Opole_P a em:Place ;
     # Added label to distinguish from other places with same name
     # (initial default to preferred name?)
     rdfs:label       "City of Opole" ;                              # Label for place
+    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
     em:coreDataRef
       [ rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/3090048/about.rdf>
@@ -361,7 +362,7 @@ ex:Opole_P a em:Place ;
     em:where
       [ a em:Setting ;
         em:location
-          [ a em:Location ;
+          [ a em:Location_value ;
             wgs84_pos:lat  "50.67211"^^xsd:double ;
             wgs84_pos:long "17.92533"^^xsd:double ;
           ] ;
@@ -790,6 +791,7 @@ ex:Opole_P a em:Place ;
 
     em:hasAnnotation
       # 1561: https://davidrumsey.georeferencer.com/maps/613891568775/view
+      # @@TODO: link to thumbnail + link to full stand-alone page
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
         oa:hasTarget ex:Opole_P ;
@@ -994,6 +996,7 @@ ex:Slaskie_Wydawnictwo a foaf:Organization ;
 
 
 ex:Opole_ADM3 a em:Place ;
+    rdfs:label       "Opole (ADM3)" ;                              # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ; # document
     em:coreDataRef
       [ rdfs:label "GeoNames data" ;
@@ -1013,7 +1016,7 @@ ex:Opole_ADM3 a em:Place ;
     em:where
       [ a em:Setting ;
         em:location
-          [ a em:Location ;
+          [ a em:Location_value ;
             wgs84_pos:lat  "50.6562"^^xsd:double ;
             wgs84_pos:long "17.9306"^^xsd:double ;
           ] ;
@@ -1076,6 +1079,7 @@ ex:Opole_ADM3 a em:Place ;
 #   ==========================================================================
 
 ex:Opole_ADM2 a em:Place ;
+    rdfs:label       "Opole (ADM2)" ;                              # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ; # document
     em:coreDataRef
       [ rdfs:label "GeoNames data" ;
@@ -1093,7 +1097,7 @@ ex:Opole_ADM2 a em:Place ;
     em:where
       [ a em:Setting ;
         em:location
-          [ a em:Location ;
+          [ a em:Location_value ;
             wgs84_pos:lat  "50.65622"^^xsd:double ;
             wgs84_pos:long "17.93066"^^xsd:double ;
           ] ;
@@ -1155,6 +1159,7 @@ ex:Opole_ADM2 a em:Place ;
 #   ==========================================================================
 
 ex:Opole_Voivodeship_ADM1 a em:Place ;
+    rdfs:label       "Opole Voivodeship (ADM1)" ;                  # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ; # document
     em:coreDataRef
       [ rdfs:label "GeoNames data" ;
@@ -1198,7 +1203,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
     em:where
       [ a em:Setting ;
         em:location
-          [ a em:Location ;
+          [ a em:Location_value ;
             wgs84_pos:lat  "50.66667"^^xsd:double ;
             wgs84_pos:long "17.9"^^xsd:double ;
           ] ;
@@ -1261,6 +1266,7 @@ ex:Opole_Voivodeship_ADM1 a em:Place ;
 
 
 ex:Poland_PCLI a em:Place ;
+    rdfs:label       "Poland (country)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
     em:coreDataRef
       [ rdfs:label "GeoNames data" ;
@@ -1419,7 +1425,7 @@ ex:Poland_PCLI a em:Place ;
     em:where
       [ a em:Setting ;
         em:location
-          [ a em:Location ;
+          [ a em:Location_value ;
             wgs84_pos:lat  "52"^^xsd:double ;
             wgs84_pos:long "20"^^xsd:double ;
           ] ;
