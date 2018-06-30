@@ -21,9 +21,9 @@ The draft [design documents][10] (display, search, edit) offer an informal descr
 An draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model is refined.
 
 ## Status
-**June 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
+**July 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
 
-**March - May 2018**: Private drafts of the gazetter's design document and data model.
+**March - June 2018**: Private drafts of the gazetter's design document and data model.
 
 ## Next ToDo Items
 - Collect and incorporate community feedback
@@ -41,6 +41,8 @@ Arno Bosse (Oxford - Project Management), Howard Hotson (Oxford - Director), Gra
 
 ## Acknowledgements
 We would like to acknowledge the inspiration we drew, and the help we received from several related projects, including the [COST Action 'Reassembling the Republic of Letters'][22], [GeoNames][17], [Das Geschichtliche Orts-Verzeichnis (GOV)][15], the [Getty TGN][16], the [Herder Institute for Historical Research on East Central Europe][20], the [Pelagios Project][8], [WikiData][18], and the [World Historical Gazetteer][19]. Particular thanks are due to [Dariusz Gierczak][23] for providing us with sample historical gazetteer data on Silesia.
+
+[EM Places, EM People, and EM Dates][2] are funded by a grant to the University of Oxford from the Andrew W. Mellon Foundation.
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
