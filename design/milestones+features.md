@@ -1,4 +1,6 @@
-# Features and Milestones
+## Features and Milestones
+
+### Initial draft list
 
 Data:
 
@@ -25,7 +27,7 @@ Record Detail:
 - Creator/Contributors/Core Data/Licenses (links only)
 - Export record in multiple formats
 - Current place map (Google or TBD)
-- Historical maps for current place
+- Historical maps for current place (TBD)
 - Place Description
 - Linked Sources page for Historical hierarchies
 - Historical administrative hierarchies
@@ -41,14 +43,25 @@ Import:
 - Import formats defined
 - Import implemented
 
+Export:
+
+- Export functionality defined
+- Export formats defined
+- Export implemented
+
 Basic (place centric) Search:
 
 - Basic search design notes completed
 - Basic search mockup completed
 - Basic search implemented
 
+Advanced Search:
+
+- TBA
+
 User Interface:
 
+- App-wide UX/user-flow
 - App-wide context UI mockup completed
 - App-wide context UI implemented
 
