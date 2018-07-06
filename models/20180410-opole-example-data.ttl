@@ -409,9 +409,7 @@ ex:Opole_P a em:Place ;
     # Non-core data - EMPlaces editorial additions
 
     em:editorialNote """
-        Getty Thesaurus of Geographic Names (05/03/2018):
-
-        Located on Oder River; passed to Bohemia in 1327, to Habsburgs in 1742 & returned to Poland in 1945; is important port between Wrocław & Upper Silesia; economy depends on cement factories & iron foundries; noted for many historic buildings.
+        Opole is a city located in southern Poland on the Oder River (Odra). With a population of approximately 127,792 (January 2017), it is the capital of the Opole Voivodeship and also the seat of Opole County. With it long history dating back to the 9th century, Opole is considered to be one of the oldest towns in Poland.
         """ ;
 
     # Reference bibliography
