@@ -108,7 +108,7 @@ In the current draft, the intent is for a simple wikidata-style interface where 
 
 If the contributed data does not already have a well-defined vocabulary, the feature 'type' may, for example, be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary (here, ['Parish Church'][19] and matched, where applicable, with the appropriate [GeoNames feature code][9] so that this this data becomes easier to integrate by other, less granular gazetteers.
 
-TBA: Create a sample 'related place' record using data on St. Adalbert drawn from the [National Heritage Board of Poland][20] website and add this to the existing draft [Opole sample RDF](/models/20180410-opole-example-data.ttl) file.
+A test 'related place' record on [St. Adalbert Parish Church][21] has been created on WikiData and is being reviewed for inclusion in the [Opole sample RDF](/models/20180410-opole-example-data.ttl).
 
 ## Related Resources
 
@@ -177,4 +177,4 @@ Many sections in the individual record display will include 'Info' and/or 'Sourc
 [18]: http://blogs.bodleian.ox.ac.uk/digital/2017/03/23/wikimedia-for-public-engagement/
 [19]: http://vocab.getty.edu/page/aat/300108377
 [20]: https://zabytek.pl/en/obiekty/opole-kosciol-parafialny-pw-matki-boskiej-bolesnej-i-sw-wojc
-
+[21]: https://www.wikidata.org/wiki/Q55338793
