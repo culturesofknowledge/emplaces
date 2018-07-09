@@ -122,7 +122,7 @@ A list of bibliographic resources (predominantly offline, scholarly references).
 
 ## Creators & Licenses
 
-A listing (machine readable) of the Creator of the record (i.e. the person or organization which created the initial record), one or more subsequent Contributors, a credit line for the reference gazetteers, and a notice of the licenses in use. We will require two licenses – CC0 for the reference gazetteer (core data), and CC-BY (v4 or possibly higher – since changes will be logged in Timbuctoo) for the remaining, additional metadata.
+A listing (machine readable) of the Creator of the record (i.e. the person or organization which created the initial record), one or more subsequent Contributors, a credit line for the reference gazetteers, and a notice of the licenses in use. GeoNames is CC-BY v3 (or possibly v4, the site is inconsistent) so it appears that CC0 is not an option.
 
 ## Export
 
