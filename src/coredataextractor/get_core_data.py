@@ -1,6 +1,6 @@
 # !/usr/bin/env python
 #
-# am_main.py - command line tool to create EMPlaces core from GeoNames data
+# get_core_data.py - command line tool to create EMPlaces core from GeoNames data
 #
 
 from __future__ import print_function
@@ -20,19 +20,23 @@ import errno
 
 log = logging.getLogger(__name__)
 
-# if __name__ == "__main__":
 dirhere = os.path.dirname(os.path.realpath(__file__))
-annroot = os.path.dirname(os.path.join(dirhere))
-sys.path.insert(0, annroot)
-# sys.path.insert(0, dirhere)
+gcdroot = os.path.dirname(os.path.join(dirhere))
+sys.path.insert(0, gcdroot)
 
-VERSION = "0.1"
+# Software version
+
+GCD_VERSION = "0.1"
 
 # Status return codes
 
 GCD_SUCCESS          = 0         # Success
 GCD_BADCMD           = 2         # Command error
-GCD_UNEXPECTEDARGS   = 3         # Unexpected arguments supplied
+GCD_UNKNOWNCMD       = 3         # Unknown command
+GCD_UNIMPLEMENTED    = 4         # Unimplemented command or feature
+GCD_UNEXPECTEDARGS   = 5         # Unexpected arguments supplied
+
+#   ===================================================================
 
 def progname(args):
     return os.path.basename(args[0])
@@ -52,7 +56,7 @@ def parseCommandArgs(argv):
                 formatter_class=argparse.RawDescriptionHelpFormatter,
                 epilog=command_summary_help
                 )
-    parser.add_argument('--version', action='version', version='%(prog)s '+VERSION)
+    parser.add_argument('--version', action='version', version='%(prog)s '+GCD_VERSION)
     parser.add_argument("--debug",
                         action="store_true", 
                         dest="debug", 
@@ -77,24 +81,120 @@ def parseCommandArgs(argv):
     parser.print_usage()
     return None
 
+#   ===================================================================
+
+def gcd_version(gcdroot, userhome, options):
+    """
+    Print software version string to standard output.
+
+    gcdroot     is the root directory for the Annalist software installation.
+    userhome    is the home directory for the host system user issuing the command.
+    options     contains options parsed from the command line.
+
+    returns     0 if all is well, or a non-zero status code.
+                This value is intended to be used as an exit status code
+                for the calling program.
+    """
+    status = GCD_SUCCESS
+    print(sitesettings.GCD_VERSION)
+    return status
+
+command_summary_help = ("\n"+
+    "Commands:\n"+
+    "\n"+
+    "  %(prog)s help [command]\n"+
+    "  %(prog)s get GEONAMESID\n"+
+    "  %(prog)s version\n"+
+    "")
+
+def gcd_help(options, progname):
+    """
+    Display annalist-manager command help
+
+    options     contains options parsed from the command line.
+
+    returns     0 if all is well, or a non-zero status code.
+                This value is intended to be used as an exit status code
+                for the calling program.
+    """
+    if len(options.args) > 1:
+        print("Unexpected arguments for %s: (%s)"%(options.command, " ".join(options.args)), file=sys.stderr)
+        return gcd_errors.AM_UNEXPECTEDARGS
+    status = gcd_errors.AM_SUCCESS
+    if len(options.args) == 0:
+        help_text = (
+            command_summary_help+
+            "\n"+
+            "For more information about command options, use:\n"+
+            "\n"+
+            "  %(prog)s --help\n"+
+            "")
+    elif options.args[0].startswith("get"):
+        help_text = ("\n"+
+            "  %(prog)s get GEONAMESID\n"+
+            "\n"+
+            "Gets data about a specified place from GeoNames, and sends corresponding\n"+
+            "EMPlaces data to standard output.\n"+
+            "\n"+
+            "")
+    elif options.args[0].startswith("ver"):
+        help_text = ("\n"+
+            "  %(prog)s version\n"+
+            "\n"+
+            "Sends the software version string to standard output.\n"+
+            "\n"+
+            "")
+    elif options.args[0].startswith("@@@"):
+        help_text = ("\n"+
+            "  %(prog)s @@@\n"+
+            "\n"+
+            "@@@.\n"+
+            "\n"+
+            "")
+    else:
+        help_text = "Unrecognized command for %s: (%s)"%(options.command, options.args[0])
+        status = GCD_UNKNOWNCMD
+    print(help_text%{'prog': progname}, file=sys.stderr)
+    return status
+
+#   ===================================================================
+
+def do_get_geonames_data(gcdroot, options):
+    geonames_id = getargvalue(getarg(options.args, 0), "GoeNames Id: ")
+
+
+    print("@@@ get %s"%())
+
+    return GCD_UNIMPLEMENTED
+
+#   ===================================================================
+
+def do_zzzzzz(gcdroot, options):
+    print("Un-implemented sub-command: %s"%(options.command), file=sys.stderr)
+    return GCD_UNIMPLEMENTED
+
+#   ===================================================================
+
 def run(userhome, userconfig, options, progname):
     """
-    Command line tool to create and submit deposit information packages
+    Command dispatcher.
     """
     if options.command.startswith("@@@"):
-        return do_zzzzzz(annroot, options)
-    if options.command.startswith("ver"):                   # version
-        return show_version(annroot, userhome, options)
+        return do_zzzzzz(gcdroot, options)
+    if options.command.startswith("get"):
+        return do_get_geonames_data(gcdroot, options)
+    if options.command.startswith("ver"):
+        return show_version(gcdroot, userhome, options)
     if options.command.startswith("help"):
         return show_help(options, progname)
     print("Un-recognised sub-command: %s"%(options.command), file=sys.stderr)
     print("Use '%s --help' to see usage summary"%(progname), file=sys.stderr)        
-    return am_errors.AM_BADCMD
+    return GCD_BADCMD
 
 def runCommand(userhome, userconfig, argv):
     """
-    Run program with supplied configuration base directory, Base directory
-    from which to start looking for research objects, and arguments.
+    Run program with supplied configuration base directory, 
+    configuration directory and command arguments.
 
     This is called by main function (below), and also by test suite routines.
 
@@ -105,7 +205,7 @@ def runCommand(userhome, userconfig, argv):
         progname = os.path.basename(argv[0])
         status   = run(userhome, userconfig, options, progname)
     else:
-        status = am_errors.GCD_BADCMD
+        status = GCD_BADCMD
     return status
 
 def runMain():
