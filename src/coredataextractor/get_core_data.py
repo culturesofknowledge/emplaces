@@ -18,6 +18,11 @@ import argparse
 import logging
 import errno
 
+from rdflib         import Graph, Namespace, URIRef, Literal
+from rdflib.paths   import Path
+
+from getargvalue    import getargvalue, getarg
+
 log = logging.getLogger(__name__)
 
 dirhere = os.path.dirname(os.path.realpath(__file__))
@@ -157,13 +162,132 @@ def gcd_help(options, progname):
     print(help_text%{'prog': progname}, file=sys.stderr)
     return status
 
+def show_version(gcdroot, userhome, options):
+    """
+    Print software version string to standard output.
+
+    gcdroot     is the root directory for the getcoredata software installation.
+    userhome    is the home directory for the host system user issuing the command.
+    options     contains options parsed from the command line.
+
+    returns     0 if all is well, or a non-zero status code.
+                This value is intended to be used as an exit status code
+                for the calling program.
+    """
+    if len(options.args) > 0:
+        return show_error(
+            "Unexpected arguments for %s: (%s)"%(options.command, " ".join(options.args)), 
+            GCD_UNEXPECTEDARGS
+            )
+    status = GCD_SUCCESS
+    print(GCD_VERSION)
+    # with open(logfilename, "r") as logfile:
+    #     shutil.copyfileobj(logfile, sys.stdout)
+    return status
+
+def show_error(msg, status):
+    print(msg, file=sys.stderr)
+    return status
+
 #   ===================================================================
 
+def get_rdf_graph(url, format="xml"):
+    """
+    Return RDF graph at given location.
+    """
+    # e.g. http://sws.geonames.org/3090048/about.rdf
+    g = Graph()
+    g.parse(location=url, format=format)
+    # result = g.parse(data=r.content, publicID=u, format="turtle")
+    # result = g.parse(source=s, publicID=b, format="json-ld")
+    return g
+
 def do_get_geonames_data(gcdroot, options):
-    geonames_id = getargvalue(getarg(options.args, 0), "GoeNames Id: ")
+    gn        = Namespace("http://www.geonames.org/ontology#")
+    wgs84_pos = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
+    skos      = Namespace("http://www.w3.org/2004/02/skos/core#")
 
 
-    print("@@@ get %s"%())
+    geonames_id  = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
+    geonames_uri = "http://sws.geonames.org/%s/"%(geonames_id,)
+    geonames_url = "http://sws.geonames.org/%s/about.rdf"%(geonames_id,)
+    geonames_rdf = get_rdf_graph(geonames_url)
+
+    geo_ont_url  = "http://www.geonames.org/ontology/ontology_v3.1.rdf"
+    geo_ont_rdf  = get_rdf_graph(geo_ont_url)
+
+    geonames_node   = URIRef(geonames_uri)
+    place_name      = geonames_rdf[geonames_node:gn.name:].next()
+    place_altnames  = list(geonames_rdf[geonames_node:gn.alternateName:])
+    place_def_by    = URIRef(geonames_url)
+    place_category  = geonames_rdf[geonames_node:gn.featureClass:].next()
+    place_type      = geonames_rdf[geonames_node:gn.featureCode:].next()
+    place_map       = geonames_rdf[geonames_node:gn.locationMap:].next()
+    place_parent    = geonames_rdf[geonames_node:gn.parentFeature:].next()
+    place_seeAlso   = list(geonames_rdf[geonames_node:gn.seeAlso|gn.wikipediaArticle:])
+    place_lat       = geonames_rdf[geonames_node:wgs84_pos.lat:].next()
+    place_long      = geonames_rdf[geonames_node:wgs84_pos.long:].next()
+
+    place_type_labels = geo_ont_rdf[place_type:skos.prefLabel:]
+    for l in place_type_labels:
+        if l.language == "en":
+            place_type_label  = Literal(" ".join(str(l).split()))
+            # https://stackoverflow.com/a/46501496/324122
+    display_label     = Literal("%s (%s)"%(place_name, place_type_label)) 
+    display_names     = list(set([Literal(unicode(n)) for n in place_altnames]))
+
+    print("@@@ get %s"%(geonames_id))
+    print("@@@ geonames_node   %r"%(geonames_node))
+    print("@@@ place_name:     %r"%(place_name))
+    print("@@@ place_altnames: %r"%(place_altnames))
+    print("@@@ place_def_by:   %r"%(place_def_by))
+    print("@@@ place_category: %r"%(place_category))
+    print("@@@ place_type:     %r"%(place_type))
+    print("@@@ place_map:      %r"%(place_map))
+    print("@@@ place_parent:   %r"%(place_parent))
+    print("@@@ place_seeAlso:  %r"%(place_seeAlso))
+    print("@@@ lat, long:      %r, %r"%(place_lat, place_long))
+    print("@@@ display_label:  %r"%(display_label))
+    print("@@@ display_names:  %s"%(",".join(display_names)))
+    # print("@@@ graph:")
+    # print(geonames_rdf.serialize(format='turtle', indent=4))
+    print("@@@")
+
+    emplaces_id  = "g_%s"%(geonames_id)
+    emplaces_uri = "http://emplaces.namespace.example.org/places/%s"%(emplaces_id)
+    emplaces_rdf = Graph()
+
+    emplaces_rdf.bind("em",  "http://emplaces.namespace.example.org/")
+    emplaces_rdf.bind("emp", "http://emplaces.namespace.example.org/places/")
+    emplaces_rdf.bind("emt", "http://emplaces.namespace.example.org/timespan/")
+    emplaces_rdf.bind("eml", "http://emplaces.namespace.example.org/language/")
+    for gn_pre, gn_uri in geonames_rdf.namespaces():
+        emplaces_rdf.bind(gn_pre, gn_uri)
+
+
+
+
+
+    # ex:Opole_P a em:Place ;
+    #     # Added label to distinguish from other places with same name
+    #     # (initial default to preferred name?)
+    #     rdfs:label       "City of Opole" ;                              # Label for place
+    #     rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
+    #     em:coreDataRef
+    #       [ rdfs:label "GeoNames data" ;
+    #         em:link <http://sws.geonames.org/3090048/about.rdf>
+    #       ] ;
+    #     em:alternateURI
+    #       [ rdfs:label "GeoNames URI" ;
+    #         em:link <http://sws.geonames.org/3090048/>
+    #       ] ;
+    #     # Core data (derived from GeoNames /reference gazetteer)
+    #     em:placeCategory gn:P ;             # from gn:featureClass
+    #     em:corePlaceType gn:P.PPLA ;        # from gn:featureCode
+    #     em:preferredName "Opole" ;          # from gn:name
+    #     em:alternateName "Opole" ;          # from gn:alternateName
+    #     em:displayName "Opole" ;
+
 
     return GCD_UNIMPLEMENTED
 
@@ -188,7 +312,7 @@ def run(userhome, userconfig, options, progname):
     if options.command.startswith("help"):
         return show_help(options, progname)
     print("Un-recognised sub-command: %s"%(options.command), file=sys.stderr)
-    print("Use '%s --help' to see usage summary"%(progname), file=sys.stderr)        
+    print("Use '%s --help' to see usage summary"%(progname), file=sys.stderr)
     return GCD_BADCMD
 
 def runCommand(userhome, userconfig, argv):
@@ -223,6 +347,8 @@ if __name__ == "__main__":
     p = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     sys.path.insert(0, p)
     status = runMain()
+    if status != GCD_SUCCESS:
+        print("Exit status: %d"%(status,), file=sys.stderr)
     sys.exit(status)
 
 # End.
