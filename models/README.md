@@ -29,7 +29,8 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 - [ ] Update [Data model notes](./20180405-EMPlaces-data-model-notes.md); resolve any remaining TODOs there
 - [ ] Update [diagrams](./PDFs/)
     - [x] main diagram done
-    - [ ] annotation diagrams still to do
+    - [x] name attestation diagram done
+    - [ ] other annotation diagrams still to do
 - [ ] Crosswalk between UI and data model
 - [x] Dealing with uncertainty
     - See example, em:competence

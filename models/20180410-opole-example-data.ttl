@@ -798,6 +798,7 @@ ex:Opole_P a em:Place ;
             rdfs:label   "1561" ;   # Used for tab label
             rdfs:comment "Map of Silesia in 1561" ;
             em:link      <https://davidrumsey.georeferencer.com/maps/613891568775/view>
+            em:preview   <https://davidrumsey.georeferencer.com/maps/613891568775/view>
           ] ;
         em:when 
           [ a em:Time_period ;
