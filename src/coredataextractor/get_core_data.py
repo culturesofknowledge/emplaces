@@ -18,7 +18,7 @@ import argparse
 import logging
 import errno
 
-from rdflib         import Graph, Namespace, URIRef, Literal
+from rdflib         import Graph, Namespace, URIRef, Literal, BNode
 from rdflib.paths   import Path
 
 from getargvalue    import getargvalue, getarg
@@ -202,93 +202,183 @@ def get_rdf_graph(url, format="xml"):
     # result = g.parse(source=s, publicID=b, format="json-ld")
     return g
 
-def do_get_geonames_data(gcdroot, options):
-    gn        = Namespace("http://www.geonames.org/ontology#")
-    wgs84_pos = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
-    skos      = Namespace("http://www.w3.org/2004/02/skos/core#")
+def get_geonames_ontology():
+    """
+    Return Graph of GeoNames ontology data
+    """
+    geo_ont_url  = "http://www.geonames.org/ontology/ontology_v3.1.rdf"
+    geo_ont_rdf  = get_rdf_graph(geo_ont_url)
+    return geo_ont_rdf
 
-
-    geonames_id  = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
+def get_geonames_place_data(geonames_id):
+    """
+    Returns tuple: 
+        1. GeoNames place URI
+        2. GeoNames place description URL
+        3. Graph of GeoNames place data
+    """
     geonames_uri = "http://sws.geonames.org/%s/"%(geonames_id,)
     geonames_url = "http://sws.geonames.org/%s/about.rdf"%(geonames_id,)
     geonames_rdf = get_rdf_graph(geonames_url)
+    return (geonames_uri, geonames_url, geonames_rdf)
 
-    geo_ont_url  = "http://www.geonames.org/ontology/ontology_v3.1.rdf"
-    geo_ont_rdf  = get_rdf_graph(geo_ont_url)
-
-    geonames_node   = URIRef(geonames_uri)
-    place_name      = geonames_rdf[geonames_node:gn.name:].next()
-    place_altnames  = list(geonames_rdf[geonames_node:gn.alternateName:])
-    place_def_by    = URIRef(geonames_url)
-    place_category  = geonames_rdf[geonames_node:gn.featureClass:].next()
-    place_type      = geonames_rdf[geonames_node:gn.featureCode:].next()
-    place_map       = geonames_rdf[geonames_node:gn.locationMap:].next()
-    place_parent    = geonames_rdf[geonames_node:gn.parentFeature:].next()
-    place_seeAlso   = list(geonames_rdf[geonames_node:gn.seeAlso|gn.wikipediaArticle:])
-    place_lat       = geonames_rdf[geonames_node:wgs84_pos.lat:].next()
-    place_long      = geonames_rdf[geonames_node:wgs84_pos.long:].next()
-
-    place_type_labels = geo_ont_rdf[place_type:skos.prefLabel:]
-    for l in place_type_labels:
+def get_geonames_place_type_label(place_type, geo_ont_rdf):
+    """
+    Returns label for supplied GeoNames place type
+    """
+    skos        = Namespace("http://www.w3.org/2004/02/skos/core#")
+    type_labels = geo_ont_rdf[place_type:skos.prefLabel:]
+    for l in type_labels:
         if l.language == "en":
-            place_type_label  = Literal(" ".join(str(l).split()))
+            type_label  = Literal(" ".join(str(l).split()))
             # https://stackoverflow.com/a/46501496/324122
+    return type_label
+
+def get_emplaces_core_data(geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf):
+    """
+    Returns:
+        1. EMPlaces URI for place
+        2. Graph of EMPlaces data
+    """
+    rdf       = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+    rdfs      = Namespace("http://www.w3.org/2000/01/rdf-schema#")
+    gn        = Namespace("http://www.geonames.org/ontology#")
+    wgs84_pos = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
+    em        = Namespace("http://emplaces.namespace.example.org/")
+    emp       = Namespace("http://emplaces.namespace.example.org/places/")
+    emt       = Namespace("http://emplaces.namespace.example.org/timespan/")
+    eml       = Namespace("http://emplaces.namespace.example.org/language/")
+
+    geonames_node     = URIRef(geonames_uri)
+    place_name        = geonames_rdf[geonames_node:gn.name:].next()
+    place_altnames    = list(geonames_rdf[geonames_node:gn.alternateName:])
+    place_def_by      = URIRef(geonames_url)
+    place_category    = geonames_rdf[geonames_node:gn.featureClass:].next()
+    place_type        = geonames_rdf[geonames_node:gn.featureCode:].next()
+    place_map         = geonames_rdf[geonames_node:gn.locationMap:].next()
+    place_parent      = geonames_rdf[geonames_node:gn.parentFeature:].next()
+    place_seeAlso     = list(geonames_rdf[geonames_node:gn.seeAlso|gn.wikipediaArticle:])
+    place_lat         = geonames_rdf[geonames_node:wgs84_pos.lat:].next()
+    place_long        = geonames_rdf[geonames_node:wgs84_pos.long:].next()
+    place_type_label  = get_geonames_place_type_label(place_type, geo_ont_rdf)
     display_label     = Literal("%s (%s)"%(place_name, place_type_label)) 
     display_names     = list(set([Literal(unicode(n)) for n in place_altnames]))
 
-    print("@@@ get %s"%(geonames_id))
-    print("@@@ geonames_node   %r"%(geonames_node))
-    print("@@@ place_name:     %r"%(place_name))
-    print("@@@ place_altnames: %r"%(place_altnames))
-    print("@@@ place_def_by:   %r"%(place_def_by))
-    print("@@@ place_category: %r"%(place_category))
-    print("@@@ place_type:     %r"%(place_type))
-    print("@@@ place_map:      %r"%(place_map))
-    print("@@@ place_parent:   %r"%(place_parent))
-    print("@@@ place_seeAlso:  %r"%(place_seeAlso))
-    print("@@@ lat, long:      %r, %r"%(place_lat, place_long))
-    print("@@@ display_label:  %r"%(display_label))
-    print("@@@ display_names:  %s"%(",".join(display_names)))
+    # print("@@@ geonames_node   %r"%(geonames_node))
+    # print("@@@ place_name:     %r"%(place_name))
+    # print("@@@ place_altnames: %r"%(place_altnames))
+    # print("@@@ place_def_by:   %r"%(place_def_by))
+    # print("@@@ place_category: %r"%(place_category))
+    # print("@@@ place_type:     %r"%(place_type))
+    # print("@@@ place_map:      %r"%(place_map))
+    # print("@@@ place_parent:   %r"%(place_parent))
+    # print("@@@ place_seeAlso:  %r"%(place_seeAlso))
+    # print("@@@ lat, long:      %r, %r"%(place_lat, place_long))
+    # print("@@@ display_label:  %r"%(display_label))
+    # print("@@@ display_names:  %s"%(",".join(display_names)))
     # print("@@@ graph:")
     # print(geonames_rdf.serialize(format='turtle', indent=4))
-    print("@@@")
+    # print("@@@")
 
-    emplaces_id  = "g_%s"%(geonames_id)
-    emplaces_uri = "http://emplaces.namespace.example.org/places/%s"%(emplaces_id)
-    emplaces_rdf = Graph()
-
-    emplaces_rdf.bind("em",  "http://emplaces.namespace.example.org/")
-    emplaces_rdf.bind("emp", "http://emplaces.namespace.example.org/places/")
-    emplaces_rdf.bind("emt", "http://emplaces.namespace.example.org/timespan/")
-    emplaces_rdf.bind("eml", "http://emplaces.namespace.example.org/language/")
+    # Initial empty graph
+    emp_rdf = Graph()
+    emp_rdf.bind("em",  em.term(""))
+    emp_rdf.bind("emp", "http://emplaces.namespace.example.org/places/")
+    emp_rdf.bind("emt", "http://emplaces.namespace.example.org/timespan/")
+    emp_rdf.bind("eml", "http://emplaces.namespace.example.org/language/")
     for gn_pre, gn_uri in geonames_rdf.namespaces():
-        emplaces_rdf.bind(gn_pre, gn_uri)
+        emp_rdf.bind(gn_pre, gn_uri)
+
+    # Add em:Place description
+    emp_id   = "g_%s"%(geonames_id)
+    emp_uri  = "http://emplaces.namespace.example.org/places/%s"%(emp_id)
+    emp_node = URIRef(emp_uri)
+    emp_rdf.add((emp_node,  rdf.type,         em.Place                ))
+    emp_rdf.add((emp_node,  rdfs.label,       display_label           ))
+    emp_rdf.add((emp_node,  rdfs.isDefinedBy, place_def_by            ))
+    b_coreref = BNode()
+    emp_rdf.add((emp_node,  em.coreDataRef,   b_coreref               ))
+    emp_rdf.add((b_coreref, rdfs.label,       Literal("GeoNames data")))
+    emp_rdf.add((b_coreref, em.link,          place_def_by            ))
+    b_alturi = BNode()
+    emp_rdf.add((emp_node,  em.alternateURI,  b_alturi                ))
+    emp_rdf.add((b_alturi,  rdfs.label,       Literal("GeoNames URI") ))
+    emp_rdf.add((b_alturi,  em.link,          geonames_node           ))
+
+    emp_rdf.add((emp_node,  em.placeCategory, place_category          ))
+    emp_rdf.add((emp_node,  em.corePlaceType, place_type              ))
+    emp_rdf.add((emp_node,  em.preferredName, place_name              ))
+    for an in place_altnames:
+        emp_rdf.add((emp_node, em.alternateName, an))
+    for dn in display_names:
+        emp_rdf.add((emp_node, em.displayName, dn))
+
+    # b_setting = BNode()
+    # ???
 
 
 
 
-
-    # ex:Opole_P a em:Place ;
-    #     # Added label to distinguish from other places with same name
-    #     # (initial default to preferred name?)
-    #     rdfs:label       "City of Opole" ;                              # Label for place
-    #     rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
-    #     em:coreDataRef
+    # em:where
+    #   [ a em:Setting ;
+    #     em:location
+    #       [ a em:Location_value ;
+    #         wgs84_pos:lat  "50.67211"^^xsd:double ;
+    #         wgs84_pos:long "17.92533"^^xsd:double ;
+    #       ] ;
+    #     em:when emt:Current ;
+    #     em:source
     #       [ rdfs:label "GeoNames data" ;
+    #         # NOTE: source link same as core data ref, indicates core data
     #         em:link <http://sws.geonames.org/3090048/about.rdf>
     #       ] ;
-    #     em:alternateURI
-    #       [ rdfs:label "GeoNames URI" ;
-    #         em:link <http://sws.geonames.org/3090048/>
+    #   ] ;
+
+    # em:hasRelation
+    #   [ a em:Qualified_relation ;
+    #     em:relationTo ex:Opole_ADM3 ;       # from gn:parentFeature, gn:parentADM3
+    #     em:relationType em:P_PART_OF_A ;    # relates populated place to parent admin div
+    #     em:competence em:DEFINITIVE ;
+    #     em:source
+    #       [ rdfs:label "GeoNames data" ;
+    #         # NOTE: source link same as core data ref, indicates core data
+    #         em:link <http://sws.geonames.org/3090048/about.rdf>
     #       ] ;
-    #     # Core data (derived from GeoNames /reference gazetteer)
-    #     em:placeCategory gn:P ;             # from gn:featureClass
-    #     em:corePlaceType gn:P.PPLA ;        # from gn:featureCode
-    #     em:preferredName "Opole" ;          # from gn:name
-    #     em:alternateName "Opole" ;          # from gn:alternateName
-    #     em:displayName "Opole" ;
+    #   ] ;
+
+    # em:hasAnnotation
+    #   [ a oa:Annotation ;
+    #     oa:motivatedBy em:MAP_RESOURCE ;
+    #     oa:hasTarget ex:Opole_P ;
+    #     oa:hasBody 
+    #       [ rdfs:label "Current map for Opole" ;
+    #         em:link <http://www.geonames.org/3090048/opole.html>
+    #       ] ;
+    #     em:when emt:Current ;
+    #     em:source
+    #       [ rdfs:label "GeoNames data" ;
+    #         # NOTE: source link same as core data ref, indicates core data
+    #         em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
+    #       ] ;
+    #   ] ;
+
+    # rdfs:seeAlso <http://dbpedia.org/resource/Opole> ;
+    # rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole> ;
+    # rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> ;
+    return (emp_id, emp_uri, emp_rdf)
 
 
+
+def do_get_geonames_data(gcdroot, options):
+    geonames_id  = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
+    geonames_uri, geonames_url, geonames_rdf = get_geonames_place_data(geonames_id)
+
+    geo_ont_rdf  = get_geonames_ontology()
+    emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_core_data(
+        geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf
+        )
+
+    print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GCD_UNIMPLEMENTED
 
 #   ===================================================================

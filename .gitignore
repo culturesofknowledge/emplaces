@@ -2,5 +2,5 @@ Icon?
 .DS_Store
 .Ulysses-Group.plist
 .Ulysses-favorites.plist
-
+*.pyc
 gcdenv
