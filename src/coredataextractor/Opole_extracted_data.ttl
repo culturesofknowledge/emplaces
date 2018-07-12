@@ -1,0 +1,114 @@
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix em: <http://emplaces.namespace.example.org/> .
+@prefix eml: <http://emplaces.namespace.example.org/language/> .
+@prefix emp: <http://emplaces.namespace.example.org/places/> .
+@prefix emt: <http://emplaces.namespace.example.org/timespan/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geonames: <http://sws.geonames.org/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+emp:g_3090048 a em:Place ;
+    rdfs:label "Opole (seat of a first-order administrative division)" ;
+    em:alternateName "Opole",
+        "Oppein",
+        "Oppeln",
+        "أبولوسكي"@ar,
+        "Горад Аполе"@be,
+        "Ополе"@bg,
+        "Opolí"@cs,
+        "Òpòle"@csb,
+        "Opole"@da,
+        "Oppeln"@de,
+        "Opole"@en,
+        "Opole"@eo,
+        "اوپوله"@fa,
+        "Opole"@fi,
+        "Opole"@fr,
+        "אופולה"@he,
+        "Opole"@hu,
+        "Opole"@id,
+        "Opole"@it,
+        "オポーレ"@ja,
+        "Opole"@jv,
+        "오폴레"@ko,
+        "Opolė"@lt,
+        "Opole"@lv,
+        "Opole"@na,
+        "Oppeln"@nds,
+        "Opole"@nl,
+        "Opole"@pl,
+        "اوپول"@pnb,
+        "Opole"@pt,
+        "Opole"@ro,
+        "Ополе"@ru,
+        "Opole"@sl,
+        "Ополе"@sr,
+        "Opole"@sv,
+        "Uopole"@szl,
+        "ออปอเล"@th,
+        "Ополе"@uk,
+        "奥波莱"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3090048/> ] ;
+    em:canonicalURI emp:g_3090048 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3090048/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLA ;
+    em:displayName "Opole",
+        "Opolí",
+        "Opolė",
+        "Oppein",
+        "Oppeln",
+        "Uopole",
+        "Òpòle",
+        "Горад Аполе",
+        "Ополе",
+        "אופולה",
+        "أبولوسكي",
+        "اوپول",
+        "اوپوله",
+        "ออปอเล",
+        "オポーレ",
+        "奥波莱",
+        "오폴레" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3090048/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <http://www.geonames.org/3090048/opole.html> ] ;
+            oa:hasTarget emp:g_3090048 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7532413 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3090048/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Opole" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.067211e+01 ;
+                    wgs84_pos:long 1.792533e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3090048/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <http://en.wikipedia.org/wiki/Opole>,
+        <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> .
+
+
