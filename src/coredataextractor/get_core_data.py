@@ -29,11 +29,17 @@ dirhere = os.path.dirname(os.path.realpath(__file__))
 gcdroot = os.path.dirname(os.path.join(dirhere))
 sys.path.insert(0, gcdroot)
 
-# Software version
+#   ===================================================================
+#
+#   Data constants
+#
+#   ===================================================================
+
+#   Software version
 
 GCD_VERSION = "0.1"
 
-# Status return codes
+#   Status return codes
 
 GCD_SUCCESS          = 0         # Success
 GCD_BADCMD           = 2         # Command error
@@ -41,7 +47,7 @@ GCD_UNKNOWNCMD       = 3         # Unknown command
 GCD_UNIMPLEMENTED    = 4         # Unimplemented command or feature
 GCD_UNEXPECTEDARGS   = 5         # Unexpected arguments supplied
 
-# Namespaces
+#   Namespaces
 
 SKOS      = Namespace("http://www.w3.org/2004/02/skos/core#")
 XSD       = Namespace("http://www.w3.org/2001/XMLSchema#")
@@ -56,11 +62,40 @@ GN        = Namespace("http://www.geonames.org/ontology#")  # GeoNames ontology
 GEONAMES  = Namespace("http://sws.geonames.org/")           # GeoNames place 
 WGS84_POS = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
 EM        = Namespace("http://emplaces.namespace.example.org/")
-EMP       = Namespace("http://emplaces.namespace.example.org/places/")
+EMP       = Namespace("http://emplaces.namespace.example.org/place/")
 EMT       = Namespace("http://emplaces.namespace.example.org/timespan/")
 EML       = Namespace("http://emplaces.namespace.example.org/language/")
 
-# Common definitions for EMPlaces
+#   ===================================================================
+#
+#   Common definitions for EMPlaces / GeoNames data
+#
+#   ===================================================================
+
+COMMON_PREFIX_DEFS = (
+    """
+    @prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix owl:        <http://www.w3.org/2002/07/owl#> .
+    @prefix skos:       <http://www.w3.org/2004/02/skos/core#> .
+    @prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+    @prefix oa:         <http://www.w3.org/ns/oa#> .
+    
+    @prefix cc:         <http://creativecommons.org/ns#> .
+    @prefix dcterms:    <http://purl.org/dc/terms/> .
+    @prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+    @prefix bibo:       <http://purl.org/ontology/bibo/> .
+    
+    @prefix geonames:   <http://sws.geonames.org/> .                # GeoNames place IDs
+    @prefix gn:         <http://www.geonames.org/ontology#> .       # GeoNames vocabulary terms
+    @prefix wgs84_pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+    
+    @prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
+    @prefix emp:        <http://emplaces.namespace.example.org/place/> .
+    @prefix emt:        <http://emplaces.namespace.example.org/timespan/> .
+    @prefix eml:        <http://emplaces.namespace.example.org/language/> .
+    """)
+
 
 COMMON_GEONAMES_DEFS = (
     """
@@ -225,7 +260,7 @@ COMMON_EMPLACES_DEFS = (
     em:coreDataRef rdfs:subPropertyOf em:source .
     """)
 
-COMMON_LANGUAGES_DEFS = (
+COMMON_LANGUAGE_DEFS = (
     """
     # Language resources @@TODO: generate as-needed@@
     eml:de a em:Language_value ;
@@ -244,9 +279,37 @@ COMMON_LANGUAGES_DEFS = (
 
 
 #   ===================================================================
+#
+#   Command line parsing and help
+#
+#   ===================================================================
+
+command_summary_help = ("\n"+
+    "Commands:\n"+
+    "\n"+
+    "  %(prog)s help [command]\n"+
+    "  %(prog)s get GEONAMESID\n"+
+    "  %(prog)s version\n"+
+    "")
 
 def progname(args):
     return os.path.basename(args[0])
+
+def gcd_version(gcdroot, userhome, options):
+    """
+    Print software version string to standard output.
+
+    gcdroot     is the root directory for the Annalist software installation.
+    userhome    is the home directory for the host system user issuing the command.
+    options     contains options parsed from the command line.
+
+    returns     0 if all is well, or a non-zero status code.
+                This value is intended to be used as an exit status code
+                for the calling program.
+    """
+    status = GCD_SUCCESS
+    print(sitesettings.GCD_VERSION)
+    return status
 
 def parseCommandArgs(argv):
     """
@@ -269,7 +332,42 @@ def parseCommandArgs(argv):
                         dest="debug", 
                         default=False,
                         help="Run with full debug output enabled.  "+
-                             "Also creates log file 'annalist-manager.log' in the working directory"
+                             "Also creates log file 'get-core-data.log' in the working directory"
+                        )
+    parser.add_argument("-e", "--include-emplaces-defs",
+                        action="store_true", 
+                        dest="emplaces_defs", 
+                        default=False,
+                        help="Include common EMPlaces defintions "+
+                             "(e.g. for relation types, periods, competencies, etc.) "+
+                             "in the output graph."+
+                             ""
+                        )
+    parser.add_argument("-g", "--include-geonames-defs",
+                        action="store_true", 
+                        dest="geonames_defs", 
+                        default=False,
+                        help="Include common GeoNames defintions "+
+                             "(e.g. for feature codes, categories, etc.) "+
+                             "in the output graph."+
+                             ""
+                        )
+    parser.add_argument("-l", "--include-language-defs",
+                        action="store_true", 
+                        dest="language_defs", 
+                        default=False,
+                        help="Include common language resource defintions "+
+                             "(as referenced by name attestations, etc.) "+
+                             "in the output graph."+
+                             ""
+                        )
+    parser.add_argument("-c", "--include-common-defs",
+                        action="store_true", 
+                        dest="common_defs", 
+                        default=False,
+                        help="Include common EMPlaces, GeoNames and language resource "+
+                             "defintions in the output graph."+
+                             ""
                         )
     parser.add_argument("command", metavar="COMMAND",
                         nargs=None,
@@ -288,35 +386,9 @@ def parseCommandArgs(argv):
     parser.print_usage()
     return None
 
-#   ===================================================================
-
-def gcd_version(gcdroot, userhome, options):
+def show_help(options, progname):
     """
-    Print software version string to standard output.
-
-    gcdroot     is the root directory for the Annalist software installation.
-    userhome    is the home directory for the host system user issuing the command.
-    options     contains options parsed from the command line.
-
-    returns     0 if all is well, or a non-zero status code.
-                This value is intended to be used as an exit status code
-                for the calling program.
-    """
-    status = GCD_SUCCESS
-    print(sitesettings.GCD_VERSION)
-    return status
-
-command_summary_help = ("\n"+
-    "Commands:\n"+
-    "\n"+
-    "  %(prog)s help [command]\n"+
-    "  %(prog)s get GEONAMESID\n"+
-    "  %(prog)s version\n"+
-    "")
-
-def gcd_help(options, progname):
-    """
-    Display annalist-manager command help
+    Display command help
 
     options     contains options parsed from the command line.
 
@@ -326,8 +398,8 @@ def gcd_help(options, progname):
     """
     if len(options.args) > 1:
         print("Unexpected arguments for %s: (%s)"%(options.command, " ".join(options.args)), file=sys.stderr)
-        return gcd_errors.AM_UNEXPECTEDARGS
-    status = gcd_errors.AM_SUCCESS
+        return GCD_UNEXPECTEDARGS
+    status = GCD_SUCCESS
     if len(options.args) == 0:
         help_text = (
             command_summary_help+
@@ -341,7 +413,11 @@ def gcd_help(options, progname):
             "  %(prog)s get GEONAMESID\n"+
             "\n"+
             "Gets data about a specified place from GeoNames, and sends corresponding\n"+
-            "EMPlaces data to standard output.\n"+
+            "EMPlaces data in Turtle format to standard output.\n"+
+            "\n"+
+            "To incluse come common non-place-specific supporting definitions, see options\n"+
+            "'--include-common-defs', '--include-geonames-defs', and '--include-language-defs'.\n"+
+            "\n"+
             "\n"+
             "")
     elif options.args[0].startswith("ver"):
@@ -393,7 +469,7 @@ def show_error(msg, status):
 
 #   ===================================================================
 #
-#   Id and URI wrangling.  URI introspection is hacky.
+#   Id and URI wrangling.  Hacky URI introspection is isolated here.
 #
 #   ===================================================================
 
@@ -420,7 +496,7 @@ def get_emlaces_id_uri_node(geonames_id):
     Given a GeoNames Id, returns Id, URI and Node for EMPlaces
     """
     emplaces_id   = "g_%s"%(geonames_id)
-    emplaces_uri  = "http://emplaces.namespace.example.org/places/%s"%(emplaces_id)
+    emplaces_uri  = EMP[emplaces_id]
     emplaces_node = URIRef(emplaces_uri)
     return (emplaces_id, emplaces_uri, emplaces_node)
 
@@ -467,7 +543,7 @@ def get_geonames_place_type_label(place_type, geo_ont_rdf):
             # https://stackoverflow.com/a/46501496/324122
     return type_label
 
-def add_emplaces_common_definitions(emp_graph):
+def add_emplaces_common_namespaces(emp_graph):
     """
     Add common EMPlaces definitions to supplied graph
     """
@@ -485,14 +561,28 @@ def add_emplaces_common_definitions(emp_graph):
     emp_graph.bind("emp",       EMP.term(""))
     emp_graph.bind("emt",       EMT.term(""))
     emp_graph.bind("eml",       EML.term(""))
-    #@@@@ common definitions @@@
     return
+
+def add_turtle_data(emp_rdf, turtle_str):
+    """
+    Adds Turtle string data to a graph under construction.
+
+    emp_rdf     is the graph to which statements are added
+    turtle_str  is a string that contains Turtle startements 
+                to be added to the graph.
+
+    NOTE:
+    Namespace prefixes already defined for the graph are not
+    recognized in the Turtle data.
+    """
+    emp_rdf.parse(data=COMMON_PREFIX_DEFS+turtle_str, format="turtle")
+    return emp_rdf
 
 def add_resource_attributes(emp_rdf, attributes, subject=None):
     """
     Adds a set of attributes to a graph.
 
-    emp_rdf     is the graph to shich statements are added
+    emp_rdf     is the graph to which statements are added
     attributes  is a dictionary of attributes and values to be added
     subject     is the common subject for statements to be added.  
                 If not specified, a new blank node is used.
@@ -567,25 +657,24 @@ def get_emplaces_core_data(geonames_id, geonames_uri, geonames_url, geonames_rdf
     display_label     = Literal("%s (%s)"%(place_name, place_type_label)) 
     display_names     = list(set([Literal(unicode(n)) for n in place_altnames]))
 
-    # print("@@@ geonames_node   %r"%(geonames_node))
-    # print("@@@ place_name:     %r"%(place_name))
-    # print("@@@ place_altnames: %r"%(place_altnames))
-    # print("@@@ place_def_by:   %r"%(place_def_by))
-    # print("@@@ place_category: %r"%(place_category))
-    # print("@@@ place_type:     %r"%(place_type))
-    # print("@@@ place_map:      %r"%(place_map))
-    # print("@@@ place_parent:   %r"%(place_parent))
-    # print("@@@ place_seeAlso:  %r"%(place_seeAlso))
-    # print("@@@ lat, long:      %r, %r"%(place_lat, place_long))
-    # print("@@@ display_label:  %r"%(display_label))
-    # print("@@@ display_names:  %s"%(",".join(display_names)))
-    # print("@@@ graph:")
-    # print(geonames_rdf.serialize(format='turtle', indent=4))
-    # print("@@@")
+    log.debug("get_emplaces_core_data: geonames_node   %r"%(geonames_node))
+    log.debug("get_emplaces_core_data: place_name:     %r"%(place_name))
+    log.debug("get_emplaces_core_data: place_altnames: %r"%(place_altnames))
+    log.debug("get_emplaces_core_data: place_def_by:   %r"%(place_def_by))
+    log.debug("get_emplaces_core_data: place_category: %r"%(place_category))
+    log.debug("get_emplaces_core_data: place_type:     %r"%(place_type))
+    log.debug("get_emplaces_core_data: place_map:      %r"%(place_map))
+    log.debug("get_emplaces_core_data: place_parent:   %r"%(place_parent))
+    log.debug("get_emplaces_core_data: place_seeAlso:  %r"%(place_seeAlso))
+    log.debug("get_emplaces_core_data: lat, long:      %r, %r"%(place_lat, place_long))
+    log.debug("get_emplaces_core_data: display_label:  %r"%(display_label))
+    log.debug("get_emplaces_core_data: display_names:  %s"%(",".join(display_names)))
+    log.debug("get_emplaces_core_data: GeoNames graph:")
+    log.debug(geonames_rdf.serialize(format='turtle', indent=4))
 
     # Initial empty graph
     emp_rdf = Graph()
-    add_emplaces_common_definitions(emp_rdf)
+    add_emplaces_common_namespaces(emp_rdf)
     # for gn_pre, gn_uri in geonames_rdf.namespaces():
     #     emp_rdf.bind(gn_pre, gn_uri)
     lit_geonames_data = Literal("GeoNames data")
@@ -593,7 +682,7 @@ def get_emplaces_core_data(geonames_id, geonames_uri, geonames_url, geonames_rdf
 
     # Add em:Place description
     emp_id   = "g_%s"%(geonames_id)
-    emp_uri  = "http://emplaces.namespace.example.org/places/%s"%(emp_id)
+    emp_uri  = EMP[emp_id]
     emp_node = URIRef(emp_uri)
     emp_rdf.add((emp_node,  RDF.type,         EM.Place         ))
     emp_rdf.add((emp_node,  RDFS.label,       display_label    ))
@@ -663,7 +752,12 @@ def do_get_geonames_data(gcdroot, options):
     emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_core_data(
         geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf
         )
-
+    if options.emplaces_defs or options.common_defs:
+        add_turtle_data(emplaces_rdf, COMMON_EMPLACES_DEFS)
+    if options.geonames_defs or options.common_defs:
+        add_turtle_data(emplaces_rdf, COMMON_GEONAMES_DEFS)
+    if options.language_defs or options.common_defs:
+        add_turtle_data(emplaces_rdf, COMMON_LANGUAGE_DEFS)
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GCD_UNIMPLEMENTED
 
@@ -701,6 +795,12 @@ def runCommand(userhome, userconfig, argv):
     Returns exit status.
     """
     options = parseCommandArgs(argv[1:])
+    if options and options.debug:
+        logging.basicConfig(level=logging.DEBUG, filename="get-core-data.log", filemode="w")
+    else:
+        logging.basicConfig(level=logging.INFO)
+    log.debug("runCommand: userhome %s, userconfig %s, argv %s"%(userhome, userconfig, repr(argv)))
+    log.debug("Options: %s"%(repr(options)))
     if options:
         progname = os.path.basename(argv[0])
         status   = run(userhome, userconfig, options, progname)

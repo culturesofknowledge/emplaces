@@ -3,18 +3,145 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix em: <http://emplaces.namespace.example.org/> .
 @prefix eml: <http://emplaces.namespace.example.org/language/> .
-@prefix emp: <http://emplaces.namespace.example.org/places/> .
+@prefix emp: <http://emplaces.namespace.example.org/place/> .
 @prefix emt: <http://emplaces.namespace.example.org/timespan/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix geonames: <http://sws.geonames.org/> .
 @prefix gn: <http://www.geonames.org/ontology#> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+em:Place a rdfs:Class ;
+    em:coreProperty em:alternateName,
+        em:corePlaceType,
+        em:placeCategory,
+        em:preferredName .
+
+em:AH_PART_OF_AH a em:Relation_type ;
+    rdfs:label "Former part of" ;
+    em:fromType em:P_OR_A ;
+    em:toType gn:A ;
+    rdfs:comment "Records a historical relationship between a historical place or administrative division and its parent division." .
+
+em:APPROXIMATE a em:Competence_value ;
+    rdfs:label "Approximate" ;
+    rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges." .
+
+em:ASSUMED a em:Competence_value ;
+    rdfs:label "Assumed" ;
+    rdfs:comment "The associated value is assumed from context." .
+
+em:A_PART_OF_A a em:Relation_type ;
+    rdfs:label "Subdivision of" ;
+    em:fromType gn:A ;
+    em:toType gn:A ;
+    rdfs:comment "Relates a subdivision of an administrative division to its parent division." .
+
+em:DEFINITIVE a em:Competence_value ;
+    rdfs:label "Definitive" ;
+    rdfs:comment "The associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be appropiate source references." .
+
+em:INFERRED a em:Competence_value ;
+    rdfs:label "Inferred" ;
+    rdfs:comment "The associated value has been inferred from (preferably?) definitive informaton." .
+
+em:UNCERTAIN a em:Competence_value ;
+    rdfs:label "Uncertain" ;
+    rdfs:comment "The associated value is uncertain." .
+
+em:competence a rdf:Property ;
+    rdfs:label "Certainty, or quality, of information" ;
+    rdfs:comment "Records the quality or certaintly of some information.  Note that in the absence of an explicit value, no competence should be assumed." ;
+    rdfs:range em:Competence_value .
+
+em:coreDataRef rdfs:subPropertyOf em:source .
+
+eml:de a em:Language_value ;
+    rdfs:label "German" ;
+    em:tag "de" .
+
+eml:la a em:Language_value ;
+    rdfs:label "Latin" ;
+    em:tag "la" .
+
+eml:pl a em:Language_value ;
+    rdfs:label "Polish" ;
+    em:tag "pl" .
+
+gn:A.ADM1 a skos:Concept ;
+    rdfs:label "First-order admin division" ;
+    rdfs:comment "A primary administrative division of a country, such as a state in the United States.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.ADM1H a skos:Concept ;
+    rdfs:label "Former first-order admin division" ;
+    rdfs:comment "A former first-order administrative division.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.ADM2 a skos:Concept ;
+    rdfs:label "Second-order admin division" ;
+    rdfs:comment "A subdivision of a first-order administrative division.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.ADM2H a skos:Concept ;
+    rdfs:label "Former second-order admin division" ;
+    rdfs:comment "A former first-order administrative division.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.ADM3 a skos:Concept ;
+    rdfs:label "Third-order admin division" ;
+    rdfs:comment "A subdivision of a second-order administrative division.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.ADM3H a skos:Concept ;
+    rdfs:label "Former Third-order admin division" ;
+    rdfs:comment "A former third-order administrative division.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.PCLH a skos:Concept ;
+    rdfs:label "Former independent political entity" ;
+    rdfs:comment "A former independent political entity, typically a country.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.PCLI a skos:Concept ;
+    rdfs:label "Independent political entity" ;
+    rdfs:comment "An independent political entity, typically a country.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:P.PPL a skos:Concept ;
+    rdfs:label "Populated place" ;
+    rdfs:comment "A populated place (town, city, village, etc.).  From GeoNames (feature code)." ;
+    skos:narrower gn:P .
+
+gn:P.PPLH a skos:Concept ;
+    rdfs:label "Former populated place" ;
+    rdfs:comment "A former populated place that no longer exists.  From GeoNames (feature code)." ;
+    skos:narrower gn:P .
+
+em:P_OR_A a skos:Concept ;
+    rdfs:label "Former populated place or admin division" ;
+    rdfs:comment "Former populated place or administrative division, used in historical administrative relations" ;
+    skos:broader gn:A,
+        gn:P .
+
+em:P_PART_OF_A a em:Relation_type ;
+    rdfs:label "Administered by" ;
+    em:fromType gn:P ;
+    em:toType gn:A ;
+    rdfs:comment "Relates a populated place to its administrative division." .
+
+em:corePlaceType rdfs:subPropertyOf em:placeType .
+
+gn:P.PPLA a skos:Concept ;
+    rdfs:label "Seat of 1st-order admin div" ;
+    rdfs:comment "Populated place that is a seat of a first-order administrative division.  From GeoNames (feature code)." ;
+    skos:narrower gn:P .
 
 emp:g_3090048 a em:Place ;
     rdfs:label "Opole (seat of a first-order administrative division)" ;
@@ -110,5 +237,20 @@ emp:g_3090048 a em:Place ;
     rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
         <http://en.wikipedia.org/wiki/Opole>,
         <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> .
+
+emt:Current a em:Time_period ;
+    rdfs:label "Current, as of 2018" ;
+    em:timespan [ a em:Time_span ;
+            <http://emplaces.namespace.example.org/earliestEnd:> "2018" ;
+            <http://emplaces.namespace.example.org/latestStart:> "2018" ] ;
+    rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." .
+
+gn:P a skos:Concept ;
+    rdfs:label "Populated place" ;
+    rdfs:comment "Populated place - from GeoNames (feature class)." .
+
+gn:A a skos:Concept ;
+    rdfs:label "Administrative division" ;
+    rdfs:comment "Administrative division - from GeoNames (feature class)." .
 
 
