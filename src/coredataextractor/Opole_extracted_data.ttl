@@ -74,29 +74,14 @@ eml:pl a em:Language_value ;
     rdfs:label "Polish" ;
     em:tag "pl" .
 
-gn:A.ADM1 a skos:Concept ;
-    rdfs:label "First-order admin division" ;
-    rdfs:comment "A primary administrative division of a country, such as a state in the United States.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
 gn:A.ADM1H a skos:Concept ;
     rdfs:label "Former first-order admin division" ;
     rdfs:comment "A former first-order administrative division.  From GeoNames (feature code)." ;
     skos:narrower gn:A .
 
-gn:A.ADM2 a skos:Concept ;
-    rdfs:label "Second-order admin division" ;
-    rdfs:comment "A subdivision of a first-order administrative division.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
 gn:A.ADM2H a skos:Concept ;
     rdfs:label "Former second-order admin division" ;
     rdfs:comment "A former first-order administrative division.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.ADM3 a skos:Concept ;
-    rdfs:label "Third-order admin division" ;
-    rdfs:comment "A subdivision of a second-order administrative division.  From GeoNames (feature code)." ;
     skos:narrower gn:A .
 
 gn:A.ADM3H a skos:Concept ;
@@ -107,11 +92,6 @@ gn:A.ADM3H a skos:Concept ;
 gn:A.PCLH a skos:Concept ;
     rdfs:label "Former independent political entity" ;
     rdfs:comment "A former independent political entity, typically a country.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.PCLI a skos:Concept ;
-    rdfs:label "Independent political entity" ;
-    rdfs:comment "An independent political entity, typically a country.  From GeoNames (feature code)." ;
     skos:narrower gn:A .
 
 gn:P.PPL a skos:Concept ;
@@ -130,13 +110,27 @@ em:P_OR_A a skos:Concept ;
     skos:broader gn:A,
         gn:P .
 
-em:P_PART_OF_A a em:Relation_type ;
-    rdfs:label "Administered by" ;
-    em:fromType gn:P ;
-    em:toType gn:A ;
-    rdfs:comment "Relates a populated place to its administrative division." .
-
 em:corePlaceType rdfs:subPropertyOf em:placeType .
+
+gn:A.ADM1 a skos:Concept ;
+    rdfs:label "First-order admin division" ;
+    rdfs:comment "A primary administrative division of a country, such as a state in the United States.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.ADM2 a skos:Concept ;
+    rdfs:label "Second-order admin division" ;
+    rdfs:comment "A subdivision of a first-order administrative division.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.ADM3 a skos:Concept ;
+    rdfs:label "Third-order admin division" ;
+    rdfs:comment "A subdivision of a second-order administrative division.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
+
+gn:A.PCLI a skos:Concept ;
+    rdfs:label "Independent political entity" ;
+    rdfs:comment "An independent political entity, typically a country.  From GeoNames (feature code)." ;
+    skos:narrower gn:A .
 
 gn:P.PPLA a skos:Concept ;
     rdfs:label "Seat of 1st-order admin div" ;
@@ -238,16 +232,444 @@ emp:g_3090048 a em:Place ;
         <http://en.wikipedia.org/wiki/Opole>,
         <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> .
 
+emp:g_3337495 a em:Place ;
+    rdfs:label "Opole Voivodeship (first-order administrative division)" ;
+    em:alternateName "Województwo Opolskie",
+        "Voivodat d'Opole"@ca,
+        "Opolské vojvodství"@cs,
+        "Òpòlsczé wòjewództwò"@csb,
+        "Woiwodschaft Oppeln"@de,
+        "Opole Voivodeship"@en,
+        "Opolio"@eo,
+        "Opole"@es,
+        "Opole vojevoodkond"@et,
+        "Voïvodie d'Opole"@fr,
+        "Provinsi Opole"@id,
+        "Voivodato di Opole"@it,
+        "オポーレ県"@ja,
+        "Opolės vaivadija"@lt,
+        "Opole"@nl,
+        "Województwo opolskie"@pl,
+        "Província de Opole"@pt,
+        "Voivodia de Opole"@pt,
+        "Voievodatul Opole"@ro,
+        "Опольское воеводство"@ru,
+        "Opolské vojvodstvo"@sk,
+        "Opole vojvodskap"@sv,
+        "Opplen"@sv ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3337495/> ] ;
+    em:canonicalURI emp:g_3337495 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3337495/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Opole",
+        "Opole Voivodeship",
+        "Opole vojevoodkond",
+        "Opole vojvodskap",
+        "Opolio",
+        "Opolské vojvodstvo",
+        "Opolské vojvodství",
+        "Opolės vaivadija",
+        "Opplen",
+        "Provinsi Opole",
+        "Província de Opole",
+        "Voievodatul Opole",
+        "Voivodat d'Opole",
+        "Voivodato di Opole",
+        "Voivodia de Opole",
+        "Voïvodie d'Opole",
+        "Woiwodschaft Oppeln",
+        "Województwo Opolskie",
+        "Województwo opolskie",
+        "Òpòlsczé wòjewództwò",
+        "Опольское воеводство",
+        "オポーレ県" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337495/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Opole Voivodeship" ;
+                    em:link <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ] ;
+            oa:hasTarget emp:g_3337495 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3066138 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337495/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Opole Voivodeship" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.066667e+01 ;
+                    wgs84_pos:long 1.79e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337495/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole_Voivodeship>,
+        <http://en.wikipedia.org/wiki/Opole_Voivodeship>,
+        <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+emp:g_798544 a em:Place ;
+    rdfs:label "Poland (independent political entity)" ;
+    em:alternateName "Lengyelország",
+        "Lenkija",
+        "Poland",
+        "Polen",
+        "Polija",
+        "Polish People’s Republic",
+        "Pologne",
+        "Polonia",
+        "Polsha",
+        "Polska",
+        "Polska Rzeczpospolita Ludowa",
+        "Polsko",
+        "Poola",
+        "Pole"@af,
+        "ፖላንድ"@am,
+        "Polonia"@an,
+        "Polaland"@ang,
+        "بولندا"@ar,
+        "ܦܘܠܢܕ"@arc,
+        "Polonia"@ast,
+        "Polşa"@az,
+        "Польша"@be,
+        "Полша"@bg,
+        "পোল্যাণ্ড"@bn,
+        "Polonia"@br,
+        "Poljska"@bs,
+        "Polònia"@ca,
+        "Polsko"@cs,
+        "Pòlskô"@csb,
+        "Пол҄ьска"@cu,
+        "Польша"@cv,
+        "Gwlad Pwyl"@cy,
+        "Polen"@da,
+        "Polen"@de,
+        "Polonya"@diq,
+        "Πολωνία"@el,
+        "Republic of Poland"@en,
+        "Polio"@eo,
+        "Pollando"@eo,
+        "Polujo"@eo,
+        "Poola"@et,
+        "Polonia"@eu,
+        "لهستان"@fa,
+        "Puola"@fi,
+        "Pólland"@fo,
+        "Pologne"@frp,
+        "Polonie"@fur,
+        "Poalen"@fy,
+        "An Pholainn"@ga,
+        "A Phòlainn"@gd,
+        "Polonia - Polska"@gl,
+        "Polóña"@gn,
+        "Yn Pholynn"@gv,
+        "Poljska"@hbs,
+        "פולין"@he,
+        "पोलैंड"@hi,
+        "Poljska"@hr,
+        "Pólska"@hsb,
+        "Lengyelország"@hu,
+        "Լեհաստան"@hy,
+        "Polonia"@ia,
+        "Polandia"@id,
+        "Polandia"@ilo,
+        "Polonia"@io,
+        "Pólland"@is,
+        "Polonia"@it,
+        "ポーランド"@ja,
+        "polskas"@jbo,
+        "Polandia"@jv,
+        "პოლონეთი"@ka,
+        "ប៉ូលូញ"@km,
+        "폴란드"@ko,
+        "Polonya"@ku,
+        "Poloni"@kw,
+        "Polonia"@la,
+        "Polen"@lb,
+        "Pole"@li,
+        "Polonia"@lij,
+        "ໂປແລນ"@lo,
+        "Lenkija"@lt,
+        "Polija"@lv,
+        "Полска"@mk,
+        "Poland"@ms,
+        "Polonja"@mt,
+        "Poran"@na,
+        "Pulonnia"@nap,
+        "Polen"@nb,
+        "Polen"@nds,
+        "Polen"@nl,
+        "Polen"@nn,
+        "Polen"@no,
+        "Polonia"@nov,
+        "Polongne"@nrm,
+        "Polonha"@oc,
+        "Pol’šu"@olo,
+        "Польшæ"@os,
+        "Polonya"@pam,
+        "Rzeczpospolita Polska"@pl,
+        "Polònia"@pms,
+        "پولنډ"@ps,
+        "Polónia"@pt,
+        "Polônia"@pt,
+        "Pulska"@qu,
+        "Pulunya"@qu,
+        "Polonia"@ro,
+        "Полония"@ro,
+        "Польша"@ru,
+        "Polonia"@sc,
+        "Pulonia"@scn,
+        "Poland"@sco,
+        "Polen"@se,
+        "Poľsko"@sk,
+        "Poljska"@sl,
+        "Booland"@so,
+        "Poloni"@sq,
+        "Polonia"@sq,
+        "Пољска"@sr,
+        "Polen"@sv,
+        "Poland"@sw,
+        "போலந்து"@ta,
+        "Polónia"@tet,
+        "Лаҳистон"@tg,
+        "ประเทศโปแลนด์"@th,
+        "โปแลนด์"@th,
+        "Polonya"@tl,
+        "poland"@tl,
+        "Polonya"@tr,
+        "لەھىستان"@ug,
+        "Польща"@uk,
+        "Polsha"@uz,
+        "Ba Lan"@vi,
+        "Pooln"@vls,
+        "Polän"@vo,
+        "Polonya"@war,
+        "פוילן"@yi,
+        "波兰"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/798544/> ] ;
+    em:canonicalURI emp:g_798544 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/798544/about.rdf> ] ;
+    em:corePlaceType gn:A.PCLI ;
+    em:displayName "A Phòlainn",
+        "An Pholainn",
+        "Ba Lan",
+        "Booland",
+        "Gwlad Pwyl",
+        "Lengyelország",
+        "Lenkija",
+        "Poalen",
+        "Polaland",
+        "Poland",
+        "Polandia",
+        "Pole",
+        "Polen",
+        "Polija",
+        "Polio",
+        "Polish People’s Republic",
+        "Poljska",
+        "Pollando",
+        "Pologne",
+        "Polongne",
+        "Polonha",
+        "Poloni",
+        "Polonia",
+        "Polonia - Polska",
+        "Polonie",
+        "Polonja",
+        "Polonya",
+        "Polsha",
+        "Polska",
+        "Polska Rzeczpospolita Ludowa",
+        "Polsko",
+        "Polujo",
+        "Polän",
+        "Polònia",
+        "Polónia",
+        "Polóña",
+        "Polônia",
+        "Polşa",
+        "Pol’šu",
+        "Poola",
+        "Pooln",
+        "Poran",
+        "Poľsko",
+        "Pulonia",
+        "Pulonnia",
+        "Pulska",
+        "Pulunya",
+        "Puola",
+        "Pòlskô",
+        "Pólland",
+        "Pólska",
+        "Republic of Poland",
+        "Rzeczpospolita Polska",
+        "Yn Pholynn",
+        "poland",
+        "polskas",
+        "Πολωνία",
+        "Лаҳистон",
+        "Полония",
+        "Полска",
+        "Полша",
+        "Польшæ",
+        "Польша",
+        "Польща",
+        "Пол҄ьска",
+        "Пољска",
+        "Լեհաստան",
+        "פוילן",
+        "פולין",
+        "بولندا",
+        "لهستان",
+        "لەھىستان",
+        "پولنډ",
+        "ܦܘܠܢܕ",
+        "पोलैंड",
+        "পোল্যাণ্ড",
+        "போலந்து",
+        "ประเทศโปแลนด์",
+        "โปแลนด์",
+        "ໂປແລນ",
+        "პოლონეთი",
+        "ፖላንድ",
+        "ប៉ូលូញ",
+        "ポーランド",
+        "波兰",
+        "폴란드" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/798544/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Poland" ;
+                    em:link <http://www.geonames.org/798544/republic-of-poland.html> ] ;
+            oa:hasTarget emp:g_798544 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7729884 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/798544/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Poland" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.2e+01 ;
+                    wgs84_pos:long 2e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/798544/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Poland>,
+        <http://en.wikipedia.org/wiki/Poland>,
+        <http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BE%D0%BD%D0%B8%D1%8F>,
+        <http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8C%D1%88%D0%B0> .
+
+emp:g_7530818 a em:Place ;
+    rdfs:label "Opole (second-order administrative division)" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7530818/> ] ;
+    em:canonicalURI emp:g_7530818 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7530818/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530818/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <http://www.geonames.org/7530818/opole.html> ] ;
+            oa:hasTarget emp:g_7530818 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3082777 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530818/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Opole" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.065622e+01 ;
+                    wgs84_pos:long 1.793066e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530818/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <http://en.wikipedia.org/wiki/Opole> .
+
+emp:g_7532413 a em:Place ;
+    rdfs:label "Opole (third-order administrative division)" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7532413/> ] ;
+    em:canonicalURI emp:g_7532413 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7532413/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532413/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <http://www.geonames.org/7532413/opole.html> ] ;
+            oa:hasTarget emp:g_7532413 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7530818 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532413/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Opole" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.06562e+01 ;
+                    wgs84_pos:long 1.79306e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532413/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <http://en.wikipedia.org/wiki/Opole> .
+
+em:P_PART_OF_A a em:Relation_type ;
+    rdfs:label "Administered by" ;
+    em:fromType gn:P ;
+    em:toType gn:A ;
+    rdfs:comment "Relates a populated place to its administrative division." .
+
+gn:P a skos:Concept ;
+    rdfs:label "Populated place" ;
+    rdfs:comment "Populated place - from GeoNames (feature class)." .
+
 emt:Current a em:Time_period ;
     rdfs:label "Current, as of 2018" ;
     em:timespan [ a em:Time_span ;
             <http://emplaces.namespace.example.org/earliestEnd:> "2018" ;
             <http://emplaces.namespace.example.org/latestStart:> "2018" ] ;
     rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." .
-
-gn:P a skos:Concept ;
-    rdfs:label "Populated place" ;
-    rdfs:comment "Populated place - from GeoNames (feature class)." .
 
 gn:A a skos:Concept ;
     rdfs:label "Administrative division" ;
