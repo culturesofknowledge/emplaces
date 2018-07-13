@@ -8,3 +8,6 @@
 - [ ] review place type labelling (currently uses label from GeoNames ontology file)
 - [ ] Installation  script (setup.py)
 
+
+
+
