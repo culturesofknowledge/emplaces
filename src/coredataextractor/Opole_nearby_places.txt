@@ -1,0 +1,10 @@
+3090048         # Opole
+3081368         # Wroclaw
+3100946         # Czestochowa
+3096472         # Katowice
+3094802         # Krakow
+3093133         # Lodz
+3088171         # Poznan
+756135          # Warsaw
+3068799         # Ostrava (Czechia)
+3067696         # Prague (Czechia)

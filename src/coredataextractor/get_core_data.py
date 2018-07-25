@@ -290,8 +290,9 @@ command_summary_help = ("\n"+
     "\n"+
     "  %(prog)s help [command]\n"+
     "  %(prog)s get GEONAMESID\n"+
-    "  %(prog)s getmultiple\n"+
+    "  %(prog)s manyget\n"+
     "  %(prog)s placehierarchy GEONAMESID\n"+
+    "  %(prog)s manyplacehierarchy\n"+
     "  %(prog)s version\n"+
     "")
 
@@ -411,16 +412,16 @@ def show_help(options, progname):
             "\n"+
             "  %(prog)s --help\n"+
             "")
-    elif options.args[0].startswith("getm"):
+    elif options.args[0].startswith("manyg"):
         help_text = ("\n"+
-            "  %(prog)s getmultiple\n"+
+            "  %(prog)s manyget\n"+
             "\n"+
             "\n"+
             "Reads GeoNames place Ids from stdin, one per line, retrieves data\n"+
             "for these from GeoNames, and sends corresponding EMPlaces data in\n"+
             "Turtle format to standard output.\n"+
             "\n"+
-            "To include come common non-place-specific supporting definitions, see options\n"+
+            "To include some common non-place-specific supporting definitions, see options\n"+
             "'--include-common-defs', '--include-emplaces-defs', '--include-geonames-defs', \n"+
             "and '--include-language-defs'.\n"+
             "\n"+
@@ -432,19 +433,31 @@ def show_help(options, progname):
             "Gets data about a specified place from GeoNames, and sends corresponding\n"+
             "EMPlaces data in Turtle format to standard output.\n"+
             "\n"+
-            "To include come common non-place-specific supporting definitions, see options\n"+
+            "To include some common non-place-specific supporting definitions, see options\n"+
             "'--include-common-defs', '--include-emplaces-defs', '--include-geonames-defs', \n"+
             "and '--include-language-defs'.\n"+
             "\n"+
             "")
-    elif options.args[0].startswith("placehierarchy"):
+    elif options.args[0].startswith("placeh"):
         help_text = ("\n"+
             "  %(prog)s placehierarchy GEONAMESID\n"+
             "\n"+
             "Gets current administrative hierarchy about a place from GeoNames, \n"+
             "and outputs a list of place Ids, oine poer line,m to standard output.\n"+
             "\n"+
-            "The output can be used as input to a `getmultiple` command.\n"+
+            "The output can be used as input to a `manyget` command.\n"+
+            "\n"+
+            "")
+    elif options.args[0].startswith("manyplaceh"):
+        help_text = ("\n"+
+            "  %(prog)s manyplacehierarchy\n"+
+            "\n"+
+            "Reads GeoNames place Ids from stdin, one per line, and for each retrieves\n"+
+            "place ids in the current administratiove hierarch up as far as country\n"+
+            "level, and outouts the resuting list of place IDs (including the input IDs)\n"+
+            "to stdout, one per line.\n"+
+            "\n"+
+            "The output can be used as input to a `manyget` command.\n"+
             "\n"+
             "")
     elif options.args[0].startswith("ver"):
@@ -527,6 +540,17 @@ def get_emlaces_id_uri_node(geonames_id):
     emplaces_node = URIRef(emplaces_uri)
     return (emplaces_id, emplaces_uri, emplaces_node)
 
+def get_many_place_ids():
+    geonames_ids = []
+    for line in sys.stdin:
+        u_line = line.decode("utf8")
+        bare_id = u_line.split("#", 1)[0].strip()
+        if bare_id:
+            geonames_ids.append(bare_id)
+    if not geonames_ids:
+        print("No place Ids found", file=sys.stderr)
+    return geonames_ids    
+
 #   ===================================================================
 #
 #   RDF data wrangling
@@ -565,18 +589,24 @@ def get_geonames_place_type_label(place_type, geo_ont_rdf):
     """
     # Alternatives to ontology labels
     place_type_labels = (
-        { GN["P.PPL"]:   "Populated place"
-        , GN["P.PPLA"]:  "Populated place (city?)"
-        , GN["A.ADM3"]:  "City"
-        , GN["A.ADM2"]:  "County"
-        , GN["A.ADM1"]:  "Region"
+        { GN["P.PPL"]:   "Populated place (ppl)"
+        , GN["P.PPLA"]:  "Populated place (ppla)"
+        , GN["A.ADM5"]:  "City   (adm3}"
+        , GN["A.ADM4"]:  "City   (adm3}"
+        , GN["A.ADM3"]:  "City   (adm3}"
+        , GN["A.ADM2"]:  "County (adm2)"
+        , GN["A.ADM1"]:  "Region (adm1)"
         , GN["A.PCLI"]:  "Country"
+        , GN["L.RGN"]:   "Region (l.rgn)"
         })
-    type_labels = geo_ont_rdf[place_type:SKOS.prefLabel:]
-    for l in type_labels:
-        if l.language == "en":
-            type_label  = Literal(" ".join(str(l).split()))
-            # https://stackoverflow.com/a/46501496/324122
+    if place_type in place_type_labels:
+        type_label = place_type_labels[place_type]
+    else:
+        type_labels = geo_ont_rdf[place_type:SKOS.prefLabel:]
+        for l in type_labels:
+            if l.language == "en":
+                type_label  = Literal(" ".join(str(l).split()))
+                # https://stackoverflow.com/a/46501496/324122
     return type_label
 
 def add_emplaces_common_namespaces(emp_graph):
@@ -757,7 +787,9 @@ def get_emplaces_core_data(
 
     # Define relation for current admin hierarchy (1 level up only)
     parent_geonames_id  = get_geonames_id(str(place_parent))
-    parent_id, parent_uri, parent_node = get_emlaces_id_uri_node(parent_geonames_id)
+    parent_id, parent_uri, parent_node = (
+        get_emlaces_id_uri_node(parent_geonames_id)
+        )
     b_source   = add_source(emplaces_rdf, lit_geonames_data, place_def_by)
     b_relation = add_place_relation(emplaces_rdf, 
         EM.P_PART_OF_A, parent_node,
@@ -816,19 +848,14 @@ def do_get_geonames_place_data(gcdroot, options):
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GCD_SUCCESS
 
-def do_get_geonames_multiple_data(gcdroot, options):
+def do_get_many_geonames_place_data(gcdroot, options):
     """
     Read multiple place Ids from standard input, and return a graph of
     EMPlaces data for all of the identified places.
     """
     emplaces_rdf = None     # Graph created on first loop below
-    geonames_ids = []
-    for line in sys.stdin:
-        bare_id = line.split("#", 1)[0].strip()
-        if bare_id:
-            geonames_ids.append(bare_id)
+    geonames_ids = get_many_place_ids()
     if not geonames_ids:
-        print("No place Ids found", file=sys.stderr)
         return GCD_NO_PLACE_IDS
     for geonames_id in geonames_ids:
         #@@TODO: catch exception and return failure
@@ -837,41 +864,119 @@ def do_get_geonames_multiple_data(gcdroot, options):
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GCD_SUCCESS
 
-def get_geonames_place_parent(place_id):
-    log.debug("get_geonames_place_parent(%s)"%(place_id))
+# def get_geonames_place_parent(place_id):
+#     log.debug("get_geonames_place_parent(%s)"%(place_id))
+#     place_uri, place_url = get_geonames_uri(place_id)
+#     place_node   = URIRef(place_uri)
+#     place_rdf    = get_geonames_place_data(place_url)
+#     for place_type in place_rdf[place_node:GN.featureCode:]:
+#         if place_type == GN["A.PCLI"]:
+#             return None
+#     for place_parent in place_rdf[place_node:GN.parentFeature:]:
+#         parent_id    = get_geonames_id(str(place_parent))
+#         return parent_id
+#     return None     # No parent place here
+
+def get_geonames_place_rdf(place_id):
+    log.debug("get_geonames_place_rdf(%s)"%(place_id))
     place_uri, place_url = get_geonames_uri(place_id)
     place_node   = URIRef(place_uri)
     place_rdf    = get_geonames_place_data(place_url)
+    return (place_node, place_rdf)
+
+def get_geonames_place_name_type_parent(place_node, place_rdf):
+    place_name = None
+    place_type = None
+    parent_id  = None
     for place_type in place_rdf[place_node:GN.featureCode:]:
-        if place_type == GN["A.PCLI"]:
-            return None
-    for place_parent in place_rdf[place_node:GN.parentFeature:]:
-        parent_id    = get_geonames_id(str(place_parent))
-        return parent_id
-    return None     # No parent place here
+        break
+    for place_name in place_rdf[place_node:GN.name:]:
+        break
+    for parent_node in place_rdf[place_node:GN.parentFeature:]:
+        parent_id = get_geonames_id(str(parent_node))
+        break
+    if place_type == GN["A.PCLI"]:
+        parent_id = None     # No parent place for country
+    return (place_name, place_type, parent_id)
 
-    # if ... in place_rdf:
-    #     place_parent = place_rdf[place_node:GN.parentFeature:].next()
-    #     parent_id    = get_geonames_id(str(place_parent))
-    # else:
-    #     place_id = None
-    # return parent_id
+def get_place_admin_hierarchy(place_ids, hier_ids):
+    """
+    Reads admin hierarchy places directly out of a place record
 
-def get_places_hierarchy(place_ids, parent_ids):
-    log.debug("get_places_hierarchy(%s, %s)"%(place_ids, parent_ids))
+    This is an alternative to `get_places_hierarchy` which walks the parent featiure
+    links up the tree.  We have found the parent links are not always consistent.
+    """
+    log.debug("get_places_hierarchy(%s, %s)"%(place_ids, hier_ids))
+    admin_parent_properties = (
+        [ GN.parentADM5
+        , GN.parentADM4
+        , GN.parentADM3
+        , GN.parentADM2
+        , GN.parentADM1
+        , GN.parentCountry
+        ])
     for place_id in place_ids:
-        if place_id not in parent_ids:
-            parent_ids.append(place_id)
-            parent_id    = get_geonames_place_parent(place_id)
+        if place_id not in hier_ids:
+            place_node, place_rdf = get_geonames_place_rdf(place_id)
+            place_name, place_type, parent_id = (
+                get_geonames_place_name_type_parent(place_node, place_rdf)
+                )
+            hier_ids[place_id] = (place_id, place_name, place_type)
+            for prop in admin_parent_properties:
+                for parent_obj in place_rdf[place_node:prop:]:
+                    parent_id = get_geonames_id(parent_obj)
+                    if parent_id not in hier_ids:
+                        log.debug("get_places_hierarchy: parent_id %s"%(parent_id,))
+                        parent_node, parent_rdf = get_geonames_place_rdf(parent_id)
+                        parent_name, parent_type, grandparent_id = (
+                            get_geonames_place_name_type_parent(parent_node, parent_rdf)
+                            )
+                        hier_ids[parent_id] = (parent_id, parent_name, parent_type)
+    return hier_ids
+
+def get_places_hierarchy(place_ids, hier_ids):
+    log.debug("get_places_hierarchy(%s, %s)"%(place_ids, hier_ids))
+    for place_id in place_ids:
+        if place_id not in hier_ids:
+            place_node, place_rdf = get_geonames_place_rdf(place_id)
+            place_name, place_type, parent_id = (
+                get_geonames_place_name_type_parent(place_node, place_rdf)
+                )
+            hier_ids[place_id] = (place_id, place_name, place_type)
             if parent_id:
-                parent_ids   = get_places_hierarchy([parent_id], parent_ids)
-    return parent_ids
+                hier_ids   = get_places_hierarchy([parent_id], hier_ids)
+    return hier_ids
+
+def format_id_name(pid, pname, ptype, geo_ont_rdf):
+    log.debug("format_id_name: (%r, %r, %r)"%(pid, pname, ptype))
+    return (
+        unicode(pid).ljust(8) +
+        "  # " + unicode(pname) +
+        " ("   + get_geonames_place_type_label(ptype, geo_ont_rdf) +
+        ")").encode('utf8')
 
 def do_get_place_hierarchy(gcdroot, options):
-    geonames_id   = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
-    parent_ids    = get_places_hierarchy([geonames_id], [])
-    for p in parent_ids:
-        print(p, file=sys.stdout)
+    geo_ont_rdf = get_geonames_ontology()
+    geonames_id = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
+    #@@ follow parentFeature links: results are inconsistent.
+    # hier_id_name_types = get_places_hierarchy([geonames_id], {})
+    #@@
+    hier_id_name_types = get_place_admin_hierarchy([geonames_id], {})
+    for p, n, t in hier_id_name_types.values():
+        print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
+    return GCD_SUCCESS
+
+def do_get_many_place_hierarchy(gcdroot, options):
+    geo_ont_rdf = get_geonames_ontology()
+    place_ids   = get_many_place_ids()
+    if not place_ids:
+        return GCD_NO_PLACE_IDS
+    #@@ follow parentFeature links: results are inconsistent.
+    # hier_id_name_types = get_places_hierarchy(place_ids, {})
+    #@@
+    hier_id_name_types = get_place_admin_hierarchy(place_ids, {})
+    for p, n, t in hier_id_name_types.values():
+        print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
     return GCD_SUCCESS
 
 #   ===================================================================
@@ -888,12 +993,14 @@ def run(userhome, userconfig, options, progname):
     """
     if options.command.startswith("@@@"):
         return do_zzzzzz(gcdroot, options)
-    if options.command.startswith("getm"):
-        return do_get_geonames_multiple_data(gcdroot, options)
     if options.command.startswith("get"):
         return do_get_geonames_place_data(gcdroot, options)
+    if options.command.startswith("manyg"):
+        return do_get_many_geonames_place_data(gcdroot, options)
     if options.command.startswith("placeh"):
         return do_get_place_hierarchy(gcdroot, options)
+    if options.command.startswith("manyplaceh"):
+        return do_get_many_place_hierarchy(gcdroot, options)
     if options.command.startswith("ver"):
         return show_version(gcdroot, userhome, options)
     if options.command.startswith("help"):

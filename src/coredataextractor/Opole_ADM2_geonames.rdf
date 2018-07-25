@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rdf:RDF xmlns:cc="http://creativecommons.org/ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gn="http://www.geonames.org/ontology#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:wgs84_pos="http://www.w3.org/2003/01/geo/wgs84_pos#">
+<gn:Feature rdf:about="http://sws.geonames.org/7530818/">
+<rdfs:isDefinedBy rdf:resource="http://sws.geonames.org/7530818/about.rdf"/>
+<gn:name>Opole</gn:name>
+<gn:featureClass rdf:resource="http://www.geonames.org/ontology#A"/>
+<gn:featureCode rdf:resource="http://www.geonames.org/ontology#A.ADM2"/>
+<gn:countryCode>PL</gn:countryCode>
+<wgs84_pos:lat>50.65622</wgs84_pos:lat>
+<wgs84_pos:long>17.93066</wgs84_pos:long>
+<gn:parentFeature rdf:resource="http://sws.geonames.org/3082777/"/>
+<gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
+<gn:parentADM1 rdf:resource="http://sws.geonames.org/3337495/"/>
+<gn:childrenFeatures rdf:resource="http://sws.geonames.org/7530818/contains.rdf"/>
+<gn:locationMap rdf:resource="http://www.geonames.org/7530818/opole.html"/>
+<gn:wikipediaArticle rdf:resource="http://en.wikipedia.org/wiki/Opole"/>
+<rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Opole"/>
+</gn:Feature>
+<foaf:Document rdf:about="http://sws.geonames.org/7530818/about.rdf">
+<foaf:primaryTopic rdf:resource="http://sws.geonames.org/7530818/"/>
+<cc:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
+<cc:attributionURL rdf:resource="http://www.geonames.org"/>
+<cc:attributionName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GeoNames</cc:attributionName>
+<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-09-04</dcterms:created>
+<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2017-10-25</dcterms:modified>
+</foaf:Document>
+</rdf:RDF>

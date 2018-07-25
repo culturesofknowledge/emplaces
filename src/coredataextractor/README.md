@@ -27,13 +27,35 @@ Install `rdflib` dependency
     cd src/coredataextractor
     pip install rdflib==4.2.2
 
+
+## Example usage
+
 Run the extractor for Opole ("3090048" is the GeoNames id for the City of Opole):
 
     python get_core_data.py get 3090048
 
-Turtle data is sent to stdout; may be redirected to a file, thus:
+Turtle data is sent to stdout, and may be redirected to a file, thus:
 
     python get_core_data.py get 3090048 >emplaces_opole.ttl
+
+Get list of place Ids in administrative hierarchy:
+
+    python get_core_data.py placehierarchy 3090048
+
+Get Turtle data for all places in administrative hierarchy:
+
+    python get_core_data.py placehierarchy 3090048 | \
+    python get_core_data.py manyget >emplaces_opole_hierarchy.ttl
+
+Get all members of the administrative hierarchy covering a supplied list of places:
+
+    cat Opole_nearby_places.txt | python get_core_data.py manyplacehierarchy
+
+Get RDF Turtle data for all members of the administrative hierarchy covering the list of places near Opole:
+
+    cat Opole_nearby_places.txt | \
+    python get_core_data.py manyplacehierarchy | \
+    python get_core_data.py manyget > Opole_extracted_data.ttl
 
 
 ## Command line usage
@@ -71,5 +93,8 @@ Turtle data is sent to stdout; may be redirected to a file, thus:
 
       get_core_data.py help [command]
       get_core_data.py get GEONAMESID
+      get_core_data.py manyget
+      get_core_data.py placehierarchy GEONAMESID
+      get_core_data.py manyplacehierarchy
       get_core_data.py version
-
+      
