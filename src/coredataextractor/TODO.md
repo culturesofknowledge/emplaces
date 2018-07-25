@@ -1,10 +1,12 @@
-# GeoNames cote data extractor for EMPlaces
+# GeoNames core data extractor for EMPlaces
 
 ## TODO
 
 - [x] add common definitions to output (optionally)
-- [ ] support multiple extractions in one command?
-- [ ] automatically scan admin hierarchy up to country, and add places
+- [x] support multiple extractions in one command, reading from stdin
+- [x] command to generate list of places in admin hierarchy for a place
+- [ ] command to generate hierarchy closure for supplied list of places
 - [ ] review place type labelling (currently uses label from GeoNames ontology file)
-- [ ] Installation  script (setup.py)
+- [ ] Installation script (setup.py)
+
 

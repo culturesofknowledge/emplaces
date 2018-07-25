@@ -9,7 +9,6 @@
 @prefix geonames: <http://sws.geonames.org/> .
 @prefix gn: <http://www.geonames.org/ontology#> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -17,134 +16,479 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-em:Place a rdfs:Class ;
-    em:coreProperty em:alternateName,
-        em:corePlaceType,
-        em:placeCategory,
-        em:preferredName .
+emp:g_3067696 a em:Place ;
+    rdfs:label "Prague (capital of a political entity)" ;
+    em:alternateName "ፕራግ"@am,
+        "براغ"@ar,
+        "ܦܪܓ"@arc,
+        "Прага"@be,
+        "Прага"@bg,
+        "པུ་ལ་ཁེ"@bo,
+        "Prag"@bs,
+        "Praga"@ca,
+        "Praga"@csb,
+        "Prag"@cy,
+        "Prâg"@cy,
+        "Prag"@da,
+        "Πράγα"@el,
+        "Prago"@eo,
+        "Praha"@et,
+        "Praga"@eu,
+        "پراگ"@fa,
+        "Praha"@fi,
+        "Prág"@ga,
+        "Pràg"@gd,
+        "Praga"@gl,
+        "Prag"@hbs,
+        "פראג"@he,
+        "Prag"@hr,
+        "Praha"@hsb,
+        "Prága"@hu,
+        "Praga"@ia,
+        "Praha"@id,
+        "Praha"@io,
+        "Prag"@is,
+        "Praga"@it,
+        "プラハ"@ja,
+        "პრაღა"@ka,
+        "프라하"@ko,
+        "Prag"@ku,
+        "Praga"@la,
+        "Prag"@lb,
+        "Praag"@li,
+        "Praha"@lt,
+        "Prāga"@lv,
+        "Praha"@na,
+        "Praag"@nl,
+        "Praha"@nn,
+        "Praha"@no,
+        "Prague"@nrm,
+        "Praga"@oc,
+        "Прагæ"@os,
+        "Praga"@pl,
+        "Praga"@pt,
+        "Praga"@ro,
+        "Praha"@sk,
+        "Praga"@sl,
+        "Praga"@sq,
+        "Праг"@sr,
+        "Prag"@sv,
+        "Прага"@tg,
+        "ปราก"@th,
+        "Prague"@tl,
+        "Prag"@tr,
+        "پراگا"@ug,
+        "Прага"@uk,
+        "Praha"@vi,
+        "布拉格"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3067696/> ] ;
+    em:canonicalURI emp:g_3067696 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3067696/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLC ;
+    em:displayName "Praag",
+        "Prag",
+        "Praga",
+        "Prago",
+        "Prague",
+        "Praha",
+        "Pràg",
+        "Prág",
+        "Prága",
+        "Prâg",
+        "Prāga",
+        "Πράγα",
+        "Праг",
+        "Прагæ",
+        "Прага",
+        "פראג",
+        "براغ",
+        "پراگ",
+        "پراگا",
+        "ܦܪܓ",
+        "ปราก",
+        "པུ་ལ་ཁེ",
+        "პრაღა",
+        "ፕራግ",
+        "プラハ",
+        "布拉格",
+        "프라하" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3067696/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Prague" ;
+                    em:link <http://www.geonames.org/3067696/prague.html> ] ;
+            oa:hasTarget emp:g_3067696 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3067695 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3067696/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Prague" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.008804e+01 ;
+                    wgs84_pos:long 1.442076e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3067696/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3067696/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Prague>,
+        <http://en.wikipedia.org/wiki/Prague> .
 
-em:AH_PART_OF_AH a em:Relation_type ;
-    rdfs:label "Former part of" ;
-    em:fromType em:P_OR_A ;
-    em:toType gn:A ;
-    rdfs:comment "Records a historical relationship between a historical place or administrative division and its parent division." .
+emp:g_3068799 a em:Place ;
+    rdfs:label "Ostrava (Populated place (ppla))" ;
+    em:alternateName "أوسترافا"@ar,
+        "Острава"@bg,
+        "Ostrava"@cs,
+        "Ostrava"@da,
+        "Ostrava"@de,
+        "Οστράβα"@el,
+        "Ostrava"@en,
+        "Ostrava"@eo,
+        "Ostrava"@es,
+        "Ostrava"@fi,
+        "Ostrava"@fr,
+        "אוסטרבה"@he,
+        "Ostrava"@id,
+        "Ostrava"@is,
+        "Ostrava"@it,
+        "オストラヴァ"@ja,
+        "오스트라바"@ko,
+        "Ostrava"@lt,
+        "Ostrava"@lv,
+        "Ostrava"@nl,
+        "Ostrawa"@pl,
+        "Ostrava"@pt,
+        "Ostrava"@ro,
+        "Острава"@ru,
+        "Ostrava"@sk,
+        "Острава"@sr,
+        "Ostrava"@sv,
+        "俄斯特拉發"@zh,
+        "奥斯特拉瓦"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3068799/> ] ;
+    em:canonicalURI emp:g_3068799 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3068799/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLA ;
+    em:displayName "Ostrava",
+        "Ostrawa",
+        "Οστράβα",
+        "Острава",
+        "אוסטרבה",
+        "أوسترافا",
+        "オストラヴァ",
+        "俄斯特拉發",
+        "奥斯特拉瓦",
+        "오스트라바" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3068799/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Ostrava" ;
+                    em:link <http://www.geonames.org/3068799/ostrava.html> ] ;
+            oa:hasTarget emp:g_3068799 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3068798 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3068799/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Ostrava" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 4.983465e+01 ;
+                    wgs84_pos:long 1.828204e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3068799/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3068799/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Ostrava>,
+        <http://en.wikipedia.org/wiki/Ostrava> .
 
-em:APPROXIMATE a em:Competence_value ;
-    rdfs:label "Approximate" ;
-    rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges." .
+emp:g_3081368 a em:Place ;
+    rdfs:label "Wrocław (Populated place (ppla))" ;
+    em:alternateName "Breslau",
+        "Breslavia",
+        "Breslavl’",
+        "Vrotslav",
+        "Wrocław",
+        "Wrosław",
+        "Wrocław"@af,
+        "فروتسواف"@ar,
+        "Wroclaw"@ast,
+        "Vroslav"@az,
+        "Горад Вроцлаў"@be,
+        "Вроцлав"@bg,
+        "Wroclaw"@bi,
+        "ڤرۆتسواف"@ckb,
+        "Vratislav"@cs,
+        "Wrocław"@csb,
+        "Wrocław"@da,
+        "Breslau"@de,
+        "Βρότσλαβ"@el,
+        "Wrocław"@en,
+        "Vroclavo"@eo,
+        "Breslavia"@es,
+        "Wrocław"@et,
+        "Wroclaw"@eu,
+        "وروتسواف"@fa,
+        "Wrocław"@fi,
+        "Wrocław"@fr,
+        "ורוצלב"@he,
+        "Wrocław"@hr,
+        "Wrócław"@hsb,
+        "Wrocław"@hu,
+        "Wrocław"@id,
+        "Wrocław"@is,
+        "Breslavia"@it,
+        "ヴロツワフ"@ja,
+        "Wrocław"@jv,
+        "ვროცლავი"@ka,
+        "브로츠와프"@ko,
+        "Vratislavia"@la,
+        "Vroclavas"@lt,
+        "Vroclava"@lv,
+        "Вроцлав"@mk,
+        "व्रोत्सवाफ"@mr,
+        "Wrocław"@ms,
+        "Wrocław"@na,
+        "Breslau"@nds,
+        "Wrocław"@nl,
+        "Wrocław"@nn,
+        "Wrocław"@no,
+        "Вроцлав"@os,
+        "Wrocław"@pl,
+        "وروسلاو"@pnb,
+        "Wrocław"@pt,
+        "Wrocław"@ro,
+        "Вроцлав"@ru,
+        "Vroclav"@sk,
+        "Wrocław"@sl,
+        "Brassel"@sli,
+        "Вроцлав"@sr,
+        "Wrocław"@sv,
+        "Wrocłow"@szl,
+        "விராத்ஸ்சாஃப்"@ta,
+        "Vroklave"@tet,
+        "วรอตสวัฟ"@th,
+        "Wroklaw"@ug,
+        "Вроцлав"@uk,
+        "Vroclav"@vep,
+        "Wrocław"@vo,
+        "ברעסלוי"@yi,
+        "弗罗茨瓦夫"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3081368/> ] ;
+    em:canonicalURI emp:g_3081368 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3081368/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLA ;
+    em:displayName "Brassel",
+        "Breslau",
+        "Breslavia",
+        "Breslavl’",
+        "Vratislav",
+        "Vratislavia",
+        "Vroclav",
+        "Vroclava",
+        "Vroclavas",
+        "Vroclavo",
+        "Vroklave",
+        "Vroslav",
+        "Vrotslav",
+        "Wroclaw",
+        "Wrocław",
+        "Wrocłow",
+        "Wroklaw",
+        "Wrosław",
+        "Wrócław",
+        "Βρότσλαβ",
+        "Вроцлав",
+        "Горад Вроцлаў",
+        "ברעסלוי",
+        "ורוצלב",
+        "فروتسواف",
+        "وروتسواف",
+        "وروسلاو",
+        "ڤرۆتسواف",
+        "व्रोत्सवाफ",
+        "விராத்ஸ்சாஃப்",
+        "วรอตสวัฟ",
+        "ვროცლავი",
+        "ヴロツワフ",
+        "弗罗茨瓦夫",
+        "브로츠와프" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3081368/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Wrocław" ;
+                    em:link <http://www.geonames.org/3081368/wroclaw.html> ] ;
+            oa:hasTarget emp:g_3081368 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7531292 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3081368/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Wrocław" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.11e+01 ;
+                    wgs84_pos:long 1.703333e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3081368/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3081368/about.rdf> ;
+    rdfs:seeAlso <http://de.wikipedia.org/wiki/Breslau>,
+        <http://ru.wikipedia.org/wiki/%D0%92%D1%80%D0%BE%D1%86%D0%BB%D0%B0%D0%B2> .
 
-em:ASSUMED a em:Competence_value ;
-    rdfs:label "Assumed" ;
-    rdfs:comment "The associated value is assumed from context." .
-
-em:A_PART_OF_A a em:Relation_type ;
-    rdfs:label "Subdivision of" ;
-    em:fromType gn:A ;
-    em:toType gn:A ;
-    rdfs:comment "Relates a subdivision of an administrative division to its parent division." .
-
-em:DEFINITIVE a em:Competence_value ;
-    rdfs:label "Definitive" ;
-    rdfs:comment "The associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be appropiate source references." .
-
-em:INFERRED a em:Competence_value ;
-    rdfs:label "Inferred" ;
-    rdfs:comment "The associated value has been inferred from (preferably?) definitive informaton." .
-
-em:UNCERTAIN a em:Competence_value ;
-    rdfs:label "Uncertain" ;
-    rdfs:comment "The associated value is uncertain." .
-
-em:competence a rdf:Property ;
-    rdfs:label "Certainty, or quality, of information" ;
-    rdfs:comment "Records the quality or certaintly of some information.  Note that in the absence of an explicit value, no competence should be assumed." ;
-    rdfs:range em:Competence_value .
-
-em:coreDataRef rdfs:subPropertyOf em:source .
-
-eml:de a em:Language_value ;
-    rdfs:label "German" ;
-    em:tag "de" .
-
-eml:la a em:Language_value ;
-    rdfs:label "Latin" ;
-    em:tag "la" .
-
-eml:pl a em:Language_value ;
-    rdfs:label "Polish" ;
-    em:tag "pl" .
-
-gn:A.ADM1 a skos:Concept ;
-    rdfs:label "First-order admin division" ;
-    rdfs:comment "A primary administrative division of a country, such as a state in the United States.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.ADM1H a skos:Concept ;
-    rdfs:label "Former first-order admin division" ;
-    rdfs:comment "A former first-order administrative division.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.ADM2 a skos:Concept ;
-    rdfs:label "Second-order admin division" ;
-    rdfs:comment "A subdivision of a first-order administrative division.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.ADM2H a skos:Concept ;
-    rdfs:label "Former second-order admin division" ;
-    rdfs:comment "A former first-order administrative division.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.ADM3 a skos:Concept ;
-    rdfs:label "Third-order admin division" ;
-    rdfs:comment "A subdivision of a second-order administrative division.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.ADM3H a skos:Concept ;
-    rdfs:label "Former Third-order admin division" ;
-    rdfs:comment "A former third-order administrative division.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.PCLH a skos:Concept ;
-    rdfs:label "Former independent political entity" ;
-    rdfs:comment "A former independent political entity, typically a country.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:A.PCLI a skos:Concept ;
-    rdfs:label "Independent political entity" ;
-    rdfs:comment "An independent political entity, typically a country.  From GeoNames (feature code)." ;
-    skos:narrower gn:A .
-
-gn:P.PPL a skos:Concept ;
-    rdfs:label "Populated place" ;
-    rdfs:comment "A populated place (town, city, village, etc.).  From GeoNames (feature code)." ;
-    skos:narrower gn:P .
-
-gn:P.PPLH a skos:Concept ;
-    rdfs:label "Former populated place" ;
-    rdfs:comment "A former populated place that no longer exists.  From GeoNames (feature code)." ;
-    skos:narrower gn:P .
-
-em:P_OR_A a skos:Concept ;
-    rdfs:label "Former populated place or admin division" ;
-    rdfs:comment "Former populated place or administrative division, used in historical administrative relations" ;
-    skos:broader gn:A,
-        gn:P .
-
-em:P_PART_OF_A a em:Relation_type ;
-    rdfs:label "Administered by" ;
-    em:fromType gn:P ;
-    em:toType gn:A ;
-    rdfs:comment "Relates a populated place to its administrative division." .
-
-em:corePlaceType rdfs:subPropertyOf em:placeType .
-
-gn:P.PPLA a skos:Concept ;
-    rdfs:label "Seat of 1st-order admin div" ;
-    rdfs:comment "Populated place that is a seat of a first-order administrative division.  From GeoNames (feature code)." ;
-    skos:narrower gn:P .
+emp:g_3088171 a em:Place ;
+    rdfs:label "Poznań (Populated place (ppla))" ;
+    em:alternateName "Poznań",
+        "بوزنان"@ar,
+        "Poznan"@az,
+        "Горад Познань"@be,
+        "Познан"@bg,
+        "ཕྰོ་ཟོ་ནན།"@bo,
+        "Познань"@ce,
+        "پۆزنان"@ckb,
+        "Pоznan"@crh,
+        "Poznaň"@cs,
+        "Pòznóń"@csb,
+        "Posen"@de,
+        "Πόζναν"@el,
+        "Poznano"@eo,
+        "Posnania"@es,
+        "پوزنان"@fa,
+        "Poznan"@fy,
+        "Pô-tsṳ-nàm"@hak,
+        "Poznanj"@hbs,
+        "פוזנן"@he,
+        "Poznanj"@hr,
+        "Պոզնան"@hy,
+        "ポズナン"@ja,
+        "პოზნანი"@ka,
+        "포즈난"@ko,
+        "Познань"@ky,
+        "Posnania"@la,
+        "Poznan"@lmo,
+        "Poznanė"@lt,
+        "Poznaņa"@lv,
+        "पोझ्नान"@mr,
+        "Познань ош"@myv,
+        "Poznan"@nah,
+        "Posen"@nds,
+        "Познань"@os,
+        "پوزنان"@pnb,
+        "Познань"@ru,
+        "Poznaň"@sk,
+        "Poznanj"@sl,
+        "Познањ"@sr,
+        "Poznańy"@szl,
+        "போசுனான்"@ta,
+        "พอซนาน"@th,
+        "Познань"@tt,
+        "Познань"@udm,
+        "Poznan"@ug,
+        "Познань"@uk,
+        "پوزنان"@ur,
+        "Poznan"@vep,
+        "פויזן"@yi,
+        "波茲南"@yue,
+        "波茲南"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3088171/> ] ;
+    em:canonicalURI emp:g_3088171 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3088171/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLA ;
+    em:displayName "Posen",
+        "Posnania",
+        "Poznan",
+        "Poznanj",
+        "Poznano",
+        "Poznanė",
+        "Poznań",
+        "Poznańy",
+        "Poznaņa",
+        "Poznaň",
+        "Pòznóń",
+        "Pô-tsṳ-nàm",
+        "Pоznan",
+        "Πόζναν",
+        "Горад Познань",
+        "Познан",
+        "Познань",
+        "Познань ош",
+        "Познањ",
+        "Պոզնան",
+        "פוזנן",
+        "פויזן",
+        "بوزنان",
+        "پوزنان",
+        "پۆزنان",
+        "पोझ्नान",
+        "போசுனான்",
+        "พอซนาน",
+        "ཕྰོ་ཟོ་ནན།",
+        "პოზნანი",
+        "ポズナン",
+        "波茲南",
+        "포즈난" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3088171/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Poznań" ;
+                    em:link <http://www.geonames.org/3088171/poznan.html> ] ;
+            oa:hasTarget emp:g_3088171 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7531836 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3088171/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Poznań" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.240692e+01 ;
+                    wgs84_pos:long 1.692993e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3088171/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3088171/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Pozna%C5%84>,
+        <http://en.wikipedia.org/wiki/Pozna%C5%84> .
 
 emp:g_3090048 a em:Place ;
-    rdfs:label "Opole (seat of a first-order administrative division)" ;
+    rdfs:label "Opole (Populated place (ppla))" ;
     em:alternateName "Opole",
         "Oppein",
         "Oppeln",
@@ -238,19 +582,3078 @@ emp:g_3090048 a em:Place ;
         <http://en.wikipedia.org/wiki/Opole>,
         <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> .
 
-emt:Current a em:Time_period ;
-    rdfs:label "Current, as of 2018" ;
-    em:timespan [ a em:Time_span ;
-            <http://emplaces.namespace.example.org/earliestEnd:> "2018" ;
-            <http://emplaces.namespace.example.org/latestStart:> "2018" ] ;
-    rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." .
+emp:g_3093133 a em:Place ;
+    rdfs:label "Łódź (Populated place (ppla))" ;
+    em:alternateName "Łódź",
+        "وودج"@ar,
+        "Lodz"@az,
+        "Горад Лодзь"@be,
+        "Лодз"@bg,
+        "Лодзь"@ce,
+        "Luc"@crh,
+        "Lodž"@cs,
+        "Łódź"@da,
+        "Litzmannstadt"@de,
+        "Λοτζ"@el,
+        "Lodzo"@eo,
+        "Łódź"@es,
+        "Łódź"@et,
+        "Lodz"@eu,
+        "ووچ"@fa,
+        "Łódź"@fi,
+        "Łódź"@fr,
+        "Lodz"@fy,
+        "Lodz"@gl,
+        "Lò-tsṳ"@hak,
+        "לודז"@he,
+        "Łódź"@hu,
+        "Լոձ"@hy,
+        "Łódź"@id,
+        "Łódź"@is,
+        "Łódź"@it,
+        "ウッチ"@ja,
+        "Łódź"@jv,
+        "ლოძი"@ka,
+        "Лодзь"@kk,
+        "우치"@ko,
+        "Lodzia"@la,
+        "Lodzė"@lt,
+        "Lodza"@lv,
+        "Лоѓ"@mk,
+        "Лодзь"@mn,
+        "वूत्श"@mr,
+        "Лодзь ош"@myv,
+        "Łódź"@na,
+        "Łódź"@nds,
+        "Łódź"@nl,
+        "Łódź"@no,
+        "Лодзь"@os,
+        "Lodz"@pap,
+        "Łódź"@pl,
+        "لودز"@pnb,
+        "Łódź"@pt,
+        "Łódź"@ro,
+        "Лодзь"@ru,
+        "Lodž"@sk,
+        "Lodž"@sl,
+        "Лођ"@sr,
+        "Łódź"@sv,
+        "Łůdź"@szl,
+        "วูช"@th,
+        "Lodz"@tpi,
+        "Łódź"@tr,
+        "Лодзь"@tt,
+        "Луӟ"@udm,
+        "Лодзь"@uk,
+        "ووچ"@ur,
+        "Lodz"@uz,
+        "Lodz"@vep,
+        "ლოძი"@xmf,
+        "לאדזש"@yi,
+        "羅茲"@yue,
+        "罗兹"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3093133/> ] ;
+    em:canonicalURI emp:g_3093133 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3093133/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLA ;
+    em:displayName "Litzmannstadt",
+        "Lodz",
+        "Lodza",
+        "Lodzia",
+        "Lodzo",
+        "Lodzė",
+        "Lodž",
+        "Luc",
+        "Lò-tsṳ",
+        "Łódź",
+        "Łůdź",
+        "Λοτζ",
+        "Горад Лодзь",
+        "Лодз",
+        "Лодзь",
+        "Лодзь ош",
+        "Лођ",
+        "Лоѓ",
+        "Луӟ",
+        "Լոձ",
+        "לאדזש",
+        "לודז",
+        "لودز",
+        "وودج",
+        "ووچ",
+        "वूत्श",
+        "วูช",
+        "ლოძი",
+        "ウッチ",
+        "罗兹",
+        "羅茲",
+        "우치" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3093133/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Łódź" ;
+                    em:link <http://www.geonames.org/3093133/lodz.html> ] ;
+            oa:hasTarget emp:g_3093133 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7531754 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3093133/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Łódź" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.175e+01 ;
+                    wgs84_pos:long 1.946667e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3093133/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3093133/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/%C5%81%C3%B3d%C5%BA>,
+        <http://en.wikipedia.org/wiki/%C5%81%C3%B3d%C5%BA>,
+        <http://ru.wikipedia.org/wiki/%D0%9B%D0%BE%D0%B4%D0%B7%D1%8C> .
 
-gn:P a skos:Concept ;
-    rdfs:label "Populated place" ;
-    rdfs:comment "Populated place - from GeoNames (feature class)." .
+emp:g_3094802 a em:Place ;
+    rdfs:label "Krakow (Populated place (ppla))" ;
+    em:alternateName "Cracovia",
+        "Cracovie",
+        "Cracow",
+        "Krakau",
+        "Krakov",
+        "Kraków",
+        "Krakau"@als,
+        "كراكوف"@ar,
+        "Горад Кракаў"@be,
+        "Краков"@bg,
+        "Krakov"@bs,
+        "Kraków"@bs,
+        "Cracòvia"@ca,
+        "Krakоv"@crh,
+        "Krakov"@cs,
+        "Krakòwò"@csb,
+        "Краков"@cv,
+        "Krakow"@da,
+        "Kraków"@da,
+        "Krakow"@dsb,
+        "Κρακοβία"@el,
+        "Krakovo"@eo,
+        "Cracovia"@es,
+        "Kraków"@et,
+        "Krakovia"@eu,
+        "کراکوف"@fa,
+        "Krakova"@fi,
+        "Cracovia"@gl,
+        "קרקוב"@he,
+        "Krakov"@hr,
+        "Krakow"@hsb,
+        "Krakkó"@hu,
+        "Կրակով"@hy,
+        "Krakow"@id,
+        "Kraków"@id,
+        "Kraká"@is,
+        "Kraków"@is,
+        "Cracovia"@it,
+        "クラクフ"@ja,
+        "კრაკოვი"@ka,
+        "크라쿠프"@ko,
+        "Краков"@ky,
+        "Cracovia"@la,
+        "Krakovia"@lad,
+        "Krokuva"@lt,
+        "Krakova"@lv,
+        "Краков"@mk,
+        "Краков"@mn,
+        "क्राकूफ"@mr,
+        "Krakovja"@mt,
+        "ကရားကော့မြို့"@my,
+        "Krakow"@na,
+        "Carcovia"@nap,
+        "Krakau"@nds,
+        "Krakau"@nl,
+        "Kraków"@nl,
+        "Kraków"@nn,
+        "Kraków"@no,
+        "Cracaû"@nrm,
+        "Cracòvia"@oc,
+        "Краков"@os,
+        "کراکوف"@pnb,
+        "Cracóvia"@pt,
+        "Краковия"@ro,
+        "Краков"@ru,
+        "Cracòvia"@sc,
+        "Cracovia"@scn,
+        "Krakov"@sk,
+        "Krakov"@sl,
+        "Kraków"@sl,
+        "Krakovi"@sq,
+        "Краков"@sr,
+        "Kraków"@sv,
+        "Krakůw"@szl,
+        "Krakóvia"@tet,
+        "กรากุฟ"@th,
+        "Kraków"@tr,
+        "Krakow"@ug,
+        "Краків"@uk,
+        "Kraków"@vi,
+        "קראקע"@yi,
+        "克拉科夫"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3094802/> ] ;
+    em:canonicalURI emp:g_3094802 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3094802/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLA ;
+    em:displayName "Carcovia",
+        "Cracaû",
+        "Cracovia",
+        "Cracovie",
+        "Cracow",
+        "Cracòvia",
+        "Cracóvia",
+        "Krakau",
+        "Krakkó",
+        "Krakov",
+        "Krakova",
+        "Krakovi",
+        "Krakovia",
+        "Krakovja",
+        "Krakovo",
+        "Krakow",
+        "Kraká",
+        "Krakòwò",
+        "Krakóvia",
+        "Kraków",
+        "Krakůw",
+        "Krakоv",
+        "Krokuva",
+        "Κρακοβία",
+        "Горад Кракаў",
+        "Краков",
+        "Краковия",
+        "Краків",
+        "Կրակով",
+        "קראקע",
+        "קרקוב",
+        "كراكوف",
+        "کراکوف",
+        "क्राकूफ",
+        "กรากุฟ",
+        "ကရားကော့မြို့",
+        "კრაკოვი",
+        "クラクフ",
+        "克拉科夫",
+        "크라쿠프" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3094802/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Krakow" ;
+                    em:link <http://www.geonames.org/3094802/krakow.html> ] ;
+            oa:hasTarget emp:g_3094802 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7531791 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3094802/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Krakow" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.006143e+01 ;
+                    wgs84_pos:long 1.993658e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3094802/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3094802/about.rdf> ;
+    rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B0%D0%BA%D0%BE%D0%B2> .
 
-gn:A a skos:Concept ;
-    rdfs:label "Administrative division" ;
-    rdfs:comment "Administrative division - from GeoNames (feature class)." .
+emp:g_3096472 a em:Place ;
+    rdfs:label "Katowice (Populated place (ppla))" ;
+    em:alternateName "Catowice",
+        "Katowice",
+        "Kattowitz",
+        "Stalinogorod",
+        "Stalinograd",
+        "Stalinogród",
+        "Katowice"@af,
+        "ካቶቪጸ"@am,
+        "Katowice"@an,
+        "Katowice"@ang,
+        "كاتوفيتسه"@ar,
+        "مستخدم:محمد القيرواني"@ar,
+        "Katowice"@ast,
+        "Катовице"@ba,
+        "Горад Катавіцы"@be,
+        "Катовице"@bg,
+        "Katowice"@bs,
+        "Katowice"@ca,
+        "Katovitse"@crh,
+        "Katovice"@cs,
+        "Katowice"@csb,
+        "Катовица"@cv,
+        "Katowice"@cy,
+        "Katowice"@da,
+        "Kattowitz"@de,
+        "Katowice"@dv,
+        "ކެޓޮވިސް"@dv,
+        "Κάτοβιτσε"@el,
+        "Κατοβίτσε"@el,
+        "Κατοβιτσε"@el,
+        "Katowice"@en,
+        "Katowice"@eo,
+        "Katowice"@es,
+        "Katowice"@et,
+        "Katowice"@eu,
+        "کاتوویتس"@fa,
+        "Katowice"@fi,
+        "Katowice"@fo,
+        "Katowice"@fr,
+        "Katowice"@fy,
+        "Katowice"@ga,
+        "Katowice"@gl,
+        "Khà-thok-vì-chṳ"@hak,
+        "קטוביץ"@he,
+        "Katowice"@hr,
+        "Katowice"@hu,
+        "Կատովիցե"@hy,
+        "Katowice"@ia,
+        "Katowice"@id,
+        "Katowice"@io,
+        "Katowice"@it,
+        "カトヴィツェ"@ja,
+        "katovitses"@jbo,
+        "tcadrkatovitse"@jbo,
+        "Katowice"@jv,
+        "კატოვიცე"@ka,
+        "Катовице"@kk,
+        "ಕತೋವೀಸ್ಸ"@kn,
+        "카토비체"@ko,
+        "Katovîts"@ku,
+        "Katowice"@ky,
+        "Катовице"@ky,
+        "Katovicum"@la,
+        "Katowice"@lb,
+        "Katowice"@lmo,
+        "Katovicai"@lt,
+        "Katovice"@lv,
+        "Катовице"@mdf,
+        "Katowice"@mg,
+        "Katowice"@mi,
+        "Katowihi"@mi,
+        "Катовице"@mk,
+        "कातोवित्सा"@mr,
+        "Katowice"@ms,
+        "Katowice"@mt,
+        "Катовице ош"@myv,
+        "Katowice"@na,
+        "Katovice"@nap,
+        "Kattowitz"@nds,
+        "क्याटोभिस"@ne,
+        "Katowice"@nl,
+        "Katowice"@nn,
+        "Katowice"@no,
+        "Katowice"@nrm,
+        "Katowice"@oc,
+        "Катовице"@os,
+        "Kattowitz"@pdc,
+        "Katowice"@pl,
+        "کاتووچ"@pnb,
+        "Katowice"@pt,
+        "Katovice"@rmy,
+        "Katowice"@ro,
+        "Катовице"@ru,
+        "Katowice"@scn,
+        "Katowice"@se,
+        "Katovice"@sk,
+        "Katovice"@sl,
+        "Katowice"@sq,
+        "Катовице"@sr,
+        "Katowice"@sv,
+        "Katowicy"@szl,
+        "คะโตวิตซ"@th,
+        "คาโตวีตเซ"@th,
+        "Katowice"@tr,
+        "Katovitse"@tt,
+        "Катовице"@udm,
+        "Катовіце"@uk,
+        "کاتوویتس"@ur,
+        "Katowice"@uz,
+        "Katovice"@vep,
+        "Katowice"@vi,
+        "Katowice"@wa,
+        "קאטאוויץ"@yi,
+        "卡托維治"@yue,
+        "卡托维兹"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3096472/> ] ;
+    em:canonicalURI emp:g_3096472 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3096472/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLA ;
+    em:displayName "Catowice",
+        "Katovicai",
+        "Katovice",
+        "Katovicum",
+        "Katovitse",
+        "Katovîts",
+        "Katowice",
+        "Katowicy",
+        "Katowihi",
+        "Kattowitz",
+        "Khà-thok-vì-chṳ",
+        "Stalinogorod",
+        "Stalinograd",
+        "Stalinogród",
+        "katovitses",
+        "tcadrkatovitse",
+        "Κάτοβιτσε",
+        "Κατοβίτσε",
+        "Κατοβιτσε",
+        "Горад Катавіцы",
+        "Катовица",
+        "Катовице",
+        "Катовице ош",
+        "Катовіце",
+        "Կատովիցե",
+        "קאטאוויץ",
+        "קטוביץ",
+        "كاتوفيتسه",
+        "مستخدم:محمد القيرواني",
+        "کاتووچ",
+        "کاتوویتس",
+        "ކެޓޮވިސް",
+        "कातोवित्सा",
+        "क्याटोभिस",
+        "ಕತೋವೀಸ್ಸ",
+        "คะโตวิตซ",
+        "คาโตวีตเซ",
+        "კატოვიცე",
+        "ካቶቪጸ",
+        "カトヴィツェ",
+        "卡托維治",
+        "卡托维兹",
+        "카토비체" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3096472/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Katowice" ;
+                    em:link <http://www.geonames.org/3096472/katowice.html> ] ;
+            oa:hasTarget emp:g_3096472 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7532033 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3096472/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Katowice" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.025841e+01 ;
+                    wgs84_pos:long 1.902754e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3096472/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3096472/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Katowice>,
+        <http://de.wikipedia.org/wiki/Katowice>,
+        <http://en.wikipedia.org/wiki/Katowice>,
+        <http://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%82%D0%BE%D0%B2%D0%B8%D1%86%D0%B5> .
+
+emp:g_3100946 a em:Place ;
+    rdfs:label "Częstochowa (seat of a third-order administrative division)" ;
+    em:alternateName "Chenstochov",
+        "Chenstokhov",
+        "Częstochowa",
+        "Tschenstochau",
+        "تشيستوخوفا"@ar,
+        "Горад Чанстахова"@be,
+        "Ченстохова"@bg,
+        "Çenstohova"@crh,
+        "Čenstochová"@cs,
+        "Częstochowa"@de,
+        "Tschenstochau"@de,
+        "Częstochowa"@en,
+        "Częstochowa"@eo,
+        "Częstochowa"@es,
+        "Częstochowa"@et,
+        "چستوهووا"@fa,
+        "Częstochowa"@fi,
+        "Częstochowa"@fr,
+        "Khìm-sṳ̂-thok-khok-ngá"@hak,
+        "צנסטוחובה"@he,
+        "Częstochowa"@hu,
+        "Չեստոխովա"@hy,
+        "Częstochowa"@id,
+        "Częstochowa"@it,
+        "チェンストホヴァ"@ja,
+        "Częstochowa"@jv,
+        "쳉스토호바"@ko,
+        "Čenstakava"@lt,
+        "Čenstohova"@lv,
+        "Czestochowa"@ms,
+        "Częstochowa"@na,
+        "Częstochowa"@nds,
+        "Częstochowa"@nl,
+        "Czestochowa"@no,
+        "Częstochowa"@no,
+        "Częstochowa"@pl,
+        "Częstochowa"@ro,
+        "Ченстохова"@ru,
+        "Čenstochová"@sk,
+        "Čenstohova"@sl,
+        "Ченстохова"@sr,
+        "Częstochowa"@sv,
+        "Czynstochowy"@szl,
+        "เชนสโตโควา"@th,
+        "Ченстохова"@tt,
+        "Ӵенстохова"@udm,
+        "Ченстохова"@uk,
+        "琴斯托霍瓦"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3100946/> ] ;
+    em:canonicalURI emp:g_3100946 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3100946/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLA3 ;
+    em:displayName "Chenstochov",
+        "Chenstokhov",
+        "Czestochowa",
+        "Czynstochowy",
+        "Częstochowa",
+        "Khìm-sṳ̂-thok-khok-ngá",
+        "Tschenstochau",
+        "Çenstohova",
+        "Čenstakava",
+        "Čenstochová",
+        "Čenstohova",
+        "Горад Чанстахова",
+        "Ченстохова",
+        "Ӵенстохова",
+        "Չեստոխովա",
+        "צנסטוחובה",
+        "تشيستوخوفا",
+        "چستوهووا",
+        "เชนสโตโควา",
+        "チェンストホヴァ",
+        "琴斯托霍瓦",
+        "쳉스토호바" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3100946/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Częstochowa" ;
+                    em:link <http://www.geonames.org/3100946/czestochowa.html> ] ;
+            oa:hasTarget emp:g_3100946 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7532537 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3100946/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Częstochowa" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.079646e+01 ;
+                    wgs84_pos:long 1.912409e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3100946/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3100946/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Cz%C4%99stochowa>,
+        <http://en.wikipedia.org/wiki/Cz%C4%99stochowa>,
+        <http://ru.wikipedia.org/wiki/%D0%A7%D0%B5%D0%BD%D1%81%D1%82%D0%BE%D1%85%D0%BE%D0%B2%D0%B0> .
+
+emp:g_3337495 a em:Place ;
+    rdfs:label "Opole Voivodeship (Region (adm1))" ;
+    em:alternateName "Województwo Opolskie",
+        "Voivodat d'Opole"@ca,
+        "Opolské vojvodství"@cs,
+        "Òpòlsczé wòjewództwò"@csb,
+        "Woiwodschaft Oppeln"@de,
+        "Opole Voivodeship"@en,
+        "Opolio"@eo,
+        "Opole"@es,
+        "Opole vojevoodkond"@et,
+        "Voïvodie d'Opole"@fr,
+        "Provinsi Opole"@id,
+        "Voivodato di Opole"@it,
+        "オポーレ県"@ja,
+        "Opolės vaivadija"@lt,
+        "Opole"@nl,
+        "Województwo opolskie"@pl,
+        "Província de Opole"@pt,
+        "Voivodia de Opole"@pt,
+        "Voievodatul Opole"@ro,
+        "Опольское воеводство"@ru,
+        "Opolské vojvodstvo"@sk,
+        "Opole vojvodskap"@sv,
+        "Opplen"@sv ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3337495/> ] ;
+    em:canonicalURI emp:g_3337495 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3337495/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Opole",
+        "Opole Voivodeship",
+        "Opole vojevoodkond",
+        "Opole vojvodskap",
+        "Opolio",
+        "Opolské vojvodstvo",
+        "Opolské vojvodství",
+        "Opolės vaivadija",
+        "Opplen",
+        "Provinsi Opole",
+        "Província de Opole",
+        "Voievodatul Opole",
+        "Voivodat d'Opole",
+        "Voivodato di Opole",
+        "Voivodia de Opole",
+        "Voïvodie d'Opole",
+        "Woiwodschaft Oppeln",
+        "Województwo Opolskie",
+        "Województwo opolskie",
+        "Òpòlsczé wòjewództwò",
+        "Опольское воеводство",
+        "オポーレ県" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337495/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Opole Voivodeship" ;
+                    em:link <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ] ;
+            oa:hasTarget emp:g_3337495 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3066138 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337495/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Opole Voivodeship" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.066667e+01 ;
+                    wgs84_pos:long 1.79e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337495/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole_Voivodeship>,
+        <http://en.wikipedia.org/wiki/Opole_Voivodeship>,
+        <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+emp:g_756135 a em:Place ;
+    rdfs:label "Warsaw (capital of a political entity)" ;
+    em:alternateName "Varsavia",
+        "Varshava",
+        "Warszaw",
+        "Warskou"@af,
+        "ዋርሶው"@am,
+        "وارسو"@ar,
+        "ܘܪܣܘ"@arc,
+        "Варшава"@be,
+        "Варшава"@bg,
+        "Varsovia"@br,
+        "Varšava"@bs,
+        "Varsòvia"@ca,
+        "Varšava"@cs,
+        "Warszawa"@csb,
+        "Варшава"@cu,
+        "Варшава"@cv,
+        "Warsaw"@cy,
+        "Warszawa"@da,
+        "Warschau"@de,
+        "Βαρσοβία"@el,
+        "Warsaw"@en,
+        "Varsovio"@eo,
+        "Varsovia"@es,
+        "Varssavi"@et,
+        "Barsobia"@eu,
+        "Varsovia"@eu,
+        "ورشو"@fa,
+        "Varsova"@fi,
+        "Varsovie"@fr,
+        "Varsovie"@frp,
+        "Vársá"@ga,
+        "Warsaw"@gd,
+        "Varsovia - Warszawa"@gl,
+        "Varšava"@hbs,
+        "ורשה"@he,
+        "Varšava"@hr,
+        "Waršawa"@hsb,
+        "Varsó"@hu,
+        "Վարշավա"@hy,
+        "Varsovia"@ia,
+        "Warsawa"@id,
+        "Warszawa"@io,
+        "Varsjá"@is,
+        "Varsavia"@it,
+        "ワルシャワ"@ja,
+        "Warsawa"@jv,
+        "ვარშავა"@ka,
+        "바르샤바"@ko,
+        "Varsovia"@la,
+        "Warschau"@lb,
+        "Warschau"@li,
+        "Varšuva"@lt,
+        "Варшава"@mk,
+        "वॉर्सो"@mr,
+        "Varsavja"@mt,
+        "Warsaw"@na,
+        "Varsavia"@nap,
+        "Warschau"@nds,
+        "Warschau"@nl,
+        "Warszawa"@nn,
+        "Warszawa"@no,
+        "Варшавæ"@os,
+        "Varsóvia"@pt,
+        "Varșovia"@ro,
+        "Варшава"@ru,
+        "Varsavia"@scn,
+        "Varšava"@sk,
+        "Varšava"@sl,
+        "Varshava"@sq,
+        "Варшава"@sr,
+        "Warszawa"@sv,
+        "Varsóvia"@tet,
+        "วอร์ซอ"@th,
+        "Varşova"@tr,
+        "Варшава"@udm,
+        "ۋارشاۋا"@ug,
+        "Варшава"@uk,
+        "Warszawa"@vi,
+        "Warszawa"@vo,
+        "ווארשע"@yi,
+        "װאַרשע"@yi,
+        "华沙"@zh,
+        "華沙"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/756135/> ] ;
+    em:canonicalURI emp:g_756135 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/756135/about.rdf> ] ;
+    em:corePlaceType gn:P.PPLC ;
+    em:displayName "Barsobia",
+        "Varsavia",
+        "Varsavja",
+        "Varshava",
+        "Varsjá",
+        "Varsova",
+        "Varsovia",
+        "Varsovia - Warszawa",
+        "Varsovie",
+        "Varsovio",
+        "Varssavi",
+        "Varsòvia",
+        "Varsó",
+        "Varsóvia",
+        "Varşova",
+        "Varšava",
+        "Varšuva",
+        "Varșovia",
+        "Vársá",
+        "Warsaw",
+        "Warsawa",
+        "Warschau",
+        "Warskou",
+        "Warszaw",
+        "Warszawa",
+        "Waršawa",
+        "Βαρσοβία",
+        "Варшавæ",
+        "Варшава",
+        "Վարշավա",
+        "ווארשע",
+        "ורשה",
+        "װאַרשע",
+        "وارسو",
+        "ورشو",
+        "ۋارشاۋا",
+        "ܘܪܣܘ",
+        "वॉर्सो",
+        "วอร์ซอ",
+        "ვარშავა",
+        "ዋርሶው",
+        "ワルシャワ",
+        "华沙",
+        "華沙",
+        "바르샤바" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/756135/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Warsaw" ;
+                    em:link <http://www.geonames.org/756135/warsaw.html> ] ;
+            oa:hasTarget emp:g_756135 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7531926 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/756135/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:P ;
+    em:preferredName "Warsaw" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.222977e+01 ;
+                    wgs84_pos:long 2.101178e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/756135/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/756135/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Warsaw>,
+        <http://en.wikipedia.org/wiki/Warsaw>,
+        <http://ru.wikipedia.org/wiki/%D0%92%D0%B0%D1%80%D1%88%D0%B0%D0%B2%D0%B0> .
+
+emp:g_3067695 a em:Place ;
+    rdfs:label "Hlavní město Praha (Region (adm1))" ;
+    em:alternateName "Capital City of Prague",
+        "City of Prague",
+        "Prague Independent City",
+        "Hlavní město Praha"@cs,
+        "Hauptstadt Prag"@de,
+        "Hlavní Mesto Praha"@nb,
+        "Hlavní Mesto Praha"@nn ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3067695/> ] ;
+    em:canonicalURI emp:g_3067695 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3067695/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Capital City of Prague",
+        "City of Prague",
+        "Hauptstadt Prag",
+        "Hlavní Mesto Praha",
+        "Hlavní město Praha",
+        "Prague Independent City" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3067695/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Hlavní město Praha" ;
+                    em:link <http://www.geonames.org/3067695/hlavni-mesto-praha.html> ] ;
+            oa:hasTarget emp:g_3067695 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3077311 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3067695/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Hlavní město Praha" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.008333e+01 ;
+                    wgs84_pos:long 1.446667e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3067695/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3067695/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Prague>,
+        <http://en.wikipedia.org/wiki/Prague> .
+
+emp:g_3068798 a em:Place ;
+    rdfs:label "Okres Ostrava-Město (County (adm2))" ;
+    em:alternateName "Okres Ostrava-Město",
+        "Ostrava",
+        "Ostrava-Město" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3068798/> ] ;
+    em:canonicalURI emp:g_3068798 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3068798/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:displayName "Okres Ostrava-Město",
+        "Ostrava",
+        "Ostrava-Město" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3068798/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Okres Ostrava-Město" ;
+                    em:link <http://www.geonames.org/3068798/okres-ostrava-mesto.html> ] ;
+            oa:hasTarget emp:g_3068798 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3339573 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3068798/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Okres Ostrava-Město" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 4.983333e+01 ;
+                    wgs84_pos:long 1.825e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3068798/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3068798/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Ostrava-City_District>,
+        <http://en.wikipedia.org/wiki/Ostrava-City_District> .
+
+emp:g_3077311 a em:Place ;
+    rdfs:label "Czechia (Country)" ;
+    em:alternateName "Czech Lands",
+        "Czech Socialist Republic",
+        "Česká Socialistická Republika",
+        "České Kraje",
+        "České Země",
+        "České Územi",
+        "Tjeggiese Republiek"@af,
+        "Tsjeggië"@af,
+        "ቼክ ሪፑብሊክ"@am,
+        "Republica Checa"@an,
+        "Cecland"@ang,
+        "تشيك"@ar,
+        "جمهورية التشيك"@ar,
+        "ܬܫܝܟ"@arc,
+        "República Checa"@ast,
+        "Çex Respublikası"@az,
+        "Чэхія"@be,
+        "Чехия"@bg,
+        "Чешка Република"@bg,
+        "চেক প্রজাতন্ত্র"@bn,
+        "চেকিয়া"@bn,
+        "ཅེ་ཁེ"@bo,
+        "Republik Tchek"@br,
+        "Češka"@bs,
+        "República Txeca"@ca,
+        "Ripublica Cecca"@co,
+        "Česká republika"@cs,
+        "Czeskô Repùblika"@csb,
+        "Чешьско"@cu,
+        "Gweriniaeth Tsiec"@cy,
+        "Tjekkiet"@da,
+        "Tschechische Republik"@de,
+        "ཅེཀ་རི་པབ་ལིཀ"@dz,
+        "Τσεχία"@el,
+        "Bohemia"@en,
+        "Ĉeĥio"@eo,
+        "Ĉeĥujo"@eo,
+        "Chequia"@es,
+        "Tšehhi"@et,
+        "Tšehhi Vabariik"@et,
+        "Txekiar Errepublika"@eu,
+        "جمهوری چک"@fa,
+        "Tšekki"@fi,
+        "Kekkia"@fo,
+        "Tchéquie"@fr,
+        "Rèpublica tch·èca"@frp,
+        "Republiche Ceche"@fur,
+        "Tsjechje"@fy,
+        "An tSeic"@ga,
+        "Poblacht na Seice"@ga,
+        "Chequia - Česko"@gl,
+        "Yn Pobblaght Sheckagh"@gv,
+        "Češka Republika"@hbs,
+        "צ'כיה"@he,
+        "चेक गणराज्य"@hi,
+        "Češka"@hr,
+        "Češka Republika"@hr,
+        "Čěska republika"@hsb,
+        "Cseh Köztársaság"@hu,
+        "Csehország"@hu,
+        "Չեխիայի Հանրապետություն"@hy,
+        "Republica Chec"@ia,
+        "Ceko"@id,
+        "Republik Ceko"@id,
+        "Chekia"@io,
+        "Tékkland"@is,
+        "チェコ"@ja,
+        "ჩეხეთი"@ka,
+        "ჩეხეთის რესპუბლიკა"@ka,
+        "សាធារណរដ្ឋឆេក"@km,
+        "Komara Çêkiyayê"@ku,
+        "Res publica Bohemica"@la,
+        "Tschechesch Republik"@lb,
+        "Tsjechië"@li,
+        "Repubbrica Ceca"@lij,
+        "ສາທາລະນະລັດເຊັກ"@lo,
+        "Čekija"@lt,
+        "Čehija"@lv,
+        "Чешка"@mk,
+        "Чешка Република"@mk,
+        "चेक प्रजासत्ताक"@mr,
+        "Republik Czech"@ms,
+        "Repubblika Ċeka"@mt,
+        "Republik Czechia"@na,
+        "Tsjekkia"@nb,
+        "Tschechien"@nds,
+        "चेक रिपब्लिक"@ne,
+        "Tsjechië"@nl,
+        "Tsjekkia"@nn,
+        "Tsjekkia"@no,
+        "Républyique Tchèque"@nrm,
+        "Republica Chèca"@oc,
+        "Čeehi"@olo,
+        "Чехи"@os,
+        "Czech Republic"@pam,
+        "Republika Czeska"@pl,
+        "Repùblica Ceca"@pms,
+        "چېک جمهوريت"@ps,
+        "República Tcheca"@pt,
+        "Chik Suyu"@qu,
+        "Chexiya"@rmy,
+        "Cehia"@ro,
+        "Republica Cehă"@ro,
+        "Чехия"@ru,
+        "Чешская Республика"@ru,
+        "Ripùbblica Ceca"@scn,
+        "Čeahkka"@se,
+        "Česko"@sk,
+        "Česká republika"@sk,
+        "Češka"@sl,
+        "Republika e Çekisë"@sq,
+        "Republika Çeke"@sq,
+        "Чешка"@sr,
+        "Чешка Република"@sr,
+        "Tjeckien"@sv,
+        "Ucheki"@sw,
+        "செக் குடியரசு"@ta,
+        "Чехия"@tg,
+        "สาธารณรัฐเช็ก"@th,
+        "Czech Republic"@tl,
+        "Çek Cumhuriyeti"@tr,
+        "Чеська республіка"@uk,
+        "Чехія"@uk,
+        "Cộng hòa Séc"@vi,
+        "Tsyegän"@vo,
+        "Republika Czeka"@war,
+        "טשעכיע"@yi,
+        "捷克"@zh,
+        "捷克共和国"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3077311/> ] ;
+    em:canonicalURI emp:g_3077311 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3077311/about.rdf> ] ;
+    em:corePlaceType gn:A.PCLI ;
+    em:displayName "An tSeic",
+        "Bohemia",
+        "Cecland",
+        "Cehia",
+        "Ceko",
+        "Chekia",
+        "Chequia",
+        "Chequia - Česko",
+        "Chexiya",
+        "Chik Suyu",
+        "Cseh Köztársaság",
+        "Csehország",
+        "Czech Lands",
+        "Czech Republic",
+        "Czech Socialist Republic",
+        "Czeskô Repùblika",
+        "Cộng hòa Séc",
+        "Gweriniaeth Tsiec",
+        "Kekkia",
+        "Komara Çêkiyayê",
+        "Poblacht na Seice",
+        "Repubblika Ċeka",
+        "Repubbrica Ceca",
+        "Republica Cehă",
+        "Republica Chec",
+        "Republica Checa",
+        "Republica Chèca",
+        "Republiche Ceche",
+        "Republik Ceko",
+        "Republik Czech",
+        "Republik Czechia",
+        "Republik Tchek",
+        "Republika Czeka",
+        "Republika Czeska",
+        "Republika e Çekisë",
+        "Republika Çeke",
+        "Repùblica Ceca",
+        "República Checa",
+        "República Tcheca",
+        "República Txeca",
+        "Res publica Bohemica",
+        "Ripublica Cecca",
+        "Ripùbblica Ceca",
+        "Rèpublica tch·èca",
+        "Républyique Tchèque",
+        "Tchéquie",
+        "Tjeckien",
+        "Tjeggiese Republiek",
+        "Tjekkiet",
+        "Tschechesch Republik",
+        "Tschechien",
+        "Tschechische Republik",
+        "Tsjechië",
+        "Tsjechje",
+        "Tsjeggië",
+        "Tsjekkia",
+        "Tsyegän",
+        "Txekiar Errepublika",
+        "Tékkland",
+        "Tšehhi",
+        "Tšehhi Vabariik",
+        "Tšekki",
+        "Ucheki",
+        "Yn Pobblaght Sheckagh",
+        "Çek Cumhuriyeti",
+        "Çex Respublikası",
+        "Ĉeĥio",
+        "Ĉeĥujo",
+        "Čeahkka",
+        "Čeehi",
+        "Čehija",
+        "Čekija",
+        "Česko",
+        "Česká Socialistická Republika",
+        "Česká republika",
+        "České Kraje",
+        "České Země",
+        "České Územi",
+        "Češka",
+        "Češka Republika",
+        "Čěska republika",
+        "Τσεχία",
+        "Чеська республіка",
+        "Чехи",
+        "Чехия",
+        "Чехія",
+        "Чешка",
+        "Чешка Република",
+        "Чешская Республика",
+        "Чешьско",
+        "Чэхія",
+        "Չեխիայի Հանրապետություն",
+        "טשעכיע",
+        "צ'כיה",
+        "تشيك",
+        "جمهورية التشيك",
+        "جمهوری چک",
+        "چېک جمهوريت",
+        "ܬܫܝܟ",
+        "चेक गणराज्य",
+        "चेक प्रजासत्ताक",
+        "चेक रिपब्लिक",
+        "চেক প্রজাতন্ত্র",
+        "চেকিয়া",
+        "செக் குடியரசு",
+        "สาธารณรัฐเช็ก",
+        "ສາທາລະນະລັດເຊັກ",
+        "ཅེ་ཁེ",
+        "ཅེཀ་རི་པབ་ལིཀ",
+        "ჩეხეთი",
+        "ჩეხეთის რესპუბლიკა",
+        "ቼክ ሪፑብሊክ",
+        "សាធារណរដ្ឋឆេក",
+        "チェコ",
+        "捷克",
+        "捷克共和国" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3077311/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Czechia" ;
+                    em:link <http://www.geonames.org/3077311/czechia.html> ] ;
+            oa:hasTarget emp:g_3077311 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7729884 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3077311/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Czechia" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 4.975e+01 ;
+                    wgs84_pos:long 1.5e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3077311/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3077311/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Czech_Republic>,
+        <http://en.wikipedia.org/wiki/Czech_Republic>,
+        <http://ru.wikipedia.org/wiki/%D0%A7%D0%B5%D1%85%D0%B8%D1%8F> .
+
+emp:g_3337492 a em:Place ;
+    rdfs:label "Lower Silesia (Region (adm1))" ;
+    em:alternateName "Województwo Dolnośląskie",
+        "Долносилезко воеводство"@bg,
+        "Baixa Silèsia"@ca,
+        "Dolnoslezské vojvodství"@cs,
+        "Niederschlesien"@da,
+        "Woiwodschaft Niederschlesien"@de,
+        "Lower Silesian Voivodeship"@en,
+        "Malsupra Silezio"@eo,
+        "Baja Silesia"@es,
+        "Alam-Sileesia vojevoodkond"@et,
+        "Voïvodie de Basse-Silésie"@fr,
+        "Provinsi Dolnośląskie"@id,
+        "Voivodato della Bassa Slesia"@it,
+        "ドルヌィ・シロンスク県"@ja,
+        "Žemutinės Silezijos vaivadija"@lt,
+        "Lejassilēzijas vojevodiste"@lv,
+        "Neder-Silezië"@nl,
+        "Nedre Schlesien"@no,
+        "Baixa Silésia"@pt,
+        "Voievodatul Silezia de Jos"@ro,
+        "Нижнесилезское воеводство"@ru,
+        "Dolnosliezske vojvodstvo"@sk,
+        "Dolny Śląsk vojvodskap"@sv,
+        "Nedre Schlesien"@sv,
+        "下西里西亚省"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3337492/> ] ;
+    em:canonicalURI emp:g_3337492 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3337492/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Alam-Sileesia vojevoodkond",
+        "Baixa Silèsia",
+        "Baixa Silésia",
+        "Baja Silesia",
+        "Dolnoslezské vojvodství",
+        "Dolnosliezske vojvodstvo",
+        "Dolny Śląsk vojvodskap",
+        "Lejassilēzijas vojevodiste",
+        "Lower Silesian Voivodeship",
+        "Malsupra Silezio",
+        "Neder-Silezië",
+        "Nedre Schlesien",
+        "Niederschlesien",
+        "Provinsi Dolnośląskie",
+        "Voievodatul Silezia de Jos",
+        "Voivodato della Bassa Slesia",
+        "Voïvodie de Basse-Silésie",
+        "Woiwodschaft Niederschlesien",
+        "Województwo Dolnośląskie",
+        "Žemutinės Silezijos vaivadija",
+        "Долносилезко воеводство",
+        "Нижнесилезское воеводство",
+        "ドルヌィ・シロンスク県",
+        "下西里西亚省" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337492/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Lower Silesia" ;
+                    em:link <http://www.geonames.org/3337492/wojewodztwo-dolnoslaskie.html> ] ;
+            oa:hasTarget emp:g_3337492 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3066138 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337492/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Lower Silesia" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.11e+01 ;
+                    wgs84_pos:long 1.643333e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337492/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337492/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Lower_Silesian_Voivodeship>,
+        <http://en.wikipedia.org/wiki/Lower_Silesian_Voivodeship>,
+        <http://ru.wikipedia.org/wiki/%D0%9D%D0%B8%D0%B6%D0%BD%D0%B5%D1%81%D0%B8%D0%BB%D0%B5%D0%B7%D1%81%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+emp:g_3337493 a em:Place ;
+    rdfs:label "Łódź Voivodeship (Region (adm1))" ;
+    em:alternateName "Województwo Łódzkie",
+        "Voivodat de Łódź"@ca,
+        "Lodžské vojvodství"@cs,
+        "Łódzczé wòjewództwò"@csb,
+        "Woiwodschaft Łódź"@de,
+        "Łódź Voivodeship"@en,
+        "Łódź"@es,
+        "Łódźi vojevoodkond"@et,
+        "Voïvodie de Łódź"@fr,
+        "Provinsi Łódź"@id,
+        "Voivodato di Łódź"@it,
+        "ウッチ県"@ja,
+        "Lodzės vaivadija"@lt,
+        "Łódź"@nl,
+        "Lódzkie"@pl,
+        "Voievodatul Łódź"@ro,
+        "Лодзинское воеводство"@ru,
+        "Војводство Лођ"@sr,
+        "Łódź"@sv,
+        "罗兹省"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3337493/> ] ;
+    em:canonicalURI emp:g_3337493 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3337493/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Lodzės vaivadija",
+        "Lodžské vojvodství",
+        "Lódzkie",
+        "Provinsi Łódź",
+        "Voievodatul Łódź",
+        "Voivodat de Łódź",
+        "Voivodato di Łódź",
+        "Voïvodie de Łódź",
+        "Woiwodschaft Łódź",
+        "Województwo Łódzkie",
+        "Łódzczé wòjewództwò",
+        "Łódź",
+        "Łódź Voivodeship",
+        "Łódźi vojevoodkond",
+        "Војводство Лођ",
+        "Лодзинское воеводство",
+        "ウッチ県",
+        "罗兹省" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337493/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Łódź Voivodeship" ;
+                    em:link <http://www.geonames.org/3337493/wojewodztwo-lodzkie.html> ] ;
+            oa:hasTarget emp:g_3337493 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_798544 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337493/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Łódź Voivodeship" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.16e+01 ;
+                    wgs84_pos:long 1.943333e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337493/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337493/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/%C5%81%C3%B3d%C5%BA_Voivodeship>,
+        <http://en.wikipedia.org/wiki/%C5%81%C3%B3d%C5%BA_Voivodeship>,
+        <http://ru.wikipedia.org/wiki/%D0%9B%D0%BE%D0%B4%D0%B7%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+emp:g_3337497 a em:Place ;
+    rdfs:label "Silesia (Region (adm1))" ;
+    em:alternateName "Województwo Śląskie",
+        "Silèsia"@ca,
+        "Slezské vojvodství"@cs,
+        "Woiwodschaft Schlesien"@de,
+        "Silesian Voivodeship"@en,
+        "Silesia"@es,
+        "Sileesia vojevoodkond"@et,
+        "Behe Silesia"@eu,
+        "Voïvodie de Silésie"@fr,
+        "Provinsi Silesia"@id,
+        "Provinsi Slaskie"@id,
+        "Voivodato di Slesia"@it,
+        "シロンスク県"@ja,
+        "Silezijos vaivadija"@lt,
+        "Silezië"@nl,
+        "Województwo śląskie"@pl,
+        "Voievodatul Silezia"@ro,
+        "Силезское воеводство"@ru,
+        "Schlesien"@sv,
+        "Śląsk"@sv,
+        "Śląsk vojvodskap"@sv,
+        "西里西亚省"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3337497/> ] ;
+    em:canonicalURI emp:g_3337497 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3337497/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Behe Silesia",
+        "Provinsi Silesia",
+        "Provinsi Slaskie",
+        "Schlesien",
+        "Sileesia vojevoodkond",
+        "Silesia",
+        "Silesian Voivodeship",
+        "Silezijos vaivadija",
+        "Silezië",
+        "Silèsia",
+        "Slezské vojvodství",
+        "Voievodatul Silezia",
+        "Voivodato di Slesia",
+        "Voïvodie de Silésie",
+        "Woiwodschaft Schlesien",
+        "Województwo Śląskie",
+        "Województwo śląskie",
+        "Śląsk",
+        "Śląsk vojvodskap",
+        "Силезское воеводство",
+        "シロンスク県",
+        "西里西亚省" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337497/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Silesia" ;
+                    em:link <http://www.geonames.org/3337497/wojewodztwo-slaskie.html> ] ;
+            oa:hasTarget emp:g_3337497 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3066138 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337497/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Silesia" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.033333e+01 ;
+                    wgs84_pos:long 1.893333e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337497/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337497/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Silesian_Voivodeship>,
+        <http://en.wikipedia.org/wiki/Silesian_Voivodeship>,
+        <http://ru.wikipedia.org/wiki/%D0%A1%D0%B8%D0%BB%D0%B5%D0%B7%D1%81%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+emp:g_3337498 a em:Place ;
+    rdfs:label "Greater Poland (Region (adm1))" ;
+    em:alternateName "Województwo Wielkopolskie",
+        "Voivodat de Gran Polònia"@ca,
+        "Velkopolské vojvodství"@cs,
+        "Wiôlgòpòlsczé wòjewództwò"@csb,
+        "Woiwodschaft Großpolen"@de,
+        "Greater Poland Voivodeship"@en,
+        "Grandpolio"@eo,
+        "Grandpollanda Provinco"@eo,
+        "Voivodato de Gran Polonia"@es,
+        "Suur-Poola vojevoodkond"@et,
+        "Voïvodie de Grande-Pologne"@fr,
+        "Provinsi Polandia Besar"@id,
+        "Voivodato della Grande Polonia"@it,
+        "ヴィエルコポルスカ県"@ja,
+        "Didžiosios Lenkijos vaivadija"@lt,
+        "Lielpolijas vojevodiste"@lv,
+        "Woiwodschap Groot-Polen"@nl,
+        "Storpolske voivodskap"@no,
+        "Województwo wielkopolskie"@pl,
+        "Grande Polônia"@pt,
+        "Voievodatul Polonia Mare"@ro,
+        "Великопольское воеводство"@ru,
+        "Војводство великопољско"@sr,
+        "Storpolen"@sv,
+        "Storpolens vojvodskap"@sv,
+        "大波兰省"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3337498/> ] ;
+    em:canonicalURI emp:g_3337498 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3337498/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Didžiosios Lenkijos vaivadija",
+        "Grande Polônia",
+        "Grandpolio",
+        "Grandpollanda Provinco",
+        "Greater Poland Voivodeship",
+        "Lielpolijas vojevodiste",
+        "Provinsi Polandia Besar",
+        "Storpolen",
+        "Storpolens vojvodskap",
+        "Storpolske voivodskap",
+        "Suur-Poola vojevoodkond",
+        "Velkopolské vojvodství",
+        "Voievodatul Polonia Mare",
+        "Voivodat de Gran Polònia",
+        "Voivodato de Gran Polonia",
+        "Voivodato della Grande Polonia",
+        "Voïvodie de Grande-Pologne",
+        "Wiôlgòpòlsczé wòjewództwò",
+        "Woiwodschaft Großpolen",
+        "Woiwodschap Groot-Polen",
+        "Województwo Wielkopolskie",
+        "Województwo wielkopolskie",
+        "Великопольское воеводство",
+        "Војводство великопољско",
+        "ヴィエルコポルスカ県",
+        "大波兰省" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337498/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Greater Poland" ;
+                    em:link <http://www.geonames.org/3337498/wojewodztwo-wielkopolskie.html> ] ;
+            oa:hasTarget emp:g_3337498 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_798544 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337498/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Greater Poland" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.23e+01 ;
+                    wgs84_pos:long 1.72e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3337498/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337498/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Greater_Poland_Voivodeship>,
+        <http://en.wikipedia.org/wiki/Greater_Poland_Voivodeship>,
+        <http://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BB%D0%B8%D0%BA%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+emp:g_3339573 a em:Place ;
+    rdfs:label "Moravskoslezský kraj (Region (adm1))" ;
+    em:alternateName "Moravian and Silesian Region",
+        "Ostrava Region",
+        "Ostravský Kraj",
+        "Moravskoslezský kraj"@cs,
+        "Mährisch-Schlesische Region"@de ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/3339573/> ] ;
+    em:canonicalURI emp:g_3339573 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3339573/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Moravian and Silesian Region",
+        "Moravskoslezský kraj",
+        "Mährisch-Schlesische Region",
+        "Ostrava Region",
+        "Ostravský Kraj" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3339573/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Moravskoslezský kraj" ;
+                    em:link <http://www.geonames.org/3339573/moravskoslezsky-kraj.html> ] ;
+            oa:hasTarget emp:g_3339573 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3063584 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3339573/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Moravskoslezský kraj" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 4.983333e+01 ;
+                    wgs84_pos:long 1.8e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/3339573/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3339573/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Moravian%E2%80%93Silesian_Region>,
+        <http://en.wikipedia.org/wiki/Moravian%E2%80%93Silesian_Region> .
+
+emp:g_6690154 a em:Place ;
+    rdfs:label "Kraków (County (adm2))" ;
+    em:alternateName "Krakau"@af,
+        "Krakau"@als,
+        "ክራካው"@am,
+        "Cracovia"@an,
+        "كراكوف"@ar,
+        "Cracovia"@ast,
+        "Krakov"@az,
+        "Горад Кракаў"@be,
+        "Краков"@bg,
+        "Cracòvia"@ca,
+        "Краков"@ce,
+        "Krakоv"@crh,
+        "Krakov"@cs,
+        "Krakòwò"@csb,
+        "Краков"@cv,
+        "Krakau"@de,
+        "Krakow"@dsb,
+        "Κρακοβία"@el,
+        "Krakovo"@eo,
+        "Cracovia"@es,
+        "Krakovia"@eu,
+        "Cracovia"@ext,
+        "کراکوف"@fa,
+        "Krakova"@fi,
+        "Cracovie"@fr,
+        "Krakau"@fy,
+        "Cracovia"@gl,
+        "Khiet-là-khô-fû"@hak,
+        "Krakov"@hbs,
+        "קרקוב"@he,
+        "क्रकाउ"@hi,
+        "Krakov"@hr,
+        "Krakow"@hsb,
+        "Krakkó"@hu,
+        "Կրակով"@hy,
+        "Kraká"@is,
+        "Cracovia"@it,
+        "クラクフ"@ja,
+        "კრაკოვი"@ka,
+        "Краков"@kk,
+        "크라쿠프"@ko,
+        "Краков"@ky,
+        "Cracovia"@la,
+        "Krakovia"@lad,
+        "Cracòvia"@lmo,
+        "Krokuva"@lt,
+        "Krakova"@lv,
+        "Краков"@mhr,
+        "Краков"@mk,
+        "Краков"@mn,
+        "क्राकूफ"@mr,
+        "Krakovja"@mt,
+        "ကရားကော့မြို့"@my,
+        "Краков ош"@myv,
+        "Cracovia"@nah,
+        "Carcovia"@nap,
+        "Krakau"@nds,
+        "Krakau"@nl,
+        "Cracaû"@nrm,
+        "Cracòvia"@oc,
+        "Краков"@os,
+        "کراکوف"@pnb,
+        "Cracóvia"@pt,
+        "Cracovia"@ro,
+        "Краков"@ru,
+        "Cracòvia"@sc,
+        "Cracovia"@scn,
+        "Kruokova"@sgs,
+        "Krakov"@sk,
+        "Krakov"@sl,
+        "Krakovi"@sq,
+        "Краков"@sr,
+        "Krakov"@sw,
+        "Krakůw"@szl,
+        "கிராக்கோவ்"@ta,
+        "Krakóvia"@tet,
+        "กรากุฟ"@th,
+        "Cracow"@tpi,
+        "Краков"@tt,
+        "Кракув"@udm,
+        "Krakow"@ug,
+        "Краків"@uk,
+        "کراکوف"@ur,
+        "Krakov"@uz,
+        "Krakov"@vep,
+        "Краков балһсн"@xal,
+        "קראקע"@yi,
+        "克拉科夫"@yue,
+        "克拉科夫"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/6690154/> ] ;
+    em:canonicalURI emp:g_6690154 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/6690154/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:displayName "Carcovia",
+        "Cracaû",
+        "Cracovia",
+        "Cracovie",
+        "Cracow",
+        "Cracòvia",
+        "Cracóvia",
+        "Khiet-là-khô-fû",
+        "Krakau",
+        "Krakkó",
+        "Krakov",
+        "Krakova",
+        "Krakovi",
+        "Krakovia",
+        "Krakovja",
+        "Krakovo",
+        "Krakow",
+        "Kraká",
+        "Krakòwò",
+        "Krakóvia",
+        "Krakůw",
+        "Krakоv",
+        "Krokuva",
+        "Kruokova",
+        "Κρακοβία",
+        "Горад Кракаў",
+        "Краков",
+        "Краков балһсн",
+        "Краков ош",
+        "Кракув",
+        "Краків",
+        "Կրակով",
+        "קראקע",
+        "קרקוב",
+        "كراكوف",
+        "کراکوف",
+        "क्रकाउ",
+        "क्राकूफ",
+        "கிராக்கோவ்",
+        "กรากุฟ",
+        "ကရားကော့မြို့",
+        "კრაკოვი",
+        "ክራካው",
+        "クラクフ",
+        "克拉科夫",
+        "크라쿠프" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6690154/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Kraków" ;
+                    em:link <http://www.geonames.org/6690154/krakow.html> ] ;
+            oa:hasTarget emp:g_6690154 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_858786 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6690154/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Kraków" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.007262e+01 ;
+                    wgs84_pos:long 1.99325e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6690154/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/6690154/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Krak%C3%B3w>,
+        <http://en.wikipedia.org/wiki/Krak%C3%B3w> .
+
+emp:g_6695624 a em:Place ;
+    rdfs:label "Warszawa (County (adm2))" ;
+    em:alternateName "Warsaw",
+        "Powiat m. Warszawa"@pl ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/6695624/> ] ;
+    em:canonicalURI emp:g_6695624 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/6695624/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:displayName "Powiat m. Warszawa",
+        "Warsaw" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6695624/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Warszawa" ;
+                    em:link <http://www.geonames.org/6695624/warszawa.html> ] ;
+            oa:hasTarget emp:g_6695624 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_858787 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6695624/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Warszawa" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.223547e+01 ;
+                    wgs84_pos:long 2.104191e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6695624/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/6695624/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Warsaw>,
+        <http://en.wikipedia.org/wiki/Warsaw> .
+
+emp:g_6697536 a em:Place ;
+    rdfs:label "powiat Łódzki Wschodni (County (adm2))" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/6697536/> ] ;
+    em:canonicalURI emp:g_6697536 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/6697536/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6697536/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for powiat Łódzki Wschodni" ;
+                    em:link <http://www.geonames.org/6697536/powiat-lodzki-wschodni.html> ] ;
+            oa:hasTarget emp:g_6697536 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3337493 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6697536/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "powiat Łódzki Wschodni" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.176529e+01 ;
+                    wgs84_pos:long 1.948288e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/6697536/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/6697536/about.rdf> .
+
+emp:g_7530792 a em:Place ;
+    rdfs:label "Katowice (County (adm2))" ;
+    em:alternateName "Kattowitz"@als,
+        "ካቶቪጸ"@am,
+        "كاتوفيتسه"@ar,
+        "Катовице"@ba,
+        "Горад Катавіцы"@be,
+        "Катовице"@bg,
+        "Katovitse"@crh,
+        "Katovice"@cs,
+        "Катовица"@cv,
+        "Kattowitz"@de,
+        "ކެޓޮވިސް"@dv,
+        "Κατοβίτσε"@el,
+        "کاتوویتس"@fa,
+        "קטוביץ"@he,
+        "Կատովիցե"@hy,
+        "カトヴィツェ"@ja,
+        "tcadrkatovitse"@jbo,
+        "კატოვიცე"@ka,
+        "Катовице"@kk,
+        "ಕತೋವೀಸ್ಸ"@kn,
+        "카토비체"@ko,
+        "Katovîts"@ku,
+        "Катовице"@ky,
+        "Katovicum"@la,
+        "Katovicai"@lt,
+        "Katovice"@lv,
+        "Катовице"@mdf,
+        "Катовице"@mk,
+        "कातोवित्सा"@mr,
+        "Katovice"@nap,
+        "Kattowitz"@nds,
+        "क्याटोभिस"@ne,
+        "Катовице"@os,
+        "Kattowitz"@pdc,
+        "کاتووچ"@pnb,
+        "Katovice"@rmy,
+        "Катовице"@ru,
+        "Katovice"@sk,
+        "Katovice"@sl,
+        "Катовице"@sr,
+        "Katowicy"@szl,
+        "คาโตวีตเซ"@th,
+        "Катовице"@udm,
+        "Катовіце"@uk,
+        "Katovice"@vep,
+        "קאטאוויץ"@yi,
+        "卡托维兹"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7530792/> ] ;
+    em:canonicalURI emp:g_7530792 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7530792/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:displayName "Katovicai",
+        "Katovice",
+        "Katovicum",
+        "Katovitse",
+        "Katovîts",
+        "Katowicy",
+        "Kattowitz",
+        "tcadrkatovitse",
+        "Κατοβίτσε",
+        "Горад Катавіцы",
+        "Катовица",
+        "Катовице",
+        "Катовіце",
+        "Կատովիցե",
+        "קאטאוויץ",
+        "קטוביץ",
+        "كاتوفيتسه",
+        "کاتووچ",
+        "کاتوویتس",
+        "ކެޓޮވިސް",
+        "कातोवित्सा",
+        "क्याटोभिस",
+        "ಕತೋವೀಸ್ಸ",
+        "คาโตวีตเซ",
+        "კატოვიცე",
+        "ካቶቪጸ",
+        "カトヴィツェ",
+        "卡托维兹",
+        "카토비체" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530792/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Katowice" ;
+                    em:link <http://www.geonames.org/7530792/katowice.html> ] ;
+            oa:hasTarget emp:g_7530792 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3082777 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530792/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Katowice" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.021414e+01 ;
+                    wgs84_pos:long 1.900798e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530792/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7530792/about.rdf> .
+
+emp:g_7530801 a em:Place ;
+    rdfs:label "Wrocław (County (adm2))" ;
+    em:alternateName "Wrocław County",
+        "Powiat wrocławski"@pl ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7530801/> ] ;
+    em:canonicalURI emp:g_7530801 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7530801/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:displayName "Powiat wrocławski",
+        "Wrocław County" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530801/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Wrocław" ;
+                    em:link <http://www.geonames.org/7530801/wroclaw.html> ] ;
+            oa:hasTarget emp:g_7530801 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3337492 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530801/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Wrocław" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.11081e+01 ;
+                    wgs84_pos:long 1.703859e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530801/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7530801/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Wroc%C5%82aw_County>,
+        <http://en.wikipedia.org/wiki/Wroc%C5%82aw_County> .
+
+emp:g_7530818 a em:Place ;
+    rdfs:label "Opole (County (adm2))" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7530818/> ] ;
+    em:canonicalURI emp:g_7530818 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7530818/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530818/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <http://www.geonames.org/7530818/opole.html> ] ;
+            oa:hasTarget emp:g_7530818 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3082777 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530818/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Opole" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.065622e+01 ;
+                    wgs84_pos:long 1.793066e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530818/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <http://en.wikipedia.org/wiki/Opole> .
+
+emp:g_7530858 a em:Place ;
+    rdfs:label "Poznań (County (adm2))" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7530858/> ] ;
+    em:canonicalURI emp:g_7530858 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7530858/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530858/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Poznań" ;
+                    em:link <http://www.geonames.org/7530858/poznan.html> ] ;
+            oa:hasTarget emp:g_7530858 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3337498 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530858/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Poznań" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.240063e+01 ;
+                    wgs84_pos:long 1.690154e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530858/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7530858/about.rdf> .
+
+emp:g_7530964 a em:Place ;
+    rdfs:label "Częstochowa (County (adm2))" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7530964/> ] ;
+    em:canonicalURI emp:g_7530964 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7530964/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM2 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530964/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Częstochowa" ;
+                    em:link <http://www.geonames.org/7530964/czestochowa.html> ] ;
+            oa:hasTarget emp:g_7530964 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_3337497 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530964/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Częstochowa" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.080964e+01 ;
+                    wgs84_pos:long 1.912217e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7530964/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7530964/about.rdf> .
+
+emp:g_7531292 a em:Place ;
+    rdfs:label "Wrocław (City   (adm3})" ;
+    em:alternateName "Breslū"@ang,
+        "فروتسواف"@ar,
+        "Wroclaw"@ast,
+        "Vrotslav"@az,
+        "Breslau"@bar,
+        "Горад Уроцлаў"@be,
+        "Вроцлав"@bg,
+        "Wroclaw"@bi,
+        "Breslau"@ca,
+        "Вроцлав"@ce,
+        "ڤرۆتسواف"@ckb,
+        "Vrotslav"@crh,
+        "Vratislav"@cs,
+        "Βρότσλαβ"@el,
+        "Vroclavo"@eo,
+        "Breslavia"@es,
+        "وروتسواف"@fa,
+        "Wrocław"@fr,
+        "Breslau"@fy,
+        "Fut-lò-tshṳ-ngá-fû"@hak,
+        "ורוצלב"@he,
+        "Wrócław"@hsb,
+        "Վրոցլավ"@hy,
+        "Breslavia"@it,
+        "ヴロツワフ"@ja,
+        "ვროცლავი"@ka,
+        "Вроцлав"@kk,
+        "브로츠와프"@ko,
+        "Вроцлав"@ky,
+        "Vratislavia"@la,
+        "Breslavia"@lmo,
+        "Vroclavas"@lt,
+        "Vroclava"@lv,
+        "Вроцлав"@mk,
+        "Вроцлав"@mn,
+        "व्रोत्सवाफ"@mr,
+        "Вроцлав ош"@myv,
+        "Wroclaw"@nah,
+        "Breslau"@nds,
+        "Вроцлав"@os,
+        "وروسلاو"@pnb,
+        "Breslávia"@pt,
+        "Вроцлав"@ru,
+        "Vruoclavs"@sgs,
+        "Vroclav"@sk,
+        "Vroclav"@sl,
+        "Вроцлав"@sr,
+        "Breslau"@stq,
+        "Wrocłow"@szl,
+        "விராத்ஸ்சாஃப்"@ta,
+        "Vroklave"@tet,
+        "วรอตสวัฟ"@th,
+        "Breslavia"@tl,
+        "Вроцлав"@tt,
+        "Вроцлав"@udm,
+        "Wroklaw"@ug,
+        "Вроцлав"@uk,
+        "وراتسواف"@ur,
+        "Vrotslav"@uz,
+        "Vroclav"@vep,
+        "ברעסלוי"@yi,
+        "樂斯拉夫"@yue,
+        "弗罗茨瓦夫"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7531292/> ] ;
+    em:canonicalURI emp:g_7531292 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7531292/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:displayName "Breslau",
+        "Breslavia",
+        "Breslávia",
+        "Breslū",
+        "Fut-lò-tshṳ-ngá-fû",
+        "Vratislav",
+        "Vratislavia",
+        "Vroclav",
+        "Vroclava",
+        "Vroclavas",
+        "Vroclavo",
+        "Vroklave",
+        "Vrotslav",
+        "Vruoclavs",
+        "Wroclaw",
+        "Wrocław",
+        "Wrocłow",
+        "Wroklaw",
+        "Wrócław",
+        "Βρότσλαβ",
+        "Вроцлав",
+        "Вроцлав ош",
+        "Горад Уроцлаў",
+        "Վրոցլավ",
+        "ברעסלוי",
+        "ורוצלב",
+        "فروتسواف",
+        "وراتسواف",
+        "وروتسواف",
+        "وروسلاو",
+        "ڤرۆتسواف",
+        "व्रोत्सवाफ",
+        "விராத்ஸ்சாஃப்",
+        "วรอตสวัฟ",
+        "ვროცლავი",
+        "ヴロツワフ",
+        "弗罗茨瓦夫",
+        "樂斯拉夫",
+        "브로츠와프" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531292/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Wrocław" ;
+                    em:link <http://www.geonames.org/7531292/wroclaw.html> ] ;
+            oa:hasTarget emp:g_7531292 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7530801 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531292/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Wrocław" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.110773e+01 ;
+                    wgs84_pos:long 1.703533e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531292/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7531292/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Wroc%C5%82aw>,
+        <http://en.wikipedia.org/wiki/Wroc%C5%82aw> .
+
+emp:g_7531754 a em:Place ;
+    rdfs:label "Łódź (City   (adm3})" ;
+    em:alternateName "Lodsch"@de,
+        "Lodz"@de ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7531754/> ] ;
+    em:canonicalURI emp:g_7531754 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7531754/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:displayName "Lodsch",
+        "Lodz" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531754/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Łódź" ;
+                    em:link <http://www.geonames.org/7531754/lodz.html> ] ;
+            oa:hasTarget emp:g_7531754 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_6697536 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531754/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Łódź" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.17732e+01 ;
+                    wgs84_pos:long 1.94804e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531754/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7531754/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/%C5%81%C3%B3d%C5%BA>,
+        <http://en.wikipedia.org/wiki/%C5%81%C3%B3d%C5%BA> .
+
+emp:g_7531791 a em:Place ;
+    rdfs:label "Kraków (City   (adm3})" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7531791/> ] ;
+    em:canonicalURI emp:g_7531791 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7531791/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531791/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Kraków" ;
+                    em:link <http://www.geonames.org/7531791/krakow.html> ] ;
+            oa:hasTarget emp:g_7531791 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_6690154 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531791/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Kraków" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.00469e+01 ;
+                    wgs84_pos:long 2.00048e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531791/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7531791/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Krak%C3%B3w>,
+        <http://en.wikipedia.org/wiki/Krak%C3%B3w> .
+
+emp:g_7531836 a em:Place ;
+    rdfs:label "Poznań (City   (adm3})" ;
+    em:alternateName "بوزنان"@ar,
+        "Горад Познань"@be,
+        "Познан"@bg,
+        "ཕྰོ་ཟོ་ནན།"@bo,
+        "Poznanj"@bs,
+        "Pоznan"@crh,
+        "Poznaň"@cs,
+        "Pòznóń"@csb,
+        "Πόζναν"@el,
+        "پوزنان"@fa,
+        "Poznan"@fy,
+        "Poznanj"@hbs,
+        "פוזנן"@he,
+        "Poznanj"@hr,
+        "ポズナン"@ja,
+        "პოზნანი"@ka,
+        "포즈난"@ko,
+        "Posnania"@la,
+        "Poznanė"@lt,
+        "Poznaņa"@lv,
+        "पोझ्नान"@mr,
+        "Posen"@nds,
+        "Познань"@os,
+        "پوزنان"@pnb,
+        "Познань"@ru,
+        "Poznaň"@sk,
+        "Poznanj"@sl,
+        "Познањ"@sr,
+        "Poznańy"@szl,
+        "Poznan"@ug,
+        "Познань"@uk,
+        "פויזן"@yi,
+        "波茲南"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7531836/> ] ;
+    em:canonicalURI emp:g_7531836 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7531836/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:displayName "Posen",
+        "Posnania",
+        "Poznan",
+        "Poznanj",
+        "Poznanė",
+        "Poznańy",
+        "Poznaņa",
+        "Poznaň",
+        "Pòznóń",
+        "Pоznan",
+        "Πόζναν",
+        "Горад Познань",
+        "Познан",
+        "Познань",
+        "Познањ",
+        "פוזנן",
+        "פויזן",
+        "بوزنان",
+        "پوزنان",
+        "पोझ्नान",
+        "ཕྰོ་ཟོ་ནན།",
+        "პოზნანი",
+        "ポズナン",
+        "波茲南",
+        "포즈난" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531836/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Poznań" ;
+                    em:link <http://www.geonames.org/7531836/poznan.html> ] ;
+            oa:hasTarget emp:g_7531836 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7530858 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531836/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Poznań" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.240619e+01 ;
+                    wgs84_pos:long 1.692341e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531836/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7531836/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Province_of_Posen>,
+        <http://en.wikipedia.org/wiki/Province_of_Posen> .
+
+emp:g_7531926 a em:Place ;
+    rdfs:label "Warsaw (City   (adm3})" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7531926/> ] ;
+    em:canonicalURI emp:g_7531926 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7531926/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531926/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Warsaw" ;
+                    em:link <http://www.geonames.org/7531926/warszawa.html> ] ;
+            oa:hasTarget emp:g_7531926 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_6695624 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531926/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Warsaw" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.22331e+01 ;
+                    wgs84_pos:long 2.10614e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7531926/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7531926/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Warsaw>,
+        <http://en.wikipedia.org/wiki/Warsaw> .
+
+emp:g_7532033 a em:Place ;
+    rdfs:label "Katowice (City   (adm3})" ;
+    em:alternateName "Miasto Katowice"@pl ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7532033/> ] ;
+    em:canonicalURI emp:g_7532033 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7532033/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:displayName "Miasto Katowice" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532033/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Katowice" ;
+                    em:link <http://www.geonames.org/7532033/katowice.html> ] ;
+            oa:hasTarget emp:g_7532033 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7530792 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532033/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Katowice" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.02141e+01 ;
+                    wgs84_pos:long 1.90079e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532033/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7532033/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Katowice>,
+        <http://en.wikipedia.org/wiki/Katowice> .
+
+emp:g_7532413 a em:Place ;
+    rdfs:label "Opole (City   (adm3})" ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7532413/> ] ;
+    em:canonicalURI emp:g_7532413 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7532413/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532413/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <http://www.geonames.org/7532413/opole.html> ] ;
+            oa:hasTarget emp:g_7532413 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7530818 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532413/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Opole" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.06562e+01 ;
+                    wgs84_pos:long 1.79306e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532413/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <http://en.wikipedia.org/wiki/Opole> .
+
+emp:g_7532537 a em:Place ;
+    rdfs:label "Częstochowa (City   (adm3})" ;
+    em:alternateName "Горад Чэнстахова"@be,
+        "Ченстохова"@bg,
+        "Çenstohova"@crh,
+        "Čenstochová"@cs,
+        "چستوهووا"@fa,
+        "צ'נסטוחובה"@he,
+        "チェンストホヴァ"@ja,
+        "쳉스토호바"@ko,
+        "Čenstakava"@lt,
+        "Čenstohova"@lv,
+        "Czestochowa"@ms,
+        "Ченстохова"@ru,
+        "Čenstochová"@sk,
+        "Čenstohova"@sl,
+        "Ченстохова"@sr,
+        "Czynstochowy"@szl,
+        "เชนสโตโควา"@th,
+        "Ченстохова"@uk,
+        "琴斯托霍瓦"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/7532537/> ] ;
+    em:canonicalURI emp:g_7532537 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/7532537/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM3 ;
+    em:displayName "Czestochowa",
+        "Czynstochowy",
+        "Çenstohova",
+        "Čenstakava",
+        "Čenstochová",
+        "Čenstohova",
+        "Горад Чэнстахова",
+        "Ченстохова",
+        "צ'נסטוחובה",
+        "چستوهووا",
+        "เชนสโตโควา",
+        "チェンストホヴァ",
+        "琴斯托霍瓦",
+        "쳉스토호바" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532537/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Częstochowa" ;
+                    em:link <http://www.geonames.org/7532537/czestochowa.html> ] ;
+            oa:hasTarget emp:g_7532537 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_7530964 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532537/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Częstochowa" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.08096e+01 ;
+                    wgs84_pos:long 1.91221e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/7532537/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7532537/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Cz%C4%99stochowa>,
+        <http://en.wikipedia.org/wiki/Cz%C4%99stochowa> .
+
+emp:g_858786 a em:Place ;
+    rdfs:label "Lesser Poland Voivodeship (Region (adm1))" ;
+    em:alternateName "Województwo Małopolskie",
+        "Voivodat de Petita Polònia"@ca,
+        "Malopolské vojvodství"@cs,
+        "Małopòlsczé wòjewództwò"@csb,
+        "Województwo małopolskie"@da,
+        "Woiwodschaft Kleinpolen"@de,
+        "Lesser Poland Voivodeship"@en,
+        "Voivodato de Pequeña Polonia"@es,
+        "Väike-Poola vojevoodkond"@et,
+        "Voïvodie de Petite-Pologne"@fr,
+        "Provinsi Polandia Kecil"@id,
+        "Voivodato della Piccola Polonia"@it,
+        "マウォポルスカ県"@ja,
+        "Mažosios Lenkijos vaivadija"@lt,
+        "Mazpolijas vojevodiste"@lv,
+        "Woiwodschap Klein-Polen"@nl,
+        "Województwo małopolskie"@pl,
+        "Pequena Polónia"@pt,
+        "Voievodatul Polonia Mică"@ro,
+        "Малопольское воеводство"@ru,
+        "Malopoľské vojvodstvo"@sk,
+        "Lillpolen"@sv,
+        "Lillpolens vojvodskap"@sv,
+        "小波兰省"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/858786/> ] ;
+    em:canonicalURI emp:g_858786 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/858786/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Lesser Poland Voivodeship",
+        "Lillpolen",
+        "Lillpolens vojvodskap",
+        "Malopolské vojvodství",
+        "Malopoľské vojvodstvo",
+        "Mazpolijas vojevodiste",
+        "Małopòlsczé wòjewództwò",
+        "Mažosios Lenkijos vaivadija",
+        "Pequena Polónia",
+        "Provinsi Polandia Kecil",
+        "Voievodatul Polonia Mică",
+        "Voivodat de Petita Polònia",
+        "Voivodato de Pequeña Polonia",
+        "Voivodato della Piccola Polonia",
+        "Voïvodie de Petite-Pologne",
+        "Väike-Poola vojevoodkond",
+        "Woiwodschaft Kleinpolen",
+        "Woiwodschap Klein-Polen",
+        "Województwo Małopolskie",
+        "Województwo małopolskie",
+        "Малопольское воеводство",
+        "マウォポルスカ県",
+        "小波兰省" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/858786/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Lesser Poland Voivodeship" ;
+                    em:link <http://www.geonames.org/858786/wojewodztwo-malopolskie.html> ] ;
+            oa:hasTarget emp:g_858786 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_798544 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/858786/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Lesser Poland Voivodeship" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 4.986667e+01 ;
+                    wgs84_pos:long 2.026667e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/858786/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/858786/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Lesser_Poland_Voivodeship>,
+        <http://en.wikipedia.org/wiki/Lesser_Poland_Voivodeship>,
+        <http://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BB%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+emp:g_858787 a em:Place ;
+    rdfs:label "Mazovia (Region (adm1))" ;
+    em:alternateName "Województwo Mazowieckie",
+        "Woiwodskap Masowië"@af,
+        "Voivodat de Masòvia"@ca,
+        "Mazovské vojvodství"@cs,
+        "Mazowiecczé wòjewództwò"@csb,
+        "Województwo mazowieckie"@da,
+        "Woiwodschaft Masowien"@de,
+        "Masovian Voivodeship"@en,
+        "Mazovia Province"@en,
+        "Mazovia Provinco"@eo,
+        "Voivodato de Mazovia"@es,
+        "Masoovia vojevoodkond"@et,
+        "Voïvodie de Mazovie"@fr,
+        "Provinsi Mazowsze"@id,
+        "Voivodato della Masovia"@it,
+        "マゾフシェ県"@ja,
+        "Mazovijos vaivadija"@lt,
+        "Woiwodschap Mazovië"@nl,
+        "Województwo mazowieckie"@pl,
+        "Voivodia da Mazóvia"@pt,
+        "Voievodatul Mazovia"@ro,
+        "Мазовецкое воеводство"@ru,
+        "Војводство мазовско"@sr,
+        "Masoviens vojvodskap"@sv ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/858787/> ] ;
+    em:canonicalURI emp:g_858787 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/858787/about.rdf> ] ;
+    em:corePlaceType gn:A.ADM1 ;
+    em:displayName "Masoovia vojevoodkond",
+        "Masovian Voivodeship",
+        "Masoviens vojvodskap",
+        "Mazovia Province",
+        "Mazovia Provinco",
+        "Mazovijos vaivadija",
+        "Mazovské vojvodství",
+        "Mazowiecczé wòjewództwò",
+        "Provinsi Mazowsze",
+        "Voievodatul Mazovia",
+        "Voivodat de Masòvia",
+        "Voivodato de Mazovia",
+        "Voivodato della Masovia",
+        "Voivodia da Mazóvia",
+        "Voïvodie de Mazovie",
+        "Woiwodschaft Masowien",
+        "Woiwodschap Mazovië",
+        "Woiwodskap Masowië",
+        "Województwo Mazowieckie",
+        "Województwo mazowieckie",
+        "Војводство мазовско",
+        "Мазовецкое воеводство",
+        "マゾフシェ県" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/858787/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Mazovia" ;
+                    em:link <http://www.geonames.org/858787/wojewodztwo-mazowieckie.html> ] ;
+            oa:hasTarget emp:g_858787 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_798544 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/858787/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Mazovia" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.236667e+01 ;
+                    wgs84_pos:long 2.11e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/858787/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/858787/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Masovian_Voivodeship>,
+        <http://en.wikipedia.org/wiki/Masovian_Voivodeship>,
+        <http://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%B7%D0%BE%D0%B2%D0%B5%D1%86%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+emp:g_798544 a em:Place ;
+    rdfs:label "Poland (Country)" ;
+    em:alternateName "Lengyelország",
+        "Lenkija",
+        "Poland",
+        "Polen",
+        "Polija",
+        "Polish People’s Republic",
+        "Pologne",
+        "Polonia",
+        "Polsha",
+        "Polska",
+        "Polska Rzeczpospolita Ludowa",
+        "Polsko",
+        "Poola",
+        "Pole"@af,
+        "ፖላንድ"@am,
+        "Polonia"@an,
+        "Polaland"@ang,
+        "بولندا"@ar,
+        "ܦܘܠܢܕ"@arc,
+        "Polonia"@ast,
+        "Polşa"@az,
+        "Польша"@be,
+        "Полша"@bg,
+        "পোল্যাণ্ড"@bn,
+        "Polonia"@br,
+        "Poljska"@bs,
+        "Polònia"@ca,
+        "Polsko"@cs,
+        "Pòlskô"@csb,
+        "Пол҄ьска"@cu,
+        "Польша"@cv,
+        "Gwlad Pwyl"@cy,
+        "Polen"@da,
+        "Polen"@de,
+        "Polonya"@diq,
+        "Πολωνία"@el,
+        "Republic of Poland"@en,
+        "Polio"@eo,
+        "Pollando"@eo,
+        "Polujo"@eo,
+        "Poola"@et,
+        "Polonia"@eu,
+        "لهستان"@fa,
+        "Puola"@fi,
+        "Pólland"@fo,
+        "Pologne"@frp,
+        "Polonie"@fur,
+        "Poalen"@fy,
+        "An Pholainn"@ga,
+        "A Phòlainn"@gd,
+        "Polonia - Polska"@gl,
+        "Polóña"@gn,
+        "Yn Pholynn"@gv,
+        "Poljska"@hbs,
+        "פולין"@he,
+        "पोलैंड"@hi,
+        "Poljska"@hr,
+        "Pólska"@hsb,
+        "Lengyelország"@hu,
+        "Լեհաստան"@hy,
+        "Polonia"@ia,
+        "Polandia"@id,
+        "Polandia"@ilo,
+        "Polonia"@io,
+        "Pólland"@is,
+        "Polonia"@it,
+        "ポーランド"@ja,
+        "polskas"@jbo,
+        "Polandia"@jv,
+        "პოლონეთი"@ka,
+        "ប៉ូលូញ"@km,
+        "폴란드"@ko,
+        "Polonya"@ku,
+        "Poloni"@kw,
+        "Polonia"@la,
+        "Polen"@lb,
+        "Pole"@li,
+        "Polonia"@lij,
+        "ໂປແລນ"@lo,
+        "Lenkija"@lt,
+        "Polija"@lv,
+        "Полска"@mk,
+        "Poland"@ms,
+        "Polonja"@mt,
+        "Poran"@na,
+        "Pulonnia"@nap,
+        "Polen"@nb,
+        "Polen"@nds,
+        "Polen"@nl,
+        "Polen"@nn,
+        "Polen"@no,
+        "Polonia"@nov,
+        "Polongne"@nrm,
+        "Polonha"@oc,
+        "Pol’šu"@olo,
+        "Польшæ"@os,
+        "Polonya"@pam,
+        "Rzeczpospolita Polska"@pl,
+        "Polònia"@pms,
+        "پولنډ"@ps,
+        "Polónia"@pt,
+        "Polônia"@pt,
+        "Pulska"@qu,
+        "Pulunya"@qu,
+        "Polonia"@ro,
+        "Полония"@ro,
+        "Польша"@ru,
+        "Polonia"@sc,
+        "Pulonia"@scn,
+        "Poland"@sco,
+        "Polen"@se,
+        "Poľsko"@sk,
+        "Poljska"@sl,
+        "Booland"@so,
+        "Poloni"@sq,
+        "Polonia"@sq,
+        "Пољска"@sr,
+        "Polen"@sv,
+        "Poland"@sw,
+        "போலந்து"@ta,
+        "Polónia"@tet,
+        "Лаҳистон"@tg,
+        "ประเทศโปแลนด์"@th,
+        "โปแลนด์"@th,
+        "Polonya"@tl,
+        "poland"@tl,
+        "Polonya"@tr,
+        "لەھىستان"@ug,
+        "Польща"@uk,
+        "Polsha"@uz,
+        "Ba Lan"@vi,
+        "Pooln"@vls,
+        "Polän"@vo,
+        "Polonya"@war,
+        "פוילן"@yi,
+        "波兰"@zh ;
+    em:alternateURI [ rdfs:label "GeoNames URI" ;
+            em:link <http://sws.geonames.org/798544/> ] ;
+    em:canonicalURI emp:g_798544 ;
+    em:coreDataRef [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/798544/about.rdf> ] ;
+    em:corePlaceType gn:A.PCLI ;
+    em:displayName "A Phòlainn",
+        "An Pholainn",
+        "Ba Lan",
+        "Booland",
+        "Gwlad Pwyl",
+        "Lengyelország",
+        "Lenkija",
+        "Poalen",
+        "Polaland",
+        "Poland",
+        "Polandia",
+        "Pole",
+        "Polen",
+        "Polija",
+        "Polio",
+        "Polish People’s Republic",
+        "Poljska",
+        "Pollando",
+        "Pologne",
+        "Polongne",
+        "Polonha",
+        "Poloni",
+        "Polonia",
+        "Polonia - Polska",
+        "Polonie",
+        "Polonja",
+        "Polonya",
+        "Polsha",
+        "Polska",
+        "Polska Rzeczpospolita Ludowa",
+        "Polsko",
+        "Polujo",
+        "Polän",
+        "Polònia",
+        "Polónia",
+        "Polóña",
+        "Polônia",
+        "Polşa",
+        "Pol’šu",
+        "Poola",
+        "Pooln",
+        "Poran",
+        "Poľsko",
+        "Pulonia",
+        "Pulonnia",
+        "Pulska",
+        "Pulunya",
+        "Puola",
+        "Pòlskô",
+        "Pólland",
+        "Pólska",
+        "Republic of Poland",
+        "Rzeczpospolita Polska",
+        "Yn Pholynn",
+        "poland",
+        "polskas",
+        "Πολωνία",
+        "Лаҳистон",
+        "Полония",
+        "Полска",
+        "Полша",
+        "Польшæ",
+        "Польша",
+        "Польща",
+        "Пол҄ьска",
+        "Пољска",
+        "Լեհաստան",
+        "פוילן",
+        "פולין",
+        "بولندا",
+        "لهستان",
+        "لەھىستان",
+        "پولنډ",
+        "ܦܘܠܢܕ",
+        "पोलैंड",
+        "পোল্যাণ্ড",
+        "போலந்து",
+        "ประเทศโปแลนด์",
+        "โปแลนด์",
+        "ໂປແລນ",
+        "პოლონეთი",
+        "ፖላንድ",
+        "ប៉ូលូញ",
+        "ポーランド",
+        "波兰",
+        "폴란드" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/798544/about.rdf> ] ;
+            em:when emt:Current ;
+            oa:hasBody [ rdfs:label "Current map for Poland" ;
+                    em:link <http://www.geonames.org/798544/republic-of-poland.html> ] ;
+            oa:hasTarget emp:g_798544 ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:relationTo emp:g_6695072 ;
+            em:relationType em:P_PART_OF_A ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/798544/about.rdf> ] ;
+            em:when emt:Current ] ;
+    em:placeCategory gn:A ;
+    em:preferredName "Poland" ;
+    em:where [ a em:Setting ;
+            em:location [ a em:Location_value ;
+                    wgs84_pos:lat 5.2e+01 ;
+                    wgs84_pos:long 2e+01 ] ;
+            em:source [ a em:Source_ref ;
+                    rdfs:label "GeoNames data" ;
+                    em:link <http://sws.geonames.org/798544/about.rdf> ] ;
+            em:when emt:Current ] ;
+    rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Poland>,
+        <http://en.wikipedia.org/wiki/Poland>,
+        <http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BE%D0%BD%D0%B8%D1%8F>,
+        <http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8C%D1%88%D0%B0> .
 
 

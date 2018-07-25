@@ -1,0 +1,25 @@
+# GeoNames Place Ids in administrative hierarchy for city of Opole
+
+3090048     # PPLA - City of Opole
+
+7532413     # ADM3
+7530818     # ADM2
+3337495     # ADM1 - Opole Vovoideship
+
+798544      # PCLI - Poland
+
+# Results from following admin hierarchy :-o
+# 
+#     3090048
+#     7532413
+#     7530818
+#     3082777
+#     3077311
+# 
+# 
+#     <gn:parentFeature rdf:resource="http://sws.geonames.org/7532413/"/>
+# 
+#     <gn:parentADM3 rdf:resource="http://sws.geonames.org/7532413/"/>
+#     <gn:parentADM2 rdf:resource="http://sws.geonames.org/7530818/"/>
+#     <gn:parentADM1 rdf:resource="http://sws.geonames.org/3337495/"/>
+#     <gn:parentCountry rdf:resource="http://sws.geonames.org/798544/"/>
