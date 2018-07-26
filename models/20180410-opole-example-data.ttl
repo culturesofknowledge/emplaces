@@ -70,16 +70,6 @@
 #    [1] (in 2018-04-12 personal email)
 #
 #
-# TODO:
-#   Record metadata design (creator, contributor, license, etc. - waiting to see what Timbuctoo provides)
-#   Record timespans as identified resources (rather than inline blank nodes)
-#   Finalize some URIs to be used
-#
-# FOR REVIEW:
-#   Finalize prefixes
-#   URIs for language codes (consider lexvo?)
-#   Review format for timespan data; consider alignment with emerging LPiF activity
-#
 
 # Timespan for "current" data
 
@@ -268,6 +258,8 @@ em:APPROXIMATE a em:Competence_value ;
     .
 
 # Core vs non-core data
+#
+#NOTE: these terms could be eliminated if an alternative approach is taken to core data.
 
 em:Place a rdfs:Class ;
     em:coreProperty em:preferredName, em:alternateName, em:placeCategory, em:corePlaceType ;

@@ -259,6 +259,28 @@ COMMON_EMPLACES_DEFS = (
     # em:coreDataRef indicates source (reference gazetteer) for core data
     # Use em:source for other gazetteer references
     em:coreDataRef rdfs:subPropertyOf em:source .
+
+    # Annotation motivations
+    em:MAP_RESOURCE a oa:Motivation ;
+        rdfs:label "Map resource" ;
+        rdfs:comment "References a current or historical map resource associated with a place." ;
+        .
+    em:NAME_ATTESTATION
+        rdfs:label "Name attestation" ;
+        rdfs:comment "References a historical name attestation for a place, with source and compenence information." ;
+        .
+    em:CALENDAR_IN_USE
+        rdfs:label "Calendar in use" ;
+        rdfs:comment "References a historical calendar used in a place, with source and compenence information." ;
+        .
+    em:DEDICATED_TO a oa:Motivation ;
+        rdfs:label "Dedicated to" ;
+        rdfs:comment "Generally used with a related place that is a church or a place or worship, to indicate a person or historical figure to whom the place has been dedicated.  The annotation body directly references a resource for the dedicatee, which is assumed to have an rdfs:label value that can be used for display purposes." ;
+        .
+    em:USED_FOR a oa:Motivation ;
+        rdfs:label "Used for" ;
+        rdfs:comment "Generally used with a related place that is a building or site for some activity, to indicate a purpose for which the place was used.  The annotation body directly references a resource describing the purpose, which is assumed to have an rdfs:label value that can be used for display purposes.  The annotation itself may carry a temporal constraint (`em:where`) that gives some indication of when the place was used for that purpose." ;
+        .
     """)
 
 COMMON_LANGUAGE_DEFS = (
