@@ -1,6 +1,6 @@
 # EMPlaces data model for multiple "core data" sources
 
-(The contents of this note will eventually be incorporated into the main data model notes, but arer being kept separate for now to highlight the proposed changes.)
+(The contents of this note will eventually be incorporated into the main data model notes, but are being kept separate for now to highlight the proposed changes.)
 
 ## Problem with the previous model
 
