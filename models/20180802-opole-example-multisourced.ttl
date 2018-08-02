@@ -2,7 +2,7 @@
 # Data format is Turtle (http://www.w3.org/TR/turtle/)
 # Validated by http://ttl.summerofcode.be/
 #
-# This is a revision of '20180802-opole-example-multisourced.ttl' with
+# This is a revision of '20180410-opole-example-data.ttl' with
 # data model changes described at '20180802-multisource-data-model-notes.md'.
 
 #@@TODO: finalize preface stuff, prefixes, etc
