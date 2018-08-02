@@ -14415,11 +14415,11 @@ link}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{-1182, 212}, {1200, 1150}}</string>
+		<string>{{-1074, 204}, {1200, 1150}}</string>
 		<key>ListView</key>
 		<false/>
 		<key>OutlineWidth</key>
@@ -14433,7 +14433,7 @@ link}</string>
 		<key>SidebarWidth</key>
 		<integer>126</integer>
 		<key>VisibleRegion</key>
-		<string>{{10, -105}, {1059, 993}}</string>
+		<string>{{95, -105}, {1059, 993}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
