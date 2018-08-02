@@ -1,4 +1,4 @@
-# EMPlaces data model foutr multipkle "core data" sources
+# EMPlaces data model for multiple "core data" sources
 
 (The contents of this note will eventually be incorporated into the main data model notes, but arer being kept separate for now to highlight the proposed changes.)
 
@@ -6,13 +6,13 @@
 
 See [Data model for EMPlaces using annotations (draft 2018-07-09)](PDFs/20180305-EMPlaces-data-model-using-annotations.pdf).
 
-The previous model tried to apply core vs non-core distinctions at the level of individual properties, and in so doing ended mixing up the model-source information with the actualk data model.  For example, there were two properties for place type information: `em:corePlaceType` and `em:placeType`.
+The previous model tried to apply core vs non-core distinctions at the level of individual properties, and in so doing ended mixing up the model-source information with the actual data model.  For example, there were two properties for place type information: `em:corePlaceType` and `em:placeType`.
 
-The main reason for distinguishing "core" data from other data was to be able to refresh the core data when the underlying source (e.g. GeoNames) is updated, without disturbing the editorial content that had been added as a result of EMPlaces curation activities.
+The main reason for distinguishing "core" data from other data is to be able to refresh the core data when the underlying source (e.g. GeoNames) is updated, without disturbing any editorial content that has been added as a result of EMPlaces curation activities.
 
-An additional concern not addressed by the original model was that there wasn't proper provision for the possibility of "core": data coming from multiple sources.
+An additional concern not addressed by the original model was that there wasn't proper provision for the possibility of "core" data coming from multiple sources.
 
-And finally, the distinction between a minimum set of "core" data for a place, and data that was derived from existing sources vs data that was a contribution of EMPlaces has rather been lost.
+And finally, the distinction between a minimum set of "core" data for a place, and data that was derived from existing sources _vs_ data that was a contribution of EMPlaces has rather been lost.
 
 The new design aims to rectify these problems:
 
@@ -27,7 +27,7 @@ The new design aims to rectify these problems:
 
 See [Data model for EMPlaces using annotations (draft 2018-07-09)](PDFs/20180802-EMPlaces-data-model-multisource.pdf), page 1.
 
-The basic place data model is a slight simplification of the previous data model, in that it removes distinctions between "core data" and other data:
+The revised basic place data model is a slight simplification of the previous data model, in that it removes distinctions between "core data" and other data:
 
 - the `em:corePlaceType` property is removed, and just `em:placeType` is used.
 
@@ -64,10 +64,15 @@ For example, the following SPARQL CONSTRUCT statement might be used to construct
             {
                 ?place em:place_data [ ?p ?o ]
                 FILTER ( ?p != em:source )
+                FILTER ( ?p != rdf:type )
             }
         }
 
 @@This query is untested, but I trust it conveys the general idea
+
+@@We might find some additional smarts are needed to avoid problems from properties that appear in multiple sourced data; e.g. multiple rdfs:label values.
+
+NOTE: I'm not actually proposing this method for displaying EMPlaces data, but using it to illustrate how the probe query patterns might be modified when extracting data for display.
 
 NOTE: the exclusion of `em:source` properties is intended to avoid multiple conflicting source information.  One might consider allow multiple em:source values, but I feel that could conflict with the intuitive semantics of `em:source`.  E.g. if a particular source is considered trusted, it could be unintentionally applied to untrusted elements of the merged data.
 
