@@ -79,7 +79,7 @@
 
 emt:Current a em:Time_period ;
     rdfs:label   "Current, as of 2018" ;
-    rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
+    rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
     em:timespan
       [ a em:Time_span ;
         em:latestStart: "2018" ;
@@ -372,7 +372,6 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
         em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
-            # NOTE: source link same as core data ref, indicates core data
             em:link <http://sws.geonames.org/3090048/about.rdf>
           ] ;
       ] ;
@@ -384,7 +383,6 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
         em:competence em:DEFINITIVE ;
         em:source
           [ rdfs:label "GeoNames data" ;
-            # NOTE: source link same as core data ref, indicates core data
             em:link <http://sws.geonames.org/3090048/about.rdf>
           ] ;
       ] ;
@@ -400,7 +398,6 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
         em:when emt:Current ;
         em:source
           [ rdfs:label "GeoNames data" ;
-            # NOTE: source link same as core data ref, indicates core data
             em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
           ] ;
       ] ;
@@ -415,8 +412,6 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
     # Added label to distinguish from other places with same name
     # (initial default to preferred name?)
     rdfs:label      "City of Opole" ;
-
-    # Non-core data - EMPlaces editorial additions
 
     em:editorialNote """
         Getty Thesaurus of Geographic Names (05/03/2018):
@@ -1019,8 +1014,8 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
         em:link <http://sws.geonames.org/7532413/about.rdf>
       ] ;
 
-    em:placeCategory gn:A ;             # from gn:featureClass
-    em:corePlaceType gn:A.ADM3 ;        # from gn:featureCode
+    em:placeCategory gn:A ;         # from gn:featureClass
+    em:placeType gn:A.ADM3 ;        # from gn:featureCode
 
     em:preferredName "Opole" ;
 
@@ -1102,9 +1097,9 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
         em:link <http://sws.geonames.org/7530818/about.rdf>
       ] ;
 
-    em:placeCategory gn:A ;             # from gn:featureClass
-    em:corePlaceType gn:A.ADM2 ;        # from gn:featureCode
-    em:preferredName "Opole" ;          # from gn:name
+    em:placeCategory gn:A ;         # from gn:featureClass
+    em:placeType gn:A.ADM2 ;        # from gn:featureCode
+    em:preferredName "Opole" ;      # from gn:name
 
     em:where
       [ a em:Setting ;
@@ -1185,7 +1180,7 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
       ] ;
 
     em:placeCategory gn:A ;                 # from gn:featureClass
-    em:corePlaceType gn:A.ADM1 ;            # from gn:featureCode
+    em:placeType gn:A.ADM1 ;                # from gn:featureCode
     em:preferredName "Opole Voivodeship" ;  # from gn:name
 
     em:alternateName "Województwo Opolskie" ;
@@ -1285,13 +1280,13 @@ ex:Poland_PCLI_ADM1 a em:Place, em:Place_merged ;
 ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Poland (country)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
-    em:coreDataRef
+    em:source
       [ rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/798544/about.rdf>
       ] ;
 
-    em:placeCategory gn:A ;             # from gn:featureClass
-    em:corePlaceType gn:A.PCLI ;        # from gn:featureCode
+    em:placeCategory gn:A ;         # from gn:featureClass
+    em:placeType gn:A.PCLI ;        # from gn:featureCode
 
     gn:countryCode   "PL" ;
     em:preferredName "Poland" ;
