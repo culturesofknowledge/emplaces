@@ -110,6 +110,11 @@ COMMON_GEONAMES_DEFS = (
         rdfs:comment "Administrative division - from GeoNames (feature class)." 
         .
 
+    gn:S a skos:Concept ; 
+        rdfs:label "Spot feature" ;
+        rdfs:comment "Spot feature (spot, building, farm)." 
+        .
+
     # Place types
     gn:P.PPL a skos:Concept ;
         skos:narrower gn:P ;
@@ -166,6 +171,14 @@ COMMON_GEONAMES_DEFS = (
         rdfs:label    "Former Third-order admin division" ;
         rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
         .
+
+    gn:S.CH a skos:Concept ;
+        skos:narrower gn:S ;
+        rdfs:label    "Church" ;
+        rdfs:comment  "A church; a building for public Christian worship." 
+        .
+
+    #@@ more to add here
     """)
 
 COMMON_EMPLACES_DEFS = (
@@ -208,6 +221,14 @@ COMMON_EMPLACES_DEFS = (
         em:toType     gn:A ;
         rdfs:label    "Former part of" ;
         rdfs:comment  "Records a historical relationship between a historical place or administrative division and its parent division." 
+        .
+    em:S_PART_OF_P a em:Relation_type ;
+        em:fromType   gn:S ;
+        em:toType     gn:P ;
+        rdfs:label    "Located within" ;
+        rdfs:comment  "Relates a spot feature to a populated place within which it may be found."
+        #@@NOTE: this is quite specific - we may later want to allow for 
+        #        a looser style of relationship; e.g. `em:S_PART_OF_PA`
         .
 
     # Information competence (certainty)

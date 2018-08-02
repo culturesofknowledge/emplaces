@@ -45,6 +45,7 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - general issue here about materialization of inferred/implied/deduced information.
     - note that name attestations are *additions* to the primary info; no such for calendars.
 
+- [ ] Generate data from EMLO data
 - [ ] Review way that core data is represented
 
 - [ ] note 2 kinds of Julian calendars
@@ -63,4 +64,34 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 
 # Notes (questions and ideas)
 
+
+
+# Priorities (2018-08-01)
+
+1. Modelling of core data to deal with multiple core data sources
+    - update diagrams
+    - update sample data
+    - update core data extractor
+2. Need to start getting data into RDF and/or Timbuctoo
+    - e.g.
+    - 4 more towns like Opole to comparable detail
+3. Loose ends
+    - Modelling and Opole data
+    - Related places
+    - Historical place record: minimum viable information
+       - differs from current place
+4. Info for Lancaster talk - long talk later in August
+
+- Sample bibliographies to enter
+- Dealing with sources (see issue)
+- Integration of date conversions
+
+## Actions
+
+1. Revised data model for multiple core data sources
+    - (Try using Getty TGN)
+2. Annalist definitions for place data entry
+3. Session to ensure Arno can present EMPlaces to geographers
+
+- Invoice September time before going away (up to including September)
 

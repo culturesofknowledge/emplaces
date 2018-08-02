@@ -1,4 +1,4 @@
-# Sample data for church ofg St Adalberg in Opole
+# Sample data for church of St Adalberg in Opole
 # This is intended as an example of how "related places" may be handled.
 #
 # The structure of connections to other places is similar to that used for
@@ -41,7 +41,6 @@
 # Supporting definitions
 
 # Place categories, types and relations
-
 
 gn:S a skos:Concept ; 
     rdfs:label "Spot feature" ;
@@ -101,8 +100,8 @@ ex:Opole_St_Adalbert a em:Building ;
         em:link <http://www.wikidata.org/entity/Q55338793>
       ] ;
 
-    em:placeCategory gn:S ;             # from gn:featureClass
-    em:corePlaceType gn:S.CH ;          # from gn:featureCode
+    em:placeCategory gn:S ;         # from gn:featureClass
+    em:placeType gn:S.CH ;          # from gn:featureCode
 
     em:preferredName "Church of Our Lady of Sorrows and St. Adalbert"@en ;
 
@@ -252,7 +251,6 @@ ex:Opole_St_Adalbert a em:Building ;
             em:link <https://www.wikidata.org/wiki/Q55338793>
           ] ;
       ] ;
-
 
     # Used for
 
