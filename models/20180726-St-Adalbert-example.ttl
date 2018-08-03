@@ -1,4 +1,4 @@
-# Sample data for church of St Adalberg in Opole
+# Sample data for church of St Adalbert in Opole
 # This is intended as an example of how "related places" may be handled.
 #
 # The structure of connections to other places is similar to that used for
@@ -39,6 +39,26 @@
 @prefix ex:         <http://emplaces.data.example.org/> .        #@@@@ TBD
 
 # Supporting definitions
+
+em:Place a rdfs:Class ;
+    rdfs:label "Place" ;
+    rdfs:comment
+        """
+        A resource that provides information about a place (which is considered in the sense of being "constructed by human experience").
+
+        @@TODO: is this a generic superclass of all place types?
+
+        @@TODO: need to be clear about place vs info about place.
+        """
+    .
+
+em:Building a rdfs:Class ;
+    rdfs:label "Building" ;
+    rdfs:comment
+        """
+        A resource that provides information about a building.
+        """
+    .
 
 # Place categories, types and relations
 
@@ -92,7 +112,7 @@ em:USED_FOR a oa:Motivation ;
 
 # Place record for St Adalbert's church in Opole
 
-ex:Opole_St_Adalbert a em:Building ;
+ex:Opole_St_Adalbert a em:Building, em:Place ;
     rdfs:label       "Church of Our Lady of Sorrows and St. Adalbert"@en ;
     rdfs:comment     "Parish Church in Opole"@en ;
     em:alternateURI

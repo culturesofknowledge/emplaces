@@ -46,7 +46,7 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - note that name attestations are *additions* to the primary info; no such for calendars.
 
 - [ ] Generate data from EMLO data
-- [ ] Review way that core data is represented
+- [x] Review way that core data is represented
 
 - [ ] note 2 kinds of Julian calendars
     - currently using "Old style" and "New style", but this is probably not enough.
