@@ -45,14 +45,11 @@ em:Place a rdfs:Class ;
     rdfs:comment
         """
         A resource that provides information about a place (which is considered in the sense of being "constructed by human experience").
-
-        @@TODO: is this a generic superclass of all place types?
-
-        @@TODO: need to be clear about place vs info about place.
         """
     .
 
 em:Building a rdfs:Class ;
+    rdfs:subClassOf em:Place ;
     rdfs:label "Building" ;
     rdfs:comment
         """
