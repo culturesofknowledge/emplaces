@@ -110,6 +110,11 @@ COMMON_GEONAMES_DEFS = (
         rdfs:comment "Administrative division - from GeoNames (feature class)." 
         .
 
+    gn:S a skos:Concept ; 
+        rdfs:label "Spot feature" ;
+        rdfs:comment "Spot feature (spot, building, farm)." 
+        .
+
     # Place types
     gn:P.PPL a skos:Concept ;
         skos:narrower gn:P ;
@@ -166,6 +171,14 @@ COMMON_GEONAMES_DEFS = (
         rdfs:label    "Former Third-order admin division" ;
         rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
         .
+
+    gn:S.CH a skos:Concept ;
+        skos:narrower gn:S ;
+        rdfs:label    "Church" ;
+        rdfs:comment  "A church; a building for public Christian worship." 
+        .
+
+    #@@ more to add here
     """)
 
 COMMON_EMPLACES_DEFS = (
@@ -208,6 +221,14 @@ COMMON_EMPLACES_DEFS = (
         em:toType     gn:A ;
         rdfs:label    "Former part of" ;
         rdfs:comment  "Records a historical relationship between a historical place or administrative division and its parent division." 
+        .
+    em:S_PART_OF_P a em:Relation_type ;
+        em:fromType   gn:S ;
+        em:toType     gn:P ;
+        rdfs:label    "Located within" ;
+        rdfs:comment  "Relates a spot feature to a populated place within which it may be found."
+        #@@NOTE: this is quite specific - we may later want to allow for 
+        #        a looser style of relationship; e.g. `em:S_PART_OF_PA`
         .
 
     # Information competence (certainty)
@@ -259,6 +280,28 @@ COMMON_EMPLACES_DEFS = (
     # em:coreDataRef indicates source (reference gazetteer) for core data
     # Use em:source for other gazetteer references
     em:coreDataRef rdfs:subPropertyOf em:source .
+
+    # Annotation motivations
+    em:MAP_RESOURCE a oa:Motivation ;
+        rdfs:label "Map resource" ;
+        rdfs:comment "References a current or historical map resource associated with a place." ;
+        .
+    em:NAME_ATTESTATION
+        rdfs:label "Name attestation" ;
+        rdfs:comment "References a historical name attestation for a place, with source and compenence information." ;
+        .
+    em:CALENDAR_IN_USE
+        rdfs:label "Calendar in use" ;
+        rdfs:comment "References a historical calendar used in a place, with source and compenence information." ;
+        .
+    em:DEDICATED_TO a oa:Motivation ;
+        rdfs:label "Dedicated to" ;
+        rdfs:comment "Generally used with a related place that is a church or a place or worship, to indicate a person or historical figure to whom the place has been dedicated.  The annotation body directly references a resource for the dedicatee, which is assumed to have an rdfs:label value that can be used for display purposes." ;
+        .
+    em:USED_FOR a oa:Motivation ;
+        rdfs:label "Used for" ;
+        rdfs:comment "Generally used with a related place that is a building or site for some activity, to indicate a purpose for which the place was used.  The annotation body directly references a resource describing the purpose, which is assumed to have an rdfs:label value that can be used for display purposes.  The annotation itself may carry a temporal constraint (`em:where`) that gives some indication of when the place was used for that purpose." ;
+        .
     """)
 
 COMMON_LANGUAGE_DEFS = (
