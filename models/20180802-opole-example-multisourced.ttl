@@ -161,13 +161,13 @@ gn:A  a skos:Concept ;
 # Place types
 
 gn:P.PPL a skos:Concept ;
-    skos:narrower gn:P ;
+    skos:narrower gn:P ;  @@@@@ could be wrong way round @@@@
     rdfs:label    "Populated place" ;
     rdfs:comment  "A populated place (town, city, village, etc.).  From GeoNames (feature code)." 
     .
 
 gn:P.PPLA a skos:Concept ;
-    skos:narrower gn:P ;
+    skos:narrower gn:P ; @@@
     rdfs:label    "Seat of 1st-order admin div" ;
     rdfs:comment  "Populated place that is a seat of a first-order administrative division.  From GeoNames (feature code)." 
     .
@@ -331,14 +331,15 @@ ex:Opole_P a em:Place, em:Place_merged ;
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/3090048/>
       ] ;
-    em:place_data ex:Opope_P_EMPlaces, ex:Opole_P_Geonames ;
+    em:place_data ex:Opole_P_EMPlaces, ex:Opole_P_Geonames ;
     .
 
 ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (PPLA)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
     em:source
-      [ rdfs:label "GeoNames data" ;
+      [ a em:Authority ;
+        rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/3090048/about.rdf>
       ] ;
 
@@ -404,7 +405,8 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3090048/about.rdf>
           ] ;
       ] ;
@@ -415,7 +417,8 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
         em:relationType em:P_PART_OF_A ;    # relates populated place to parent admin div
         em:competence em:DEFINITIVE ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3090048/about.rdf>
           ] ;
       ] ;
@@ -423,14 +426,15 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P ;
+        oa:hasTarget ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ rdfs:label "Current map for Opole" ;
             em:link <http://www.geonames.org/3090048/opole.html>
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
           ] ;
       ] ;
@@ -440,7 +444,7 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
     rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5>
     .
 
-ex:Opope_P_EMPlaces a em:Place_sourced ;
+ex:Opole_P_EMPlaces a em:Place_sourced ;
     em:source ems:EMPlaces ;
     # Added label to distinguish from other places with same name
     # (initial default to preferred name?)
@@ -523,7 +527,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opole" ;
@@ -549,7 +553,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opol" ;
@@ -574,7 +578,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opolie" ;
@@ -599,7 +603,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppol" ;
@@ -625,7 +629,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opul" ;
@@ -650,7 +654,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppoln" ;
@@ -674,7 +678,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppelln" ;
@@ -697,7 +701,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppul" ;
@@ -722,7 +726,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppeln" ;
@@ -746,7 +750,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
 
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppolie" ;
@@ -774,7 +778,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Calendar ;
             # Old style (OS) begins year on 25-Mar
@@ -800,7 +804,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
-        oa:hasTarget   ex:Opole_P ;
+        oa:hasTarget   ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Calendar ;
             rdfs:label   "Gregorian" ;
@@ -832,7 +836,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
       # @@TODO: link to thumbnail + link to full stand-alone page
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P ;
+        oa:hasTarget ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:MapResource ;
             rdfs:label   "1561" ;   # Used for tab label
@@ -855,7 +859,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
       # 1608: https://davidrumsey.georeferencer.com/maps/769642035679/view
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P ;
+        oa:hasTarget ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:MapResource ;
             rdfs:label   "1608" ;   # Used for tab label
@@ -878,7 +882,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
       # 1740: https://davidrumsey.georeferencer.com/maps/306903845600/view
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P ;
+        oa:hasTarget ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:MapResource ;
             rdfs:label   "1740" ;   # Used for tab label
@@ -901,7 +905,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
       # 1777: https://davidrumsey.georeferencer.com/maps/608622104523/view
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P ;
+        oa:hasTarget ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:MapResource ;
             rdfs:label   "1777" ;   # Used for tab label
@@ -925,7 +929,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
       # @@NOTE: this displayed map has a davidrumsey.com annotation: is this a rip-off?
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P ;
+        oa:hasTarget ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:MapResource ;
             rdfs:label   "1787" ;   # Used for tab label
@@ -948,7 +952,7 @@ ex:Opope_P_EMPlaces a em:Place_sourced ;
       # 1794: https://davidrumsey.georeferencer.com/maps/17345888797/view
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P ;
+        oa:hasTarget ex:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:MapResource ;
             rdfs:label   "1794" ;   # Used for tab label
@@ -1043,7 +1047,8 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (ADM3)" ;                              # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ; # document
     em:source
-      [ rdfs:label "GeoNames data" ;
+      [ a em:Authority ;
+        rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/7532413/about.rdf>
       ] ;
 
@@ -1061,7 +1066,8 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when em:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7532413/about.rdf>
           ] ;
       ] ;
@@ -1072,7 +1078,8 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7532413/about.rdf>
           ] ;
       ] ;
@@ -1087,7 +1094,8 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;    # from gn:locationMap
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;    # from gn:locationMap
             em:link <http://sws.geonames.org/7532413/about.rdf>
           ] ;
       ] ;
@@ -1126,7 +1134,8 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (ADM2)" ;                              # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ; # document
     em:source
-      [ rdfs:label "GeoNames data" ;
+      [ a em:Authority ;
+        rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/7530818/about.rdf>
       ] ;
 
@@ -1143,7 +1152,8 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7530818/about.rdf>
           ] ;
       ] ;
@@ -1154,7 +1164,8 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7530818/about.rdf>
           ] ;
       ] ;
@@ -1169,7 +1180,8 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/7530818/about.rdf>
           ] ;
       ] ;
@@ -1208,7 +1220,8 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole Voivodeship (ADM1)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ;
     em:source
-      [ rdfs:label "GeoNames data" ;
+      [ a em:Authority ;
+        rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/3337495/about.rdf>
       ] ;
 
@@ -1249,7 +1262,8 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3337495/about.rdf>
           ] ;
       ] ;
@@ -1259,7 +1273,8 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
         em:relationTo ex:Poland_PCLI ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3337495/about.rdf>
           ] ;
         em:competence em:DEFINITIVE ;
@@ -1275,7 +1290,8 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/3337495/about.rdf>     # from gn:locationMap
           ] ;
       ] ;
@@ -1314,7 +1330,8 @@ ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Poland (country)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
     em:source
-      [ rdfs:label "GeoNames data" ;
+      [ a em:Authority ;
+        rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/798544/about.rdf>
       ] ;
 
@@ -1470,7 +1487,8 @@ ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/798544/about.rdf>
           ] ;
       ] ;
@@ -1485,7 +1503,8 @@ ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
           ] ;
         em:when emt:Current ;
         em:source
-          [ rdfs:label "GeoNames data" ;
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
             em:link <http://sws.geonames.org/798544/about.rdf>     # from gn:locationMap
           ] ;
       ] ;

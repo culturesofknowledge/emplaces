@@ -58,27 +58,29 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 - [ ] Finalize some URIs to be used
 - [ ] Finalize prefixes
 - [ ] URIs for language codes (consider lexvo?)
-- [ ] Review format for timespan data; consider alignment with emerging LPiF activity
+- [ ] Review format for timespan data; align with emerging LPiF activity
 - [ ] ...
 
 
 # Notes (questions and ideas)
 
-
+@@TODO: add citation/provenance section for annotations
+@@TODO: allocate URIs for attestations (where for our purposes, the oa:Annotation denotes the attestation)
+@@TODO: revisit "Setting" terminology - see what the latest usage is in Topotime related designs
+@@TODO: related place data - adapt to multi-source struicture?
 
 # Priorities (2018-08-01)
 
 1. Modelling of core data to deal with multiple core data sources
-    - update diagrams
-    - update sample data
-    - update core data extractor
+    - [x] update diagrams
+    - [x] update sample data
+    - [ ] update core data extractor
 2. Need to start getting data into RDF and/or Timbuctoo
-    - e.g.
-    - 4 more towns like Opole to comparable detail
+    - [ ] e.g. 4 more towns like Opole to comparable detail
 3. Loose ends
-    - Modelling and Opole data
-    - Related places
-    - Historical place record: minimum viable information
+    - [ ] Modelling and Opole data
+    - [x] Related places
+    - [ ] Historical place record: minimum viable information
        - differs from current place
 4. Info for Lancaster talk - long talk later in August
 

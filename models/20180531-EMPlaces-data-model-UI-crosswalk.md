@@ -1,3 +1,5 @@
+NOTE: Continuing work in 20180814-EMPlaces-data-model-UI-crosswalk-multisource.md
+
 # EMPlaces Data model to UI crosswalk
 
 UI sample for [Opole](../images/current_display.pdf).
