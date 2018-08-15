@@ -36,11 +36,13 @@ Extended Data:
 - Feedback text with mailto link.
 - Maps section w/linked Provenance page. If reference gazetteer can offer a lat/long then e.g. Google (TBD) map is shown centred on that location. If a historical place, optional historical maps are shown, identified with tab labels corresponding to their date of publication. Historical map can be a preview PNG linked to a website with geo-referenced map, or (fallback) linked to a higher-resolution PNG image. TBD if an additional mechanism (e.g. IIIF) will be supported in v1.
 - Place Description. Initial text will be derived from first paragraph of Wikipedia entry for the selected place. 
-- Creator/Contributors/Core Data/Licenses (links only)
-- Export record in multiple formats
-- Historical administrative hierarchies
-- Historical ecclesiastical hierarchies w/multiple confessions
-- Historical military and judicial hierarchies
+- Historical hierarchies w/linked Provenance page
+	- Multiple administrative hierarchies (v1)
+	- Multiple ecclesiastical hierarchies w/multiple confessions (TBD for v1)
+	- Multiple military hierarchies (not in v1)
+	- Multiple judicial hierarchies (not in v1)
+- Creator/Contributors/Licenses (data from Timbuctoo)
+- Export selected record in multiple formats (see below)
 
 #### Provenance pages
 
