@@ -186,19 +186,40 @@ Provides information about the physical location of a Place.
 
 # Annotations general model
 
-@@@describe general approach; per-annotation details come later
-
-@@TODO: reference standard!!!!
-
 ## Annotations general structure
+
+Web Annotations are a W3C web standard ([data model](http://www.w3.org/TR/annotation-model/) and [vocabulary](http://www.w3.org/TR/annotation-vocab/)) for connecting some descriptive information (a "body") with a resource (the "target").
+
+![Basic Web Annotation (from W3C specification)](images/web_annotation_basic_model.png "Basic Web Annotation (W3C)")
+
+Traditionally, Web Annotations have been associated with human-readable annotations of documents (which are a way of associating some additional information of opinion or context with the content of a document), but the underlying model is also applicable to associating machine-readable data with an arbitrary resource identified by a URI.
+
+Web Annotations have been adopted for use in the EMPlaces for the following reasons:
+
+1. They allow additional information to be associated with a place, along with contextual information; e.g. a name attestation may be associated with a period within which it is believed to have been in use.  In particular, Web Annotations allow association of provenance and contributor informaton with individual claims about a place.
+
+2. They proviode an extension point through which additional information about a place can be introduced using the same basic structures that are used for basic EMPlaces information.
+
+3. They allow separately-published information to be associated with a place, which in turn provides a possible route for curation of third party contributions to EMPlaces while maintaining editorial integrity of the base service.
+
+4. As an increasingly popular web standard, we anticipate that Web Annotations will be increasingly supported by a range of software systems, which should make EMPlaces data more accessible and flexible for use with independent information systems.
+
+When reading a Web Annotation, think of the "target" as something that the annotation is about - in our case, this is commonly a place.  The "body" is then some additional information about that place (or thing).  In our use of annotations, the body is an RDF node that denotes some information about the target.
+
+The annotation itself is a resource distinct from the target or body.  We use a "motivation" property applied to the annotation to indicate how the body is related to the target; e.g. a "Name attestation" motivation indicates that the body is information about a name atestation associated with a target place.  Generally, the expected structure of RDF information in the body depends on the motivation used (but note that the RDF's open world model allows providion of additional arbitrary information here).
+
+Additional properties of the annotation can be used to provide additional context for the information provided.  Some commonly-used additional context values are:
+
+- a time period in which the information is considered to be applicable
+- an indication of the source or provenance of the information, which may in turn inform decisions about its trustworthiness
+- an indication of the "competence" of the information provided; e.g. is it considered to be definitive (coming from a generally reliable source), inferred (deduced from other information), uncertain (a researchers informed guess), etc.
+- bibliographic references that provide additional related information
 
 ## `em:hasAnnotation` Annotation 
 
 This statement indicates an annotation associated with a place.  The annotation may carry different information about the place, dependent on the value of the associated Annotation type.
 
 `em:hasAnnotation` functions roughly as an inverse of `oa:hastarget`, and is defined to simplify JSON-LD representations of annotations associated with a place.  The annotation itself should also have an `oa:hasTarget` property with the asscoated place as its object, to be a valid web annoation.
-
-@@TODO: would it be better to associate an anotation container with the place (e.g. using `em:hasAnnotations`), or to treat the place itself as an annotation container?  Or maybe have a separate annotation container for all places?  Probably not: it just complicates things for no clear value.  It may make sense to have a separate annotation container for all place annotations, but that can be real;ized later if desired.
 
 ### `oa:hasTarget` Place
 
@@ -210,29 +231,13 @@ See also `em:hasAnnotation` Annotation.
 
 The purpose of the annotation type is to make it easy to find particiular annotation values associated with a place.
 
-@@TODO: is this the appropriate property?  Maybe `oa:purpose` (doesn't seem quite right), some new property, or an additional `rdf:type associated` with the annotation body?
-
-@@TODO: instead of `oa:motivatedBy`, use `rdf:type`.  Hence annotation types arethemselves `rdfs:Class`es
-
 ### `oa:hasBody` Annotation body
 
-The Annotation body conveys specific information associated with the associated place.  The structure of this information is definbed by the corresponding Annotation type value.
-
-@@TODO: should the annotation body also reference the place directly?  (This would make it stand more independently, maybe easier to process separately from the annotation itself, but could it also cause some semantic problems?)
--- My current preference is "no" - rather, use the annotation to stand for the qualified relation.
-
-@@TODO: should the temporal information be attached to the annotation body, or to the annotation (as now)?
--- Currently, I prefer attachment to the Annotation, but I should check that this doesn't break anything in OA.  (Ask Rob Sanderson?)
--- Could this be considered to be a subproperty of AO "scope"?
-
-@@TODO: should the annotation type be attached to the annotation body, or to the annotation (as now)?
--- I'm inclined to leave it on the Annotation.  But check this doesn't violate OA.
+The Annotation body conveys specific information associated with the associated place.  The expected structure of this information is defined by the corresponding Annotation type value.
 
 @@TODO: should the annotation carry an editorial note: currently, that is attached to the annotation body.
 -- I'm inclined to move it to the Annotation.  But check this doesn't violate OA.
--- OA allows multiple bodies per annotation.  Suggest the editorialnote is provided as a separate body with textual value.
-
-@@NOTE: AO defines a `source` property, but its use is more akin to prov:specializationOf.
+-- OA allows multiple bodies per annotation.  Suggest the editorial note is provided as a separate body with textual value.
 
 @@TODO: the above questions arise in part from thinking about the "annotation" as being a reification of an association between the place and the annotation body, thereby allowing that association to be qualified in various ways.
 
