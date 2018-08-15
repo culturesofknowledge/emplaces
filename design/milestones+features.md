@@ -34,7 +34,7 @@ Extended Data:
 - Bibliography for selected place w/link and bibliography item count. Link to separate page where the structured bibliographic entries for the selected place are listed. Item count is derived from this page. 
 - Related Resources. List of external (typically online, and this linked) resources related to the selected place. Links open in new browser tabs.
 - Feedback text with mailto link.
-- Maps section w/linked Provenance page. If reference gazetteer can offer a lat/long then e.g. Google (TBD) map is shown centred on that location. If a historical place, optional historical maps are shown, identified with tab labels corresponding to their date of publication. Historical map can be a preview PNG linked to a website with geo-referenced map, or (fallback) linked to a higher-resolution PNG image. TBD if an additional mechanism (e.g. IIIF) will be supported in v1.
+- Maps section w/linked Provenance page. If reference gazetteer can offer a lat/long then e.g. Google (TBD) map is shown centred on that location. If a historical place, optional historical maps are shown (with placeholder for no data), identified with tab labels corresponding to their date of publication. Historical map can be a preview PNG linked to a website with geo-referenced map, or (fallback) linked to a higher-resolution PNG image. TBD if an additional mechanism (e.g. IIIF) will be supported in v1.
 - Place Description. Initial text will be derived from first paragraph of Wikipedia entry for the selected place. 
 - Historical hierarchies w/linked Provenance page
 	- Multiple administrative hierarchies (v1)
@@ -67,11 +67,19 @@ Modal pop-up with simple, formatted text describing the functionality of the res
 
 - Timbuctoo APIs only (no Pelagios API in v1)
 
-### Basic Search:
+### Basic Search
 
 - Basic search functionality TBD
 - Place centric, derived from default Timbuctoo search/result functionality
 
-### Advanced Search:
+### Advanced Search
 
 - Advanced search functionality TBD in time for EM Places workshop/hack-a-thon (late April)
+
+### Edit View
+
+- TBD. Depends on 
+
+### EM Places site
+
+- Static pages for About, Infos etc.
