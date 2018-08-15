@@ -27,11 +27,8 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 - [x] Check that proposed Web Annotation extensions don't break anything (email with Robert Sanderson)
 - [x] Pin down location/timespan vocabularies (the structure here follows ideas from Topotime/GeoJSON-LDT (also a work-in-progress?) but the vocabularies haven't yet been checked.)
 - [ ] Update [Data model notes](./20180405-EMPlaces-data-model-notes.md); resolve any remaining TODOs there
-- [.] Update [diagrams](./PDFs/)
-    - [x] main diagram done
-    - [x] name attestation diagram done
-    - [ ] other annotation diagrams still to do
-- [.] Crosswalk between UI and data model
+- [x] Update [diagrams](./PDFs/)
+- [x] Crosswalk between UI and data model
 - [x] Dealing with uncertainty
     - See example, em:competence
     - How to represent?  
@@ -68,8 +65,12 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 @@TODO: allocate URIs for attestations (where for our purposes, the oa:Annotation denotes the attestation)
 @@TODO: revisit "Setting" terminology - see what the latest usage is in Topotime related designs
 @@TODO: related place data - adapt to multi-source struicture?
+@@TODO: source resources have optional licence
+@@TODO: add tab label prioperties to all map resource annotations
+@@TODO: look at similar issue for historical hierarchies
+@@TODO: data extractor: fix up parentFeature link in hierarchy to match PPL record
 
-# Priorities (2018-08-01)
+# Priorities (2018-08-01, 2018-08-14)
 
 1. Modelling of core data to deal with multiple core data sources
     - [x] update diagrams
@@ -77,7 +78,9 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [ ] update core data extractor
 2. Need to start getting data into RDF and/or Timbuctoo
     - [ ] e.g. 4 more towns like Opole to comparable detail
-3. Loose ends
+3. Bulk data into RDF/Timbuctoo
+    - [ ] e.g. 2000 places core data from GeoNames
+4. Loose ends
     - [ ] Modelling and Opole data
     - [x] Related places
     - [ ] Historical place record: minimum viable information

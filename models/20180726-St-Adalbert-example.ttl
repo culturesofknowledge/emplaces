@@ -28,15 +28,15 @@
 @prefix foaf:       <http://xmlns.com/foaf/0.1/> .
 @prefix bibo:       <http://purl.org/ontology/bibo/> .
 
-@prefix geonames:   <http://sws.geonames.org/> .                # GeoNames place IDs
-@prefix gn:         <http://www.geonames.org/ontology#> .       # GeoNames vocabulary terms
+@prefix geonames:   <http://sws.geonames.org/> .          # GeoNames place IDs
+@prefix gn:         <http://www.geonames.org/ontology#> . # GeoNames vocabulary terms
 @prefix wgs84_pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
-@prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
+@prefix em:         <http://emplaces.namespace.example.org/> . #@@@@ TBD
 @prefix emt:        <http://emplaces.namespace.example.org/timespan/> .
 @prefix eml:        <http://emplaces.namespace.example.org/language/> .
 
-@prefix ex:         <http://emplaces.data.example.org/> .        #@@@@ TBD
+@prefix ex:         <http://emplaces.data.example.org/> .     #@@@@ TBD
 
 # Supporting definitions
 
@@ -108,83 +108,25 @@ em:USED_FOR a oa:Motivation ;
     .
 
 # Place record for St Adalbert's church in Opole
+#
+# @@TODO: eventually, figure out which data is direct from wikidata, 
+#         and which is interpreted.
+#
 
-ex:Opole_St_Adalbert a em:Building, em:Place ;
-    rdfs:label       "Church of Our Lady of Sorrows and St. Adalbert"@en ;
-    rdfs:comment     "Parish Church in Opole"@en ;
+ex:Opole_St_Adalbert a em:Place, em:Place_merged ;
+    em:canonicalURI ex:Opole_St_Adalbert ;
     em:alternateURI
       [ rdfs:label "Wikidata URI" ;
         em:link <http://www.wikidata.org/entity/Q55338793>
       ] ;
+    em:place_data ex:Opole_St_Adalbert_wikidata, ex:Opole_St_Adalbert_EMPlaces ;
+    .
 
-    em:placeCategory gn:S ;         # from gn:featureClass
-    em:placeType gn:S.CH ;          # from gn:featureCode
-
-    em:preferredName "Church of Our Lady of Sorrows and St. Adalbert"@en ;
-
-    em:alternateName "Church on the Hill"@en ;
-    em:alternateName "St. Adalbert's church"@en ;
-
-    em:displayName   "Church of Our Lady of Sorrows and St. Adalbert" ;
-    em:displayName   "Church on the Hill" ;
-    em:displayName   "St. Adalbert's church" ;
-
-    em:where
-      [ a em:Setting ;
-        rdfs:comment "Plac Kopernika 12, Opole" ;
-        #@@ em:location
-        #@@   [ a em:Location_value ;
-        #@@     wgs84_pos:lat  "50.67211"^^xsd:double ;
-        #@@     wgs84_pos:long "17.92533"^^xsd:double ;
-        #@@   ] ;
-        em:when emt:Current ;
-        em:source
-          [ rdfs:label "Wikidata" ;
-            em:link <https://www.wikidata.org/wiki/Q55338793>
-          ] ;
-      ] ;
-
-    em:when 
-      [ a em:Time_period ;
-        rdfs:label   "1361-" ;
-        em:timespan
-          [ em:start  "1361" ;
-            #@@ em:end    "1806" ;
-          ]
-      ] ;
-
-    em:hasRelation
-      [ a em:Qualified_relation ;
-        em:relationTo ex:Opole_P ;
-        em:relationType em:S_PART_OF_P ;    # relates spot feature to populated place
-        em:competence em:DEFINITIVE ;
-        em:source
-          [ rdfs:label "Wikidata" ;
-            em:link <https://www.wikidata.org/wiki/Q55338793>
-          ] ;
-      ] ;
+ex:Opole_St_Adalbert_wikidata a em:Building, em:Place, em:Place_sourced ;
+    rdfs:label       "Church of Our Lady of Sorrows and St. Adalbert"@en ;
+    rdfs:comment     "Parish Church in Opole"@en ;
 
     rdfs:isDefinedBy <https://zabytek.pl/en/obiekty/opole-kosciol-parafialny-pw-matki-boskiej-bolesnej-i-sw-wojc> ;
-
-    # Map resource
-    #
-    # Currently using map resource for Opole (containing place). 
-    # If available, use something at larger scale.
-
-    em:hasAnnotation
-      [ a oa:Annotation ;
-        oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P ;
-        oa:hasBody 
-          [ rdfs:label "Current map for Opole" ;
-            em:link <http://www.geonames.org/3090048/opole.html>
-          ] ;
-        em:when emt:Current ;
-        em:source
-          [ rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/3090048/about.rdf>
-          ] ;
-      ] ;
 
     # Related resources
 
@@ -348,6 +290,74 @@ ex:Opole_St_Adalbert a em:Building, em:Place ;
             em:link <https://www.wikidata.org/wiki/Q55338793>
           ] ;
       ] ;
-
-    em:canonicalURI ex:Opole_St_Adalbert 
     .
+
+ex:Opole_St_Adalbert_EMPlaces a em:Building, em:Place, em:Place_sourced ;
+    rdfs:label       "Church of Our Lady of Sorrows and St. Adalbert"@en ;
+    rdfs:comment     "Parish Church in Opole"@en ;
+
+    em:placeCategory gn:S ;         # from gn:featureClass
+    em:placeType gn:S.CH ;          # from gn:featureCode
+    em:preferredName "Church of Our Lady of Sorrows and St. Adalbert"@en ;
+    em:alternateName "Church on the Hill"@en ;
+    em:alternateName "St. Adalbert's church"@en ;
+    em:displayName   "Church of Our Lady of Sorrows and St. Adalbert" ;
+    em:displayName   "Church on the Hill" ;
+    em:displayName   "St. Adalbert's church" ;
+
+    em:where
+      [ a em:Setting ;
+        rdfs:comment "Plac Kopernika 12, Opole" ;
+        #@@ em:location
+        #@@   [ a em:Location_value ;
+        #@@     wgs84_pos:lat  "50.67211"^^xsd:double ;
+        #@@     wgs84_pos:long "17.92533"^^xsd:double ;
+        #@@   ] ;
+        em:when emt:Current ;
+        em:source
+          [ rdfs:label "Wikidata" ;
+            em:link <https://www.wikidata.org/wiki/Q55338793>
+          ] ;
+      ] ;
+
+    em:when 
+      [ a em:Time_period ;
+        rdfs:label   "1361-" ;
+        em:timespan
+          [ em:start  "1361" ;
+            #@@ em:end    "1806" ;
+          ]
+      ] ;
+
+    em:hasRelation
+      [ a em:Qualified_relation ;
+        em:relationTo ex:Opole_P ;
+        em:relationType em:S_PART_OF_P ;
+        em:competence em:DEFINITIVE ;
+        em:source
+          [ rdfs:label "Wikidata" ;
+            em:link <https://www.wikidata.org/wiki/Q55338793>
+          ] ;
+      ] ;
+
+    # Map resource
+    #
+    # Currently using map resource for Opole (containing place). 
+    # If available, use something at larger scale.
+    #
+    em:hasAnnotation
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget ex:Opole_P ;
+        oa:hasBody 
+          [ rdfs:label "Current map for Opole" ;
+            em:link <http://www.geonames.org/3090048/opole.html>
+          ] ;
+        em:when emt:Current ;
+        em:source
+          [ rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3090048/about.rdf>
+          ] ;
+      ] ;
+    .
+
