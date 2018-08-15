@@ -1,17 +1,22 @@
 ## Features and Milestones
 
-### Initial draft list
+#### v1 Data Goals
 
-Data:
+Metadata:
 
-- Opele (current place) RDF sample completed
-- Opele (current place) RDF mapping completed
-- TBD (historical place) RDF sample completed
-- TBD (historical place) RDF mapping completed
-- 6K core records w/GeoName IDs imported from EMLO
-- 50 detailed (full) records
+- Opele (current place) RDF w/content for all data fields
+- Historical places (in Opele's admin historical hierarchy) RDF
+- Five more full Silesian current places (as for Opele) 
+- Circa 6K core records w/GeoName IDs imported from EMLO
+- Circa 50 full records (as for Opele)
 
-Record Detail:
+Maps:
+
+- Preview and full PNG images for all full records
+
+##### v1 Record View
+
+Core Data:
 
 - Preferred name w/reduced Toponyms
 - Location lat/long with degrees/minutes/seconds representation
@@ -37,19 +42,19 @@ Record Detail:
 
 - Info pop-ups on selected elements
 
-Import:
+#### Import
 
 - Import functionality defined
 - Import formats defined
 - Import implemented
 
-Export:
+#### Export
 
 - Export functionality defined
 - Export formats defined
 - Export implemented
 
-Basic (place centric) Search:
+#### Basic (place centric) Search:
 
 - Basic search design notes completed
 - Basic search mockup completed
