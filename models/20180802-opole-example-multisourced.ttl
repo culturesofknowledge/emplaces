@@ -161,75 +161,73 @@ gn:A  a skos:Concept ;
 # Place types
 
 gn:P.PPL a skos:Concept ;
-    skos:narrower gn:P ;  @@@@@ could be wrong way round @@@@
+    skos:broader  gn:P ;
     rdfs:label    "Populated place" ;
     rdfs:comment  "A populated place (town, city, village, etc.).  From GeoNames (feature code)." 
     .
 
 gn:P.PPLA a skos:Concept ;
-    skos:narrower gn:P ; @@@
+    skos:broader  gn:P ;
     rdfs:label    "Seat of 1st-order admin div" ;
     rdfs:comment  "Populated place that is a seat of a first-order administrative division.  From GeoNames (feature code)." 
     .
 
 gn:P.PPLH a skos:Concept ;
-    skos:narrower gn:P ;
+    skos:broader  gn:P ;
     rdfs:label    "Former populated place" ;
     rdfs:comment  "A former populated place that no longer exists.  From GeoNames (feature code)." 
     .
 
 gn:A.PCLI a skos:Concept ;
-    skos:narrower gn:A ;
+    skos:broader  gn:A ;
     rdfs:label    "Independent political entity" ;
     rdfs:comment  "An independent political entity, typically a country.  From GeoNames (feature code)."
     .
 
 gn:A.ADM1 a skos:Concept ;
-    skos:narrower gn:A ;
+    skos:broader  gn:A ;
     rdfs:label    "First-order admin division" ;
     rdfs:comment  "A primary administrative division of a country, such as a state in the United States.  From GeoNames (feature code)."
     .
 
 gn:A.ADM2 a skos:Concept ;
-    skos:narrower gn:A ;
+    skos:broader  gn:A ;
     rdfs:label    "Second-order admin division" ;
     rdfs:comment  "A subdivision of a first-order administrative division.  From GeoNames (feature code)."
     .
 
 gn:A.ADM3 a skos:Concept ;
-    skos:narrower gn:A ;
+    skos:broader  gn:A ;
     rdfs:label    "Third-order admin division" ;
     rdfs:comment  "A subdivision of a second-order administrative division.  From GeoNames (feature code)."
     .
 
 gn:A.PCLH a skos:Concept ;
-    skos:narrower gn:A ;
+    skos:broader  gn:A ;
     rdfs:label    "Former independent political entity" ;
     rdfs:comment  "A former independent political entity, typically a country.  From GeoNames (feature code)."
     .
 
 gn:A.ADM1H a skos:Concept ;
-    skos:narrower gn:A ;
+    skos:broader  gn:A ;
     rdfs:label    "Former first-order admin division" ;
     rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
     .
 
 gn:A.ADM2H a skos:Concept ;
-    skos:narrower gn:A ;
+    skos:broader  gn:A ;
     rdfs:label    "Former second-order admin division" ;
     rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
     .
 
 gn:A.ADM3H a skos:Concept ;
-    skos:narrower gn:A ;
+    skos:broader  gn:A ;
     rdfs:label    "Former Third-order admin division" ;
     rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
     .
 
-#@@@@TODO: discuss this.  
-#   I'm trying to avoid having to create extra historical places corresponding to 
-#   a current P.  See em:AH_PART_OF_AH below.
-
+#   Avoid having to create extra historical places corresponding to a current P.
+#   See em:AH_PART_OF_AH below.
 em:P_OR_A a skos:Concept ;
     skos:broader gn:A ;
     skos:broader gn:P ;
@@ -431,8 +429,8 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
           [ rdfs:label     "Current map for Opole" ;
             rdfs:comment   "Current map for Opole" ;
             em:short_label "Current" ;       # Used for tab label
-            em:link        <http://www.geonames.org/3090048/opole.html>
-            em:preview     <http://www.geonames.org/3090048/opole.html>
+            em:link        <http://www.geonames.org/3090048/opole.html> ;
+            em:preview     <http://www.geonames.org/3090048/opole.html> ;
           ] ;
         em:when emt:Current ;
         em:source
@@ -1175,8 +1173,8 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
           [ rdfs:label     "Current map for Opole_ADM2" ;
             rdfs:comment   "Current map for Opole_ADM2" ;
             em:short_label "Current" ;
-            em:link        <http://www.geonames.org/7530818/opole.html>
-            em:preview     <http://www.geonames.org/7530818/opole.html>
+            em:link        <http://www.geonames.org/7530818/opole.html> ;
+            em:preview     <http://www.geonames.org/7530818/opole.html> ;
           ] ;
         em:when emt:Current ;
         em:source
