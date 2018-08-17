@@ -42,20 +42,13 @@
 #
 # 5. GeoNames includes multiple parent links which have not been included here.
 #
-# 6. The handling of Timespan values for current values (e.g. current hierarchy)
-#    has not been fully decided.  At least three approaches are possible:
-#    (a) use a semantically vacuous "Current" timespan (i.e. from which no formal 
-#        inferences may be drawn because no specific date information is provided,
-#        but which may still be useful for ionfrmation retrieval purposes).
-#        (Or maybe we can infer that the claim holds at some time after all the 
-#        historical places, and with higj probability still holds at the time the
-#        data is inspected.)
-#    (b) use a current date value based on the date the trecord is created; over
-#        time, the value may need to be updated if it is to be of any use.
-#    (c) say nothing (i.e. omit the em:when property altogether).  We cannot draw 
-#        any formal inference from such absence of information because of the RDF
-#        open-world model.
-#    On balance, I favour (a), which is represented below as emt:Current.
+# 6. The handling of time period values for current values (e.g. current
+#    hierarchy)uses a semantically vacuous "Current" time period (i.e. from
+#    which no formal  inferences may be drawn because no specific date
+#    information is provided, but which may still be useful for ionfrmation
+#    retrievalpurposes).  (Or maybe we can infer that the claim holds at some
+#    time after all the historical places, and with high probability still
+#    holds at the time the  data is inspected.)
 #
 # 7. The representation of Timespan information needs to be fixed.  I favour using
 #    something that aligns with the linked pasts network, but it's not clear if that 

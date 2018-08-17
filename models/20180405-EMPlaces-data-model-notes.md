@@ -1,8 +1,7 @@
 # EMPlaces data model notes
 
-@@NOTES:
-- reorganize titles of annotation diagrams
-
+@@TODO: reorganize titles of annotation diagrams
+@@TODO: Many of the details originally noted here have now been fleshed out in other documents; replace text with references.
 
 ## Shapes
 
@@ -10,7 +9,7 @@
 
 - large rectangular shapes designate literal values, which in actual place descriptions appear as strings, numbers or other literal data values.
 
-- @@TODO: add "instance" shape
+- large 8-sided shapes (roughly, rectangles with their corners truncated) are used for "instance" values; i.e. specific instances of some type that are defined by the EMPlaces data model to represent specific values.  E.g., these are used to indicate specific anotation types for name attestations, map resources and calendar-in-use descriptions.
 
 ## Relationships (properties, connections)
 
@@ -24,15 +23,11 @@
 
 Colour is used in the diagrams to give a sense of the role and/or source of information in EMPlaces descriptions:
 
--   Yellow indicates "core data" which is derived from a reference gazetteer.  The "Reference gazeteer entry", which is indicated by property "em:coreDataRef" whose subject is the Place concerned.  The general intent is that core data will be present for all place descriptions.
+-   Yellow usually indicates "core data" which is derived from a reference gazetteer, or other authority, without editorial intervention.  The general intent is that core data may be present for all place descriptions.
 
     A key property of this core data is that it may be automatically updated if the reference gazeteer entry is updated; as such it should not normally be edited ("messed with") in EMPlaces cataloguing workflows.  (In the case of a historical place that does not exist in the reference gazetteer, this core data will need to be created manually.)
 
-    @@TODO: if data displayed as core requires intervention to construct, how will this be recoirded so that upodates to the reference gazetteer can be applied automatically.
-
 -   Orange indicates EMPlaces additional data about a place that (generally) if not provided by a conventional gazetteer.  This data represents editorial contributions of EMPlaces to the information about a place.  The intent is that EMPlaces additional data will be provided where available, and is not necessarily poresent for every Place instance.
-
-    @@TODO: indicate a simple generic mechanism that distinguishes core data instances from added data, so that they can be reliably superseded when gazetteer-provided informaton is refreshed.  Possibilities ofr this include: flag associated with value; type associated with core value; subtypes for core values; separate properties for core values; subproperties for core values; etc.
 
 -   Green is used for spatial location information.
 
@@ -47,19 +42,21 @@ Some entities are shown with both yellow and orange colouring.  This indicates t
 
 This class represents the central idea described by EMPlaces.  Instances of this class represent a place, in the sense used by Pleiades: "constructed by human experience".
 
+Note that places are subdivided into `em:Place_sourced` which denotes information about a place derived from a single specified source, and `em:Place_merged` which denotes information that is combined from multiple sources (see [MPlaces data model for multiple "core data" sources](./20180802-multisource-data-model-notes.md).
+
 See also:
 - https://pleiades.stoa.org/help/conceptual-overview
 - https://pleiades.stoa.org/help/pleiades-data-model/
 - 
 
 
-## Place type (_term TBD_)
+## Place type (`em:placeType` -> `skos:Concept`)
 
 A value that indicates a type of a place (e.g. city,  battlefield, country, etc.).  For core data populated from GeoNames, these would be GeoName feature class codes (A, ADM1, ADM2, etc.).  A place may (and generally does) have more than one type.
 
 (We suggest that values used are based on Getty AAT terms)
 
-## Place category (_term TBD_)
+## Place category (`em:placeCategory` -> `skos:Concept`)
 
 Place types may be associated with categories (e.g. administrative, ecclesiastical, etc.)  These associations with categories are initially intended to describe groupings of place types that are associated with various hierarchies.  But the notion is quite general, and other uses may emerge over time (e.g. a "geographical feature" category might cover mountains, lakes, rivers, seas, islands, etc., for which there is no specific hierarchy).
 
@@ -73,9 +70,9 @@ Initial category values will be:
 - Judicial
 
 
-## Reference gazetteer entry
+## Source entry
 
-A node that references a gazetteer entry and also provides a label for that entry.
+A node that references a source of information (e.g. a Reference gazetteer entry) and also provides a label and other information about that entry.
 
 ## Preferred name
 
@@ -101,9 +98,7 @@ The description may be initially populated from the reference gazeteer entry, bu
 
 ## Qualified relation
 
-@@TODO: note current hierarchy is core; historical is additional@@
-
-A Qualified relation represents a historical relationship between two places.  Specifically, the relationship is one that exists only for a limited perod of time (e.g. the City of Opole being administratively part of the Duchy of Opole during the period 1281 to 1521).
+A Qualified relation represents a current or historical relationship between two places.  Specifically, the relationship is one that exists only for a limited perod of time (e.g. the City of Opole being administratively part of the Duchy of Opole during the period 1281 to 1521).
 
 Thus, in addition to being linked to the two related places, a Qualified relation is also linked to a Timespan during which the relationship existed, and a Relation type that indicates the type of relationship (e.g. administrative part, ecclesiastic part, etc.)
 
@@ -137,8 +132,6 @@ A place type may belong to several cvatagories.
 
 The intent of this value is to provide a means to identifty the various place types that may appear in a given hierarchy:  in this use, the place categiory identifies a hierarchy.  But the mechanism provided is quite general, and could be used to identify other groupings of place types (e.g. habitations).
 
-@@TODO: model Place categories as RDF classes, whose members are Place type values?
-
 ## Setting
 
 @@TODO: note concept derived from Grossner's Topotime work@@
@@ -149,17 +142,9 @@ Represents a bounded region in space and time (cf. CIDOC CRM [E92 Spacetime Volu
 
 A bibliographic entry (preferably structured) to some published work.
 
-@@TODO: adopt bibliographic structure; e.g. bibtex-json derived.
-
-@@TODO: can we get away with a minimal text format in V1?  Or a very reduced structured format?
-
 ## Source
 
-A reference to a source of a claim made by an Annotation.  May also convey contextual information about the applicability of the claim.
-
-@@applied to name attestations:  label, language, link to /something/
-
-@@move down to annotations section
+A reference to a source and/or provenance of a claim made by an Annotation.  May also convey contextual information about the applicability of the claim.
 
 ## Related resource
 
@@ -177,7 +162,7 @@ May be with reference to a specific calendar dates, or more generally to some id
 
 Provides information about the physical location of a Place.
 
-@@@@ rework: atial location specified or reference to locatiopns @@@@  May be connected to specific geographic or spatial location, or simply a reference to some unspecified location.
+@@ rework: spatial location specified or reference to locations.  May be connected to specific geographic or spatial location, or simply a reference to some unspecified location.
 
 @@TODO: try to be clear about the distinction between Place (as "constructed by human experience") and Location.
 
@@ -198,7 +183,7 @@ Web Annotations have been adopted for use in the EMPlaces for the following reas
 
 1. They allow additional information to be associated with a place, along with contextual information; e.g. a name attestation may be associated with a period within which it is believed to have been in use.  In particular, Web Annotations allow association of provenance and contributor informaton with individual claims about a place.
 
-2. They proviode an extension point through which additional information about a place can be introduced using the same basic structures that are used for basic EMPlaces information.
+2. They provide an extension point through which additional information about a place can be introduced using the same basic structures that are used for basic EMPlaces information.
 
 3. They allow separately-published information to be associated with a place, which in turn provides a possible route for curation of third party contributions to EMPlaces while maintaining editorial integrity of the base service.
 
@@ -214,6 +199,9 @@ Additional properties of the annotation can be used to provide additional contex
 - an indication of the source or provenance of the information, which may in turn inform decisions about its trustworthiness
 - an indication of the "competence" of the information provided; e.g. is it considered to be definitive (coming from a generally reliable source), inferred (deduced from other information), uncertain (a researchers informed guess), etc.
 - bibliographic references that provide additional related information
+
+(NOTE: one way of thinking about an annotation is as a "reification" of an association between the target place and the annotation body, thereby allowing that association to be qualified in various ways.)
+
 
 ## `em:hasAnnotation` Annotation 
 
@@ -234,14 +222,6 @@ The purpose of the annotation type is to make it easy to find particiular annota
 ### `oa:hasBody` Annotation body
 
 The Annotation body conveys specific information associated with the associated place.  The expected structure of this information is defined by the corresponding Annotation type value.
-
-@@TODO: should the annotation carry an editorial note: currently, that is attached to the annotation body.
--- I'm inclined to move it to the Annotation.  But check this doesn't violate OA.
--- OA allows multiple bodies per annotation.  Suggest the editorial note is provided as a separate body with textual value.
-
-@@TODO: the above questions arise in part from thinking about the "annotation" as being a reification of an association between the place and the annotation body, thereby allowing that association to be qualified in various ways.
-
-@@TODO: the above questions also beg the question: "why annoations?".  A possible answer is that they provide a seamless way to incorporate 3rd-party data, externally stored and managed, into an overall description.  This could support a number of potential usage models for EWMPlaces and friends (researcher notebooks, 3rd party submissions for incorporaton, use-dependent trust models fopr annotation data, etc.)
 
 ## `em:when` Timespan
 
