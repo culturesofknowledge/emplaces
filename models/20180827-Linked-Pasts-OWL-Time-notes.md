@@ -10,7 +10,11 @@ I shall take a 3-stage approach:
 
 1. Informally review my understanding of the proposed JSON structure for time spans.
 2. Propose a free-standing ontology structure (using `lpo`) for capturing this intent, and
+<<<<<<< HEAD
 3. Show how the proposed ontology can be mapped to the OWL Time ontology.
+=======
+3. Show how the proposed ontology can be mapped to the OWL Tine ontology.
+>>>>>>> b0994bb2313d0d7790630992b9156f24b2e76630
 
 In this way, I hope to avoid the problems of tring to interpret the proposed JSON structure directly as JSON-LD using OWL Time terms (which I think is not possible).
 
@@ -293,3 +297,4 @@ While it's possible to capture the intended `lpo` semantics in the OWL Time onto
 
 Hence, I'd suggest using the easier-to-use `lpo` terms in the JSON-LD context, and maintain the OWL Time mapping, maybe in the form of a set of inference rules, so that information exchange compatiblity with OWL Time can be achieved.
 
+ 
