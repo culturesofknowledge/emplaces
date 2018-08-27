@@ -36,20 +36,23 @@ A `<date>` value is a literal value indicating a time (typically a year, but gre
 Example (adapted from [linked-places](https://github.com/LinkedPasts/linked-places):
 
     { "@id": "Abingdon",
-      "parthood": [
-        { "@id": "Abingdon-in-Berkshire",
-          "when": {
-            "timespans":[
-              {"start":{"latest":"1600"},"end":{"in":"1974"}}
-            ]}
-        },
-        { "@id": "Abingdon-in-Oxfordshire",
-          "when": {
-            "timespans":
-              [{"start":{"in":"1974"}}
-            ]}
-        }
-      ]
+      "parthood": 
+        [
+          { "@id": "Abingdon-in-Berkshire",
+            "when": 
+              { "timespans":
+                  [ {"start":{"latest":"1600"},"end":{"in":"1974"}} 
+                  ]
+              }
+          },
+          { "@id": "Abingdon-in-Oxfordshire",
+            "when": 
+              { "timespans":
+                [ {"start":{"in":"1974"}}
+                ]
+              }
+          }
+        ]
     }
 
 
