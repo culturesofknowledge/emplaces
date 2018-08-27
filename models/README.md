@@ -74,7 +74,7 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [ ] Create Annalist definitions for data entry
 3. Bulk data into RDF/Timbuctoo
     - e.g. 2000 places core data from GeoNames
-    - [ ] update core data extractor
+    - [ ] update core data extractor to generate multi-source structure
 4. Loose ends
     - [x] Modelling and Opole data
     - [x] Related places
@@ -83,7 +83,7 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 4. Info for Lancaster talk - long talk later in August
 
 - Sample bibliographies to enter
-- Dealing with sources (see issue)
+- Dealing with sources (see issues #19, #13, #7 ?)
 - Integration of date conversions
 
 ## Actions
