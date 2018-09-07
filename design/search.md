@@ -24,7 +24,7 @@ The [Getty TGN][5] follows a variant of approach #2. Here are the results of an 
 
 However, this doesn't include other types of associations with the place. These are shown in [a place record’s detail view][3]. Additional, e.g. historical administrative hierarchies and other type of place relations are not included in the search results for places and so must surfaced by inspection of individual place records.
 
-The German genealogical [GOV gazetteer][6] addresses this differently by following a variant of approach #1. Here are the results of an initial keyword search for ["Opole""][4]. The search results are structured similarly to Getty (GOV also includes a very useful keyword filter widget to help pick out feature types). 
+The German genealogical [GOV gazetteer][6] addresses this differently by following a variant of approach #1. Here are the results of an initial keyword search for ["Opole"][4]. The search results are structured similarly to Getty (GOV also includes a very useful keyword filter widget to help pick out feature types). 
 
 GOV doesn't offer a transition level analogous to the TGN's hierarchy-only view. After selecting a single place record from the initial list of results ([the town of Opole][4]), GOV divides the detail view listing into higher and lower nodes in the place hierarchy (what it calls superordinate and subordinate objects). _Superordinate_ objects can be of multiple types. Their hierarchies, in turn, are represented both in a graph and in traversable tree, with multiple, branching historical hierarchies. _Subordinate objects_ (e.g. buildings) are represented in a flat list (though with a feature type, and the option of including a date range).
 
