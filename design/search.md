@@ -32,9 +32,9 @@ The way search results are initially represented in the Getty TGN is more compac
 
 #### Recommendation
 
-By and large, GOV (following approach #1) offers the better solution. If we provide a comprehensive, and intelligently ranked listing of all matching places (i.e. also including places from the appropriate sub-hierarchies) with an improved tabular layout, a keyword filter and facets, then we can avoid the cons associated with option #1. Crucially, a user can learn to avoid a long list of result but entering more specific search terms. It is not a solution that has to be engineered. 
+By and large, GOV (following approach #2) offers the better solution. If we provide a comprehensive, and intelligently ranked listing of all matching places (i.e. also including places from the appropriate sub-hierarchies) with an improved tabular layout, a keyword filter and facets, then we can avoid the cons associated with this option. Crucially, a user can learn to avoid a long list of result but entering more specific search terms. It is not a solution that has to be engineered. 
 
-We can also learn from GOV at the detail view. A simpler version of GOV's Subordinate Places listing in the detail view (i.e. very similar to the Name Attestation listing) could serve as a flexible means to show not just places 'contained within' but (in the future) potentially other relation types. This section could be called 'Related Places' (in distinction to the already planned 'Related Resources'). For more details, see the current [draft design notes][7].
+We can also learn from GOV at the detail view. A simpler version of GOV's Subordinate Places listing in the detail view (i.e. very similar to the Name Attestation listing) could serve as a flexible means to show not just places 'located in' but (in the future) potentially other relation types. This section could be called 'Related Places' (in distinction to the already planned 'Related Resources'). For more details, see the current [draft design notes][7].
 
 ### Facets
 
