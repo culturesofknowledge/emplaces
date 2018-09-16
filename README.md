@@ -21,17 +21,21 @@ The draft [design documents][10] (display, search, edit) offer an informal descr
 An draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model is refined.
 
 ## Status
+**August 2018**: Provisional full draft of complete data model completed; first release of tool for processing GeoNames data; provisional complete full record user interface
+
 **July 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
 
 **March - June 2018**: Private drafts of the gazetter's design document and data model.
 
-## Next ToDo Items
+## Upcoming ToDo Items
 - Collect and incorporate community feedback
-- Fix the main v.1 features of the gazetteer; revise documentation
-- Test data model with sample data
-- Update data model; revise documentation
-- Refine the proposed search interface
-- Discuss editorial workflows; create initial interface mockups
+- ~~Fix the main v.1 features of the gazetteer~~; revise documentation
+- ~~Test data model with sample record~~; test data with 6K places from [EMLO][27]
+- ~~Finalize the proposed record detail interface, create interface mockup~~
+- Finalize the proposed search interface, create interface mockup
+- Discuss proposed editorial workflow, create interface mockup
+- Finalize bulk upload and export formats, review [Linked Places Interconnection Format][24]
+- Prepare API, test interconnection with [EM Dates][26]
 
 ## Feedback and Comments
 We are keen to get your comments and feedback on EM Places. Please get in touch by contacting Arno Bosse (Digital Project Manager, [Cultures of Knowledge][12]) by email [arno.bosse@history.ox.ac.uk][13] via [@kintopp][14] on Twitter or by creating a new GitHub issue in the repository with your comment/question.
@@ -70,3 +74,4 @@ EM Places, EM People, and EM Dates are [funded by a grant][2] to the University 
 [24]: https://github.com/LinkedPasts/lpif
 [25]: http://linkedpasts.org
 [26]: https://github.com/culturesofknowledge/emdates
+[27]: http://emlo.bodleian.ox.ac.uk
