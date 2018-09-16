@@ -30,7 +30,7 @@ An draft of the [proposed data model][11] for EM Places and a set of data model 
 ## Upcoming ToDo Items
 - Collect and incorporate community feedback
 - ~~Fix the main v.1 features of the gazetteer~~; revise documentation
-- ~~Test data model with sample record~~; test data with 6K places from [EMLO][27]
+- ~~Test data model with sample record~~; test model with 6K core data places from [EMLO][27]; prepare 25-50 sample full data records
 - ~~Finalize the proposed record detail interface, create interface mockup~~
 - Finalize the proposed search interface, create interface mockup
 - Discuss proposed editorial workflow, create interface mockup
