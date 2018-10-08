@@ -217,12 +217,12 @@ gn:A.ADM1H a skos:Concept ;
 gn:A.ADM2H a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Former second-order admin division" ;
-    rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
+    rdfs:comment  "A former second-order administrative division.  From GeoNames (feature code)."
     .
 
 gn:A.ADM3H a skos:Concept ;
     skos:broader  gn:A ;
-    rdfs:label    "Former Third-order admin division" ;
+    rdfs:label    "Former third-order admin division" ;
     rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
     .
 
@@ -282,7 +282,7 @@ em:DEFINITIVE a em:Competence_value ;
 
 em:INFERRED a em:Competence_value ;
     rdfs:label   "Inferred" ;
-    rdfs:comment "The associated value has been inferred from (preferably?) definitive informaton."
+    rdfs:comment "The associated value has been inferred from (preferably?) definitive information."
     .
 
 em:ASSUMED a em:Competence_value ;
@@ -300,19 +300,6 @@ em:APPROXIMATE a em:Competence_value ;
     rdfs:label   "Approximate" ;
     rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges."
     .
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #   ==========================================================================
@@ -342,7 +329,7 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
       ] ;
 
     em:placeCategory gn:P ;             # from gn:featureClass
-    em:placeType gn:P.PPLA ;            # from gn:featureCode
+    em:placeType     gn:P.PPLA ;        # from gn:featureCode
     em:preferredName "Opole" ;          # from gn:name
 
     em:alternateName "Opole" ;          # from gn:alternateName
@@ -989,13 +976,13 @@ ex:Opole_Emmerling_Zajaczkowska a em:Bib_entry, bibo:Book ;
 
 ex:Ryszard_Emmerling a foaf:Person ;
     rdfs:label "Ryszard Emmerling" ;
-    foaf:firstName "Ryszard" ;
-    foaf:surname "Emmerling" .
+    foaf:givenName "Ryszard" ;
+    foaf:familyName "Emmerling" .
 
 ex:Urszula_Zajaczkowska a foaf:Person ;
     rdfs:label "Urszula Zajączkowska" ;
-    foaf:firstName "Urszula" ;
-    foaf:surname "Zajączkowska" .
+    foaf:givenName "Urszula" ;
+    foaf:familyName "Zajączkowska" .
 
 ex:Slaskie_Wydawnictwo a foaf:Organization ;
     foaf:name "Wydawnictwo Śląskie" .

@@ -80,7 +80,6 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [x] Related places
     - [ ] Historical place record: minimum viable information
        - differs from current place
-4. Info for Lancaster talk - long talk later in August
 
 - Sample bibliographies to enter
 - Dealing with sources (see issues #19, #13, #7 ?)
