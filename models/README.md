@@ -62,7 +62,6 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 
 @@TODO: allocate URIs for attestations (where for our purposes, the oa:Annotation denotes the attestation)?
 @@TODO: revisit "Setting" terminology - see what the latest usage is in Topotime related designs
-@@TODO: data extractor: fix up parentFeature link in hierarchy to match PPL record
 
 # Priorities (2018-08-01, 2018-08-14)
 

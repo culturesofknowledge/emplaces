@@ -511,20 +511,21 @@ def show_help(options, progname):
         help_text = ("\n"+
             "  %(prog)s geonamesid URL [REGEXP]\n"+
             "\n"+
-            "URL is presumed to a a GeoNames URL or other string containing a GeoNames Id.  \n"+
+            "URL is presumed to be a GeoNames URL or other string containing a GeoNames Id.  \n"+
             "Extracts the Geonames Id and writes it to stdout, or a diagnostic message is \n"+
             "output to stderr along with an exit status of %d\n"%(GCD_NO_GEONAMES_URL)+
             "\n"+
             "If REGEXP is specified, this command uses it as a regular expression \n"+
             "(per https://docs.python.org/2/library/re.html#regular-expression-syntax) \n"+
             "which, if it matches the supplied URL, returns the substring matching the\n"+
-            "first parenthesized sub-expression as the GeoNames Id.  E.g., for GeoNames\n"+
-            "a URL of the form 'http://www.geonames.org/2638655/shropshire.html', use \n"+
+            "first parenthesized sub-expression as the GeoNames Id.  E.g., for a GeoNames\n"+
+            "URL of the form 'http://www.geonames.org/2638655/shropshire.html', use \n"+
             "a REGEXP like 'http://www\.geonames\.org/([0-9]+)/.+$'.\n"+
+            "\n"+
             "If REGEXP is not matched, a diagnostic message is output to stderr.\n"+
             "\n"+
             "If REGEXP is not supplied, a range of internal REGEXPs is used to try and\n"+
-            "extract tghe \n"+
+            "extract the GeroNames id.\n"+
             "\n"+
             "The output can be used as input to a `manyget` or similar command.\n"+
             "\n"+
@@ -534,12 +535,13 @@ def show_help(options, progname):
             "  %(prog)s manygeonamesids [REGEXP]\n"+
             "\n"+
             "Reads a list of GeoNames URLs (or other strings that are presumed to \n"+
-            "contain a geoNames Id), and ignoring any that start with a '#', \n"+
-            "from stdin, one per line, and for each extracts the embedded GeoNames \n"+
-            "place ids, and outputs the resuting list of GeoNames IDs to stdout, \n"+
-            "one per line.  Non-matching inputs are reported to stderr.\n"+
+            "contain a geoNames Id) one per line from stdin and, ignoring any that \n"+
+            "start with a '#', extracts the embedded GeoNames place ids, and \n"+
+            "outputs the resuting list of GeoNames IDs to stdout, one per line. \n"+
             "\n"+
-            "REGEXP is an optional regular exression used for extracting GeoNames IDs.\n"+
+            "Non-matching inputs are reported to stderr.\n"+
+            "\n"+
+            "REGEXP is an optional regular exression used for extracting the Ids.\n"+
             "See 'geonamesid' command for more details.\n"+
             "\n"+
             "Returns exit status:\n"+
