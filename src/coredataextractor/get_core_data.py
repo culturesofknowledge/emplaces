@@ -1128,7 +1128,7 @@ def do_extract_geonames_id(gcdroot, options):
     rex = getargvalue(getarg(options.args, 1), "Regexp:       ")
     geo_id = extract_geonames_id(url, rex)
     if not geo_id:
-        print("GeoNames URL %s not matched"%(url,), file=sys.stderr)
+        print("No match: %s"%(url,), file=sys.stderr)
         return GCD_NO_GEONAMES_URL
     print(format_id_text(geo_id, url), file=sys.stdout)
     return GCD_SUCCESS
@@ -1146,7 +1146,7 @@ def do_extract_many_geonames_ids(gcdroot, options):
             print(format_id_text(geo_id, url), file=sys.stdout)
             match_seen = True
         else:
-            print("GeoNames URL %s not matched"%(url,), file=sys.stderr)
+            print("No match: %s"%(url,), file=sys.stderr)
             fail_seen = True
     if match_seen:
         if fail_seen:
