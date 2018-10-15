@@ -10,6 +10,8 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 
 # TODO
 
+- [ ] Finalize some URIs to be used
+- [ ] Finalize prefixes
 - [ ] Finish assembling example data for Opole
     - [x] Fix structure and vocabulary for bibliography (using BIBO)
     - [x] Historical hierarchies
@@ -19,20 +21,21 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
         - also, type of resource?
     - [ ] Record metadata (maybe later when we see what Timbuctoo provides)
 - [ ] Pin down location/timespan vocabularies (the structure here follows ideas from Topotime/GeoJSON-LDT (also a work-in-progress?) but the vocabularies haven't yet been checked.)
-- [ ] Update [Data model notes](./20180405-EMPlaces-data-model-notes.md); resolve any remaining TODOs there
+- [ ] Review format for timespan data; align with emerging LPiF activity
+- [x] Update [Data model notes](./20180405-EMPlaces-data-model-notes.md); resolve remaining TODOs there, as far as possible.
 - [ ] Generate data from EMLO data
 
-- [ ] note 2 kinds of Julian calendars
+- [x] note 2 kinds of Julian calendars
     - currently using "Old style" and "New style", but this is probably not enough.
     - suggestion that we might add start-of-year date to calendar details, but even that isn't always enough: in some cases 25 Dec start of year occurs in the year BEFORE that indicated?
-- [ ] Review handling of date uncertainty/aprroximation, and how it relates to PGiF proposal to use USO 8601-2 (https://github.com/LinkedPasts/lpif)
+    - currently handled in Annalist definitions.  Can revisit later if needed.
+- [ ] Review handling of date uncertainty/aprroximation, and how it relates to PGiF proposal to use ISO 8601-2 (https://github.com/LinkedPasts/lpif)
 - [ ] Type URIs for places that don't have same kind of info (cf. "related places", 20180726-St-Adalbert-example.ttl)
 - [ ] Record metadata design (creator, contributor, license, etc. - waiting to see what Timbuctoo provides)
-- [ ] Record timespans as identified resources (rather than inline blank nodes)
-- [ ] Finalize some URIs to be used
-- [ ] Finalize prefixes
-- [ ] URIs for language codes (consider lexvo?)
-- [ ] Review format for timespan data; align with emerging LPiF activity
+- [ ] Record time periods as identified resources (rather than inline blank nodes)
+    - Handled in Annalist data; not yet in example
+- [x] URIs for language codes (consider lexvo?)
+    - holding pattern in place, and Annalist data. Revisit later.
 - [ ] ...
 
 - [x] Decide how to flag "core data" in structures used for both core and additional data (needed for refresh of core data from source).  It seems what is really needed is a reference source indication.

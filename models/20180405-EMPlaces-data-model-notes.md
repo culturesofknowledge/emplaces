@@ -1,8 +1,5 @@
 # EMPlaces data model notes
 
-@@TODO: reorganize titles of annotation diagrams
-@@TODO: Many of the details originally noted here have now been fleshed out in other documents; replace text with references.
-
 ## Shapes
 
 - large round-ended shapes designate classes, or entitity types, which in actual place descriptions appear as instances of the described class.  The underlying rectangles to the upper left of the main class symbol indicate URIs or CURIEs (compact URIs) for one or more classes of which the designated value is a member.
@@ -84,7 +81,7 @@ A string, possibly with a language code, that is an alernative name for a place.
 
 ## @@TODO: technical metadata
 
-Supplied by underlying systtem, covers:
+Supplied by underlying system, covers:
 - creator
 - contributors
 - licenses (core, EMplaces)
@@ -134,9 +131,72 @@ The intent of this value is to provide a means to identifty the various place ty
 
 ## Setting
 
-@@TODO: note concept derived from Grossner's Topotime work@@
+The notion of a "Setting" was used previously in Karl Grossner's work on [Topotime](https://github.com/kgeographer/Topotime); e.g. see [Place, Period, and Setting for Linked Data Gazetteers](https://geog.ucsb.edu/~jano/GrossnerJanowiczKessler_submitted_draft.pdf), and has been adopted here.
 
-Represents a bounded region in space and time (cf. CIDOC CRM [E92 Spacetime Volume](http://www.cidoc-crm.org/lrmoo/entity/e92-spacetime-volume/version-6.2))
+Represents a bounded region in space and time (cf. CIDOC CRM [E92 Spacetime Volume](http://www.cidoc-crm.org/lrmoo/entity/e92-spacetime-volume/version-6.2)).
+
+Where the location of a place changes over time, this can be captured through associating multiple settings with that place.
+
+Example:
+
+    em:where
+      [ a em:Setting ;
+        em:location
+          [ a em:Location_value ;
+            wgs84_pos:lat  "50.67211"^^xsd:double ;
+            wgs84_pos:long "17.92533"^^xsd:double ;
+          ] ;
+        em:when emp:Current ;
+        em:source
+          [ a em:Authority ;
+            rdfs:label "GeoNames data" ;
+            em:link <http://sws.geonames.org/3090048/about.rdf>
+          ] ;
+      ] ;
+
+## Time period and timespan
+
+A time period represents a period of time, by reference to a specific timespan, or to some identified but maybe unspecified period (cf. PeriodO).
+
+A timespan represents an temporal intervalby reference to a specific calendar dates.
+
+Example:
+
+    em:when 
+      [ a em:Time_period ;
+        rdfs:label   "1281-1521" ;
+        em:timespan
+          [ a em:Time_span
+            em:start  "1281" ;
+            em:end    "1521" ;
+          ]
+      ] ;
+
+Possible timespan properties:
+
+- em:start: start of span contained within year (or other calendar period)
+- em:end: end of span contained within year (or other calendar period)
+- em:latestStart: start of span no later than given year (or other calendar period)
+- em:earliestEnd: end of span no earlier than given year (or other calendar period)
+- _&more?_
+
+## Location
+
+Provides information about a physical location.
+
+Example:
+
+    em:location
+      [ a em:Location_value ;
+        wgs84_pos:lat  "50.67211"^^xsd:double ;
+        wgs84_pos:long "17.92533"^^xsd:double ;
+      ] ;
+
+May be connected to specific geographic or spatial location, or simply a reference to some unspecified location.
+
+Note the distinction between "Place" (as "constructed by human experience") and "Location".
+
+@@TODO: expand the options for specifying location (e.g. relative to other location, etc., as needs arise.)
 
 ## Bibliographic entry
 
@@ -146,27 +206,17 @@ A bibliographic entry (preferably structured) to some published work.
 
 A reference to a source and/or provenance of a claim made by an Annotation.  May also convey contextual information about the applicability of the claim.
 
+## Alternate authority
+
+Reference to an alernative authority for information about a place (e.g. TGN, GeoNames, etc.)
+
+Multiple authorities may be present.
+
 ## Related resource
 
 A reference to a resource that is believed to contain relevant additional information about a place (or other entity).
 
-@@TODO: use with `rdfs:seeAlso` instead of `em:relatedesource`?
-
-## Timespan
-
-Represents a period of time.
-
-May be with reference to a specific calendar dates, or more generally to some identified but maybe unspecified period (cf. PeriodO).
-
-## Location
-
-Provides information about the physical location of a Place.
-
-@@ rework: spatial location specified or reference to locations.  May be connected to specific geographic or spatial location, or simply a reference to some unspecified location.
-
-@@TODO: try to be clear about the distinction between Place (as "constructed by human experience") and Location.
-
-@@TODO: refer to existing work.  Intend to not invent here.  (e.g. Topotime, Pleiades)
+Multiple related resources may be present.
 
 
 # Annotations general model
@@ -227,30 +277,44 @@ The Annotation body conveys specific information associated with the associated 
 
 Temporal qualification of association described by the annotation.
 
-@@TODO: is this OK applied to the annotation, or should it be the annotation body?
-
 ### `em:source` Source
 
 Indicates the source of information for the claim represented by this annotation.
-
 
 # Specific Annotation details
 
 ## Name attestation
 
-@@@TODO
+Annotation type: `em:NAME_ATTESTATION`
+
+Example annotation body:
+
+    oa:hasBody 
+      [ a em:Place_name ;
+        em:name      "Oppeln" ;
+        em:language  eml:de ;
+        rdfs:label   "German" ;
+        rdfs:comment "German" ;
+      ] ;
 
 ## Calendar in use
 
-Annotation type: `em:CalendarInUse`
+Annotation type: `em:CALENDAR_IN_USE`
 
-### Calendar label
+Example annotation body:
+
+    oa:hasBody 
+      [ a em:Calendar ;
+        em:link      emc:Gregorian ;
+        rdfs:label   "Gregorian" ;
+        rdfs:comment "..." ;
+      ] ;
+
+### `rdfs:label`: Calendar label
 
 A short string or phrase used as a label for the calendar; e.g., "Julian", "Gregorian", etc.
 
-### `em:uri` Calendar resource
-
-@@TODO: `em:uri` is probably a poor name (implies mention rather than use).  Maybe `em:resource`?  Or `rdf:value`?  Or ...?
+### `em:link` Calendar resource
 
 An arbitrary resource identifying and describing the calendar.  May be content negotiated to retrieve different formats.  Ideally, content negotion can provide a linked data representation, but this may not always be possible.  At least, the URI of this resource should be a way of uniquely identifying the calendar concerned.
 
@@ -260,18 +324,41 @@ A textual description of the calendar's applicability to the associated place.
 
 NOTE: the calendar itself may be described by a textual description associated with the calendar resource.  Where the same calendar is in use at several different places and/or times, it should be described just once.
 
-### `em:when` Timespan
+### `em:when` Time period
 
 Indicates a period during which the calendar was used at the associated place.
 
 
 ## Map reference
 
-@@@TODO
+Annotation type: `em:MAP_RESOURCE`
 
-## Canonical URI
+Example annotation body:
 
-@@@TODO
+    oa:hasBody 
+      [ a em:Map_resource ;
+        rdfs:label     "Map of Silesia from 1561" ;
+        rdfs:comment   "Map of Silesia from 1561" ;
+        em:short_label "1561" ;
+        em:link        <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
+        em:preview     <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
+      ] ;
+
+
+## Canonical URI (and alternate reference URIs)
+
+Applied to merged place data to indicate URIs that can be used to identify a place.
+
+Example:
+
+    ex:Opole_P a em:Place, em:Place_merged ;
+    em:canonicalURI ex:Opole_P ;
+    em:alternateURI
+      [ rdfs:label "GeoNames URI" ;
+        em:link <http://sws.geonames.org/3090048/>
+      ] ;
+    em:place_data ex:Opole_P_EMPlaces, ex:Opole_P_GeoNames ;
+    .
 
 ## Linkback
 
@@ -279,11 +366,12 @@ A linkback annotation records a reference to the associated place from some exte
 
 The data model does not constrain how a linkback is published; e.g., it may be part of the EMPlaces data, or the additional data service, or via some third-party annotation store.
 
-@@@TODO
-
+@@@TODO: not currently used
 
 
 # Properties
 
-@@TODO?
+@@TODO: Full documentation would include a description of all properties.  In due course, generate from Annalist definitions?
+
+See: http://demo.annalist.net/annalist/c/EMPlaces_defs/l/Field_list/
 
