@@ -41,12 +41,14 @@ GCD_VERSION = "0.1"
 
 #   Status return codes
 
-GCD_SUCCESS         = 0         # Success
-GCD_BADCMD          = 2         # Command error
-GCD_UNKNOWNCMD      = 3         # Unknown command
-GCD_UNIMPLEMENTED   = 4         # Unimplemented command or feature
-GCD_UNEXPECTEDARGS  = 5         # Unexpected arguments supplied
-GCD_NO_PLACE_IDS    = 6         # No place ids given
+GCD_SUCCESS             = 0         # Success
+GCD_BADCMD              = 2         # Command error
+GCD_UNKNOWNCMD          = 3         # Unknown command
+GCD_UNIMPLEMENTED       = 4         # Unimplemented command or feature
+GCD_UNEXPECTEDARGS      = 5         # Unexpected arguments supplied
+GCD_NO_PLACE_IDS        = 6         # No place ids given
+GCD_NO_GEONAMES_URL      = 7        # No GeoNames URL
+GCD_SOME_GEONAMES_URLS   = 8        # Some but not all all URLs matched GeoNames IDs
 
 #   Namespaces
 
@@ -336,6 +338,8 @@ command_summary_help = ("\n"+
     "  %(prog)s manyget\n"+
     "  %(prog)s placehierarchy GEONAMESID\n"+
     "  %(prog)s manyplacehierarchy\n"+
+    "  %(prog)s geonamesid URL [REGEXP]\n"
+    "  %(prog)s manygeonamesids [REGEXP]\n"
     "  %(prog)s version\n"+
     "")
 
@@ -455,7 +459,7 @@ def show_help(options, progname):
             "\n"+
             "  %(prog)s --help\n"+
             "")
-    elif options.args[0].startswith("manyg"):
+    elif options.args[0].startswith("manyget"):
         help_text = ("\n"+
             "  %(prog)s manyget\n"+
             "\n"+
@@ -486,7 +490,7 @@ def show_help(options, progname):
             "  %(prog)s placehierarchy GEONAMESID\n"+
             "\n"+
             "Gets current administrative hierarchy about a place from GeoNames, \n"+
-            "and outputs a list of place Ids, oine poer line,m to standard output.\n"+
+            "and outputs a list of place Ids, one per line, to standard output.\n"+
             "\n"+
             "The output can be used as input to a `manyget` command.\n"+
             "\n"+
@@ -496,11 +500,56 @@ def show_help(options, progname):
             "  %(prog)s manyplacehierarchy\n"+
             "\n"+
             "Reads GeoNames place Ids from stdin, one per line, and for each retrieves\n"+
-            "place ids in the current administratiove hierarch up as far as country\n"+
-            "level, and outouts the resuting list of place IDs (including the input IDs)\n"+
+            "place ids in the current administrative hierarch up as far as country\n"+
+            "level, and outputs the resuting list of place IDs (including the input IDs)\n"+
             "to stdout, one per line.\n"+
             "\n"+
             "The output can be used as input to a `manyget` command.\n"+
+            "\n"+
+            "")
+    elif options.args[0].startswith("geo"):
+        help_text = ("\n"+
+            "  %(prog)s geonamesid URL [REGEXP]\n"+
+            "\n"+
+            "URL is presumed to be a GeoNames URL or other string containing a GeoNames Id.  \n"+
+            "Extracts the Geonames Id and writes it to stdout, or a diagnostic message is \n"+
+            "output to stderr along with an exit status of %d\n"%(GCD_NO_GEONAMES_URL)+
+            "\n"+
+            "If REGEXP is specified, this command uses it as a regular expression \n"+
+            "(per https://docs.python.org/2/library/re.html#regular-expression-syntax) \n"+
+            "which, if it matches the supplied URL, returns the substring matching the\n"+
+            "first parenthesized sub-expression as the GeoNames Id.  E.g., for a GeoNames\n"+
+            "URL of the form 'http://www.geonames.org/2638655/shropshire.html', use \n"+
+            "a REGEXP like 'http://www\.geonames\.org/([0-9]+)/.+$'.\n"+
+            "\n"+
+            "If REGEXP is not matched, a diagnostic message is output to stderr.\n"+
+            "\n"+
+            "If REGEXP is not supplied, a range of internal REGEXPs is used to try and\n"+
+            "extract the GeroNames id.\n"+
+            "\n"+
+            "The output can be used as input to a `manyget` or similar command.\n"+
+            "\n"+
+            "")
+    elif options.args[0].startswith("manygeo"):
+        help_text = ("\n"+
+            "  %(prog)s manygeonamesids [REGEXP]\n"+
+            "\n"+
+            "Reads a list of GeoNames URLs (or other strings that are presumed to \n"+
+            "contain a geoNames Id) one per line from stdin and, ignoring any that \n"+
+            "start with a '#', extracts the embedded GeoNames place ids, and \n"+
+            "outputs the resuting list of GeoNames IDs to stdout, one per line. \n"+
+            "\n"+
+            "Non-matching inputs are reported to stderr.\n"+
+            "\n"+
+            "REGEXP is an optional regular exression used for extracting the Ids.\n"+
+            "See 'geonamesid' command for more details.\n"+
+            "\n"+
+            "Returns exit status:\n"+
+            "  %d if all input strings are matched and processed,\n"%(GCD_SUCCESS)+
+            "  %d if no input strings could be matched and processed, or\n"%(GCD_NO_GEONAMES_URL)+
+            "  %d if some input strings could not be matched and processed.\n"%(GCD_SOME_GEONAMES_URLS)+
+            "\n"+
+            "The output can be used as input to a `manyget` or similar command.\n"+
             "\n"+
             "")
     elif options.args[0].startswith("ver"):
@@ -583,16 +632,26 @@ def get_emlaces_id_uri_node(geonames_id):
     emplaces_node = URIRef(emplaces_uri)
     return (emplaces_id, emplaces_uri, emplaces_node)
 
-def get_many_place_ids():
-    geonames_ids = []
+def get_many_inputs():
+    inputs = []
     for line in sys.stdin:
         u_line = line.decode("utf8")
-        bare_id = u_line.split("#", 1)[0].strip()
-        if bare_id:
-            geonames_ids.append(bare_id)
+        bare_input = u_line.split("#", 1)[0].strip()
+        if bare_input:
+            inputs.append(bare_input)
+    return inputs    
+
+def get_many_place_ids():
+    geonames_ids = get_many_inputs()
     if not geonames_ids:
         print("No place Ids found", file=sys.stderr)
     return geonames_ids    
+
+def get_many_geonames_urls():
+    geonames_urls = get_many_inputs()
+    if not geonames_urls:
+        print("No GeoNames URLs found", file=sys.stderr)
+    return geonames_urls    
 
 #   ===================================================================
 #
@@ -998,6 +1057,12 @@ def format_id_name(pid, pname, ptype, geo_ont_rdf):
         " ("   + get_geonames_place_type_label(ptype, geo_ont_rdf) +
         ")").encode('utf8')
 
+def format_id_text(pid, ptext):
+    log.debug("format_id_text: (%s, %s)"%(pid, ptext))
+    return (
+        unicode(pid).ljust(8) + "  # " + unicode(ptext)
+        ).encode('utf8')
+
 def do_get_place_hierarchy(gcdroot, options):
     geo_ont_rdf = get_geonames_ontology()
     geonames_id = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
@@ -1022,6 +1087,76 @@ def do_get_many_place_hierarchy(gcdroot, options):
         print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
     return GCD_SUCCESS
 
+def extract_geonames_id(url, rex):
+    """
+    Extract GeoNames Id from URL or string using suplied Regexp,
+    if range of built-in defails regexps.
+    Returns extracted Id or None.
+    """
+    default_rex = (
+        [ r"https?://www\.geonames\.org/([0-9]+)/.+$"
+        , r"https?://sws\.geonames\.org/([0-9]+)/about\.rdf$"
+        ])
+
+    def match_geonames_id(url, rex):
+        """
+        Local helper to match and process a specified regexp.
+        Returns extracted Id or None.
+        """
+        log.debug("match_geonames_id: url %s, regexp /%s/"%(url, rex))
+        geo_id = None
+        try:
+            matchobject = re.match(rex, url)
+            if matchobject:
+                geo_id = matchobject.group(1)
+        except IndexError:
+            geo_id = None
+        except re.error as e:
+            print("Invalid regular expression '%s' (%s)"%(rex, e), file=sys.stderr)
+            raise
+        return geo_id
+
+    if rex:
+        geo_id = match_geonames_id(url, rex)
+    else:
+        for rex in default_rex:
+            geo_id = match_geonames_id(url, rex)
+            if geo_id:
+                break
+    return geo_id
+
+def do_extract_geonames_id(gcdroot, options):
+    url = getargvalue(getarg(options.args, 0), "GeoNames URL: ")
+    rex = getargvalue(getarg(options.args, 1), "Regexp:       ")
+    geo_id = extract_geonames_id(url, rex)
+    if not geo_id:
+        print("No match: %s"%(url,), file=sys.stderr)
+        return GCD_NO_GEONAMES_URL
+    print(format_id_text(geo_id, url), file=sys.stdout)
+    return GCD_SUCCESS
+
+def do_extract_many_geonames_ids(gcdroot, options):
+    # No prompt fpr mamy-value input
+    rex    = getarg(options.args, 0) or ""
+    urls   = get_many_geonames_urls()
+    status = GCD_NO_GEONAMES_URL
+    match_seen = False
+    fail_seen  = False
+    for url in urls:
+        geo_id = extract_geonames_id(url, rex)
+        if geo_id:
+            print(format_id_text(geo_id, url), file=sys.stdout)
+            match_seen = True
+        else:
+            print("No match: %s"%(url,), file=sys.stderr)
+            fail_seen = True
+    if match_seen:
+        if fail_seen:
+            status = GCD_SOME_GEONAMES_URLS
+        else:
+            status = GCD_SUCCESS
+    return status
+
 #   ===================================================================
 
 def do_zzzzzz(gcdroot, options):
@@ -1038,12 +1173,16 @@ def run(userhome, userconfig, options, progname):
         return do_zzzzzz(gcdroot, options)
     if options.command.startswith("get"):
         return do_get_geonames_place_data(gcdroot, options)
-    if options.command.startswith("manyg"):
+    if options.command.startswith("manyget"):
         return do_get_many_geonames_place_data(gcdroot, options)
     if options.command.startswith("placeh"):
         return do_get_place_hierarchy(gcdroot, options)
     if options.command.startswith("manyplaceh"):
         return do_get_many_place_hierarchy(gcdroot, options)
+    if options.command.startswith("geo"):
+        return do_extract_geonames_id(gcdroot, options)
+    if options.command.startswith("manygeo"):
+        return do_extract_many_geonames_ids(gcdroot, options)
     if options.command.startswith("ver"):
         return show_version(gcdroot, userhome, options)
     if options.command.startswith("help"):

@@ -96,5 +96,7 @@ Get RDF Turtle data for all members of the administrative hierarchy covering the
       get_core_data.py manyget
       get_core_data.py placehierarchy GEONAMESID
       get_core_data.py manyplacehierarchy
+      get_core_data.py geonamesid URL [REGEXP]
+      get_core_data.py manygeonamesids [REGEXP]
       get_core_data.py version
-      
+

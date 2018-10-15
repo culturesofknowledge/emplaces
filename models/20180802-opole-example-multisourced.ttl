@@ -24,9 +24,11 @@
 @prefix wgs84_pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
 @prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
+@prefix emp:        <http://emplaces.namespace.example.org/timeperiod/> .
 @prefix emt:        <http://emplaces.namespace.example.org/timespan/> .
 @prefix eml:        <http://emplaces.namespace.example.org/language/> .
 @prefix ems:        <http://emplaces.namespace.example.org/source/> .
+@prefix emc:        <http://emplaces.namespace.example.org/calendar/> .
 
 @prefix ex:         <http://emplaces.data.example.org/> .        #@@@@ TBD
 
@@ -50,7 +52,7 @@
 #    has not been fully decided.  At least three approaches are possible:
 #    (a) use a semantically vacuous "Current" timespan (i.e. from which no formal 
 #        inferences may be drawn because no specific date information is provided,
-#        but which may still be useful for ionfrmation retrieval purposes).
+#        but which may still be useful for information retrieval purposes).
 #        (Or maybe we can infer that the claim holds at some time after all the 
 #        historical places, and with higj probability still holds at the time the
 #        data is inspected.)
@@ -59,7 +61,7 @@
 #    (c) say nothing (i.e. omit the em:when property altogether).  We cannot draw 
 #        any formal inference from such absence of information because of the RDF
 #        open-world model.
-#    On balance, I favour (a), which is represented below as emt:Current.
+#    On balance, I favour (a), which is represented below as emp:Current.
 #
 # 7. The representation of Timespan information needs to be fixed.  I favour using
 #    something that aligns with the linked pasts network, but it's not clear if that 
@@ -110,7 +112,7 @@ em:Place_merged
 
 # Timespan for "current" data
 
-emt:Current a em:Time_period ;
+emp:Current a em:Time_period ;
     rdfs:label   "Current, as of 2018" ;
     rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
     em:timespan
@@ -142,6 +144,7 @@ eml:la a em:Language_value ;
 ems:EMPlaces a em:Source ;
     # @@ Placeholder link...
     em:link <https://github.com/culturesofknowledge/emplaces> ;
+    em:short_label "EMPlaces" ;
     rdfs:label "EMPlaces project activity" ;
     rdfs:comment "Sample data for Opole based on research by Dariusz Gierczak and Arno Bosse." ;
     .
@@ -217,12 +220,12 @@ gn:A.ADM1H a skos:Concept ;
 gn:A.ADM2H a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Former second-order admin division" ;
-    rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
+    rdfs:comment  "A former second-order administrative division.  From GeoNames (feature code)."
     .
 
 gn:A.ADM3H a skos:Concept ;
     skos:broader  gn:A ;
-    rdfs:label    "Former Third-order admin division" ;
+    rdfs:label    "Former third-order admin division" ;
     rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
     .
 
@@ -282,7 +285,7 @@ em:DEFINITIVE a em:Competence_value ;
 
 em:INFERRED a em:Competence_value ;
     rdfs:label   "Inferred" ;
-    rdfs:comment "The associated value has been inferred from (preferably?) definitive informaton."
+    rdfs:comment "The associated value has been inferred from (preferably?) definitive information."
     .
 
 em:ASSUMED a em:Competence_value ;
@@ -302,19 +305,6 @@ em:APPROXIMATE a em:Competence_value ;
     .
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 #   ==========================================================================
 #   ==========================================================================
 #
@@ -329,20 +319,21 @@ ex:Opole_P a em:Place, em:Place_merged ;
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/3090048/>
       ] ;
-    em:place_data ex:Opole_P_EMPlaces, ex:Opole_P_Geonames ;
+    em:place_data ex:Opole_P_EMPlaces, ex:Opole_P_GeoNames ;
     .
 
-ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
+ex:Opole_P_GeoNames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (PPLA)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
     em:source
       [ a em:Authority ;
-        rdfs:label "GeoNames data" ;
+        em:short_label "GeoNames" ;
+        rdfs:label "GeoNames data for Opole" ;
         em:link <http://sws.geonames.org/3090048/about.rdf>
       ] ;
 
     em:placeCategory gn:P ;             # from gn:featureClass
-    em:placeType gn:P.PPLA ;            # from gn:featureCode
+    em:placeType     gn:P.PPLA ;        # from gn:featureCode
     em:preferredName "Opole" ;          # from gn:name
 
     em:alternateName "Opole" ;          # from gn:alternateName
@@ -401,10 +392,11 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "50.67211"^^xsd:double ;
             wgs84_pos:long "17.92533"^^xsd:double ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
+            em:short_label "GeoNames" ;
+            rdfs:label "GeoNames data for Opole" ;
             em:link <http://sws.geonames.org/3090048/about.rdf>
           ] ;
       ] ;
@@ -416,7 +408,8 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
         em:competence em:DEFINITIVE ;
         em:source
           [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
+            em:short_label "GeoNames" ;
+            rdfs:label "GeoNames data for Opole" ;
             em:link <http://sws.geonames.org/3090048/about.rdf>
           ] ;
       ] ;
@@ -432,11 +425,12 @@ ex:Opole_P_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/3090048/opole.html> ;
             em:preview     <http://www.geonames.org/3090048/opole.html> ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/3090048/about.rdf>     # from gn:locationMap
+            em:short_label "GeoNames" ;
+            rdfs:label "GeoNames data for Opole" ;
+            em:link <http://sws.geonames.org/3090048/about.rdf> # from gn:locationMap
           ] ;
       ] ;
 
@@ -462,6 +456,18 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
     em:reference ex:Opole_Emmerling_Zajaczkowska ;
 
     # Related resources
+
+    em:alternateAuthority 
+      [ a em:Authority ;
+        em:short_label "GeoNames" ;
+        rdfs:label "GeoNames data for Opole" ;
+        em:link <http://sws.geonames.org/3090048/about.rdf>
+      ],
+      [ a em:Authority ;
+        em:short_label "TGN" ;
+        rdfs:label "TGN data for Opole" ;
+        em:link <http://vocab.getty.edu/page/tgn/7007751>
+      ]
 
     em:relatedResource
       [ em:link <https://dolny-slask.org.pl> ],
@@ -775,7 +781,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             # Old style (OS) begins year on 25-Mar
             # New style (NS) begins year on 01-Jan
             rdfs:label   "Julian (OS)" ;  # assumed old style
-            em:link      em:Julian_old ;
+            em:link      emc:Julian_old ;
           ] ;
         em:when 
           [ a em:Time_period ;
@@ -799,7 +805,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
         oa:hasBody 
           [ a em:Calendar ;
             rdfs:label   "Gregorian" ;
-            em:link      em:Gregorian ;
+            em:link      emc:Gregorian ;
           ] ;
         em:when 
           [ a em:Time_period ;
@@ -989,13 +995,13 @@ ex:Opole_Emmerling_Zajaczkowska a em:Bib_entry, bibo:Book ;
 
 ex:Ryszard_Emmerling a foaf:Person ;
     rdfs:label "Ryszard Emmerling" ;
-    foaf:firstName "Ryszard" ;
-    foaf:surname "Emmerling" .
+    foaf:givenName "Ryszard" ;
+    foaf:familyName "Emmerling" .
 
 ex:Urszula_Zajaczkowska a foaf:Person ;
     rdfs:label "Urszula Zajączkowska" ;
-    foaf:firstName "Urszula" ;
-    foaf:surname "Zajączkowska" .
+    foaf:givenName "Urszula" ;
+    foaf:familyName "Zajączkowska" .
 
 ex:Slaskie_Wydawnictwo a foaf:Organization ;
     foaf:name "Wydawnictwo Śląskie" .
@@ -1040,6 +1046,7 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
     rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ; # document
     em:source
       [ a em:Authority ;
+        em:short_label "GeoNames" ;
         rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/7532413/about.rdf>
       ] ;
@@ -1087,7 +1094,7 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/7532413/opole.html> ;
             em:preview     <http://www.geonames.org/7532413/opole.html> ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;    # from gn:locationMap
@@ -1130,6 +1137,7 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
     rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ; # document
     em:source
       [ a em:Authority ;
+        em:short_label "GeoNames" ;
         rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/7530818/about.rdf>
       ] ;
@@ -1145,7 +1153,7 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "50.65622"^^xsd:double ;
             wgs84_pos:long "17.93066"^^xsd:double ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1176,7 +1184,7 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/7530818/opole.html> ;
             em:preview     <http://www.geonames.org/7530818/opole.html> ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1219,6 +1227,7 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ;
     em:source
       [ a em:Authority ;
+        em:short_label "GeoNames" ;
         rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/3337495/about.rdf>
       ] ;
@@ -1258,7 +1267,7 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "50.66667"^^xsd:double ;
             wgs84_pos:long "17.9"^^xsd:double ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1289,7 +1298,7 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
             em:preview     <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1332,6 +1341,7 @@ ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
     em:source
       [ a em:Authority ;
+        em:short_label "GeoNames" ;
         rdfs:label "GeoNames data" ;
         em:link <http://sws.geonames.org/798544/about.rdf>
       ] ;
@@ -1486,7 +1496,7 @@ ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "52"^^xsd:double ;
             wgs84_pos:long "20"^^xsd:double ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1505,7 +1515,7 @@ ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/798544/republic-of-poland.html> ;
             em:preview     <http://www.geonames.org/798544/republic-of-poland.html> ;
           ] ;
-        em:when emt:Current ;
+        em:when emp:Current ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
