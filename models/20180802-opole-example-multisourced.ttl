@@ -23,14 +23,18 @@
 @prefix gn:         <http://www.geonames.org/ontology#> .       # GeoNames vocabulary terms
 @prefix wgs84_pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
-@prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
-@prefix emp:        <http://emplaces.namespace.example.org/timeperiod/> .
-@prefix emt:        <http://emplaces.namespace.example.org/timespan/> .
-@prefix eml:        <http://emplaces.namespace.example.org/language/> .
-@prefix ems:        <http://emplaces.namespace.example.org/source/> .
-@prefix emc:        <http://emplaces.namespace.example.org/calendar/> .
+@prefix em:         <http://id.emplaces.info/vocab/> .
+@prefix emp:        <http://id.emplaces.info/timeperiod/> .
+@prefix emt:        <http://id.emplaces.info/timespan/> .
+@prefix eml:        <http://id.emplaces.info/language/> .
+@prefix ems:        <http://id.emplaces.info/source/> .
+@prefix emc:        <http://id.emplaces.info/calendar/> .
 
-@prefix ex:         <http://emplaces.data.example.org/> .        #@@@@ TBD
+# Prefixes for arbitrary URIs for entities referenced in place descriptions
+# In principle, any URI prefix could be used for these.
+@prefix place:      <http://id.emplaces.info/place/> .      # Canonical place URIs
+@prefix agent:      <http://id.emplaces.info/agent/> .      # People and institutions
+@prefix reference:  <http://id.emplaces.info/reference/> .  # Bibliographic entries
 
 # Notes:
 #
@@ -110,7 +114,7 @@ em:Place_merged
         """
     .
 
-# Timespan for "current" data
+# Time period for "current" data
 
 emp:Current a em:Time_period ;
     rdfs:label   "Current, as of 2018" ;
@@ -124,19 +128,37 @@ emp:Current a em:Time_period ;
 
 # Language resources
 
+eml:en a em:Language_value ;
+    # em:tag "en" ; 
+    em:tag_639_1 "en" ;
+    em:tag_639_2 "eng" ;
+    rdfs:label   "English" ;
+    rdfs:comment "# English" ;
+    .
+
 eml:de a em:Language_value ;
-    em:tag "de" ; 
-    rdfs:label "German"
+    # em:tag "de" ; 
+    em:tag_639_1 "de" ;
+    em:tag_639_2 "deu" ;
+    rdfs:label   "German"
+    rdfs:comment "# German" ;
     .
     
 eml:pl a em:Language_value ;
-    em:tag "pl" ; 
-    rdfs:label "Polish"
+    # em:tag "pl" ; 
+    em:tag_639_1 "pl" ;
+    em:tag_639_2 "pol" ;
+    rdfs:label   "Polish"
+    rdfs:comment "# Polish" ;
     .
 
 eml:la a em:Language_value ;
-    em:tag "la" ; 
+    # em:tag "la" ; 
     rdfs:label "Latin"
+    em:tag_639_1 "la" ;
+    em:tag_639_2 "lat" ;
+    rdfs:label   "Latin"
+    rdfs:comment "# Latin" ;
     .
 
 # Source description(s)
@@ -313,16 +335,16 @@ em:APPROXIMATE a em:Competence_value ;
 #   ==========================================================================
 #   ==========================================================================
 
-ex:Opole_P a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Opole_P ;
+place:Opole_P a em:Place, em:Place_merged ;
+    em:canonicalURI place:Opole_P ;
     em:alternateURI
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/3090048/>
       ] ;
-    em:place_data ex:Opole_P_EMPlaces, ex:Opole_P_GeoNames ;
+    em:place_data place:Opole_P_EMPlaces, place:Opole_P_GeoNames ;
     .
 
-ex:Opole_P_GeoNames a em:Place, em:Place_sourced ;
+place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (PPLA)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
     em:source
@@ -403,7 +425,7 @@ ex:Opole_P_GeoNames a em:Place, em:Place_sourced ;
 
     em:hasRelation
       [ a em:Qualified_relation ;
-        em:relationTo ex:Opole_ADM3 ;       # from gn:parentFeature, gn:parentADM3
+        em:relationTo place:Opole_ADM3 ;       # from gn:parentFeature, gn:parentADM3
         em:relationType em:P_PART_OF_A ;    # relates populated place to parent admin div
         em:competence em:DEFINITIVE ;
         em:source
@@ -417,7 +439,7 @@ ex:Opole_P_GeoNames a em:Place, em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P_EMPlaces ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ rdfs:label     "Current map for Opole" ;
             rdfs:comment   "Current map for Opole" ;
@@ -439,7 +461,7 @@ ex:Opole_P_GeoNames a em:Place, em:Place_sourced ;
     rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5>
     .
 
-ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
+place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
     em:source ems:EMPlaces ;
     # Added label to distinguish from other places with same name
     # (initial default to preferred name?)
@@ -453,7 +475,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
 
     # Reference bibliography
 
-    em:reference ex:Opole_Emmerling_Zajaczkowska ;
+    em:reference reference:Opole_Emmerling_Zajaczkowska ;
 
     # Related resources
 
@@ -487,7 +509,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
 
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:Opole_Duchy ;
+        em:relationTo place:Opole_Duchy ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1281-1521" ;
@@ -501,7 +523,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:Opole_Raciborz_Duchy ;
+        em:relationTo place:Opole_Raciborz_Duchy ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1521-1809" ;
@@ -515,7 +537,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:Opole_County ;
+        em:relationTo place:Opole_County ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1742-1945" ;
@@ -533,7 +555,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opole" ;
@@ -558,7 +580,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opol" ;
@@ -582,7 +604,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opolie" ;
@@ -606,7 +628,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppol" ;
@@ -631,7 +653,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Opul" ;
@@ -655,7 +677,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppoln" ;
@@ -678,7 +700,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppelln" ;
@@ -700,7 +722,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppul" ;
@@ -724,7 +746,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppeln" ;
@@ -747,7 +769,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a oa:Annotation ;
         oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Place_name ;
             em:name      "Oppolie" ;
@@ -775,7 +797,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Calendar ;
             # Old style (OS) begins year on 25-Mar
@@ -801,7 +823,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
-        oa:hasTarget   ex:Opole_P_EMPlaces ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Calendar ;
             rdfs:label   "Gregorian" ;
@@ -832,7 +854,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       # @@TODO: link to thumbnails + link to full stand-alone pages
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P_EMPlaces ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Map_resource ;
             rdfs:label     "Map of Silesia from 1561" ;
@@ -855,7 +877,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P_EMPlaces ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Map_resource ;
             rdfs:label     "Map of Silesia from 1608" ;
@@ -878,7 +900,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P_EMPlaces ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Map_resource ;
             rdfs:label     "Map of Silesia from 1740" ;
@@ -901,7 +923,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P_EMPlaces ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Map_resource ;
             rdfs:label     "Map of Boheme, Silesia, Moravie and Luace in 1777" ;
@@ -924,7 +946,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P_EMPlaces ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Map_resource ;
             rdfs:label     "Map of (part of) Europe in 1787" ;
@@ -948,7 +970,7 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_P_EMPlaces ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Map_resource ;
             rdfs:label     "Map of Silesia / Southern Poland in 1794" ;
@@ -982,28 +1004,28 @@ ex:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
 # This sample has been assembled by adapting examples found on the web; 
 # it should be checked against the Bibo spec.
 
-ex:Opole_Emmerling_Zajaczkowska a em:Bib_entry, bibo:Book ;
+reference:Opole_Emmerling_Zajaczkowska a em:Bib_entry, bibo:Book ;
     # Emmerling, Ryszard; Zajączkowska, Urszula 2003: Oppeln/Opole.
     # Die Hauptstadt der Wojewodschaft Oppeln, Opole.
     dcterms:title "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" ;
-    bibo:authorList (ex:Ryszard_Emmerling ex:Urszula_Zajaczkowska) ;
-    dcterms:publisher ex:Slaskie_Wydawnictwo ;
+    bibo:authorList (agent:Ryszard_Emmerling agent:Urszula_Zajaczkowska) ;
+    dcterms:publisher agent:Slaskie_Wydawnictwo ;
     dcterms:date "2003" ;
     bibo:isbn10 "8391537137" ;
     bibo:isbn13 "978-8391537138" ;
     dcterms:source "https://www.amazon.com/Opole-Capital-of-Opolskie-Province/dp/B0021JGAOI" .
 
-ex:Ryszard_Emmerling a foaf:Person ;
+agent:Ryszard_Emmerling a foaf:Person ;
     rdfs:label "Ryszard Emmerling" ;
     foaf:givenName "Ryszard" ;
     foaf:familyName "Emmerling" .
 
-ex:Urszula_Zajaczkowska a foaf:Person ;
+agent:Urszula_Zajaczkowska a foaf:Person ;
     rdfs:label "Urszula Zajączkowska" ;
     foaf:givenName "Urszula" ;
     foaf:familyName "Zajączkowska" .
 
-ex:Slaskie_Wydawnictwo a foaf:Organization ;
+agent:Slaskie_Wydawnictwo a foaf:Organization ;
     foaf:name "Wydawnictwo Śląskie" .
 
 # More bibliography to be added...
@@ -1032,16 +1054,16 @@ ex:Slaskie_Wydawnictwo a foaf:Organization ;
 #   ==========================================================================
 #   ==========================================================================
 
-ex:Opole_ADM3 a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Opole_ADM3 ;
+place:Opole_ADM3 a em:Place, em:Place_merged ;
+    em:canonicalURI place:Opole_ADM3 ;
     em:alternateURI
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/7532413/>
       ] ;
-    em:place_data ex:Opole_ADM3_Geonames ;
+    em:place_data place:Opole_ADM3_Geonames ;
     .
 
-ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
+place:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (ADM3)" ;                              # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ; # document
     em:source
@@ -1073,7 +1095,7 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
 
     em:hasRelation
       [ a em:Qualified_relation ;
-        em:relationTo ex:Opole_ADM2 ;
+        em:relationTo place:Opole_ADM2 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
         em:source
@@ -1086,7 +1108,7 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_ADM3 ;
+        oa:hasTarget place:Opole_ADM3 ;
         oa:hasBody 
           [ rdfs:label     "Current map for Opole_ADM3" ;
             rdfs:comment   "Current map for Opole_ADM3" ;
@@ -1123,16 +1145,16 @@ ex:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
 #   ==========================================================================
 #   ==========================================================================
 
-ex:Opole_ADM2 a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Opole_ADM2 ;
+place:Opole_ADM2 a em:Place, em:Place_merged ;
+    em:canonicalURI place:Opole_ADM2 ;
     em:alternateURI
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/7530818/>
       ] ;
-    em:place_data ex:Opole_ADM2_Geonames ;
+    em:place_data place:Opole_ADM2_Geonames ;
     .
 
-ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
+place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (ADM2)" ;                              # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ; # document
     em:source
@@ -1163,7 +1185,7 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
 
     em:hasRelation
       [ a em:Qualified_relation ;
-        em:relationTo ex:Opole_Voivodeship_ADM1 ;
+        em:relationTo place:Opole_Voivodeship_ADM1 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
         em:source
@@ -1176,7 +1198,7 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_ADM2 ;
+        oa:hasTarget place:Opole_ADM2 ;
         oa:hasBody 
           [ rdfs:label     "Current map for Opole_ADM2" ;
             rdfs:comment   "Current map for Opole_ADM2" ;
@@ -1213,16 +1235,16 @@ ex:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
 #   ==========================================================================
 #   ==========================================================================
 
-ex:Opole_Voivodeship_ADM1 a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Opole_Voivodeship_ADM1 ;
+place:Opole_Voivodeship_ADM1 a em:Place, em:Place_merged ;
+    em:canonicalURI place:Opole_Voivodeship_ADM1 ;
     em:alternateURI
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/3337495/>
       ] ;
-    em:place_data ex:Opole_Voivodeship_ADM1_Geonames ;
+    em:place_data place:Opole_Voivodeship_ADM1_Geonames ;
     .
 
-ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
+place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole Voivodeship (ADM1)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ;
     em:source
@@ -1277,7 +1299,7 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
 
     em:hasRelation
       [ a em:Qualified_relation ;
-        em:relationTo ex:Poland_PCLI ;
+        em:relationTo place:Poland_PCLI ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:source
           [ a em:Authority ;
@@ -1290,7 +1312,7 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Opole_Voivodeship_ADM1 ;
+        oa:hasTarget place:Opole_Voivodeship_ADM1 ;
         oa:hasBody 
           [ rdfs:label     "Current map for Opole Voivodeship" ;
             rdfs:comment   "Current map for Opole Voivodeship" ;
@@ -1327,16 +1349,16 @@ ex:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
 #   ==========================================================================
 #   ==========================================================================
 
-ex:Poland_PCLI_ADM1 a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Poland_PCLI_ADM1 ;
+place:Poland_PCLI_ADM1 a em:Place, em:Place_merged ;
+    em:canonicalURI place:Poland_PCLI_ADM1 ;
     em:alternateURI
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/798544/>
       ] ;
-    em:place_data ex:Poland_PCLI_ADM1_Geonames ;
+    em:place_data place:Poland_PCLI_ADM1_Geonames ;
     .
 
-ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
+place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Poland (country)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
     em:source
@@ -1507,7 +1529,7 @@ ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget ex:Poland_PCLI ;
+        oa:hasTarget place:Poland_PCLI ;
         oa:hasBody 
           [ rdfs:label     "Current map for Poland" ;
             rdfs:comment   "Current map for Poland" ;
@@ -1569,12 +1591,12 @@ ex:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
 
 # Note: historical admin orders (1/2/3) are arbitarily chosen @@TODO: discuss
 
-ex:Opole_Duchy a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Opole_Duchy ;
-    em:place_data ex:Opole_Duchy_EMPlaces ;
+place:Opole_Duchy a em:Place, em:Place_merged ;
+    em:canonicalURI place:Opole_Duchy ;
+    em:place_data place:Opole_Duchy_EMPlaces ;
     .
 
-ex:Opole_Duchy_EMPlaces a em:Place, em:Place_sourced ;
+place:Opole_Duchy_EMPlaces a em:Place, em:Place_sourced ;
     em:source ems:EMPlaces ;
     rdfs:label       "Duchy of Opole" ;
     em:placeCategory gn:A ;             # from gn:featureClass
@@ -1590,7 +1612,7 @@ ex:Opole_Duchy_EMPlaces a em:Place, em:Place_sourced ;
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:Bohemian_Crown ;
+        em:relationTo place:Bohemian_Crown ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
@@ -1604,7 +1626,7 @@ ex:Opole_Duchy_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:War_and_Domain_Chamber_Wroclaw ;   # Not defined in this sample
+        em:relationTo place:War_and_Domain_Chamber_Wroclaw ;   # Not defined in this sample
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1742-1809" ;
@@ -1618,12 +1640,12 @@ ex:Opole_Duchy_EMPlaces a em:Place, em:Place_sourced ;
 
 
 
-ex:Opole_Raciborz_Duchy a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Opole_Raciborz_Duchy ;
-    em:place_data ex:Opole_Raciborz_Duchy_EMPlaces ;
+place:Opole_Raciborz_Duchy a em:Place, em:Place_merged ;
+    em:canonicalURI place:Opole_Raciborz_Duchy ;
+    em:place_data place:Opole_Raciborz_Duchy_EMPlaces ;
     .
 
-ex:Opole_Raciborz_Duchy_EMPlaces a em:Place, em:Place_sourced ;
+place:Opole_Raciborz_Duchy_EMPlaces a em:Place, em:Place_sourced ;
     em:source ems:EMPlaces ;
     rdfs:label       "Duchy of Opole and Racibórz" ;
     em:placeCategory gn:A ;
@@ -1639,7 +1661,7 @@ ex:Opole_Raciborz_Duchy_EMPlaces a em:Place, em:Place_sourced ;
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:Bohemian_Crown ;
+        em:relationTo place:Bohemian_Crown ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
@@ -1655,12 +1677,12 @@ ex:Opole_Raciborz_Duchy_EMPlaces a em:Place, em:Place_sourced ;
 
 
 
-ex:Opole_County a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Opole_County ;
-    em:place_data ex:Opole_County_EMPlaces ;
+place:Opole_County a em:Place, em:Place_merged ;
+    em:canonicalURI place:Opole_County ;
+    em:place_data place:Opole_County_EMPlaces ;
     .
 
-ex:Opole_County_EMPlaces a em:Place, em:Place_sourced ;
+place:Opole_County_EMPlaces a em:Place, em:Place_sourced ;
     em:source ems:EMPlaces ;
     rdfs:label       "County of Opole" ;
     em:placeCategory gn:A ;             # from gn:featureClass
@@ -1676,7 +1698,7 @@ ex:Opole_County_EMPlaces a em:Place, em:Place_sourced ;
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo ex:Opole_Duchy ;
+        em:relationTo place:Opole_Duchy ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1521-1809" ;
@@ -1694,12 +1716,12 @@ ex:Opole_County_EMPlaces a em:Place, em:Place_sourced ;
 
 
 
-ex:Bohemian_Crown a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Bohemian_Crown ;
-    em:place_data ex:Bohemian_Crown_EMPlaces ;
+place:Bohemian_Crown a em:Place, em:Place_merged ;
+    em:canonicalURI place:Bohemian_Crown ;
+    em:place_data place:Bohemian_Crown_EMPlaces ;
     .
 
-ex:Bohemian_Crown_EMPlaces a em:Place, em:Place_sourced ;
+place:Bohemian_Crown_EMPlaces a em:Place, em:Place_sourced ;
     em:source ems:EMPlaces ;
     rdfs:label       "Bohemian Crown" ;
     em:placeCategory gn:A ;             # from gn:featureClass
@@ -1715,7 +1737,7 @@ ex:Bohemian_Crown_EMPlaces a em:Place, em:Place_sourced ;
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo   ex:Habsburg_Monarchy ;    # Not defined in this sample
+        em:relationTo   place:Habsburg_Monarchy ;    # Not defined in this sample
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1348-1804" ;
@@ -1729,7 +1751,7 @@ ex:Bohemian_Crown_EMPlaces a em:Place, em:Place_sourced ;
       ] ,
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
-        em:relationTo   ex:Holy_Roman_Empire ;
+        em:relationTo   place:Holy_Roman_Empire ;
         em:when 
           [ a em:Time_period ;
             rdfs:label   "1348-1806" ;
@@ -1744,12 +1766,12 @@ ex:Bohemian_Crown_EMPlaces a em:Place, em:Place_sourced ;
 
 
 
-ex:Holy_Roman_Empire a em:Place, em:Place_merged ;
-    em:canonicalURI ex:Holy_Roman_Empire ;
-    em:place_data ex:Holy_Roman_Empire_EMPlaces ;
+place:Holy_Roman_Empire a em:Place, em:Place_merged ;
+    em:canonicalURI place:Holy_Roman_Empire ;
+    em:place_data place:Holy_Roman_Empire_EMPlaces ;
     .
 
-ex:Holy_Roman_Empire_EMPlaces a em:Place, em:Place_sourced ;
+place:Holy_Roman_Empire_EMPlaces a em:Place, em:Place_sourced ;
     em:source ems:EMPlaces ;
     rdfs:label       "Holy Roman Empire" ;
     em:placeCategory gn:A ;
