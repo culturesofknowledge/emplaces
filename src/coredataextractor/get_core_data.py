@@ -47,8 +47,8 @@ GCD_UNKNOWNCMD          = 3         # Unknown command
 GCD_UNIMPLEMENTED       = 4         # Unimplemented command or feature
 GCD_UNEXPECTEDARGS      = 5         # Unexpected arguments supplied
 GCD_NO_PLACE_IDS        = 6         # No place ids given
-GCD_NO_GEONAMES_URL      = 7        # No GeoNames URL
-GCD_SOME_GEONAMES_URLS   = 8        # Some but not all all URLs matched GeoNames IDs
+GCD_NO_GEONAMES_URL     = 7         # No GeoNames URL
+GCD_SOME_GEONAMES_URLS  = 8         # Some but not all all URLs matched GeoNames IDs
 
 #   Namespaces
 
@@ -64,10 +64,17 @@ BIBO      = Namespace("http://purl.org/ontology/bibo/")
 GN        = Namespace("http://www.geonames.org/ontology#")  # GeoNames ontology
 GEONAMES  = Namespace("http://sws.geonames.org/")           # GeoNames place 
 WGS84_POS = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
-EM        = Namespace("http://emplaces.namespace.example.org/")
-EMP       = Namespace("http://emplaces.namespace.example.org/place/")
-EMT       = Namespace("http://emplaces.namespace.example.org/timespan/")
-EML       = Namespace("http://emplaces.namespace.example.org/language/")
+EM        = Namespace("http://http://id.emplaces.info/vocab/")
+EMP       = Namespace("http://id.emplaces.info/place/")
+EMT       = Namespace("http://id.emplaces.info/timespan/")
+EML       = Namespace("http://id.emplaces.info/language/")
+EMS       = Namespace("http://id.emplaces.info/source/")
+EMC       = Namespace("http://id.emplaces.info/calendar/")
+
+PLACE     = Namespace("http://id.emplaces.info/place/")
+AGENT     = Namespace("http://id.emplaces.info/agent/")
+REF       = Namespace("http://id.emplaces.info/reference/")
+
 
 #   ===================================================================
 #
@@ -93,102 +100,55 @@ COMMON_PREFIX_DEFS = (
     @prefix gn:         <http://www.geonames.org/ontology#> .       # GeoNames vocabulary terms
     @prefix wgs84_pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
     
-    @prefix em:         <http://emplaces.namespace.example.org/> .   #@@@@ TBD
-    @prefix emp:        <http://emplaces.namespace.example.org/place/> .
-    @prefix emt:        <http://emplaces.namespace.example.org/timespan/> .
-    @prefix eml:        <http://emplaces.namespace.example.org/language/> .
-    """)
+    @prefix em:         <http://id.emplaces.info/vocab/> .
+    @prefix emp:        <http://id.emplaces.info/timeperiod/> .
+    @prefix emt:        <http://id.emplaces.info/timespan/> .
+    @prefix eml:        <http://id.emplaces.info/language/> .
+    @prefix ems:        <http://id.emplaces.info/source/> .
+    @prefix emc:        <http://id.emplaces.info/calendar/> .
 
-
-COMMON_GEONAMES_DEFS = (
-    """
-    # Place categories
-    gn:P a skos:Concept ; 
-        rdfs:label "Populated place" ;
-        rdfs:comment "Populated place - from GeoNames (feature class)." 
-        .
-    gn:A  a skos:Concept ; 
-        rdfs:label   "Administrative division" ;
-        rdfs:comment "Administrative division - from GeoNames (feature class)." 
-        .
-
-    gn:S a skos:Concept ; 
-        rdfs:label "Spot feature" ;
-        rdfs:comment "Spot feature (spot, building, farm)." 
-        .
-
-    # Place types
-    gn:P.PPL a skos:Concept ;
-        skos:narrower gn:P ;
-        rdfs:label    "Populated place" ;
-        rdfs:comment  "A populated place (town, city, village, etc.).  From GeoNames (feature code)." 
-        .
-    gn:P.PPLA a skos:Concept ;
-        skos:narrower gn:P ;
-        rdfs:label    "Seat of 1st-order admin div" ;
-        rdfs:comment  "Populated place that is a seat of a first-order administrative division.  From GeoNames (feature code)." 
-        .
-    gn:P.PPLH a skos:Concept ;
-        skos:narrower gn:P ;
-        rdfs:label    "Former populated place" ;
-        rdfs:comment  "A former populated place that no longer exists.  From GeoNames (feature code)." 
-        .
-    gn:A.PCLI a skos:Concept ;
-        skos:narrower gn:A ;
-        rdfs:label    "Independent political entity" ;
-        rdfs:comment  "An independent political entity, typically a country.  From GeoNames (feature code)."
-        .
-    gn:A.ADM1 a skos:Concept ;
-        skos:narrower gn:A ;
-        rdfs:label    "First-order admin division" ;
-        rdfs:comment  "A primary administrative division of a country, such as a state in the United States.  From GeoNames (feature code)."
-        .
-    gn:A.ADM2 a skos:Concept ;
-        skos:narrower gn:A ;
-        rdfs:label    "Second-order admin division" ;
-        rdfs:comment  "A subdivision of a first-order administrative division.  From GeoNames (feature code)."
-        .
-    gn:A.ADM3 a skos:Concept ;
-        skos:narrower gn:A ;
-        rdfs:label    "Third-order admin division" ;
-        rdfs:comment  "A subdivision of a second-order administrative division.  From GeoNames (feature code)."
-        .
-    gn:A.PCLH a skos:Concept ;
-        skos:narrower gn:A ;
-        rdfs:label    "Former independent political entity" ;
-        rdfs:comment  "A former independent political entity, typically a country.  From GeoNames (feature code)."
-        .
-    gn:A.ADM1H a skos:Concept ;
-        skos:narrower gn:A ;
-        rdfs:label    "Former first-order admin division" ;
-        rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
-        .
-    gn:A.ADM2H a skos:Concept ;
-        skos:narrower gn:A ;
-        rdfs:label    "Former second-order admin division" ;
-        rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
-        .
-    gn:A.ADM3H a skos:Concept ;
-        skos:narrower gn:A ;
-        rdfs:label    "Former Third-order admin division" ;
-        rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
-        .
-
-    gn:S.CH a skos:Concept ;
-        skos:narrower gn:S ;
-        rdfs:label    "Church" ;
-        rdfs:comment  "A church; a building for public Christian worship." 
-        .
-
-    #@@ more to add here
+    @prefix place:      <http://id.emplaces.info/place/> .          # Canonical place URIs
+    @prefix agent:      <http://id.emplaces.info/agent/> .          # People and institutions
+    @prefix ref:        <http://id.emplaces.info/reference/> .      # Bibliographic entries
     """)
 
 COMMON_EMPLACES_DEFS = (
     """
-    # Timespan for "current" data
-    emt:Current a em:Time_period ;
+    em:Place a rdfs:Class ;
+        rdfs:label "Place" ;
+        rdfs:comment
+            '''
+            A resource that provides information about a place (which is 
+            considered in the sense of being "constructed by human experience").
+            '''
+        .
+
+    em:Place_sourced a rdfs:Class ;
+        rdfs:subClassOf em:Place ;  #@@TODO: review this
+        rdfs:label "Place information from single source" ;
+        rdfs:comment
+            '''
+            A resource that provides information about a place that comes from 
+            a single source.  Property `em:source` references a description of 
+            that source.
+            '''
+        .
+
+    em:Place_merged
+        rdfs:subClassOf em:Place ;  #@@TODO: review this
+        rdfs:label "Place information merged from multiple sources" ;
+        rdfs:comment
+            '''
+            A resource that provides information about a place that comes from 
+            multiple sources.  One or more em:place_data properties reference 
+            single-sourced information about the place.
+            '''
+        .
+
+    # Time period for "current" data
+    emp:Current a em:Time_period ;
         rdfs:label   "Current, as of 2018" ;
-        rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. core data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
+        rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
         em:timespan
           [ a em:Time_span ;
             em:latestStart: "2018" ;
@@ -196,8 +156,9 @@ COMMON_EMPLACES_DEFS = (
           ]
         .
 
-    #   This avoids having to create extra historical places 
-    #   corresponding to a current P.  See em:AH_PART_OF_AH below.
+    #   Combined place type to avoid having to create extra historical places 
+    #   corresponding to a current P.  References GeoNames place types.
+    #   See also relation type em:AH_PART_OF_AH.
     em:P_OR_A a skos:Concept ;
         skos:broader gn:A ;
         skos:broader gn:P ;
@@ -235,14 +196,15 @@ COMMON_EMPLACES_DEFS = (
 
     # Information competence (certainty)
     #
-    # Information in a qualified relation or annotation may be uncertain.  These properties and values
-    # are used to qualify these claims.  Information that is directly attached to an em:Place 
-    # (i.e. not as a qualified relation or annotation) is considered to be definitive.
+    # Information in a qualified relation or annotation may be uncertain.  These properties and 
+    # values are used to qualify these claims.  Information that is directly attached to an 
+    # em:Place (i.e. not as a qualified relation or annotation) is considered to be definitive.
     #
     # Specifically, annotations for calendar-in-use and alternate name attestations should have 
     # associated competence values.
     #
-    # Approximate date ranges are represented by range values in the corresponding Timespan value.
+    # Approximate date ranges are represented by range values in the corresponding 
+    # Timespan value.
     em:competence a rdf:Property ;
         rdfs:label "Certainty, or quality, of information" ;
         rdfs:comment "Records the quality or certaintly of some information.  Note that in the absence of an explicit value, no competence should be assumed." ;
@@ -268,11 +230,6 @@ COMMON_EMPLACES_DEFS = (
     em:APPROXIMATE a em:Competence_value ;
         rdfs:label   "Approximate" ;
         rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges."
-        .
-
-    # Core vs non-core data
-    em:Place a rdfs:Class ;
-        em:coreProperty em:preferredName, em:alternateName, em:placeCategory, em:corePlaceType ;
         .
 
     # Use em:corePlaceType for place type info that is obtained, and 
@@ -306,20 +263,123 @@ COMMON_EMPLACES_DEFS = (
         .
     """)
 
+COMMON_GEONAMES_DEFS = (
+    """
+    # Place categories
+    gn:P a skos:Concept ; 
+        rdfs:label "Populated place" ;
+        rdfs:comment "Populated place - from GeoNames (feature class)." 
+        .
+    gn:A  a skos:Concept ; 
+        rdfs:label   "Administrative division" ;
+        rdfs:comment "Administrative division - from GeoNames (feature class)." 
+        .
+
+    gn:S a skos:Concept ; 
+        rdfs:label "Spot feature" ;
+        rdfs:comment "Spot feature (spot, building, farm)." 
+        .
+
+    # Place types
+    gn:P.PPL a skos:Concept ;
+        skos:narrower gn:P ;
+        rdfs:label    "Populated place" ;
+        rdfs:comment  "A populated place (town, city, village, etc.)." 
+        .
+    gn:P.PPLA a skos:Concept ;
+        skos:narrower gn:P ;
+        rdfs:label    "Seat of 1st-order admin div" ;
+        rdfs:comment  "Populated place that is a seat of a first-order administrative division." 
+        .
+    gn:P.PPLH a skos:Concept ;
+        skos:narrower gn:P ;
+        rdfs:label    "Former populated place" ;
+        rdfs:comment  "A former populated place that no longer exists." 
+        .
+    gn:A.PCLI a skos:Concept ;
+        skos:narrower gn:A ;
+        rdfs:label    "Independent political entity" ;
+        rdfs:comment  "An independent political entity, typically a country."
+        .
+    gn:A.ADM1 a skos:Concept ;
+        skos:narrower gn:A ;
+        rdfs:label    "First-order admin division" ;
+        rdfs:comment  "A primary administrative division of a country, such as a state in the United States."
+        .
+    gn:A.ADM2 a skos:Concept ;
+        skos:narrower gn:A ;
+        rdfs:label    "Second-order admin division" ;
+        rdfs:comment  "A subdivision of a first-order administrative division."
+        .
+    gn:A.ADM3 a skos:Concept ;
+        skos:narrower gn:A ;
+        rdfs:label    "Third-order admin division" ;
+        rdfs:comment  "A subdivision of a second-order administrative division."
+        .
+    gn:A.PCLH a skos:Concept ;
+        skos:narrower gn:A ;
+        rdfs:label    "Former independent political entity" ;
+        rdfs:comment  "A former independent political entity, typically a country."
+        .
+    gn:A.ADM1H a skos:Concept ;
+        skos:narrower gn:A ;
+        rdfs:label    "Former first-order admin division" ;
+        rdfs:comment  "A former first-order administrative division."
+        .
+    gn:A.ADM2H a skos:Concept ;
+        skos:narrower gn:A ;
+        rdfs:label    "Former second-order admin division" ;
+        rdfs:comment  "A former first-order administrative division."
+        .
+    gn:A.ADM3H a skos:Concept ;
+        skos:narrower gn:A ;
+        rdfs:label    "Former Third-order admin division" ;
+        rdfs:comment  "A former third-order administrative division."
+        .
+
+    gn:S.CH a skos:Concept ;
+        skos:narrower gn:S ;
+        rdfs:label    "Church" ;
+        rdfs:comment  "A church; a building for public Christian worship." 
+        .
+
+    #@@ more to add here
+    """)
+
 COMMON_LANGUAGE_DEFS = (
     """
     # Language resources @@TODO: generate as-needed@@
+    eml:en a em:Language_value ;
+        # em:tag "en" ; 
+        em:tag_639_1 "en" ;
+        em:tag_639_2 "eng" ;
+        rdfs:label   "English" ;
+        rdfs:comment "# English" ;
+        .
+
     eml:de a em:Language_value ;
-        em:tag "de" ; 
-        rdfs:label "German"
+        # em:tag "de" ; 
+        em:tag_639_1 "de" ;
+        em:tag_639_2 "deu" ;
+        rdfs:label   "German"
+        rdfs:comment "# German" ;
         .
+        
     eml:pl a em:Language_value ;
-        em:tag "pl" ; 
-        rdfs:label "Polish"
+        # em:tag "pl" ; 
+        em:tag_639_1 "pl" ;
+        em:tag_639_2 "pol" ;
+        rdfs:label   "Polish"
+        rdfs:comment "# Polish" ;
         .
+
     eml:la a em:Language_value ;
-        em:tag "la" ; 
+        # em:tag "la" ; 
         rdfs:label "Latin"
+        em:tag_639_1 "la" ;
+        em:tag_639_2 "lat" ;
+        rdfs:label   "Latin"
+        rdfs:comment "# Latin" ;
         .
     """)
 
@@ -623,13 +683,18 @@ def get_geonames_id(geonames_uri):
     geonames_id   = geonames_path[0]
     return geonames_id
 
-def get_emlaces_id_uri_node(geonames_id):
+def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     """
-    Given a GeoNames Id, returns Id, URI and Node for EMPlaces
+    Given a place name, place type, GeoNames Id and optional suffix,
+    returns a place Id, URI and Node for 
     """
-    emplaces_id   = "g_%s"%(geonames_id)
+    type_id       = get_geonames_place_type_id(place_type)
+    emplaces_id   = "%s_%s_%s%s"%(place_name, type_id, unique_id, suffix)
     emplaces_uri  = EMP[emplaces_id]
     emplaces_node = URIRef(emplaces_uri)
+    # emplaces_id   = "g_%s"%(geonames_id)
+    # emplaces_uri  = EMP[emplaces_id]
+    # emplaces_node = URIRef(emplaces_uri)
     return (emplaces_id, emplaces_uri, emplaces_node)
 
 def get_many_inputs():
@@ -685,21 +750,43 @@ def get_geonames_place_data(geonames_url):
     geonames_rdf = get_rdf_graph(geonames_url)
     return geonames_rdf
 
+def get_geonames_place_type_id(place_type):
+    """
+    Returns id for supplied GeoNames place type
+    """
+    # place_type_ids = (
+    #     { GN["P.PPL"]:   "PPL"
+    #     , GN["P.PPLA"]:  "PPLA"
+    #     , GN["A.ADM5"]:  "ADM5"
+    #     , GN["A.ADM4"]:  "ADM4"
+    #     , GN["A.ADM3"]:  "ADM3"
+    #     , GN["A.ADM2"]:  "ADM2"
+    #     , GN["A.ADM1"]:  "ADM1"
+    #     , GN["A.PCLI"]:  "PCLI"
+    #     , GN["L.RGN"]:   "RGN"
+    #     })
+    # if place_type in place_type_ids:
+    #     type_id = place_type_ids[place_type]
+    # else:
+    tokens  = [t for t in re.split(r'\W', place_type) if t]
+    type_id = tokens[-1]
+    return type_id
+
 def get_geonames_place_type_label(place_type, geo_ont_rdf):
     """
     Returns label for supplied GeoNames place type
     """
     # Alternatives to ontology labels
     place_type_labels = (
-        { GN["P.PPL"]:   "Populated place (ppl)"
-        , GN["P.PPLA"]:  "Populated place (ppla)"
-        , GN["A.ADM5"]:  "City   (adm3}"
-        , GN["A.ADM4"]:  "City   (adm3}"
-        , GN["A.ADM3"]:  "City   (adm3}"
-        , GN["A.ADM2"]:  "County (adm2)"
-        , GN["A.ADM1"]:  "Region (adm1)"
+        { GN["P.PPL"]:   "Populated place (P.PPL)"
+        , GN["P.PPLA"]:  "Populated place (P.PPLA)"
+        , GN["A.ADM5"]:  "City   (A.ADM5)"
+        , GN["A.ADM4"]:  "City   (A.ADM4)"
+        , GN["A.ADM3"]:  "City   (A.ADM3)"
+        , GN["A.ADM2"]:  "County (A.ADM2)"
+        , GN["A.ADM1"]:  "Region (A.ADM1)"
         , GN["A.PCLI"]:  "Country"
-        , GN["L.RGN"]:   "Region (l.rgn)"
+        , GN["L.RGN"]:   "Region (L.RGN)"
         })
     if place_type in place_type_labels:
         type_label = place_type_labels[place_type]
@@ -729,6 +816,11 @@ def add_emplaces_common_namespaces(emp_graph):
     emp_graph.bind("emp",       EMP.term(""))
     emp_graph.bind("emt",       EMT.term(""))
     emp_graph.bind("eml",       EML.term(""))
+    emp_graph.bind("ems",       EMS.term(""))
+    emp_graph.bind("emc",       EMC.term(""))
+    emp_graph.bind("place",     PLACE.term(""))
+    emp_graph.bind("agent",     AGENT.term(""))
+    emp_graph.bind("ref",       REF.term(""))
     return
 
 def add_turtle_data(emp_rdf, turtle_str):
@@ -773,7 +865,7 @@ def add_place_location(emp_rdf, place_lat, place_long):
     emp_rdf.add((b_location, WGS84_POS.long, Literal(str(place_long), datatype=XSD.double)))
     return b_location
 
-def add_source(emp_rdf, label, link):
+def _unused_add_source(emp_rdf, label, link):
     """
     Create BNode for source
     """
@@ -851,72 +943,90 @@ def get_emplaces_core_data(
         add_emplaces_common_namespaces(emplaces_rdf)
     # for gn_pre, gn_uri in geonames_rdf.namespaces():
     #     emplaces_rdf.bind(gn_pre, gn_uri)
-    lit_geonames_data = Literal("GeoNames data")
-    lit_geonames_uri  = Literal("GeoNames URI")
+    lit_geonames_data = Literal("GeoNames data for %s"%(place_name,))
+    lit_geonames_uri  = Literal("GeoNames URI for %s"%(place_name,))
 
-    # Add em:Place description
-    emp_id   = "g_%s"%(geonames_id)
-    emp_uri  = EMP[emp_id]
-    emp_node = URIRef(emp_uri)
-    emplaces_rdf.add((emp_node,  RDF.type,         EM.Place         ))
-    emplaces_rdf.add((emp_node,  RDFS.label,       display_label    ))
-    emplaces_rdf.add((emp_node,  RDFS.isDefinedBy, place_def_by     ))
-    emplaces_rdf.add((emp_node,  EM.canonicalURI,  emp_node         ))
-    b_coreref = BNode()
-    emplaces_rdf.add((emp_node,  EM.coreDataRef,   b_coreref        ))
-    emplaces_rdf.add((b_coreref, RDFS.label,       lit_geonames_data))
-    emplaces_rdf.add((b_coreref, EM.link,          place_def_by     ))
+    # Allocate URIs and nodes for merged and geonames data
+    emp_id_merged, emp_uri_merged, emp_node_merged = get_emplaces_id_uri_node(
+        place_name, place_type, geonames_id
+        )
+    emp_id_geonames, emp_uri_geonames, emp_node_geonames = get_emplaces_id_uri_node(
+        place_name, place_type, geonames_id, suffix="_geonames"
+        )
+    ems_uri_geonames_source  = EMS[emp_id_geonames]
+    ems_node_geonames_source = URIRef(ems_uri_geonames_source)
+
+    # Add em:Place_merged description
+    emplaces_rdf.add((emp_node_merged, RDF.type, EM.Place))
+    emplaces_rdf.add((emp_node_merged, RDF.type, EM.Place_merged))
+    emplaces_rdf.add((emp_node_merged, EM.canonicalURI, emp_node_merged))
     b_alturi = BNode()
-    emplaces_rdf.add((emp_node,  EM.alternateURI,  b_alturi         ))
-    emplaces_rdf.add((b_alturi,  RDFS.label,       lit_geonames_uri ))
-    emplaces_rdf.add((b_alturi,  EM.link,          geonames_node    ))
+    emplaces_rdf.add((emp_node_merged,  EM.alternateURI,  b_alturi))
+    emplaces_rdf.add((b_alturi,  RDFS.label, lit_geonames_uri ))
+    emplaces_rdf.add((b_alturi,  EM.link,    geonames_node    ))
+    emplaces_rdf.add((emp_node_merged, EM.place_data, emp_node_geonames))
 
-    emplaces_rdf.add((emp_node,  EM.placeCategory, place_category   ))
-    emplaces_rdf.add((emp_node,  EM.corePlaceType, place_type       ))
-    emplaces_rdf.add((emp_node,  EM.preferredName, place_name       ))
+    # Add description of GeoNames source
+    emplaces_rdf.add((ems_node_geonames_source, RDF.type,       EM.Authority       ))
+    emplaces_rdf.add((ems_node_geonames_source, RDFS.label,     lit_geonames_data  ))
+    emplaces_rdf.add((ems_node_geonames_source, EM.short_label, Literal("GeoNames")))
+    emplaces_rdf.add((ems_node_geonames_source, EM.link,        place_def_by       ))
+
+    # Add em:Place_sourced description for GeoNames
+    emplaces_rdf.add((emp_node_geonames,  RDF.type,         EM.Place                ))
+    emplaces_rdf.add((emp_node_geonames,  RDFS.label,       display_label           ))
+    emplaces_rdf.add((emp_node_geonames,  RDFS.isDefinedBy, place_def_by            ))
+    emplaces_rdf.add((emp_node_geonames,  EM.source,        ems_node_geonames_source))
+    emplaces_rdf.add((emp_node_geonames,  EM.placeCategory, place_category          ))
+    emplaces_rdf.add((emp_node_geonames,  EM.placeType,     place_type              ))
+    emplaces_rdf.add((emp_node_geonames,  EM.preferredName, place_name              ))
     for an in place_altnames:
-        emplaces_rdf.add((emp_node, EM.alternateName, an))
+        emplaces_rdf.add((emp_node_geonames, EM.alternateName, an))
     for dn in display_names:
-        emplaces_rdf.add((emp_node, EM.displayName, dn))
+        emplaces_rdf.add((emp_node_geonames, EM.displayName, dn))
     for sa in place_seeAlso:
-        emplaces_rdf.add((emp_node, RDFS.seeAlso, sa))
+        emplaces_rdf.add((emp_node_geonames, RDFS.seeAlso, sa))
 
     # Define setting for current location
     b_location = add_place_location(emplaces_rdf, place_lat, place_long)
-    b_source   = add_source(emplaces_rdf, lit_geonames_data, place_def_by)
-    b_setting  = add_place_setting(emplaces_rdf, b_location, EMT.Current, b_source)
-    emplaces_rdf.add((emp_node, EM.where, b_setting))
+    b_setting  = add_place_setting(emplaces_rdf, 
+        b_location, 
+        EMT.Current, 
+        ems_node_geonames_source
+        )
+    emplaces_rdf.add((emp_node_geonames, EM.where, b_setting))
 
     # Define relation for current admin hierarchy (1 level up only)
-    parent_geonames_id  = get_geonames_id(str(place_parent))
-    parent_id, parent_uri, parent_node = (
-        get_emlaces_id_uri_node(parent_geonames_id)
+    parent_geonames_id = get_geonames_id(str(place_parent))
+    parent_gn_node, parent_gn_rdf = get_geonames_place_rdf(parent_geonames_id)
+    parent_name        = parent_gn_rdf[parent_gn_node:GN.name:].next()
+    parent_type        = parent_gn_rdf[parent_gn_node:GN.featureCode:].next()
+    parent_id, parent_uri, parent_node = get_emplaces_id_uri_node(
+        parent_name, parent_type, parent_geonames_id, suffix="_geonames"
         )
-    b_source   = add_source(emplaces_rdf, lit_geonames_data, place_def_by)
     b_relation = add_place_relation(emplaces_rdf, 
         EM.P_PART_OF_A, parent_node,
         EMT.Current, 
         EM.DEFINITIVE,
-        b_source
+        ems_node_geonames_source
         )
-    emplaces_rdf.add((emp_node, EM.hasRelation, b_relation))
+    emplaces_rdf.add((emp_node_geonames, EM.hasRelation, b_relation))
 
     # Define map resource for current
     b_body = add_resource_attributes(emplaces_rdf, 
         { RDFS.label:       Literal("Current map for %s"%(place_name,))
         , EM.link:          place_map
         })
-    b_source = add_source(emplaces_rdf, lit_geonames_data, place_def_by)
     b_annotation = add_resource_attributes(emplaces_rdf, 
         { RDF.type:         OA.Annotation
         , OA.motivatedBy:   EM.MAP_RESOURCE
-        , OA.hasTarget:     emp_node
+        , OA.hasTarget:     emp_node_geonames
         , OA.hasBody:       b_body
         , EM.when:          EMT.Current
-        , EM.source:        b_source
+        , EM.source:        ems_node_geonames_source
         })
-    emplaces_rdf.add((emp_node, EM.hasAnnotation, b_annotation))
-    return (emp_id, emp_uri, emplaces_rdf)
+    emplaces_rdf.add((emp_node_geonames, EM.hasAnnotation, b_annotation))
+    return (emp_id_merged, emp_uri_merged, emplaces_rdf)
 
 def get_geonames_id_data(gcdroot, geonames_id, emplaces_rdf=None):
     """

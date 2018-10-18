@@ -34,7 +34,7 @@
 # In principle, any URI prefix could be used for these.
 @prefix place:      <http://id.emplaces.info/place/> .      # Canonical place URIs
 @prefix agent:      <http://id.emplaces.info/agent/> .      # People and institutions
-@prefix reference:  <http://id.emplaces.info/reference/> .  # Bibliographic entries
+@prefix ref:        <http://id.emplaces.info/reference/> .  # Bibliographic entries
 
 # Notes:
 #
@@ -107,10 +107,7 @@ em:Place_merged
     rdfs:label "Place information merged from multiple sources" ;
     rdfs:comment
         """
-        A resource that provides information about a place that comes from a multiple source.  One or more em:place_data properties reference single-sourced information about the place.
-
-        @TODO: consider also adding something like foaf:primaryTopic to be clear about
-        description / described entity issues.
+        A resource that provides information about a place that comes from multiple sources.  One or more em:place_data properties reference single-sourced information about the place.
         """
     .
 
@@ -164,7 +161,9 @@ eml:la a em:Language_value ;
 # Source description(s)
 
 ems:EMPlaces a em:Source ;
-    # @@ Placeholder link...
+    # @@TODO
+    # Placeholder source for local data...
+    # These should be generated on-the-fly for each place.
     em:link <https://github.com/culturesofknowledge/emplaces> ;
     em:short_label "EMPlaces" ;
     rdfs:label "EMPlaces project activity" ;
@@ -326,6 +325,29 @@ em:APPROXIMATE a em:Competence_value ;
     rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges."
     .
 
+# Annotation motivations
+
+em:MAP_RESOURCE a oa:Motivation ;
+    rdfs:label "Map resource" ;
+    rdfs:comment "References a current or historical map resource associated with a place." ;
+    .
+em:NAME_ATTESTATION
+    rdfs:label "Name attestation" ;
+    rdfs:comment "References a historical name attestation for a place, with source and compenence information." ;
+    .
+em:CALENDAR_IN_USE
+    rdfs:label "Calendar in use" ;
+    rdfs:comment "References a historical calendar used in a place, with source and compenence information." ;
+    .
+em:DEDICATED_TO a oa:Motivation ;
+    rdfs:label "Dedicated to" ;
+    rdfs:comment "Generally used with a related place that is a church or a place or worship, to indicate a person or historical figure to whom the place has been dedicated.  The annotation body directly references a resource for the dedicatee, which is assumed to have an rdfs:label value that can be used for display purposes." ;
+    .
+em:USED_FOR a oa:Motivation ;
+    rdfs:label "Used for" ;
+    rdfs:comment "Generally used with a related place that is a building or site for some activity, to indicate a purpose for which the place was used.  The annotation body directly references a resource describing the purpose, which is assumed to have an rdfs:label value that can be used for display purposes.  The annotation itself may carry a temporal constraint (`em:where`) that gives some indication of when the place was used for that purpose." ;
+    .
+
 
 #   ==========================================================================
 #   ==========================================================================
@@ -475,7 +497,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
 
     # Reference bibliography
 
-    em:reference reference:Opole_Emmerling_Zajaczkowska ;
+    em:reference refe:Opole_Emmerling_Zajaczkowska ;
 
     # Related resources
 
@@ -1004,7 +1026,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
 # This sample has been assembled by adapting examples found on the web; 
 # it should be checked against the Bibo spec.
 
-reference:Opole_Emmerling_Zajaczkowska a em:Bib_entry, bibo:Book ;
+ref:Opole_Emmerling_Zajaczkowska a em:Bib_entry, bibo:Book ;
     # Emmerling, Ryszard; Zajączkowska, Urszula 2003: Oppeln/Opole.
     # Die Hauptstadt der Wojewodschaft Oppeln, Opole.
     dcterms:title "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" ;
