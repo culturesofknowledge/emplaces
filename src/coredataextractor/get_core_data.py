@@ -361,7 +361,7 @@ COMMON_LANGUAGE_DEFS = (
         # em:tag "de" ; 
         em:tag_639_1 "de" ;
         em:tag_639_2 "deu" ;
-        rdfs:label   "German"
+        rdfs:label   "German" ;
         rdfs:comment "# German" ;
         .
         
@@ -369,16 +369,15 @@ COMMON_LANGUAGE_DEFS = (
         # em:tag "pl" ; 
         em:tag_639_1 "pl" ;
         em:tag_639_2 "pol" ;
-        rdfs:label   "Polish"
+        rdfs:label   "Polish" ;
         rdfs:comment "# Polish" ;
         .
 
     eml:la a em:Language_value ;
         # em:tag "la" ; 
-        rdfs:label "Latin"
         em:tag_639_1 "la" ;
         em:tag_639_2 "lat" ;
-        rdfs:label   "Latin"
+        rdfs:label   "Latin" ;
         rdfs:comment "# Latin" ;
         .
     """)
@@ -689,7 +688,9 @@ def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     returns a place Id, URI and Node for 
     """
     type_id       = get_geonames_place_type_id(place_type)
-    emplaces_id   = "%s_%s_%s%s"%(place_name, type_id, unique_id, suffix)
+    name_slug     = place_name.replace(" ", "_")
+    name_slug     = name_slug[:40]
+    emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
     emplaces_uri  = EMP[emplaces_id]
     emplaces_node = URIRef(emplaces_uri)
     # emplaces_id   = "g_%s"%(geonames_id)
@@ -767,7 +768,6 @@ def get_geonames_place_type_id(place_type):
     #     })
     # if place_type in place_type_ids:
     #     type_id = place_type_ids[place_type]
-    # else:
     tokens  = [t for t in re.split(r'\W', place_type) if t]
     type_id = tokens[-1]
     return type_id
