@@ -10,8 +10,8 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 
 # TODO
 
-- [ ] Finalize some URIs to be used
-- [ ] Finalize prefixes
+- [x] Finalize some URIs to be used
+- [x] Finalize prefixes
 - [ ] Finish assembling example data for Opole
     - [x] Fix structure and vocabulary for bibliography (using BIBO)
     - [x] Historical hierarchies
@@ -20,16 +20,18 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [x] Related resource, include optional license (see LPiF proposal)
         - also, type of resource?
     - [ ] Record metadata (maybe later when we see what Timbuctoo provides)
-- [ ] Pin down location/timespan vocabularies (the structure here follows ideas from Topotime/GeoJSON-LDT (also a work-in-progress?) but the vocabularies haven't yet been checked.)
-- [ ] Review format for timespan data; align with emerging LPiF activity
+- [x] Pin down location/timespan vocabularies (the structure here follows ideas from Topotime/GeoJSON-LDT (also a work-in-progress?) but the vocabularies haven't yet been checked.)
+- [x] Review format for timespan data; align with emerging LPiF activity (loosely aliogned, but not same vocabulary for now)
 - [x] Update [Data model notes](./20180405-EMPlaces-data-model-notes.md); resolve remaining TODOs there, as far as possible.
 - [ ] Generate data from EMLO data
+    - first 25 done; awaiting feedback
 
 - [x] note 2 kinds of Julian calendars
     - currently using "Old style" and "New style", but this is probably not enough.
     - suggestion that we might add start-of-year date to calendar details, but even that isn't always enough: in some cases 25 Dec start of year occurs in the year BEFORE that indicated?
     - currently handled in Annalist definitions.  Can revisit later if needed.
 - [ ] Review handling of date uncertainty/aprroximation, and how it relates to PGiF proposal to use ISO 8601-2 (https://github.com/LinkedPasts/lpif)
+    - currently using LPiF-related structures, rather than ISO date formats
 - [ ] Type URIs for places that don't have same kind of info (cf. "related places", 20180726-St-Adalbert-example.ttl)
 - [ ] Record metadata design (creator, contributor, license, etc. - waiting to see what Timbuctoo provides)
 - [ ] Record time periods as identified resources (rather than inline blank nodes)
@@ -58,13 +60,12 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - Handled by em:competence
     - general issue here about materialization of inferred/implied/deduced information.
     - note that name attestations are *additions* to the primary info; no such for calendars.
-- [x] Review way that core data is represented
+- [x] Review the way that core data is represented
 
 
 # Notes (questions and ideas)
 
 @@TODO: allocate URIs for attestations (where for our purposes, the oa:Annotation denotes the attestation)?
-@@TODO: revisit "Setting" terminology - see what the latest usage is in Topotime related designs
 
 # Priorities (2018-08-01, 2018-08-14)
 
@@ -73,10 +74,10 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [x] update sample data
 2. Need to start getting data into RDF and/or Timbuctoo
     - e.g. 4 more towns like Opole to comparable detail
-    - [ ] Create Annalist definitions for data entry
+    - [x] Create Annalist definitions for data entry
 3. Bulk data into RDF/Timbuctoo
     - e.g. 2000 places core data from GeoNames
-    - [ ] update core data extractor to generate multi-source structure
+    - [x] update core data extractor to generate multi-source structure
 4. Loose ends
     - [x] Modelling and Opole data
     - [x] Related places
