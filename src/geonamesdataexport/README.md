@@ -1,6 +1,6 @@
 # Core data extractor
 
-This directory contains code for a command line tool to extract EMPlaces core data, and other useful values, given a GeoNames ID.
+This directory contains code for a command line tool to extract EMPlaces data from GeoNamnes, and some related values, given a GeoNames ID.
 
 
 ## Installation (under Linux/Unix/MacOS)
@@ -24,7 +24,7 @@ Recommended to create and activate a new Python "virtualenv", thus:
 
 Install `rdflib` dependency
 
-    cd src/coredataextractor
+    cd src/geonamesdataexport
     pip install rdflib==4.2.2
 
 
