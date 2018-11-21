@@ -1055,27 +1055,30 @@ def get_common_defs(options, emplaces_rdf):
     return emplaces_rdf
 
 def do_get_source_place_data(gadroot, options):
-    geonames_id  = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
-    emplaces_rdf = get_geonames_id_data(gadroot, geonames_id)
+    """
+    Get single-source place data from a given place reference
+    """
+    annalist_ref  = getargvalue(getarg(options.args, 0), "Annalist ref: ")
+    emplaces_rdf = get_annalist_ref_data(gadroot, annalist_ref)
     get_common_defs(options, emplaces_rdf)
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GAD_SUCCESS
 
-def do_get_many_geonames_place_data(gadroot, options):
-    """
-    Read multiple place Ids from standard input, and return a graph of
-    EMPlaces data for all of the identified places.
-    """
-    emplaces_rdf = None     # Graph created on first loop below
-    geonames_ids = get_many_place_ids()
-    if not geonames_ids:
-        return GAD_NO_PLACE_REFS
-    for geonames_id in geonames_ids:
-        #@@TODO: catch exception and return failure
-        emplaces_rdf = get_geonames_id_data(gadroot, geonames_id, emplaces_rdf=emplaces_rdf)
-    get_common_defs(options, emplaces_rdf)
-    print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
-    return GAD_SUCCESS
+# def do_get_many_geonames_place_data(gadroot, options):
+#     """
+#     Read multiple place Ids from standard input, and return a graph of
+#     EMPlaces data for all of the identified places.
+#     """
+#     emplaces_rdf = None     # Graph created on first loop below
+#     annalist_refs = get_many_place_ids()
+#     if not annalist_refs:
+#         return GAD_NO_PLACE_REFS
+#     for annalist_ref in annalist_refs:
+#         #@@TODO: catch exception and return failure
+#         emplaces_rdf = get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=emplaces_rdf)
+#     get_common_defs(options, emplaces_rdf)
+#     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+#     return GAD_SUCCESS
 
 # def get_geonames_place_parent(place_id):
 #     log.debug("get_geonames_place_parent(%s)"%(place_id))
@@ -1086,79 +1089,79 @@ def do_get_many_geonames_place_data(gadroot, options):
 #         if place_type == GN["A.PCLI"]:
 #             return None
 #     for place_parent in place_rdf[place_node:GN.parentFeature:]:
-#         parent_id    = get_geonames_id(str(place_parent))
+#         parent_id    = get_annalist_ref(str(place_parent))
 #         return parent_id
 #     return None     # No parent place here
 
-def get_geonames_place_rdf(place_id):
-    log.debug("get_geonames_place_rdf(%s)"%(place_id))
-    place_uri, place_url = get_geonames_uri(place_id)
-    place_node   = URIRef(place_uri)
-    place_rdf    = get_geonames_place_data(place_url)
-    return (place_node, place_rdf)
+# def get_geonames_place_rdf(place_id):
+#     log.debug("get_geonames_place_rdf(%s)"%(place_id))
+#     place_uri, place_url = get_geonames_uri(place_id)
+#     place_node   = URIRef(place_uri)
+#     place_rdf    = get_geonames_place_data(place_url)
+#     return (place_node, place_rdf)
 
-def get_geonames_place_name_type_parent(place_node, place_rdf):
-    place_name = None
-    place_type = None
-    parent_id  = None
-    for place_type in place_rdf[place_node:GN.featureCode:]:
-        break
-    for place_name in place_rdf[place_node:GN.name:]:
-        break
-    for parent_node in place_rdf[place_node:GN.parentFeature:]:
-        parent_id = get_geonames_id(str(parent_node))
-        break
-    if place_type == GN["A.PCLI"]:
-        parent_id = None     # No parent place for country
-    return (place_name, place_type, parent_id)
+# def get_geonames_place_name_type_parent(place_node, place_rdf):
+#     place_name = None
+#     place_type = None
+#     parent_id  = None
+#     for place_type in place_rdf[place_node:GN.featureCode:]:
+#         break
+#     for place_name in place_rdf[place_node:GN.name:]:
+#         break
+#     for parent_node in place_rdf[place_node:GN.parentFeature:]:
+#         parent_id = get_annalist_ref(str(parent_node))
+#         break
+#     if place_type == GN["A.PCLI"]:
+#         parent_id = None     # No parent place for country
+#     return (place_name, place_type, parent_id)
 
-def get_place_admin_hierarchy(place_ids, hier_ids):
-    """
-    Reads admin hierarchy places directly out of a place record
+# def get_place_admin_hierarchy(place_ids, hier_ids):
+#     """
+#     Reads admin hierarchy places directly out of a place record
 
-    This is an alternative to `get_places_hierarchy` which walks the parent featiure
-    links up the tree.  We have found the parent links are not always consistent.
-    """
-    log.debug("get_places_hierarchy(%s, %s)"%(place_ids, hier_ids))
-    admin_parent_properties = (
-        [ GN.parentADM5
-        , GN.parentADM4
-        , GN.parentADM3
-        , GN.parentADM2
-        , GN.parentADM1
-        , GN.parentCountry
-        ])
-    for place_id in place_ids:
-        if place_id not in hier_ids:
-            place_node, place_rdf = get_geonames_place_rdf(place_id)
-            place_name, place_type, parent_id = (
-                get_geonames_place_name_type_parent(place_node, place_rdf)
-                )
-            hier_ids[place_id] = (place_id, place_name, place_type)
-            for prop in admin_parent_properties:
-                for parent_obj in place_rdf[place_node:prop:]:
-                    parent_id = get_geonames_id(parent_obj)
-                    if parent_id not in hier_ids:
-                        log.debug("get_places_hierarchy: parent_id %s"%(parent_id,))
-                        parent_node, parent_rdf = get_geonames_place_rdf(parent_id)
-                        parent_name, parent_type, grandparent_id = (
-                            get_geonames_place_name_type_parent(parent_node, parent_rdf)
-                            )
-                        hier_ids[parent_id] = (parent_id, parent_name, parent_type)
-    return hier_ids
+#     This is an alternative to `get_places_hierarchy` which walks the parent featiure
+#     links up the tree.  We have found the parent links are not always consistent.
+#     """
+#     log.debug("get_places_hierarchy(%s, %s)"%(place_ids, hier_ids))
+#     admin_parent_properties = (
+#         [ GN.parentADM5
+#         , GN.parentADM4
+#         , GN.parentADM3
+#         , GN.parentADM2
+#         , GN.parentADM1
+#         , GN.parentCountry
+#         ])
+#     for place_id in place_ids:
+#         if place_id not in hier_ids:
+#             place_node, place_rdf = get_geonames_place_rdf(place_id)
+#             place_name, place_type, parent_id = (
+#                 get_geonames_place_name_type_parent(place_node, place_rdf)
+#                 )
+#             hier_ids[place_id] = (place_id, place_name, place_type)
+#             for prop in admin_parent_properties:
+#                 for parent_obj in place_rdf[place_node:prop:]:
+#                     parent_id = get_annalist_ref(parent_obj)
+#                     if parent_id not in hier_ids:
+#                         log.debug("get_places_hierarchy: parent_id %s"%(parent_id,))
+#                         parent_node, parent_rdf = get_geonames_place_rdf(parent_id)
+#                         parent_name, parent_type, grandparent_id = (
+#                             get_geonames_place_name_type_parent(parent_node, parent_rdf)
+#                             )
+#                         hier_ids[parent_id] = (parent_id, parent_name, parent_type)
+#     return hier_ids
 
-def get_places_hierarchy(place_ids, hier_ids):
-    log.debug("get_places_hierarchy(%s, %s)"%(place_ids, hier_ids))
-    for place_id in place_ids:
-        if place_id not in hier_ids:
-            place_node, place_rdf = get_geonames_place_rdf(place_id)
-            place_name, place_type, parent_id = (
-                get_geonames_place_name_type_parent(place_node, place_rdf)
-                )
-            hier_ids[place_id] = (place_id, place_name, place_type)
-            if parent_id:
-                hier_ids   = get_places_hierarchy([parent_id], hier_ids)
-    return hier_ids
+# def get_places_hierarchy(place_ids, hier_ids):
+#     log.debug("get_places_hierarchy(%s, %s)"%(place_ids, hier_ids))
+#     for place_id in place_ids:
+#         if place_id not in hier_ids:
+#             place_node, place_rdf = get_geonames_place_rdf(place_id)
+#             place_name, place_type, parent_id = (
+#                 get_geonames_place_name_type_parent(place_node, place_rdf)
+#                 )
+#             hier_ids[place_id] = (place_id, place_name, place_type)
+#             if parent_id:
+#                 hier_ids   = get_places_hierarchy([parent_id], hier_ids)
+#     return hier_ids
 
 def format_id_name(pid, pname, ptype, geo_ont_rdf):
     log.debug("format_id_name: (%r, %r, %r)"%(pid, pname, ptype))
@@ -1174,100 +1177,100 @@ def format_id_text(pid, ptext):
         unicode(pid).ljust(8) + "  # " + unicode(ptext)
         ).encode('utf8')
 
-def do_get_place_hierarchy(gadroot, options):
-    geo_ont_rdf = get_geonames_ontology()
-    geonames_id = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
-    #@@ follow parentFeature links: results are inconsistent.
-    # hier_id_name_types = get_places_hierarchy([geonames_id], {})
-    #@@
-    hier_id_name_types = get_place_admin_hierarchy([geonames_id], {})
-    for p, n, t in hier_id_name_types.values():
-        print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
-    return GAD_SUCCESS
+# def do_get_place_hierarchy(gadroot, options):
+#     geo_ont_rdf = get_geonames_ontology()
+#     annalist_ref = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
+#     #@@ follow parentFeature links: results are inconsistent.
+#     # hier_id_name_types = get_places_hierarchy([annalist_ref], {})
+#     #@@
+#     hier_id_name_types = get_place_admin_hierarchy([annalist_ref], {})
+#     for p, n, t in hier_id_name_types.values():
+#         print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
+#     return GAD_SUCCESS
 
-def do_get_many_place_hierarchy(gadroot, options):
-    geo_ont_rdf = get_geonames_ontology()
-    place_ids   = get_many_place_ids()
-    if not place_ids:
-        return GAD_NO_PLACE_REFS
-    #@@ follow parentFeature links: results are inconsistent.
-    # hier_id_name_types = get_places_hierarchy(place_ids, {})
-    #@@
-    hier_id_name_types = get_place_admin_hierarchy(place_ids, {})
-    for p, n, t in hier_id_name_types.values():
-        print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
-    return GAD_SUCCESS
+# def do_get_many_place_hierarchy(gadroot, options):
+#     geo_ont_rdf = get_geonames_ontology()
+#     place_ids   = get_many_place_ids()
+#     if not place_ids:
+#         return GAD_NO_PLACE_REFS
+#     #@@ follow parentFeature links: results are inconsistent.
+#     # hier_id_name_types = get_places_hierarchy(place_ids, {})
+#     #@@
+#     hier_id_name_types = get_place_admin_hierarchy(place_ids, {})
+#     for p, n, t in hier_id_name_types.values():
+#         print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
+#     return GAD_SUCCESS
 
-def extract_geonames_id(url, rex):
-    """
-    Extract GeoNames Id from URL or string using suplied Regexp,
-    if range of built-in defails regexps.
-    Returns extracted Id or None.
-    """
-    default_rex = (
-        [ r"https?://www\.geonames\.org/([0-9]+)/.+$"
-        , r"https?://sws\.geonames\.org/([0-9]+)/about\.rdf$"
-        ])
+# def extract_annalist_ref(url, rex):
+#     """
+#     Extract GeoNames Id from URL or string using suplied Regexp,
+#     if range of built-in defails regexps.
+#     Returns extracted Id or None.
+#     """
+#     default_rex = (
+#         [ r"https?://www\.geonames\.org/([0-9]+)/.+$"
+#         , r"https?://sws\.geonames\.org/([0-9]+)/about\.rdf$"
+#         ])
 
-    def match_geonames_id(url, rex):
-        """
-        Local helper to match and process a specified regexp.
-        Returns extracted Id or None.
-        """
-        log.debug("match_geonames_id: url %s, regexp /%s/"%(url, rex))
-        geo_id = None
-        try:
-            matchobject = re.match(rex, url)
-            if matchobject:
-                geo_id = matchobject.group(1)
-        except IndexError:
-            geo_id = None
-        except re.error as e:
-            print("Invalid regular expression '%s' (%s)"%(rex, e), file=sys.stderr)
-            raise
-        return geo_id
+#     def match_annalist_ref(url, rex):
+#         """
+#         Local helper to match and process a specified regexp.
+#         Returns extracted Id or None.
+#         """
+#         log.debug("match_annalist_ref: url %s, regexp /%s/"%(url, rex))
+#         geo_id = None
+#         try:
+#             matchobject = re.match(rex, url)
+#             if matchobject:
+#                 geo_id = matchobject.group(1)
+#         except IndexError:
+#             geo_id = None
+#         except re.error as e:
+#             print("Invalid regular expression '%s' (%s)"%(rex, e), file=sys.stderr)
+#             raise
+#         return geo_id
 
-    if rex:
-        geo_id = match_geonames_id(url, rex)
-    else:
-        for rex in default_rex:
-            geo_id = match_geonames_id(url, rex)
-            if geo_id:
-                break
-    return geo_id
+#     if rex:
+#         geo_id = match_annalist_ref(url, rex)
+#     else:
+#         for rex in default_rex:
+#             geo_id = match_annalist_ref(url, rex)
+#             if geo_id:
+#                 break
+#     return geo_id
 
-def do_extract_geonames_id(gadroot, options):
-    url    = getargvalue(getarg(options.args, 0), "GeoNames URL: ")
-    # rex = getargvalue(getarg(options.args, 1), "Regexp:       ")
-    rex    = getarg(options.args, 1) or ""
-    geo_id = extract_geonames_id(url, rex)
-    if not geo_id:
-        print("No match: %s"%(url,), file=sys.stderr)
-        return GAD_NO_ANNALIST_URL
-    print(format_id_text(geo_id, url), file=sys.stdout)
-    return GAD_SUCCESS
+# def do_extract_annalist_ref(gadroot, options):
+#     url    = getargvalue(getarg(options.args, 0), "GeoNames URL: ")
+#     # rex = getargvalue(getarg(options.args, 1), "Regexp:       ")
+#     rex    = getarg(options.args, 1) or ""
+#     geo_id = extract_annalist_ref(url, rex)
+#     if not geo_id:
+#         print("No match: %s"%(url,), file=sys.stderr)
+#         return GAD_NO_ANNALIST_URL
+#     print(format_id_text(geo_id, url), file=sys.stdout)
+#     return GAD_SUCCESS
 
-def do_extract_many_geonames_ids(gadroot, options):
-    # No prompt fpr mamy-value input
-    rex    = getarg(options.args, 0) or ""
-    urls   = get_many_geonames_urls()
-    status = GAD_NO_ANNALIST_URL
-    match_seen = False
-    fail_seen  = False
-    for url in urls:
-        geo_id = extract_geonames_id(url, rex)
-        if geo_id:
-            print(format_id_text(geo_id, url), file=sys.stdout)
-            match_seen = True
-        else:
-            print("No match: %s"%(url,), file=sys.stderr)
-            fail_seen = True
-    if match_seen:
-        if fail_seen:
-            status = GAD_SOME_ANNALIST_URLS
-        else:
-            status = GAD_SUCCESS
-    return status
+# def do_extract_many_annalist_refs(gadroot, options):
+#     # No prompt fpr mamy-value input
+#     rex    = getarg(options.args, 0) or ""
+#     urls   = get_many_geonames_urls()
+#     status = GAD_NO_ANNALIST_URL
+#     match_seen = False
+#     fail_seen  = False
+#     for url in urls:
+#         geo_id = extract_annalist_ref(url, rex)
+#         if geo_id:
+#             print(format_id_text(geo_id, url), file=sys.stdout)
+#             match_seen = True
+#         else:
+#             print("No match: %s"%(url,), file=sys.stderr)
+#             fail_seen = True
+#     if match_seen:
+#         if fail_seen:
+#             status = GAD_SOME_ANNALIST_URLS
+#         else:
+#             status = GAD_SUCCESS
+#     return status
 
 #   ===================================================================
 
@@ -1292,9 +1295,9 @@ def run(userhome, userconfig, options, progname):
     # if options.command.startswith("manyplaceh"):
     #     return do_get_many_place_hierarchy(gadroot, options)
     # if options.command.startswith("geo"):
-    #     return do_extract_geonames_id(gadroot, options)
+    #     return do_extract_annalist_ref(gadroot, options)
     # if options.command.startswith("manygeo"):
-    #     return do_extract_many_geonames_ids(gadroot, options)
+    #     return do_extract_many_annalist_refs(gadroot, options)
     if options.command.startswith("ver"):
         return show_version(gadroot, userhome, options)
     if options.command.startswith("help"):
