@@ -1,6 +1,6 @@
 # !/usr/bin/env python
 #
-# get_geonames_data.py - command line tool to create EMPlaces core from GeoNames data
+# get_annalist_data.py - command line tool to create EMPlaces core from Annalist data
 #
 
 from __future__ import print_function
@@ -26,8 +26,8 @@ from getargvalue    import getargvalue, getarg
 log = logging.getLogger(__name__)
 
 dirhere = os.path.dirname(os.path.realpath(__file__))
-gcdroot = os.path.dirname(os.path.join(dirhere))
-sys.path.insert(0, gcdroot)
+gadroot = os.path.dirname(os.path.join(dirhere))
+sys.path.insert(0, gadroot)
 
 #   ===================================================================
 #
@@ -37,18 +37,18 @@ sys.path.insert(0, gcdroot)
 
 #   Software version
 
-GCD_VERSION = "0.1"
+GAD_VERSION = "0.1"
 
 #   Status return codes
 
-GCD_SUCCESS             = 0         # Success
-GCD_BADCMD              = 2         # Command error
-GCD_UNKNOWNCMD          = 3         # Unknown command
-GCD_UNIMPLEMENTED       = 4         # Unimplemented command or feature
-GCD_UNEXPECTEDARGS      = 5         # Unexpected arguments supplied
-GCD_NO_PLACE_IDS        = 6         # No place ids given
-GCD_NO_GEONAMES_URL     = 7         # No GeoNames URL
-GCD_SOME_GEONAMES_URLS  = 8         # Some but not all all URLs matched GeoNames IDs
+GAD_SUCCESS             = 0         # Success
+GAD_BADCMD              = 2         # Command error
+GAD_UNKNOWNCMD          = 3         # Unknown command
+GAD_UNIMPLEMENTED       = 4         # Unimplemented command or feature
+GAD_UNEXPECTEDARGS      = 5         # Unexpected arguments supplied
+GAD_NO_PLACE_REFS        = 6         # No place ids given
+GAD_NO_ANNALIST_URL     = 7         # No Annalist URL
+GAD_SOME_ANNALIST_URLS  = 8         # Some but not all all URLs matched GeoNames IDs
 
 #   Namespaces
 
@@ -78,9 +78,11 @@ REF       = Namespace("http://id.emplaces.info/reference/")
 
 #   ===================================================================
 #
-#   Common definitions for EMPlaces / GeoNames data
+#   Common definitions for EMPlaces data
 #
 #   ===================================================================
+
+# @@TODO: refactor
 
 COMMON_PREFIX_DEFS = (
     """
@@ -393,23 +395,23 @@ command_summary_help = ("\n"+
     "Commands:\n"+
     "\n"+
     "  %(prog)s help [command]\n"+
-    "  %(prog)s get GEONAMESID\n"+
-    "  %(prog)s manyget\n"+
-    "  %(prog)s placehierarchy GEONAMESID\n"+
-    "  %(prog)s manyplacehierarchy\n"+
-    "  %(prog)s geonamesid URL [REGEXP]\n"
-    "  %(prog)s manygeonamesids [REGEXP]\n"
+    "  %(prog)s get ANNALISTREF\n"+
+    # "  %(prog)s manyget\n"+
+    # "  %(prog)s placehierarchy ANNALISTREF\n"+
+    # "  %(prog)s manyplacehierarchy\n"+
+    # "  %(prog)s geonamesid URL [REGEXP]\n"
+    # "  %(prog)s manygeonamesids [REGEXP]\n"
     "  %(prog)s version\n"+
     "")
 
 def progname(args):
     return os.path.basename(args[0])
 
-def gcd_version(gcdroot, userhome, options):
+def gad_version(gadroot, userhome, options):
     """
     Print software version string to standard output.
 
-    gcdroot     is the root directory for the Annalist software installation.
+    gadroot     is the root directory for the Annalist software installation.
     userhome    is the home directory for the host system user issuing the command.
     options     contains options parsed from the command line.
 
@@ -417,8 +419,8 @@ def gcd_version(gcdroot, userhome, options):
                 This value is intended to be used as an exit status code
                 for the calling program.
     """
-    status = GCD_SUCCESS
-    print(sitesettings.GCD_VERSION)
+    status = GAD_SUCCESS
+    print(sitesettings.GAD_VERSION)
     return status
 
 def parseCommandArgs(argv):
@@ -432,17 +434,17 @@ def parseCommandArgs(argv):
     """
     # create a parser for the command line options
     parser = argparse.ArgumentParser(
-                description="EMPlaces GeoNames data extporter",
+                description="EMPlaces Annalist data exporter",
                 formatter_class=argparse.RawDescriptionHelpFormatter,
                 epilog=command_summary_help
                 )
-    parser.add_argument('--version', action='version', version='%(prog)s '+GCD_VERSION)
+    parser.add_argument('--version', action='version', version='%(prog)s '+GAD_VERSION)
     parser.add_argument("--debug",
                         action="store_true", 
                         dest="debug", 
                         default=False,
                         help="Run with full debug output enabled.  "+
-                             "Also creates log file 'get-geonames-data.log' in the working directory"
+                             "Also creates log file 'get-annalist-data.log' in the working directory"
                         )
     parser.add_argument("-e", "--include-emplaces-defs",
                         action="store_true", 
@@ -508,8 +510,8 @@ def show_help(options, progname):
     """
     if len(options.args) > 1:
         print("Unexpected arguments for %s: (%s)"%(options.command, " ".join(options.args)), file=sys.stderr)
-        return GCD_UNEXPECTEDARGS
-    status = GCD_SUCCESS
+        return GAD_UNEXPECTEDARGS
+    status = GAD_SUCCESS
     if len(options.args) == 0:
         help_text = (
             command_summary_help+
@@ -518,23 +520,23 @@ def show_help(options, progname):
             "\n"+
             "  %(prog)s --help\n"+
             "")
-    elif options.args[0].startswith("manyget"):
-        help_text = ("\n"+
-            "  %(prog)s manyget\n"+
-            "\n"+
-            "\n"+
-            "Reads GeoNames place Ids from stdin, one per line, retrieves data\n"+
-            "for these from GeoNames, and sends corresponding EMPlaces data in\n"+
-            "Turtle format to standard output.\n"+
-            "\n"+
-            "To include some common non-place-specific supporting definitions, see options\n"+
-            "'--include-common-defs', '--include-emplaces-defs', '--include-geonames-defs', \n"+
-            "and '--include-language-defs'.\n"+
-            "\n"+
-            "")
+    # elif options.args[0].startswith("manyget"):
+    #     help_text = ("\n"+
+    #         "  %(prog)s manyget\n"+
+    #         "\n"+
+    #         "\n"+
+    #         "Reads GeoNames place Ids from stdin, one per line, retrieves data\n"+
+    #         "for these from GeoNames, and sends corresponding EMPlaces data in\n"+
+    #         "Turtle format to standard output.\n"+
+    #         "\n"+
+    #         "To include some common non-place-specific supporting definitions, see options\n"+
+    #         "'--include-common-defs', '--include-emplaces-defs', '--include-geonames-defs', \n"+
+    #         "and '--include-language-defs'.\n"+
+    #         "\n"+
+    #         "")
     elif options.args[0].startswith("get"):
         help_text = ("\n"+
-            "  %(prog)s get GEONAMESID\n"+
+            "  %(prog)s get ANNALISTREF\n"+
             "\n"+
             "Gets data about a specified place from GeoNames, and sends corresponding\n"+
             "EMPlaces data in Turtle format to standard output.\n"+
@@ -544,73 +546,73 @@ def show_help(options, progname):
             "and '--include-language-defs'.\n"+
             "\n"+
             "")
-    elif options.args[0].startswith("placeh"):
-        help_text = ("\n"+
-            "  %(prog)s placehierarchy GEONAMESID\n"+
-            "\n"+
-            "Gets current administrative hierarchy about a place from GeoNames, \n"+
-            "and outputs a list of place Ids, one per line, to standard output.\n"+
-            "\n"+
-            "The output can be used as input to a `manyget` command.\n"+
-            "\n"+
-            "")
-    elif options.args[0].startswith("manyplaceh"):
-        help_text = ("\n"+
-            "  %(prog)s manyplacehierarchy\n"+
-            "\n"+
-            "Reads GeoNames place Ids from stdin, one per line, and for each retrieves\n"+
-            "place ids in the current administrative hierarch up as far as country\n"+
-            "level, and outputs the resuting list of place IDs (including the input IDs)\n"+
-            "to stdout, one per line.\n"+
-            "\n"+
-            "The output can be used as input to a `manyget` command.\n"+
-            "\n"+
-            "")
-    elif options.args[0].startswith("geo"):
-        help_text = ("\n"+
-            "  %(prog)s geonamesid URL [REGEXP]\n"+
-            "\n"+
-            "URL is presumed to be a GeoNames URL or other string containing a GeoNames Id.  \n"+
-            "Extracts the Geonames Id and writes it to stdout, or a diagnostic message is \n"+
-            "output to stderr along with an exit status of %d\n"%(GCD_NO_GEONAMES_URL)+
-            "\n"+
-            "If REGEXP is specified, this command uses it as a regular expression \n"+
-            "(per https://docs.python.org/2/library/re.html#regular-expression-syntax) \n"+
-            "which, if it matches the supplied URL, returns the substring matching the\n"+
-            "first parenthesized sub-expression as the GeoNames Id.  E.g., for a GeoNames\n"+
-            "URL of the form 'http://www.geonames.org/2638655/shropshire.html', use \n"+
-            "a REGEXP like 'http://www\.geonames\.org/([0-9]+)/.+$'.\n"+
-            "\n"+
-            "If REGEXP is not matched, a diagnostic message is output to stderr.\n"+
-            "\n"+
-            "If REGEXP is not supplied, a range of internal REGEXPs is used to try and\n"+
-            "extract the GeroNames id.\n"+
-            "\n"+
-            "The output can be used as input to a `manyget` or similar command.\n"+
-            "\n"+
-            "")
-    elif options.args[0].startswith("manygeo"):
-        help_text = ("\n"+
-            "  %(prog)s manygeonamesids [REGEXP]\n"+
-            "\n"+
-            "Reads a list of GeoNames URLs (or other strings that are presumed to \n"+
-            "contain a geoNames Id) one per line from stdin and, ignoring any that \n"+
-            "start with a '#', extracts the embedded GeoNames place ids, and \n"+
-            "outputs the resuting list of GeoNames IDs to stdout, one per line. \n"+
-            "\n"+
-            "Non-matching inputs are reported to stderr.\n"+
-            "\n"+
-            "REGEXP is an optional regular exression used for extracting the Ids.\n"+
-            "See 'geonamesid' command for more details.\n"+
-            "\n"+
-            "Returns exit status:\n"+
-            "  %d if all input strings are matched and processed,\n"%(GCD_SUCCESS)+
-            "  %d if no input strings could be matched and processed, or\n"%(GCD_NO_GEONAMES_URL)+
-            "  %d if some input strings could not be matched and processed.\n"%(GCD_SOME_GEONAMES_URLS)+
-            "\n"+
-            "The output can be used as input to a `manyget` or similar command.\n"+
-            "\n"+
-            "")
+    # elif options.args[0].startswith("placeh"):
+    #     help_text = ("\n"+
+    #         "  %(prog)s placehierarchy ANNALISTREF\n"+
+    #         "\n"+
+    #         "Gets current administrative hierarchy about a place from GeoNames, \n"+
+    #         "and outputs a list of place Ids, one per line, to standard output.\n"+
+    #         "\n"+
+    #         "The output can be used as input to a `manyget` command.\n"+
+    #         "\n"+
+    #         "")
+    # elif options.args[0].startswith("manyplaceh"):
+    #     help_text = ("\n"+
+    #         "  %(prog)s manyplacehierarchy\n"+
+    #         "\n"+
+    #         "Reads GeoNames place Ids from stdin, one per line, and for each retrieves\n"+
+    #         "place ids in the current administrative hierarch up as far as country\n"+
+    #         "level, and outputs the resuting list of place IDs (including the input IDs)\n"+
+    #         "to stdout, one per line.\n"+
+    #         "\n"+
+    #         "The output can be used as input to a `manyget` command.\n"+
+    #         "\n"+
+    #         "")
+    # elif options.args[0].startswith("geo"):
+    #     help_text = ("\n"+
+    #         "  %(prog)s geonamesid URL [REGEXP]\n"+
+    #         "\n"+
+    #         "URL is presumed to be a GeoNames URL or other string containing a GeoNames Id.  \n"+
+    #         "Extracts the Geonames Id and writes it to stdout, or a diagnostic message is \n"+
+    #         "output to stderr along with an exit status of %d\n"%(GAD_NO_ANNALIST_URL)+
+    #         "\n"+
+    #         "If REGEXP is specified, this command uses it as a regular expression \n"+
+    #         "(per https://docs.python.org/2/library/re.html#regular-expression-syntax) \n"+
+    #         "which, if it matches the supplied URL, returns the substring matching the\n"+
+    #         "first parenthesized sub-expression as the GeoNames Id.  E.g., for a GeoNames\n"+
+    #         "URL of the form 'http://www.geonames.org/2638655/shropshire.html', use \n"+
+    #         "a REGEXP like 'http://www\.geonames\.org/([0-9]+)/.+$'.\n"+
+    #         "\n"+
+    #         "If REGEXP is not matched, a diagnostic message is output to stderr.\n"+
+    #         "\n"+
+    #         "If REGEXP is not supplied, a range of internal REGEXPs is used to try and\n"+
+    #         "extract the GeroNames id.\n"+
+    #         "\n"+
+    #         "The output can be used as input to a `manyget` or similar command.\n"+
+    #         "\n"+
+    #         "")
+    # elif options.args[0].startswith("manygeo"):
+    #     help_text = ("\n"+
+    #         "  %(prog)s manygeonamesids [REGEXP]\n"+
+    #         "\n"+
+    #         "Reads a list of GeoNames URLs (or other strings that are presumed to \n"+
+    #         "contain a geoNames Id) one per line from stdin and, ignoring any that \n"+
+    #         "start with a '#', extracts the embedded GeoNames place ids, and \n"+
+    #         "outputs the resuting list of GeoNames IDs to stdout, one per line. \n"+
+    #         "\n"+
+    #         "Non-matching inputs are reported to stderr.\n"+
+    #         "\n"+
+    #         "REGEXP is an optional regular exression used for extracting the Ids.\n"+
+    #         "See 'geonamesid' command for more details.\n"+
+    #         "\n"+
+    #         "Returns exit status:\n"+
+    #         "  %d if all input strings are matched and processed,\n"%(GAD_SUCCESS)+
+    #         "  %d if no input strings could be matched and processed, or\n"%(GAD_NO_ANNALIST_URL)+
+    #         "  %d if some input strings could not be matched and processed.\n"%(GAD_SOME_ANNALIST_URLS)+
+    #         "\n"+
+    #         "The output can be used as input to a `manyget` or similar command.\n"+
+    #         "\n"+
+    #         "")
     elif options.args[0].startswith("ver"):
         help_text = ("\n"+
             "  %(prog)s version\n"+
@@ -627,15 +629,15 @@ def show_help(options, progname):
             "")
     else:
         help_text = "Unrecognized command for %s: (%s)"%(options.command, options.args[0])
-        status = GCD_UNKNOWNCMD
+        status = GAD_UNKNOWNCMD
     print(help_text%{'prog': progname}, file=sys.stderr)
     return status
 
-def show_version(gcdroot, userhome, options):
+def show_version(gadroot, userhome, options):
     """
     Print software version string to standard output.
 
-    gcdroot     is the root directory for the `geonamesdataexport` software installation.
+    gadroot     is the root directory for the `annalistdataexport` software installation.
     userhome    is the home directory for the host system user issuing the command.
     options     contains options parsed from the command line.
 
@@ -646,10 +648,10 @@ def show_version(gcdroot, userhome, options):
     if len(options.args) > 0:
         return show_error(
             "Unexpected arguments for %s: (%s)"%(options.command, " ".join(options.args)), 
-            GCD_UNEXPECTEDARGS
+            GAD_UNEXPECTEDARGS
             )
-    status = GCD_SUCCESS
-    print(GCD_VERSION)
+    status = GAD_SUCCESS
+    print(GAD_VERSION)
     # with open(logfilename, "r") as logfile:
     #     shutil.copyfileobj(logfile, sys.stdout)
     return status
@@ -664,23 +666,23 @@ def show_error(msg, status):
 #
 #   ===================================================================
 
-def get_geonames_uri(geonames_id):
-    """
-    Returns tuple of
-        0. GeoNames place URI
-        1. GeoNames place description URL
-    """
-    geonames_uri  = "http://sws.geonames.org/%s/"%(geonames_id,)
-    geonames_url  = "http://sws.geonames.org/%s/about.rdf"%(geonames_id,)
-    return (geonames_uri, geonames_url)
+# def get_geonames_uri(geonames_id):
+#     """
+#     Returns tuple of
+#         0. GeoNames place URI
+#         1. GeoNames place description URL
+#     """
+#     geonames_uri  = "http://sws.geonames.org/%s/"%(geonames_id,)
+#     geonames_url  = "http://sws.geonames.org/%s/about.rdf"%(geonames_id,)
+#     return (geonames_uri, geonames_url)
 
-def get_geonames_id(geonames_uri):
-    """
-    Given a GeoNames place URI, returns the GeoNames place Id
-    """
-    geonames_path = geonames_uri.replace("http://sws.geonames.org/", "").split("/")
-    geonames_id   = geonames_path[0]
-    return geonames_id
+# def get_geonames_id(geonames_uri):
+#     """
+#     Given a GeoNames place URI, returns the GeoNames place Id
+#     """
+#     geonames_path = geonames_uri.replace("http://sws.geonames.org/", "").split("/")
+#     geonames_id   = geonames_path[0]
+#     return geonames_id
 
 def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     """
@@ -707,17 +709,17 @@ def get_many_inputs():
             inputs.append(bare_input)
     return inputs    
 
-def get_many_place_ids():
-    geonames_ids = get_many_inputs()
-    if not geonames_ids:
-        print("No place Ids found", file=sys.stderr)
-    return geonames_ids    
+# def get_many_place_ids():
+#     geonames_ids = get_many_inputs()
+#     if not geonames_ids:
+#         print("No place Ids found", file=sys.stderr)
+#     return geonames_ids    
 
-def get_many_geonames_urls():
-    geonames_urls = get_many_inputs()
-    if not geonames_urls:
-        print("No GeoNames URLs found", file=sys.stderr)
-    return geonames_urls    
+# def get_many_geonames_urls():
+#     geonames_urls = get_many_inputs()
+#     if not geonames_urls:
+#         print("No GeoNames URLs found", file=sys.stderr)
+#     return geonames_urls    
 
 #   ===================================================================
 #
@@ -736,67 +738,67 @@ def get_rdf_graph(url, format="xml"):
     # result = g.parse(source=s, publicID=b, format="json-ld")
     return g
 
-def get_geonames_ontology():
-    """
-    Return Graph of GeoNames ontology data
-    """
-    geo_ont_url  = "http://www.geonames.org/ontology/ontology_v3.1.rdf"
-    geo_ont_rdf  = get_rdf_graph(geo_ont_url)
-    return geo_ont_rdf
+# def get_geonames_ontology():
+#     """
+#     Return Graph of GeoNames ontology data
+#     """
+#     geo_ont_url  = "http://www.geonames.org/ontology/ontology_v3.1.rdf"
+#     geo_ont_rdf  = get_rdf_graph(geo_ont_url)
+#     return geo_ont_rdf
 
-def get_geonames_place_data(geonames_url):
-    """
-    Returns graph of GeoNames place data
-    """
-    geonames_rdf = get_rdf_graph(geonames_url)
-    return geonames_rdf
+# def get_geonames_place_data(geonames_url):
+#     """
+#     Returns graph of GeoNames place data
+#     """
+#     geonames_rdf = get_rdf_graph(geonames_url)
+#     return geonames_rdf
 
-def get_geonames_place_type_id(place_type):
-    """
-    Returns id for supplied GeoNames place type
-    """
-    # place_type_ids = (
-    #     { GN["P.PPL"]:   "PPL"
-    #     , GN["P.PPLA"]:  "PPLA"
-    #     , GN["A.ADM5"]:  "ADM5"
-    #     , GN["A.ADM4"]:  "ADM4"
-    #     , GN["A.ADM3"]:  "ADM3"
-    #     , GN["A.ADM2"]:  "ADM2"
-    #     , GN["A.ADM1"]:  "ADM1"
-    #     , GN["A.PCLI"]:  "PCLI"
-    #     , GN["L.RGN"]:   "RGN"
-    #     })
-    # if place_type in place_type_ids:
-    #     type_id = place_type_ids[place_type]
-    tokens  = [t for t in re.split(r'\W', place_type) if t]
-    type_id = tokens[-1]
-    return type_id
+# def get_geonames_place_type_id(place_type):
+#     """
+#     Returns id for supplied GeoNames place type
+#     """
+#     # place_type_ids = (
+#     #     { GN["P.PPL"]:   "PPL"
+#     #     , GN["P.PPLA"]:  "PPLA"
+#     #     , GN["A.ADM5"]:  "ADM5"
+#     #     , GN["A.ADM4"]:  "ADM4"
+#     #     , GN["A.ADM3"]:  "ADM3"
+#     #     , GN["A.ADM2"]:  "ADM2"
+#     #     , GN["A.ADM1"]:  "ADM1"
+#     #     , GN["A.PCLI"]:  "PCLI"
+#     #     , GN["L.RGN"]:   "RGN"
+#     #     })
+#     # if place_type in place_type_ids:
+#     #     type_id = place_type_ids[place_type]
+#     tokens  = [t for t in re.split(r'\W', place_type) if t]
+#     type_id = tokens[-1]
+#     return type_id
 
-def get_geonames_place_type_label(place_type, geo_ont_rdf):
-    """
-    Returns label for supplied GeoNames place type
-    """
-    # Alternatives to ontology labels
-    place_type_labels = (
-        { GN["P.PPL"]:   "Populated place (P.PPL)"
-        , GN["P.PPLA"]:  "Populated place (P.PPLA)"
-        , GN["A.ADM5"]:  "City   (A.ADM5)"
-        , GN["A.ADM4"]:  "City   (A.ADM4)"
-        , GN["A.ADM3"]:  "City   (A.ADM3)"
-        , GN["A.ADM2"]:  "County (A.ADM2)"
-        , GN["A.ADM1"]:  "Region (A.ADM1)"
-        , GN["A.PCLI"]:  "Country"
-        , GN["L.RGN"]:   "Region (L.RGN)"
-        })
-    if place_type in place_type_labels:
-        type_label = place_type_labels[place_type]
-    else:
-        type_labels = geo_ont_rdf[place_type:SKOS.prefLabel:]
-        for l in type_labels:
-            if l.language == "en":
-                type_label  = Literal(" ".join(str(l).split()))
-                # https://stackoverflow.com/a/46501496/324122
-    return type_label
+# def get_geonames_place_type_label(place_type, geo_ont_rdf):
+#     """
+#     Returns label for supplied GeoNames place type
+#     """
+#     # Alternatives to ontology labels
+#     place_type_labels = (
+#         { GN["P.PPL"]:   "Populated place (P.PPL)"
+#         , GN["P.PPLA"]:  "Populated place (P.PPLA)"
+#         , GN["A.ADM5"]:  "City   (A.ADM5)"
+#         , GN["A.ADM4"]:  "City   (A.ADM4)"
+#         , GN["A.ADM3"]:  "City   (A.ADM3)"
+#         , GN["A.ADM2"]:  "County (A.ADM2)"
+#         , GN["A.ADM1"]:  "Region (A.ADM1)"
+#         , GN["A.PCLI"]:  "Country"
+#         , GN["L.RGN"]:   "Region (L.RGN)"
+#         })
+#     if place_type in place_type_labels:
+#         type_label = place_type_labels[place_type]
+#     else:
+#         type_labels = geo_ont_rdf[place_type:SKOS.prefLabel:]
+#         for l in type_labels:
+#             if l.language == "en":
+#                 type_label  = Literal(" ".join(str(l).split()))
+#                 # https://stackoverflow.com/a/46501496/324122
+#     return type_label
 
 def add_emplaces_common_namespaces(emp_graph):
     """
@@ -865,15 +867,15 @@ def add_place_location(emp_rdf, place_lat, place_long):
     emp_rdf.add((b_location, WGS84_POS.long, Literal(str(place_long), datatype=XSD.double)))
     return b_location
 
-def _unused_add_source(emp_rdf, label, link):
-    """
-    Create BNode for source
-    """
-    b_source = BNode()
-    emp_rdf.add((b_source, RDF.type,    EM.Source_ref))
-    emp_rdf.add((b_source, RDFS.label,  label        ))
-    emp_rdf.add((b_source, EM.link,     link         ))
-    return b_source
+# def _unused_add_source(emp_rdf, label, link):
+#     """
+#     Create BNode for source
+#     """
+#     b_source = BNode()
+#     emp_rdf.add((b_source, RDF.type,    EM.Source_ref))
+#     emp_rdf.add((b_source, RDFS.label,  label        ))
+#     emp_rdf.add((b_source, EM.link,     link         ))
+#     return b_source
 
 def add_place_setting(emp_rdf, location, when, source):
     b_setting  = BNode()
@@ -895,7 +897,9 @@ def add_place_relation(emp_rdf, reltype, relto, relwhen, relcompetence, source):
     emp_rdf.add((b_relation, EM.source,       source               ))
     return b_relation
 
-def get_emplaces_core_data(
+
+# @@@TODO: rework this @@@@
+def get_emplaces_annalist_data(
     geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf,
     emplaces_rdf=None
     ):
@@ -922,19 +926,19 @@ def get_emplaces_core_data(
     display_label     = Literal("%s (%s)"%(place_name, place_type_label)) 
     display_names     = list(set([Literal(unicode(n)) for n in place_altnames]))
 
-    log.debug("get_emplaces_core_data: geonames_node   %r"%(geonames_node))
-    log.debug("get_emplaces_core_data: place_name:     %r"%(place_name))
-    log.debug("get_emplaces_core_data: place_altnames: %r"%(place_altnames))
-    log.debug("get_emplaces_core_data: place_def_by:   %r"%(place_def_by))
-    log.debug("get_emplaces_core_data: place_category: %r"%(place_category))
-    log.debug("get_emplaces_core_data: place_type:     %r"%(place_type))
-    log.debug("get_emplaces_core_data: place_map:      %r"%(place_map))
-    log.debug("get_emplaces_core_data: place_parent:   %r"%(place_parent))
-    log.debug("get_emplaces_core_data: place_seeAlso:  %r"%(place_seeAlso))
-    log.debug("get_emplaces_core_data: lat, long:      %r, %r"%(place_lat, place_long))
-    log.debug("get_emplaces_core_data: display_label:  %r"%(display_label))
-    log.debug("get_emplaces_core_data: display_names:  %s"%(",".join(display_names)))
-    log.debug("get_emplaces_core_data: GeoNames graph:")
+    log.debug("get_emplaces_annalist_data: geonames_node   %r"%(geonames_node))
+    log.debug("get_emplaces_annalist_data: place_name:     %r"%(place_name))
+    log.debug("get_emplaces_annalist_data: place_altnames: %r"%(place_altnames))
+    log.debug("get_emplaces_annalist_data: place_def_by:   %r"%(place_def_by))
+    log.debug("get_emplaces_annalist_data: place_category: %r"%(place_category))
+    log.debug("get_emplaces_annalist_data: place_type:     %r"%(place_type))
+    log.debug("get_emplaces_annalist_data: place_map:      %r"%(place_map))
+    log.debug("get_emplaces_annalist_data: place_parent:   %r"%(place_parent))
+    log.debug("get_emplaces_annalist_data: place_seeAlso:  %r"%(place_seeAlso))
+    log.debug("get_emplaces_annalist_data: lat, long:      %r, %r"%(place_lat, place_long))
+    log.debug("get_emplaces_annalist_data: display_label:  %r"%(display_label))
+    log.debug("get_emplaces_annalist_data: display_names:  %s"%(",".join(display_names)))
+    log.debug("get_emplaces_annalist_data: GeoNames graph:")
     log.debug(geonames_rdf.serialize(format='turtle', indent=4))
 
     # Initial empty graph
@@ -1028,18 +1032,18 @@ def get_emplaces_core_data(
     emplaces_rdf.add((emp_node_geonames, EM.hasAnnotation, b_annotation))
     return (emp_id_merged, emp_uri_merged, emplaces_rdf)
 
-def get_geonames_id_data(gcdroot, geonames_id, emplaces_rdf=None):
-    """
-    Build EMPlaces place data for a specified GeoNames place id.
-    """
-    geonames_uri, geonames_url = get_geonames_uri(geonames_id)
-    geonames_rdf = get_geonames_place_data(geonames_url)
-    geo_ont_rdf  = get_geonames_ontology()
-    emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_core_data(
-        geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf,
-        emplaces_rdf=emplaces_rdf
-        )
-    return emplaces_rdf
+# def get_geonames_id_data(gadroot, geonames_id, emplaces_rdf=None):
+#     """
+#     Build EMPlaces place data for a specified GeoNames place id.
+#     """
+#     geonames_uri, geonames_url = get_geonames_uri(geonames_id)
+#     geonames_rdf = get_geonames_place_data(geonames_url)
+#     geo_ont_rdf  = get_geonames_ontology()
+#     emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_annalist_data(
+#         geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf,
+#         emplaces_rdf=emplaces_rdf
+#         )
+#     return emplaces_rdf
 
 def get_common_defs(options, emplaces_rdf):
     if options.emplaces_defs or options.common_defs:
@@ -1050,17 +1054,14 @@ def get_common_defs(options, emplaces_rdf):
         add_turtle_data(emplaces_rdf, COMMON_LANGUAGE_DEFS)
     return emplaces_rdf
 
-def do_get_geonames_place_data(gcdroot, options):
+def do_get_source_place_data(gadroot, options):
     geonames_id  = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
-    emplaces_rdf = get_geonames_id_data(gcdroot, geonames_id)
-    # emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_core_data(
-    #     geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf
-    #     )
+    emplaces_rdf = get_geonames_id_data(gadroot, geonames_id)
     get_common_defs(options, emplaces_rdf)
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
-    return GCD_SUCCESS
+    return GAD_SUCCESS
 
-def do_get_many_geonames_place_data(gcdroot, options):
+def do_get_many_geonames_place_data(gadroot, options):
     """
     Read multiple place Ids from standard input, and return a graph of
     EMPlaces data for all of the identified places.
@@ -1068,13 +1069,13 @@ def do_get_many_geonames_place_data(gcdroot, options):
     emplaces_rdf = None     # Graph created on first loop below
     geonames_ids = get_many_place_ids()
     if not geonames_ids:
-        return GCD_NO_PLACE_IDS
+        return GAD_NO_PLACE_REFS
     for geonames_id in geonames_ids:
         #@@TODO: catch exception and return failure
-        emplaces_rdf = get_geonames_id_data(gcdroot, geonames_id, emplaces_rdf=emplaces_rdf)
+        emplaces_rdf = get_geonames_id_data(gadroot, geonames_id, emplaces_rdf=emplaces_rdf)
     get_common_defs(options, emplaces_rdf)
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
-    return GCD_SUCCESS
+    return GAD_SUCCESS
 
 # def get_geonames_place_parent(place_id):
 #     log.debug("get_geonames_place_parent(%s)"%(place_id))
@@ -1173,7 +1174,7 @@ def format_id_text(pid, ptext):
         unicode(pid).ljust(8) + "  # " + unicode(ptext)
         ).encode('utf8')
 
-def do_get_place_hierarchy(gcdroot, options):
+def do_get_place_hierarchy(gadroot, options):
     geo_ont_rdf = get_geonames_ontology()
     geonames_id = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
     #@@ follow parentFeature links: results are inconsistent.
@@ -1182,20 +1183,20 @@ def do_get_place_hierarchy(gcdroot, options):
     hier_id_name_types = get_place_admin_hierarchy([geonames_id], {})
     for p, n, t in hier_id_name_types.values():
         print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
-    return GCD_SUCCESS
+    return GAD_SUCCESS
 
-def do_get_many_place_hierarchy(gcdroot, options):
+def do_get_many_place_hierarchy(gadroot, options):
     geo_ont_rdf = get_geonames_ontology()
     place_ids   = get_many_place_ids()
     if not place_ids:
-        return GCD_NO_PLACE_IDS
+        return GAD_NO_PLACE_REFS
     #@@ follow parentFeature links: results are inconsistent.
     # hier_id_name_types = get_places_hierarchy(place_ids, {})
     #@@
     hier_id_name_types = get_place_admin_hierarchy(place_ids, {})
     for p, n, t in hier_id_name_types.values():
         print(format_id_name(p, n, t, geo_ont_rdf), file=sys.stdout)
-    return GCD_SUCCESS
+    return GAD_SUCCESS
 
 def extract_geonames_id(url, rex):
     """
@@ -1235,22 +1236,22 @@ def extract_geonames_id(url, rex):
                 break
     return geo_id
 
-def do_extract_geonames_id(gcdroot, options):
+def do_extract_geonames_id(gadroot, options):
     url    = getargvalue(getarg(options.args, 0), "GeoNames URL: ")
     # rex = getargvalue(getarg(options.args, 1), "Regexp:       ")
     rex    = getarg(options.args, 1) or ""
     geo_id = extract_geonames_id(url, rex)
     if not geo_id:
         print("No match: %s"%(url,), file=sys.stderr)
-        return GCD_NO_GEONAMES_URL
+        return GAD_NO_ANNALIST_URL
     print(format_id_text(geo_id, url), file=sys.stdout)
-    return GCD_SUCCESS
+    return GAD_SUCCESS
 
-def do_extract_many_geonames_ids(gcdroot, options):
+def do_extract_many_geonames_ids(gadroot, options):
     # No prompt fpr mamy-value input
     rex    = getarg(options.args, 0) or ""
     urls   = get_many_geonames_urls()
-    status = GCD_NO_GEONAMES_URL
+    status = GAD_NO_ANNALIST_URL
     match_seen = False
     fail_seen  = False
     for url in urls:
@@ -1263,16 +1264,16 @@ def do_extract_many_geonames_ids(gcdroot, options):
             fail_seen = True
     if match_seen:
         if fail_seen:
-            status = GCD_SOME_GEONAMES_URLS
+            status = GAD_SOME_ANNALIST_URLS
         else:
-            status = GCD_SUCCESS
+            status = GAD_SUCCESS
     return status
 
 #   ===================================================================
 
-def do_zzzzzz(gcdroot, options):
+def do_zzzzzz(gadroot, options):
     print("Un-implemented sub-command: %s"%(options.command), file=sys.stderr)
-    return GCD_UNIMPLEMENTED
+    return GAD_UNIMPLEMENTED
 
 #   ===================================================================
 
@@ -1281,26 +1282,26 @@ def run(userhome, userconfig, options, progname):
     Command dispatcher.
     """
     if options.command.startswith("@@@"):
-        return do_zzzzzz(gcdroot, options)
+        return do_zzzzzz(gadroot, options)
     if options.command.startswith("get"):
-        return do_get_geonames_place_data(gcdroot, options)
-    if options.command.startswith("manyget"):
-        return do_get_many_geonames_place_data(gcdroot, options)
-    if options.command.startswith("placeh"):
-        return do_get_place_hierarchy(gcdroot, options)
-    if options.command.startswith("manyplaceh"):
-        return do_get_many_place_hierarchy(gcdroot, options)
-    if options.command.startswith("geo"):
-        return do_extract_geonames_id(gcdroot, options)
-    if options.command.startswith("manygeo"):
-        return do_extract_many_geonames_ids(gcdroot, options)
+        return do_get_source_place_data(gadroot, options)
+    # if options.command.startswith("manyget"):
+    #     return do_get_many_geonames_place_data(gadroot, options)
+    # if options.command.startswith("placeh"):
+    #     return do_get_place_hierarchy(gadroot, options)
+    # if options.command.startswith("manyplaceh"):
+    #     return do_get_many_place_hierarchy(gadroot, options)
+    # if options.command.startswith("geo"):
+    #     return do_extract_geonames_id(gadroot, options)
+    # if options.command.startswith("manygeo"):
+    #     return do_extract_many_geonames_ids(gadroot, options)
     if options.command.startswith("ver"):
-        return show_version(gcdroot, userhome, options)
+        return show_version(gadroot, userhome, options)
     if options.command.startswith("help"):
         return show_help(options, progname)
     print("Un-recognised sub-command: %s"%(options.command), file=sys.stderr)
     print("Use '%s --help' to see usage summary"%(progname), file=sys.stderr)
-    return GCD_BADCMD
+    return GAD_BADCMD
 
 def runCommand(userhome, userconfig, argv):
     """
@@ -1313,7 +1314,7 @@ def runCommand(userhome, userconfig, argv):
     """
     options = parseCommandArgs(argv[1:])
     if options and options.debug:
-        logging.basicConfig(level=logging.DEBUG, filename="get-geonames-data.log", filemode="w")
+        logging.basicConfig(level=logging.DEBUG, filename="get-annalist-data.log", filemode="w")
     else:
         logging.basicConfig(level=logging.INFO)
     log.debug("runCommand: userhome %s, userconfig %s, argv %s"%(userhome, userconfig, repr(argv)))
@@ -1322,7 +1323,7 @@ def runCommand(userhome, userconfig, argv):
         progname = os.path.basename(argv[0])
         status   = run(userhome, userconfig, options, progname)
     else:
-        status = GCD_BADCMD
+        status = GAD_BADCMD
     return status
 
 def runMain():
@@ -1340,7 +1341,7 @@ if __name__ == "__main__":
     p = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     sys.path.insert(0, p)
     status = runMain()
-    if status != GCD_SUCCESS:
+    if status != GAD_SUCCESS:
         print("Exit status: %d"%(status,), file=sys.stderr)
     sys.exit(status)
 

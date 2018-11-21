@@ -1,4 +1,7 @@
-# GeoNames data exporter
+# Annalist data exporter
+
+@@@@TODO: update for Annalist exporter tool@@@@
+
 
 This directory contains code for a command line tool to extract EMPlaces data from GeoNamnes, and some related values, given a GeoNames ID.
 
