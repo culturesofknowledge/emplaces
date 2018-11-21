@@ -11,7 +11,7 @@ SELECT=25
 
 # Write GeoNames IDs to nmew file
 
-python get_core_data.py manygeo \
+python get_geonames_data.py manygeo \
     <20181008-geonames-urls-from-EMLO.txt \
     >$DATE-geonames-ids-from-EMLO.txt
 
@@ -20,12 +20,12 @@ head -n ${SELECT} $DATE-geonames-ids-from-EMLO.txt \
     >$DATE-geonames-ids-from-EMLO-${SELECT}.txt
 
 # Find all admin hierarchy ids in GeoNames
-python get_core_data.py manyplacehierarchy \
+python get_geonames_data.py manyplacehierarchy \
     <$DATE-geonames-ids-from-EMLO-${SELECT}.txt \
     >$DATE-geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt
 
 # Retrieve GeoMNamnes data and reformat for EMPlaces
-python get_core_data.py manyget \
+python get_geonames_data.py manyget \
     --include-common-defs --include-emplaces-defs \
     --include-geonames-defs --include-language-defs \
     <$DATE-geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt \

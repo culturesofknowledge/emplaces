@@ -1,6 +1,6 @@
 # !/usr/bin/env python
 #
-# get_core_data.py - command line tool to create EMPlaces core from GeoNames data
+# get_geonames_data.py - command line tool to create EMPlaces core from GeoNames data
 #
 
 from __future__ import print_function

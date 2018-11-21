@@ -32,35 +32,35 @@ Install `rdflib` dependency
 
 Run the extractor for Opole ("3090048" is the GeoNames id for the City of Opole):
 
-    python get_core_data.py get 3090048
+    python get_geonames_data.py get 3090048
 
 Turtle data is sent to stdout, and may be redirected to a file, thus:
 
-    python get_core_data.py get 3090048 >emplaces_opole.ttl
+    python get_geonames_data.py get 3090048 >emplaces_opole.ttl
 
 Get list of place Ids in administrative hierarchy:
 
-    python get_core_data.py placehierarchy 3090048
+    python get_geonames_data.py placehierarchy 3090048
 
 Get Turtle data for all places in administrative hierarchy:
 
-    python get_core_data.py placehierarchy 3090048 | \
-    python get_core_data.py manyget >emplaces_opole_hierarchy.ttl
+    python get_geonames_data.py placehierarchy 3090048 | \
+    python get_geonames_data.py manyget >emplaces_opole_hierarchy.ttl
 
 Get all members of the administrative hierarchy covering a supplied list of places:
 
-    cat Opole_nearby_places.txt | python get_core_data.py manyplacehierarchy
+    cat Opole_nearby_places.txt | python get_geonames_data.py manyplacehierarchy
 
 Get RDF Turtle data for all members of the administrative hierarchy covering the list of places near Opole:
 
     cat Opole_nearby_places.txt | \
-    python get_core_data.py manyplacehierarchy | \
-    python get_core_data.py manyget > Opole_extracted_data.ttl
+    python get_geonames_data.py manyplacehierarchy | \
+    python get_geonames_data.py manyget > Opole_extracted_data.ttl
 
 
 ## Command line usage
 
-    usage: get_core_data.py [-h] [--version] [--debug] [-e] [-g] [-l] [-c]
+    usage: get_geonames_data.py [-h] [--version] [--debug] [-e] [-g] [-l] [-c]
                             COMMAND [ARGS [ARGS ...]]
 
     EMPlaces GeoNames data extractor
@@ -91,12 +91,12 @@ Get RDF Turtle data for all members of the administrative hierarchy covering the
 
     Commands:
 
-      get_core_data.py help [command]
-      get_core_data.py get GEONAMESID
-      get_core_data.py manyget
-      get_core_data.py placehierarchy GEONAMESID
-      get_core_data.py manyplacehierarchy
-      get_core_data.py geonamesid URL [REGEXP]
-      get_core_data.py manygeonamesids [REGEXP]
-      get_core_data.py version
+      get_geonames_data.py help [command]
+      get_geonames_data.py get GEONAMESID
+      get_geonames_data.py manyget
+      get_geonames_data.py placehierarchy GEONAMESID
+      get_geonames_data.py manyplacehierarchy
+      get_geonames_data.py geonamesid URL [REGEXP]
+      get_geonames_data.py manygeonamesids [REGEXP]
+      get_geonames_data.py version
 
