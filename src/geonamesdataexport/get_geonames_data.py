@@ -1236,8 +1236,9 @@ def extract_geonames_id(url, rex):
     return geo_id
 
 def do_extract_geonames_id(gcdroot, options):
-    url = getargvalue(getarg(options.args, 0), "GeoNames URL: ")
-    rex = getargvalue(getarg(options.args, 1), "Regexp:       ")
+    url    = getargvalue(getarg(options.args, 0), "GeoNames URL: ")
+    # rex = getargvalue(getarg(options.args, 1), "Regexp:       ")
+    rex    = getarg(options.args, 1) or ""
     geo_id = extract_geonames_id(url, rex)
     if not geo_id:
         print("No match: %s"%(url,), file=sys.stderr)
@@ -1312,7 +1313,7 @@ def runCommand(userhome, userconfig, argv):
     """
     options = parseCommandArgs(argv[1:])
     if options and options.debug:
-        logging.basicConfig(level=logging.DEBUG, filename="get-core-data.log", filemode="w")
+        logging.basicConfig(level=logging.DEBUG, filename="get-geonames-data.log", filemode="w")
     else:
         logging.basicConfig(level=logging.INFO)
     log.debug("runCommand: userhome %s, userconfig %s, argv %s"%(userhome, userconfig, repr(argv)))
