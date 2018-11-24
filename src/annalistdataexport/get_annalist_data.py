@@ -666,15 +666,21 @@ def show_error(msg, status):
 #
 #   ===================================================================
 
-# def get_geonames_uri(geonames_id):
-#     """
-#     Returns tuple of
-#         0. GeoNames place URI
-#         1. GeoNames place description URL
-#     """
-#     geonames_uri  = "http://sws.geonames.org/%s/"%(geonames_id,)
-#     geonames_url  = "http://sws.geonames.org/%s/about.rdf"%(geonames_id,)
-#     return (geonames_uri, geonames_url)
+def get_annalist_uri(annalist_ref):
+    """
+    Returns Annalist place URI, given relative reference.
+
+    The reference is generally of the form "type_id/place_id"; e.g.
+
+        Place_sourced/Opole_P_EMPlaces
+        Place_merged/Opole_P
+    """
+    default_base_uri = "http://localhost:8000/annalist/c/EMPlaces_defs/d/"
+
+
+    annalist_uri  = "http://sws.annalist.org/%s/"%(annalist_ref,)
+    annalist_url  = "http://sws.annalist.org/%s/about.rdf"%(annalist_ref,)
+    return (annalist_uri, annalist_url)
 
 # def get_geonames_id(geonames_uri):
 #     """
@@ -686,8 +692,8 @@ def show_error(msg, status):
 
 def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     """
-    Given a place name, place type, GeoNames Id and optional suffix,
-    returns a place Id, URI and Node for 
+    Given a place name, place type, Id and optional suffix,
+    returns a place Id, URI and Node.
     """
     type_id       = get_geonames_place_type_id(place_type)
     name_slug     = place_name.replace(" ", "_")
@@ -898,35 +904,34 @@ def add_place_relation(emp_rdf, reltype, relto, relwhen, relcompetence, source):
     return b_relation
 
 
-# @@@TODO: rework this @@@@
 def get_emplaces_annalist_data(
-    geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf,
+    annalist_ref, annalist_uri, annalist_url, annalist_rdf, geo_ont_rdf,
     emplaces_rdf=None
     ):
     """
-    Constructs EMPlaces RDF data from supplied GeoNames place data.
+    Constructs EMPlaces RDF data from supplied Annalist place data.
 
     Returns tuple of:
         0. EMPlaces Id for place
         1. EMPlaces URI for place
         2. Graph of EMPlaces data
     """
-    geonames_node     = URIRef(geonames_uri)
-    place_name        = geonames_rdf[geonames_node:GN.name:].next()
-    place_altnames    = list(geonames_rdf[geonames_node:GN.alternateName:])
-    place_def_by      = URIRef(geonames_url)
-    place_category    = geonames_rdf[geonames_node:GN.featureClass:].next()
-    place_type        = geonames_rdf[geonames_node:GN.featureCode:].next()
-    place_map         = geonames_rdf[geonames_node:GN.locationMap:].next()
-    place_parent      = geonames_rdf[geonames_node:GN.parentFeature:].next()
-    place_seeAlso     = list(geonames_rdf[geonames_node:(RDFS.seeAlso|GN.wikipediaArticle):])
-    place_lat         = geonames_rdf[geonames_node:WGS84_POS.lat:].next()
-    place_long        = geonames_rdf[geonames_node:WGS84_POS.long:].next()
-    place_type_label  = get_geonames_place_type_label(place_type, geo_ont_rdf)
+    annalist_node     = URIRef(annalist_uri)
+    place_name        = annalist_rdf[annalist_node:GN.name:].next()
+    place_altnames    = list(annalist_rdf[annalist_node:GN.alternateName:])
+    place_def_by      = URIRef(annalist_url)
+    place_category    = annalist_rdf[annalist_node:GN.featureClass:].next()
+    place_type        = annalist_rdf[annalist_node:GN.featureCode:].next()
+    place_map         = annalist_rdf[annalist_node:GN.locationMap:].next()
+    place_parent      = annalist_rdf[annalist_node:GN.parentFeature:].next()
+    place_seeAlso     = list(annalist_rdf[annalist_node:(RDFS.seeAlso|GN.wikipediaArticle):])
+    place_lat         = annalist_rdf[annalist_node:WGS84_POS.lat:].next()
+    place_long        = annalist_rdf[annalist_node:WGS84_POS.long:].next()
+    place_type_label  = get_annalist_place_type_label(place_type, geo_ont_rdf)
     display_label     = Literal("%s (%s)"%(place_name, place_type_label)) 
     display_names     = list(set([Literal(unicode(n)) for n in place_altnames]))
 
-    log.debug("get_emplaces_annalist_data: geonames_node   %r"%(geonames_node))
+    log.debug("get_emplaces_annalist_data: annalist_node   %r"%(annalist_node))
     log.debug("get_emplaces_annalist_data: place_name:     %r"%(place_name))
     log.debug("get_emplaces_annalist_data: place_altnames: %r"%(place_altnames))
     log.debug("get_emplaces_annalist_data: place_def_by:   %r"%(place_def_by))
@@ -938,27 +943,25 @@ def get_emplaces_annalist_data(
     log.debug("get_emplaces_annalist_data: lat, long:      %r, %r"%(place_lat, place_long))
     log.debug("get_emplaces_annalist_data: display_label:  %r"%(display_label))
     log.debug("get_emplaces_annalist_data: display_names:  %s"%(",".join(display_names)))
-    log.debug("get_emplaces_annalist_data: GeoNames graph:")
-    log.debug(geonames_rdf.serialize(format='turtle', indent=4))
+    log.debug("get_emplaces_annalist_data: Annalist graph:")
+    log.debug(annalist_rdf.serialize(format='turtle', indent=4))
 
     # Initial empty graph
     if emplaces_rdf is None:
         emplaces_rdf = Graph()
         add_emplaces_common_namespaces(emplaces_rdf)
-    # for gn_pre, gn_uri in geonames_rdf.namespaces():
-    #     emplaces_rdf.bind(gn_pre, gn_uri)
-    lit_geonames_data = Literal("GeoNames data for %s"%(place_name,))
-    lit_geonames_uri  = Literal("GeoNames URI for %s"%(place_name,))
+    lit_annalist_data = Literal("Annalist data for %s"%(place_name,))
+    lit_annalist_uri  = Literal("Annalist URI for %s"%(place_name,))
 
     # Allocate URIs and nodes for merged and geonames data
     emp_id_merged, emp_uri_merged, emp_node_merged = get_emplaces_id_uri_node(
-        place_name, place_type, geonames_id
+        place_name, place_type, annalist_ref
         )
     emp_id_geonames, emp_uri_geonames, emp_node_geonames = get_emplaces_id_uri_node(
-        place_name, place_type, geonames_id, suffix="_geonames"
+        place_name, place_type, annalist_ref
         )
-    ems_uri_geonames_source  = EMS[emp_id_geonames]
-    ems_node_geonames_source = URIRef(ems_uri_geonames_source)
+    ems_uri_annalist_source  = EMS[emp_id_geonames]
+    ems_node_annalist_source = URIRef(ems_uri_annalist_source)
 
     # Add em:Place_merged description
     emplaces_rdf.add((emp_node_merged, RDF.type, EM.Place))
@@ -966,21 +969,21 @@ def get_emplaces_annalist_data(
     emplaces_rdf.add((emp_node_merged, EM.canonicalURI, emp_node_merged))
     b_alturi = BNode()
     emplaces_rdf.add((emp_node_merged,  EM.alternateURI,  b_alturi))
-    emplaces_rdf.add((b_alturi,  RDFS.label, lit_geonames_uri ))
-    emplaces_rdf.add((b_alturi,  EM.link,    geonames_node    ))
+    emplaces_rdf.add((b_alturi,  RDFS.label, lit_annalist_uri ))
+    emplaces_rdf.add((b_alturi,  EM.link,    annalist_node    ))
     emplaces_rdf.add((emp_node_merged, EM.place_data, emp_node_geonames))
 
     # Add description of GeoNames source
-    emplaces_rdf.add((ems_node_geonames_source, RDF.type,       EM.Authority       ))
-    emplaces_rdf.add((ems_node_geonames_source, RDFS.label,     lit_geonames_data  ))
-    emplaces_rdf.add((ems_node_geonames_source, EM.short_label, Literal("GeoNames")))
-    emplaces_rdf.add((ems_node_geonames_source, EM.link,        place_def_by       ))
+    emplaces_rdf.add((ems_node_annalist_source, RDF.type,       EM.Authority       ))
+    emplaces_rdf.add((ems_node_annalist_source, RDFS.label,     lit_annalist_data  ))
+    emplaces_rdf.add((ems_node_annalist_source, EM.short_label, Literal("GeoNames")))
+    emplaces_rdf.add((ems_node_annalist_source, EM.link,        place_def_by       ))
 
     # Add em:Place_sourced description for GeoNames
     emplaces_rdf.add((emp_node_geonames,  RDF.type,         EM.Place                ))
     emplaces_rdf.add((emp_node_geonames,  RDFS.label,       display_label           ))
     emplaces_rdf.add((emp_node_geonames,  RDFS.isDefinedBy, place_def_by            ))
-    emplaces_rdf.add((emp_node_geonames,  EM.source,        ems_node_geonames_source))
+    emplaces_rdf.add((emp_node_geonames,  EM.source,        ems_node_annalist_source))
     emplaces_rdf.add((emp_node_geonames,  EM.placeCategory, place_category          ))
     emplaces_rdf.add((emp_node_geonames,  EM.placeType,     place_type              ))
     emplaces_rdf.add((emp_node_geonames,  EM.preferredName, place_name              ))
@@ -996,23 +999,23 @@ def get_emplaces_annalist_data(
     b_setting  = add_place_setting(emplaces_rdf, 
         b_location, 
         EMT.Current, 
-        ems_node_geonames_source
+        ems_node_annalist_source
         )
     emplaces_rdf.add((emp_node_geonames, EM.where, b_setting))
 
     # Define relation for current admin hierarchy (1 level up only)
-    parent_geonames_id = get_geonames_id(str(place_parent))
-    parent_gn_node, parent_gn_rdf = get_geonames_place_rdf(parent_geonames_id)
+    parent_annalist_ref = get_annalist_ref(str(place_parent))
+    parent_gn_node, parent_gn_rdf = get_annalist_place_rdf(parent_annalist_ref)
     parent_name        = parent_gn_rdf[parent_gn_node:GN.name:].next()
     parent_type        = parent_gn_rdf[parent_gn_node:GN.featureCode:].next()
     parent_id, parent_uri, parent_node = get_emplaces_id_uri_node(
-        parent_name, parent_type, parent_geonames_id, suffix="_geonames"
+        parent_name, parent_type, parent_annalist_ref
         )
     b_relation = add_place_relation(emplaces_rdf, 
         EM.P_PART_OF_A, parent_node,
         EMT.Current, 
         EM.DEFINITIVE,
-        ems_node_geonames_source
+        ems_node_annalist_source
         )
     emplaces_rdf.add((emp_node_geonames, EM.hasRelation, b_relation))
 
@@ -1027,23 +1030,39 @@ def get_emplaces_annalist_data(
         , OA.hasTarget:     emp_node_geonames
         , OA.hasBody:       b_body
         , EM.when:          EMT.Current
-        , EM.source:        ems_node_geonames_source
+        , EM.source:        ems_node_annalist_source
         })
     emplaces_rdf.add((emp_node_geonames, EM.hasAnnotation, b_annotation))
     return (emp_id_merged, emp_uri_merged, emplaces_rdf)
 
-# def get_geonames_id_data(gadroot, geonames_id, emplaces_rdf=None):
-#     """
-#     Build EMPlaces place data for a specified GeoNames place id.
-#     """
-#     geonames_uri, geonames_url = get_geonames_uri(geonames_id)
-#     geonames_rdf = get_geonames_place_data(geonames_url)
-#     geo_ont_rdf  = get_geonames_ontology()
-#     emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_annalist_data(
-#         geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf,
-#         emplaces_rdf=emplaces_rdf
-#         )
-#     return emplaces_rdf
+
+
+
+
+
+def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
+    """
+    Build EMPlaces place data for a specified Annalist place reference.
+    """
+    annalist_uri, annalist_url = get_annalist_uri(annalist_ref)
+    annalist_rdf = get_annalist_place_data(annalist_url)
+    # Initial empty graph
+    if emplaces_rdf is None:
+        emplaces_rdf = Graph()
+        add_emplaces_common_namespaces(emplaces_rdf)
+
+    # geo_ont_rdf  = get_annalist_ontology()
+    # @@@@
+    #     emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_annalist_data(
+    #         annalist_ref, annalist_uri, annalist_url, annalist_rdf, # geo_ont_rdf,
+    #         emplaces_rdf=emplaces_rdf
+    #         )
+    # @@@@
+    # also accept mapping table along lines of
+    # prop -> action, where action is from: {save ?name, emit ?template, mapping ?table}
+    # implicit variables ?subj ?prop
+
+    return emplaces_rdf
 
 def get_common_defs(options, emplaces_rdf):
     if options.emplaces_defs or options.common_defs:
