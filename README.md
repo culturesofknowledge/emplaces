@@ -33,7 +33,7 @@ An draft of the [proposed data model][11] for EM Places and a set of data model 
 - ~~Test data model with sample record~~
 - ~~Generate 4-6K core data places from [EMLO][27]~~
 - Prepare webform editor
-- Collect 25-50 sample full data records
+- ~~Collect sample full data records~~
 - Finalize the proposed record detail interface, create interface mockup
 - Finalize the proposed search interface, create interface mockup
 - Discuss proposed editorial workflow, create interface mockup
