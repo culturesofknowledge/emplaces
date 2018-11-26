@@ -12,19 +12,18 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 
 - [x] Finalize some URIs to be used
 - [x] Finalize prefixes
-- [ ] Finish assembling example data for Opole
+- [x] Finish assembling example data for Opole
     - [x] Fix structure and vocabulary for bibliography (using BIBO)
     - [x] Historical hierarchies
     - [x] Fix vocabularies for timespans (PeriodO?)
     - [x] Uncertainties, approximations, etc
     - [x] Related resource, include optional license (see LPiF proposal)
         - also, type of resource?
-    - [ ] Record metadata (maybe later when we see what Timbuctoo provides)
 - [x] Pin down location/timespan vocabularies (the structure here follows ideas from Topotime/GeoJSON-LDT (also a work-in-progress?) but the vocabularies haven't yet been checked.)
 - [x] Review format for timespan data; align with emerging LPiF activity (loosely aliogned, but not same vocabulary for now)
 - [x] Update [Data model notes](./20180405-EMPlaces-data-model-notes.md); resolve remaining TODOs there, as far as possible.
-- [ ] Generate data from EMLO data
-    - first 25 done; awaiting feedback
+- [x] Generate data from EMLO data
+    - first 500 done; awaiting feedback
 
 - [x] note 2 kinds of Julian calendars
     - currently using "Old style" and "New style", but this is probably not enough.
@@ -33,9 +32,10 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 - [ ] Review handling of date uncertainty/aprroximation, and how it relates to PGiF proposal to use ISO 8601-2 (https://github.com/LinkedPasts/lpif)
     - currently using LPiF-related structures, rather than ISO date formats
 - [ ] Type URIs for places that don't have same kind of info (cf. "related places", 20180726-St-Adalbert-example.ttl)
-- [ ] Record metadata design (creator, contributor, license, etc. - waiting to see what Timbuctoo provides)
+- [ ] Record metadata design (creator, contributor, license, etc.)
+    - waiting to see what Timbuctoo provides
 - [ ] Record time periods as identified resources (rather than inline blank nodes)
-    - Handled in Annalist data; not yet in example
+    - Handled in Annalist data; not yet in Opole example
 - [x] URIs for language codes (consider lexvo?)
     - holding pattern in place, and Annalist data. Revisit later.
 - [ ] ...

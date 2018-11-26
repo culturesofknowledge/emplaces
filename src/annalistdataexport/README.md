@@ -3,7 +3,7 @@
 @@@@TODO: update for Annalist exporter tool@@@@
 
 
-This directory contains code for a command line tool to extract EMPlaces data from GeoNamnes, and some related values, given a GeoNames ID.
+This directory contains code for a command line tool to extract EMPlaces data from Annalist, and some related values, given an Annalist place reference.
 
 
 ## Installation (under Linux/Unix/MacOS)
