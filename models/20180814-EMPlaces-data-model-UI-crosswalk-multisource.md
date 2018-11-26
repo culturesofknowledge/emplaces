@@ -10,7 +10,7 @@ In each case, the variable `?place` is assumed to be bound to the root node for 
 
 # Place multi-source structure
 
-Each place description is formed using data from one or more sources.  Data from each resource is associated with a distinct `em:Place_sourced` resource, which may also include information about the source of the data.  Data which is generated and managedunto local editorial control of the EMPlaces deploymemnt is associated with the special source `ems:EMPlaces`.  The combined (or merged) data from all sources is represented by an `em:Place_merged` resource, which in turn references each of the contributing `em:Place_sourced` resources.
+Each place description is formed using data from one or more sources.  Data from each resource is associated with a distinct `em:Place_sourced` resource, which may also include information about the source of the data.  Data which is generated and managed under local editorial control of the Cultures of Knowledge EMPlaces deployment is associated with the special source `ems:EMPlaces`.  The combined (or merged) data from all sources is represented by an `em:Place_merged` resource, which in turn references each of the contributing `em:Place_sourced` resources.
 
 Example:
 
