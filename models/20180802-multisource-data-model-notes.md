@@ -74,7 +74,7 @@ For example, the following SPARQL CONSTRUCT statement might be used to construct
 
 NOTE: I'm not actually proposing this method for displaying EMPlaces data, but using it to illustrate how the probe query patterns might be modified when extracting data for display.
 
-NOTE: the exclusion of `em:source` properties is intended to avoid multiple conflicting source information.  One might consider allow multiple em:source values, but I feel that could conflict with the intuitive semantics of `em:source`.  E.g. if a particular source is considered trusted, it could be unintentionally applied to untrusted elements of the merged data.
+NOTE: the exclusion of `em:source` properties is intended to avoid multiple conflicting source information.  One might consider allowing multiple em:source values, but I feel that could conflict with the intuitive semantics of `em:source`.  E.g. if a particular source is considered trusted, it could be unintentionally applied to untrusted elements of the merged data.
 
 NOTE `em:source` is also used with "qualified data", such as qualified relations and annotations.  In these cases, it provides additional information about the source of the qualified data (and its qualification).  Roughly, the main source of place data may be considered as providing a reference to the qualified data, and the qualified data itself provides a reference to the source used. Thus, in a sense, the main place data source and the qualified data source are both contributing the the information.
 
