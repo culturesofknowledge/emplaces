@@ -7,28 +7,52 @@
 # copy-and-paste to a text file.)
 
 DATE=$(date "+%Y%m%d")
-SELECT=25
+FROM="0400"
+TO="0500"
+SELECT="$FROM-$TO"
+DATADIR=data-$DATE
 
-# Write GeoNames IDs to nmew file
+# Write GeoNames IDs to new file
 
+echo "Extracting data for EMLO place references $FROM-$TO from geonames" > $DATADIR/geonames-ids-from-EMLO.log
+echo "Data extraction starts: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
+
+mkdir $DATADIR
 python get_geonames_data.py manygeo \
     <20181008-geonames-urls-from-EMLO.txt \
-    >$DATE-geonames-ids-from-EMLO.txt
+    >$DATADIR/geonames-ids-from-EMLO.txt
 
-# For testing: select first N (=10) ids:
-head -n ${SELECT} $DATE-geonames-ids-from-EMLO.txt \
-    >$DATE-geonames-ids-from-EMLO-${SELECT}.txt
+echo "Created $DATADIR/geonames-ids-from-EMLO.txt: $(date)"
+echo "Created $DATADIR/geonames-ids-from-EMLO.txt: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
+
+# For testing: extract selected range of ids:
+# head -n ${SELECT} $DATADIR/geonames-ids-from-EMLO.txt \
+#     >$DATADIR/geonames-ids-from-EMLO-${SELECT}.txt
+
+sed -n "${FROM},${TO}p" $DATADIR/geonames-ids-from-EMLO.txt \
+    >$DATADIR/geonames-ids-from-EMLO-${SELECT}.txt
+
+echo "Created $DATADIR/geonames-ids-from-EMLO-${SELECT}.txt: $(date)"
+echo "Created $DATADIR/geonames-ids-from-EMLO-${SELECT}.txt: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
 # Find all admin hierarchy ids in GeoNames
 python get_geonames_data.py manyplacehierarchy \
-    <$DATE-geonames-ids-from-EMLO-${SELECT}.txt \
-    >$DATE-geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt
+    <$DATADIR/geonames-ids-from-EMLO-${SELECT}.txt \
+    >$DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt
+
+echo "Created $DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt: $(date)"
+echo "Created $DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
 # Retrieve GeoMNamnes data and reformat for EMPlaces
 python get_geonames_data.py manyget \
     --include-common-defs --include-emplaces-defs \
     --include-geonames-defs --include-language-defs \
-    <$DATE-geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt \
-    >$DATE-geonames-date-ref-by-EMLO-${SELECT}.ttl
+    <$DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt \
+    >$DATADIR/geonames-data-ref-by-EMLO-${SELECT}.ttl
+
+echo "Created $DATADIR/geonames-data-ref-by-EMLO-${SELECT}.ttl: $(date)"
+echo "Created $DATADIR/geonames-data-ref-by-EMLO-${SELECT}.ttl: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
+
+echo "Data extraction ends: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
 # End

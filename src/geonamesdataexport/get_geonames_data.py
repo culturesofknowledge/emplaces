@@ -727,11 +727,14 @@ def get_many_geonames_urls():
 
 def get_rdf_graph(url, format="xml"):
     """
-    Return RDF graph at given location.
+    Return RDF graph at given location, or None.
     """
     # e.g. http://sws.geonames.org/3090048/about.rdf
     g = Graph()
-    g.parse(location=url, format=format)
+    try:
+        g.parse(location=url, format=format)
+    except Exception as e:
+        print("RDF parse error '%s' (%s)"%(url, e), file=sys.stderr)
     # result = g.parse(data=r.content, publicID=u, format="turtle")
     # result = g.parse(source=s, publicID=b, format="json-ld")
     return g
@@ -744,12 +747,16 @@ def get_geonames_ontology():
     geo_ont_rdf  = get_rdf_graph(geo_ont_url)
     return geo_ont_rdf
 
+geonames_cache = {}     # Don't get data if we've already retrieved it.
 def get_geonames_place_data(geonames_url):
     """
     Returns graph of GeoNames place data
     """
-    geonames_rdf = get_rdf_graph(geonames_url)
-    return geonames_rdf
+    if geonames_url not in geonames_cache:
+        geonames_rdf = get_rdf_graph(geonames_url)
+        geonames_cache[geonames_url] = geonames_rdf
+    return geonames_cache[geonames_url]
+    # return geonames_rdf
 
 def get_geonames_place_type_id(place_type):
     """
@@ -793,7 +800,7 @@ def get_geonames_place_type_label(place_type, geo_ont_rdf):
     else:
         type_labels = geo_ont_rdf[place_type:SKOS.prefLabel:]
         for l in type_labels:
-            if l.language == "en":
+            if getattr(l, "language", "en") == "en":
                 type_label  = Literal(" ".join(str(l).split()))
                 # https://stackoverflow.com/a/46501496/324122
     return type_label
@@ -907,21 +914,30 @@ def get_emplaces_core_data(
         1. EMPlaces URI for place
         2. Graph of EMPlaces data
     """
-    geonames_node     = URIRef(geonames_uri)
-    place_name        = geonames_rdf[geonames_node:GN.name:].next()
-    place_altnames    = list(geonames_rdf[geonames_node:GN.alternateName:])
-    place_def_by      = URIRef(geonames_url)
-    place_category    = geonames_rdf[geonames_node:GN.featureClass:].next()
-    place_type        = geonames_rdf[geonames_node:GN.featureCode:].next()
-    place_map         = geonames_rdf[geonames_node:GN.locationMap:].next()
-    place_parent      = geonames_rdf[geonames_node:GN.parentFeature:].next()
-    place_seeAlso     = list(geonames_rdf[geonames_node:(RDFS.seeAlso|GN.wikipediaArticle):])
-    place_lat         = geonames_rdf[geonames_node:WGS84_POS.lat:].next()
-    place_long        = geonames_rdf[geonames_node:WGS84_POS.long:].next()
-    place_type_label  = get_geonames_place_type_label(place_type, geo_ont_rdf)
-    display_label     = Literal("%s (%s)"%(place_name, place_type_label)) 
-    display_names     = list(set([Literal(unicode(n)) for n in place_altnames]))
+    if geonames_rdf is None:
+        msg = "No RDF data for %s"%(geonames_url,)
+        log.error(msg)
+        raise ValueError(msg)
 
+    try:
+        geonames_node     = URIRef(geonames_uri)
+        place_name        = geonames_rdf[geonames_node:GN.name:].next()
+        place_altnames    = list(geonames_rdf[geonames_node:GN.alternateName:])
+        place_def_by      = URIRef(geonames_url)
+        place_category    = geonames_rdf[geonames_node:GN.featureClass:].next()
+        place_type        = geonames_rdf[geonames_node:GN.featureCode:].next()
+        place_map         = geonames_rdf[geonames_node:GN.locationMap:].next()
+        place_parent      = geonames_rdf[geonames_node:GN.parentFeature:].next()
+        place_country     = geonames_rdf[geonames_node:GN.countryCode:].next()
+        place_seeAlso     = list(geonames_rdf[geonames_node:(RDFS.seeAlso|GN.wikipediaArticle):])
+        place_lat         = geonames_rdf[geonames_node:WGS84_POS.lat:].next()
+        place_long        = geonames_rdf[geonames_node:WGS84_POS.long:].next()
+        place_type_label  = get_geonames_place_type_label(place_type, geo_ont_rdf)
+        display_label     = Literal("%s (%s)"%(place_name, place_type_label)) 
+        display_names     = list(set([Literal(unicode(n)) for n in place_altnames]))
+    except Exception as e:
+        log.error("Problem accessing data for %s"%(geonames_url,), exc_info=True)
+        raise
     log.debug("get_emplaces_core_data: geonames_node   %r"%(geonames_node))
     log.debug("get_emplaces_core_data: place_name:     %r"%(place_name))
     log.debug("get_emplaces_core_data: place_altnames: %r"%(place_altnames))
@@ -996,6 +1012,9 @@ def get_emplaces_core_data(
         )
     emplaces_rdf.add((emp_node_geonames, EM.where, b_setting))
 
+    # Add country code
+    emplaces_rdf.add((emp_node_geonames, GN.countryCode, place_country))
+
     # Define relation for current admin hierarchy (1 level up only)
     parent_geonames_id = get_geonames_id(str(place_parent))
     parent_gn_node, parent_gn_rdf = get_geonames_place_rdf(parent_geonames_id)
@@ -1053,9 +1072,6 @@ def get_common_defs(options, emplaces_rdf):
 def do_get_geonames_place_data(gcdroot, options):
     geonames_id  = getargvalue(getarg(options.args, 0), "GeoNames Id: ")
     emplaces_rdf = get_geonames_id_data(gcdroot, geonames_id)
-    # emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_core_data(
-    #     geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf
-    #     )
     get_common_defs(options, emplaces_rdf)
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GCD_SUCCESS
@@ -1070,8 +1086,15 @@ def do_get_many_geonames_place_data(gcdroot, options):
     if not geonames_ids:
         return GCD_NO_PLACE_IDS
     for geonames_id in geonames_ids:
-        #@@TODO: catch exception and return failure
-        emplaces_rdf = get_geonames_id_data(gcdroot, geonames_id, emplaces_rdf=emplaces_rdf)
+        try:
+            emplaces_rdf = get_geonames_id_data(
+                gcdroot, geonames_id, emplaces_rdf=emplaces_rdf
+                )
+        except Exception as e:
+            log.error(
+                "Error getting data for GeoNames Id %s"%(geonames_id), 
+                exc_info=True
+                )
     get_common_defs(options, emplaces_rdf)
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GCD_SUCCESS
