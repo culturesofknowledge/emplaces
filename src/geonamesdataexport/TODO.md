@@ -9,6 +9,6 @@
 - [x] review place type labelling (currently uses label from GeoNames ontology file)
 - [ ] Installation script (setup.py)
 
-- [ ] get_core_data.py:  Pull text about place from Wikipedia
+- [ ] get_geonames_data.py:  Pull text about place from Wikipedia
 
 

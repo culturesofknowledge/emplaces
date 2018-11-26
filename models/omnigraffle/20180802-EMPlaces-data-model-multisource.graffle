@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2018-10-15 16:43:42 +0000</string>
+	<string>2018-11-24 10:49:23 +0000</string>
 	<key>Modifier</key>
 	<string>Graham Klyne</string>
 	<key>NotesVisible</key>
@@ -60,7 +60,7 @@
 		<key>NSPaperName</key>
 		<array>
 			<string>string</string>
-			<string>4F7721C1-4B39-4BF4-9900-9CADA1DA9903</string>
+			<string>6FB9A579-5F1C-4014-BFB6-5203F2ED8BA4</string>
 		</array>
 		<key>NSPaperSize</key>
 		<array>
@@ -3477,7 +3477,7 @@ em:hasAnnotation}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{503.34447653239147, 718.91001517996779}, {36.848445892333984, 16}}</string>
+					<string>{{495.54812392821304, 714.14260225717453}, {36.848445892333984, 16}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3500,9 +3500,9 @@ em:hasAnnotation}</string>
 						<key>ID</key>
 						<integer>15</integer>
 						<key>Offset</key>
-						<real>-9.6062917709350586</real>
+						<real>-13.692905426025391</real>
 						<key>Position</key>
-						<real>0.3254815936088562</real>
+						<real>0.43244650959968567</real>
 						<key>RotationType</key>
 						<integer>0</integer>
 					</dict>
@@ -3562,15 +3562,15 @@ label}</string>
 					<string>LineGraphic</string>
 					<key>ControlPoints</key>
 					<array>
-						<string>{-14.173227310180721, -14.116251302592104}</string>
-						<string>{14.173227310180664, -21.259840965270996}</string>
+						<string>{-15.067333236897753, -5.0461090850158143}</string>
+						<string>{14.173227310180664, -14.116251302592104}</string>
 					</array>
 					<key>ID</key>
 					<integer>15</integer>
 					<key>Points</key>
 					<array>
-						<string>{538.84816270637839, 731.16532042476388}</string>
-						<string>{510.23618316650391, 729.9212064743042}</string>
+						<string>{539.47674371358232, 713.70747459404902}</string>
+						<string>{481.88972854614258, 722.77761681162531}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -3605,6 +3605,8 @@ label}</string>
 					<dict>
 						<key>ID</key>
 						<integer>4</integer>
+						<key>Info</key>
+						<integer>16</integer>
 					</dict>
 				</dict>
 				<dict>
@@ -3743,7 +3745,7 @@ link}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{493.88328880993868, 735.14041990500084}, {42.519680023193359, 16}}</string>
+					<string>{{492.37861997598156, 732.17446614127755}, {42.519680023193359, 16}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3829,14 +3831,14 @@ note}</string>
 					<key>ControlPoints</key>
 					<array>
 						<string>{-17.802260327128238, -10.318551923395717}</string>
-						<string>{14.173227310180664, -21.259840965270996}</string>
+						<string>{14.173227310180664, -14.059275295003204}</string>
 					</array>
 					<key>ID</key>
 					<integer>21</integer>
 					<key>Points</key>
 					<array>
 						<string>{542.21167080381269, 740.23975839770003}</string>
-						<string>{481.88972854614258, 751.1810474395752}</string>
+						<string>{481.88972854614258, 743.9804817693074}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4697,8 +4699,8 @@ Place category \
 					<integer>35</integer>
 					<key>Points</key>
 					<array>
-						<string>{976.02573196048399, 539.59404201887139}</string>
-						<string>{889.68107905320448, 605.79864960597126}</string>
+						<string>{976.02572835704621, 539.59403807055787}</string>
+						<string>{889.68107232625277, 605.79864079819902}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4811,8 +4813,8 @@ Place category \
 					<integer>37</integer>
 					<key>Points</key>
 					<array>
-						<string>{1076.2417786785177, 562.54260162552657}</string>
-						<string>{1084.0301762646905, 594.78799529420542}</string>
+						<string>{1076.0410823867549, 562.58323136125455}</string>
+						<string>{1083.7393157029449, 594.78853795936539}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -45722,7 +45724,7 @@ Source}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
