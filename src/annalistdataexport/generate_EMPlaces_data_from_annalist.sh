@@ -1,18 +1,14 @@
 @@@@TODO: edit for use with Annlist data exporter@@@@
 
+@@@@ e.g, 
+@@@@ python get_annalist_data.py get Place_sourced/Opole_P_CofK
 
-# This is a sample script for generating GeoNames IDs from
-# data exported from EMLO.
-#
-# The starting point is file `20181008-geonames-urls-from-EMLO.txt`, which is
-# a list of all GeoNames URLs extracted from EMLO. (This file was created by 
-# hand from an EMLO spreadsheet dump, using simple row selection and export by 
-# copy-and-paste to a text file.)
+# This is a sample script for generating ...
 
 DATE=$(date "+%Y%m%d")
 SELECT=25
 
-# Write GeoNames IDs to nmew file
+# Write GeoNames URLs to new file
 
 python get_geonames_data.py manygeo \
     <20181008-geonames-urls-from-EMLO.txt \
