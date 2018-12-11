@@ -922,8 +922,6 @@ def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
 
         # , M.emit(M.prop_eq(EM.reference),       M.stmt(M.tgt_subj, M.src_prop, M.src_obj))
 
-
-
         #     em:when <http://localhost:8000/annalist/c/EMPlaces_defs/d/Time_period/Current> ;
         #     em:where <http://localhost:8000/annalist/c/EMPlaces_defs/d/Setting/Opole_current> ;
         #     em:alternateAuthority <http://localhost:8000/annalist/c/EMPlaces_defs/d/Authority/GeoNames_Opole_source>,

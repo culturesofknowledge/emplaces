@@ -137,7 +137,7 @@ eml:de a em:Language_value ;
     # em:tag "de" ; 
     em:tag_639_1 "de" ;
     em:tag_639_2 "deu" ;
-    rdfs:label   "German"
+    rdfs:label   "German" ;
     rdfs:comment "# German" ;
     .
     
@@ -145,16 +145,16 @@ eml:pl a em:Language_value ;
     # em:tag "pl" ; 
     em:tag_639_1 "pl" ;
     em:tag_639_2 "pol" ;
-    rdfs:label   "Polish"
+    rdfs:label   "Polish" ;
     rdfs:comment "# Polish" ;
     .
 
 eml:la a em:Language_value ;
     # em:tag "la" ; 
-    rdfs:label "Latin"
+    rdfs:label "Latin" ;
     em:tag_639_1 "la" ;
     em:tag_639_2 "lat" ;
-    rdfs:label   "Latin"
+    rdfs:label   "Latin" ;
     rdfs:comment "# Latin" ;
     .
 
@@ -497,7 +497,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
 
     # Reference bibliography
 
-    em:reference refe:Opole_Emmerling_Zajaczkowska ;
+    em:reference ref:Opole_Emmerling_Zajaczkowska ;
 
     # Related resources
 
@@ -511,7 +511,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
         em:short_label "TGN" ;
         rdfs:label "TGN data for Opole" ;
         em:link <http://vocab.getty.edu/page/tgn/7007751>
-      ]
+      ] ;
 
     em:relatedResource
       [ em:link <https://dolny-slask.org.pl> ],
