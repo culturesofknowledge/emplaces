@@ -83,6 +83,12 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [x] Related places
     - [ ] Historical place record: minimum viable information
        - differs from current place
+5. Generate EMPlaces data mapped from Annalist
+    - [ ] Basic mapping seems to work
+    - [ ] Nedd to figure how to handle local URIs (which are roughly blank nodes)
+6. Annalist data
+    - [ ] Generate Annalist data from geonames; get full update data
+
 
 - Sample bibliographies to enter
 - Dealing with sources (see issues #19, #13, #7 ?)

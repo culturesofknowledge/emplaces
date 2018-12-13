@@ -93,6 +93,8 @@ class DataExtractMap(object):
     <stmt_select> may be:
         prop_eq(<URI>)      matches statements whose property is <URI>
         prop_ne(<URI>)      matches statements whose property is different than <URI>
+        prop_nseq(<URI>)    matches statements whose property starts with <URI>
+        prop_nsne(<URI>)    matches statements whose property does not start with <URI>
 
     <subgraph> may be:
         stmt(<value>, <value>, <value>)
@@ -147,9 +149,9 @@ class DataExtractMap(object):
             except StopIteration as e:
                 pass    # expected response
             else:
-                raise ValueError("map_def.set_subj: ambiguous selection")
+                raise ValueError("map_def._select_single: ambiguous selection")
         except StopIteration as e:
-            raise EmptySelection("map_def.set_subj: empty selection")
+            raise EmptySelection("map_def._select_single: empty selection")
         return (s, p, o)
 
     # Extract and map data using supplied mapping table
@@ -177,7 +179,9 @@ class DataExtractMap(object):
         def set_subj_emf(self):
             try:
                 s, p, o = self._select_single(selector)
-                self._tgt_subj = value(self, s, p, o)
+                subj = value(self, s, p, o)
+                if subj:
+                    self._tgt_subj = value(self, s, p, o)
                 # print("@@@ tgt_subj %s"%(self._tgt_subj))
             except EmptySelection:
                 pass # No subject to save
@@ -225,6 +229,30 @@ class DataExtractMap(object):
                     yield (s, p, o)
             return
         return prop_ne_sel
+
+    @classmethod
+    def prop_nseq(cls, uri):
+        """
+        Returns selector for statements whose property starts with the supplied URI value.
+        """
+        def prop_nseq_sel(src, base):
+            for stmt in src:
+                if str(stmt[1]).startswith(str(uri)):
+                    yield stmt
+            return
+        return prop_nseq_sel
+
+    @classmethod
+    def prop_nsne(cls, uri):
+        """
+        Returns selector for statements whose property starts with the supplied URI value.
+        """
+        def prop_nsne_sel(src, base):
+            for stmt in src:
+                if not str(stmt[1]).startswith(str(uri)):
+                    yield stmt
+            return
+        return prop_nsne_sel
 
     # Result subgraph generator methods
 
