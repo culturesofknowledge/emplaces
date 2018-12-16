@@ -117,6 +117,7 @@ class DataExtractMap(object):
         src     source graph, from which data is extracted
         tgt     target graph, to which data is added
         """
+        # print("@@@ DataExtractMap, base %s"%(base,))
         self._base      = base
         self._src       = src
         self._tgt       = tgt
@@ -124,6 +125,7 @@ class DataExtractMap(object):
         return
 
     # Helpers
+    # -------
 
     def _select(self, selector):
         """
@@ -154,7 +156,9 @@ class DataExtractMap(object):
             raise EmptySelection("map_def._select_single: empty selection")
         return (s, p, o)
 
+
     # Extract and map data using supplied mapping table
+    # -------------------------------------------------
 
     def extract_map(self, data_mapping_table):
         """
@@ -167,7 +171,9 @@ class DataExtractMap(object):
             emf(self)
         return self._tgt_subj
 
+
     # Extract / transform methods
+    # ---------------------------
 
     @classmethod
     def set_subj(cls, selector, value):
@@ -201,7 +207,35 @@ class DataExtractMap(object):
                     self._tgt.add(stmt)
         return emit_emf
 
+    @classmethod
+    def _unused_emit_alt(cls, selector, test_stmt, alt_pass, alt_fail):
+        """
+        Emit alternative statement(s) based on selected statements,
+        depending on result of test applied to each match.
+        """
+        def emit_alt_emf(self):
+            # print("@@@ emit_alt_emf")
+            matches = self._select(selector)
+            for s, p, o in matches:
+                # print("@@@ emit_alt obj %s"%(o,))
+                subgraph = alt_pass if test_stmt(self, s, p, o) else alt_fail
+                for stmt in subgraph(self, s, p, o):
+                    # print("@@@ emit_alt stmt %s"%(stmt,))
+                    self._tgt.add(stmt)
+        return emit_alt_emf
+
     # Statement selector methods
+    # --------------------------
+
+    @classmethod
+    def prop_all(cls):
+        """
+        Returns selector that matches all statements.
+        """
+        def prop_all_sel(src, base):
+            # print("@@@ prop_all_sel %r, %s"%(src, base))
+            return src.triples((URIRef(base), None, None))
+        return prop_all_sel
 
     @classmethod
     def prop_eq(cls, uri):
@@ -209,7 +243,7 @@ class DataExtractMap(object):
         Returns selector for statements whose property is the supplied URI value.
         """
         def prop_eq_sel(src, base):
-            # print("@@@ prop_eq.sel u: %s, b: %r"%(uri, base))
+            # print("@@@ prop_eq_sel u: %s, b: %r"%(uri, base))
             # print("@@@ triples     %r"%(list( 
             #     src.triples((URIRef(base), URIRef(uri), None))
             #     )))
@@ -223,7 +257,7 @@ class DataExtractMap(object):
         """
         prop_ref = URIRef(uri)
         def prop_ne_sel(src, base):
-            # print("@@@ prop_ne.sel %s, %r, %s"%(uri, src, base))
+            # print("@@@ prop_ne_sel %s, %r, %s"%(uri, src, base))
             for s, p, o in src:
                 if p != prop_ref:
                     yield (s, p, o)
@@ -254,7 +288,13 @@ class DataExtractMap(object):
             return
         return prop_nsne_sel
 
+
     # Result subgraph generator methods
+    # ---------------------------------
+    #
+    # These are class methods that return an unbound object method which is
+    # invoked with a data extract map instance and the subject, predicate and 
+    # object of a matched source statement.
 
     @classmethod
     def stmt(cls, gen_s, gen_p, gen_o):
@@ -281,15 +321,47 @@ class DataExtractMap(object):
     @classmethod
     def stmt_copy(cls):
         """
-        Returns a subgraph generator that emiys a copy of the current statement,
+        Returns a subgraph generator that emits a copy of the current statement,
         possibly with the subject replaced according to a previous "set_subj".
         """
         return cls.stmt(cls.tgt_subj, cls.src_prop, cls.src_obj)
 
     @classmethod
+    def stmt_copy_not_blank(cls):
+        """
+        Returns a subgraph generator that emits a copy of the current statement,
+        possibly with the subject replaced according to a previous "set_subj",
+        provided that the object is not a blank literal or URI reference.
+        """
+        def gen(self, s, p, o):
+            o_val = self.src_obj(s, p, o)
+            # print("@@@ stmt_copy_not_blank o_val %s"%(o_val,))
+            if o_val != "":
+                yield (self.tgt_subj(s, p, o), self.src_prop(s, p, o), o_val)
+            return
+        return gen
+
+    @classmethod
+    def stmt_copy_obj_ne(cls, val):
+        """
+        Returns a subgraph generator that emits a copy of the current statement,
+        possibly with the subject replaced according to a previous "set_subj",
+        provided that the object is not equal to the supplied value
+        """
+        def gen(self, s, p, o):
+            o_val = self.src_obj(s, p, o)
+            # print("@@@ stmt_copy_val_ne o_val %s"%(o_val,))
+            if str(o_val) != val:
+                yield (self.tgt_subj(s, p, o), self.src_prop(s, p, o), o_val)
+            # else:
+            #     print("@@@ stmt_copy_val_ne skipped o_val %s"%(o_val,))
+            return
+        return gen
+
+    @classmethod
     def ref_subgraph(cls, gen_s, gen_p, subgraph_ref, subgraph_map):
         """
-        Returns a subgraph-generator function that emits a link to a subggraph, 
+        Returns a subgraph-generator function that emits a link to a subgraph, 
         then scans and maps the referenced subgraph and also emits that.
 
         The subgraph-generator is called with subject, predicate and object 
@@ -311,8 +383,10 @@ class DataExtractMap(object):
         def ref_subgraph_gen(self, s, p, o):
             # Get copy of graph
             subgraph_url = str(subgraph_ref(self, s, p, o))
+            # print("@@@ subgraph_url %s, link from %s, %s"%(subgraph_url,gen_s(self, s, p, o), gen_p(self, s, p, o)))
+            # if subgraph_url.startswith("#"):
+            #     assert false, "@@@@ URL error"
             subgraph_rdf = Rdf_graph_cache.get_graph(subgraph_url)
-            # print("@@@ subgraph_url %s"%(subgraph_url,))
             # Map and emit subgraph
             sub_subgraph_map = DataExtractMap(
                 subgraph_url, 
@@ -360,11 +434,10 @@ class DataExtractMap(object):
                 item     = self._src.value(subject=cursor, predicate=RDF.first, any=False)
                 tail     = self._src.value(subject=cursor, predicate=RDF.rest,  any=False)
                 new_cons = BNode()
-
                 # Extract and map subgraph, linked from new list item
                 ref_subg = self.ref_subgraph(self.const(new_cons), self.const(RDF.first), self.const(item), subgraph_map)
-                for s in ref_subg(self, s, p, o):
-                    yield s
+                for stmt in ref_subg(self, s, p, o):
+                    yield stmt
                 # Link to new list item from referrer
                 yield (prev_s, prev_p, new_cons)
                 # Advance values to next list item
@@ -376,7 +449,45 @@ class DataExtractMap(object):
             return
         return ref_list_gen
 
+    @classmethod
+    def alt_values(cls, test_stmt, alt_pass, alt_fail):
+        """
+        Emit alternative statement(s) based on selected statements,
+        depending on result of test applied to each match.
+        """
+        def emit_alt_gen(self, s, p, o):
+            # print("@@@ emit_alt_gen (%s, %s, %s)"%(s, p, o))
+            alt_gen = alt_pass if test_stmt(self, s, p, o) else alt_fail
+            for stmt in alt_gen(self, s, p, o):
+                # print("@@@ emit_alt stmt %s"%(stmt,))
+                yield stmt
+        return emit_alt_gen
+
+    # Statement test methods
+    # ----------------------
+    #
+    # These are class methods that return an unbound object method which is
+    # invoked with a data extract map instance and the subject, predicate and 
+    # object of a matched source statement, and return True or False depending
+    # on whether the corresponding test passes.
+
+    @classmethod
+    def test_prop_in(cls, prop_set):
+        """
+        Tests if property is one of a supplied set.
+        """
+        def tst(self, s, p, o):
+            # print("@@@ test_prop_in %s {%r}"%(p, prop_set))
+            return p in prop_set
+        return tst
+
+
     # Value generator methods
+    # -----------------------
+    #
+    # These are class methods that return an unbound object method which is
+    # invoked with a data extract map instance and the subject, predicate and 
+    # object of a matched source statement.
 
     @classmethod
     def const(cls, value):
@@ -406,6 +517,25 @@ class DataExtractMap(object):
         Return object of matched statement
         """
         return o
+
+    @classmethod
+    def src_obj_or_val(cls, prop):
+        """
+        If the object of matched statement is a resource with an indicated
+        property, return the value of that property, otherwise return the 
+        object of the current statement.
+
+        (This allows resources to indiocated alternate values or aliases
+        with which they should be referenced.)
+
+        NOTE: unlike some other value generators, this is invoked as a function.
+        """
+        def val(self, s, p, o):
+            value = self._src.value(subject=o, predicate=prop, any=False)
+            if value is None:
+                value = o
+            return value
+        return val
 
     def src_base(self, s, p, o):
         """

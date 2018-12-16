@@ -69,7 +69,7 @@ GN        = Namespace("http://www.geonames.org/ontology#")  # GeoNames ontology
 GEONAMES  = Namespace("http://sws.geonames.org/")           # GeoNames place 
 WGS84_POS = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
 EM        = Namespace("http://id.emplaces.info/vocab/")
-EMP       = Namespace("http://id.emplaces.info/place/")
+EMP       = Namespace("http://id.emplaces.info/timeperiod/")
 EMT       = Namespace("http://id.emplaces.info/timespan/")
 EML       = Namespace("http://id.emplaces.info/language/")
 EMS       = Namespace("http://id.emplaces.info/source/")
@@ -79,6 +79,10 @@ PLACE     = Namespace("http://id.emplaces.info/place/")
 AGENT     = Namespace("http://id.emplaces.info/agent/")
 REF       = Namespace("http://id.emplaces.info/reference/")
 
+# Base URL for collection
+# (@@TODO: extract this automatically from supplied reference)
+
+COLLECTION_BASE = "http://localhost:8000/annalist/c/EMPlaces_defs/d"
 
 #   ===================================================================
 #
@@ -695,7 +699,7 @@ def get_annalist_uri(annalist_ref):
         Place_sourced/Opole_P_EMPlaces
         Place_merged/Opole_P
     """
-    default_base_url = "http://localhost:8000/annalist/c/EMPlaces_defs/d/"
+    default_base_url = COLLECTION_BASE + "/"
     annalist_uri     = urlparse.urljoin(default_base_url, annalist_ref)
     annalist_url     = urlparse.urljoin(annalist_uri+"/", "entity_data.ttl")
     return (annalist_uri, annalist_url)
@@ -788,6 +792,29 @@ def add_emplaces_common_namespaces(emp_graph):
     emp_graph.bind("agent",     AGENT.term(""))
     emp_graph.bind("ref",       REF.term(""))
     emp_graph.bind("annal",     ANNAL.term(""))
+    local_namespaces = (
+        { "anno_cal":        "%(base)s/Calendar_used_annotation/"
+        , "anno_map":        "%(base)s/Map_resource_annotation/"
+        , "anno_nam":        "%(base)s/Name_attestation_annotation/"
+        , "annotation":      "%(base)s/Contextualized_annotation/"
+        , "place_category":  "%(base)s/Place_category/"
+        , "place_relation":  "%(base)s/Qualified_relation/"
+        , "place_sourced":   "%(base)s/Place_sourced/"
+        , "place_type":      "%(base)s/Place_type/"
+        , "place_name":      "%(base)s/Place_name/"
+        , "setting":         "%(base)s/Setting/"
+        , "location":        "%(base)s/Location_value/"
+        , "person":          "%(base)s/foaf_Person/"
+        # , "agent":           "%(base)s/foaf_Agent/"
+        , "map_resource":    "%(base)s/Map_resource/"
+        , "calendar":        "%(base)s/Calendar/"
+        , "language_value":  "%(base)s/Language_value/"
+        })
+    for pref in local_namespaces:
+        emp_graph.bind(
+            pref, 
+            local_namespaces[pref]%{"base": COLLECTION_BASE}
+            )
     return
 
 def add_turtle_data(emp_rdf, turtle_str):
@@ -803,7 +830,7 @@ def add_turtle_data(emp_rdf, turtle_str):
     recognized in the Turtle data.
     """
     emp_rdf.parse(
-        data=COMMON_PREFIX_DEFS+turtle_str, 
+        data=COMMON_PREFIX_DEFS+LOCAL_PREFIX_DEFS+turtle_str, 
         format="turtle"
         )
     return emp_rdf
@@ -858,6 +885,12 @@ def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
         add_emplaces_common_namespaces(emplaces_rdf)
     M = DataExtractMap
     # ----- mapping tables -----
+    annalist_reference_mapping = M.ref_subgraph(
+        # If an `annal:uri` value is defined for an entity, use it to
+        # refer to that entity.
+        M.tgt_subj, M.src_prop, M.src_obj,
+        [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
+        ])
     annalist_resource_copy = M.ref_subgraph(
         M.tgt_subj, M.src_prop, M.src_obj,
         [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
@@ -873,7 +906,7 @@ def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
         , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
         , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
         , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-        , M.emit(M.prop_eq(EM.link),                M.stmt_copy())
+        , M.emit(M.prop_eq(EM.link),                M.stmt_copy_obj_ne(COLLECTION_BASE+"/"))
         , M.emit(M.prop_eq(EM.short_label),         M.stmt_copy())
         ])
     annalist_when_mapping = M.ref_subgraph(
@@ -939,7 +972,7 @@ def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
         , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
         , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
         , M.emit(M.prop_eq(DCTERMS.title),      M.stmt_copy())
-        , M.emit(M.prop_eq(DCTERMS.publisher),  M.stmt_copy())
+        , M.emit(M.prop_eq(DCTERMS.publisher),  annalist_reference_mapping)
         , M.emit(M.prop_eq(DCTERMS.date),       M.stmt_copy())
         , M.emit(M.prop_eq(DCTERMS.source),     M.stmt_copy())
         , M.emit(M.prop_eq(BIBO.authorList),
@@ -965,10 +998,23 @@ def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
         , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
         , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
         , M.emit(M.prop_eq(EM.relationTo),      M.stmt_copy())
-        , M.emit(M.prop_eq(EM.relationType),    M.stmt_copy())
+        , M.emit(M.prop_eq(EM.relationType),    annalist_reference_mapping)
         , M.emit(M.prop_eq(EM.when),            annalist_when_mapping)
-        , M.emit(M.prop_eq(EM.competence),      M.stmt_copy())
+        , M.emit(M.prop_eq(EM.competence),      annalist_reference_mapping)
         , M.emit(M.prop_eq(EM.source),          annalist_source_mapping)
+        ])
+    annalist_body_copy = M.ref_subgraph(
+        M.tgt_subj, M.src_prop, M.src_obj,
+        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+        , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+        , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+        , M.emit(M.prop_nsne(ANNAL[None]),
+            M.alt_values(
+                M.test_prop_in({EM.language}),
+                M.stmt(M.tgt_subj, M.src_prop, M.src_obj_or_val(ANNAL.uri)),
+                M.stmt_copy()
+                )
+            )
         ])
     annalist_annotation_mapping = M.ref_subgraph(
         M.tgt_subj, M.const(OA.hasAnnotation), M.src_obj,
@@ -978,13 +1024,13 @@ def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
         , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
         , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
         , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
-        , M.emit(M.prop_eq(OA.hasBody),         annalist_resource_copy)
+        , M.emit(M.prop_eq(OA.hasBody),         annalist_body_copy)
         , M.emit(M.prop_eq(OA.hasTarget),       M.stmt_copy())
-        , M.emit(M.prop_eq(OA.motivatedBy),     M.stmt_copy())
+        , M.emit(M.prop_eq(OA.motivatedBy),     annalist_reference_mapping)
         , M.emit(M.prop_eq(EM.when),            annalist_when_mapping)
-        , M.emit(M.prop_eq(EM.competence),      M.stmt_copy())
+        , M.emit(M.prop_eq(EM.competence),      annalist_reference_mapping)
         , M.emit(M.prop_eq(EM.source),          annalist_source_mapping)
-        , M.emit(M.prop_eq(DCTERMS.creator),    M.stmt_copy())
+        , M.emit(M.prop_eq(DCTERMS.creator),    annalist_reference_mapping)
         , M.emit(M.prop_eq(DCTERMS.created),    M.stmt_copy())
         ])
     annalist_sourced_place_mapping = (
@@ -999,7 +1045,7 @@ def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
         , M.emit(M.prop_eq(EM.editorialNote),       M.stmt_copy())
         , M.emit(M.prop_eq(EM.placeCategory),       M.stmt_copy())
         , M.emit(M.prop_eq(EM.placeType),           M.stmt_copy())
-        , M.emit(M.prop_eq(EM.relatedResource),     M.stmt_copy())
+        , M.emit(M.prop_eq(EM.relatedResource),     annalist_source_mapping)
         , M.emit(M.prop_eq(EM.source),              annalist_source_mapping)
         , M.emit(M.prop_eq(EM.alternateAuthority),  annalist_source_mapping)
         , M.emit(M.prop_eq(EM.when),                annalist_when_mapping)
@@ -1028,7 +1074,7 @@ def do_get_source_place_data(gadroot, options):
     """
     Get single-source place data from a given place reference
     """
-    annalist_ref  = getargvalue(getarg(options.args, 0), "Annalist ref: ")
+    annalist_ref = getargvalue(getarg(options.args, 0), "Annalist ref: ")
     emplaces_rdf = get_annalist_ref_data(gadroot, annalist_ref)
     get_common_defs(options, emplaces_rdf)
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)

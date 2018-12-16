@@ -2,10 +2,10 @@
 
 ## TODO
 
-- [x] Set up initial tool framework (based on `get_geonamnes_data.py`)
+- [x] Set up initial tool framework (based on `get_geonames_data.py`)
 - [x] Export single-source data given Annalist URL
 - [ ] Export merged-source data given Annalist URL
-- [ ] Deal with local URIs - generate namespace or treat as blank nodes?
+- [x] Deal with local URIs - generate namespace for URIs.
 - [ ] Refactor common code between get_geonames_data and get_annalist_data
 - [ ] Installation script (setup.py)?
 
