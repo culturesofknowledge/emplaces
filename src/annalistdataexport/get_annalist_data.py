@@ -607,7 +607,8 @@ command_summary_help = ("\n"+
     "Commands:\n"+
     "\n"+
     "  %(prog)s help [command]\n"+
-    "  %(prog)s get ANNALISTREF\n"+
+    "  %(prog)s getmerged ANNALISTREF\n"+
+    "  %(prog)s getsourced ANNALISTREF\n"+
     "  %(prog)s resource ANNALISTREF\n"+
     # "  %(prog)s manyget\n"+
     # "  %(prog)s placehierarchy ANNALISTREF\n"+

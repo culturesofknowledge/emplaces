@@ -1,9 +1,6 @@
 # Annalist data exporter
 
-@@@@TODO: update for Annalist exporter tool@@@@
-
-
-This directory contains code for a command line tool to extract EMPlaces data from Annalist, and some related values, given an Annalist place reference.
+This directory contains code for a command line tool to extract EMPlaces data and related values from Annalist, given an Annalist place reference.
 
 
 ## Installation (under Linux/Unix/MacOS)
@@ -29,44 +26,31 @@ Install `rdflib` dependency
 
     cd src/geonamesdataexport
     pip install rdflib==4.2.2
+    pip install requests==2.21.0
 
 
 ## Example usage
 
-Run the extractor for Opole ("3090048" is the GeoNames id for the City of Opole):
+Run the extractor for Opole data as defined in GeoNames:
 
-    python get_geonames_data.py get 3090048
+    python get_annalist_data.py gets Place_sourced/Opole_P_GeoNames
 
 Turtle data is sent to stdout, and may be redirected to a file, thus:
 
-    python get_geonames_data.py get 3090048 >emplaces_opole.ttl
+    python get_annalist_data.py getsourced Place_sourced/Opole_P_GeoNames \
+      >opole_geonames.ttl
 
-Get list of place Ids in administrative hierarchy:
+Run the extractor for Opole data from multiple sources:
 
-    python get_geonames_data.py placehierarchy 3090048
-
-Get Turtle data for all places in administrative hierarchy:
-
-    python get_geonames_data.py placehierarchy 3090048 | \
-    python get_geonames_data.py manyget >emplaces_opole_hierarchy.ttl
-
-Get all members of the administrative hierarchy covering a supplied list of places:
-
-    cat Opole_nearby_places.txt | python get_geonames_data.py manyplacehierarchy
-
-Get RDF Turtle data for all members of the administrative hierarchy covering the list of places near Opole:
-
-    cat Opole_nearby_places.txt | \
-    python get_geonames_data.py manyplacehierarchy | \
-    python get_geonames_data.py manyget > Opole_extracted_data.ttl
+    python get_annalist_data.py getmerged Place_merged/Opole_P
 
 
 ## Command line usage
 
-    usage: get_geonames_data.py [-h] [--version] [--debug] [-e] [-g] [-l] [-c]
-                            COMMAND [ARGS [ARGS ...]]
+    usage: get_annalist_data.py [-h] [--version] [--debug] [-e] [-g] [-l] [-c]
+                                COMMAND [ARGS [ARGS ...]]
 
-    EMPlaces GeoNames data extractor
+    EMPlaces Annalist data exporter
 
     positional arguments:
       COMMAND               sub-command, one of the options listed below.
@@ -76,7 +60,7 @@ Get RDF Turtle data for all members of the administrative hierarchy covering the
       -h, --help            show this help message and exit
       --version             show program's version number and exit
       --debug               Run with full debug output enabled. Also creates log
-                            file 'get-core-data.log' in the working directory
+                            file 'get-annalist-data.log' in the working directory
       -e, --include-emplaces-defs
                             Include common EMPlaces defintions (e.g. for relation
                             types, periods, competencies, etc.) in the output
@@ -94,12 +78,10 @@ Get RDF Turtle data for all members of the administrative hierarchy covering the
 
     Commands:
 
-      get_geonames_data.py help [command]
-      get_geonames_data.py get GEONAMESID
-      get_geonames_data.py manyget
-      get_geonames_data.py placehierarchy GEONAMESID
-      get_geonames_data.py manyplacehierarchy
-      get_geonames_data.py geonamesid URL [REGEXP]
-      get_geonames_data.py manygeonamesids [REGEXP]
-      get_geonames_data.py version
+      get_annalist_data.py help [command]
+      get_annalist_data.py getmerged ANNALISTREF
+      get_annalist_data.py getsourced ANNALISTREF
+      get_annalist_data.py resource ANNALISTREF
+      get_annalist_data.py version
+
 

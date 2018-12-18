@@ -6,7 +6,7 @@
 - [x] Export single-source data given Annalist URL
 - [x] Export merged-source data given Annalist URL
 - [x] Deal with local URIs - generate namespace for URIs.
-- [ ] Update documentation
+- [x] Update documentation
 - [ ] Refactor common code between get_geonames_data and get_annalist_data
 - [ ] Installation script (setup.py)?
 
