@@ -207,23 +207,6 @@ class DataExtractMap(object):
                     self._tgt.add(stmt)
         return emit_emf
 
-    @classmethod
-    def _unused_emit_alt(cls, selector, test_stmt, alt_pass, alt_fail):
-        """
-        Emit alternative statement(s) based on selected statements,
-        depending on result of test applied to each match.
-        """
-        def emit_alt_emf(self):
-            # print("@@@ emit_alt_emf")
-            matches = self._select(selector)
-            for s, p, o in matches:
-                # print("@@@ emit_alt obj %s"%(o,))
-                subgraph = alt_pass if test_stmt(self, s, p, o) else alt_fail
-                for stmt in subgraph(self, s, p, o):
-                    # print("@@@ emit_alt stmt %s"%(stmt,))
-                    self._tgt.add(stmt)
-        return emit_alt_emf
-
     # Statement selector methods
     # --------------------------
 

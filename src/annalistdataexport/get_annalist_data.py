@@ -733,20 +733,6 @@ def show_help(options, progname):
             "\n"+
             "  %(prog)s --help\n"+
             "")
-    # elif options.args[0].startswith("manyget"):
-    #     help_text = ("\n"+
-    #         "  %(prog)s manyget\n"+
-    #         "\n"+
-    #         "\n"+
-    #         "Reads GeoNames place Ids from stdin, one per line, retrieves data\n"+
-    #         "for these from GeoNames, and sends corresponding EMPlaces data in\n"+
-    #         "Turtle format to standard output.\n"+
-    #         "\n"+
-    #         "To include some common non-place-specific supporting definitions, see options\n"+
-    #         "'--include-common-defs', '--include-emplaces-defs', '--include-geonames-defs', \n"+
-    #         "and '--include-language-defs'.\n"+
-    #         "\n"+
-    #         "")
     elif options.args[0].startswith("getm"):
         help_text = ("\n"+
             "  %(prog)s getmerged ANNALISTREF\n"+
@@ -788,73 +774,6 @@ def show_help(options, progname):
             "and '--include-language-defs'.\n"+
             "\n"+
             "")
-    # elif options.args[0].startswith("placeh"):
-    #     help_text = ("\n"+
-    #         "  %(prog)s placehierarchy ANNALISTREF\n"+
-    #         "\n"+
-    #         "Gets current administrative hierarchy about a place from GeoNames, \n"+
-    #         "and outputs a list of place Ids, one per line, to standard output.\n"+
-    #         "\n"+
-    #         "The output can be used as input to a `manyget` command.\n"+
-    #         "\n"+
-    #         "")
-    # elif options.args[0].startswith("manyplaceh"):
-    #     help_text = ("\n"+
-    #         "  %(prog)s manyplacehierarchy\n"+
-    #         "\n"+
-    #         "Reads GeoNames place Ids from stdin, one per line, and for each retrieves\n"+
-    #         "place ids in the current administrative hierarch up as far as country\n"+
-    #         "level, and outputs the resuting list of place IDs (including the input IDs)\n"+
-    #         "to stdout, one per line.\n"+
-    #         "\n"+
-    #         "The output can be used as input to a `manyget` command.\n"+
-    #         "\n"+
-    #         "")
-    # elif options.args[0].startswith("geo"):
-    #     help_text = ("\n"+
-    #         "  %(prog)s geonamesid URL [REGEXP]\n"+
-    #         "\n"+
-    #         "URL is presumed to be a GeoNames URL or other string containing a GeoNames Id.  \n"+
-    #         "Extracts the Geonames Id and writes it to stdout, or a diagnostic message is \n"+
-    #         "output to stderr along with an exit status of %d\n"%(GAD_NO_ANNALIST_URL)+
-    #         "\n"+
-    #         "If REGEXP is specified, this command uses it as a regular expression \n"+
-    #         "(per https://docs.python.org/2/library/re.html#regular-expression-syntax) \n"+
-    #         "which, if it matches the supplied URL, returns the substring matching the\n"+
-    #         "first parenthesized sub-expression as the GeoNames Id.  E.g., for a GeoNames\n"+
-    #         "URL of the form 'http://www.geonames.org/2638655/shropshire.html', use \n"+
-    #         "a REGEXP like 'http://www\.geonames\.org/([0-9]+)/.+$'.\n"+
-    #         "\n"+
-    #         "If REGEXP is not matched, a diagnostic message is output to stderr.\n"+
-    #         "\n"+
-    #         "If REGEXP is not supplied, a range of internal REGEXPs is used to try and\n"+
-    #         "extract the GeroNames id.\n"+
-    #         "\n"+
-    #         "The output can be used as input to a `manyget` or similar command.\n"+
-    #         "\n"+
-    #         "")
-    # elif options.args[0].startswith("manygeo"):
-    #     help_text = ("\n"+
-    #         "  %(prog)s manygeonamesids [REGEXP]\n"+
-    #         "\n"+
-    #         "Reads a list of GeoNames URLs (or other strings that are presumed to \n"+
-    #         "contain a geoNames Id) one per line from stdin and, ignoring any that \n"+
-    #         "start with a '#', extracts the embedded GeoNames place ids, and \n"+
-    #         "outputs the resuting list of GeoNames IDs to stdout, one per line. \n"+
-    #         "\n"+
-    #         "Non-matching inputs are reported to stderr.\n"+
-    #         "\n"+
-    #         "REGEXP is an optional regular exression used for extracting the Ids.\n"+
-    #         "See 'geonamesid' command for more details.\n"+
-    #         "\n"+
-    #         "Returns exit status:\n"+
-    #         "  %d if all input strings are matched and processed,\n"%(GAD_SUCCESS)+
-    #         "  %d if no input strings could be matched and processed, or\n"%(GAD_NO_ANNALIST_URL)+
-    #         "  %d if some input strings could not be matched and processed.\n"%(GAD_SOME_ANNALIST_URLS)+
-    #         "\n"+
-    #         "The output can be used as input to a `manyget` or similar command.\n"+
-    #         "\n"+
-    #         "")
     elif options.args[0].startswith("ver"):
         help_text = ("\n"+
             "  %(prog)s version\n"+
@@ -933,9 +852,6 @@ def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
     emplaces_uri  = EMP[emplaces_id]
     emplaces_node = URIRef(emplaces_uri)
-    # emplaces_id   = "g_%s"%(geonames_id)
-    # emplaces_uri  = EMP[emplaces_id]
-    # emplaces_node = URIRef(emplaces_uri)
     return (emplaces_id, emplaces_uri, emplaces_node)
 
 def get_many_inputs():
@@ -946,18 +862,6 @@ def get_many_inputs():
         if bare_input:
             inputs.append(bare_input)
     return inputs    
-
-# def get_many_place_ids():
-#     geonames_ids = get_many_inputs()
-#     if not geonames_ids:
-#         print("No place Ids found", file=sys.stderr)
-#     return geonames_ids    
-
-# def get_many_geonames_urls():
-#     geonames_urls = get_many_inputs()
-#     if not geonames_urls:
-#         print("No GeoNames URLs found", file=sys.stderr)
-#     return geonames_urls    
 
 #   ===================================================================
 #
@@ -1189,16 +1093,6 @@ def run(userhome, userconfig, options, progname):
         return do_get_source_place_data(gadroot, options)
     if options.command.startswith("resource"):
         return do_get_resource_data(gadroot, options)
-    # if options.command.startswith("manyget"):
-    #     return do_get_many_geonames_place_data(gadroot, options)
-    # if options.command.startswith("placeh"):
-    #     return do_get_place_hierarchy(gadroot, options)
-    # if options.command.startswith("manyplaceh"):
-    #     return do_get_many_place_hierarchy(gadroot, options)
-    # if options.command.startswith("geo"):
-    #     return do_extract_annalist_ref(gadroot, options)
-    # if options.command.startswith("manygeo"):
-    #     return do_extract_many_annalist_refs(gadroot, options)
     if options.command.startswith("ver"):
         return show_version(gadroot, userhome, options)
     if options.command.startswith("help"):
