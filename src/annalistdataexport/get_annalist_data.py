@@ -392,6 +392,210 @@ COMMON_LANGUAGE_DEFS = (
         .
     """)
 
+#   ===================================================================
+#
+#   RDF mapping data
+#
+#   ===================================================================
+
+M = DataExtractMap
+
+annalist_reference_mapping = M.ref_subgraph(
+    # If an `annal:uri` value is defined for an entity, use it to
+    # refer to that entity.
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
+    ])
+
+annalist_resource_copy = M.ref_subgraph(
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+    , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+    , M.emit(M.prop_nsne(ANNAL[None]),          M.stmt_copy())
+    ])
+
+annalist_when_mapping = M.ref_subgraph(
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+    , M.emit(M.prop_eq(EM.time_period), # em:time_period
+        M.ref_subgraph(
+            M.tgt_subj, M.src_prop, M.src_obj,
+            [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+            , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
+            , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
+            , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
+            , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+            , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+            , M.emit(M.prop_eq(EM.timespan),     # em:timespan
+                M.ref_subgraph(
+                    M.tgt_subj, M.src_prop, M.src_obj,
+                    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+                    , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
+                    , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
+                    , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
+                    , M.emit(M.prop_eq(EM.start),               M.stmt_copy())
+                    , M.emit(M.prop_eq(EM.end),                 M.stmt_copy())
+                    ])
+                )
+            ])
+        )
+    ])
+
+annalist_source_mapping = M.ref_subgraph(
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+    , M.emit(M.prop_eq(EM.link),                M.stmt_copy_obj_ne(COLLECTION_BASE+"/"))
+    , M.emit(M.prop_eq(EM.short_label),         M.stmt_copy())
+    ])
+
+annalist_location_mapping = M.ref_subgraph(
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+    , M.emit(M.prop_eq(WGS84_POS.lat),          M.stmt_copy())
+    , M.emit(M.prop_eq(WGS84_POS.long),         M.stmt_copy())
+    ])
+
+annalist_where_mapping = M.ref_subgraph(
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+    , M.emit(M.prop_eq(EM.location),            annalist_location_mapping)
+    , M.emit(M.prop_eq(EM.when),                annalist_when_mapping)
+    , M.emit(M.prop_eq(EM.source),              annalist_source_mapping)
+    ])
+
+annalist_reference_mapping = M.ref_subgraph(
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),           M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),         M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
+    , M.emit(M.prop_eq(DCTERMS.title),      M.stmt_copy())
+    , M.emit(M.prop_eq(DCTERMS.publisher),  annalist_reference_mapping)
+    , M.emit(M.prop_eq(DCTERMS.date),       M.stmt_copy())
+    , M.emit(M.prop_eq(DCTERMS.source),     M.stmt_copy())
+    , M.emit(M.prop_eq(BIBO.authorList),
+        M.ref_list(
+            M.tgt_subj, M.src_prop, M.src_obj,
+            [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
+            , M.emit(M.prop_eq(RDF.type),           M.stmt_copy())
+            , M.emit(M.prop_eq(RDFS.label),         M.stmt_copy())
+            , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
+            , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
+            , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
+            ])
+        )
+    , M.emit(M.prop_eq(BIBO.isbn10),    M.stmt_copy())
+    , M.emit(M.prop_eq(BIBO.isbn13),    M.stmt_copy())
+    ])
+
+annalist_relation_mapping = M.ref_subgraph(
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),           M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),         M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
+    , M.emit(M.prop_eq(EM.relationTo),      M.stmt_copy())
+    , M.emit(M.prop_eq(EM.relationType),    annalist_reference_mapping)
+    , M.emit(M.prop_eq(EM.when),            annalist_when_mapping)
+    , M.emit(M.prop_eq(EM.competence),      annalist_reference_mapping)
+    , M.emit(M.prop_eq(EM.source),          annalist_source_mapping)
+    ])
+
+annalist_body_copy = M.ref_subgraph(
+    M.tgt_subj, M.src_prop, M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+    , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+    , M.emit(M.prop_nsne(ANNAL[None]),
+        M.alt_values(
+            M.test_prop_in({EM.language}),
+            M.stmt(M.tgt_subj, M.src_prop, M.src_obj_or_val(ANNAL.uri)),
+            M.stmt_copy()
+            )
+        )
+    ])
+
+annalist_annotation_mapping = M.ref_subgraph(
+    M.tgt_subj, M.const(OA.hasAnnotation), M.src_obj,
+    [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),           M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),         M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
+    , M.emit(M.prop_eq(OA.hasBody),         annalist_body_copy)
+    , M.emit(M.prop_eq(OA.hasTarget),       M.stmt_copy())
+    , M.emit(M.prop_eq(OA.motivatedBy),     annalist_reference_mapping)
+    , M.emit(M.prop_eq(EM.when),            annalist_when_mapping)
+    , M.emit(M.prop_eq(EM.competence),      annalist_reference_mapping)
+    , M.emit(M.prop_eq(EM.source),          annalist_source_mapping)
+    , M.emit(M.prop_eq(DCTERMS.creator),    annalist_reference_mapping)
+    , M.emit(M.prop_eq(DCTERMS.created),    M.stmt_copy())
+    ])
+
+annalist_sourced_place_mapping = (
+    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.seeAlso),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+    , M.emit(M.prop_eq(EM.preferredName),       M.stmt_copy())
+    , M.emit(M.prop_eq(EM.editorialNote),       M.stmt_copy())
+    , M.emit(M.prop_eq(EM.placeCategory),       M.stmt_copy())
+    , M.emit(M.prop_eq(EM.placeType),           M.stmt_copy())
+    , M.emit(M.prop_eq(EM.relatedResource),     annalist_source_mapping)
+    , M.emit(M.prop_eq(EM.source),              annalist_source_mapping)
+    , M.emit(M.prop_eq(EM.alternateAuthority),  annalist_source_mapping)
+    , M.emit(M.prop_eq(EM.when),                annalist_when_mapping)
+    , M.emit(M.prop_eq(EM.where),               annalist_where_mapping)
+    , M.emit(M.prop_eq(EM.reference),           annalist_reference_mapping)
+    , M.emit(M.prop_eq(EM.hasRelation),         annalist_relation_mapping)
+    , M.emit(M.prop_eq(EM.hasNameAttestationAnnotation),    annalist_annotation_mapping)
+    , M.emit(M.prop_eq(EM.hasMapResourceAnnotation),        annalist_annotation_mapping)
+    , M.emit(M.prop_eq(EM.hasCalendarUsedAnnotation),       annalist_annotation_mapping)
+    ])
+
+annalist_merged_place_mapping = (
+    [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
+    , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
+    , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
+    , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
+    , M.emit(M.prop_eq(EM.canonicalURI),        M.stmt_copy())
+    , M.emit(M.prop_eq(EM.alternateURI),        M.stmt_copy())
+    , M.emit(M.prop_eq(EM.place_data),          M.ref_subgraph(
+        M.tgt_subj, M.src_prop, M.src_obj,
+        annalist_sourced_place_mapping)
+        )
+    ])
 
 #   ===================================================================
 #
@@ -543,9 +747,23 @@ def show_help(options, progname):
     #         "and '--include-language-defs'.\n"+
     #         "\n"+
     #         "")
-    elif options.args[0].startswith("get"):
+    elif options.args[0].startswith("getm"):
         help_text = ("\n"+
-            "  %(prog)s get ANNALISTREF\n"+
+            "  %(prog)s getmerged ANNALISTREF\n"+
+            "\n"+
+            "Gets merged-source data about a referenced place from Annalist, and sends \n"+
+            "corresponding EMPlaces data in Turtle format to standard output.\n"+
+            "Referenced Annalist resources are extracted and included in the result, to\n"+
+            "the extent required to generate valid and complete data for EMPLaces.\n"+
+            "\n"+
+            "To include some common non-place-specific supporting definitions, see options\n"+
+            "'--include-common-defs', '--include-emplaces-defs', '--include-geonames-defs', \n"+
+            "and '--include-language-defs'.\n"+
+            "\n"+
+            "")
+    elif options.args[0].startswith("gets"):
+        help_text = ("\n"+
+            "  %(prog)s getsourced ANNALISTREF\n"+
             "\n"+
             "Gets single-source data about a referenced place from Annalist, and sends \n"+
             "corresponding EMPlaces data in Turtle format to standard output.\n"+
@@ -797,9 +1015,10 @@ def add_emplaces_common_namespaces(emp_graph):
         , "anno_map":        "%(base)s/Map_resource_annotation/"
         , "anno_nam":        "%(base)s/Name_attestation_annotation/"
         , "annotation":      "%(base)s/Contextualized_annotation/"
+        , "place_merged":    "%(base)s/Place_merged/"
+        , "place_sourced":   "%(base)s/Place_sourced/"
         , "place_category":  "%(base)s/Place_category/"
         , "place_relation":  "%(base)s/Qualified_relation/"
-        , "place_sourced":   "%(base)s/Place_sourced/"
         , "place_type":      "%(base)s/Place_type/"
         , "place_name":      "%(base)s/Place_name/"
         , "setting":         "%(base)s/Setting/"
@@ -873,9 +1092,10 @@ def get_annalist_resource_data(gadroot, annalist_ref, resource_rdf=None):
     m.extract_map(annalist_data_mapping)
     return resource_rdf
 
-def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
+def get_annalist_ref_data(gadroot, annalist_ref, mapping, emplaces_rdf=None):
     """
-    Build EMPlaces place data for a specified Annalist place reference.
+    Build EMPlaces place data for a specified Annalist place reference,
+    using an indicated mapping table.
     """
     annalist_uri, annalist_url = get_annalist_uri(annalist_ref)
     annalist_rdf = get_annalist_graph_data(annalist_url)
@@ -883,182 +1103,9 @@ def get_annalist_ref_data(gadroot, annalist_ref, emplaces_rdf=None):
     if emplaces_rdf is None:
         emplaces_rdf = Graph()
         add_emplaces_common_namespaces(emplaces_rdf)
-    M = DataExtractMap
-    # ----- mapping tables -----
-    annalist_reference_mapping = M.ref_subgraph(
-        # If an `annal:uri` value is defined for an entity, use it to
-        # refer to that entity.
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
-        ])
-    annalist_resource_copy = M.ref_subgraph(
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-        , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-        , M.emit(M.prop_nsne(ANNAL[None]),          M.stmt_copy())
-        ])
-    annalist_source_mapping = M.ref_subgraph(
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-        , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-        , M.emit(M.prop_eq(EM.link),                M.stmt_copy_obj_ne(COLLECTION_BASE+"/"))
-        , M.emit(M.prop_eq(EM.short_label),         M.stmt_copy())
-        ])
-    annalist_when_mapping = M.ref_subgraph(
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-        , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-        , M.emit(M.prop_eq(EM.time_period), # em:time_period
-            M.ref_subgraph(
-                M.tgt_subj, M.src_prop, M.src_obj,
-                [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-                , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
-                , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
-                , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
-                , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
-                , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-                , M.emit(M.prop_eq(EM.timespan),     # em:timespan
-                    M.ref_subgraph(
-                        M.tgt_subj, M.src_prop, M.src_obj,
-                        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-                        , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
-                        , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
-                        , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
-                        , M.emit(M.prop_eq(EM.start),               M.stmt_copy())
-                        , M.emit(M.prop_eq(EM.end),                 M.stmt_copy())
-                        ])
-                    )
-                ])
-            )
-        ])
-    annalist_location_mapping = M.ref_subgraph(
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-        , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-        , M.emit(M.prop_eq(WGS84_POS.lat),          M.stmt_copy())
-        , M.emit(M.prop_eq(WGS84_POS.long),         M.stmt_copy())
-        ])
-    annalist_where_mapping = M.ref_subgraph(
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-        , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-        , M.emit(M.prop_eq(EM.location),            annalist_location_mapping)
-        , M.emit(M.prop_eq(EM.when),                annalist_when_mapping)
-        , M.emit(M.prop_eq(EM.source),              annalist_source_mapping)
-        ])
-    annalist_reference_mapping = M.ref_subgraph(
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
-        , M.emit(M.prop_eq(RDF.type),           M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),         M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
-        , M.emit(M.prop_eq(DCTERMS.title),      M.stmt_copy())
-        , M.emit(M.prop_eq(DCTERMS.publisher),  annalist_reference_mapping)
-        , M.emit(M.prop_eq(DCTERMS.date),       M.stmt_copy())
-        , M.emit(M.prop_eq(DCTERMS.source),     M.stmt_copy())
-        , M.emit(M.prop_eq(BIBO.authorList),
-            M.ref_list(
-                M.tgt_subj, M.src_prop, M.src_obj,
-                [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
-                , M.emit(M.prop_eq(RDF.type),           M.stmt_copy())
-                , M.emit(M.prop_eq(RDFS.label),         M.stmt_copy())
-                , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
-                , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
-                , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
-                ])
-            )
-        , M.emit(M.prop_eq(BIBO.isbn10),    M.stmt_copy())
-        , M.emit(M.prop_eq(BIBO.isbn13),    M.stmt_copy())
-        ])
-    annalist_relation_mapping = M.ref_subgraph(
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
-        , M.emit(M.prop_eq(RDF.type),           M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),         M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
-        , M.emit(M.prop_eq(EM.relationTo),      M.stmt_copy())
-        , M.emit(M.prop_eq(EM.relationType),    annalist_reference_mapping)
-        , M.emit(M.prop_eq(EM.when),            annalist_when_mapping)
-        , M.emit(M.prop_eq(EM.competence),      annalist_reference_mapping)
-        , M.emit(M.prop_eq(EM.source),          annalist_source_mapping)
-        ])
-    annalist_body_copy = M.ref_subgraph(
-        M.tgt_subj, M.src_prop, M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-        , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-        , M.emit(M.prop_nsne(ANNAL[None]),
-            M.alt_values(
-                M.test_prop_in({EM.language}),
-                M.stmt(M.tgt_subj, M.src_prop, M.src_obj_or_val(ANNAL.uri)),
-                M.stmt_copy()
-                )
-            )
-        ])
-    annalist_annotation_mapping = M.ref_subgraph(
-        M.tgt_subj, M.const(OA.hasAnnotation), M.src_obj,
-        [ M.set_subj(M.prop_eq(ANNAL.uri),      M.src_obj)
-        , M.emit(M.prop_eq(RDF.type),           M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),         M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.comment),       M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.id),           M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),      M.stmt_copy())
-        , M.emit(M.prop_eq(OA.hasBody),         annalist_body_copy)
-        , M.emit(M.prop_eq(OA.hasTarget),       M.stmt_copy())
-        , M.emit(M.prop_eq(OA.motivatedBy),     annalist_reference_mapping)
-        , M.emit(M.prop_eq(EM.when),            annalist_when_mapping)
-        , M.emit(M.prop_eq(EM.competence),      annalist_reference_mapping)
-        , M.emit(M.prop_eq(EM.source),          annalist_source_mapping)
-        , M.emit(M.prop_eq(DCTERMS.creator),    annalist_reference_mapping)
-        , M.emit(M.prop_eq(DCTERMS.created),    M.stmt_copy())
-        ])
-    annalist_sourced_place_mapping = (
-        [ M.set_subj(M.prop_eq(ANNAL.uri),          M.src_obj)
-        , M.emit(M.prop_eq(RDF.type),               M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),             M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.comment),           M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.seeAlso),           M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.id),               M.stmt_copy())
-        , M.emit(M.prop_eq(ANNAL.type_id),          M.stmt_copy())
-        , M.emit(M.prop_eq(EM.preferredName),       M.stmt_copy())
-        , M.emit(M.prop_eq(EM.editorialNote),       M.stmt_copy())
-        , M.emit(M.prop_eq(EM.placeCategory),       M.stmt_copy())
-        , M.emit(M.prop_eq(EM.placeType),           M.stmt_copy())
-        , M.emit(M.prop_eq(EM.relatedResource),     annalist_source_mapping)
-        , M.emit(M.prop_eq(EM.source),              annalist_source_mapping)
-        , M.emit(M.prop_eq(EM.alternateAuthority),  annalist_source_mapping)
-        , M.emit(M.prop_eq(EM.when),                annalist_when_mapping)
-        , M.emit(M.prop_eq(EM.where),               annalist_where_mapping)
-        , M.emit(M.prop_eq(EM.reference),           annalist_reference_mapping)
-        , M.emit(M.prop_eq(EM.hasRelation),         annalist_relation_mapping)
-        , M.emit(M.prop_eq(EM.hasNameAttestationAnnotation),    annalist_annotation_mapping)
-        , M.emit(M.prop_eq(EM.hasMapResourceAnnotation),        annalist_annotation_mapping)
-        , M.emit(M.prop_eq(EM.hasCalendarUsedAnnotation),       annalist_annotation_mapping)
-        ])
     # -----
     m = DataExtractMap(annalist_uri, annalist_rdf, emplaces_rdf)
-    m.extract_map(annalist_sourced_place_mapping)
+    m.extract_map(mapping)
     return emplaces_rdf
 
 def get_common_defs(options, emplaces_rdf):
@@ -1070,12 +1117,28 @@ def get_common_defs(options, emplaces_rdf):
         add_turtle_data(emplaces_rdf, COMMON_LANGUAGE_DEFS)
     return emplaces_rdf
 
+def do_get_merged_place_data(gadroot, options):
+    """
+    Get merged-source place data from a given place reference
+    """
+    annalist_ref = getargvalue(getarg(options.args, 0), "Annalist ref: ")
+    emplaces_rdf = get_annalist_ref_data(
+        gadroot, annalist_ref,
+        annalist_merged_place_mapping
+        )
+    get_common_defs(options, emplaces_rdf)
+    print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+    return GAD_SUCCESS
+
 def do_get_source_place_data(gadroot, options):
     """
     Get single-source place data from a given place reference
     """
     annalist_ref = getargvalue(getarg(options.args, 0), "Annalist ref: ")
-    emplaces_rdf = get_annalist_ref_data(gadroot, annalist_ref)
+    emplaces_rdf = get_annalist_ref_data(
+        gadroot, annalist_ref,
+        annalist_sourced_place_mapping
+        )
     get_common_defs(options, emplaces_rdf)
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GAD_SUCCESS
@@ -1120,7 +1183,9 @@ def run(userhome, userconfig, options, progname):
     """
     if options.command.startswith("@@@"):
         return do_zzzzzz(gadroot, options)
-    if options.command.startswith("get"):
+    if options.command.startswith("getm"):
+        return do_get_merged_place_data(gadroot, options)
+    if options.command.startswith("gets"):
         return do_get_source_place_data(gadroot, options)
     if options.command.startswith("resource"):
         return do_get_resource_data(gadroot, options)

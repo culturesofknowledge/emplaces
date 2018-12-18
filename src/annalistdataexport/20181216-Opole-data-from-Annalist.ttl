@@ -24,6 +24,7 @@
 @prefix person: <http://localhost:8000/annalist/c/EMPlaces_defs/d/foaf_Person/> .
 @prefix place: <http://id.emplaces.info/place/> .
 @prefix place_category: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_category/> .
+@prefix place_merged: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_merged/> .
 @prefix place_name: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_name/> .
 @prefix place_relation: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Qualified_relation/> .
 @prefix place_sourced: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_sourced/> .
@@ -36,6 +37,20 @@
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+place_merged:Opole_P a em:Place,
+        em:Place_merged,
+        annal:EntityData ;
+    rdfs:label "City of Opole" ;
+    em:canonicalURI place:Opole_P ;
+    em:place_data place_sourced:Opole_P_CofK,
+        place_sourced:Opole_P_GeoNames,
+        place_sourced:Opole_P_wikidata ;
+    annal:id "Opole_P" ;
+    annal:type_id "Place_merged" ;
+    rdfs:comment """# City of Opole\r
+\r
+Authority data from GeoNames, and additional provided by EMPlaces project.""" .
 
 agent:Ryszard_Emmerling a annal:EntityData,
         foaf:Agent,
@@ -112,6 +127,35 @@ ems:Heinrich_Adamy_Breslau a em:Source,
 \r
 Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau.""" .
 
+ems:Opole_P_EMLO a em:Source,
+        annal:EntityData ;
+    rdfs:label "City of Opole (EMLO)" ;
+    em:link <http://emlo.bodleian.ox.ac.uk/profile/location/ae6d9771-a289-4428-bca4-a1da7ba264e6> ;
+    em:short_label "EMLO" ;
+    annal:id "Opole_P_EMLO" ;
+    annal:type_id "Source" ;
+    rdfs:comment "Letters sent from, received at or mentioning Opole, recorded in EMLO." .
+
+ems:Opole_P_Freebase a em:Authority,
+        em:Source,
+        annal:EntityData ;
+    rdfs:label "City of Opole (freebase)" ;
+    em:link <https://g.co/kg/m/0jx51> ;
+    em:short_label "Freebase" ;
+    annal:id "Opole_P_Freebase" ;
+    annal:type_id "Authority" ;
+    rdfs:comment "Freebase record fort Opole" .
+
+ems:Opole_P_GND a em:Authority,
+        em:Source,
+        annal:EntityData ;
+    rdfs:label "City of Opole (GND)" ;
+    em:link <http://d-nb.info/gnd/4075671-3> ;
+    em:short_label "GND" ;
+    annal:id "Opole_P_GND" ;
+    annal:type_id "Authority" ;
+    rdfs:comment "Cit=y of Opole description in GND" .
+
 ems:TGN_Opole_source a em:Authority,
         em:Source,
         annal:EntityData ;
@@ -133,38 +177,6 @@ ems:Tomsa_1995 a em:Source,
     annal:id "Tomsa_1995" ;
     annal:type_id "Source" ;
     rdfs:comment "Tomsa, Jan: PoÄÃ¬tÃ¡nÃ¬ Äasu (ZÃ¡klady teorie kalendÃ¡Åe). Praha 1995" .
-
-ems:Wikidata_Opole_source a em:Authority,
-        em:Source,
-        annal:EntityData ;
-    rdfs:label "Wikidata for Opole" ;
-    em:short_label "Wikidata" ;
-    annal:id "Wikidata_Opole_source" ;
-    annal:type_id "Authority" ;
-    rdfs:comment """# Wikidata description for Opole\r
-\r
-View the [Wikidata edit page](https://www.wikidata.org/wiki/Q92212).\r
-\r
-The "Link" field URL can content negotiate for data in one of the following MIME types:\r
-\r
-* application/json\r
-* application/vnd.php.serialized\r
-* text/n3\r
-* text/rdf+n3\r
-* text/turtle\r
-* application/x-turtle\r
-* application/n-triples\r
-* text/n-triples, text/plain\r
-* application/rdf+xml\r
-* application/xml\r
-* text/xml\r
-\r
-This will then redirect to an appropriate URL for the selected format;. e.g. \r
-\r
-* [https://www.wikidata.org/wiki/Special:EntityData/Q92212.json](https://www.wikidata.org/wiki/Special:EntityData/Q92212.json) for JSON, or\r
-* [https://www.wikidata.org/wiki/Special:EntityData/Q92212.ttl](https://www.wikidata.org/wiki/Special:EntityData/Q92212.ttl) for turtle.\r
-\r
-""" .
 
 ems:dolny_slask_org_pl a em:Source,
         annal:EntityData ;
@@ -301,6 +313,16 @@ em:ASSUMED a em:Competence_value,
     annal:type_id "Competence_value" ;
     rdfs:comment "The associated value is assumed from context." .
 
+em:P_PART_OF_A a em:Relation_type,
+        annal:EntityData ;
+    rdfs:label "Administered by" ;
+    annal:id "em_P_PART_OF_A" ;
+    annal:type_id "Relation_type" ;
+    rdfs:comment """#  Administered by\r
+\r
+Relates a populated place to its administrative division.\r
+""" .
+
 anno_cal:Opole_calendar_from_1584 a em:Annotation,
         em:Calendar_used_annotation,
         annal:EntityData,
@@ -383,22 +405,6 @@ map_resource:Silesia_1608 a em:Map_resource,
     annal:type_id "Map_resource" ;
     rdfs:comment """# Map of Silesia dated 1608\r
 """ .
-
-anno_map:Opole_anno_map_current a em:Annotation,
-        em:Map_resource_annotation,
-        annal:EntityData,
-        oa:Annotation ;
-    rdfs:label "Opole current map annotation" ;
-    em:source ems:GeoNames_Opole_source ;
-    em:when emp:Current ;
-    annal:id "Opole_anno_map_current" ;
-    annal:type_id "Map_resource_annotation" ;
-    dcterms:created "2018-09-20" ;
-    dcterms:creator agent:GK ;
-    rdfs:comment "# Opole current map annotation" ;
-    oa:hasBody map_resource:Opole_map_current ;
-    oa:hasTarget place_sourced:Opole_P_CofK ;
-    oa:motivatedBy em:MAP_RESOURCE .
 
 anno_map:Silesia_1561 a em:Annotation,
         em:Map_resource_annotation,
@@ -629,6 +635,90 @@ place_name:Opole_P_Name_attestation_Opol a em:Place_name,
     annal:type_id "Place_name" ;
     rdfs:comment "# Opole place name: Opol (lat)" .
 
+place_sourced:Opole_P_GeoNames a em:Place,
+        em:Place_sourced,
+        annal:EntityData ;
+    rdfs:label "City of Opole (GeoNames)" ;
+    em:editorialNote "" ;
+    em:hasRelation place_relation:Opole_rel_ADM3 ;
+    em:placeCategory place_category:gn_P ;
+    em:placeType place_type:gn_P_PPL ;
+    em:preferredName "Opole" ;
+    em:source ems:GeoNames_Opole_source ;
+    em:when emp:Current ;
+    em:where setting:Opole_current ;
+    annal:id "Opole_P_GeoNames" ;
+    annal:type_id "Place_sourced" ;
+    rdfs:comment """Further alternate names not entered:\r
+\r
+<!--\r
+    em:alternateName "Opole"@eo ;\r
+    em:alternateName "Opole"@fi ;\r
+    em:alternateName "Opole"@fr ;\r
+    em:alternateName "Opole"@hu ;\r
+    em:alternateName "Opole"@id ;\r
+    em:alternateName "Opole"@it ;\r
+    em:alternateName "Opole"@jv ;\r
+    em:alternateName "Opole"@lv ;\r
+    em:alternateName "Opole"@na ;\r
+    em:alternateName "Opole"@nl ;\r
+    em:alternateName "Opole"@pl ;\r
+    em:alternateName "Opole"@pt ;\r
+    em:alternateName "Opole"@ro ;\r
+    em:alternateName "Opole"@sl ;\r
+    em:alternateName "Opole"@sv ;\r
+    em:alternateName "ÃpÃ²le"@csb ;\r
+    em:alternateName "OpolÄ"@lt ;\r
+    em:alternateName "OpolÃ­"@cs ;\r
+    em:alternateName "Oppeln"@de ;\r
+    em:alternateName "Oppeln"@nds ;\r
+    em:alternateName "Uopole"@szl ;\r
+    em:alternateName "Ø£Ø¨ÙÙÙØ³ÙÙ"@ar ;\r
+    em:alternateName "Ø§ÙÙ¾ÙÙ"@pnb ;\r
+    em:alternateName "Ø§ÙÙ¾ÙÙÙ"@fa ;\r
+    em:alternateName "×××¤×××"@he ;\r
+    em:alternateName "ÐÐ¾ÑÐ°Ð´ ÐÐ¿Ð¾Ð»Ðµ"@be ;\r
+    em:alternateName "ÐÐ¿Ð¾Ð»Ðµ"@bg ;\r
+    em:alternateName "ÐÐ¿Ð¾Ð»Ðµ"@ru ;\r
+    em:alternateName "ÐÐ¿Ð¾Ð»Ðµ"@sr ;\r
+    em:alternateName "ÐÐ¿Ð¾Ð»Ðµ"@uk ;\r
+    em:alternateName "å¥¥æ³¢è±"@zh ;\r
+-->\r
+""" ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <http://en.wikipedia.org/wiki/Opole>,
+        <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> ;
+    oa:hasAnnotation anno_map:Opole_anno_map_current .
+
+place_sourced:Opole_P_wikidata a em:Place,
+        em:Place_sourced,
+        annal:EntityData ;
+    rdfs:label "City of Opole (wikidata)" ;
+    em:alternateAuthority ems:Opole_P_Freebase,
+        ems:Opole_P_GND ;
+    em:editorialNote "" ;
+    em:placeCategory place_category:gn_P ;
+    em:placeType place_type:gn_P_PPL ;
+    em:preferredName "Opole" ;
+    em:relatedResource ems:Opole_P_EMLO ;
+    em:source ems:Wikidata_Opole_source ;
+    em:when emp:Current ;
+    annal:id "Opole_P_wikidata" ;
+    annal:type_id "Place_sourced" ;
+    rdfs:comment "City with powiat rights of Poland" .
+
+place_relation:Opole_rel_ADM3 a em:Qualified_relation,
+        annal:EntityData ;
+    rdfs:label "Opole relation to Opole ADM3" ;
+    em:competence em:DEFINITIVE ;
+    em:relationTo <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place/Opole_ADM3> ;
+    em:relationType em:P_PART_OF_A ;
+    em:source ems:GeoNames_Opole_source ;
+    em:when <http://localhost:8000/annalist/c/EMPlaces_defs/d/> ;
+    annal:id "Opole_rel_ADM3" ;
+    annal:type_id "Qualified_relation" ;
+    rdfs:comment "# Opole relation to Opole ADM3" .
+
 place_relation:Opole_rel_Duchy a em:Qualified_relation,
         annal:EntityData ;
     rdfs:label "Opole relation to Duch of Opole" ;
@@ -640,16 +730,6 @@ place_relation:Opole_rel_Duchy a em:Qualified_relation,
     annal:id "Opole_rel_Duchy" ;
     annal:type_id "Qualified_relation" ;
     rdfs:comment "# Opole relation to Duch of Opole" .
-
-setting:Opole_current a em:Setting,
-        annal:EntityData ;
-    rdfs:label "City of Opole" ;
-    em:location location:Opole_location ;
-    em:source ems:GeoNames_Opole_source ;
-    em:when emp:Current ;
-    annal:id "Opole_current" ;
-    annal:type_id "Setting" ;
-    rdfs:comment "# City of Opole" .
 
 emc:Gregorian a em:Calendar,
         annal:EntityData ;
@@ -690,6 +770,38 @@ ems:David_Rumsey_map_collection a em:Source,
     annal:type_id "Source" ;
     rdfs:comment "# David Rumsey map collection" .
 
+ems:Wikidata_Opole_source a em:Authority,
+        em:Source,
+        annal:EntityData ;
+    rdfs:label "Wikidata for Opole" ;
+    em:short_label "Wikidata" ;
+    annal:id "Wikidata_Opole_source" ;
+    annal:type_id "Authority" ;
+    rdfs:comment """# Wikidata description for Opole\r
+\r
+View the [Wikidata edit page](https://www.wikidata.org/wiki/Q92212).\r
+\r
+The "Link" field URL can content negotiate for data in one of the following MIME types:\r
+\r
+* application/json\r
+* application/vnd.php.serialized\r
+* text/n3\r
+* text/rdf+n3\r
+* text/turtle\r
+* application/x-turtle\r
+* application/n-triples\r
+* text/n-triples, text/plain\r
+* application/rdf+xml\r
+* application/xml\r
+* text/xml\r
+\r
+This will then redirect to an appropriate URL for the selected format;. e.g. \r
+\r
+* [https://www.wikidata.org/wiki/Special:EntityData/Q92212.json](https://www.wikidata.org/wiki/Special:EntityData/Q92212.json) for JSON, or\r
+* [https://www.wikidata.org/wiki/Special:EntityData/Q92212.ttl](https://www.wikidata.org/wiki/Special:EntityData/Q92212.ttl) for turtle.\r
+\r
+""" .
+
 em:CALENDAR_IN_USE a em:Annotation_motivation,
         annal:EntityData,
         skos:Concept,
@@ -701,6 +813,51 @@ em:CALENDAR_IN_USE a em:Annotation_motivation,
 \r
 An annotation type (motivation) that is used to indicate a reference to a historical calendar-in-use annotation for a place.\r
 """ .
+
+anno_map:Opole_anno_map_current a em:Annotation,
+        em:Map_resource_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole current map annotation" ;
+    em:source ems:GeoNames_Opole_source ;
+    em:when emp:Current ;
+    annal:id "Opole_anno_map_current" ;
+    annal:type_id "Map_resource_annotation" ;
+    dcterms:created "2018-09-20" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment "# Opole current map annotation" ;
+    oa:hasBody map_resource:Opole_map_current ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:MAP_RESOURCE .
+
+setting:Opole_current a em:Setting,
+        annal:EntityData ;
+    rdfs:label "City of Opole" ;
+    em:location location:Opole_location ;
+    em:source ems:GeoNames_Opole_source ;
+    em:when emp:Current ;
+    annal:id "Opole_current" ;
+    annal:type_id "Setting" ;
+    rdfs:comment "# City of Opole" .
+
+em:MAP_RESOURCE a em:Annotation_motivation,
+        annal:EntityData,
+        skos:Concept,
+        oa:Motivation ;
+    rdfs:label "Map resource annotation" ;
+    annal:id "MAP_RESOURCE" ;
+    annal:type_id "Annotation_motivation" ;
+    rdfs:comment """# Map resource annotation\r
+\r
+An annotation type (motivation) that is used to indicate a reference to a map resource for a place.""" .
+
+ems:www_dokumentyslaska_pl a em:Source,
+        annal:EntityData ;
+    rdfs:label "www.dokumentyslaska.pl" ;
+    em:link <http://www.dokumentyslaska.pl/> ;
+    annal:id "www_dokumentyslaska_pl" ;
+    annal:type_id "Source" ;
+    rdfs:comment "# www.dokumentyslaska.pl" .
 
 ems:GeoNames_Opole_source a em:Authority,
         em:Source,
@@ -725,25 +882,6 @@ For ease of retrieval, use this specific resource to label any current informati
 \r
 @@TODO: should this be a more explicit value? E.g. `emp:Current_2018`\r
 """ .
-
-em:MAP_RESOURCE a em:Annotation_motivation,
-        annal:EntityData,
-        skos:Concept,
-        oa:Motivation ;
-    rdfs:label "Map resource annotation" ;
-    annal:id "MAP_RESOURCE" ;
-    annal:type_id "Annotation_motivation" ;
-    rdfs:comment """# Map resource annotation\r
-\r
-An annotation type (motivation) that is used to indicate a reference to a map resource for a place.""" .
-
-ems:www_dokumentyslaska_pl a em:Source,
-        annal:EntityData ;
-    rdfs:label "www.dokumentyslaska.pl" ;
-    em:link <http://www.dokumentyslaska.pl/> ;
-    annal:id "www_dokumentyslaska_pl" ;
-    annal:type_id "Source" ;
-    rdfs:comment "# www.dokumentyslaska.pl" .
 
 em:DEFINITIVE a em:Competence_value,
         annal:EntityData ;
@@ -781,7 +919,7 @@ place_sourced:Opole_P_CofK a em:Place,
         ems:Wikidata_Opole_source ;
     em:editorialNote """Getty Thesaurus of Geographic Names (05/03/2018):\r
 \r
-Located on Oder River; passed to Bohemia in 1327, to Habsburgs in 1742 & returned to Poland in 1945; is important port between Wrocław & Upper Silesia; economy depends on cement factories & iron foundries; noted for many historic buildings.\r
+Located on Oder River; passed to Bohemia in 1327, to Habsburgs in 1742 & returned to Poland in 1945; is important port between WrocÅaw & Upper Silesia; economy depends on cement factories & iron foundries; noted for many historic buildings.\r
 """ ;
     em:hasRelation place_relation:Opole_rel_Duchy ;
     em:placeCategory place_category:gn_P ;
