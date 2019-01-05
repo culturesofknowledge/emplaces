@@ -1,18 +1,18 @@
 # EM Places
-Early Modern Places (EM Places) is a collaboratively curated, historical geo-gazetteer for the sixteenth- to eighteenth-century under development by the [Cultures of Knowledge][1] project at Oxford University. It is the first of what will eventually become [three Linked Open Data resources][2] also comprising EM People and [EM Dates][26] built on a [shared humanities infrastructure platform][3] in collaboration with the [Huygens Institute][4] (KNAW) in Amsterdam. 
+Early Modern Places (EM Places) is a collaboratively curated, historical geo-gazetteer for the sixteenth- to eighteenth-century under development by the [Cultures of Knowledge][1] project at Oxford University. It is the first of what will eventually become [three Linked Open Data resources][2] also comprising EM People and [EM Dates][26] built on a [shared humanities infrastructure platform][3] in collaboration with the [Humanities Cluster][5] of the Royal Dutch Academy of Arts and Sciences (KNAW) in Amsterdam. 
 
 ## Goals
 EM Places is being designed to meet four goals: 
 
-The first is to be __a resource for identifying early modern places__ by means of their current and historical name variants. To this end, EM Places will combine current place (and alternative) place names, a current administrative hierarchy and location data from reference gazetteers and extend this with additional name attestations provided by contributors from other historical sources (e.g. manuscripts). Users will be able to browse and search for places on multiple criteria, refine their results over facets, and export their search results. 
+The first is to be __a resource for identifying early modern places by means of their current and historical name variants__. To this end, EM Places will combine current place (and alternative) place names, a current administrative hierarchy and location data from reference gazetteers such as GeoNames and WikiData and extend this with further place name attestations provided by contributors from primary sources. Users will be able to browse and search for places on multiple criteria, refine their results over facets, and export their search results. To facilitate semi-automatic disambiguation of bulk metadata EM Places will function as a reconciliation service for [OpenRefine][28]. 
 
-The second is to provide __a means for researchers to contribute richer historical contexts__. For all places, this will provide means for capturing, i) basic data (e.g. names, periods, related resources, bibliography) for the administrative, ecclesiastical, military, and judicial hierarchies associated with a historical place, ii) data on the dominant calendars in use (e.g. Julian calendar – new year starting March 25), as well as iii) bespoke properties for what we are calling 'related places' such as streets and buildings. In the future, EM Places may be extended with further support for other related features.
+The second is to provide __a means for researchers to contribute richer historical contexts to places__. EM Places will provide means for capturing i) basic mereological (partitive) data on historical polities in political-administrative and ecclesiastical hierarchies (later, also military and judicial hierarchies), ii) the dates of transition between official calendars in a region (e.g. from the Julian to the Gregorian) for reuse in [EM Dates][26], iii) custom attributes describing ‘associations’ between places' (e.g. the time and cost for mail to travel between two postal stations on a named postal route), and iv) links to additional historical resources and bibliographies. 
 
-The third is to __fully credit, source, and cite all contributions__ to the gazetteer by individual researchers and project teams and provide means to link to other, associated resources. Contributing users with registered accounts on EM Places will be able to submit or amend data using either a web interface or via a bulk upload facility. Editorial users will have means to review these contributions. Place records in the gazetteer will be accompanied by bibliographical entries, related resources and a facility to link back to other early modern collections sharing their records as Linked Open Data.
+The third is to __fully credit, source, and cite all contributions to the gazetteer by individual researchers__. Regular contributors users with registered accounts on EM Places will be able to submit new data or suggest revisions to existing data using either a web interface or via a bulk upload facility. More experienced users with editorial privileges will have the means to review and approve these contributions. Users will be able to see whether data in the gazetteer originated from a reference gazetteer such as GeoNames or was added by an individual contributor. All contributors to EM Places will be able to call up a listing of their contributions and revisions to the gazetteer. 
 
-The fourth is to __make the EM Places source code and datasets easily accessible and reusable by others__. To this end, the EM Places source code, based on the Huygens’ [Timbuctoo][5] technical infrastructure, will be shared under open source and made accessible for reuse. All data in EM Places will be shared under open access over multiple channels: in the form of user initiated exports from the applications itself, on external repositories, and via the EM Places API. Separately, EM Places will be able to share its data in the [Linked Places Interconnection Format][24]. 
+The fourth and final goal is to __make the EM Places source code and datasets easily accessible and reusable by others__. To this end, the source code for EM Places, based on the [Timbuctoo technical infrastructure][3] developed by the KNAW [Humanities Cluster][5], will be shared under open source and made easily for reuse in Docker containers. The data in EM Places will be shared under open access licenses and distributed over multiple channels: as user-initiated exports of individual records from the application itself, on popular open platforms such as GitHub, and via the EM Places API. 
 
-Our intent is to prepare EM Places in a transparent and collaborative manner as possible to allow it to become a useful resource for the [Pelagios Community][8] and an active participant in the proposed [Linked Pasts Network][25].
+Our intent is to prepare the gazetteer in a transparent and collaborative manner as possible to allow it to become a useful resource for the [Pelagios Community][8] and an active participant in the proposed [Linked Pasts Network][25]. In support of this, in addition to CSV, Excel, and Turtle, EM Places will also support the export of its data in the [Linked Places Interconnection Format][4]. 
 
 ## Design
 The draft [design documents][10] (display, search, edit) offer an informal description of the planned features for EM Places together with a first set of [interface mock-ups][21]. More details will be added here as the gazetteer’s features are finalized.
@@ -55,8 +55,8 @@ EM Places, EM People, and EM Dates are [funded by a grant][2] to the University 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
 [3]:	https://github.com/HuygensING/timbuctoo
-[4]:	https://www.huygens.knaw.nl/?lang=en
-[5]:	https://github.com/HuygensING/timbuctoo
+[4]:	https://github.com/LinkedPasts/linked-places
+[5]:	https://huc.knaw.nl
 [6]:	https://github.com/pelagios/pelagios-cookbook/wiki/Pelagios-Gazetteer-Interconnection-Format
 [7]:	https://github.com/pelagios/peripleo
 [8]:	http://commons.pelagios.org
@@ -79,3 +79,4 @@ EM Places, EM People, and EM Dates are [funded by a grant][2] to the University 
 [25]: http://linkedpasts.org
 [26]: https://github.com/culturesofknowledge/emdates
 [27]: http://emlo.bodleian.ox.ac.uk
+[28]: https://openrefine.org
