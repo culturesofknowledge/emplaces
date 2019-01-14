@@ -1,20 +1,57 @@
 # Overview (Display View)
 
-The draft description below offers an informal overview of the functionality of the gazetteer. It is best read alongside the [interface mockup][1] of the detail/display view for a typical place record. We welcome anyone interested in the project to [get in touch with us][2] with comments and feedback.
+The draft description below offers an informal overview of the functionality of the EM Places gazetteer. It is best read alongside the [interface mock-up][1] of a typical individual place record's detail view. 
+
+We welcome anyone interested in the project to [get in touch with us][2] with comments and feedback.
 
 ## Concepts and Principles
 
-### Scope
+### Temporal Range
 
-EM Places is centered on the 16-18th centuries. As such, historical contexts and historical places recorded in the gazetteer will be limited to those whose existence clearly intersects this period.
+EM Places is focused on places referenced in historical records from the 16-18th centuries. As such, historical contexts and historical places recorded in the gazetteer will be limited to those whose existence clearly intersects with this period.
 
-### Sources and Contributors
+### Initial Size and Future Growth
 
-The initial release of EM Places will probably be limited to c. 50-100 sample records serving as representative examples of full entries and and as a means to demonstrate the gazetteer's features to contributors. The records will be selected, in large part, from those places in [Early Modern Letters Online (EMLO)][5] with the greatest number of letters sent, received, or mentioned. An alternative approach is to match a small number (again, c. 50-100) complete sample records with a larger group (e.g. 5-6K) of minimal place entries.
+The pilot release of EM Places will be limited to c. 50-100 sample records serving as representative examples of full place entries as a means to best demonstrate all of the gazetteer's features to potential users and contributors. These records will be selected from the c. 6,500 current places in [Early Modern Letters Online (EMLO)][5] associated with the greatest number of letters sent, received, or mentioned. This small set of full records will be accompanied by a much larger (TBD) sample of records containing only 'core' or 'reference gazetteer' metadata capable of being extended with additional metadata from contributors.
 
-Over time, we expect to add records to EM Places in much the same way as we have grown EMLO's database – that is, slowly and incrementally, in a way which allows us to meet, wherever possible, the particular needs of our individual and institutional contributors. Although EM Places will draw on reference gazetteers for certain core data (e.g. locations) it is not designed to be a bulk aggregator of place data. Our emphasis will be on much fewer, but richer records, directed towards the needs of early modern scholars.  
+Over time, we expect to add new place records to EM Places in much the same way as we have grown EMLO's epistolary database – that is, slowly and incrementally, in a way which allows us to adapt our resource, wherever possible, to meet the research needs of our individual and institutional contributors. Thus, while EM Places will draw on a small number of reference gazetteers for its core place metadata we are not designing the gazetteer  bulk aggregator of place data. Our emphasis will be on much fewer, but richer records, directed towards the needs of early modern scholars.  
 
-### Current and Historical Place Entities
+### Sources (Core and Extended Metadata)
+
+All EM Places records will be composed of two distinct classes of metadata: 1) a minimal, and required set of basic or 'core' current metadata ingested without modification from a small number of reference geo-gazetteers, and 2) an additional, and optional set of extended historical metadata defined by EM Places provided by contributors.
+
+By default, _Core Metadata_ will be ingested semi-automatically from a small number of reference geo-gazetteers (currently: GeoNames, Getty TGN, and WikiData) and will be comprised of data fields on:
+
+* The preferred (i.e. default) name
+* A set of unique (i.e. non-repeating) alternative place names and variants 
+* Location data (typically a single latitude/longitude pair, with multiple pairs representing regions where these are available)
+* The current administrative-political hierarchy
+* Links to other external gazetteer authorities (e.g. the German GND authority)
+
+This metadata will, in effect, form the spine of the gazetteer. This is data which EM Places will accept 'as is' from its reference gazetteers without further editing (with the exception of some processing steps to e.g. remove duplicate entries and standardize how the data is indexed and/or displayed). On the basis of this data, EM Places will additionally represent the place on a map, produce a set of formated bibliographic references, and, crucially, create its permanent URI.
+
+By limiting our requirements for a minimal, valid EM Places record in this manner, we gain the ability to a) create bulk records on demand from an existing set of authority data (e.g. a list of GeoNames IDs), and thereby b) increase the utility of our resource for users who wish to use EM Places to disambiguate and reconcile their existing records.
+
+The intent is that EM Places will be able to refresh its core data at regular intervals (e.g. bi-annually) with minimal editorial intervention to benefit from upstream corrections/additions at their sources.
+
+(Further details of the features and implementation of core metadata, including an overview of how EM Places will work with places which cannot be found in its reference gazetteers, are discussed in the sections below).
+
+By contrast, all other data fields in EM Places will be made up of optional _Extended Metadata_ contributed by our users and partner projects. Each place record will be able to capture additional historical data on:
+
+* Attestations to additional place name variants
+* A brief text description to assist with its disambiguation, initially seeded (where available) from Wikipedia
+* One or more images and/or links to geo-referenced, historial maps
+* Administrative, Ecclesiastical (and in future releases, potentially Military and Judicial) historical hierarchies
+* The date(s) of transition to a new calendar (e.g. from Julian to Gregorian)
+* Bespoke data associated with a place (e.g. its function as station on a named postal route)
+* Related historical resources
+* Bibliography
+
+(Further details of the features and implementation of extended metadata are discussed in the sections below).
+
+### Current and Historical Entities
+
+It is important to note that because our 
 
 Our use of ‘current’ refers to still currently existing places and thus generally also found in our reference gazetteers (GeoNames, Getty TGN). Consequently, a current place will also have a current administrative hierarchy (e.g. ADM1, ADM2, ADM3..) and a physical location (i.e. lat/long)  maintained for it outside of EM Places by our reference gazetteer(s).  
 
@@ -28,21 +65,7 @@ In summary, all 'current places' in EM Places will have a current hierarchy and 
 
 Ultimately, the intent of EM Places (and alongside it, EM People, and EM Dates) is to provide a series of [Linked Open Data resources for computable, historical entities][6].
 
-### Core and Additional Metadata
 
-We envision several sources for data in EM Places. _Core metadata_ is periodically drawn by API from reference gazetteers (currently: GeoNames, Getty TGN) and will be comprised of:
-
-* Preferred Place Name
-* Alternative Names (all entries are indexed, not all languages are displayed)
-* Location (lat/long is displayed, and polygons where available for regions)
-* Current administrative/political hierarchy (with labels under consideration for a future version)
-* Authorities (corresponding entries in other gazetteers)
-
-This core metadata will form the spine of the gazetteer. This is data which EM Places will accept 'as is' without editing (though, as noted above, not everything indexed for search purposes will also be displayed in the individual place entry – GeoNames records  alternative names in many languages). The intent is that EM Places will be able to refresh this data at regular intervals (e.g. bi-annually) with minimal editorial oversight in order to benefit from corrections/additions upstream.
-
-By contrast, _additional metadata_ is primarily further historical context and data (i.e. over and beyond core metadata) contributed to the gazetteer by individual researchers and projects, which will first need to be reviewed by EM Places editors. Examples of additional metadata would include data on historical calendars, historical hierarchies, bibliographic entries, and historical maps.
-
-See also the section on 'Related Places' below, for an early discussion of what may become a third class of additional metadata.
 
 ### Uncertainties (TBD)
 
