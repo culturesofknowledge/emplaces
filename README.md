@@ -21,24 +21,25 @@ The draft [design documents][10] (display, search, edit) offer an informal descr
 An draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model is refined.
 
 ## Status
-**August 2018**: Provisional full draft of complete data model completed; first release of tool for processing GeoNames data; provisional complete full record user interface
+**December 2018**: Built internal tool for creating core metadata for place records from reference gazetteers; created sample dataset from EMLO places; reviewed Timbuctoo infratructure dependancies; defined basic editorial workflows; provisional decisions on approach to representing search and browse
+
+**August 2018**: Provisional full draft of complete data model completed; first release of tool for processing GeoNames data; completed draft user interface for record detail view
 
 **July 2018**: First public draft of the design document describing the proposed features of the gazetteer with schematic mock-ups of potential UI elements. First public draft of the overview data model document. 
 
 **March - June 2018**: Private drafts of the gazetter's design document and data model.
 
 ## Upcoming ToDo Items
-- Collect and incorporate community feedback
+- Collect and incorporate community feedback [underway]
 - ~~Fix the main v.1 features of the gazetteer~~; revise documentation
 - ~~Test data model with sample record~~
 - ~~Generate 4-6K core data places from [EMLO][27]~~
-- Prepare webform editor
+- Prepare webform editor [underway]
 - ~~Collect sample full data records~~
-- Finalize the proposed record detail interface, create interface mockup
+- ~~Finalize the proposed record detail interface, create interface mockup~~
 - Finalize the proposed search interface, create interface mockup
-- Discuss proposed editorial workflow, create interface mockup
-
-- Finalize bulk upload and export formats, review [Linked Places Interconnection Format][24]
+- Discuss proposed editorial workflow, create interface mockup [underway]
+- Finalize bulk upload and export formats, ~~review [Linked Places Interconnection Format][24]~~
 - Prepare API, test interconnection with [EM Dates][26]
 
 ## Feedback and Comments
