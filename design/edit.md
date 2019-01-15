@@ -1,4 +1,6 @@
-# Overview (draft 22.12.18)
+# Overview 
+
+(draft 22.12.18)
 
 The basic workflow for a single record not yet in EM Places will request that a contributor first identify the place in a reference gazetteer (GeoNames or Getty TGN) and enter its ID in EM Places. EM Places will then pull the relevant core metadata from the reference gazetteer APIs and use this to populate a draft record for that place in a private staging area. Following this, the user will optionally be able to contribute additional metadata, and save the draft record, which will queue it for review by an editor.
 
