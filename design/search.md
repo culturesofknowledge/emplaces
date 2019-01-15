@@ -1,16 +1,8 @@
-# Overview (Search)
-
-TBA
+# Overview
 
 ## Concepts and Principles
 
-TBA
-
 ### Basic Search
-
-**Priority:** High 
-
-**Source:** Core data, additional data
 
 This will be a free keyword, place centric search (i.e. all results will be places, whether current or historical). A key design challenge will be offering a workflow capable of accommodating searching and browsing.
 
@@ -45,10 +37,6 @@ A potential concern are dates. If a facet limits results to a certain date or da
 
 ### Advanced Search (TBD)
 
-**Priority:** Medium 
-
-**Source:** Core data, additional data)
-
 Multi-term search, and with the possibility of returning not just a sorted list of places, but also other types of data collected by the gazetteer, e.g. calendars, related resources, name attestations, places with historical maps etc. Initial ranked results can be sorted, keyword filtered, and facetted.
 
 
@@ -59,5 +47,4 @@ Multi-term search, and with the possibility of returning not just a sorted list 
 [5]:	https://www.getty.edu/research/tools/vocabularies/tgn/
 [6]:	http://gov.genealogy.net
 [7]:	/design/display.md
-
 
