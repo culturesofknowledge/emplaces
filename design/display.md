@@ -112,6 +112,8 @@ In summary, while conceptually (i.e. from the perspective of the EM Places data 
 
 ## Interface (Detail View)
 
+### Core Data
+
 
 
 ### Preferred Place Name; alternative names
