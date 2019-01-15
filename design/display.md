@@ -122,7 +122,7 @@ Note: The _Info_ links shown next to each user-interface element will link to a 
 
 ### Preferred place name, alternative place names, current administrative hierarchy, location, citations.
 
-https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/core-data.png
+[Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/core-data.png)
 
 Alongside the _Preferred Name_ name of the place, we show a merged list of all unique _Alternative Place Names_ (toponyms) found in our reference gazetteers. While useful for disambiguation purposes, these will seldom be able to provide us with historical, early modern toponyms. As we will see below, these can later be added as part of the record's extended metadata in the 'Name Attestations' section. 
 
@@ -136,7 +136,7 @@ A _Permanent URI_ for each place record in EM Places will be generated automatic
 
 ### Map and Description 
 
-https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/map-description.jpg
+[Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/map-description.jpg)
 
 If location data is available for a current place, it will be default be represented as a single point on and (OpenStreetMap) _Map_. Optionally, if the required georeferenced data is available, the modern representation can be accompanied by a small number of additional historical cartographic representations from a source such as the [David Rumsey Map Collection](https://www.davidrumsey.com). The different maps will be identified, in the first instance, by date of publication, with further metadata recorded in their provenance fields.
 
@@ -144,7 +144,7 @@ To help further disambiguate the places, and to provide more context for full-te
 
 ### Name Attestations, Calendars, Associated Places
 
-https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/attestations-cal-assoc.png
+[Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/attestations-cal-assoc.png)
 
 _Name Attestations_ are documented instances of name variants of the preferred and alternative names in core data. For example, if a scholar finds a reference to Siena in a manuscript written 'Ciena' and this is not already listed as an alternative name in our reference gazetteers, then this toponym can be recorded here, along with the language, date, and source for the attestation.
 
@@ -170,7 +170,7 @@ If the contributed data does not already have a well-defined vocabulary, the fea
 
 ### Historical hierarchies
 
-https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/historical-hierarchies.png
+[Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/historical-hierarchies.png)
 
 _Historical hierarchies_ show the historical administrative, ecclesiastical, judicial, and military hierarchies for both historical and current places. Initially, this will show the period a certain relationship existed. For example, from an administrative/political perspective, the Silesian town of Opole fell under the Duchy of Opole from 1281-1521. In each part of the hierarchy (with the precise mode of display TBD, for example via mouseover) a user will also be able to view the period of existence of each place entity (e.g. the Bohemian Crown existed from 1348 to 1918). Together, a set of dated entities, linked in hierarchial order by a set of dated relations, forms one (from a possible four kinds of) historical hierarchy. In the case of ecclesiastical hierarchies, an additional row of tabs will be needed to show what kind of hierarchy (e.g. what religion and/or confession) is being tracked. 
 
@@ -178,7 +178,7 @@ Further discussion is needed on the necessary editorial policies. We expect that
 
 ### Related Resources, Bibliography, and Feedback
 
-https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/resources-bib-feedback.png
+[Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/resources-bib-feedback.png)
 
 _Related Resources_ provide a means for listing additional, predominant digital resources related to a place which aren't usefully represented in traditional bibliographies. In many instances, these will be live links to searches carried out on external databases (for example, all letters sent to or from a place). 
 
@@ -188,7 +188,7 @@ The _Bibliography_ is intended for recording predominantly offline, scholarly pr
 
 A link to a simple comment form, referencing the current record and (if present) a link to the logged-in users profile, or else a mailto: link, referencing the current record (e.g. in the subject field).
 
-https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/credits-export.png
+[Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/credits-export.png)
 
 #### Credits, Contributors, License, and Export
  
