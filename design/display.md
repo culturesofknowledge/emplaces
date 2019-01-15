@@ -120,11 +120,9 @@ This section reviews key features of EM Places with the aid of a mock-up interfa
 
 Note: The _Info_ links shown next to each user-interface element will link to a pop-up window briefly describing its functionality. It is intended as a help text. The _Provenance_ links will lead to a separate page with provenance metadata the data shown in that interface element. 
 
-### Core Data
+### Preferred place name, alternative place names, current administrative hierarchy, location, citations.
 
-#### Preferred place name, alternative place names, current administrative hierarchy, location, citations.
-
-![core-data](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/core-data.png)
+https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/core-data.png
 
 Alongside the _Preferred Name_ name of the place, we show a merged list of all unique _Alternative Place Names_ (toponyms) found in our reference gazetteers. While useful for disambiguation purposes, these will seldom be able to provide us with historical, early modern toponyms. As we will see below, these can later be added as part of the record's extended metadata in the 'Name Attestations' section. 
 
@@ -136,19 +134,17 @@ _Location_ data will in most instances be in the form of a single latitude/longi
 
 A _Permanent URI_ for each place record in EM Places will be generated automatically by the underlying [Timbuctoo infrastructure][28] for reuse by others to reconcile their places against EM Places, and, crucially, as the basis for sharing our records as Linked Open Data. Drawing on this permanent identifier, we plan to offer a simple means to reference an EM Places record in several standard bibliographic _Citation_ formats.
 
-### Extended metadata
+### Map and Description 
 
-#### Map and Description 
-
-![map and description](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/map-description.jpg)
+https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/map-description.jpg
 
 If location data is available for a current place, it will be default be represented as a single point on and (OpenStreetMap) _Map_. Optionally, if the required georeferenced data is available, the modern representation can be accompanied by a small number of additional historical cartographic representations from a source such as the [David Rumsey Map Collection](https://www.davidrumsey.com). The different maps will be identified, in the first instance, by date of publication, with further metadata recorded in their provenance fields.
 
 To help further disambiguate the places, and to provide more context for full-text search, each place record will be seeded with a paragraph of _Descriptive Text_ from WikiPedia. 
 
-#### Name Attestations, Calendars, Associated Places
+### Name Attestations, Calendars, Associated Places
 
-![Name Attestations, Calendars, Associated Places](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/attestations-cal-assoc.png)
+https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/attestations-cal-assoc.png
 
 _Name Attestations_ are documented instances of name variants of the preferred and alternative names in core data. For example, if a scholar finds a reference to Siena in a manuscript written 'Ciena' and this is not already listed as an alternative name in our reference gazetteers, then this toponym can be recorded here, along with the language, date, and source for the attestation.
 
@@ -172,33 +168,27 @@ In the current draft, the intent is for a simple wikidata-style interface where 
 
 If the contributed data does not already have a well-defined vocabulary, the feature 'type' may, for example, be drawn from a pre-selected subset of the [Getty AAT][10] vocabulary (here, ['Parish Church'][19] and matched, where applicable, with the appropriate [GeoNames feature code][9] so that this this data becomes easier to integrate by other, less granular gazetteers.
 
-#### Historical hierarchies
+### Historical hierarchies
 
-![related resources, bibliography, feedback](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/historical-hiearchies.png)
+https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/historical-hierarchies.png
 
 _Historical hierarchies_ show the historical administrative, ecclesiastical, judicial, and military hierarchies for both historical and current places. Initially, this will show the period a certain relationship existed. For example, from an administrative/political perspective, the Silesian town of Opole fell under the Duchy of Opole from 1281-1521. In each part of the hierarchy (with the precise mode of display TBD, for example via mouseover) a user will also be able to view the period of existence of each place entity (e.g. the Bohemian Crown existed from 1348 to 1918). Together, a set of dated entities, linked in hierarchial order by a set of dated relations, forms one (from a possible four kinds of) historical hierarchy. In the case of ecclesiastical hierarchies, an additional row of tabs will be needed to show what kind of hierarchy (e.g. what religion and/or confession) is being tracked. 
 
 Further discussion is needed on the necessary editorial policies. We expect that administrative and ecclesiastical data will be easier to collect from contributors than judicial and military. As a result, displaying data on the latter two categories might not be included in the initial release.
 
-#### Related Resources, Bibliography, and Feedback
+### Related Resources, Bibliography, and Feedback
 
-![related resources, bibliography, feedback](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/resources-bib-feedback.png)
+https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/resources-bib-feedback.png
 
-### Related Resources
+_Related Resources_ provide a means for listing additional, predominant digital resources related to a place which aren't usefully represented in traditional bibliographies. In many instances, these will be live links to searches carried out on external databases (for example, all letters sent to or from a place). 
 
-A list of what we expect will be predominantly online, digital resources (for traditional scholarly references, contributors can make use of the bibliography section). Some of the URIs to these resources can be derived  automatically from our reference gazetteers (e.g. links to Wikipedia, WikiData, certain other gazetteers) but most of which will be suggested by contributors and confirmed by editors. 
+The _Bibliography_ is intended for recording predominantly offline, scholarly print publications. In the initial release of EM Places, this will be a simple formatted text list. However, our intent is that in the future, contributors creating the list will be able to easily see if a certain entry had previously been added to a different record, and to select this, so that bibliographic entries can be added in a consistent manner. In addition, contributors should ideally also have a means to add a bibliographic entry to a whole class of records (e.g. to have an entry appear in all places which are grouped together at the same level in a hierarchy). This feature would help prevent contributors working independently on different places (in e.g. the same region and period) from repeatedly entering the same reference in different records.
 
-This could also include dynamic links to resources which can be queried over an API for more information about a place in the gazetteer. The data would be polled and updated at an appropriate interval. For example, X number of letters were sent from this place, and Y number of letters were received at this place. 
-
-### Bibliography
-
-A list of bibliographic resources (predominantly offline, scholarly references). At minimum, an unstructured free text list would suffice for v.1. However, our assumption is that this can be a simply structured list, and with the ability to apply place tags to each entry, making it much easier for subsequent contributors to find and select existing bibliographic entries in a consistent manner. This helps avoid contributors working independently on different places (in e.g. the same region and period) repeatedly entering the same reference in different records, possibly in different formats. 
-
-### Feedback
+#### Feedback
 
 A link to a simple comment form, referencing the current record and (if present) a link to the logged-in users profile, or else a mailto: link, referencing the current record (e.g. in the subject field).
 
-![credits, contributors, licenses, export](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/credits-export.png)
+https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/credits-export.png
 
 #### Credits, Contributors, License, and Export
  
