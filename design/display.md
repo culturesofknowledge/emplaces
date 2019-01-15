@@ -104,47 +104,53 @@ In summary, while conceptually (i.e. from the perspective of the EM Places data 
 
 ### Uncertainties
 
-[TBA - review with Graham what we've put in place in the data model]
+[TBA]
 
 ### Dates and Periods
 
-[TBA - review with Graham what we've put in place in the data model]
+[TBA]
+
+### Provenance
+
+[TBA]
 
 ## Interface (Detail View)
 
+This section reviews key features of EM Places with the aid of a mock-up interface of the detail view of a single place record. The place selected for this example, Opole, is a town in Poland with a [current entry in GeoNames][25]. Please refer to the [full-size PDF image][1] for a high-resolution mock-up of the place record detail view interface.
+
+Note: The _Info_ links shown next to each user-interface element will link to a pop-up window briefly describing its functionality. It is intended as a help text. The _Provenance_ links will lead to a separate page with provenance metadata the data shown in that interface element. 
+
 ### Core Data
+
+*Preferred place name, alternative place names, current administrative hierarchy, location, citations.*
 
 ![core-data](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/core-data.png)
 
-### Preferred Place Name; alternative names
+Alongside the _Preferred Name_ name of the place, we show a merged list of all unique _Alternative Place Names_ (toponyms) found in our reference gazetteers. While useful for disambiguation purposes, these will seldom be able to provide us with historical, early modern toponyms. As we will see below, these can later be added as part of the record's extended metadata in the 'Name Attestations' section. 
 
-The default/preferred place name and its alternate names (toponyms) will come from the reference gazetteer but only a subset of unique names will be displayed. 
+The _Current Administrative Hierarchy_ shows the partitive relationships between a place its polities. Here, the town of Opole, is part of a third-order administrative polity (called Opole), which in turn is part of a second-order polity (also called Opole), which is part of the Opole Voivodeship, which in turn is part of Poland. The data in the Current Administrative Hierarchy is derived exclusively from GeoNames. This is because gazetteers interpret such hierarchies in different ways. For example, in the [Getty TGN entry for Opole][26], there is only one administrative polity between the town of Opole and Poland and it is called differently (Opolskie). In addition, the Getty TGN hierarchy does not terminate in Poland but in 'Europe' and 'World'. Moreover, Poland itself is not defined as a 'Country' (as in GeoNames) but a 'Nation'. This is not just a question of labels. As a consequence of this, GeoNames and the Getty TGN use quite different models, for example, to characterise England, Great-Britain, and the United-Kingdom. 
 
-For example, while we can allow users to search for and find places using a Persian transliteration of a place (Opole: اوپوله) there is no need to display this particular transliteration in the list of alternative names. For the display list, alternative names will be drawn from a short list of major European languages and historical forms (i.e. Latin). Next, the list of alternative names will be compared with one or more additional gazetteers. From this these lists, a merged set of unique alternative names will finally be shown. This is to avoid having to list multiple, identical instances of e.g. 'Opole' for the many language transliterations supported by GeoNames.  
+To avoid having to arbitrate and resolve such conflicts manually, we have opted for the Current Administrative Hierarchy to rely exclusively on the data maintained by GeoNames. A regrettable side-effect of this is that the polities in the hierarchy are shown with generic GeoNames feature codes (e.g. ADM1, PPLA). In the Getty TGN, these label are bespoke, and contextual. 
 
-### Current Hierarchy
+_Location_ data will in most instances be in the form of a single latitude/longitude coordinate pair and will be copied from GeoNames. Today, geo-spatial coordinates drawn up with respect to the Greenwich Prime Meridian in accordance with the WGS84 geodetic standard. However, in the early modern modern period (and well into the nineteenth century) multiple [prime meridians were in active use][27]. Amongst the most important of these were the El Hiero (Ferro), Cadiz, and Paris meridians. To raise awareness of their use, and to help disambiguate historical latitude and longitude references, users will have the option of viewing location coordinates as based on several different prime meridian systems and in degrees, minutes, and seconds. 
 
-The administrative/political hierarchy ('polity') for a current place provided by the reference gazetteer(s). Note that GeoNames only provides data for ADM1, ADM2 etc. It does not attempt to label these as states, provinces, counties etc. However, Getty TGN does provide this information. Unfortunately, Getty and GeoNames sometimes disagree on the depth of the hierarchy making automatic matching of Getty labels to GeoNames hierarchies difficult. For this reason v1 will not attempt to match places with labels. We may return to this in a future revision of EM Places or perhaps make us of generic labels (as appears to have been done by Mapzen for their ['Who's on First'][13] open-access dataset – see, for example, [their entry for Opele][14]).  
+A _Permanent URI_ for each place record in EM Places will be generated automatically by the underlying [Timbuctoo infrastructure][28] for reuse by others to reconcile their places against EM Places, and, crucially, as the basis for sharing our records as Linked Open Data. Drawing on this permanent identifier, we plan to offer a simple means to reference an EM Places record in several standard bibliographic _Citation_ formats.
 
-By definition, a historical (i.e. former) place can’t display its administrative hierarchy here – instead, a placeholder message could refer the user to the section on ‘Historical Hierarchies’. Alternatively, we may use this area to highlight the period of the historical place
+### Extended metadata
 
-Further discussion is required on what will constitute core data for historical places. 
+*Map and Description*
 
-### Location
+![map and description](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/map-description.jpg)
 
-The representative center for a place displayed as decimal lat/long and degrees (image just shows decimal). It should be accompanied by a link allowing the URI to be copied as decimal lat/long on mouseclick. What will be copied should be revealed on mouseover. 
+If location data is available for a current place, it will be default be represented as a single point on and (OpenStreetMap) _Map_. Optionally, if the required georeferenced data is available, the modern representation can be accompanied by a small number of additional historical cartographic representations from a source such as the [David Rumsey Map Collection](https://www.davidrumsey.com). The different maps will be identified, in the first instance, by date of publication, with further metadata recorded in their provenance fields.
 
-We will not attempt to override what GeoNames considers to be the representative point for a current place. For a historical place, an editor will decide where to locate the center (e.g. Vienna for the Habsburg Empire). TBD how to capture a representative historical location can changing over time. We also need to think about what to do if we were to have temporal polygons for historcal places.
+To help further disambiguate the places, including via 
 
-### Citation
+ This field will initially be (semi?)-automatically populated with data from the Getty TGN and then further revised as needed by users/editors.
 
-A simple means to represent the canonical URI as an academic citation, in several standard bibliographic formats and copy it on mouseclick for reuse. What will be copied should be revealed on mouseover, allowing the user to see in advance what the entry will look like in the different citation styles. We had initially considered using [BibTeX][15] as the generic bibliography interchange format. However, [RIS][16] is more current and may be more appropriate. [CSL][17] could provide a means to convert amongst formats.
+*Name Attestations, Calendars, Associated Places*
 
-### Permanent URI
-
-This should be a short form. Timbuctoo generated permanent URI based on the custom domain for EM Places (probably emplaces.info). It should allow the URI to be copied to the clipboard on mouseclick. We need to decide if we additionally want to offer e.g. a DOI or an ARK identifier. Amongst the issues to consider are whether the metadata required by such a service is suited to us (and whether we can then employ the same service for EM People as well). See further:
-
-ARK info: http://n2t.net/e/ark_ids.html (n2t,net is the resolver service) and DOI CataCite info: https://schema.datacite.org/meta/kernel-4.0/
+![Name Attestations, Calendars, Associated Places](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/attestations-cal-assoc.png)
 
 ### Name Attestations
 
@@ -178,6 +184,22 @@ If the contributed data does not already have a well-defined vocabulary, the fea
 
 A test 'related place' record on [St. Adalbert Parish Church][21] has been created on WikiData and is being reviewed for inclusion in the [Opole sample RDF](/models/20180410-opole-example-data.ttl).
 
+![historical hierarchies](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/historical-hierarchies.png)
+
+*Historical Hierarchies*
+
+### Historical Hierarchies 
+
+This section is best understood by looking at the draft [interface mockups][4].
+
+Historical hierarchies show the historical administrative, ecclesiastical, judicial, and military hierarchies for both historical and current places. Initially, this will show the period a certain relationship existed. For example, from an administrative/political perspective, the Silesian town of Opole fell under the Duchy of Opole from 1281-1521. In each part of the hierarchy (with the precise mode of display TBD, for example via mouseover) a user will also be able to view the period of existence of each place entity (e.g. the Bohemian Crown existed from 1348 to 1918). Together, a set of dated entities, linked in hierarchial order by a set of dated relations, forms one (from a possible four kinds of) historical hierarchy. In the case of ecclesiastical hierarchies, an additional row of tabs will be needed to show what kind of hierarchy (e.g. what religion and/or confession) is being tracked. 
+
+Further discussion is needed on the necessary editorial policies. We expect that administrative and ecclesiastical data will be easier to collect from contributors than judicial and military. As a result, displaying data on the latter two categories might not be included in the initial release.
+
+*Related Resources, Bibliography, and Feedback*
+
+![related resources, bibliography, feedback](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/resources-bib-feedback.png)
+
 ### Related Resources
 
 A list of what we expect will be predominantly online, digital resources (for traditional scholarly references, contributors can make use of the bibliography section). Some of the URIs to these resources can be derived  automatically from our reference gazetteers (e.g. links to Wikipedia, WikiData, certain other gazetteers) but most of which will be suggested by contributors and confirmed by editors. 
@@ -188,42 +210,15 @@ This could also include dynamic links to resources which can be queried over an 
 
 A list of bibliographic resources (predominantly offline, scholarly references). At minimum, an unstructured free text list would suffice for v.1. However, our assumption is that this can be a simply structured list, and with the ability to apply place tags to each entry, making it much easier for subsequent contributors to find and select existing bibliographic entries in a consistent manner. This helps avoid contributors working independently on different places (in e.g. the same region and period) repeatedly entering the same reference in different records, possibly in different formats. 
 
-### Creators & Licenses
-
-A listing (machine readable) of the Creator of the record (i.e. the person or organization which created the initial record), one or more subsequent Contributors, a credit line for the reference gazetteers, and a notice of the licenses in use. GeoNames is CC-BY v3 (or possibly v4, the site is inconsistent) so it appears that CC0 is not an option.
-
-### Export
-
-A means to manually export the current record (only) in several common formats, currently assumed to be CSV, Excel, Turtle, GraphML, and GeoJSON. 
-
-Note: GeoJSON is required for Pelagios compatibility via [LPIF format][11].
-
-### Maps
-
-The required (for current places) default map view will be an e.g. OpenStreetMap view using the location provided by core data. 
-
-Optionally, it will be possible, via tabs, to view a finite number of (e.g. 4) historical, open-access geo-referenced and live-tiled maps of the place drawn from a provider such as https://www.davidrumsey.com or http://www.oldmapsonline.org or http://retromap.ru. Alternatively, one could substitute a single tile as a thumbnail for the historical map, and link this to the external historical map resource.
-
-### Description
-
-This field will initially be (semi?)-automatically populated with data from the Getty TGN and then further revised as needed by users/editors.
-
-### Historical Hierarchies 
-
-This section is best understood by looking at the draft [interface mockups][4].
-
-Historical hierarchies show the historical administrative, ecclesiastical, judicial, and military hierarchies for both historical and current places. Initially, this will show the period a certain relationship existed. For example, from an administrative/political perspective, the Silesian town of Opole fell under the Duchy of Opole from 1281-1521. In each part of the hierarchy (with the precise mode of display TBD, for example via mouseover) a user will also be able to view the period of existence of each place entity (e.g. the Bohemian Crown existed from 1348 to 1918). Together, a set of dated entities, linked in hierarchial order by a set of dated relations, forms one (from a possible four kinds of) historical hierarchy. In the case of ecclesiastical hierarchies, an additional row of tabs will be needed to show what kind of hierarchy (e.g. what religion and/or confession) is being tracked. 
-
-Further discussion is needed on the necessary editorial policies. We expect that administrative and ecclesiastical data will be easier to collect from contributors than judicial and military. As a result, displaying data on the latter two categories might not be included in the initial release.
-
 ### Feedback
 
 A link to a simple comment form, referencing the current record and (if present) a link to the logged-in users profile, or else a mailto: link, referencing the current record (e.g. in the subject field).
 
-### Info and Sources pop-ups
+![credits, contributors, licenses, export](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/credits-export.png)
 
-Many sections in the individual record display will include 'Info' and/or 'Sources' links. Clicking this could, as one possibility, show a pop-up with text on that section. In the case of Sources, this could include both an unstructured text area, and a structured bibliographic area. 
+*Credits, Contributors, License, and Export*
  
+[TBA]
 
 [1]: /images/current_display.pdf
 [2]: https://github.com/culturesofknowledge/emplaces#feedback-and-comments
@@ -249,3 +244,9 @@ Many sections in the individual record display will include 'Info' and/or 'Sourc
 [22]: https://pleiades.stoa.org/help/technical-intro-places
 [23]: https://pleiades.stoa.org/help/conceptual-overview
 [24]: https://www.davidrumsey.com
+[25]: http://www.geonames.org/3090048/opole.html
+[26]: http://www.getty.edu/vow/TGNFullDisplay?find=Opole&place=&nation=Poland&subjectid=7007751&english=Y
+[27]: https://en.wikipedia.org/wiki/Prime_meridian
+[28]: https://timbuctoo.huygens.knaw.nl
+[29]: http://n2t.net/e/ark_ids.html 
+
