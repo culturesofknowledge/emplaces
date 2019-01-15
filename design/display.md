@@ -114,7 +114,7 @@ In summary, while conceptually (i.e. from the perspective of the EM Places data 
 
 ### Core Data
 
-
+![core-data](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/core-data.png)
 
 ### Preferred Place Name; alternative names
 
