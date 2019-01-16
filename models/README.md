@@ -84,8 +84,8 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [ ] Historical place record: minimum viable information
        - differs from current place
 5. Generate EMPlaces data mapped from Annalist
-    - [ ] Basic mapping seems to work
-    - [ ] Nedd to figure how to handle local URIs (which are roughly blank nodes)
+    - [x] Basic mapping seems to work
+    - [x] Figure how to handle local URIs (which are roughly blank nodes) [Note: depends on Annalist code updates in 0.5.13 in development branch]
 6. Annalist data
     - [ ] Generate Annalist data from geonames; get full update data
 
