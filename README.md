@@ -21,7 +21,9 @@ The draft [design documents][10] (display, search, edit) offer an informal descr
 An draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model is refined.
 
 ## Status
-**December 2018**: Built internal tool for creating core metadata for place records from reference gazetteers; created sample dataset from EMLO places; reviewed Timbuctoo infratructure dependancies; defined basic editorial workflows; provisional decisions on approach to representing search and browse
+**December 2018**: Second revision of internal tool for creating core metadata for place records from reference gazetteers; created sample dataset from EMLO places; reviewed Timbuctoo infratructure dependancies; defined basic editorial workflows; 
+
+**November 2018** Further revisions to the data model; provisional plan for searching and browsing place records. Initial version of internal Linked Data web editor to be used for prototyping and data entry until the EM Places web editor is ready.
 
 **August 2018**: Provisional full draft of complete data model completed; first release of tool for processing GeoNames data; completed draft user interface for record detail view
 
