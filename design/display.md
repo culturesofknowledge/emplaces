@@ -10,7 +10,7 @@ We welcome anyone interested in the project to [get in touch with us][2] with co
 
 ### Places, Names, and Locations
 
-EM Places is indebted to the [Pleiades] gazetter of Ancient Places for its [key concepts of place, name, and location][21] (see also ['Pleiades: Conceptual Overview'][22]):
+EM Places is indebted to the [Pleiades][30] gazetter of Ancient Places for its [key concepts of place, name, and location][21] (see also ['Pleiades: Conceptual Overview'][22]):
 
 > A _Place_ is a geographical and historical context for Names and
 > Locations. Places may have within their core some features of the
@@ -185,10 +185,10 @@ The _Bibliography_ is intended for recording predominantly offline, scholarly pr
 
 A link to a simple _Feedback_ form, or else a mailto: link, referencing the current record in the subject field.
 
-[Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/credits-export.png)
-
 ### Creator, Contributors, License, and Export
  
+[Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/credits-export.png)
+
 Our intent is to distinguish and separately credit the (single) _Creator_ of a place record, and the potentially multiple _Contributors_ to the data in it. Although we would be able, in principle, to record and display as a contributor each user who made a change to a data field in EM Places, it is unlikely that we will want to do so, as this would give equal credit to the person contributing the original data, and the person who made a trivial change to the data. Moreover, not all contributions to the gazetteer are equal. Deciding which types of edits to count as contributions will be managed under an editorial policy. 
 
 EM Places will incorporate data from multiple sources, not all of which will have the same open-access _License_. Thus, for example, data from GeoNames is licensed under CC0, while research data from a contributor is likely to be shared under CC-BY. Which, and how many of these licenses to display here for users who wish to export data from EM Places will need to be settled under an editorial policy.
@@ -224,4 +224,4 @@ Users will have the opportunity to _Export_ the open-access data in EM Places on
 [27]: https://en.wikipedia.org/wiki/Prime_meridian
 [28]: https://timbuctoo.huygens.knaw.nl
 [29]: http://n2t.net/e/ark_ids.html 
-
+[30]: https://pleiades.stoa.org
