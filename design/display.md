@@ -112,7 +112,14 @@ In summary, while conceptually (i.e. from the perspective of the EM Places data 
 
 ### Provenance
 
-[TBD]
+Though the two will overlap, we need to distinguish between technical and scholarly provenance. The technical provenance metadata will come from the Timbuctoo infrastructure underlying EM Places. For each data field, it will be able to provide the name of the contributor, when it last changed, and (at least in some cases) the applicable open access license. To this we will add further scholarly provenance metadata. Currently, we are considering providing means for specifying the source for the data, a means to cite it (i.e. a permanent URI to a specific contribution, such as a name attestation), and a notes section. Other possibilities include a way to indicate (based on a limited, controlled vocabulary) the (un)certainty of the statement, and a means to specify an authority. 
+
+For example, the EM Places contributor John Smith, asserted that place XYZ transitioned from the Julian to the Gregorian calendar on a certain date. The listed authority for this assertion is the contributor himself, his confidence in it is high, and the evidence for the assertion may be viewed at the specified source. The statement was last modified on the specified date, and no further comments were left about the assertion in the notes field. Finally, it would also list the license granted by the source for its reuse.
+
+Not all data collected in EM Places would require this treatment. For example, the provenance for core metadata, derived from our reference gazetteers, could be simpler. To meet this goal, we plan to add a custom provenance link to all of the relevant core and extended metadata fields in the gazetteer. Each link will go to a unique page on which the technical and scholarly provenance relevant to that data can be displayed. 
+
+The appropriate functionality and data model for 'Provenance' are currently under discussion. 
+ 
 
 ## Interface (Detail View)
 
@@ -172,19 +179,21 @@ We anticipate that administrative and ecclesiastical data will be easier to coll
 
 [Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/resources-bib-feedback.png)
 
-_Related Resources_ provide a means for listing additional, predominant digital resources related to a place which aren't usefully represented in traditional bibliographies. In many instances, these will be live links to searches carried out on external databases (for example, all letters sent to or from a place). 
+_Related Resources_ provide a means for listing additional, predominant digital resources related to a place which aren't usefully represented in traditional bibliographies. In many instances, these will be live links to searches carried out on external databases. For example, to all letters sent to or from a place, or to all mentions of a place in a text. 
 
 The _Bibliography_ is intended for recording predominantly offline, scholarly print publications. In the initial release of EM Places, this will be a simple formatted text list. However, our intent is that in the future, contributors creating the list will be able to easily see if a certain entry had previously been added to a different record, and to select this, so that bibliographic entries can be added in a consistent manner. In addition, contributors should ideally also have a means to add a bibliographic entry to a whole class of records (e.g. to have an entry appear in all places which are grouped together at the same level in a hierarchy). This feature would help prevent contributors working independently on different places (in e.g. the same region and period) from repeatedly entering the same reference in different records.
 
-#### Feedback
-
-A link to a simple comment form, referencing the current record and (if present) a link to the logged-in users profile, or else a mailto: link, referencing the current record (e.g. in the subject field).
+A link to a simple _Feedback_ form, or else a mailto: link, referencing the current record in the subject field.
 
 [Screenshot](https://github.com/culturesofknowledge/emplaces/blob/master/images/screenshots/credits-export.png)
 
-#### Credits, Contributors, License, and Export
+### Creator, Contributors, License, and Export
  
-[TBA]
+Our intent is to distinguish and separately credit the (single) _Creator_ of a place record, and the potentially multiple _Contributors_ to the data in it. Although we would be able, in principle, to record and display as a contributor each user who made a change to a data field in EM Places, it is unlikely that we will want to do so, as this would give equal credit to the person contributing the original data, and the person who made a trivial change to the data. Moreover, not all contributions to the gazetteer are equal. Deciding which types of edits to count as contributions will be managed under an editorial policy. 
+
+EM Places will incorporate data from multiple sources, not all of which will have the same open-access _License_. Thus, for example, data from GeoNames is licensed under CC0, while research data from a contributor is likely to be shared under CC-BY. Which, and how many of these licenses to display here for users who wish to export data from EM Places will need to be settled under an editorial policy.
+
+Users will have the opportunity to _Export_ the open-access data in EM Places on-demand for reuse. We anticipate to provide support for sharing this data in tabular formats (CSV, Excel), as Linked Open Data (Turtle-RDF), and in the Geo-JSON format employed by the Pelagios Gazetteer Interchange Format. In the context of a single record, shown here, an export will only include the data for one place record. In the Search and Browse interface, EM Places users will additionally have the opportunity to export bulk records matching all or a selection of their search criteria. 
 
 [1]: /images/current_display.pdf
 [2]: https://github.com/culturesofknowledge/emplaces#feedback-and-comments
