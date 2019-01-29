@@ -20,6 +20,8 @@ import argparse
 import logging
 import errno
 import requests
+import urllib
+import urlparse
 
 from rdflib         import Graph, Namespace, URIRef, Literal, BNode, RDF, RDFS
 from rdflib.paths   import Path
@@ -27,6 +29,51 @@ from rdflib.paths   import Path
 from getargvalue    import getargvalue, getarg
 
 log = logging.getLogger(__name__)
+
+def merge_two_dicts(x, y):
+    # From: https://stackoverflow.com/a/26853961
+    z = x.copy()   # start with x's keys and values
+    z.update(y)    # modifies z with y's keys and values & returns None
+    return z
+
+def copy_update_dict(x, **updates):
+    return merge_two_dicts(x, updates)
+
+def http_get_json(url, req_headers={}):
+    """
+    Issue an HTTP GET request to the supplied URL, and return the result data.
+    """
+    return http_get(url, copy_update_dict(req_headers, accept="application/json"))
+
+def http_get(url, req_headers={}):
+    """
+    Issue an HTTP GET request to the supplied URL, and return the result data.
+    """
+    response = requests.get(url, headers=req_headers)
+    response.raise_for_status()  # raise an error on unsuccessful status codes
+    return response.text
+
+def make_query_url(endpoint_url, **query_params):
+    """
+    Builds a query URL from the supplied endpoint URL and query params.
+    """
+    # encode_query = urllib.urlencode(query_params)
+    query_string = "&".join([ key+"="+urllib.quote(query_params[key]) for key in query_params ])
+    encode_query = "?" + query_string
+    query_url    = urlparse.urljoin(endpoint_url, encode_query)
+    return query_url
+
+def find_entity_url(entity_uri, content_type="text/turtle"):
+    """
+    Use content negotiuation to find URL for data with specified 
+    content type.
+    """
+    req_headers = (
+        { "accept":     content_type 
+        })
+    response = requests.head(entity_uri, headers=req_headers, allow_redirects=True)
+    response.raise_for_status()  # raise an error on unsuccessful status codes
+    return response.url    
 
 def load_rdf_text(entity_url, format="turtle"):
     rdf_formats = (
@@ -79,7 +126,8 @@ class DataExtractMap(object):
     To use this class:
 
     1. instantiate an instance object with a base node, source and target graphs.
-    2. use methods of the instantiated instances to build a list of extract/transform functions
+    2. use methods of the instantiated instances to build a list of 
+       extract/transform functions
     3. call extract_map to perform the required transformation
 
     @@The design of the mapping is evolving. Curently:@@
@@ -243,7 +291,7 @@ class DataExtractMap(object):
         prop_ref = URIRef(uri)
         def prop_ne_sel(src, base):
             # print("@@@ prop_ne_sel %s, %r, %s"%(uri, src, base))
-            for s, p, o in src:
+            for s, p, o in src.triples((URIRef(base), None, None)):
                 if p != prop_ref:
                     yield (s, p, o)
             return
@@ -255,7 +303,7 @@ class DataExtractMap(object):
         Returns selector for statements whose property starts with the supplied URI value.
         """
         def prop_nseq_sel(src, base):
-            for stmt in src:
+            for stmt in src.triples((URIRef(base), None, None)):
                 if str(stmt[1]).startswith(str(uri)):
                     yield stmt
             return
@@ -267,7 +315,7 @@ class DataExtractMap(object):
         Returns selector for statements whose property starts with the supplied URI value.
         """
         def prop_nsne_sel(src, base):
-            for stmt in src:
+            for stmt in src.triples((URIRef(base), None, None)):
                 if not str(stmt[1]).startswith(str(uri)):
                     yield stmt
             return

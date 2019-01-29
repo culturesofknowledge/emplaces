@@ -32,7 +32,7 @@ sys.path.insert(0, gadroot)
 sys.path.insert(0, comroot)
 
 from commondataexport.getargvalue    import getargvalue, getarg
-from commondataexport.dataextractmap import DataExtractMap
+from commondataexport.dataextractmap import DataExtractMap, find_entity_url
 
 from commondataexport.emplaces_defs import (
     SKOS, XSD, OA, CC, DCTERMS, FOAF, BIBO,
@@ -303,6 +303,7 @@ command_summary_help = ("\n"+
     # "  %(prog)s manyplacehierarchy\n"+
     # "  %(prog)s geonamesid URL [REGEXP]\n"
     # "  %(prog)s manygeonamesids [REGEXP]\n"
+    "  %(prog)s getwikidata WIKIDATAID\n"+
     "  %(prog)s version\n"+
     "")
 
@@ -460,6 +461,14 @@ def show_help(options, progname):
             "and '--include-language-defs'.\n"+
             "\n"+
             "")
+    elif options.args[0].startswith("getw"):
+        help_text = ("\n"+
+            "  %(prog)s getwikidata WIKIDATAID\n"+
+            "\n"+
+            "Gets data about a referenced place from Wikidata, and sends \n"+
+            "data in Turtle format to standard output.\n"+
+            "\n"+
+            "")
     elif options.args[0].startswith("ver"):
         help_text = ("\n"+
             "  %(prog)s version\n"+
@@ -534,6 +543,59 @@ def get_common_defs(options, emplaces_rdf):
 
 #   ===================================================================
 #
+#   Wikidata access
+#
+#   ===================================================================
+
+def get_wikidata_uri(wikidata_id):
+    """
+    Returns Wikidata place URI, given Wikidata ID (e.g. "Q92212")
+    """
+    wikidata_base_uri = "http://www.wikidata.org/entity/"
+    wikidata_uri     = urlparse.urljoin(wikidata_base_uri, wikidata_id)
+    wikidata_url     = find_entity_url(wikidata_uri, "text/turtle")
+    return (wikidata_uri, wikidata_url)
+
+def get_wikidata_id(wikidata_uri):
+    """
+    Returns Wikidata ID (e.g. "Q92212") given Wikidata entity URI, or None.
+    """
+    wikidata_base_uri = "http://www.wikidata.org/entity/"
+    if wikidata_uri.startswith(wikidata_base_uri):
+        wikidata_id = wikidata_uri[len(wikidata_base_uri):]
+    else:
+        wikidata_id = None
+    return wikidata_id
+
+def get_wikidata_id_data(gadroot, wikidata_id, result_rdf=None):
+    """
+    Get Wikidata place data for a given wikidata id
+    """
+    wikidata_uri, wikidata_url = get_wikidata_uri(wikidata_id)
+    print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
+    print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
+    wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
+    # Initial empty graph
+    if result_rdf is None:
+        result_rdf = Graph()
+    # ----- Copy prefixes -----
+    use_namespaces = dict(wikidata_rdf.namespaces())
+    for prefix, ns_uri in wikidata_rdf.namespaces():
+        result_rdf.bind(prefix, ns_uri)
+    WDT = Namespace(use_namespaces["wdt"])
+    # ----- mapping table -----
+    #@@TODO: fix this to pull selected details
+    wikidata_data_mapping = (
+        [ M.emit(M.prop_eq(RDFS.label), M.stmt_copy())
+        , M.emit(M.prop_eq(WDT.P1566), M.stmt_copy())   # Geonames ID
+        ])
+    # -----
+    m = DataExtractMap(wikidata_uri, wikidata_rdf, result_rdf)
+    m.extract_map(wikidata_data_mapping)
+    return result_rdf
+
+#   ===================================================================
+#
 #   Command execution
 #
 #   ===================================================================
@@ -576,6 +638,17 @@ def do_get_resource_data(gadroot, options):
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GAD_SUCCESS
 
+def do_get_wikidata_place_data(gadroot, options):
+    """
+    Get single-source place data from a given place reference
+    """
+    wikidata_id  = getargvalue(getarg(options.args, 0), "Wikidata ID: ")
+    wikidata_rdf = get_wikidata_id_data(
+        gadroot, wikidata_id
+        )
+    print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+    return GAD_SUCCESS
+
 #   ===================================================================
 
 def do_zzzzzz(gadroot, options):
@@ -596,6 +669,8 @@ def run(userhome, userconfig, options, progname):
         return do_get_source_place_data(gadroot, options)
     if options.command.startswith("resource"):
         return do_get_resource_data(gadroot, options)
+    if options.command.startswith("getw"):
+        return do_get_wikidata_place_data(gadroot, options)
     if options.command.startswith("ver"):
         return show_version(gadroot, userhome, options)
     if options.command.startswith("help"):

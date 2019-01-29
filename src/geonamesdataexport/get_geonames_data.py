@@ -18,6 +18,7 @@ import re
 import argparse
 import logging
 import errno
+import json
 
 from rdflib         import Graph, Namespace, URIRef, Literal, BNode, RDF, RDFS
 from rdflib.paths   import Path
@@ -31,9 +32,10 @@ sys.path.insert(0, gcdroot)
 sys.path.insert(0, comroot)
 
 from commondataexport.getargvalue    import getargvalue, getarg
-# from commondataexport.dataextractmap import DataExtractMap
-
-from commondataexport.emplaces_defs import (
+from commondataexport.dataextractmap import (
+    DataExtractMap, make_query_url, http_get_json
+    )
+from commondataexport.emplaces_defs  import (
     SKOS, XSD, OA, CC, DCTERMS, FOAF, BIBO,
     ANNAL, GN, GEONAMES, WGS84_POS, 
     EM, EMP, EMT, EML, EMS, EMC,
@@ -74,6 +76,8 @@ GCD_UNEXPECTEDARGS      = 5         # Unexpected arguments supplied
 GCD_NO_PLACE_IDS        = 6         # No place ids given
 GCD_NO_GEONAMES_URL     = 7         # No GeoNames URL
 GCD_SOME_GEONAMES_URLS  = 8         # Some but not all all URLs matched GeoNames IDs
+GCD_NO_WIKIDATA_IDS     = 9         # No Wikidata Ids for GeoNames ID
+GCD_MANY_WIKIDATA_IDS   = 10        # Multiple Wikidata Ids for GeoNames ID
 
 #   ===================================================================
 #
@@ -91,6 +95,7 @@ command_summary_help = ("\n"+
     "  %(prog)s manyplacehierarchy\n"+
     "  %(prog)s geonamesid URL [REGEXP]\n"
     "  %(prog)s manygeonamesids [REGEXP]\n"
+    "  %(prog)s wikidataid GEONAMESID\n"+
     "  %(prog)s version\n"+
     "")
 
@@ -282,6 +287,15 @@ def show_help(options, progname):
             "  %d if some input strings could not be matched and processed.\n"%(GCD_SOME_GEONAMES_URLS)+
             "\n"+
             "The output can be used as input to a `manyget` or similar command.\n"+
+            "\n"+
+            "")
+    elif options.args[0].startswith("wikidataid"):
+        help_text = ("\n"+
+            "  %(prog)s wikidataid geonamesid\n"+
+            "\n"+
+            "Determines a Wikidata Id corresponding to the supplied Geonames Id,\n"+
+            "and writes it to stdout, or a diagnostic message is output to stderr\n"+
+            "along with an exit status of %d or %d\n"%(GCD_NO_WIKIDATA_IDS, GCD_MANY_WIKIDATA_IDS)+
             "\n"+
             "")
     elif options.args[0].startswith("ver"):
@@ -790,6 +804,59 @@ def do_extract_many_geonames_ids(gcdroot, options):
             status = GCD_SUCCESS
     return status
 
+def get_wikidata_id(wikidata_uri):
+    """
+    Returns Wikidata ID (e.g. "Q92212") given Wikidata entity URI, or None.
+    """
+    wikidata_base_uri = "http://www.wikidata.org/entity/"
+    if wikidata_uri.startswith(wikidata_base_uri):
+        wikidata_id = wikidata_uri[len(wikidata_base_uri):]
+    else:
+        wikidata_id = None
+    return wikidata_id
+
+def wikidata_sparql_query(query, endpoint="https://query.wikidata.org/sparql"):
+    query_url      = make_query_url(endpoint, query=query)
+    # print("@@@ query URL:\n--\n%s\n--"%(query_url,), file=sys.stderr)
+    query_response = http_get_json(query_url)
+    # print("@@@ query_response:\n--\n%s\n--"%(query_response,), file=sys.stderr)
+    return json.loads(query_response)
+
+def do_extract_wikidata_id(gcdroot, options):
+    geo_id = getargvalue(getarg(options.args, 0), "GeoNames ID: ")
+    wikidata_query = ("""
+        SELECT ?item ?itemLabel 
+        WHERE 
+        {
+          ?item wdt:P1566 "%s" .
+          SERVICE wikibase:label 
+            { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+        }
+        """)%(geo_id,)
+    query_response_dict = wikidata_sparql_query(wikidata_query)
+    # print("@@@ query_response_dict:\n--\n%s\n--"%
+    #     (json.dumps(query_response_dict, sort_keys=True, indent=4),), 
+    #     file=sys.stderr
+    #     )
+    # @@@@@ print(format_id_text(geo_id, url), file=sys.stdout)
+    result_bindings = query_response_dict["results"]["bindings"]
+    ids_uris_labels = (
+        [ ( get_wikidata_id(b["item"]["value"])
+          , b["item"]["value"]
+          , b["itemLabel"]["value"]
+          ) 
+          for b in result_bindings 
+        ])
+    if len(ids_uris_labels) == 0:
+        print("No Wikidata IDs found for %s"%(geo_id,), file=sys.stderr)
+        return GCD_NO_WIKIDATA_IDS
+    elif len(ids_uris_labels) != 1:
+        print("Multiple Wikidata IDs found for %s:"%(geo_id,), file=sys.stderr)
+        print("  %s"%([i for i,u,l in ids_uris_labels],), file=sys.stderr)
+        return GCD_MANY_WIKIDATA_IDS
+    print(ids_uris_labels[0][0], file=sys.stdout)
+    return GCD_SUCCESS
+
 #   ===================================================================
 
 def do_zzzzzz(gcdroot, options):
@@ -816,6 +883,8 @@ def run(userhome, userconfig, options, progname):
         return do_extract_geonames_id(gcdroot, options)
     if options.command.startswith("manygeo"):
         return do_extract_many_geonames_ids(gcdroot, options)
+    if options.command.startswith("wikidataid"):
+        return do_extract_wikidata_id(gcdroot, options)
     if options.command.startswith("ver"):
         return show_version(gcdroot, userhome, options)
     if options.command.startswith("help"):

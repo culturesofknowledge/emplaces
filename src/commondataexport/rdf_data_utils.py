@@ -15,17 +15,14 @@ import sys
 import os
 import os.path
 import re
-import argparse
 import urlparse
 import logging
-import errno
 
 from rdflib         import Graph, Namespace, URIRef, Literal, BNode, RDF, RDFS
 from rdflib.paths   import Path
 
 from emplaces_defs  import GN, EMP, SKOS
 from dataextractmap import DataExtractMap
-
 
 log = logging.getLogger(__name__)
 
@@ -115,12 +112,12 @@ def get_rdf_graph(url, format="turtle"):
     # result = g.parse(source=s, publicID=b, format="json-ld")
     return g
 
-def get_geonames_graph_data(annalist_url):
+def get_geonames_graph_data(geonames_url):
     """
-    Returns graph of Annalist place data
+    Returns graph of GeoNames place data
     """
-    annalist_rdf = get_rdf_graph(annalist_url, format="xml")
-    return annalist_rdf
+    geonames_rdf = get_rdf_graph(geonames_url, format="xml")
+    return geonames_rdf
 
 def get_annalist_graph_data(annalist_url):
     """

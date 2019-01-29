@@ -78,6 +78,7 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
 3. Bulk data into RDF/Timbuctoo
     - e.g. 2000 places core data from GeoNames
     - [x] update core data extractor to generate multi-source structure
+    - [ ] Wikidata cross-referencing for alternate authorities
 4. Loose ends
     - [x] Modelling and Opole data
     - [x] Related places
@@ -89,6 +90,9 @@ NOTE: this is WORK-IN-PROGRESS, and NOT FINAL.
     - [x] Figure how to handle local URIs (which are roughly blank nodes) [Note: depends on Annalist code updates in 0.5.13 in development branch]
 6. Annalist data
     - [ ] Generate Annalist data from geonames; get full update data
+    - [ ] Review Annalist definitions with Arno
+
+
 
 - Sample bibliographies to enter
 - Dealing with sources (see issues #19, #13, #7 ?)
