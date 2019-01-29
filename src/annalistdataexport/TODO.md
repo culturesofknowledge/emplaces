@@ -8,5 +8,6 @@
 - [x] Deal with local URIs - generate namespace for URIs.
 - [x] Update documentation
 - [x] Refactor common code between get_geonames_data and get_annalist_data
-- [ ] Installation script (setup.py)?
+- [ ] Test output with Timbuctoo
+- [ ] Installation script (setup.py). Worth doing?
 
