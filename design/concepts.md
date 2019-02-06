@@ -10,7 +10,7 @@ EM Places is indebted to the [Pleiades](https://pleiades.stoa.org) gazetteer of 
 > 
 > A Name is a current or former, abstract textual entity. Like a location, a name belongs to a place. The Πάπρημις of Herodotus 2.59 is one of many with no known locations in the same place. At the other end of the spectrum, Ἀφροδισιάς belongs to a place rich in locations and names.
 > 
-> Y. Tuan, "Place: An Experiential Perspective," Geographical Review, vol. 65, Apr. 1975, pp. 151-165.
+> Y. Tuan, "Place: An Experiential Perspective," _Geographical Review_, vol. 65, Apr. 1975, pp. 151-165.
 
 Drawing closely on this definition, a ‘place’ in EM Places is a geographical and historical context for an entity 'constructed by human experience'. A place therefore, does not only include geographically known locations at specific points in time (e.g. regions and cities) but is also able to accommodate, where required, subjective and even fictional references. To quote again from the Pleiades gazetteer, ‘Places may be no larger than a family dwelling or as big as an empire, be temporally enduring or fleeting. They may expand, contract and evolve over time. A place may be unnamed, unlocated, falsely attested, or even mythical.’  
 
