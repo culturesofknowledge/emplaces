@@ -1,6 +1,6 @@
 ## Places, Names, and Locations
 
-EM Places is indebted to the Pleiades gazetteer of ancient places for its key concepts of place, name, and location (see also their 'Technical Introduction to Places'):
+EM Places is indebted to the [Pleiades](https://pleiades.stoa.org) gazetteer of ancient places for its key concepts of [place, name, and location](https://pleiades.stoa.org/help/conceptual-overview) (see also their ['Technical Introduction to Places'](https://pleiades.stoa.org/help/technical-intro-places)):
 
 > A Place is a geographical and historical context for Names and Locations. Places may have within their core some features of the physical world – a sea, a bay, a river, a mountain range, a pass, a road, a settlement, or an ethnic region – but their primary quality is that, in the words of Yi-fu Tuan 1, they are constructed by human experience. Places may be no larger than a family dwelling or as big as an empire, be temporally enduring or fleeting. They may expand, contract and evolve over time. A place may be unnamed, unlocated, falsely attested, or even mythical.
 > 
