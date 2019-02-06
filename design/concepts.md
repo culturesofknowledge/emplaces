@@ -1,4 +1,6 @@
-## Places, Names, and Locations
+## Key Concepts and Definitions
+
+### Places, Names, and Locations
 
 EM Places is indebted to the [Pleiades](https://pleiades.stoa.org) gazetteer of ancient places for its key concepts of [place, name, and location](https://pleiades.stoa.org/help/conceptual-overview) (see also their ['Technical Introduction to Places'](https://pleiades.stoa.org/help/technical-intro-places)):
 
@@ -16,7 +18,7 @@ A 'location' is a spatial reference, typically represented as a single point, ex
 
 For the pilot release of EM Places we have chosen to largely bracket out fictional, mythical, extra-terrestrial and similar places referenced in historical texts. ‘Atlantis’, for example, or 'Saturn' are not likely to be found in this version of EM Places. This is because, in the first instance, our focus is on creating a gazetteer for describing the kinds of places from which real people wrote and received letters. Of course, distinctions between ‘real’ and ‘imaginary’ are never quite as strict as they may initially seem, and this is where the Pleiades model gives us the flexibility we will need to (at minimum) also account for ambiguous, allusive, and temporally curtailed places. 
 
-## Core and Supplementary Metadata
+### Core and Supplementary Metadata
 
 EM Places records are composed of two classes of data: 1) a required, minimal set of core metadata, and 2) an optional, larger set of predominantly historical, supplementary metadata provided by contributing scholars and projects.
 When a new place record is added to EM Places, we will first attempt to locate that place in GeoNames, our primary reference gazetteer. If the place is found, we ingest and record in EM Places a set of core metadata from a small number of contemporary reference authorities (currently: GeoNames, Getty TGN, and WikiData):
