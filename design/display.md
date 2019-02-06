@@ -1,8 +1,3 @@
-# Overview
-
-The draft description below offers an overview of the functionality of the EM Places gazetteer. It is best consulted alongside the current [mock-up][1] of the detail view of a an individual place record. 
-
-We welcome anyone interested in the project to [get in touch with us][2] with comments and feedback.
 
 ## Interface (Detail View)
 
