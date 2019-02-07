@@ -1,0 +1,958 @@
+@prefix agent: <http://id.emplaces.info/agent/> .
+@prefix annal: <http://purl.org/annalist/2014/#> .
+@prefix anno_cal: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Calendar_used_annotation/> .
+@prefix anno_map: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Map_resource_annotation/> .
+@prefix anno_nam: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Name_attestation_annotation/> .
+@prefix annotation: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Contextualized_annotation/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix calendar: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Calendar/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix em: <http://id.emplaces.info/vocab/> .
+@prefix emc: <http://id.emplaces.info/calendar/> .
+@prefix eml: <http://id.emplaces.info/language/> .
+@prefix emp: <http://id.emplaces.info/timeperiod/> .
+@prefix ems: <http://id.emplaces.info/source/> .
+@prefix emt: <http://id.emplaces.info/timespan/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geonames: <http://sws.geonames.org/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix language_value: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Language_value/> .
+@prefix location: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Location_value/> .
+@prefix map_resource: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Map_resource/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix person: <http://localhost:8000/annalist/c/EMPlaces_defs/d/foaf_Person/> .
+@prefix place: <http://id.emplaces.info/place/> .
+@prefix place_category: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_category/> .
+@prefix place_merged: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_merged/> .
+@prefix place_name: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_name/> .
+@prefix place_relation: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Qualified_relation/> .
+@prefix place_sourced: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_sourced/> .
+@prefix place_type: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place_type/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ref: <http://id.emplaces.info/reference/> .
+@prefix setting: <http://localhost:8000/annalist/c/EMPlaces_defs/d/Setting/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+place_merged:Opole_P a em:Place,
+        em:Place_merged,
+        annal:EntityData ;
+    rdfs:label "City of Opole" ;
+    em:canonicalURI place:Opole_P ;
+    em:place_data place_sourced:Opole_P_CofK,
+        place_sourced:Opole_P_GeoNames,
+        place_sourced:Opole_P_wikidata ;
+    annal:id "Opole_P" ;
+    annal:type_id "Place_merged" ;
+    rdfs:comment """# City of Opole\r
+\r
+Authority data from GeoNames, and additional provided by EMPlaces project.""" .
+
+agent:Ryszard_Emmerling a annal:EntityData,
+        foaf:Agent,
+        foaf:Person ;
+    rdfs:label "Ryszard Emmerling" ;
+    annal:id "Ryszard_Emmerling" ;
+    annal:type_id "foaf_Person" ;
+    rdfs:comment "Ryszard Emmerling" .
+
+agent:Urszula_Zajaczkowska a annal:EntityData,
+        foaf:Agent,
+        foaf:Person ;
+    rdfs:label "Urszula ZajÄczkowska" ;
+    annal:id "Urszula_Zajaczkowska" ;
+    annal:type_id "foaf_Person" ;
+    rdfs:comment "Urszula ZajÄczkowska" .
+
+ref:Opole_Emmerling_Zajaczkowska a em:Bib_entry,
+        annal:EntityData,
+        bibo:Book ;
+    rdfs:label "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" ;
+    annal:id "Opole_Emmerling_Zajaczkowska" ;
+    annal:type_id "bibo_Book" ;
+    dcterms:date "2003" ;
+    dcterms:publisher agent:Slaskie_Wydawnictwo ;
+    dcterms:source <https://www.amazon.com/Opole-Capital-of-Opolskie-Province/dp/B0021JGAOI> ;
+    dcterms:title "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" ;
+    bibo:authorList ( agent:Ryszard_Emmerling agent:Urszula_Zajaczkowska ) ;
+    bibo:isbn10 "8391537137" ;
+    bibo:isbn13 "978-8391537138" ;
+    rdfs:comment "Oppeln/Opole: Die Hauptstadt der Wojewodschaft Oppeln" .
+
+<http://id.emplaces.info/source/1584_Papal_Bull> a em:Source,
+        annal:EntityData ;
+    rdfs:label "1584 Papal Bull" ;
+    annal:id "1584_Papal_Bull" ;
+    annal:type_id "Source" ;
+    rdfs:comment """# 1584 Papal Bull\r
+\r
+Assumed from adoption of Papal Bull (Gregorian) in 1584.""" .
+
+ems:Babik_2001 a em:Source,
+        annal:EntityData ;
+    rdfs:label "Babik, Zbigniew 2001" ;
+    annal:id "Babik_2001" ;
+    annal:type_id "Source" ;
+    rdfs:comment """# Babik, Zbigniew 2001\r
+\r
+Babik, Zbigniew 2001: Najstarsza warstwa nazewnicza na ziemiach polskich w granicach wczesnoÅredniowiecznej SÅowiaÅszczyzny, KrakÃ³w.\r
+""" .
+
+ems:Behuneck_1855 a em:Source,
+        annal:EntityData ;
+    rdfs:label " Behuneck, Adolf 1855" ;
+    annal:id "Behuneck_1855" ;
+    annal:type_id "Source" ;
+    rdfs:comment """# Behuneck, Adolf 1855\r
+\r
+Behuneck, Adolf 1855: Alphabetisch-tabellarisches Verzeichniss sÃ¤mmtlicher StÃ¤dte, Flecken, DÃ¶rfer und anderer Orte Schlesiens sowie sÃ¤mmtlicher StÃ¤dte und derjenigen Ortschaften Preussens, in denen Gerichtssitze sind, oder Gerichtstage abgehalten werden, Steinau.""" .
+
+ems:Blahova_2001 a em:Source,
+        annal:EntityData ;
+    rdfs:label "BlÃ¡hovÃ¡, Marie, 2001" ;
+    annal:id "Blahova_2001" ;
+    annal:type_id "Source" ;
+    rdfs:comment "BlÃ¡hovÃ¡, Marie: HistorickÃ¡ chronologie. Praha 2001" .
+
+ems:Heinrich_Adamy_Breslau a em:Source,
+        annal:EntityData ;
+    rdfs:label "Heinrich Adamy, Breslau" ;
+    annal:id "Heinrich_Adamy_Breslau" ;
+    annal:type_id "Source" ;
+    rdfs:comment """# Heinrich Adamy, Breslau\r
+\r
+Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau.""" .
+
+ems:Opole_P_EMLO a em:Source,
+        annal:EntityData ;
+    rdfs:label "City of Opole (EMLO)" ;
+    em:link <http://emlo.bodleian.ox.ac.uk/profile/location/ae6d9771-a289-4428-bca4-a1da7ba264e6> ;
+    em:short_label "EMLO" ;
+    annal:id "Opole_P_EMLO" ;
+    annal:type_id "Source" ;
+    rdfs:comment "Letters sent from, received at or mentioning Opole, recorded in EMLO." .
+
+ems:Opole_P_Freebase a em:Authority,
+        em:Source,
+        annal:EntityData ;
+    rdfs:label "City of Opole (freebase)" ;
+    em:link <https://g.co/kg/m/0jx51> ;
+    em:short_label "Freebase" ;
+    annal:id "Opole_P_Freebase" ;
+    annal:type_id "Authority" ;
+    rdfs:comment "Freebase record fort Opole" .
+
+ems:Opole_P_GND a em:Authority,
+        em:Source,
+        annal:EntityData ;
+    rdfs:label "City of Opole (GND)" ;
+    em:link <http://d-nb.info/gnd/4075671-3> ;
+    em:short_label "GND" ;
+    annal:id "Opole_P_GND" ;
+    annal:type_id "Authority" ;
+    rdfs:comment "Cit=y of Opole description in GND" .
+
+ems:TGN_Opole_source a em:Authority,
+        em:Source,
+        annal:EntityData ;
+    rdfs:label "TGN data for Opole" ;
+    em:link <http://vocab.getty.edu/page/tgn/7007751> ;
+    em:short_label "TGN" ;
+    annal:id "TGN_Opole_source" ;
+    annal:type_id "Authority" ;
+    rdfs:comment """# TGN data for Opole\r
+\r
+View [TGN page](http://www.getty.edu/vow/TGNFullDisplay?find=opole&place=&nation=&english=Y&subjectid=7007751).\r
+\r
+Dereferencing the "link" URL returns RDF data\r
+""" .
+
+ems:Tomsa_1995 a em:Source,
+        annal:EntityData ;
+    rdfs:label "Tomsa, Jan, 1995" ;
+    annal:id "Tomsa_1995" ;
+    annal:type_id "Source" ;
+    rdfs:comment "Tomsa, Jan: PoÄÃ¬tÃ¡nÃ¬ Äasu (ZÃ¡klady teorie kalendÃ¡Åe). Praha 1995" .
+
+ems:dolny_slask_org_pl a em:Source,
+        annal:EntityData ;
+    rdfs:label "dolny-slask.org.pl" ;
+    em:link <https://dolny-slask.org.pl/> ;
+    annal:id "dolny_slask_org_pl" ;
+    annal:type_id "Source" ;
+    rdfs:comment "dolny-slask.org.pl" .
+
+ems:herder_institut_de_silesia a em:Source,
+        annal:EntityData ;
+    rdfs:label "www.herder-institut.de: Silesia" ;
+    em:link <https://www.herder-institut.de/en/research-projects/current-projects/town-atlas-silesia.html> ;
+    annal:id "herder_institut_de_silesia" ;
+    annal:type_id "Source" ;
+    rdfs:comment """# www.herder-institut.de: Silesia\r
+\r
+https://www.herder-institut.de/en/research-projects/current-projects/town-atlas-silesia.html""" .
+
+ems:ome_lexikon_uni_oldenburg_de a em:Source,
+        annal:EntityData ;
+    rdfs:label "ome-lexikon.uni-oldenburg.de" ;
+    em:link <http://ome-lexikon.uni-oldenburg.de/> ;
+    annal:id "ome_lexikon_uni_oldenburg_de" ;
+    annal:type_id "Source" ;
+    rdfs:comment """# ome-lexikon.uni-oldenburg.de\r
+\r
+http://ome-lexikon.uni-oldenburg.de""" .
+
+emp:Period_1146_current a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1146..current" ;
+    annal:id "Period_1146_current" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment """# Period 1146..current\r
+\r
+""" .
+
+emp:Period_1222_1431 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1222..1431" ;
+    annal:id "Period_1222_1431" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period 1222..1431" .
+
+emp:Period_1281_1521 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1281..1521" ;
+    annal:id "Period_1281_1521" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period 1281..1521" .
+
+emp:Period_1322_1417 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1322..1417" ;
+    annal:id "Period_1322_1417" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period 1322..1417" .
+
+emp:Period_1433 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1433" ;
+    annal:id "Period_1433" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period 1433" .
+
+emp:Period_1454 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1454" ;
+    annal:id "Period_1454" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment """# Period 1454\r
+""" .
+
+emp:Period_1455 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1455" ;
+    annal:id "Period_1455" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment """# Period 1455\r
+""" .
+
+emp:Period_1477_1945 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1477..1945" ;
+    annal:id "Period_1477_1945" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period 1477..1945" .
+
+emp:Period_1561 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1561" ;
+    annal:id "Period_1561" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period 1561" .
+
+emp:Period_1608 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period 1608" ;
+    annal:id "Period_1608" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period 1608" .
+
+emp:Period_from_15840223 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period from 15840223" ;
+    annal:id "Period_from_15840223" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period from 15840223" .
+
+emp:Period_to_1584 a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Period to 1584" ;
+    annal:id "Period_to_1584" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment "# Period to 1584" .
+
+em:AH_PART_OF_AH a em:Relation_type,
+        annal:EntityData ;
+    rdfs:label "Former part of" ;
+    annal:id "em_AH_PART_OF_AH" ;
+    annal:type_id "Relation_type" ;
+    rdfs:comment """#  Former part of\r
+\r
+Records a historical relationship between a historical place or administrative division and its parent division.\r
+\r
+This relation type allows the _from_ category to be a populated place or an administrative division, to avoid having to define and use multiple relation types for historic relations.\r
+""" .
+
+em:ASSUMED a em:Competence_value,
+        annal:EntityData ;
+    rdfs:label "Assumed" ;
+    annal:id "ASSUMED" ;
+    annal:type_id "Competence_value" ;
+    rdfs:comment "The associated value is assumed from context." .
+
+em:P_PART_OF_A a em:Relation_type,
+        annal:EntityData ;
+    rdfs:label "Administered by" ;
+    annal:id "em_P_PART_OF_A" ;
+    annal:type_id "Relation_type" ;
+    rdfs:comment """#  Administered by\r
+\r
+Relates a populated place to its administrative division.\r
+""" .
+
+anno_cal:Opole_calendar_from_1584 a em:Annotation,
+        em:Calendar_used_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole calendar from 1584" ;
+    em:competence em:DEFINITIVE ;
+    em:source ems:Blahova_2001,
+        ems:Tomsa_1995 ;
+    em:when emp:Period_from_15840223 ;
+    annal:id "Opole_calendar_from_1584" ;
+    annal:type_id "Calendar_used_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """# Opole calendar from 1584\r
+\r
+Gregorian since 23/02/1584. The actual switch took place on 12.2.1584. The next day then became the 23.2.1584.\r
+\r
+Data assembled by Arno Bosse.""" ;
+    oa:hasBody emc:Gregorian ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:CALENDAR_IN_USE .
+
+anno_cal:Opole_calendar_to_1584 a em:Annotation,
+        em:Calendar_used_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole calendar used to 1584" ;
+    em:competence em:ASSUMED ;
+    em:source <http://id.emplaces.info/source/1584_Papal_Bull> ;
+    em:when emp:Period_to_1584 ;
+    annal:id "Opole_calendar_to_1584" ;
+    annal:type_id "Calendar_used_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """Opole calendar used to 1584\r
+\r
+Data assembled by Arno Bosse.""" ;
+    oa:hasBody emc:Julian_old ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:CALENDAR_IN_USE .
+
+location:Opole_location a em:Location_value,
+        annal:EntityData ;
+    rdfs:label "50.67211Â°N, 17.92533Â°E (Opole)" ;
+    annal:id "Opole_location" ;
+    annal:type_id "Location_value" ;
+    rdfs:comment "Location of City of Opole." ;
+    wgs84_pos:lat "50.67211" ;
+    wgs84_pos:long "17.92533" .
+
+map_resource:Opole_map_current a em:Map_resource,
+        annal:EntityData ;
+    rdfs:label "Current map for Opole" ;
+    em:link <http://www.geonames.org/3090048/opole.html> ;
+    em:preview <http://www.geonames.org/3090048/opole.html> ;
+    em:short_label "Current" ;
+    annal:id "Opole_map_current" ;
+    annal:type_id "Map_resource" ;
+    rdfs:comment """# Current map for Opole\r
+""" .
+
+map_resource:Silesia_1561 a em:Map_resource,
+        annal:EntityData ;
+    rdfs:label "Map of Silesia dated 1561" ;
+    em:link <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
+    em:preview <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
+    em:short_label "1561" ;
+    annal:id "Silesia_1561" ;
+    annal:type_id "Map_resource" ;
+    rdfs:comment """# Map of Silesia dated 1561\r
+""" .
+
+map_resource:Silesia_1608 a em:Map_resource,
+        annal:EntityData ;
+    rdfs:label "Map of Silesia dated 1608" ;
+    em:link <https://davidrumsey.georeferencer.com/maps/769642035679/view> ;
+    em:preview <https://davidrumsey.georeferencer.com/maps/769642035679/view> ;
+    em:short_label "1561" ;
+    annal:id "Silesia_1608" ;
+    annal:type_id "Map_resource" ;
+    rdfs:comment """# Map of Silesia dated 1608\r
+""" .
+
+anno_map:Silesia_1561 a em:Annotation,
+        em:Map_resource_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Map of Silesia dated 1561" ;
+    em:source ems:David_Rumsey_map_collection ;
+    em:when emp:Period_1561 ;
+    annal:id "Silesia_1561" ;
+    annal:type_id "Map_resource_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment "# Map of Silesia dated 1561" ;
+    oa:hasBody map_resource:Silesia_1561 ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:MAP_RESOURCE .
+
+anno_map:Silesia_1608 a em:Annotation,
+        em:Map_resource_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Map of Silesia dated 1608" ;
+    em:source ems:David_Rumsey_map_collection ;
+    em:when emp:Period_1608 ;
+    annal:id "Silesia_1608" ;
+    annal:type_id "Map_resource_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment "# Map of Silesia dated 1608" ;
+    oa:hasBody map_resource:Silesia_1608 ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:MAP_RESOURCE .
+
+anno_nam:Opole_P_Name_attestation a em:Annotation,
+        em:Name_attestation_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole name attestation (pol)" ;
+    em:competence em:DEFINITIVE ;
+    em:source ems:Heinrich_Adamy_Breslau ;
+    em:when emp:Period_1146_current ;
+    annal:id "Opole_P_Name_attestation" ;
+    annal:type_id "Name_attestation_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """Name attestation: Opole\r
+\r
+Data assembled by Dariusz Gierczak / Arno Bosse.""" ;
+    oa:hasBody place_name:Opole_P_Name_Opole ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:NAME_ATTESTATION .
+
+anno_nam:Opole_P_Name_attestation_Opol a em:Annotation,
+        em:Name_attestation_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole name attestation: Opol (lat)" ;
+    em:competence em:DEFINITIVE ;
+    em:source ems:www_dokumentyslaska_pl ;
+    em:when emp:Period_1222_1431 ;
+    annal:id "Opole_P_Name_attestation_Opol" ;
+    annal:type_id "Name_attestation_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """Name attestation: Opol\r
+\r
+Data assembled by Dariusz Gierczak / Arno Bosse.""" ;
+    oa:hasBody place_name:Opole_P_Name_attestation_Opol ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:NAME_ATTESTATION .
+
+anno_nam:Opole_P_Name_attestation_Oppelln a em:Annotation,
+        em:Name_attestation_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole name attestation: Oppelln (ger)" ;
+    em:when emp:Period_1454 ;
+    annal:id "Opole_P_Name_attestation_Oppelln" ;
+    annal:type_id "Name_attestation_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """# Opole name attestation: Oppelln (ger)\r
+\r
+Data assembled by Dariusz Gierczak / Arno Bosse.""" ;
+    oa:hasBody place_name:Opole_P_Name_Oppeln ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:NAME_ATTESTATION .
+
+anno_nam:Opole_P_Name_attestation_Oppeln a em:Annotation,
+        em:Name_attestation_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole name attestation: Oppeln (ger)" ;
+    em:when emp:Period_1477_1945 ;
+    annal:id "Opole_P_Name_attestation_Oppeln" ;
+    annal:type_id "Name_attestation_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """# Opole name attestation: Oppelln (ger)\r
+\r
+Data assembled by Dariusz Gierczak / Arno Bosse.\r
+""" ;
+    oa:hasBody place_name:Opole_P_Name_Oppelln ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:NAME_ATTESTATION .
+
+anno_nam:Opole_P_Name_attestation_Oppoln a em:Annotation,
+        em:Name_attestation_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole name attestation: Oppoln (ger)" ;
+    em:when emp:Period_1433 ;
+    annal:id "Opole_P_Name_attestation_Oppoln" ;
+    annal:type_id "Name_attestation_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """# Opole name attestation: Oppoln (ger)\r
+\r
+Data assembled by Dariusz Gierczak / Arno Bosse.\r
+""" ;
+    oa:hasBody place_name:Opole_P_Name_Oppoln ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:NAME_ATTESTATION .
+
+anno_nam:Opole_P_Name_attestation_Oppul a em:Annotation,
+        em:Name_attestation_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole name attestation: Oppul (ger)" ;
+    em:competence em:DEFINITIVE ;
+    em:source ems:www_dokumentyslaska_pl ;
+    em:when emp:Period_1455 ;
+    annal:id "Opole_P_Name_attestation_Oppul" ;
+    annal:type_id "Name_attestation_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """Opole name attestation: Oppul (ger)\r
+\r
+Data assembled by Dariusz Gierczak / Arno Bosse.\r
+""" ;
+    oa:hasBody place_name:Opole_P_Name_Oppul ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:NAME_ATTESTATION .
+
+anno_nam:Opole_P_Name_attestation_Opul a em:Annotation,
+        em:Name_attestation_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole name attestation: Opul (ger)" ;
+    em:competence em:DEFINITIVE ;
+    em:source ems:www_dokumentyslaska_pl ;
+    em:when emp:Period_1322_1417 ;
+    annal:id "Opole_P_Name_attestation_Opul" ;
+    annal:type_id "Name_attestation_annotation" ;
+    dcterms:created "2018-10-08" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment """Opole name attestation: Opul (ger)\r
+\r
+Data assembled by Dariusz Gierczak / Arno Bosse.\r
+""" ;
+    oa:hasBody place_name:Opole_P_Name_Opul ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:NAME_ATTESTATION .
+
+place_name:Opole_P_Name_Opole a em:Place_name,
+        annal:EntityData ;
+    rdfs:label "Opole place name (pol)" ;
+    em:language language_value:pl ;
+    em:name "Opole" ;
+    annal:id "Opole_P_Name_Opole" ;
+    annal:type_id "Place_name" ;
+    rdfs:comment """# Opole place name (pol)\r
+\r
+Polish\r
+""" .
+
+place_name:Opole_P_Name_Oppelln a em:Place_name,
+        annal:EntityData ;
+    rdfs:label "Opole place name: Oppelln (ger)" ;
+    em:language language_value:de ;
+    em:name "Oppelln" ;
+    annal:id "Opole_P_Name_Oppelln" ;
+    annal:type_id "Place_name" ;
+    rdfs:comment "# Opole place name: Oppelln (ger)" .
+
+place_name:Opole_P_Name_Oppeln a em:Place_name,
+        annal:EntityData ;
+    rdfs:label "Opole place name: Oppeln (ger)" ;
+    em:language language_value:de ;
+    em:name "Oppeln" ;
+    annal:id "Opole_P_Name_Oppeln" ;
+    annal:type_id "Place_name" ;
+    rdfs:comment "# Opole place name: Oppeln (ger)" .
+
+place_name:Opole_P_Name_Oppoln a em:Place_name,
+        annal:EntityData ;
+    rdfs:label "Opole place name: Oppoln (ger)" ;
+    em:language language_value:de ;
+    em:name "Oppoln" ;
+    annal:id "Opole_P_Name_Oppoln" ;
+    annal:type_id "Place_name" ;
+    rdfs:comment "# Opole place name: Oppoln (ger)" .
+
+place_name:Opole_P_Name_Oppul a em:Place_name,
+        annal:EntityData ;
+    rdfs:label "Opole place name: Oppul (ger)" ;
+    em:language language_value:de ;
+    em:name "Oppul" ;
+    annal:id "Opole_P_Name_Oppul" ;
+    annal:type_id "Place_name" ;
+    rdfs:comment "# Opole place name: Oppul (ger)" .
+
+place_name:Opole_P_Name_Opul a em:Place_name,
+        annal:EntityData ;
+    rdfs:label "Opole place name: Opul (ger)" ;
+    em:language language_value:de ;
+    em:name "Opul" ;
+    annal:id "Opole_P_Name_Opul" ;
+    annal:type_id "Place_name" ;
+    rdfs:comment "# Opole place name: Opul (ger)" .
+
+place_name:Opole_P_Name_attestation_Opol a em:Place_name,
+        annal:EntityData ;
+    rdfs:label "Opole place name: Opol (lat)" ;
+    em:language language_value:la ;
+    em:name "Opol" ;
+    annal:id "Opole_P_Name_attestation_Opol" ;
+    annal:type_id "Place_name" ;
+    rdfs:comment "# Opole place name: Opol (lat)" .
+
+place_sourced:Opole_P_GeoNames a em:Place,
+        em:Place_sourced,
+        annal:EntityData ;
+    rdfs:label "City of Opole (GeoNames)" ;
+    em:editorialNote "" ;
+    em:hasRelation place_relation:Opole_rel_ADM3 ;
+    em:placeCategory place_category:gn_P ;
+    em:placeType place_type:gn_P_PPL ;
+    em:preferredName "Opole" ;
+    em:source ems:GeoNames_Opole_source ;
+    em:when emp:Current ;
+    em:where setting:Opole_current ;
+    annal:id "Opole_P_GeoNames" ;
+    annal:type_id "Place_sourced" ;
+    rdfs:comment """Further alternate names not entered:\r
+\r
+<!--\r
+    em:alternateName "Opole"@eo ;\r
+    em:alternateName "Opole"@fi ;\r
+    em:alternateName "Opole"@fr ;\r
+    em:alternateName "Opole"@hu ;\r
+    em:alternateName "Opole"@id ;\r
+    em:alternateName "Opole"@it ;\r
+    em:alternateName "Opole"@jv ;\r
+    em:alternateName "Opole"@lv ;\r
+    em:alternateName "Opole"@na ;\r
+    em:alternateName "Opole"@nl ;\r
+    em:alternateName "Opole"@pl ;\r
+    em:alternateName "Opole"@pt ;\r
+    em:alternateName "Opole"@ro ;\r
+    em:alternateName "Opole"@sl ;\r
+    em:alternateName "Opole"@sv ;\r
+    em:alternateName "ÃpÃ²le"@csb ;\r
+    em:alternateName "OpolÄ"@lt ;\r
+    em:alternateName "OpolÃ­"@cs ;\r
+    em:alternateName "Oppeln"@de ;\r
+    em:alternateName "Oppeln"@nds ;\r
+    em:alternateName "Uopole"@szl ;\r
+    em:alternateName "Ø£Ø¨ÙÙÙØ³ÙÙ"@ar ;\r
+    em:alternateName "Ø§ÙÙ¾ÙÙ"@pnb ;\r
+    em:alternateName "Ø§ÙÙ¾ÙÙÙ"@fa ;\r
+    em:alternateName "×××¤×××"@he ;\r
+    em:alternateName "ÐÐ¾ÑÐ°Ð´ ÐÐ¿Ð¾Ð»Ðµ"@be ;\r
+    em:alternateName "ÐÐ¿Ð¾Ð»Ðµ"@bg ;\r
+    em:alternateName "ÐÐ¿Ð¾Ð»Ðµ"@ru ;\r
+    em:alternateName "ÐÐ¿Ð¾Ð»Ðµ"@sr ;\r
+    em:alternateName "ÐÐ¿Ð¾Ð»Ðµ"@uk ;\r
+    em:alternateName "å¥¥æ³¢è±"@zh ;\r
+-->\r
+""" ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <http://en.wikipedia.org/wiki/Opole>,
+        <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> ;
+    oa:hasAnnotation anno_map:Opole_anno_map_current .
+
+place_sourced:Opole_P_wikidata a em:Place,
+        em:Place_sourced,
+        annal:EntityData ;
+    rdfs:label "City of Opole (wikidata)" ;
+    em:alternateAuthority ems:Opole_P_Freebase,
+        ems:Opole_P_GND ;
+    em:editorialNote "" ;
+    em:placeCategory place_category:gn_P ;
+    em:placeType place_type:gn_P_PPL ;
+    em:preferredName "Opole" ;
+    em:relatedResource ems:Opole_P_EMLO ;
+    em:source ems:Wikidata_Opole_source ;
+    em:when emp:Current ;
+    annal:id "Opole_P_wikidata" ;
+    annal:type_id "Place_sourced" ;
+    rdfs:comment "City with powiat rights of Poland" .
+
+place_relation:Opole_rel_ADM3 a em:Qualified_relation,
+        annal:EntityData ;
+    rdfs:label "Opole relation to Opole ADM3" ;
+    em:competence em:DEFINITIVE ;
+    em:relationTo <http://localhost:8000/annalist/c/EMPlaces_defs/d/Place/Opole_ADM3> ;
+    em:relationType em:P_PART_OF_A ;
+    em:source ems:GeoNames_Opole_source ;
+    em:when <http://localhost:8000/annalist/c/EMPlaces_defs/d/> ;
+    annal:id "Opole_rel_ADM3" ;
+    annal:type_id "Qualified_relation" ;
+    rdfs:comment "# Opole relation to Opole ADM3" .
+
+place_relation:Opole_rel_Duchy a em:Qualified_relation,
+        annal:EntityData ;
+    rdfs:label "Opole relation to Duch of Opole" ;
+    em:competence em:DEFINITIVE ;
+    em:relationTo place_sourced:Opole_Duchy_CofK ;
+    em:relationType em:AH_PART_OF_AH ;
+    em:source ems:CofK ;
+    em:when emp:Period_1281_1521 ;
+    annal:id "Opole_rel_Duchy" ;
+    annal:type_id "Qualified_relation" ;
+    rdfs:comment "# Opole relation to Duch of Opole" .
+
+emc:Gregorian a em:Calendar,
+        annal:EntityData ;
+    rdfs:label "Gregorian calendar" ;
+    em:link emc:Gregorian ;
+    annal:id "Gregorian" ;
+    annal:type_id "Calendar" ;
+    rdfs:comment """# Gregorian calendar\r
+\r
+Calendar generally in use in Europe from about 23 Feb 1584.""" .
+
+emc:Julian_old a em:Calendar,
+        annal:EntityData ;
+    rdfs:label "Julian calendar (Old)" ;
+    em:link emc:Julian_old ;
+    annal:id "Julian_old" ;
+    annal:type_id "Calendar" ;
+    rdfs:comment """# Julian calendar (Old)\r
+\r
+"Old style" Julian calendar, year begins on 25-Mar.""" .
+
+ems:CofK a em:Source,
+        annal:EntityData ;
+    rdfs:label "CofK project activity" ;
+    em:link <http://www.culturesofknowledge.org/> ;
+    em:short_label "CofK" ;
+    annal:id "CofK" ;
+    annal:type_id "Source" ;
+    rdfs:comment """# CofK project activity\r
+\r
+Data additional to authority sources published by the Cultures of Knowledge team.""" .
+
+ems:David_Rumsey_map_collection a em:Source,
+        annal:EntityData ;
+    rdfs:label "David Rumsey map collection" ;
+    em:link <https://davidrumsey.georeferencer.com/> ;
+    annal:id "David_Rumsey_map_collection" ;
+    annal:type_id "Source" ;
+    rdfs:comment "# David Rumsey map collection" .
+
+ems:Wikidata_Opole_source a em:Authority,
+        em:Source,
+        annal:EntityData ;
+    rdfs:label "Wikidata for Opole" ;
+    em:short_label "Wikidata" ;
+    annal:id "Wikidata_Opole_source" ;
+    annal:type_id "Authority" ;
+    rdfs:comment """# Wikidata description for Opole\r
+\r
+View the [Wikidata edit page](https://www.wikidata.org/wiki/Q92212).\r
+\r
+The "Link" field URL can content negotiate for data in one of the following MIME types:\r
+\r
+* application/json\r
+* application/vnd.php.serialized\r
+* text/n3\r
+* text/rdf+n3\r
+* text/turtle\r
+* application/x-turtle\r
+* application/n-triples\r
+* text/n-triples, text/plain\r
+* application/rdf+xml\r
+* application/xml\r
+* text/xml\r
+\r
+This will then redirect to an appropriate URL for the selected format;. e.g. \r
+\r
+* [https://www.wikidata.org/wiki/Special:EntityData/Q92212.json](https://www.wikidata.org/wiki/Special:EntityData/Q92212.json) for JSON, or\r
+* [https://www.wikidata.org/wiki/Special:EntityData/Q92212.ttl](https://www.wikidata.org/wiki/Special:EntityData/Q92212.ttl) for turtle.\r
+\r
+""" .
+
+em:CALENDAR_IN_USE a em:Annotation_motivation,
+        annal:EntityData,
+        skos:Concept,
+        oa:Motivation ;
+    rdfs:label "Calendar-in-use annotation" ;
+    annal:id "CALENDAR_IN_USE" ;
+    annal:type_id "Annotation_motivation" ;
+    rdfs:comment """# Calendar-in-use annotation\r
+\r
+An annotation type (motivation) that is used to indicate a reference to a historical calendar-in-use annotation for a place.\r
+""" .
+
+anno_map:Opole_anno_map_current a em:Annotation,
+        em:Map_resource_annotation,
+        annal:EntityData,
+        oa:Annotation ;
+    rdfs:label "Opole current map annotation" ;
+    em:source ems:GeoNames_Opole_source ;
+    em:when emp:Current ;
+    annal:id "Opole_anno_map_current" ;
+    annal:type_id "Map_resource_annotation" ;
+    dcterms:created "2018-09-20" ;
+    dcterms:creator agent:GK ;
+    rdfs:comment "# Opole current map annotation" ;
+    oa:hasBody map_resource:Opole_map_current ;
+    oa:hasTarget place_sourced:Opole_P_CofK ;
+    oa:motivatedBy em:MAP_RESOURCE .
+
+setting:Opole_current a em:Setting,
+        annal:EntityData ;
+    rdfs:label "City of Opole" ;
+    em:location location:Opole_location ;
+    em:source ems:GeoNames_Opole_source ;
+    em:when emp:Current ;
+    annal:id "Opole_current" ;
+    annal:type_id "Setting" ;
+    rdfs:comment "# City of Opole" .
+
+em:MAP_RESOURCE a em:Annotation_motivation,
+        annal:EntityData,
+        skos:Concept,
+        oa:Motivation ;
+    rdfs:label "Map resource annotation" ;
+    annal:id "MAP_RESOURCE" ;
+    annal:type_id "Annotation_motivation" ;
+    rdfs:comment """# Map resource annotation\r
+\r
+An annotation type (motivation) that is used to indicate a reference to a map resource for a place.""" .
+
+ems:www_dokumentyslaska_pl a em:Source,
+        annal:EntityData ;
+    rdfs:label "www.dokumentyslaska.pl" ;
+    em:link <http://www.dokumentyslaska.pl/> ;
+    annal:id "www_dokumentyslaska_pl" ;
+    annal:type_id "Source" ;
+    rdfs:comment "# www.dokumentyslaska.pl" .
+
+ems:GeoNames_Opole_source a em:Authority,
+        em:Source,
+        annal:EntityData ;
+    rdfs:label "GeoNames data for Opole" ;
+    em:link <http://sws.geonames.org/3090048/about.rdf> ;
+    em:short_label "GeoNames" ;
+    annal:id "GeoNames_Opole_source" ;
+    annal:type_id "Authority" ;
+    rdfs:comment """# GeoNames data for Opole\r
+\r
+View [GeoNames page](http://www.geonames.org/3090048/opole.html).""" .
+
+emp:Current a em:Time_period,
+        annal:EntityData ;
+    rdfs:label "Current, as of 2018" ;
+    annal:id "Current" ;
+    annal:type_id "Time_period" ;
+    rdfs:comment """# Current, as of 2018\r
+\r
+For ease of retrieval, use this specific resource to label any current information (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information.\r
+\r
+@@TODO: should this be a more explicit value? E.g. `emp:Current_2018`\r
+""" .
+
+em:DEFINITIVE a em:Competence_value,
+        annal:EntityData ;
+    rdfs:label "Definitive" ;
+    annal:id "DEFINITIVE" ;
+    annal:type_id "Competence_value" ;
+    rdfs:comment "The associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be authoritative source references." .
+
+em:NAME_ATTESTATION a em:Annotation_motivation,
+        annal:EntityData,
+        skos:Concept,
+        oa:Motivation ;
+    rdfs:label "Name attestation annotation" ;
+    annal:id "NAME_ATTESTATION" ;
+    annal:type_id "Annotation_motivation" ;
+    rdfs:comment """# Name attestation annotation\r
+\r
+An annotation type (motivation) that is used to indicate a reference to a historical name attestation for a place.\r
+""" .
+
+agent:GK a annal:EntityData,
+        foaf:Agent,
+        foaf:Person ;
+    rdfs:label "GK" ;
+    annal:id "GK" ;
+    annal:type_id "foaf_Person" ;
+    rdfs:comment "GK" .
+
+place_sourced:Opole_P_CofK a em:Place,
+        em:Place_sourced,
+        annal:EntityData ;
+    rdfs:label "City of Opole (CofK)" ;
+    em:alternateAuthority ems:GeoNames_Opole_source,
+        ems:TGN_Opole_source,
+        ems:Wikidata_Opole_source ;
+    em:editorialNote """Getty Thesaurus of Geographic Names (05/03/2018):\r
+\r
+Located on Oder River; passed to Bohemia in 1327, to Habsburgs in 1742 & returned to Poland in 1945; is important port between WrocÅaw & Upper Silesia; economy depends on cement factories & iron foundries; noted for many historic buildings.\r
+""" ;
+    em:hasRelation place_relation:Opole_rel_Duchy ;
+    em:placeCategory place_category:gn_P ;
+    em:placeType place_type:gn_P_PPL ;
+    em:preferredName "Opole" ;
+    em:reference ref:Opole_Emmerling_Zajaczkowska ;
+    em:relatedResource ems:Babik_2001,
+        ems:Behuneck_1855,
+        ems:dolny_slask_org_pl,
+        ems:herder_institut_de_silesia,
+        ems:ome_lexikon_uni_oldenburg_de,
+        ems:www_dokumentyslaska_pl ;
+    em:source ems:CofK ;
+    em:when emp:Current ;
+    em:where setting:Opole_current ;
+    annal:id "Opole_P_CofK" ;
+    annal:type_id "Place_sourced" ;
+    rdfs:comment """Opole is a city located in southern Poland on the Oder River and the historical capital of Upper Silesia. With a population of approximately 127,792 (January 2017), it is currently the capital of the Opole Voivodeship and, also the seat of Opole County. With its long history dating back to the 8th century, Opole is one of the oldest cities in Poland. (From [Wikipedia](https://en.wikipedia.org/wiki/Opole).)\r
+""" ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <http://en.wikipedia.org/wiki/Opole>,
+        <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> ;
+    oa:hasAnnotation anno_cal:Opole_calendar_from_1584,
+        anno_cal:Opole_calendar_to_1584,
+        anno_map:Opole_anno_map_current,
+        anno_map:Silesia_1561,
+        anno_map:Silesia_1608,
+        anno_nam:Opole_P_Name_attestation,
+        anno_nam:Opole_P_Name_attestation_Opol,
+        anno_nam:Opole_P_Name_attestation_Oppelln,
+        anno_nam:Opole_P_Name_attestation_Oppeln,
+        anno_nam:Opole_P_Name_attestation_Oppoln,
+        anno_nam:Opole_P_Name_attestation_Oppul,
+        anno_nam:Opole_P_Name_attestation_Opul .
+
+

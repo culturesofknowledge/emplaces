@@ -5,3 +5,4 @@ Icon?
 gcdenv
 *.pyc
 *.log
+*.tmp

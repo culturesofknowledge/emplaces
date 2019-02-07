@@ -1,10 +1,13 @@
-# GeoNames core data extractor for EMPlaces
+# Annalist data exporter for EMPlaces
 
 ## TODO
 
-- [ ] Set up initial tool framework (based on `get_geonamnes_data.py`)
-- [ ] Export single-source data given Annalist URL
-- [ ] Export merged-source data given Annalist URL
-- [ ] Refactor common code between get_geonames_data and get_annalist_data
-- [ ] Installation script (setup.py)?
+- [x] Set up initial tool framework (based on `get_geonames_data.py`)
+- [x] Export single-source data given Annalist URL
+- [x] Export merged-source data given Annalist URL
+- [x] Deal with local URIs - generate namespace for URIs.
+- [x] Update documentation
+- [x] Refactor common code between get_geonames_data and get_annalist_data
+- [ ] Test output with Timbuctoo
+- [ ] Installation script (setup.py). Worth doing?
 
