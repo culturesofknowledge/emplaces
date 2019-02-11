@@ -273,13 +273,34 @@ The purpose of the annotation type is to make it easy to find particiular annota
 
 The Annotation body conveys specific information associated with the associated place.  The expected structure of this information is defined by the corresponding Annotation type value.
 
-## `em:when` Timespan
+### `em:when` Timespan
 
 Temporal qualification of association described by the annotation.
 
 ### `em:source` Source
 
 Indicates the source of information for the claim represented by this annotation.
+
+### `em:competence` Quality of information
+
+Information in a qualified relation or annotation may be uncertain.  These properties and values are used to qualify these claims.  Note that in the absence of an explicit value, no competence should be assumed.
+
+Information that is directly attached to an em:Place (i.e. not as a qualified relation or annotation) is considered to be definitive.  
+
+Specifically, annotations for calendar-in-use and alternate name attestations should have associated competence values.  Approximate date ranges are represented by range values in the corresponding Timespan value.
+
+Possible values
+
+- `em:DEFINITIVE`: Definitive; the associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be appropiate source references.
+
+- `em:INFERRED`: Inferred; the associated value has been inferred from (preferably?) definitive information.
+
+- `em:ASSUMED`: Assumed; the associated value is assumed from context.  (Assumed data is like uncertain, but maybe with better foundation?)
+
+- `em:UNCERTAIN`: Uncertain; the associated value is uncertain, maybe a best guess or informed opinoon but without good evidence.
+
+- `em:APPROXIMATE`: Approximate;  the associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges.
+
 
 # Specific Annotation details
 
