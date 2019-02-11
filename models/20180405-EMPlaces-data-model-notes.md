@@ -158,7 +158,7 @@ Example:
 
 A time period represents a period of time, by reference to a specific timespan, or to some identified but maybe unspecified period (cf. PeriodO).
 
-A timespan represents an temporal intervalby reference to a specific calendar dates.
+A timespan represents an temporal interval by reference to a specific calendar dates.
 
 Example:
 
@@ -174,11 +174,11 @@ Example:
 
 Possible timespan properties:
 
-- em:start: start of span contained within year (or other calendar period)
-- em:end: end of span contained within year (or other calendar period)
-- em:latestStart: start of span no later than given year (or other calendar period)
-- em:earliestEnd: end of span no earlier than given year (or other calendar period)
-- _&more?_
+- `em:start`: start of span contained within year (or other calendar interval)
+- `em:end`: end of span contained within year (or other calendar interval)
+- `em:latestStart`: start of span no later than given year (or other calendar interval)
+- `em:earliestEnd`: end of span is no earlier than given year (or other calendar interval)
+- _&more?_  (e.g. `em:year` for timespan that starts and ends within a given year/calendar interval?; LPIF might use this IIRC)
 
 ## Location
 
