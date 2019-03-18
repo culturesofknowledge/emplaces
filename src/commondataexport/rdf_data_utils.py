@@ -21,7 +21,7 @@ import logging
 from rdflib         import Graph, Namespace, URIRef, Literal, BNode, RDF, RDFS
 from rdflib.paths   import Path
 
-from emplaces_defs  import GN, EMP, SKOS
+from emplaces_defs  import GN, SKOS, PLACE, COMMON_PREFIX_DEFS
 from dataextractmap import DataExtractMap
 
 log = logging.getLogger(__name__)
@@ -70,6 +70,28 @@ def get_annalist_uri(annalist_ref):
     annalist_url     = urlparse.urljoin(annalist_uri+"/", "entity_data.ttl")
     return (annalist_uri, annalist_url)
 
+def get_emplaces_id(place_name, place_type, unique_id, suffix=""):
+    """
+    Given a place name, place type, Id and optional suffix,
+    returns a place Id, URI and Node.
+    """
+    type_id       = get_geonames_place_type_id(place_type)
+    name_slug     = place_name.replace(" ", "_")
+    name_slug     = name_slug[:40]
+    emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
+    return emplaces_id
+
+def get_emplaces_uri_node(emplaces_id, suffix=""):
+    """
+    Given a place name, place type, Id and optional suffix,
+    returns a place Id, URI and Node.
+    """
+    emplaces_sid  = emplaces_id + suffix
+    emplaces_uri  = PLACE[emplaces_sid]
+    emplaces_node = URIRef(emplaces_uri)
+    return (emplaces_sid, emplaces_uri, emplaces_node)
+
+# @@TODO: refactor to use above...
 def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     """
     Given a place name, place type, Id and optional suffix,
@@ -79,7 +101,7 @@ def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     name_slug     = place_name.replace(" ", "_")
     name_slug     = name_slug[:40]
     emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
-    emplaces_uri  = EMP[emplaces_id]
+    emplaces_uri  = PLACE[emplaces_id]
     emplaces_node = URIRef(emplaces_uri)
     return (emplaces_id, emplaces_uri, emplaces_node)
 
@@ -139,7 +161,7 @@ def add_turtle_data(emp_rdf, turtle_str):
     recognized in the Turtle data.
     """
     emp_rdf.parse(
-        data=COMMON_PREFIX_DEFS+LOCAL_PREFIX_DEFS+turtle_str, 
+        data=COMMON_PREFIX_DEFS+turtle_str, 
         format="turtle"
         )
     return emp_rdf

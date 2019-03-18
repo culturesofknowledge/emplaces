@@ -36,6 +36,7 @@ log = logging.getLogger(__name__)
 SKOS      = Namespace("http://www.w3.org/2004/02/skos/core#")
 XSD       = Namespace("http://www.w3.org/2001/XMLSchema#")
 
+SCHEMA    = Namespace("http://schema.org/")
 OA        = Namespace("http://www.w3.org/ns/oa#")
 CC        = Namespace("http://creativecommons.org/ns#")
 DCTERMS   = Namespace("http://purl.org/dc/terms/")
