@@ -34,6 +34,7 @@ From 2018-11-08 meeting (20181108-CofK-Arno-meeting-notes):
             - https://www.wikidata.org/wiki/Property:P6060 (MoEML)
     - [ ] Provide extra pieces as required for data gathering and management workflows.
         - This rather depends on what form it is decided that the workflows should take.
+        - See: https://github.com/culturesofknowledge/emplaces/blob/master/design/edit.md
 
 - [ ] Create capability to import EMPLaces data into Annalist, based on existing data (e.g., a new option for "get_annalist_data").
     - This would be used, for example, importing Geonames data in an Annalist collectiobn, via get_geonames_data.
