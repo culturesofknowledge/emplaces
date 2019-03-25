@@ -2,9 +2,9 @@
 
 See also `src/annalistdataexport/TODO.md`
 
-## Outstanding at 2019-01-29
+## Outstanding at 2019-03-26
  
-From 2018-11-08 meeting (20181108-CofK-Arno-meeting-notes):
+### From 2018-11-08 meeting (20181108-CofK-Arno-meeting-notes):
 
 - [ ] Review Annalist definitions with Arno
     - this was intended to be a face-to-face session, but was previously stymied by an Annalist login bug.  This has been fixed.
@@ -39,13 +39,35 @@ From 2018-11-08 meeting (20181108-CofK-Arno-meeting-notes):
 - [ ] Create capability to import EMPLaces data into Annalist, based on existing data (e.g., a new option for "get_annalist_data").
     - This would be used, for example, importing Geonames data in an Annalist collectiobn, via get_geonames_data.
 
-From 2018-11-23 meeting (20181123-EMPlaces-meeting-Oxford)
+### From 2018-11-23 meeting (20181123-EMPlaces-meeting-Oxford):
 
-- [ ] Arno send "related places" details;  ??
+- [ ] Arno send "related places" details;
     - I think this was to be a small number of examples and associated details, but my notes don't say.
+    - See Arno's email of 2019-03-22
 - [ ] GK to prototype one or two "related places" cases
     - Arno to send place with postal relations
     - Also, use St Adalberts church for Opole
+
+
+### From 2019-03-25 meeting (20190325-EMLO-oxford-meeting):
+
+NOTE: Annalist-related activity is on hold until Arno has discussed progress on Timbuctoo UI with Rob.
+
+Wrapping up EMPlaces:
+
+- [ ] GK email Martijn with details of GeoNames script and how I run it.
+- [ ] GK rethink use of emt:Current in place data.  Probably need to auto-generate when generating place data.
+- [ ] GK check about licence information in data model: the multi source diagram should have license links.
+- [ ] GK for sourced information, provide property that records date of retrieval from source.
+- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This about a curation model than can be applied to create a consistent view of data.
+- [ ] GK+AB continue review of Opole example data (by Skype)
+- [ ] GK research current consensus about http vs https for identifier URIs.
+
+Preparing for EMPeople:
+
+- [ ] GK read prosopography data model (e.g. end April) (Arno to provide)
+- [ ] GK research other prosopographical data models (Arno to provide list)
+- [ ] GK review prosopographical workshop notes (what are we aiming to get out of this?)
 
 Other:
 

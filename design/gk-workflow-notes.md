@@ -36,6 +36,8 @@ This assumes that "core" data is obtainable from GeoNames, maybe supplemented by
 2.  Create core data for new place:
 
     - [Auto] Use `geonamesdataexport` to generate EMPlaces RDF.  This will also include information about known containing regions from GeoNames.
+    - @@@TODO: add details of merging additional description from Wikidata/Wikipedia
+
 
 3.  Allocate permanent URI for new place...  (process unclear)
 
