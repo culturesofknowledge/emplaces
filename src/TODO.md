@@ -55,7 +55,7 @@ NOTE: Annalist-related activity is on hold until Arno has discussed progress on 
 
 Wrapping up EMPlaces:
 
-- [ ] GK email Martijn with details of GeoNames script and how I run it.
+- [x] GK email Martijn with details of GeoNames script and how I run it.
 - [ ] GK rethink use of emt:Current in place data.  Probably need to auto-generate when generating place data.
 - [ ] GK check about licence information in data model: the multi source diagram should have license links.
 - [ ] GK for sourced information, provide property that records date of retrieval from source.
@@ -69,7 +69,7 @@ Preparing for EMPeople:
 - [ ] GK research other prosopographical data models (Arno to provide list)
 - [ ] GK review prosopographical workshop notes (what are we aiming to get out of this?)
 
-Other:
+# Other:
 
 - [ ] Update `src/commondataexport/README.md` (documentation)
 - [ ] Test wrangled data with Timbuctoo
@@ -79,7 +79,7 @@ Other:
 - [ ] Test suite for data wrangling utilities
 - [ ] Clean up documentation.  Move superseded documents to "historic" subfolder.
 
-See also:
+# See also:
 
 - https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
 
@@ -92,5 +92,6 @@ See also:
     }
 
 - https://query.wikidata.org/embed.html#SELECT%20%3Fproperty%20%3FpropertyLabel%20WHERE%20%7B%0A%20%20%3Fproperty%20wdt%3AP31%20wd%3AQ19829908.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%7D%0A
+
 
 
