@@ -547,7 +547,7 @@ def get_emplaces_core_data(
     b_location = add_place_location(emplaces_rdf, place_lat, place_long)
     b_setting  = add_place_setting(emplaces_rdf, 
         b_location, 
-        EMT.Current, 
+        EMP.Current, 
         ems_node_geonames_source
         )
     emplaces_rdf.add((emp_node_geonames, EM.where, b_setting))
@@ -565,7 +565,7 @@ def get_emplaces_core_data(
         )
     b_relation = add_place_relation(emplaces_rdf, 
         EM.P_PART_OF_A, parent_node,
-        EMT.Current, 
+        EMP.Current, 
         EM.DEFINITIVE,
         ems_node_geonames_source
         )
@@ -581,7 +581,7 @@ def get_emplaces_core_data(
         , OA.motivatedBy:   EM.MAP_RESOURCE
         , OA.hasTarget:     emp_node_geonames
         , OA.hasBody:       b_body
-        , EM.when:          EMT.Current
+        , EM.when:          EMP.Current
         , EM.source:        ems_node_geonames_source
         })
     emplaces_rdf.add((emp_node_geonames, EM.hasAnnotation, b_annotation))

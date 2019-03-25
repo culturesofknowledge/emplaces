@@ -16,10 +16,10 @@ DATADIR=data-$DATE
 
 # Write GeoNames IDs to new file
 
+mkdir $DATADIR
 echo "Extracting data for EMLO place references $FROM-$TO from geonames" > $DATADIR/geonames-ids-from-EMLO.log
 echo "Data extraction starts: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
-mkdir $DATADIR
 python get_geonames_data.py manygeo \
     <20181008-geonames-urls-from-EMLO.txt \
     >$DATADIR/geonames-ids-from-EMLO.txt
