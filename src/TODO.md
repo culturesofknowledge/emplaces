@@ -56,12 +56,17 @@ NOTE: Annalist-related activity is on hold until Arno has discussed progress on 
 Wrapping up EMPlaces:
 
 - [x] GK email Martijn with details of GeoNames script and how I run it.
-- [ ] GK rethink use of emt:Current in place data.  Probably need to auto-generate when generating place data.
+- [x] GK rethink use of emt:Current in place data.  Probably need to auto-generate when generating place data.
 - [ ] GK check about licence information in data model: the multi source diagram should have license links.
 - [ ] GK for sourced information, provide property that records date of retrieval from source.
 - [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This about a curation model than can be applied to create a consistent view of data.
 - [ ] GK+AB continue review of Opole example data (by Skype)
 - [ ] GK research current consensus about http vs https for identifier URIs.
+
+Later:
+
+- [ ] GK Updates to `geonamesdataexport`?
+
 
 Preparing for EMPeople:
 
@@ -69,29 +74,18 @@ Preparing for EMPeople:
 - [ ] GK research other prosopographical data models (Arno to provide list)
 - [ ] GK review prosopographical workshop notes (what are we aiming to get out of this?)
 
-# Other:
+
+## Other:
+
+- [x] Define minimal viable information model for historical place definitions (with no GeoNames data to seed)
+    - See meeting notes from 2019-03-25 (20190325-EMLO-oxford-meeting)
+- [x] Clean up documentation.  Move superseded documents to "historic" subfolder.
+- [ ] Test wrangled data with Timbuctoo
+    - with data at `src/geonamesdataexport/data-20190322`
+
+## Techical debt and unscheduled:
 
 - [ ] Update `src/commondataexport/README.md` (documentation)
-- [ ] Test wrangled data with Timbuctoo
-    - with what data??
 - [ ] Create capability to import EMPLaces data into Annalist, based on existing data (e.g., a new option for "get_annalist_data").
-- [ ] Define minimal viable information model for historical place definitions (with no GeoNames data to seed)
 - [ ] Test suite for data wrangling utilities
-- [ ] Clean up documentation.  Move superseded documents to "historic" subfolder.
-
-# See also:
-
-- https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
-
-- https://query.wikidata.org/#SELECT%20%3Fs%20%3FsLabel%20WHERE%20%7B%0A%20%20%3Fs%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%7D%0ALIMIT%201000%0A
-
-- Query for wikidata properties for authority control of places (HT @Tagishsimon)
-    SELECT ?property ?propertyLabel WHERE {
-      ?property wdt:P31 wd:Q19829908.
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-    }
-
-- https://query.wikidata.org/embed.html#SELECT%20%3Fproperty%20%3FpropertyLabel%20WHERE%20%7B%0A%20%20%3Fproperty%20wdt%3AP31%20wd%3AQ19829908.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%7D%0A
-
-
 
