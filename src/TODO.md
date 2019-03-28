@@ -57,12 +57,6 @@ Wrapping up EMPlaces:
 
 - [x] GK email Martijn with details of GeoNames script and how I run it.
 - [x] GK rethink use of emt:Current in place data.  Probably need to auto-generate when generating place data.
-- [ ] GK+AB continue review of Opole example data (by Skype)
-- [ ] GK check about licence information in data model: the multi source diagram should have license links.
-    - em:Source_desc entity has em:licence property.  Intent is that the target URI both identifies the license, and locates a description of it.
-    - Still need to revioew and check needed cases are covered.
-- [ ] GK for sourced information, provide property that records date of retrieval from source.
-- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This about a curation model than can be applied to create a consistent view of data.
 - [x] GK research current consensus about http vs https for identifier URIs.
     - https://github.com/w3c/web-annotation/issues/193
     - https://www.w3.org/blog/2016/05/https-and-the-semantic-weblinked-data/
@@ -70,19 +64,37 @@ Wrapping up EMPlaces:
     - 
     - ...
     - it appears to me that the current preference is to use http: in namespace URIs, and let the infrastructure handle upgrading to HTTPS for secure data transmission.
+- [ ] GK+AB continue review of Opole example data (by Skype)
+- [ ] GK check about licence information in data model: the multi source diagram should have license links.
+    - em:Source_desc entity has em:licence property.  Intent is that the target URI both identifies the license, and locates a description of it.
+    - Still need to review and check needed cases are covered.
+- [ ] GK for sourced information, provide property that records date of retrieval from source.
+- [ ] Update geoNames extractor to reflect model changes (cf. models/20190329-opole-example-multisourced-arno.ttl)
+
 
 Later:
 
-- [ ] GK Updates to `geonamesdataexport`?
-- [ ] Publish EMPlaces vocabulary as RDF schema and/or OWL ontology (curently in Annalist)
+- [x] Are there existing vocabs covering competence, etc.
+    - e.g. http://www.tema.unina.it/index.php/tema/article/view/2530/0
+        - maybe-useful diagram
+        - seems to focus more on degrees rather than kinds of incertainty
+        - seems to be oriented towards prediction rather that recording
+    - https://www.lri.fr/~antoine/Papers/PUBLIES/Ontology_Uncertainty_and_Food_Risk_v2.pdf
+    - https://www.w3.org/2005/Incubator/urw3/wiki/UncertaintyOntology.html
+    - http://c4i.gmu.edu/ursw/2008/talks/URSW2008_P6_CeravoloEtAl_talk.pdf
+    - Based on the above survey, I conclude there has been lots of woprk on this topic, but that there are not really any obvious ready-to-use Ontologies.  It is possible that the proposed EMPlaces competencies could be refined somewhat usinbg the W3C 'urw3' work (last 2 links), but it's not clear that any specific value would come from such work.
 - [ ] Workflow notes: need to add some specifics:
     - generation of em:Source_desc/em:Authority entity for data added
     - generation of em:Time_period entity
-    -
-
-
+    - introduction of new kinds of annotation
+    - ...
+- [ ] Publish EMPlaces vocabulary as RDF schema and/or OWL ontology (curently in Annalist).
+- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This about a curation model than can be applied to create a consistent view of data.
 
 Preparing for EMPeople:
+
+Prosopographical workshop 2019-05-16/17
+(Hotel from 15th)
 
 - [ ] GK read prosopography data model (e.g. end April) (Arno to provide)
 - [ ] GK research other prosopographical data models (Arno to provide list)

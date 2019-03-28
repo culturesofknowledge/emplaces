@@ -23,7 +23,7 @@ It's all a bit unsatisfactory, despite being technically correct, not least beca
 
 2. For each place retrieved from GeoNames, auto-generate and reference an `em:Time_period` resource which reflects available information (or the actual time of retrieval).  This has no obvious disadvantage except that it may result in a large number of auto-generated `em:Time_period` and `em:Time_span` values.
 
-3. Basically the same as 2, except that the generated `em:Time_period` values would be restricted to yearly granularity and named accordingly (like the `emp:Current_2018` example above.)  The timespan value would be allocated a similar URI to facilitate merging.  When loaded into a triple store, this would allow a hight degree of data sharing as the generated time period and time span values would be merged into a small number of distinct instances (one per year from which data is sourced).
+3. Basically the same as 2, except that the generated `em:Time_period` values would be restricted to yearly granularity and named accordingly (like the `emp:Current_2018` example above.)  The timespan value would be allocated a similar URI to facilitate merging.  When loaded into a triple store, this would allow a hight degree of data sharing as the generated time period and time span values would be merged into a small number of distinct instances (one per year from which data is sourced).   Use a specified URI pattern so that data can be merged on ingest.
 
 
 # Proposal
