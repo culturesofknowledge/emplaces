@@ -90,8 +90,9 @@ em:Place_merged a rdfs:Class ;
         """
     .
 
-# Time period for "current" data
-# @@TODO: use place+source dependent generated value
+# Time period for "current" place
+# The intent is to generate or use a time period instance that is determined by available information 
+# from the place record, with a fallback of using the year of ingest.
 
 emp:Current_2018 a em:Time_period ;
     rdfs:label   "Current, as of 2018" ;

@@ -74,6 +74,12 @@ Wrapping up EMPlaces:
 Later:
 
 - [ ] GK Updates to `geonamesdataexport`?
+- [ ] Publish EMPlaces vocabulary as RDF schema and/or OWL ontology (curently in Annalist)
+- [ ] Workflow notes: need to add some specifics:
+    - generation of em:Source_desc/em:Authority entity for data added
+    - generation of em:Time_period entity
+    -
+
 
 
 Preparing for EMPeople:
