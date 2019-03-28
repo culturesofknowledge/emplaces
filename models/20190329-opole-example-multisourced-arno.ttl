@@ -32,7 +32,8 @@
 @prefix agent:      <http://id.emplaces.info/agent/> .      # People and institutions
 @prefix ref:        <http://id.emplaces.info/reference/> .  # Bibliographic entries
 
-# @@TODO http/https for persistent identifiers
+# @@TODO Review http/https for persistent identifiers
+# @@TODO Publish RDF schema
 
 # Notes (gk):
 #
@@ -87,21 +88,29 @@ em:Place_merged a rdfs:Class ;
         """
     .
 
-# change to reflect current as defined by source
-emp:Current a em:Time_period ;
-    rdfs:label   "Current, at the date of ingest" ;
-    rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
-    em:timespan
-      [ a em:Time_span ;
-        em:latestStart: "2018" ;
-        em:earliestEnd: "2018" ;
-      ]
+# Time period for "current" place
+# The intent is to generate or use a time period instance that is determined by available information 
+# from the place record, with a fallback of using the year of ingest.
+
+emp:Current_2018 a em:Time_period ; # Identified period in time
+    rdfs:label   "Current, as of 2018" ;
+    rdfs:comment "Time period generated for current information (e.g. from GeoNames).  More specific time period values could be indicated if required." ;
+    em:timespan emt:Current_2018 ;
     .
 
-# Language resources
+emt:Current_2018 a em:Time_span # Specific temporal interval
+    rdfs:label "Current, as of 2018"
+    rdfs:comment   "Time span starting no later than 2018, and ending no sooner than 2018" ;
+    em:latestStart:   "2018" ;
+    em:earliestEnd: "2018" ;
+    .
+
+# Language resources (used in this sample file)
+# Currently using custom vocab that provides access to ISO 2- and 3- character tags.
+# @@TODO consider using lexvo, or another vocabulary.
 
 eml:en a em:Language_value ;
-    # em:tag "en" ; 
+    # em:tag "en" ;
     em:tag_639_1 "en" ;
     em:tag_639_2 "eng" ;
     rdfs:label   "English" ;
@@ -135,17 +144,17 @@ eml:la a em:Language_value ;
 
 # Source description(s)
 
-ems:EMPlaces a em:Source ;
-    # @@TODO
-    # Placeholder source for local data...
-    # These should be generated on-the-fly for each place.
+ems:EMPlaces a em:Source_desc ;
+    # Placeholder source for EM Places extended data...
+    # In production, these will be generated on-the-fly for each place.
     em:link <https://github.com/culturesofknowledge/emplaces> ;
-    em:short_label "EMPlaces" ;
-    rdfs:label "EMPlaces project activity" ;
+    em:short_label "CofK" ;
+    rdfs:label "Cultures of Knowledge" ;
     rdfs:comment "Sample data for Opole based on research by Dariusz Gierczak and Arno Bosse." ;
     .
 
 # Place categories
+# For Geonames feature codes, see: http://www.geonames.org/export/codes.html
 
 gn:P a skos:Concept ; 
     rdfs:label "Populated place" ;
@@ -158,6 +167,7 @@ gn:A  a skos:Concept ;
     .
 
 # Place types
+# For Geonames feature codes, see: http://www.geonames.org/export/codes.html
 
 gn:P.PPL a skos:Concept ;
     skos:broader  gn:P ;
@@ -226,7 +236,8 @@ gn:A.ADM3H a skos:Concept ;
     .
 
 #   Avoid having to create extra historical places corresponding to a current P.
-#   See em:AH_PART_OF_AH below.
+#   Allows creating hierarchies that cross over between populated places and administrative divisions.
+#   See em:AH_PART_OF_AH below
 em:P_OR_A a skos:Concept ;
     skos:broader gn:A ;
     skos:broader gn:P ;
@@ -234,7 +245,10 @@ em:P_OR_A a skos:Concept ;
     rdfs:comment  "Former populated place or administrative division, used in historical administrative relations" 
     .
 
-# Place relations
+# Hierarchical place relations
+#
+# The distinction between populated and administrative places in maintained here for data 
+# obtained from GeoNames, but could be elided as has been done for historic places.
 
 em:P_PART_OF_A a em:Relation_type ;
     em:fromType   gn:P ;
@@ -257,36 +271,38 @@ em:AH_PART_OF_AH a em:Relation_type ;
     rdfs:comment  "Records a historical relationship between a historical place or administrative division and its parent division." 
     .
 
-# Information competence (certainty)
+# Information Competence (certainty)
 #
-# Information in a qualified relation or annotation may be uncertain.  These properties and values
-# are used to qualify these claims.  Information that is directly attached to an em:Place 
-# (i.e. not as a qualified relation or annotation) is considered to be definitive.
+# Any information in a qualified relation or annotation may be uncertain.
+# The competence property and associated values
+# are used to qualify these claims. Information that is directly attached to an em:Place 
+# (i.e. not as a qualified relation or annotation) is considered by default to be definitive.
 #
-# Specifically, annotations for calendar-in-use and alternate name attestations should have 
+# For example, annotations for calendar-in-use and alternate name attestations should have 
 # associated competence values.
 #
 # Approximate date ranges are represented by range values in the corresponding Timespan value.
+# @@TODO Research possible reuse of appropriate vocabularies
 
 em:competence a rdf:Property ;
     rdfs:label "Certainty, or quality, of information" ;
-    rdfs:comment "Records the quality or certaintly of some information.  Note that in the absence of an explicit value, no competence should be assumed." ;
+    rdfs:comment "Records the certaintly or quality of some information in a qualified relation or annotation.  Note that in the absence of an explicit value, no competence should be assumed." ;
     rdfs:range em:Competence_value ;
     .
 
 em:DEFINITIVE a em:Competence_value ;
-    rdfs:label   "Definitive" ;
-    rdfs:comment "The associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be appropiate source references."
+    rdfs:label   "Definitive" ; # Not used in EMLO
+    rdfs:comment "The associated value is definitively true.  Such information should be backed by appropiate source references."
     .
 
 em:INFERRED a em:Competence_value ;
-    rdfs:label   "Inferred" ;
-    rdfs:comment "The associated value has been inferred from (preferably?) definitive information."
+    rdfs:label   "Inferred" ; # Evidence exists on which inference is based
+    rdfs:comment "The associated value has been inferred from (preferably) definitive information."
     .
 
 em:ASSUMED a em:Competence_value ;
     # Assumed data is like uncertain, but maybe with better foundation?
-    rdfs:label   "Assumed" ;
+    rdfs:label   "Assumed" ; # No definite premise on which to base an inference; Not used in EMLO
     rdfs:comment "The associated value is assumed from context."
     .
 
@@ -297,28 +313,31 @@ em:UNCERTAIN a em:Competence_value ;
 
 em:APPROXIMATE a em:Competence_value ;
     rdfs:label   "Approximate" ;
-    rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges."
+    rdfs:comment "The associated value is only approximately known."
     .
 
-# Annotation motivations
+# Kinds of Annotations
+#
+# The annotations used are based on the Web Annotation model and vocabulary (oa:)
+# See: https://www.w3.org/annotation/
 
 em:MAP_RESOURCE a oa:Motivation ;
     rdfs:label "Map resource" ;
     rdfs:comment "References a current or historical map resource associated with a place." ;
     .
-em:NAME_ATTESTATION
+em:NAME_ATTESTATION a oa:Motivation ;
     rdfs:label "Name attestation" ;
-    rdfs:comment "References a historical name attestation for a place, with source and compenence information." ;
+    rdfs:comment "References a historical name attestation for a place, with source and competence information." ;
     .
-em:CALENDAR_IN_USE
+em:CALENDAR_IN_USE a oa:Motivation ;
     rdfs:label "Calendar in use" ;
-    rdfs:comment "References a historical calendar used in a place, with source and compenence information." ;
+    rdfs:comment "References a historical calendar used in a place, with source and competence information." ;
     .
-em:DEDICATED_TO a oa:Motivation ;
+em:DEDICATED_TO a oa:Motivation ; # Used handle St. Adalbert example
     rdfs:label "Dedicated to" ;
     rdfs:comment "Generally used with a related place that is a church or a place or worship, to indicate a person or historical figure to whom the place has been dedicated.  The annotation body directly references a resource for the dedicatee, which is assumed to have an rdfs:label value that can be used for display purposes." ;
     .
-em:USED_FOR a oa:Motivation ;
+em:USED_FOR a oa:Motivation ; # Used handle St. Adalbert example
     rdfs:label "Used for" ;
     rdfs:comment "Generally used with a related place that is a building or site for some activity, to indicate a purpose for which the place was used.  The annotation body directly references a resource describing the purpose, which is assumed to have an rdfs:label value that can be used for display purposes.  The annotation itself may carry a temporal constraint (`em:where`) that gives some indication of when the place was used for that purpose." ;
     .
@@ -345,7 +364,7 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (PPLA)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
     em:source
-      [ a em:Authority ;
+      [ a em:Authority, em:Source_desc ;
         em:short_label "GeoNames" ;
         rdfs:label "GeoNames data for Opole" ;
         em:link <http://sws.geonames.org/3090048/about.rdf>
