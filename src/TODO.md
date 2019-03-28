@@ -57,11 +57,19 @@ Wrapping up EMPlaces:
 
 - [x] GK email Martijn with details of GeoNames script and how I run it.
 - [x] GK rethink use of emt:Current in place data.  Probably need to auto-generate when generating place data.
+- [ ] GK+AB continue review of Opole example data (by Skype)
 - [ ] GK check about licence information in data model: the multi source diagram should have license links.
+    - em:Source_desc entity has em:licence property.  Intent is that the target URI both identifies the license, and locates a description of it.
+    - Still need to revioew and check needed cases are covered.
 - [ ] GK for sourced information, provide property that records date of retrieval from source.
 - [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This about a curation model than can be applied to create a consistent view of data.
-- [ ] GK+AB continue review of Opole example data (by Skype)
-- [ ] GK research current consensus about http vs https for identifier URIs.
+- [x] GK research current consensus about http vs https for identifier URIs.
+    - https://github.com/w3c/web-annotation/issues/193
+    - https://www.w3.org/blog/2016/05/https-and-the-semantic-weblinked-data/
+    - https://github.com/schemaorg/schemaorg/issues/1914
+    - 
+    - ...
+    - it appears to me that the current preference is to use http: in namespace URIs, and let the infrastructure handle upgrading to HTTPS for secure data transmission.
 
 Later:
 
