@@ -89,6 +89,8 @@ Supplied by underlying system, covers:
 
 ## Description
 
+(aka "Editorial Note")
+
 A description of a place.
 
 The description may be initially populated from the reference gazeteer entry, but is editorialy controlled by EMPlaces.  Its focus is on the historical existence and context of the place, and may diverge from the gazetteer description.  As such, it is not intended to be updated when the other core data obtained from the reference gazetteer entry is refreshed.

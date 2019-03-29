@@ -32,6 +32,7 @@ See also `src/annalistdataexport/TODO.md`
             - https://www.wikidata.org/wiki/Property:P2503 (GOV)
             - https://www.wikidata.org/wiki/Property:P1871 (CERL)
             - https://www.wikidata.org/wiki/Property:P6060 (MoEML)
+
     - [ ] Provide extra pieces as required for data gathering and management workflows.
         - This rather depends on what form it is decided that the workflows should take.
         - See: https://github.com/culturesofknowledge/emplaces/blob/master/design/edit.md
@@ -41,12 +42,12 @@ See also `src/annalistdataexport/TODO.md`
 
 ### From 2018-11-23 meeting (20181123-EMPlaces-meeting-Oxford):
 
-- [ ] Arno send "related places" details;
+- [x] Arno send "related places" details;
     - I think this was to be a small number of examples and associated details, but my notes don't say.
+    - Arno to send place with postal relations.
+    - Also, use St Adalberts church for Opole.
     - See Arno's email of 2019-03-22
 - [ ] GK to prototype one or two "related places" cases
-    - Arno to send place with postal relations
-    - Also, use St Adalberts church for Opole
 
 
 ### From 2019-03-25 meeting (20190325-EMLO-oxford-meeting):
@@ -68,11 +69,15 @@ Wrapping up EMPlaces:
 - [ ] GK check about licence information in data model: the multi source diagram should have license links.
     - em:Source_desc entity has em:licence property.  Intent is that the target URI both identifies the license, and locates a description of it.
     - Still need to review and check needed cases are covered.
-- [ ] GK for sourced information, provide property that records date of retrieval from source.
-- [ ] Update geoNames extractor to reflect model changes (cf. models/20190329-opole-example-multisourced-arno.ttl)
+        - overall place record (multiple licences - how to combine)
+- [ ] GK for sourced information, provide property that records date of retrieval from source.  (e.g. date of retrieval from GeoNames.)
+    - Model change and extractor software affected?
+- [ ] Time_span: rethink properties used; particularly with reference to applicability of map deduced from publication date.  What are sementics of em:start, em:end
+    - Possible model change
+- [ ] Update GeoNames extractor to reflect model changes (cf. models/20190329-opole-example-multisourced-arno.ttl)
 
 
-Later:
+### Later, and 2019-03-28/29 telecons:
 
 - [x] Are there existing vocabs covering competence, etc.
     - e.g. http://www.tema.unina.it/index.php/tema/article/view/2530/0
@@ -82,16 +87,48 @@ Later:
     - https://www.lri.fr/~antoine/Papers/PUBLIES/Ontology_Uncertainty_and_Food_Risk_v2.pdf
     - https://www.w3.org/2005/Incubator/urw3/wiki/UncertaintyOntology.html
     - http://c4i.gmu.edu/ursw/2008/talks/URSW2008_P6_CeravoloEtAl_talk.pdf
-    - Based on the above survey, I conclude there has been lots of woprk on this topic, but that there are not really any obvious ready-to-use Ontologies.  It is possible that the proposed EMPlaces competencies could be refined somewhat usinbg the W3C 'urw3' work (last 2 links), but it's not clear that any specific value would come from such work.
+    - Based on the above survey, I conclude there has been lots of work on this topic, but that there are not really any obvious ready-to-use Ontologies.  It is possible that the proposed EMPlaces competencies could be refined somewhat usinbg the W3C 'urw3' work (last 2 links), but it's not clear that any specific value would come from such work.
+- [ ] GK revisit identifiers for records vs identifiers for places.
+    - Currently, particularly with the introduction of the multi-source model, all em:Place values are data resources, and their properties are thus implicitly <<making claims about a place described by their subject resource>>
+    - cf: foaf:primaryTopic http://xmlns.com/foaf/spec/#term_primaryTopic
 - [ ] Workflow notes: need to add some specifics:
+    - selection of place label and type label for overall place record.
     - generation of em:Source_desc/em:Authority entity for data added
-    - generation of em:Time_period entity
+    - generation of em:Time_period entity for each place
     - introduction of new kinds of annotation
+    - explicitly cover how wikidata imnformation is incorporated.
+    - explicitly cover how EMPlaces data may be initialized from other sources
     - ...
 - [ ] Publish EMPlaces vocabulary as RDF schema and/or OWL ontology (curently in Annalist).
-- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This about a curation model than can be applied to create a consistent view of data.
+- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This about a curation model that can be applied to create a consistent view of data.
+- [ ] GK add licence information to Opole example data and data extractor
+    - possible model change
+- [ ] GK think about licence representation: need another level of indirection so we can add local label?
+    - possible model change
+- [ ] GK source information in example data should be URI-labeled and refenced (like periods, etc.).  Also ensure extractor does likewise.
+- [ ] GK consider how alternative to single-point representation of location_value (e.g. bounding polygons)  (Maybve later when we have actual data) 
+    - e.g. https://histogis.acdh.oeaw.ac.at/shapes/shape/detail/8004
+- [ ] GK em:editorialNote becomes em:description/rdfs:comment.  Applicable to (say) name attestations.  Distinct from description of process: note em:editoalNote becomes more about the curation and creation of a record.  Update geonames extractor here. Note em:description and em:editorialNote may both be kinds of rdfs:comment - about the described place and (curation) process.
+- [ ] AB add more authorities to Opole example
+- [ ] GK update model diagrams:
+    - page 2: note the model as described privileges EMPLaces place data (cf. "propose how place label and type label are derived from merged data" above).
+    - page 6: ???
 
-Preparing for EMPeople:
+- [ ] GK Note that qualified relation could be modeled as an annotation: is this an inconsistency of style?
+- [ ] GK think about RDF semantics of multiple name attestations and multiple languages.
+- [ ] GK Note that em:Source_desc rdfs:comment is for curatorial/editorial notes
+
+Urgent Tasks?
+
+1. Settle down any model changes noted above; update diagram,s and examples and notes
+2. Flesh out workflow details and script support
+3. geneation of URI-identified resources where these might be shared
+4. Update scripts to align with model changes
+
+- [ ] Update crosswalk??
+
+
+### Preparing for EMPeople:
 
 Prosopographical workshop 2019-05-16/17
 (Hotel from 15th)
