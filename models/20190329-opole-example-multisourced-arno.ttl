@@ -32,9 +32,6 @@
 @prefix agent:      <http://id.emplaces.info/agent/> .      # People and institutions
 @prefix ref:        <http://id.emplaces.info/reference/> .  # Bibliographic entries
 
-# @@TODO Review http/https for persistent identifiers
-# @@TODO Publish RDF schema
-
 # Notes (gk):
 #
 # 1. I have hand-constructed readable names for the URIs here for easier discussion.
@@ -333,6 +330,11 @@ em:CALENDAR_IN_USE a oa:Motivation ;
     rdfs:label "Calendar in use" ;
     rdfs:comment "References a historical calendar used in a place, with source and competence information." ;
     .
+
+# The following annotation motivations (i.e. kinds of annotations) are not used to describe 
+# gazetteer places, but have been added to capture some related place information from Wikidata 
+# (specifically St Adalbert's Church - see other example file).
+
 em:DEDICATED_TO a oa:Motivation ; # Used handle St. Adalbert example
     rdfs:label "Dedicated to" ;
     rdfs:comment "Generally used with a related place that is a church or a place or worship, to indicate a person or historical figure to whom the place has been dedicated.  The annotation body directly references a resource for the dedicatee, which is assumed to have an rdfs:label value that can be used for display purposes." ;
@@ -351,8 +353,8 @@ em:USED_FOR a oa:Motivation ; # Used handle St. Adalbert example
 #   ==========================================================================
 #   ==========================================================================
 
-place:Opole_P a em:Place, em:Place_merged ;
-    em:canonicalURI place:Opole_P ;
+place:Opole_P a em:Place, em:Place_merged ; # merges reference gazetteer(s) and custom extended metadata
+    em:canonicalURI place:Opole_P ; # @@@use different URI for place contra place data?
     em:alternateURI
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/3090048/>
@@ -360,14 +362,21 @@ place:Opole_P a em:Place, em:Place_merged ;
     em:place_data place:Opole_P_EMPlaces, place:Opole_P_GeoNames ;
     .
 
+# Data below is from GeoNames
+
 place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
-    rdfs:label       "Opole (PPLA)" ;
-    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # document
+    rdfs:label       "Opole (PPLA)" ; # derived from GeoNames
+    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # (probably superfluous: see em:source)
     em:source
       [ a em:Authority, em:Source_desc ;
         em:short_label "GeoNames" ;
         rdfs:label "GeoNames data for Opole" ;
-        em:link <http://sws.geonames.org/3090048/about.rdf>
+        em:link <http://sws.geonames.org/3090048/about.rdf> ;
+        em:licence 
+        [ @@@@TODO flesh out...
+          rdfs:label "(GeoNames licence)" ;
+          em:link <pointer to licence descriuption; e.g. CC, etc.> ;
+        ] ;
       ] ;
 
     em:placeCategory gn:P ;             # from gn:featureClass
@@ -414,23 +423,34 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
     em:alternateName "Ополе"@uk ;
     em:alternateName "奥波莱"@zh ;
 
-    em:displayName "Opole" ;
-    em:displayName "Oppein" ;
-    em:displayName "Oppeln" ;
-    em:displayName "Òpòle" ;
-    em:displayName "Opolė" ;
-    em:displayName "Opolí" ;
-    em:displayName "Uopole" ;
-    em:displayName "Ополе" ;
+    # Flattening of alternative names to single instances
+    # without consideration of their language codes.     
+    em:displayName "Opole",
+        "Opolí",
+        "Opolė",
+        "Oppein",
+        "Oppeln",
+        "Uopole",
+        "Òpòle",
+        "Горад Аполе",
+        "Ополе",
+        "אופולה",
+        "أبولوسكي",
+        "اوپول",
+        "اوپوله",
+        "ออปอเล",
+        "オポーレ",
+        "奥波莱",
+        "오폴레" ;
 
     em:where
-      [ a em:Setting ;
+      [ a em:Setting ; # combination of location and period
         em:location
-          [ a em:Location_value ;
+          [ a em:Location_value ; # https://www.geonames.org/2640726/oxfordshire.html
             wgs84_pos:lat  "50.67211"^^xsd:double ;
             wgs84_pos:long "17.92533"^^xsd:double ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             em:short_label "GeoNames" ;
@@ -441,7 +461,7 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
 
     em:hasRelation
       [ a em:Qualified_relation ;
-        em:relationTo place:Opole_ADM3 ;       # from gn:parentFeature, gn:parentADM3
+        em:relationTo place:Opole_ADM3 ;    # from gn:parentFeature, gn:parentADM3
         em:relationType em:P_PART_OF_A ;    # relates populated place to parent admin div
         em:competence em:DEFINITIVE ;
         em:source
@@ -460,10 +480,10 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
           [ rdfs:label     "Current map for Opole" ;
             rdfs:comment   "Current map for Opole" ;
             em:short_label "Current" ;       # Used for tab label
-            em:link        <http://www.geonames.org/3090048/opole.html> ;
-            em:preview     <http://www.geonames.org/3090048/opole.html> ;
+            em:link        <http://www.geonames.org/3090048/opole.html> ; # map implementation TBD 
+            em:preview     <http://www.geonames.org/3090048/opole.html> ; # thumbnail preview image
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             em:short_label "GeoNames" ;
@@ -477,23 +497,23 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
     rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5>
     .
 
+# Everything below is extended data not derived from GeoNames 
+
 place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
     em:source ems:EMPlaces ;
-    # Added label to distinguish from other places with same name
-    # (initial default to preferred name?)
-    rdfs:label      "City of Opole" ;
+    # Added optional label to distinguish from other places with same name
+    # (added for convenience; implementation TBD)
+    rdfs:label   "City of Opole" ;
 
-    em:editorialNote """
-        Getty Thesaurus of Geographic Names (05/03/2018):
-
-        Located on Oder River; passed to Bohemia in 1327, to Habsburgs in 1742 & returned to Poland in 1945; is important port between Wrocław & Upper Silesia; economy depends on cement factories & iron foundries; noted for many historic buildings.
+    em:description """ # possibly rdfs:comment, or sub-property of rdfs:comment?
+        Opole is a city located in southern Poland on the Oder River (Odra). With a population of approximately 127,792 (January 2017), it is the capital of the Opole Voivodeship and also the seat of Opole County. With it long history dating back to the ninth  century, Opole is considered to be one of the oldest towns in Poland.
         """ ;
 
-    # Reference bibliography
+    em:editorialNote """ 
+  Typically blank, the text here would comment on the process of creating and curating the place record. 
+       """ ;
 
-    em:reference ref:Opole_Emmerling_Zajaczkowska ;
-
-    # Related resources
+    # Authorities
 
     em:alternateAuthority 
       [ a em:Authority ;
@@ -507,13 +527,222 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
         em:link <http://vocab.getty.edu/page/tgn/7007751>
       ] ;
 
-    em:relatedResource
-      [ em:link <https://dolny-slask.org.pl> ],
-      [ em:link <http://www.dokumentyslaska.pl> ],
-      [ em:link <https://www.herder-institut.de/en/research-projects/current-projects/town-atlas-silesia.html> ],
-      [ em:link <http://ome-lexikon.uni-oldenburg.de> ],
-      [ rdfs:label "Babik, Zbigniew 2001: Najstarsza warstwa nazewnicza na ziemiach polskich w granicach wczesnośredniowiecznej Słowiańszczyzny, Kraków." ],
-      [ rdfs:label "Behuneck, Adolf 1855: Alphabetisch-tabellarisches Verzeichniss sämmtlicher Städte, Flecken, Dörfer und anderer Orte Schlesiens sowie sämmtlicher Städte und derjenigen Ortschaften Preussens, in denen Gerichtssitze sind, oder Gerichtstage abgehalten werden, Steinau."] ;
+    # Historical map data
+    # @@TODO: link to thumbnails + link to full stand-alone pages
+    # em:preview references an image that can be referenced by an <img> element.
+    # em:link references a stand-alone resource that can be presented in a separate page or tab.
+
+    em:hasAnnotation
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
+        oa:hasBody 
+          [ a em:Map_resource ;
+            rdfs:label     "Map of Silesia from 1561" ; # use this to describe the date of publication
+            rdfs:comment   "Map of Silesia from 1561" ;
+            em:short_label "1561" ; 
+            em:link        <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
+            em:preview     <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
+          ] ;
+        em:when  # time span the map purports to represent
+          [ a em:Time_period ;
+            rdfs:label   "1561" ;
+            em:timespan
+              [ em:start  "1561" ;
+                em:end    "1561" ;
+              ]
+          ] ;
+        em:source
+          [ rdfs:label   "David Rumsey Map Collection" ;
+            rdfs:comment "@@TODO" ; # Use for curatorial comments about source
+            em:link      "@@TODO" ;
+            em:licence   "@@TODO" ;
+          ] ;
+      ],
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
+        oa:hasBody 
+          [ a em:Map_resource ;
+            rdfs:label     "Map of Silesia from 1608" ;
+            rdfs:comment   "Map of Silesia from 1608" ;
+            em:short_label "1608" ;   # Used for tab label
+            em:link      <https://davidrumsey.georeferencer.com/maps/769642035679/view> ;
+            em:preview   <https://davidrumsey.georeferencer.com/maps/769642035679/view> ;
+          ] ;
+        em:when 
+          [ a em:Time_period ;
+            rdfs:label   "1608" ;
+            em:timespan
+              [ em:start  "1608" ;
+                em:end    "1608" ;
+              ]
+          ] ;
+        em:source
+          [ rdfs:label   "David Rumsey Map Collection" ;
+            rdfs:comment "@@TODO" ; # Use for curatorial comments about source
+            em:link      "@@TODO" ;
+            em:licence   "@@TODO" ;
+          ] ;
+      ],
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
+        oa:hasBody 
+          [ a em:Map_resource ;
+            rdfs:label     "Map of Silesia from 1740" ;
+            rdfs:comment   "Map of Silesia from 1740" ;
+            em:short_label "1740" ;   # Used for tab label
+            em:link        <https://davidrumsey.georeferencer.com/maps/306903845600/view> ;
+            em:preview     <https://davidrumsey.georeferencer.com/maps/306903845600/view> ;
+          ] ;
+        em:when 
+          [ a em:Time_period ;
+            rdfs:label     "1740" ;
+            em:timespan
+              [ em:start   "1740" ;
+                em:end     "1740" ;
+              ]
+          ] ;
+        em:source
+          [ rdfs:label   "David Rumsey Map Collection" ;
+            rdfs:comment "@@TODO" ; # Use for curatorial comments about source
+            em:link      "@@TODO" ;
+            em:licence   "@@TODO" ;
+          ] ;
+      ],
+      [ a oa:Annotation ;
+        oa:motivatedBy em:MAP_RESOURCE ;
+        oa:hasTarget place:Opole_P_EMPlaces ;
+        oa:hasBody 
+          [ a em:Map_resource ;
+            rdfs:label     "Map of Silesia / Southern Poland in 1794" ;
+            rdfs:comment   "Map of Silesia / Southern Poland in 1794" ;
+            em:short_label "1794" ;   # Used for tab label
+            em:link        <https://davidrumsey.georeferencer.com/maps/17345888797/view> ;
+            em:preview     <https://davidrumsey.georeferencer.com/maps/17345888797/view> ;
+          ] ;
+        em:when 
+          [ a em:Time_period ;
+            rdfs:label   "1794" ;
+            em:timespan
+              [ em:start  "1794" ;
+                em:end    "1794" ;
+              ]
+          ] ;
+        em:source
+          [ rdfs:label   "David Rumsey Map Collection" ;
+            rdfs:comment "@@TODO" ; # Use for curatorial comments about source
+            em:link      "@@TODO" ;
+            em:licence   "@@TODO" ;
+          ] ;
+      ] ;
+
+
+    # Historical name attestations
+
+    em:hasAnnotation
+
+      [ a oa:Annotation ;
+        oa:motivatedBy em:NAME_ATTESTATION ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
+        oa:hasBody 
+          [ a em:Place_name ;
+            em:name      "Opole" ;
+            em:language  eml:pl ;
+            rdfs:comment "Polish" ;
+          ] ;
+        em:when 
+          [ a em:Time_period ;
+            rdfs:label   "1146-(today)" ;
+            em:timespan
+              [ em:start  "1146" ;
+              ]
+          ] ;
+        em:source
+          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
+            rdfs:comment "Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau." ;
+            # em:link      <@@@> ;
+          ] ;
+        rdfs:comment "1146-(today) [Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau]" ;
+        em:competence em:DEFINITIVE ;
+      ] ,
+
+      [ a oa:Annotation ;
+        oa:motivatedBy em:NAME_ATTESTATION ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
+        oa:hasBody 
+          [ a em:Place_name ;
+            em:name      "Opol" ;
+            em:language  eml:la ;
+            rdfs:comment "Latin" ;
+          ] ;
+        em:when 
+          [ a em:Time_period ;
+            rdfs:label   "1222-1431" ;
+            em:timespan
+              [ em:start  "1222" ;
+                em:end    "1431" ;
+              ]
+          ] ;
+        em:source
+          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
+            em:link      <http://www.dokumentyslaska.pl> ;
+          ] ;
+        rdfs:comment "1222-1431 [http://www.dokumentyslaska.pl]" ;
+        em:competence em:DEFINITIVE ;
+      ] ,
+
+      [ a oa:Annotation ;
+        oa:motivatedBy em:NAME_ATTESTATION ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
+        oa:hasBody 
+          [ a em:Place_name ;
+            em:name      "Opolie" ;
+            em:language  eml:la ;
+            rdfs:comment "Latin/PL" ; #@@@@ what does this mean?
+          ] ;
+        em:when 
+          [ a em:Time_period ;
+            rdfs:label   "1228-1483" ;
+            em:timespan
+              [ em:start  "1228" ;
+                # em:end    "@@@@" ;
+              ]
+          ] ;
+        em:source
+          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
+            em:link      <http://www.dokumentyslaska.pl> ;
+          ] ;
+        rdfs:comment "Opolie (Latin/PL) 1228-1483 [http://www.dokumentyslaska.pl]" ;
+        em:competence em:DEFINITIVE ;
+      ] ,
+
+      [ a oa:Annotation ;
+        oa:motivatedBy em:NAME_ATTESTATION ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
+        oa:hasBody 
+          [ a em:Place_name ;
+            em:name      "Oppol" ;
+            em:language  eml:la ;
+            rdfs:comment "(Latin; DE: 1384)" ;
+          ] ;
+        em:when 
+          [ a em:Time_period ;
+            rdfs:label   "1226-1487" ;
+            em:timespan
+              [ em:start  "1226" ;
+                em:end    "1487" ;
+              ]
+          ] ;
+        em:source
+          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
+            rdfs:comment "Liber fundationis episcopatus Vratislaviensis" ;
+            em:link      <http://www.dokumentyslaska.pl> ;
+          ] ;
+        rdfs:comment "Oppol (Latin; DE: 1384) 1226-1487 [Liber fundationis episcopatus Vratislaviensis; [http://www.dokumentyslaska.pl]" ;
+        em:competence em:DEFINITIVE ;
+      ] ;
 
     # Historical hierarchies
 
@@ -566,248 +795,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
         em:competence em:DEFINITIVE ;
       ] ;
 
-    # Historical name attestations
-
-    em:hasAnnotation
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Opole" ;
-            em:language  eml:pl ;
-            rdfs:comment "Polish" ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1146-(today)" ;
-            em:timespan
-              [ em:start  "1146" ;
-                # em:end    "@@@@" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            rdfs:comment "Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau." ;
-            # em:link      <@@@> ;
-          ] ;
-        rdfs:comment "1146-(today) [Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau]" ;
-        em:competence em:DEFINITIVE ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Opol" ;
-            em:language  eml:la ;
-            rdfs:comment "Latin" ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1222-1431" ;
-            em:timespan
-              [ em:start  "1222" ;
-                em:end    "1431" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            em:link      <http://www.dokumentyslaska.pl> ;
-          ] ;
-        rdfs:comment "1222-1431 [http://www.dokumentyslaska.pl]" ;
-        em:competence em:DEFINITIVE ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Opolie" ;
-            em:language  eml:la ;
-            rdfs:comment "Latin/PL" ; #@@@@ what does this mean?
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1228-1483" ;
-            em:timespan
-              [ em:start  "1228" ;
-                # em:end    "@@@@" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            em:link      <http://www.dokumentyslaska.pl> ;
-          ] ;
-        rdfs:comment "Opolie (Latin/PL) 1228-1483 [http://www.dokumentyslaska.pl]" ;
-        em:competence em:DEFINITIVE ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Oppol" ;
-            em:language  eml:la ;
-            rdfs:comment "(Latin; DE: 1384)" ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1226-1487" ;
-            em:timespan
-              [ em:start  "1226" ;
-                em:end    "1487" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            rdfs:comment "Liber fundationis episcopatus Vratislaviensis" ;
-            em:link      <http://www.dokumentyslaska.pl> ;
-          ] ;
-        rdfs:comment "Oppol (Latin; DE: 1384) 1226-1487 [Liber fundationis episcopatus Vratislaviensis; [http://www.dokumentyslaska.pl]" ;
-        em:competence em:DEFINITIVE ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Opul" ;
-            em:language  eml:de ;
-            rdfs:comment "German" ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1322-1417" ;
-            em:timespan
-              [ em:start  "1322" ;
-                em:end    "1417" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            em:link      <http://www.dokumentyslaska.pl> ;
-          ] ;
-        rdfs:comment "Opul (DE) 1322-1417 [http://www.dokumentyslaska.pl]" ;
-        em:competence em:DEFINITIVE ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Oppoln" ;
-            em:language  eml:de ;
-            rdfs:comment "German" ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1433" ;
-            em:timespan
-              [ em:start  "1433" ;
-                em:end    "1433" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-          ] ;
-        rdfs:comment "Oppoln (DE) 1433" ;
-        em:competence em:DEFINITIVE ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Oppelln" ;
-            em:language  eml:de ;
-            rdfs:comment "German" ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1454" ;
-            em:timespan
-              [ em:start  "1454" ;
-                em:end    "1454" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-          ] ;
-        rdfs:comment "Oppelln (DE) 1454" ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Oppul" ;
-            em:language  eml:de ;
-            rdfs:comment "German" ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1455" ;
-            em:timespan
-              [ em:start  "1455" ;
-                em:end    "1455" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            em:link      <http://www.dokumentyslaska.pl> ;
-          ] ;
-        rdfs:comment "Oppul (DE) 1455 [http://www.dokumentyslaska.pl]" ;
-        em:competence em:DEFINITIVE ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Oppeln" ;
-            em:language  eml:de ;
-            rdfs:comment "German" ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1477-1945" ;
-            em:timespan
-              [ em:start  "1477" ;
-                em:end    "1945" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-          ] ;
-        rdfs:comment "Oppeln (DE) 1477-1945" ;
-        em:competence em:DEFINITIVE ;
-      ] ,
-      [ a oa:Annotation ;
-        oa:motivatedBy em:NAME_ATTESTATION ;
-        oa:hasTarget   place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Place_name ;
-            em:name      "Oppolie" ;
-            em:language  eml:pl ;
-            rdfs:comment "Polish (mistake)" ; #@@@@ what does this mean?
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1830" ;
-            em:timespan
-              [ em:start  "1830" ;
-                em:end    "1830" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            rdfs:comment "Mistake?" ;
-          ] ;
-        rdfs:comment "Oppolie (PL, mistake) 1830" ;
-        em:competence em:DEFINITIVE ;
-      ] ;
-
+   
     # Historical calendar data
 
     em:hasAnnotation
@@ -864,152 +852,23 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
         em:competence em:DEFINITIVE ;
       ] ;
 
-    # Historical map data
 
-    em:hasAnnotation
-      # @@TODO: link to thumbnails + link to full stand-alone pages
-      [ a oa:Annotation ;
-        oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Map_resource ;
-            rdfs:label     "Map of Silesia from 1561" ;
-            rdfs:comment   "Map of Silesia from 1561" ;
-            em:short_label "1561" ;
-            em:link        <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
-            em:preview     <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "Published 1561" ;
-            em:timespan
-              [ em:start  "1561" ;
-                em:end    "1561" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "David Rumsey Map Collection" ;
-          ] ;
-      ],
-      [ a oa:Annotation ;
-        oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Map_resource ;
-            rdfs:label     "Map of Silesia from 1608" ;
-            rdfs:comment   "Map of Silesia from 1608" ;
-            em:short_label "1608" ;   # Used for tab label
-            em:link      <https://davidrumsey.georeferencer.com/maps/769642035679/view> ;
-            em:preview   <https://davidrumsey.georeferencer.com/maps/769642035679/view> ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1608" ;
-            em:timespan
-              [ em:start  "1608" ;
-                em:end    "1608" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "David Rumsey Map Collection" ;
-          ] ;
-      ],
-      [ a oa:Annotation ;
-        oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Map_resource ;
-            rdfs:label     "Map of Silesia from 1740" ;
-            rdfs:comment   "Map of Silesia from 1740" ;
-            em:short_label "1740" ;   # Used for tab label
-            em:link        <https://davidrumsey.georeferencer.com/maps/306903845600/view> ;
-            em:preview     <https://davidrumsey.georeferencer.com/maps/306903845600/view> ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label     "1740" ;
-            em:timespan
-              [ em:start   "1740" ;
-                em:end     "1740" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label     "David Rumsey Map Collection" ;
-          ] ;
-      ],
-      [ a oa:Annotation ;
-        oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Map_resource ;
-            rdfs:label     "Map of Boheme, Silesia, Moravie and Luace in 1777" ;
-            rdfs:comment   "Map of Boheme, Silesia, Moravie and Luace in 1777" ;
-            em:short_label "1777" ;   # Used for tab label
-            em:link        <https://davidrumsey.georeferencer.com/maps/608622104523/view> ;
-            em:preview     <https://davidrumsey.georeferencer.com/maps/608622104523/view> ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1777" ;
-            em:timespan
-              [ em:start  "1777" ;
-                em:end    "1777" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "David Rumsey Map Collection" ;
-          ] ;
-      ],
-      [ a oa:Annotation ;
-        oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Map_resource ;
-            rdfs:label     "Map of (part of) Europe in 1787" ;
-            rdfs:comment   "Map of (part of) Europe in 1787" ;
-            em:short_label "1787" ;   # Used for tab label
-            # @@NOTE: this displayed map has a davidrumsey.com annotation: is this a rip-off?
-            em:link        <http://retromap.ru/m.php#l=1617871&z=8&y=50.495040&x=17.865997> ;
-            em:preview     <http://retromap.ru/m.php#l=1617871&z=8&y=50.495040&x=17.865997> ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1787" ;
-            em:timespan
-              [ em:start  "1787" ;
-                em:end    "1787" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "David Rumsey Map Collection" ;
-          ] ;
-      ],
-      [ a oa:Annotation ;
-        oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget place:Opole_P_EMPlaces ;
-        oa:hasBody 
-          [ a em:Map_resource ;
-            rdfs:label     "Map of Silesia / Southern Poland in 1794" ;
-            rdfs:comment   "Map of Silesia / Southern Poland in 1794" ;
-            em:short_label "1794" ;   # Used for tab label
-            em:link        <https://davidrumsey.georeferencer.com/maps/17345888797/view> ;
-            em:preview     <https://davidrumsey.georeferencer.com/maps/17345888797/view> ;
-          ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1794" ;
-            em:timespan
-              [ em:start  "1794" ;
-                em:end    "1794" ;
-              ]
-          ] ;
-        em:source
-          [ rdfs:label   "David Rumsey Map Collection" ;
-          ] ;
-      ] ;
+    # Related resources
+
+    em:relatedResource
+      [ em:link <https://dolny-slask.org.pl> ],
+      [ em:link <http://www.dokumentyslaska.pl> ],
+      [ em:link <https://www.herder-institut.de/en/research-projects/current-projects/town-atlas-silesia.html> ],
+      [ em:link <http://ome-lexikon.uni-oldenburg.de> ],
+      [ rdfs:label "Babik, Zbigniew 2001: Najstarsza warstwa nazewnicza na ziemiach polskich w granicachwczesnośredniowiecznej Słowiańszczyzny, Kraków." ],
+      [ rdfs:label "Behuneck, Adolf 1855: Alphabetisch-tabellarisches Verzeichniss sämmtlicher Städte,Flecken, Dörfer und anderer Orte Schlesiens sowie sämmtlicher Städte und derjenigen Ortschaften Preussens,in denen Gerichtssitze sind, oder Gerichtstage abgehalten werden, Steinau."] ;
+
+    # Reference bibliography
+
+    em:reference ref:Opole_Emmerling_Zajaczkowska ;
     .
 
-# Bibliographic recources referenced
+# Bibliographic resources referenced
 #
 # For the time being, I'm proposing Bibo as the vocabulary for publication details, 
 # as it seems to capture an appropriate level of detail, and draws upon widely-used 
