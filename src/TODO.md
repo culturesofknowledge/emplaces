@@ -72,9 +72,9 @@ Wrapping up EMPlaces:
         - overall place record (multiple licences - how to combine)
 - [ ] GK for sourced information, provide property that records date of retrieval from source.  (e.g. date of retrieval from GeoNames.)
     - Model change and extractor software affected?
-- [ ] Time_span: rethink properties used; particularly with reference to applicability of map deduced from publication date.  What are sementics of em:start, em:end
-    - Possible model change
-- [ ] Update GeoNames extractor to reflect model changes (cf. models/20190329-opole-example-multisourced-arno.ttl)
+- [x] Time_span: rethink properties used; particularly with reference to applicability of map deduced from publication date.  What are semantics of em:start, em:end
+    - See: [models/notes/20190325-current-place-time-period.md](../models/notes/20190325-current-place-time-period.md).
+- [ ] Update GeoNames extractor to reflect model changes (cf. models/20190329-opole-example-multisourced.ttl)
 
 
 ### Later, and 2019-03-28/29 telecons:
@@ -100,15 +100,16 @@ Wrapping up EMPlaces:
     - explicitly cover how EMPlaces data may be initialized from other sources
     - ...
 - [ ] Publish EMPlaces vocabulary as RDF schema and/or OWL ontology (curently in Annalist).
-- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This about a curation model that can be applied to create a consistent view of data.
+- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This could be about a curation model that can be applied to create a consistent view of data.
 - [ ] GK add licence information to Opole example data and data extractor
-    - possible model change
+    - Done for GeoNames in sample data.
 - [ ] GK think about licence representation: need another level of indirection so we can add local label?
     - possible model change
+    - Need to update GeoNames extractor.
 - [ ] GK source information in example data should be URI-labeled and refenced (like periods, etc.).  Also ensure extractor does likewise.
 - [ ] GK consider how alternative to single-point representation of location_value (e.g. bounding polygons)  (Maybve later when we have actual data) 
     - e.g. https://histogis.acdh.oeaw.ac.at/shapes/shape/detail/8004
-- [ ] GK em:editorialNote becomes em:description/rdfs:comment.  Applicable to (say) name attestations.  Distinct from description of process: note em:editoalNote becomes more about the curation and creation of a record.  Update geonames extractor here. Note em:description and em:editorialNote may both be kinds of rdfs:comment - about the described place and (curation) process.
+- [ ] GK em:editorialNote becomes em:description/rdfs:comment.  Applicable to (say) name attestations.  Distinct from description of process: note em:editorialNote becomes more about the curation and creation of a record.  Update geonames extractor here. Note em:description and em:editorialNote may both be kinds of rdfs:comment - about the described place and (curation) process.
 - [ ] AB add more authorities to Opole example
 - [ ] GK update model diagrams:
     - page 2: note the model as described privileges EMPLaces place data (cf. "propose how place label and type label are derived from merged data" above).
@@ -118,14 +119,14 @@ Wrapping up EMPlaces:
 - [ ] GK think about RDF semantics of multiple name attestations and multiple languages.
 - [ ] GK Note that em:Source_desc rdfs:comment is for curatorial/editorial notes
 
+- [ ] Update crosswalk??
+
 Urgent Tasks?
 
-1. Settle down any model changes noted above; update diagram,s and examples and notes
+1. Settle down any model changes noted above; update diagrams and examples and notes
 2. Flesh out workflow details and script support
 3. geneation of URI-identified resources where these might be shared
 4. Update scripts to align with model changes
-
-- [ ] Update crosswalk??
 
 
 ### Preparing for EMPeople:

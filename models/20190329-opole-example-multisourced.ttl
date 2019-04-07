@@ -56,7 +56,10 @@
 #    serves any useful purpose.
 #    [1] (in 2018-04-12 personal email)
 #
-#
+
+#   ==========================================================================
+#   Classes
+#   ==========================================================================
 
 em:Place a rdfs:Class ;
     rdfs:label "Place" ;
@@ -85,6 +88,10 @@ em:Place_merged a rdfs:Class ;
         """
     .
 
+#   ==========================================================================
+#   Time periods resources referenced
+#   ==========================================================================
+
 # Time period for "current" place
 # The intent is to generate or use a time period instance that is determined by available information 
 # from the place record, with a fallback of using the year of ingest.
@@ -95,12 +102,314 @@ emp:Current_2018 a em:Time_period ; # Identified period in time
     em:timespan emt:Current_2018 ;
     .
 
-emt:Current_2018 a em:Time_span # Specific temporal interval
-    rdfs:label "Current, as of 2018"
-    rdfs:comment   "Time span starting no later than 2018, and ending no sooner than 2018" ;
-    em:latestStart:   "2018" ;
+emt:Current_2018 a em:Time_span ;
+    rdfs:label      "Current, as of 2018" ;
+    rdfs:comment    "Time span starting no later than 2018, and ending no sooner than 2018" ;
+    em:latestStart: "2018" ;
     em:earliestEnd: "2018" ;
     .
+
+# Map dates, covering year of original map publication
+
+emp:Current_1561 a em:Time_period ;
+    rdfs:label     "Current in 1561" ;
+    rdfs:comment   "Time period that includes at least part of the year 1561" ;
+    em:short_label "1561" ;
+    em:timespan    emt:Current_1561 ;
+    .
+
+emt:Current_1561 a em:Time_span ;
+    rdfs:label     "Current in 1561" ;
+    rdfs:comment   "Time span that includes at least part of the year 1561" ;
+    em:short_label "1561" ;
+    em:latestStart "1561" ;
+    em:earliestEnd "1561" ;
+    .
+
+emp:Current_1608 a em:Time_period ;
+    rdfs:label     "Current in 1608" ;
+    rdfs:comment   "Time period that includes at least part of the year 1608" ;
+    em:short_label "1608" ;
+    em:timespan    emt:Current_1608 ;
+    .
+
+emt:Current_1608 a em:Time_span ;
+    rdfs:label     "Current in 1608" ;
+    rdfs:comment   "Time span that includes at least part of the year 1608" ;
+    em:short_label "1608" ;
+    em:latestStart "1608" ;
+    em:earliestEnd "1608" ;
+    .
+
+emp:Current_1740 a em:Time_period ;
+    rdfs:label     "Current in 1740" ;
+    rdfs:comment   "Time period that includes at least part of the year 1740" ;
+    em:short_label "1740" ;
+    em:timespan    emt:Current_1740 ;
+    .
+
+emt:Current_1740 a em:Time_span ;
+    rdfs:label     "Current in 1740" ;
+    rdfs:comment   "Time span that includes at least part of the year 1740" ;
+    em:short_label "1740" ;
+    em:latestStart "1740" ;
+    em:earliestEnd "1740" ;
+    .
+
+emp:Current_1749 a em:Time_period ;
+    rdfs:label     "Current in 1749" ;
+    rdfs:comment   "Time period that includes at least part of the year 1749" ;
+    em:short_label "1749" ;
+    em:timespan    emt:Current_1749 ;
+    .
+
+emt:Current_1749 a em:Time_span ;
+    rdfs:label     "Current in 1749" ;
+    rdfs:comment   "Time span that includes at least part of the year 1749" ;
+    em:short_label "1749" ;
+    em:latestStart "1749" ;
+    em:earliestEnd "1749" ;
+    .
+
+# Name attestations: assuming covered date range specified
+# I.e. the actual range of dates applicable may be wider than the range given
+
+emp:Since_1146 a em:Time_period ;
+    rdfs:label     "Since 1146" ;
+    rdfs:comment   "Time period including since year 1146" ;
+    em:short_label "1146-" ;
+    em:timespan    emt:Since_1146 ;
+    .
+
+emt:Since_1146 a em:Time_span ;
+    rdfs:label     "Since 1146" ;
+    rdfs:comment   "Time span including since year 1146" ;
+    em:short_label "1146-" ;
+    em:latestStart  "1146" ;
+    em:earliestEnd: "2018" ;
+    .
+
+emp:Covers_1222_1431 a em:Time_period ;
+    rdfs:label     "Covering 1222-1431" ;
+    rdfs:comment   "Time period covering 1222 to 1431" ;
+    em:short_label "1222-1431" ;
+    em:timespan    emt:Covers_1222_1431 ;
+    .
+
+emt:Covers_1222_1431 a em:Time_span ;
+    rdfs:label     "Covering 1222-1431" ;
+    rdfs:comment   "Time span covering 1222 to 1431" ;
+    em:short_label "1222-1431" ;
+    em:latestStart "1222" ;
+    em:earliestEnd "1431" ;
+    .
+
+emp:Covers_1226_1487 a em:Time_period ;
+    rdfs:label     "Covering 1226-1487" ;
+    rdfs:comment   "Time period covering 1226 to 1487" ;
+    em:short_label "1226-1487" ;
+    em:timespan    emt:Covers_1226_1487 ;
+    .
+
+emt:Covers_1226_1487 a em:Time_span ;
+    rdfs:label     "Covering 1226-1487" ;
+    rdfs:comment   "Time span covering 1226 to 1487" ;
+    em:short_label "1226-1487" ;
+    em:latestStart "1226" ;
+    em:earliestEnd "1487" ;
+    .
+
+emp:Covers_1228_1483 a em:Time_period ;
+    rdfs:label     "Covering 1228-1483" ;
+    rdfs:comment   "Time period covering 1228 to 1483" ;
+    em:short_label "1228-1483" ;
+    em:timespan    emt:Covers_1228_1483 ;
+    .
+
+emt:Covers_1228_1483 a em:Time_span ;
+    rdfs:label     "Covering 1228-1483" ;
+    rdfs:comment   "Time span covering 1228 to 1483" ;
+    em:short_label "1228-1483" ;
+    em:latestStart "1228" ;
+    em:earliestEnd "1483" ;
+    .
+
+# Historical place duration
+# Typically inferred from relations, so treated as covering period.
+
+emp:Covers_1281_1809 a em:Time_period ;
+    rdfs:label     "Covering 1281-1809" ;
+    rdfs:comment   "Time period covering 1281 to 1809" ;
+    em:short_label "1281-1809" ;
+    em:timespan    emt:Covers_1281_1809 ;
+    .
+
+emt:Covers_1281_1809 a em:Time_span ;
+    rdfs:label     "Covering 1281-1809" ;
+    rdfs:comment   "Time span covering 1281 to 1809" ;
+    em:short_label "1281-1809" ;
+    em:latestStart "1281" ;
+    em:earliestEnd "1809" ;
+    .
+
+emp:Covers_1348_1806 a em:Time_period ;
+    rdfs:label     "Covering 1348-1806" ;
+    rdfs:comment   "Time period covering 1348 to 1806" ;
+    em:short_label "1348-1806" ;
+    em:timespan    emt:Covers_1348_1806 ;
+    .
+
+emt:Covers_1348_1806 a em:Time_span ;
+    rdfs:label     "Covering 1348-1806" ;
+    rdfs:comment   "Time span covering 1348 to 1806" ;
+    em:short_label "1348-1806" ;
+    em:latestStart "1348" ;
+    em:earliestEnd "1806" ;
+    .
+
+emp:Covers_1521_1945 a em:Time_period ;
+    rdfs:label     "Covering 1521-1945" ;
+    rdfs:comment   "Time period covering 1521 to 1945" ;
+    em:short_label "1521-1945" ;
+    em:timespan    emt:Covers_1521_1945 ;
+    .
+
+emt:Covers_1521_1945 a em:Time_span ;
+    rdfs:label     "Covering 1521-1945" ;
+    rdfs:comment   "Time span covering 1521 to 1945" ;
+    em:short_label "1521-1945" ;
+    em:latestStart "1521" ;
+    em:earliestEnd "1945" ;
+    .
+
+# Hierarchy: assuming specific date ranges
+
+emp:Range_1281_1521 a em:Time_period ;
+    rdfs:label     "Period 1281-1521" ;
+    rdfs:comment   "Time period from 1281 to 1521" ;
+    em:short_label "1281-1521" ;
+    em:timespan    emt:Range_1281_1521 ;
+    .
+
+emt:Range_1281_1521 a em:Time_span ;
+    rdfs:label     "Time span 1281-1521" ;
+    rdfs:comment   "Time span from 1281 to 1521" ;
+    em:short_label "1281-1521" ;
+    em:start       "1281" ;
+    em:end         "1521" ;
+    .
+
+emp:Range_1348_1804 a em:Time_period ;
+    rdfs:label     "Period 1348-1804" ;
+    rdfs:comment   "Time period from 1348 to 1804" ;
+    em:short_label "1348-1804" ;
+    em:timespan    emt:Range_1348_1804 ;
+    .
+
+emt:Range_1348_1804 a em:Time_span ;
+    rdfs:label     "Time span 1348-1804" ;
+    rdfs:comment   "Time span from 1348 to 1804" ;
+    em:short_label "1348-1804" ;
+    em:start       "1348" ;
+    em:end         "1804" ;
+    .
+
+emp:Range_1348_1806 a em:Time_period ;
+    rdfs:label     "Period 1348-1806" ;
+    rdfs:comment   "Time period from 1348 to 1806" ;
+    em:short_label "1348-1806" ;
+    em:timespan    emt:Range_1348_1806 ;
+    .
+
+emt:Range_1348_1806 a em:Time_span ;
+    rdfs:label     "Time span 1348-1806" ;
+    rdfs:comment   "Time span from 1348 to 1806" ;
+    em:short_label "1348-1806" ;
+    em:start       "1348" ;
+    em:end         "1806" ;
+    .
+
+emp:Range_1521_1809 a em:Time_period ;
+    rdfs:label     "Period 1521-1809" ;
+    rdfs:comment   "Time period from 1521 to 1809" ;
+    em:short_label "1521-1809" ;
+    em:timespan    emt:Range_1521_1809 ;
+    .
+
+emt:Range_1521_1809 a em:Time_span ;
+    rdfs:label     "Time span 1521-1809" ;
+    rdfs:comment   "Time span from 1521 to 1809" ;
+    em:short_label "1521-1809" ;
+    em:start       "1521" ;
+    em:end         "1809" ;
+    .
+
+emp:Range_1742_1809 a em:Time_period ;
+    rdfs:label     "Period 1742-1809" ;
+    rdfs:comment   "Time period from 1742 to 1809" ;
+    em:short_label "1742-1809" ;
+    em:timespan    emt:Range_1742_1809 ;
+    .
+
+emt:Range_1742_1809 a em:Time_span ;
+    rdfs:label     "Time span 1742-1809" ;
+    rdfs:comment   "Time span from 1742 to 1809" ;
+    em:short_label "1742-1809" ;
+    em:start       "1742" ;
+    em:end         "1809" ;
+    .
+
+emp:Range_1742_1945 a em:Time_period ;
+    rdfs:label     "Period 1742-1945" ;
+    rdfs:comment   "Time period from 1742 to 1945" ;
+    em:short_label "1742-1945" ;
+    em:timespan    emt:Range_1742_1945 ;
+    .
+
+emt:Range_1742_1945 a em:Time_span ;
+    rdfs:label     "Time span 1742-1945" ;
+    rdfs:comment   "Time span from 1742 to 1945" ;
+    em:short_label "1742-1945" ;
+    em:start       "1742" ;
+    em:end         "1945" ;
+    .
+
+# Calendar-in-use: assuming specific date ranges
+
+emp:Until_15840223 a em:Time_period ;
+    rdfs:label     "Until 1584" ;
+    rdfs:comment   "Time period up to 1584-02-23" ;
+    em:short_label "-1584" ;
+    em:timespan    emt:Until_15840223 ;
+    .
+
+emt:Until_15840223 a em:Time_span ;
+    rdfs:label     "Until 1584" ;
+    rdfs:comment   "Time span up to 1584-02-23" ;
+    em:short_label "-1584" ;
+    em:end         "1584" ;
+    .
+
+
+emp:Since_15840223 a em:Time_period ;
+    rdfs:label     "Since 1584" ;
+    rdfs:comment   "Time period since 1584-02-23" ;
+    em:short_label "1584-" ;
+    em:timespan    emt:Since_15840223 ;
+    .
+
+emt:Since_15840223 a em:Time_span ;
+    rdfs:label     "Since 1584" ;
+    rdfs:comment   "Time span since 1584-02-23" ;
+    em:short_label "1584-" ;
+    em:start       "1584-02-23" ;
+    em:earliestEnd "2018" ;
+    .
+
+
+#   ==========================================================================
+#   Language resources referenced
+#   ==========================================================================
 
 # Language resources (used in this sample file)
 # Currently using custom vocab that provides access to ISO 2- and 3- character tags.
@@ -139,19 +448,28 @@ eml:la a em:Language_value ;
     rdfs:comment "# Latin" ;
     .
 
-# Source description(s)
+#   ==========================================================================
+#   Source description referenced
+#   ==========================================================================
 
+# Placeholder source for EM Places extended data (i.e. not gazetteer-sourced)
+# In production, these will be generated on-the-fly for each place.
+# For this sample file, a single source description is used
+# @@RENAME EMPlaces -> CofK
 ems:EMPlaces a em:Source_desc ;
-    # Placeholder source for EM Places extended data...
-    # In production, these will be generated on-the-fly for each place.
     em:link <https://github.com/culturesofknowledge/emplaces> ;
     em:short_label "CofK" ;
     rdfs:label "Cultures of Knowledge" ;
     rdfs:comment "Sample data for Opole based on research by Dariusz Gierczak and Arno Bosse." ;
     .
 
-# Place categories
-# For Geonames feature codes, see: http://www.geonames.org/export/codes.html
+#   ==========================================================================
+#   Place categories and types referenced
+#   ==========================================================================
+# 
+#   For Geonames feature codes, see: http://www.geonames.org/export/codes.html
+#
+#   Place categories
 
 gn:P a skos:Concept ; 
     rdfs:label "Populated place" ;
@@ -164,7 +482,6 @@ gn:A  a skos:Concept ;
     .
 
 # Place types
-# For Geonames feature codes, see: http://www.geonames.org/export/codes.html
 
 gn:P.PPL a skos:Concept ;
     skos:broader  gn:P ;
@@ -232,15 +549,23 @@ gn:A.ADM3H a skos:Concept ;
     rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
     .
 
-#   Avoid having to create extra historical places corresponding to a current P.
-#   Allows creating hierarchies that cross over between populated places and administrative divisions.
-#   See em:AH_PART_OF_AH below
+#   Place type that could be a populkated place (P) or administrative division (A)
+#
+#   Allows creating hierarchies that cross over between populated places and 
+#   administrative divisions.  See em:AH_PART_OF_AH below.
+#
+#   Used with historical places that may or may not corresponding to current places.
+#
 em:P_OR_A a skos:Concept ;
     skos:broader gn:A ;
     skos:broader gn:P ;
     rdfs:label    "Former populated place or admin division" ;
     rdfs:comment  "Former populated place or administrative division, used in historical administrative relations" 
     .
+
+#   ==========================================================================
+#   Place categories and types referenced
+#   ==========================================================================
 
 # Hierarchical place relations
 #
@@ -268,18 +593,20 @@ em:AH_PART_OF_AH a em:Relation_type ;
     rdfs:comment  "Records a historical relationship between a historical place or administrative division and its parent division." 
     .
 
-# Information Competence (certainty)
+#   ==========================================================================
+#   Information Competence (certainty)
+#   ==========================================================================
 #
-# Any information in a qualified relation or annotation may be uncertain.
-# The competence property and associated values
-# are used to qualify these claims. Information that is directly attached to an em:Place 
-# (i.e. not as a qualified relation or annotation) is considered by default to be definitive.
+#   Any information in a qualified relation or annotation may be uncertain.
+#   The competence property and associated values are used to qualify these claims. 
+#   Information that is directly attached to an em:Place (i.e. not as a qualified 
+#   relation or annotation) is considered by default to be definitive.
 #
-# For example, annotations for calendar-in-use and alternate name attestations should have 
-# associated competence values.
+#   For example, annotations for calendar-in-use and alternate name attestations 
+#   should have associated competence values.
 #
-# Approximate date ranges are represented by range values in the corresponding Timespan value.
-# @@TODO Research possible reuse of appropriate vocabularies
+#   Approximate date ranges are represented by range values in the corresponding 
+#   Timespan value.
 
 em:competence a rdf:Property ;
     rdfs:label "Certainty, or quality, of information" ;
@@ -313,7 +640,9 @@ em:APPROXIMATE a em:Competence_value ;
     rdfs:comment "The associated value is only approximately known."
     .
 
-# Kinds of Annotations
+#   ==========================================================================
+#   Annotation "motivations" (Kinds of Annotations)
+#   ==========================================================================
 #
 # The annotations used are based on the Web Annotation model and vocabulary (oa:)
 # See: https://www.w3.org/annotation/
@@ -345,6 +674,10 @@ em:USED_FOR a oa:Motivation ; # Used handle St. Adalbert example
     .
 
 
+
+
+
+
 #   ==========================================================================
 #   ==========================================================================
 #
@@ -373,10 +706,10 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
         rdfs:label "GeoNames data for Opole" ;
         em:link <http://sws.geonames.org/3090048/about.rdf> ;
         em:licence 
-        [ @@@@TODO flesh out...
-          rdfs:label "(GeoNames licence)" ;
-          em:link <pointer to licence descriuption; e.g. CC, etc.> ;
-        ] ;
+          [ rdfs:label "CC-BY (GeoNames)" ;
+            rdfs:seeAlso <http://www.geonames.org/about.html> ;
+            em:link <https://creativecommons.org/licenses/by/4.0/> ;
+          ] ;
       ] ;
 
     em:placeCategory gn:P ;             # from gn:featureClass
@@ -544,14 +877,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             em:link        <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
             em:preview     <https://davidrumsey.georeferencer.com/maps/613891568775/view> ;
           ] ;
-        em:when  # time span the map purports to represent
-          [ a em:Time_period ;
-            rdfs:label   "1561" ;
-            em:timespan
-              [ em:start  "1561" ;
-                em:end    "1561" ;
-              ]
-          ] ;
+        em:when emp:Current_1561 ;
         em:source
           [ rdfs:label   "David Rumsey Map Collection" ;
             rdfs:comment "@@TODO" ; # Use for curatorial comments about source
@@ -570,14 +896,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             em:link      <https://davidrumsey.georeferencer.com/maps/769642035679/view> ;
             em:preview   <https://davidrumsey.georeferencer.com/maps/769642035679/view> ;
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1608" ;
-            em:timespan
-              [ em:start  "1608" ;
-                em:end    "1608" ;
-              ]
-          ] ;
+        em:when emp:Current_1608 ;
         em:source
           [ rdfs:label   "David Rumsey Map Collection" ;
             rdfs:comment "@@TODO" ; # Use for curatorial comments about source
@@ -596,14 +915,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             em:link        <https://davidrumsey.georeferencer.com/maps/306903845600/view> ;
             em:preview     <https://davidrumsey.georeferencer.com/maps/306903845600/view> ;
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label     "1740" ;
-            em:timespan
-              [ em:start   "1740" ;
-                em:end     "1740" ;
-              ]
-          ] ;
+        em:when emp:Current_1740 ;
         em:source
           [ rdfs:label   "David Rumsey Map Collection" ;
             rdfs:comment "@@TODO" ; # Use for curatorial comments about source
@@ -622,14 +934,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             em:link        <https://davidrumsey.georeferencer.com/maps/17345888797/view> ;
             em:preview     <https://davidrumsey.georeferencer.com/maps/17345888797/view> ;
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1794" ;
-            em:timespan
-              [ em:start  "1794" ;
-                em:end    "1794" ;
-              ]
-          ] ;
+        em:when emp:Current_1794 ;
         em:source
           [ rdfs:label   "David Rumsey Map Collection" ;
             rdfs:comment "@@TODO" ; # Use for curatorial comments about source
@@ -652,13 +957,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             em:language  eml:pl ;
             rdfs:comment "Polish" ;
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1146-(today)" ;
-            em:timespan
-              [ em:start  "1146" ;
-              ]
-          ] ;
+        em:when emp:Since_1146 ;
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
             rdfs:comment "Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau." ;
@@ -677,14 +976,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             em:language  eml:la ;
             rdfs:comment "Latin" ;
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1222-1431" ;
-            em:timespan
-              [ em:start  "1222" ;
-                em:end    "1431" ;
-              ]
-          ] ;
+        em:when emp:Covers_1222_1431 ;
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
             em:link      <http://www.dokumentyslaska.pl> ;
@@ -702,14 +994,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             em:language  eml:la ;
             rdfs:comment "Latin/PL" ; #@@@@ what does this mean?
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1228-1483" ;
-            em:timespan
-              [ em:start  "1228" ;
-                # em:end    "@@@@" ;
-              ]
-          ] ;
+        em:when emp:Covers_1228_1483 ;
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
             em:link      <http://www.dokumentyslaska.pl> ;
@@ -727,14 +1012,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             em:language  eml:la ;
             rdfs:comment "(Latin; DE: 1384)" ;
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1226-1487" ;
-            em:timespan
-              [ em:start  "1226" ;
-                em:end    "1487" ;
-              ]
-          ] ;
+        em:when emp:Covers_1226_1487 ;
         em:source
           [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
             rdfs:comment "Liber fundationis episcopatus Vratislaviensis" ;
@@ -755,42 +1033,21 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo place:Opole_Duchy ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1281-1521" ;
-            em:timespan
-              [ em:start  "1281" ;
-                em:end    "1521" ;
-              ]
-          ] ;
+        em:when emp:Range_1281_1521 ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ,
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo place:Opole_Raciborz_Duchy ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1521-1809" ;
-            em:timespan
-              [ em:start  "1521" ;
-                em:end    "1809" ;
-              ]
-          ] ;
+        em:when emp:Range_1521_1809 ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ,
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo place:Opole_County ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1742-1945" ;
-            em:timespan
-              [ em:start  "1742" ;
-                em:end    "1945" ;
-              ]
-          ] ;
+        em:when emp:Range_1742_1945 ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ;
@@ -809,17 +1066,10 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             rdfs:label   "Julian (OS)" ;  # assumed old style
             em:link      emc:Julian_old ;
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "Until 1584" ;
-            em:timespan
-              [ # em:start  "@@@@" ;
-                em:end    "1584" ;
-              ]
-          ] ;
+        em:when emp:Until_15840223 ;
         em:source
-          [ rdfs:label   "Assumed from adoption of Papal Bull (Gregorian) in 1584" ;
-            rdfs:comment "Assumed from adoption of Papal Bull (Gregorian) in 1584" ;
+          [ rdfs:label   "Assumed until adoption of Papal Bull (Gregorian) in 1584" ;
+            rdfs:comment "Assumed until adoption of Papal Bull (Gregorian) in 1584" ;
             em:link      <@@@> ;
           ] ;
         rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
@@ -833,14 +1083,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
             rdfs:label   "Gregorian" ;
             em:link      emc:Gregorian ;
           ] ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "Since 23-Feb-1584" ;
-            em:timespan
-              [ em:start  "1584-02-23" ;
-                # em:end    "@@@@" ;
-              ]
-          ] ;
+        em:when emp:Since_15840223 ;
         em:source
           [ rdfs:label   "Tomsa, Jan: Počìtánì času (Základy teorie kalendáře). Praha 1995" ;
             # em:link      <@@@> ;
@@ -911,8 +1154,6 @@ agent:Slaskie_Wydawnictwo a foaf:Organization ;
 # Linek, Bernard; Tarka, Krzysztof (ed.) 2008: Opole na przestrzeni wieków. Historiografia wobec nowych metod badania dziejów miasta, Opole.
 # Szafran-Szadkowska, Lucyna 1995: Najstarsze dzieje Opola, Opole.
 # Veldtrup, Dieter 1995: Prosopographische Studien zur Geschichte Oppelns als herzoglicher Residenzstadt im Mittelalter, Berlin (=Stiftung Haus Oberschlesien : Schriften der Stiftung Haus Oberschlesien, Landeskundliche Reihe 7).
-
-
 
 
 
@@ -1010,8 +1251,6 @@ place:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
 
 
 
-
-
 #   ==========================================================================
 #   ==========================================================================
 #
@@ -1050,7 +1289,7 @@ place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "50.65622"^^xsd:double ;
             wgs84_pos:long "17.93066"^^xsd:double ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1081,7 +1320,7 @@ place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/7530818/opole.html> ;
             em:preview     <http://www.geonames.org/7530818/opole.html> ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1092,13 +1331,6 @@ place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
     rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole> ;
     rdfs:seeAlso <http://dbpedia.org/resource/Opole> ;
     .
-
-
-
-
-
-
-
 
 
 
@@ -1164,7 +1396,7 @@ place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "50.66667"^^xsd:double ;
             wgs84_pos:long "17.9"^^xsd:double ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1195,7 +1427,7 @@ place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
             em:preview     <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1206,12 +1438,6 @@ place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole_Voivodeship> ;
     rdfs:seeAlso <http://dbpedia.org/resource/Opole_Voivodeship> ;
     .
-
-
-
-
-
-
 
 
 
@@ -1393,7 +1619,7 @@ place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "52"^^xsd:double ;
             wgs84_pos:long "20"^^xsd:double ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1412,7 +1638,7 @@ place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/798544/republic-of-poland.html> ;
             em:preview     <http://www.geonames.org/798544/republic-of-poland.html> ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1425,10 +1651,6 @@ place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BE%D0%BD%D0%B8%D1%8F> ;
     rdfs:seeAlso <http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8C%D1%88%D0%B0> ;
     .
-
-
-
-
 
 
 
@@ -1476,44 +1698,21 @@ place:Opole_Duchy_EMPlaces a em:Place, em:Place_sourced ;
     rdfs:label       "Duchy of Opole" ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM3H ;       # from gn:featureCode
-    em:when 
-      [ a em:Time_period ;
-        rdfs:label   "1281-1809" ;      # (at least, inferred from relations)
-        em:timespan
-          [ em:start  "1281" ;
-            em:end    "1809" ;
-          ]
-      ] ;
+    em:when emp:Covers_1281_1809 ;
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo place:Bohemian_Crown ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1348-1806" ;
-            em:timespan
-              [ em:start  "1348" ;
-                em:end    "1806" ;
-              ]
-          ] ;
+        em:when emp:Range_1348_1806 ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ,
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo place:War_and_Domain_Chamber_Wroclaw ;   # Not defined in this sample
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1742-1809" ;
-            em:timespan
-              [ em:start  "1742" ;
-                em:end    "1809" ;
-              ]
-          ] ;
+        em:when emp:Range_1742_1809 ;
         # em:source ????
       ] .
-
-
 
 place:Opole_Raciborz_Duchy a em:Place, em:Place_merged ;
     em:canonicalURI place:Opole_Raciborz_Duchy ;
@@ -1525,32 +1724,16 @@ place:Opole_Raciborz_Duchy_EMPlaces a em:Place, em:Place_sourced ;
     rdfs:label       "Duchy of Opole and Racibórz" ;
     em:placeCategory gn:A ;
     em:placeType     gn:A.ADM3H ;
-    em:when 
-      [ a em:Time_period ;
-        rdfs:label   "1348-1806" ;
-        em:timespan
-          [ em:start  "1348" ;
-            em:end    "1806" ;
-          ]
-      ] ;
+    em:when emp:Covers_1348_1806 ;
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo place:Bohemian_Crown ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1348-1806" ;
-            em:timespan
-              [ em:start  "1348" ;
-                em:end    "1806" ;
-              ]
-          ] ;
+        em:when emp:Range_1348_1806 ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ]
     .
-
-
 
 place:Opole_County a em:Place, em:Place_merged ;
     em:canonicalURI place:Opole_County ;
@@ -1562,34 +1745,16 @@ place:Opole_County_EMPlaces a em:Place, em:Place_sourced ;
     rdfs:label       "County of Opole" ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM4H ;       # from gn:featureCode
-    em:when 
-      [ a em:Time_period ;
-        rdfs:label   "1521-1945" ;
-        em:timespan
-          [ em:start  "1521" ;
-            em:end    "1945" ;
-          ]
-      ] ;
+    em:when emp:Covers_1521_1945 ;
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo place:Opole_Duchy ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1521-1809" ;
-            em:timespan
-              [ em:start  "1521" ;
-                em:end    "1809" ;
-              ]
-          ] ;
+        em:when emp:Range_1521_1809 ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] 
     .
-
-
-
-
 
 place:Bohemian_Crown a em:Place, em:Place_merged ;
     em:canonicalURI place:Bohemian_Crown ;
@@ -1601,45 +1766,22 @@ place:Bohemian_Crown_EMPlaces a em:Place, em:Place_sourced ;
     rdfs:label       "Bohemian Crown" ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM2H ;       # from gn:featureCode
-    em:when 
-      [ a em:Time_period ;
-        rdfs:label   "1348-1806" ;
-        em:timespan
-          [ em:start  "1348" ;
-            em:end    "1806" ;
-          ]
-      ] ;
+    em:when emp:Covers_1348_1806 ;
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo   place:Habsburg_Monarchy ;    # Not defined in this sample
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1348-1804" ;
-            em:timespan
-              [ em:start  "1348" ;
-                em:end    "1804" ;
-              ]
-          ] ;
+        em:when emp:Range_1348_1804 ;
         # em:source ????
         em:competence em:DEFINITIVE ;
       ] ,
       [ a em:Qualified_relation ;
         em:relationType em:AH_PART_OF_AH ;
         em:relationTo   place:Holy_Roman_Empire ;
-        em:when 
-          [ a em:Time_period ;
-            rdfs:label   "1348-1806" ;
-            em:timespan
-              [ em:start  "1348" ;
-                em:end    "1806" ;
-              ]
-          ] ;
+        em:when emp:Range_1348_1806 ;
         # em:source ????
       ] 
     .
-
-
 
 place:Holy_Roman_Empire a em:Place, em:Place_merged ;
     em:canonicalURI place:Holy_Roman_Empire ;
@@ -1651,14 +1793,7 @@ place:Holy_Roman_Empire_EMPlaces a em:Place, em:Place_sourced ;
     rdfs:label       "Holy Roman Empire" ;
     em:placeCategory gn:A ;
     em:placeType     gn:A.PCLH ;
-    em:when 
-      [ a em:Time_period ;
-        rdfs:label   "1348-1806" ;
-        em:timespan
-          [ em:start  "1348" ;
-            em:end    "1806" ;
-          ]
-      ] 
+    em:when emp:Covers_1348_1806 ;
     .
 
 # End.
