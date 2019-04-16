@@ -1,11 +1,6 @@
-# Workflow notes for discussion (GK for Annalist)
+# Workflow Notes (AB for EM Places)
 
-@@for discussion, with a view to flushing out what needs to be done@@
-
-See [basic workflow for a single record not yet in EM Places](./edit.md).
-
-My focus here is on possible workflows involving Annalist; it's entirely possible that something similar could be done using a spreadsheet input format as an alternative, or additional mechanism for adding place data.  Annalist may be better suited to low volume idiosyncratic entries; spreadsheet input mayt be easier for bulk data acquisition.
-
+This is a revised version of Graham's, more [Annalist centric workflow document](gk-workflow-notes.md) which it supersedes. See also [basic workflow for a single record not yet in EM Places](./edit.md).
 
 ## Tasks
 
