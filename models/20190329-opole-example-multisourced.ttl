@@ -473,12 +473,12 @@ ems:EMPlaces a em:Source_desc ;
 
 gn:P a skos:Concept ; 
     rdfs:label "Populated place" ;
-    rdfs:comment "Populated place - from GeoNames (feature class)." 
+    rdfs:comment "Populated place." 
     .
 
 gn:A  a skos:Concept ; 
     rdfs:label   "Administrative division" ;
-    rdfs:comment "Administrative division - from GeoNames (feature class)." 
+    rdfs:comment "Administrative division." 
     .
 
 # Place types
@@ -486,67 +486,67 @@ gn:A  a skos:Concept ;
 gn:P.PPL a skos:Concept ;
     skos:broader  gn:P ;
     rdfs:label    "Populated place" ;
-    rdfs:comment  "A populated place (town, city, village, etc.).  From GeoNames (feature code)." 
+    rdfs:comment  "A populated place (town, city, village, etc.)." 
     .
 
 gn:P.PPLA a skos:Concept ;
     skos:broader  gn:P ;
     rdfs:label    "Seat of 1st-order admin div" ;
-    rdfs:comment  "Populated place that is a seat of a first-order administrative division.  From GeoNames (feature code)." 
+    rdfs:comment  "Populated place that is a seat of a first-order administrative division." 
     .
 
 gn:P.PPLH a skos:Concept ;
     skos:broader  gn:P ;
     rdfs:label    "Former populated place" ;
-    rdfs:comment  "A former populated place that no longer exists.  From GeoNames (feature code)." 
+    rdfs:comment  "A former populated place that no longer exists." 
     .
 
 gn:A.PCLI a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Independent political entity" ;
-    rdfs:comment  "An independent political entity, typically a country.  From GeoNames (feature code)."
+    rdfs:comment  "An independent political entity, typically a country."
     .
 
 gn:A.ADM1 a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "First-order admin division" ;
-    rdfs:comment  "A primary administrative division of a country, such as a state in the United States.  From GeoNames (feature code)."
+    rdfs:comment  "A primary administrative division of a country, such as a state in the United States."
     .
 
 gn:A.ADM2 a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Second-order admin division" ;
-    rdfs:comment  "A subdivision of a first-order administrative division.  From GeoNames (feature code)."
+    rdfs:comment  "A subdivision of a first-order administrative division."
     .
 
 gn:A.ADM3 a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Third-order admin division" ;
-    rdfs:comment  "A subdivision of a second-order administrative division.  From GeoNames (feature code)."
+    rdfs:comment  "A subdivision of a second-order administrative division."
     .
 
 gn:A.PCLH a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Former independent political entity" ;
-    rdfs:comment  "A former independent political entity, typically a country.  From GeoNames (feature code)."
+    rdfs:comment  "A former independent political entity, typically a country."
     .
 
 gn:A.ADM1H a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Former first-order admin division" ;
-    rdfs:comment  "A former first-order administrative division.  From GeoNames (feature code)."
+    rdfs:comment  "A former first-order administrative division."
     .
 
 gn:A.ADM2H a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Former second-order admin division" ;
-    rdfs:comment  "A former second-order administrative division.  From GeoNames (feature code)."
+    rdfs:comment  "A former second-order administrative division."
     .
 
 gn:A.ADM3H a skos:Concept ;
     skos:broader  gn:A ;
     rdfs:label    "Former third-order admin division" ;
-    rdfs:comment  "A former third-order administrative division.  From GeoNames (feature code)."
+    rdfs:comment  "A former third-order administrative division."
     .
 
 #   Place type that could be a populkated place (P) or administrative division (A)
@@ -959,7 +959,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Since_1146 ;
         em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
+          [ rdfs:label   "Dariusz Gierczak" ;
             rdfs:comment "Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau." ;
             # em:link      <@@@> ;
           ] ;
@@ -978,7 +978,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Covers_1222_1431 ;
         em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
+          [ rdfs:label   "Dariusz Gierczak" ;
             em:link      <http://www.dokumentyslaska.pl> ;
           ] ;
         rdfs:comment "1222-1431 [http://www.dokumentyslaska.pl]" ;
@@ -996,7 +996,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Covers_1228_1483 ;
         em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
+          [ rdfs:label   "Dariusz Gierczak" ;
             em:link      <http://www.dokumentyslaska.pl> ;
           ] ;
         rdfs:comment "Opolie (Latin/PL) 1228-1483 [http://www.dokumentyslaska.pl]" ;
@@ -1014,7 +1014,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Covers_1226_1487 ;
         em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
+          [ rdfs:label   "Dariusz Gierczak" ;
             rdfs:comment "Liber fundationis episcopatus Vratislaviensis" ;
             em:link      <http://www.dokumentyslaska.pl> ;
           ] ;
@@ -1061,15 +1061,15 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
         oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
           [ a em:Calendar ;
-            # Old style (OS) begins year on 25-Mar
-            # New style (NS) begins year on 01-Jan
-            rdfs:label   "Julian (OS)" ;  # assumed old style
+            # Old style (25.3) begins year on 25-Mar
+            # New style (1.1) begins year on 01-Jan
+            rdfs:label   "Julian (25.3)" ;  # assumed old style
             em:link      emc:Julian_old ;
           ] ;
         em:when emp:Until_15840223 ;
         em:source
-          [ rdfs:label   "Assumed until adoption of Papal Bull (Gregorian) in 1584" ;
-            rdfs:comment "Assumed until adoption of Papal Bull (Gregorian) in 1584" ;
+          [ rdfs:label   "Assumed until adoption of Papal Bull in 1582" ;
+            rdfs:comment "Assumed until adoption of Papal Bull in 1582" ;
             em:link      <@@@> ;
           ] ;
         rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
@@ -1091,7 +1091,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           [ rdfs:label   "Bláhová, Marie: Historická chronologie. Praha 2001" ;
             # em:link      <@@@> ;
           ] ;
-        rdfs:comment "Gregorian since 23/02/1584. The actual switch took place on 12.2.1584. The next day then became the 23.2.1584." ;
+        rdfs:comment "Gregorian since 23.02.1584. The actual switch took place on 12.2.1584. The next day became 23.2.1584." ;
         em:competence em:DEFINITIVE ;
       ] ;
 
