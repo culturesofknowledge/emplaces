@@ -1,4 +1,4 @@
-# Workflow notes for discussion (GK)
+# Workflow notes for discussion (GK for Annalist)
 
 @@for discussion, with a view to flushing out what needs to be done@@
 
