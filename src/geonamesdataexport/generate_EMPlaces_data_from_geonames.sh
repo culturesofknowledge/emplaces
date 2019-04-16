@@ -10,7 +10,7 @@
 
 DATE=$(date "+%Y%m%d")
 FROM="0001"
-TO="0100"
+TO="0002"
 SELECT="$FROM-$TO"
 DATADIR=data-$DATE
 

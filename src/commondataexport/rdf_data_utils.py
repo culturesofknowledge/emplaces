@@ -91,16 +91,16 @@ def get_emplaces_uri_node(emplaces_id, suffix=""):
     emplaces_node = URIRef(emplaces_uri)
     return (emplaces_sid, emplaces_uri, emplaces_node)
 
-# @@TODO: refactor to use above...
 def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     """
     Given a place name, place type, Id and optional suffix,
     returns a place Id, URI and Node.
     """
-    type_id       = get_geonames_place_type_id(place_type)
-    name_slug     = place_name.replace(" ", "_")
-    name_slug     = name_slug[:40]
-    emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
+    # type_id       = get_geonames_place_type_id(place_type)
+    # name_slug     = place_name.replace(" ", "_")
+    # name_slug     = name_slug[:40]
+    # emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
+    emplaces_id   = get_emplaces_id(place_name, place_type, unique_id, suffix)
     emplaces_uri  = PLACE[emplaces_id]
     emplaces_node = URIRef(emplaces_uri)
     return (emplaces_id, emplaces_uri, emplaces_node)
@@ -267,13 +267,13 @@ def get_geonames_place_type_label(place_type, geo_ont_rdf):
         , GN["L.RGN"]:   "Region (L.RGN)"
         })
     if place_type in place_type_labels:
-        type_label = place_type_labels[place_type]
+        type_label = Literal(place_type_labels[place_type])
     else:
         type_labels = geo_ont_rdf[place_type:SKOS.prefLabel:]
         for l in type_labels:
             if getattr(l, "language", "en") == "en":
                 type_label  = Literal(" ".join(str(l).split()))
-                # https://stackoverflow.com/a/46501496/324122
+                # https://stackoverflow.com/a/46501496/324122 (normalize whitespace)
     return type_label
 
 def format_id_name(pid, pname, ptype, geo_ont_rdf):

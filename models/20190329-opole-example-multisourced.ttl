@@ -88,6 +88,75 @@ em:Place_merged a rdfs:Class ;
         """
     .
 
+em:Time_period a rdfs:Class ;
+    rdfs:label   "Time period" ;
+    rdfs:comment "Identified (historical) time period, whose temporal extent may or may not be known" ;
+    .
+
+em:Time_span a rdfs:Class ;
+    rdfs:label   "Time span" ;
+    rdfs:comment "A time span specified in terms of its temporal extent.  Some or all of the bounds of the temporal extent may be unknown or approximate" ;
+    .
+
+em:Licence_desc a rdfs:Class ;
+    rdfs:label   "Licence description"
+    rdfs:comment "A description of a licence for use of some data."
+    .
+
+em:Language_value a rdfs:Class ;
+    rdfs:label   "Language identifier" ;
+    rdfs:comment "Identifies a language, such as may be appliucable to a place name, etc."
+    .
+
+em:Source_desc a rdfs:Class ;
+    rdfs:label   "Information source"
+    rdfs:comment "Describes a source of information."
+    .
+
+em:Authority a rdfs:Class ;
+    rdfs:subClassOf em:Source_desc ;
+    rdfs:label   "Authoritative information source" ;
+    rdfs:comment "Describes a source of information that is considered to be authoritative in some sense."
+    .
+
+em:Qualified_relation a rdfs:Class ;
+    rdfs:label   "Relationship between two places" ;
+    rdfs:comment "A relationship between two places, which may be qualified in various ways.  The type of relationship is specified by a 'em:relationType' property on the qualified relation." ;
+    .
+
+em:Relation_type a rdfs:Class ;
+    rdfs:label "Relationship type identifier" ;
+    .
+
+em:Competence_value a rdfs:Class ;
+    rdfs:label "Information competence (certainty) indicator" ;
+    .
+
+em:Setting a rdfs:Class ;
+    rdfs:label   "Spatial and temporal extent" ;
+    rdfs:comment "A spatial and temporal extent that a place may occupy or lie within" ;
+    .
+
+em:Map_resource a rdfs:Class ;
+    rdfs:label   "Map resource" ;
+    rdfs:comment "Describes a map rresource" ;l
+    .
+
+em:Place_name a rdfs:Class ;
+    rdfs:label   "Place name" ;
+    rdfs:comment "A name by which a place may be known of designated in some language." ;
+    .
+
+em:Bib_entry a rdfs:Class ;
+    rdfs:label   "Bibliographic item" ;
+    rdfs:comment "Bibliographic item description, based on BIBO." ;
+    .
+
+bibo:Book rdfs:subClassOf em:Bib_entry ;
+    .
+
+
+
 #   ==========================================================================
 #   Time periods resources referenced
 #   ==========================================================================
@@ -99,7 +168,7 @@ em:Place_merged a rdfs:Class ;
 emp:Current_2018 a em:Time_period ; # Identified period in time
     rdfs:label   "Current, as of 2018" ;
     rdfs:comment "Time period generated for current information (e.g. from GeoNames).  More specific time period values could be indicated if required." ;
-    em:timespan emt:Current_2018 ;
+    em:timespan  emt:Current_2018 ;
     .
 
 emt:Current_2018 a em:Time_span ;
@@ -452,16 +521,79 @@ eml:la a em:Language_value ;
 #   Source description referenced
 #   ==========================================================================
 
+ems:CofK_EMPlaces_licence a em:Licence_desc ;
+    #@@TODO em:link <https://creativecommons.org/licenses/by/4.0/> ;
+    rdfs:label   "@@TODO EMPlaces licence" ;
+    .
+
+
 # Placeholder source for EM Places extended data (i.e. not gazetteer-sourced)
 # In production, these will be generated on-the-fly for each place.
 # For this sample file, a single source description is used
-# @@RENAME EMPlaces -> CofK
-ems:EMPlaces a em:Source_desc ;
-    em:link <https://github.com/culturesofknowledge/emplaces> ;
-    em:short_label "CofK" ;
-    rdfs:label "Cultures of Knowledge" ;
-    rdfs:comment "Sample data for Opole based on research by Dariusz Gierczak and Arno Bosse." ;
+ems:CofK a em:Source_desc ;
+    em:short_label     "CofK" ;
+    rdfs:label         "Cultures of Knowledge" ;
+    rdfs:editorialNote "Additional data sourced by Cultures of Knowledge team." ;
+    em:link            <https://github.com/culturesofknowledge/emplaces> ;
     .
+
+# Data obtained from GeoNames
+ems:GeoNames_licence a em:Licence_desc ;
+    em:link <https://creativecommons.org/licenses/by/4.0/> ;
+    rdfs:label "CC-BY (GeoNames)" ;
+    rdfs:seeAlso <http://www.geonames.org/about.html> ;
+    .
+
+# City of Opole
+ems:GeoNames_Opole_2018 a em:Source_desc, em:Authority ;
+    em:short_label     "GeoNames" ;
+    rdfs:label         "GeoNames data for Opole" ;
+    rdfs:editorialNote "Data from GeoNames service (see link)"
+    em:link            <http://sws.geonames.org/3090048/about.rdf> ;
+    em:accessed        "2018"^^xsd:gYear ;
+    em:licence         ems:GeoNames_licence ;
+    .
+
+# Opole (ADM3)
+ems:GeoNames_Opole_ADM3_2018 a em:Source_desc, em:Authority ;
+    em:short_label     "GeoNames" ;
+    rdfs:label         "GeoNames data for Opole (ADM3)" ;
+    rdfs:editorialNote "Data from GeoNames service (see link)"
+    em:link            <http://sws.geonames.org/7532413/about.rdf> ;
+    em:accessed        "2018"^^xsd:gYear ;
+    em:licence         ems:GeoNames_licence ;
+    .
+
+# Opole (ADM2)
+ems:GeoNames_Opole_ADM2_2018 a em:Source_desc, em:Authority ;
+    em:short_label     "GeoNames" ;
+    rdfs:label         "GeoNames data for Opole (ADM2)" ;
+    rdfs:editorialNote "Data from GeoNames service (see link)"
+    em:link            <http://sws.geonames.org/7530818/about.rdf> ;
+    em:accessed        "2018"^^xsd:gYear ;
+    em:licence         ems:GeoNames_licence ;
+    .
+
+# Opole Voivodeship (ADM1)
+ems:GeoNames_Opole_Voivodeship_ADM1_2018 a em:Source_desc, em:Authority ;
+    em:short_label     "GeoNames" ;
+    rdfs:label         "GeoNames data for Opole Voivodeship (ADM1)" ;
+    rdfs:editorialNote "Data from GeoNames service (see link)"
+    em:link            <http://sws.geonames.org/3337495/about.rdf>
+    em:accessed        "2018"^^xsd:gYear ;
+    em:licence         ems:GeoNames_licence ;
+    .
+
+# Poland (PCLI)
+em:source ems:GeoNames_Poland_PCLI_2018 a em:Source_desc, em:Authority ;
+    em:short_label     "GeoNames" ;
+    rdfs:label         "GeoNames data for Poland (PCLI)" ;
+    rdfs:editorialNote "Data from GeoNames service (see link)"
+    em:link            <http://sws.geonames.org/798544/about.rdf>
+    em:accessed        "2018"^^xsd:gYear ;
+    em:licence         ems:GeoNames_licence ;
+    .
+
 
 #   ==========================================================================
 #   Place categories and types referenced
@@ -472,7 +604,7 @@ ems:EMPlaces a em:Source_desc ;
 #   Place categories
 
 gn:P a skos:Concept ; 
-    rdfs:label "Populated place" ;
+    rdfs:label   "Populated place" ;
     rdfs:comment "Populated place - from GeoNames (feature class)." 
     .
 
@@ -609,7 +741,7 @@ em:AH_PART_OF_AH a em:Relation_type ;
 #   Timespan value.
 
 em:competence a rdf:Property ;
-    rdfs:label "Certainty, or quality, of information" ;
+    rdfs:label   "Certainty, or quality, of information" ;
     rdfs:comment "Records the certaintly or quality of some information in a qualified relation or annotation.  Note that in the absence of an explicit value, no competence should be assumed." ;
     rdfs:range em:Competence_value ;
     .
@@ -648,15 +780,15 @@ em:APPROXIMATE a em:Competence_value ;
 # See: https://www.w3.org/annotation/
 
 em:MAP_RESOURCE a oa:Motivation ;
-    rdfs:label "Map resource" ;
+    rdfs:label   "Map resource" ;
     rdfs:comment "References a current or historical map resource associated with a place." ;
     .
 em:NAME_ATTESTATION a oa:Motivation ;
-    rdfs:label "Name attestation" ;
+    rdfs:label   "Name attestation" ;
     rdfs:comment "References a historical name attestation for a place, with source and competence information." ;
     .
 em:CALENDAR_IN_USE a oa:Motivation ;
-    rdfs:label "Calendar in use" ;
+    rdfs:label   "Calendar in use" ;
     rdfs:comment "References a historical calendar used in a place, with source and competence information." ;
     .
 
@@ -665,11 +797,12 @@ em:CALENDAR_IN_USE a oa:Motivation ;
 # (specifically St Adalbert's Church - see other example file).
 
 em:DEDICATED_TO a oa:Motivation ; # Used handle St. Adalbert example
-    rdfs:label "Dedicated to" ;
+    rdfs:label   "Dedicated to" ;
     rdfs:comment "Generally used with a related place that is a church or a place or worship, to indicate a person or historical figure to whom the place has been dedicated.  The annotation body directly references a resource for the dedicatee, which is assumed to have an rdfs:label value that can be used for display purposes." ;
     .
+
 em:USED_FOR a oa:Motivation ; # Used handle St. Adalbert example
-    rdfs:label "Used for" ;
+    rdfs:label   "Used for" ;
     rdfs:comment "Generally used with a related place that is a building or site for some activity, to indicate a purpose for which the place was used.  The annotation body directly references a resource describing the purpose, which is assumed to have an rdfs:label value that can be used for display purposes.  The annotation itself may carry a temporal constraint (`em:where`) that gives some indication of when the place was used for that purpose." ;
     .
 
@@ -700,17 +833,7 @@ place:Opole_P a em:Place, em:Place_merged ; # merges reference gazetteer(s) and 
 place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (PPLA)" ; # derived from GeoNames
     rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;  # (probably superfluous: see em:source)
-    em:source
-      [ a em:Authority, em:Source_desc ;
-        em:short_label "GeoNames" ;
-        rdfs:label "GeoNames data for Opole" ;
-        em:link <http://sws.geonames.org/3090048/about.rdf> ;
-        em:licence 
-          [ rdfs:label "CC-BY (GeoNames)" ;
-            rdfs:seeAlso <http://www.geonames.org/about.html> ;
-            em:link <https://creativecommons.org/licenses/by/4.0/> ;
-          ] ;
-      ] ;
+    em:source        ems:GeoNames_Opole_2018 ;
 
     em:placeCategory gn:P ;             # from gn:featureClass
     em:placeType     gn:P.PPLA ;        # from gn:featureCode
@@ -784,44 +907,31 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
             wgs84_pos:long "17.92533"^^xsd:double ;
           ] ;
         em:when emp:Current_2018 ;
-        em:source
-          [ a em:Authority ;
-            em:short_label "GeoNames" ;
-            rdfs:label "GeoNames data for Opole" ;
-            em:link <http://sws.geonames.org/3090048/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_2018 ;
       ] ;
 
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationTo place:Opole_ADM3 ;    # from gn:parentFeature, gn:parentADM3
         em:relationType em:P_PART_OF_A ;    # relates populated place to parent admin div
+        em:source ems:GeoNames_Opole_2018 ;
         em:competence em:DEFINITIVE ;
-        em:source
-          [ a em:Authority ;
-            em:short_label "GeoNames" ;
-            rdfs:label "GeoNames data for Opole" ;
-            em:link <http://sws.geonames.org/3090048/about.rdf>
-          ] ;
       ] ;
 
     em:hasAnnotation
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
-        oa:hasTarget place:Opole_P_EMPlaces ;
+        em:source      ems:GeoNames_Opole_2018 ;
+        em:competence  em:DEFINITIVE ;
+        em:when        emp:Current_2018 ;
+        oa:hasTarget   place:Opole_P_EMPlaces ;
         oa:hasBody 
-          [ rdfs:label     "Current map for Opole" ;
-            rdfs:comment   "Current map for Opole" ;
+          [ a em:Map_resource ;
             em:short_label "Current" ;       # Used for tab label
+            rdfs:label     "Current map for Opole" ;
+            rdfs:comment   "Current map for Opole" ;
             em:link        <http://www.geonames.org/3090048/opole.html> ; # map implementation TBD 
             em:preview     <http://www.geonames.org/3090048/opole.html> ; # thumbnail preview image
-          ] ;
-        em:when emp:Current_2018 ;
-        em:source
-          [ a em:Authority ;
-            em:short_label "GeoNames" ;
-            rdfs:label "GeoNames data for Opole" ;
-            em:link <http://sws.geonames.org/3090048/about.rdf> # from gn:locationMap
           ] ;
       ] ;
 
@@ -833,17 +943,19 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
 # Everything below is extended data not derived from GeoNames 
 
 place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
-    em:source ems:EMPlaces ;
+    em:source ems:CofK ;
     # Added optional label to distinguish from other places with same name
     # (added for convenience; implementation TBD)
     rdfs:label   "City of Opole" ;
 
-    em:description """ # possibly rdfs:comment, or sub-property of rdfs:comment?
+    em:description  # sub-property of rdfs:comment
+        """
         Opole is a city located in southern Poland on the Oder River (Odra). With a population of approximately 127,792 (January 2017), it is the capital of the Opole Voivodeship and also the seat of Opole County. With it long history dating back to the ninth  century, Opole is considered to be one of the oldest towns in Poland.
         """ ;
 
-    em:editorialNote """ 
-  Typically blank, the text here would comment on the process of creating and curating the place record. 
+    em:editorialNote  # sub-property of rdfs:comment 
+       """
+       Typically blank, the text here would comment on the process of creating and curating the place record. 
        """ ;
 
     # Authorities
@@ -879,11 +991,12 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Current_1561 ;
         em:source
-          [ rdfs:label   "David Rumsey Map Collection" ;
-            rdfs:comment "@@TODO" ; # Use for curatorial comments about source
-            em:link      "@@TODO" ;
-            em:licence   "@@TODO" ;
+          [ rdfs:label       "David Rumsey Map Collection" ;
+            em:editorialNote "@@TODO" ; # For curatorial comments about source
+            em:link          "@@TODO" ;
+            em:licence       ems:CofK_EMPlaces_licence ;
           ] ;
+        em:competence em:DEFINITIVE ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
@@ -898,11 +1011,12 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Current_1608 ;
         em:source
-          [ rdfs:label   "David Rumsey Map Collection" ;
-            rdfs:comment "@@TODO" ; # Use for curatorial comments about source
-            em:link      "@@TODO" ;
-            em:licence   "@@TODO" ;
+          [ rdfs:label       "David Rumsey Map Collection" ;
+            em:editorialNote "@@TODO" ; # For curatorial comments about source
+            em:link          "@@TODO" ;
+            em:licence       ems:CofK_EMPlaces_licence ;
           ] ;
+        em:competence em:DEFINITIVE ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
@@ -917,11 +1031,12 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Current_1740 ;
         em:source
-          [ rdfs:label   "David Rumsey Map Collection" ;
-            rdfs:comment "@@TODO" ; # Use for curatorial comments about source
-            em:link      "@@TODO" ;
-            em:licence   "@@TODO" ;
+          [ rdfs:label       "David Rumsey Map Collection" ;
+            em:editorialNote "@@TODO" ; # For curatorial comments about source
+            em:link          "@@TODO" ;
+            em:licence       ems:CofK_EMPlaces_licence ;
           ] ;
+        em:competence em:DEFINITIVE ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:MAP_RESOURCE ;
@@ -939,8 +1054,9 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           [ rdfs:label   "David Rumsey Map Collection" ;
             rdfs:comment "@@TODO" ; # Use for curatorial comments about source
             em:link      "@@TODO" ;
-            em:licence   "@@TODO" ;
+            em:licence   ems:CofK_EMPlaces_licence ;
           ] ;
+        em:competence em:DEFINITIVE ;
       ] ;
 
 
@@ -959,9 +1075,8 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Since_1146 ;
         em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            rdfs:comment "Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau." ;
-            # em:link      <@@@> ;
+          [ rdfs:label       "Arno Bosse / Dariusz Gierczak" ;
+            em:editorialNote "Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau." ;
           ] ;
         rdfs:comment "1146-(today) [Heinrich Adamy: Die Schlesischen Ortsnamen ihre entstechung und bedeutung. Breslau]" ;
         em:competence em:DEFINITIVE ;
@@ -1014,9 +1129,9 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Covers_1226_1487 ;
         em:source
-          [ rdfs:label   "Arno Bosse / Dariusz Gierczak" ;
-            rdfs:comment "Liber fundationis episcopatus Vratislaviensis" ;
-            em:link      <http://www.dokumentyslaska.pl> ;
+          [ rdfs:label       "Arno Bosse / Dariusz Gierczak" ;
+            em:editorialNote "Liber fundationis episcopatus Vratislaviensis" ;
+            em:link          <http://www.dokumentyslaska.pl> ;
           ] ;
         rdfs:comment "Oppol (Latin; DE: 1384) 1226-1487 [Liber fundationis episcopatus Vratislaviensis; [http://www.dokumentyslaska.pl]" ;
         em:competence em:DEFINITIVE ;
@@ -1068,9 +1183,8 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when emp:Until_15840223 ;
         em:source
-          [ rdfs:label   "Assumed until adoption of Papal Bull (Gregorian) in 1584" ;
-            rdfs:comment "Assumed until adoption of Papal Bull (Gregorian) in 1584" ;
-            em:link      <@@@> ;
+          [ rdfs:label       "Until Papal Bull (Gregorian) in 1584" ;
+            em:editorialNote "Assumed until adoption of Papal Bull (Gregorian) in 1584" ;
           ] ;
         rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
         em:competence em:ASSUMED ;
@@ -1086,10 +1200,8 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
         em:when emp:Since_15840223 ;
         em:source
           [ rdfs:label   "Tomsa, Jan: Počìtánì času (Základy teorie kalendáře). Praha 1995" ;
-            # em:link      <@@@> ;
           ],
           [ rdfs:label   "Bláhová, Marie: Historická chronologie. Praha 2001" ;
-            # em:link      <@@@> ;
           ] ;
         rdfs:comment "Gregorian since 23/02/1584. The actual switch took place on 12.2.1584. The next day then became the 23.2.1584." ;
         em:competence em:DEFINITIVE ;
@@ -1182,13 +1294,7 @@ place:Opole_ADM3 a em:Place, em:Place_merged ;
 place:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (ADM3)" ;                              # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ; # document
-    em:source
-      [ a em:Authority ;
-        em:short_label "GeoNames" ;
-        rdfs:label "GeoNames data" ;
-        em:link <http://sws.geonames.org/7532413/about.rdf>
-      ] ;
-
+    em:source ems:GeoNames_Opole_ADM3_2018 ;
     em:placeCategory gn:A ;         # from gn:featureClass
     em:placeType gn:A.ADM3 ;        # from gn:featureCode
 
@@ -1202,11 +1308,7 @@ place:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:long "17.9306"^^xsd:double ;
           ] ;
         em:when em:Current ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/7532413/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_ADM3_2018 ;
       ] ;
 
     em:hasRelation
@@ -1214,11 +1316,7 @@ place:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
         em:relationTo place:Opole_ADM2 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/7532413/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_ADM3_2018 ;
       ] ;
 
     em:hasAnnotation
@@ -1233,11 +1331,8 @@ place:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
             em:preview     <http://www.geonames.org/7532413/opole.html> ;
           ] ;
         em:when emp:Current ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;    # from gn:locationMap
-            em:link <http://sws.geonames.org/7532413/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_ADM3_2018 ;
+        em:competence em:DEFINITIVE ;
       ] ;
 
     rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole> ;
@@ -1271,12 +1366,7 @@ place:Opole_ADM2 a em:Place, em:Place_merged ;
 place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole (ADM2)" ;                              # Label for place
     rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ; # document
-    em:source
-      [ a em:Authority ;
-        em:short_label "GeoNames" ;
-        rdfs:label "GeoNames data" ;
-        em:link <http://sws.geonames.org/7530818/about.rdf>
-      ] ;
+    em:source ems:GeoNames_Opole_ADM2_2018 ;
 
     em:placeCategory gn:A ;         # from gn:featureClass
     em:placeType gn:A.ADM2 ;        # from gn:featureCode
@@ -1290,11 +1380,7 @@ place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:long "17.93066"^^xsd:double ;
           ] ;
         em:when emp:Current_2018 ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/7530818/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_ADM2_2018 ;
       ] ;
 
     em:hasRelation
@@ -1302,11 +1388,7 @@ place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
         em:relationTo place:Opole_Voivodeship_ADM1 ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
         em:competence em:DEFINITIVE ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/7530818/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_ADM2_2018 ;
       ] ;
 
     em:hasAnnotation
@@ -1321,11 +1403,8 @@ place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
             em:preview     <http://www.geonames.org/7530818/opole.html> ;
           ] ;
         em:when emp:Current_2018 ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/7530818/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_ADM2_2018 ;
+        em:competence em:DEFINITIVE ;
       ] ;
 
     rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole> ;
@@ -1354,12 +1433,7 @@ place:Opole_Voivodeship_ADM1 a em:Place, em:Place_merged ;
 place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Opole Voivodeship (ADM1)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ;
-    em:source
-      [ a em:Authority ;
-        em:short_label "GeoNames" ;
-        rdfs:label "GeoNames data" ;
-        em:link <http://sws.geonames.org/3337495/about.rdf>
-      ] ;
+    em:source ems:GeoNames_Opole_Voivodeship_ADM1_2018 ;
 
     em:placeCategory gn:A ;                 # from gn:featureClass
     em:placeType gn:A.ADM1 ;                # from gn:featureCode
@@ -1397,22 +1471,14 @@ place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:long "17.9"^^xsd:double ;
           ] ;
         em:when emp:Current_2018 ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/3337495/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_Voivodeship_ADM1_2018 ;
       ] ;
 
     em:hasRelation
       [ a em:Qualified_relation ;
         em:relationTo place:Poland_PCLI ;
         em:relationType em:A_PART_OF_A ;    # relates admin div to parent admin div
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/3337495/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Opole_Voivodeship_ADM1_2018 ;
         em:competence em:DEFINITIVE ;
       ] ;
 
@@ -1428,11 +1494,8 @@ place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
             em:preview     <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
           ] ;
         em:when emp:Current_2018 ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/3337495/about.rdf>     # from gn:locationMap
-          ] ;
+        em:source ems:GeoNames_Opole_Voivodeship_ADM1_2018 ;
+        em:competence em:DEFINITIVE ;
       ] ;
 
     rdfs:seeAlso <http://en.wikipedia.org/wiki/Opole_Voivodeship> ;
@@ -1462,12 +1525,7 @@ place:Poland_PCLI_ADM1 a em:Place, em:Place_merged ;
 place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Poland (country)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
-    em:source
-      [ a em:Authority ;
-        em:short_label "GeoNames" ;
-        rdfs:label "GeoNames data" ;
-        em:link <http://sws.geonames.org/798544/about.rdf>
-      ] ;
+    em:source ems:GeoNames_Poland_PCLI_2018 ;
 
     em:placeCategory gn:A ;         # from gn:featureClass
     em:placeType gn:A.PCLI ;        # from gn:featureCode
@@ -1620,11 +1678,7 @@ place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:long "20"^^xsd:double ;
           ] ;
         em:when emp:Current_2018 ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/798544/about.rdf>
-          ] ;
+        em:source ems:GeoNames_Poland_PCLI_2018 ;
       ] ;
 
     em:hasAnnotation
@@ -1639,11 +1693,8 @@ place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
             em:preview     <http://www.geonames.org/798544/republic-of-poland.html> ;
           ] ;
         em:when emp:Current_2018 ;
-        em:source
-          [ a em:Authority ;
-            rdfs:label "GeoNames data" ;
-            em:link <http://sws.geonames.org/798544/about.rdf>     # from gn:locationMap
-          ] ;
+        em:source ems:GeoNames_Poland_PCLI_2018 ;
+        em:competence em:DEFINITIVE ;
       ] ;
 
     rdfs:seeAlso <http://en.wikipedia.org/wiki/Poland> ;
@@ -1694,7 +1745,7 @@ place:Opole_Duchy a em:Place, em:Place_merged ;
     .
 
 place:Opole_Duchy_EMPlaces a em:Place, em:Place_sourced ;
-    em:source ems:EMPlaces ;
+    em:source        ems:CofK ;
     rdfs:label       "Duchy of Opole" ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM3H ;       # from gn:featureCode
@@ -1720,7 +1771,7 @@ place:Opole_Raciborz_Duchy a em:Place, em:Place_merged ;
     .
 
 place:Opole_Raciborz_Duchy_EMPlaces a em:Place, em:Place_sourced ;
-    em:source ems:EMPlaces ;
+    em:source        ems:CofK ;
     rdfs:label       "Duchy of Opole and Racibórz" ;
     em:placeCategory gn:A ;
     em:placeType     gn:A.ADM3H ;
@@ -1741,7 +1792,7 @@ place:Opole_County a em:Place, em:Place_merged ;
     .
 
 place:Opole_County_EMPlaces a em:Place, em:Place_sourced ;
-    em:source ems:EMPlaces ;
+    em:source        ems:CofK ;
     rdfs:label       "County of Opole" ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM4H ;       # from gn:featureCode
@@ -1762,7 +1813,7 @@ place:Bohemian_Crown a em:Place, em:Place_merged ;
     .
 
 place:Bohemian_Crown_EMPlaces a em:Place, em:Place_sourced ;
-    em:source ems:EMPlaces ;
+    em:source        ems:CofK ;
     rdfs:label       "Bohemian Crown" ;
     em:placeCategory gn:A ;             # from gn:featureClass
     em:placeType     gn:A.ADM2H ;       # from gn:featureCode
@@ -1789,7 +1840,7 @@ place:Holy_Roman_Empire a em:Place, em:Place_merged ;
     .
 
 place:Holy_Roman_Empire_EMPlaces a em:Place, em:Place_sourced ;
-    em:source ems:EMPlaces ;
+    em:source        ems:CofK ;
     rdfs:label       "Holy Roman Empire" ;
     em:placeCategory gn:A ;
     em:placeType     gn:A.PCLH ;

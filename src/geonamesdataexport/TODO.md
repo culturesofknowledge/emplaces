@@ -9,6 +9,9 @@
 - [x] review place type labelling (currently uses label from GeoNames ontology file)
 - [ ] get_geonames_data.py:  Pull text about place from Wikipedia (1st paragraph of text)
 
+- [ ] Using 'commondataexport', 'ref_subgraph' assumes that a new resource is retrievable at the provided URI.  Need an alternative that continues scanning in the current graph at a designated node.  (??update base URI?)
+
+
 Maybe later:
 
 - [ ] Installation script (setup.py)

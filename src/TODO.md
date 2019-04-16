@@ -66,11 +66,11 @@ Wrapping up EMPlaces:
     - ...
     - it appears to me that the current preference is to use http: in namespace URIs, and let the infrastructure handle upgrading to HTTPS for secure data transmission.
 - [ ] GK+AB continue review of Opole example data (by Skype)
-- [ ] GK check about licence information in data model: the multi source diagram should have license links.
+- [x] GK check about licence information in data model: the multi source diagram should have license links.
     - em:Source_desc entity has em:licence property.  Intent is that the target URI both identifies the license, and locates a description of it.
     - Still need to review and check needed cases are covered.
         - overall place record (multiple licences - how to combine)
-- [ ] GK for sourced information, provide property that records date of retrieval from source.  (e.g. date of retrieval from GeoNames.)
+- [x] GK for sourced information, provide property that records date of retrieval from source.  (e.g. date of retrieval from GeoNames.)
     - Model change and extractor software affected?
 - [x] Time_span: rethink properties used; particularly with reference to applicability of map deduced from publication date.  What are semantics of em:start, em:end
     - See: [models/notes/20190325-current-place-time-period.md](../models/notes/20190325-current-place-time-period.md).
@@ -88,9 +88,9 @@ Wrapping up EMPlaces:
     - https://www.w3.org/2005/Incubator/urw3/wiki/UncertaintyOntology.html
     - http://c4i.gmu.edu/ursw/2008/talks/URSW2008_P6_CeravoloEtAl_talk.pdf
     - Based on the above survey, I conclude there has been lots of work on this topic, but that there are not really any obvious ready-to-use Ontologies.  It is possible that the proposed EMPlaces competencies could be refined somewhat usinbg the W3C 'urw3' work (last 2 links), but it's not clear that any specific value would come from such work.
-- [ ] GK revisit identifiers for records vs identifiers for places.
-    - Currently, particularly with the introduction of the multi-source model, all em:Place values are data resources, and their properties are thus implicitly <<making claims about a place described by their subject resource>>
-    - cf: foaf:primaryTopic http://xmlns.com/foaf/spec/#term_primaryTopic
+- [x] GK revisit identifiers for records vs identifiers for places.
+    - Currently, particularly with the introduction of the multi-source model, all em:Place values are data resources, and their properties are thus implicitly making claims about a place _described by_ their subject resource.
+    - Added foaf:primaryTopic http://xmlns.com/foaf/spec/#term_primaryTopic
 - [ ] Workflow notes: need to add some specifics:
     - selection of place label and type label for overall place record.
     - generation of em:Source_desc/em:Authority entity for data added
@@ -124,9 +124,29 @@ Wrapping up EMPlaces:
 Urgent Tasks?
 
 1. Settle down any model changes noted above; update diagrams and examples and notes
-2. Flesh out workflow details and script support
-3. geneation of URI-identified resources where these might be shared
-4. Update scripts to align with model changes
+    - [x] licensing
+    - [x] licence representation: label and link
+    - [x] source retrieval date
+    - [x] em:editorialNote/em:description/rdfs:comment
+    - [x] Time spans (diagram p6)
+    - [x] Add diagram page for Location
+2. Update Geonames extractor
+    - [ ] Update common definitions (copy from example)
+    - [ ] Add licencing data (see notes below)
+    - [ ] Update shape-shifter patterns (see notes below)
+3. [ ] Flesh out workflow details and script support
+4. [x] Generation of URI-identified resources where these might be shared
+5. [ ] Place identifiers (_contra_. record identifiers)
+6. [ ] Generate URIs for source data descriptions
+
+Notes:
+- em:licence: related resource (p1), alternate authority (p1), source (p8)
+    - added indirection to reference URI:  --em:licence--> [] --em:link--> 
+- ems:EMPlaces -> ems:CofK
+- added foaf:primaryTopic to em:Place_merged diagram (could also apply to any em:Place)
+- added em:accessed to source descriptions
+- em:editorialNote -> em:description (applied to place).  em:description is subproperty of rdfs:comment.
+- em:editorialNote on em:Place / em:Source_desc is curational information.  em:editorialNote is subproperty of rdfs:comment.
 
 
 ### Preparing for EMPeople:
@@ -147,7 +167,7 @@ Prosopographical workshop 2019-05-16/17
 - [ ] Test wrangled data with Timbuctoo
     - with data at `src/geonamesdataexport/data-20190322`
 
-## Techical debt and unscheduled:
+## Technical debt and unscheduled:
 
 - [ ] Update `src/commondataexport/README.md` (documentation)
 - [ ] Create capability to import EMPLaces data into Annalist, based on existing data (e.g., a new option for "get_annalist_data").

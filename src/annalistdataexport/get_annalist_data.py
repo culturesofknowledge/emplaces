@@ -702,7 +702,7 @@ def do_get_source_place_data(gadroot, options):
 
 def do_get_resource_data(gadroot, options):
     """
-    Get arbitrary resource data from annalst.
+    Get arbitrary resource data from Annalist.
 
     This returns direct statements with minimal interpretation.
     """
