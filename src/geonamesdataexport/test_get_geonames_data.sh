@@ -21,7 +21,7 @@ DATADIR=data-test
 # echo "Extracting data for EMLO place references $FROM-$TO from geonames" > $DATADIR/geonames-ids-from-EMLO.log
 # echo "Data extraction starts: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
-# python get_geonames_data.py manygeo \
+# python get_geonames_data.py manygetgeo \
 #     <20181008-geonames-urls-from-EMLO.txt \
 #     >$DATADIR/geonames-ids-from-EMLO.txt
 
@@ -47,18 +47,30 @@ DATADIR=data-test
 # echo "Created $DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
 # Retrieve GeoNames data and reformat for EMPlaces
-# python get_geonames_data.py manyget \
+# python get_geonames_data.py manygetgeo \
 #     --include-common-defs --include-emplaces-defs \
 #     --include-geonames-defs --include-language-defs \
 #     <$DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt \
 #     >$DATADIR/geonames-data-ref-by-EMLO-${SELECT}.ttl
 
-python get_geonames_data.py --debug get 2798986 \
+python get_geonames_data.py getgeo 2798986 \
     --include-common-defs --include-emplaces-defs \
     --include-geonames-defs --include-language-defs \
     >$DATADIR/geonames-data-ref-by-EMLO-${SELECT}.ttl
 
 echo "Created $DATADIR/geonames-data-ref-by-EMLO-${SELECT}.ttl: $(date)"
+
+WIKIDATA_ID=$(python get_geonames_data.py wikidataid 2798986)
+
+python get_geonames_data.py getwikidata ${WIKIDATA_ID} \
+    >$DATADIR/wikidata-ref-by-EMLO-${SELECT}.ttl
+
+echo "Created $DATADIR/wikidata-ref-by-EMLO-${SELECT}.ttl: $(date)"
+
+python get_geonames_data.py getwikitext ${WIKIDATA_ID} \
+    >$DATADIR/wikitext-ref-by-EMLO-${SELECT}.ttl
+
+echo "Created $DATADIR/wikitext-ref-by-EMLO-${SELECT}.ttl: $(date)"
 
 echo "Data extraction ends: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 

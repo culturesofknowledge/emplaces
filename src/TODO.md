@@ -139,14 +139,16 @@ Urgent Tasks?
 5. [ ] Place identifiers (_contra_. record identifiers)
 6. [ ] Generate URIs for source data descriptions
 
-Notes:
-- em:licence: related resource (p1), alternate authority (p1), source (p8)
+Notes for updating get_geonames_data:
+- [x] em:licence: related resource (p1), alternate authority (p1), source (p8)
     - added indirection to reference URI:  --em:licence--> [] --em:link--> 
-- ems:EMPlaces -> ems:CofK
-- added foaf:primaryTopic to em:Place_merged diagram (could also apply to any em:Place)
-- added em:accessed to source descriptions
-- em:editorialNote -> em:description (applied to place).  em:description is subproperty of rdfs:comment.
-- em:editorialNote on em:Place / em:Source_desc is curational information.  em:editorialNote is subproperty of rdfs:comment.
+- [x] ems:EMPlaces -> ems:CofK
+- [ ] added foaf:primaryTopic to em:Place_merged diagram (could also apply to any em:Place)
+- [x] added em:accessed to source descriptions
+- [x] em:editorialNote -> em:description (applied to place).  em:description is subproperty of rdfs:comment. (used with wiki text)
+- [-] em:editorialNote on em:Place / em:Source_desc is curational information.  em:editorialNote is subproperty of rdfs:comment.
+- [ ] MISSING: map wikidata to EMPlaces (alternate authority, etc.); add licence.
+    - note: getwikitext gets this right.  Note Id generation applied.
 
 
 ### Preparing for EMPeople:

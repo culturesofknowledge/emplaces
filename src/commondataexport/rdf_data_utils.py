@@ -83,7 +83,7 @@ def get_emplaces_id(place_name, place_type, unique_id, suffix=""):
 
 def get_emplaces_uri_node(emplaces_id, suffix=""):
     """
-    Given a place name, place type, Id and optional suffix,
+    Given an EMPlaces place Id root and optional suffix,
     returns a place Id, URI and Node.
     """
     emplaces_sid  = emplaces_id + suffix

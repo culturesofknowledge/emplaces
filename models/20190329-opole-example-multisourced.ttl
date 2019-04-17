@@ -99,7 +99,7 @@ em:Time_span a rdfs:Class ;
     .
 
 em:Licence_desc a rdfs:Class ;
-    rdfs:label   "Licence description"
+    rdfs:label   "Licence description" ;
     rdfs:comment "A description of a licence for use of some data."
     .
 
@@ -109,7 +109,7 @@ em:Language_value a rdfs:Class ;
     .
 
 em:Source_desc a rdfs:Class ;
-    rdfs:label   "Information source"
+    rdfs:label   "Information source" ;
     rdfs:comment "Describes a source of information."
     .
 
@@ -139,7 +139,7 @@ em:Setting a rdfs:Class ;
 
 em:Map_resource a rdfs:Class ;
     rdfs:label   "Map resource" ;
-    rdfs:comment "Describes a map rresource" ;l
+    rdfs:comment "Describes a map rresource" ;
     .
 
 em:Place_name a rdfs:Class ;
@@ -548,7 +548,7 @@ ems:GeoNames_licence a em:Licence_desc ;
 ems:GeoNames_Opole_2018 a em:Source_desc, em:Authority ;
     em:short_label     "GeoNames" ;
     rdfs:label         "GeoNames data for Opole" ;
-    rdfs:editorialNote "Data from GeoNames service (see link)"
+    rdfs:editorialNote "Data from GeoNames service (see link)" ;
     em:link            <http://sws.geonames.org/3090048/about.rdf> ;
     em:accessed        "2018"^^xsd:gYear ;
     em:licence         ems:GeoNames_licence ;
@@ -558,7 +558,7 @@ ems:GeoNames_Opole_2018 a em:Source_desc, em:Authority ;
 ems:GeoNames_Opole_ADM3_2018 a em:Source_desc, em:Authority ;
     em:short_label     "GeoNames" ;
     rdfs:label         "GeoNames data for Opole (ADM3)" ;
-    rdfs:editorialNote "Data from GeoNames service (see link)"
+    rdfs:editorialNote "Data from GeoNames service (see link)" ;
     em:link            <http://sws.geonames.org/7532413/about.rdf> ;
     em:accessed        "2018"^^xsd:gYear ;
     em:licence         ems:GeoNames_licence ;
@@ -568,7 +568,7 @@ ems:GeoNames_Opole_ADM3_2018 a em:Source_desc, em:Authority ;
 ems:GeoNames_Opole_ADM2_2018 a em:Source_desc, em:Authority ;
     em:short_label     "GeoNames" ;
     rdfs:label         "GeoNames data for Opole (ADM2)" ;
-    rdfs:editorialNote "Data from GeoNames service (see link)"
+    rdfs:editorialNote "Data from GeoNames service (see link)" ;
     em:link            <http://sws.geonames.org/7530818/about.rdf> ;
     em:accessed        "2018"^^xsd:gYear ;
     em:licence         ems:GeoNames_licence ;
@@ -578,18 +578,18 @@ ems:GeoNames_Opole_ADM2_2018 a em:Source_desc, em:Authority ;
 ems:GeoNames_Opole_Voivodeship_ADM1_2018 a em:Source_desc, em:Authority ;
     em:short_label     "GeoNames" ;
     rdfs:label         "GeoNames data for Opole Voivodeship (ADM1)" ;
-    rdfs:editorialNote "Data from GeoNames service (see link)"
-    em:link            <http://sws.geonames.org/3337495/about.rdf>
+    rdfs:editorialNote "Data from GeoNames service (see link)" ;
+    em:link            <http://sws.geonames.org/3337495/about.rdf> ;
     em:accessed        "2018"^^xsd:gYear ;
     em:licence         ems:GeoNames_licence ;
     .
 
 # Poland (PCLI)
-em:source ems:GeoNames_Poland_PCLI_2018 a em:Source_desc, em:Authority ;
+ems:GeoNames_Poland_PCLI_2018 a em:Source_desc, em:Authority ;
     em:short_label     "GeoNames" ;
     rdfs:label         "GeoNames data for Poland (PCLI)" ;
-    rdfs:editorialNote "Data from GeoNames service (see link)"
-    em:link            <http://sws.geonames.org/798544/about.rdf>
+    rdfs:editorialNote "Data from GeoNames service (see link)" ;
+    em:link            <http://sws.geonames.org/798544/about.rdf> ;
     em:accessed        "2018"^^xsd:gYear ;
     em:licence         ems:GeoNames_licence ;
     .
@@ -823,7 +823,7 @@ place:Opole_P a em:Place, em:Place_merged ; # merges reference gazetteer(s) and 
     em:canonicalURI place:Opole_P ; # @@@use different URI for place contra place data?
     em:alternateURI
       [ rdfs:label "GeoNames URI" ;
-        em:link <http://sws.geonames.org/3090048/>
+        em:link <http://sws.geonames.org/3090048/> ;
       ] ;
     em:place_data place:Opole_P_EMPlaces, place:Opole_P_GeoNames ;
     .

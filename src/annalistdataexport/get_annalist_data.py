@@ -303,8 +303,8 @@ command_summary_help = ("\n"+
     # "  %(prog)s manyplacehierarchy\n"+
     # "  %(prog)s geonamesid URL [REGEXP]\n"
     # "  %(prog)s manygeonamesids [REGEXP]\n"
-    "  %(prog)s getwikidata WIKIDATAID\n"+
-    "  %(prog)s getwikitext WIKIDATAID\n"+
+    # "  %(prog)s getwikidata WIKIDATAID\n"+
+    # "  %(prog)s getwikitext WIKIDATAID\n"+
     "  %(prog)s version\n"+
     "")
 
@@ -462,22 +462,22 @@ def show_help(options, progname):
             "and '--include-language-defs'.\n"+
             "\n"+
             "")
-    elif options.args[0].startswith("getwikid"):
-        help_text = ("\n"+
-            "  %(prog)s getwikidata WIKIDATAID\n"+
-            "\n"+
-            "Gets data about a referenced place from Wikidata, and sends \n"+
-            "data in Turtle format to standard output.\n"+
-            "\n"+
-            "")
-    elif options.args[0].startswith("getwikit"):
-        help_text = ("\n"+
-            "  %(prog)s getwikitext WIKIDATAID\n"+
-            "\n"+
-            "Gets summary text about a referenced place from Wikipedia, and sends \n"+
-            "data in Turtle format to standard output.\n"+
-            "\n"+
-            "")
+    # elif options.args[0].startswith("getwikid"):
+    #     help_text = ("\n"+
+    #         "  %(prog)s getwikidata WIKIDATAID\n"+
+    #         "\n"+
+    #         "Gets data about a referenced place from Wikidata, and sends \n"+
+    #         "data in Turtle format to standard output.\n"+
+    #         "\n"+
+    #         "")
+    # elif options.args[0].startswith("getwikit"):
+    #     help_text = ("\n"+
+    #         "  %(prog)s getwikitext WIKIDATAID\n"+
+    #         "\n"+
+    #         "Gets summary text about a referenced place from Wikipedia, and sends \n"+
+    #         "data in Turtle format to standard output.\n"+
+    #         "\n"+
+    #         "")
     elif options.args[0].startswith("ver"):
         help_text = ("\n"+
             "  %(prog)s version\n"+
@@ -556,117 +556,116 @@ def get_common_defs(options, emplaces_rdf):
 #
 #   ===================================================================
 
-def get_wikidata_uri(wikidata_id):
-    """
-    Returns Wikidata place URI, given Wikidata ID (e.g. "Q92212")
-    """
-    wikidata_base_uri = "http://www.wikidata.org/entity/"
-    wikidata_uri     = urlparse.urljoin(wikidata_base_uri, wikidata_id)
-    wikidata_url     = find_entity_url(wikidata_uri, "text/turtle")
-    return (wikidata_uri, wikidata_url)
+# def get_wikidata_uri(wikidata_id):
+#     """
+#     Returns Wikidata place URI, given Wikidata ID (e.g. "Q92212")
+#     """
+#     wikidata_base_uri = "http://www.wikidata.org/entity/"
+#     wikidata_uri     = urlparse.urljoin(wikidata_base_uri, wikidata_id)
+#     wikidata_url     = find_entity_url(wikidata_uri, "text/turtle")
+#     return (wikidata_uri, wikidata_url)
 
-def get_wikidata_id(wikidata_uri):
-    """
-    Returns Wikidata ID (e.g. "Q92212") given Wikidata entity URI, or None.
-    """
-    wikidata_base_uri = "http://www.wikidata.org/entity/"
-    if wikidata_uri.startswith(wikidata_base_uri):
-        wikidata_id = wikidata_uri[len(wikidata_base_uri):]
-    else:
-        wikidata_id = None
-    return wikidata_id
+# def get_wikidata_id(wikidata_uri):
+#     """
+#     Returns Wikidata ID (e.g. "Q92212") given Wikidata entity URI, or None.
+#     """
+#     wikidata_base_uri = "http://www.wikidata.org/entity/"
+#     if wikidata_uri.startswith(wikidata_base_uri):
+#         wikidata_id = wikidata_uri[len(wikidata_base_uri):]
+#     else:
+#         wikidata_id = None
+#     return wikidata_id
 
-def get_wikidata_id_data(wikidata_id, result_rdf=None):
-    """
-    Get Wikidata place data for a given wikidata id
-    """
-    wikidata_uri, wikidata_url = get_wikidata_uri(wikidata_id)
-    print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
-    print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
-    wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
-    # Initial empty graph
-    if result_rdf is None:
-        result_rdf = Graph()
-    # ----- Copy prefixes -----
-    use_namespaces = dict(wikidata_rdf.namespaces())
-    for prefix, ns_uri in wikidata_rdf.namespaces():
-        result_rdf.bind(prefix, ns_uri)
-    WDT = Namespace(use_namespaces["wdt"])
-    # ----- mapping table -----
-    #@@TODO: fix this to pull selected details
-    wikidata_data_mapping = (
-        [ M.emit(M.prop_eq(RDFS.label), M.stmt_copy())
-        , M.emit(M.prop_eq(WDT.P227),  M.stmt_copy())   # GND ID
-        , M.emit(M.prop_eq(WDT.P268),  M.stmt_copy())   # BnF ID
-        , M.emit(M.prop_eq(WDT.P1566), M.stmt_copy())   # Geonames ID
-        , M.emit(M.prop_eq(WDT.P1667), M.stmt_copy())   # Getty TGN ID
-        , M.emit(M.prop_eq(WDT.P2503), M.stmt_copy())   # GOV ID
-        , M.emit(M.prop_eq(WDT.P1871), M.stmt_copy())   # CERL ID
-        , M.emit(M.prop_eq(WDT.P6060), M.stmt_copy())   # MoEML ID
-        ])
-    # -----
-    m = DataExtractMap(wikidata_uri, wikidata_rdf, result_rdf)
-    m.extract_map(wikidata_data_mapping)
-    return result_rdf
+# def get_wikidata_id_data(wikidata_id, result_rdf=None):
+#     """
+#     Get Wikidata place data for a given wikidata id
+#     """
+#     wikidata_uri, wikidata_url = get_wikidata_uri(wikidata_id)
+#     print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
+#     print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
+#     wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
+#     # Initial empty graph
+#     if result_rdf is None:
+#         result_rdf = Graph()
+#     # ----- Copy prefixes -----
+#     use_namespaces = dict(wikidata_rdf.namespaces())
+#     for prefix, ns_uri in wikidata_rdf.namespaces():
+#         result_rdf.bind(prefix, ns_uri)
+#     WDT = Namespace(use_namespaces["wdt"])
+#     # ----- mapping table -----
+#     wikidata_data_mapping = (
+#         [ M.emit(M.prop_eq(RDFS.label), M.stmt_copy())
+#         , M.emit(M.prop_eq(WDT.P227),  M.stmt_copy())   # GND ID
+#         , M.emit(M.prop_eq(WDT.P268),  M.stmt_copy())   # BnF ID
+#         , M.emit(M.prop_eq(WDT.P1566), M.stmt_copy())   # Geonames ID
+#         , M.emit(M.prop_eq(WDT.P1667), M.stmt_copy())   # Getty TGN ID
+#         , M.emit(M.prop_eq(WDT.P2503), M.stmt_copy())   # GOV ID
+#         , M.emit(M.prop_eq(WDT.P1871), M.stmt_copy())   # CERL ID
+#         , M.emit(M.prop_eq(WDT.P6060), M.stmt_copy())   # MoEML ID
+#         ])
+#     # -----
+#     m = DataExtractMap(wikidata_uri, wikidata_rdf, result_rdf)
+#     m.extract_map(wikidata_data_mapping)
+#     return result_rdf
 
-def get_wikidata_id_text(wikidata_id, result_rdf=None):
-    """
-    Returns Wikidata short text description as an RDF graph.
-    """
-    article_root = "https://en.wikipedia.org/wiki/"
-    summary_root = "https://en.wikipedia.org/api/rest_v1/page/summary/"
-    wiki_root    = "https://en.wikipedia.org/"
-    # Get wikidata data
-    wikidata_uri, wikidata_url = get_wikidata_uri(wikidata_id)
-    print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
-    print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
-    wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
-    # print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
-    summary_url  = None
-    summary_data = None
-    place_article = None
-    if wikidata_rdf:
-        # Find reference to english Wikipedia article
-        #
-        # <https://en.wikipedia.org/wiki/Opole> a schema:Article ;
-        # schema:about wd:Q92212 ;
-        # schema:inLanguage "en" ;
-        # schema:isPartOf <https://en.wikipedia.org/> ;
-        # schema:name "Opole"@en .
-        #
-        place_articles = list(wikidata_rdf[:RDF.type:SCHEMA.Article])
-        for a in place_articles:
-            if ( (URIRef(wikidata_uri) in wikidata_rdf[a:SCHEMA.about:])    and
-                 (URIRef(wiki_root)    in wikidata_rdf[a:SCHEMA.isPartOf:]) and
-                 (Literal("en")        in wikidata_rdf[a:SCHEMA.inLanguage:]) ):
-                place_article = a
-    print("place_article: %s"%(place_article,), file=sys.stderr)
-    if place_article:
-        # Construct URI of summary page (use path segment from wikipedia page)
-        if place_article and place_article.toPython().startswith(article_root):
-            article_name = place_article[len(article_root):]
-            summary_url  = summary_root + article_name
-    if summary_url:
-        # Read Summary as JSON, extract 
-        # Content-Type: application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Summary/1.4.0"
-        # "extract": "Opole (listen) is a city located in southern Poland on the Oder River and the historical capital of Upper Silesia. With a population of approximately 127,792, it is currently the capital of the Opole Voivodeship and, also the seat of Opole County. With its long history dating back to the 8th century, Opole is one of the oldest cities in Poland.",
-        # "extract_html": "<p><b>Opole</b> <span class=\"nowrap\" style=\"font-size:85%;\">(<span class=\"unicode haudio\"><span class=\"fn\"><span><figure-inline><span><img src=\"//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/11px-Loudspeaker.svg.png\" height=\"11\" width=\"11\" srcset=\"//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/22px-Loudspeaker.svg.png 2x, //upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/17px-Loudspeaker.svg.png 1.5x\" /></span></figure-inline></span>listen</span></span>)</span> is a city located in southern Poland on the Oder River and the historical capital of Upper Silesia. With a population of approximately 127,792, it is currently the capital of the Opole Voivodeship and, also the seat of Opole County. With its long history dating back to the 8th century, Opole is one of the oldest cities in Poland.</p>"
-        req_headers = (
-            { "accept":     "application/json" 
-            })
-        response = requests.get(summary_url, headers=req_headers)
-        response.raise_for_status()  # raise an error on unsuccessful status codes
-        summary_data = json.loads(response.text)
-    if summary_data:
-        # Assemble result graph (using EMPlaces structure)
-        emp_id, emp_uri, emp_node = get_emplaces_uri_node(wikidata_id, suffix="_wikidata")
-        if result_rdf is None:
-            result_rdf = Graph()
-            result_rdf.bind("em", EM.term(""))
-            result_rdf.bind("place", PLACE.term(""))
-        summary_text = summary_data["extract"]
-        result_rdf.add((emp_node, EM.editorialNote, Literal(summary_text)))
-    return result_rdf
+# def get_wikidata_id_text(wikidata_id, result_rdf=None):
+#     """
+#     Returns Wikidata short text description as an RDF graph.
+#     """
+#     article_root = "https://en.wikipedia.org/wiki/"
+#     summary_root = "https://en.wikipedia.org/api/rest_v1/page/summary/"
+#     wiki_root    = "https://en.wikipedia.org/"
+#     # Get wikidata data
+#     wikidata_uri, wikidata_url = get_wikidata_uri(wikidata_id)
+#     print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
+#     print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
+#     wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
+#     # print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+#     summary_url  = None
+#     summary_data = None
+#     place_article = None
+#     if wikidata_rdf:
+#         # Find reference to english Wikipedia article
+#         #
+#         # <https://en.wikipedia.org/wiki/Opole> a schema:Article ;
+#         # schema:about wd:Q92212 ;
+#         # schema:inLanguage "en" ;
+#         # schema:isPartOf <https://en.wikipedia.org/> ;
+#         # schema:name "Opole"@en .
+#         #
+#         place_articles = list(wikidata_rdf[:RDF.type:SCHEMA.Article])
+#         for a in place_articles:
+#             if ( (URIRef(wikidata_uri) in wikidata_rdf[a:SCHEMA.about:])    and
+#                  (URIRef(wiki_root)    in wikidata_rdf[a:SCHEMA.isPartOf:]) and
+#                  (Literal("en")        in wikidata_rdf[a:SCHEMA.inLanguage:]) ):
+#                 place_article = a
+#     print("place_article: %s"%(place_article,), file=sys.stderr)
+#     if place_article:
+#         # Construct URI of summary page (use path segment from wikipedia page)
+#         if place_article and place_article.toPython().startswith(article_root):
+#             article_name = place_article[len(article_root):]
+#             summary_url  = summary_root + article_name
+#     if summary_url:
+#         # Read Summary as JSON, extract 
+#         # Content-Type: application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Summary/1.4.0"
+#         # "extract": "Opole (listen) is a city located in southern Poland on the Oder River and the historical capital of Upper Silesia. With a population of approximately 127,792, it is currently the capital of the Opole Voivodeship and, also the seat of Opole County. With its long history dating back to the 8th century, Opole is one of the oldest cities in Poland.",
+#         # "extract_html": "<p><b>Opole</b> <span class=\"nowrap\" style=\"font-size:85%;\">(<span class=\"unicode haudio\"><span class=\"fn\"><span><figure-inline><span><img src=\"//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/11px-Loudspeaker.svg.png\" height=\"11\" width=\"11\" srcset=\"//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/22px-Loudspeaker.svg.png 2x, //upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/17px-Loudspeaker.svg.png 1.5x\" /></span></figure-inline></span>listen</span></span>)</span> is a city located in southern Poland on the Oder River and the historical capital of Upper Silesia. With a population of approximately 127,792, it is currently the capital of the Opole Voivodeship and, also the seat of Opole County. With its long history dating back to the 8th century, Opole is one of the oldest cities in Poland.</p>"
+#         req_headers = (
+#             { "accept":     "application/json" 
+#             })
+#         response = requests.get(summary_url, headers=req_headers)
+#         response.raise_for_status()  # raise an error on unsuccessful status codes
+#         summary_data = json.loads(response.text)
+#     if summary_data:
+#         # Assemble result graph (using EMPlaces structure)
+#         emp_id, emp_uri, emp_node = get_emplaces_uri_node(wikidata_id, suffix="_wikidata")
+#         if result_rdf is None:
+#             result_rdf = Graph()
+#             result_rdf.bind("em", EM.term(""))
+#             result_rdf.bind("place", PLACE.term(""))
+#         summary_text = summary_data["extract"]
+#         result_rdf.add((emp_node, EM.description, Literal(summary_text)))
+#     return result_rdf
 
 #   ===================================================================
 #
@@ -712,23 +711,23 @@ def do_get_resource_data(gadroot, options):
     print(emplaces_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GAD_SUCCESS
 
-def do_get_wikidata_place_data(gadroot, options):
-    """
-    Get Wikidata RDF for a place
-    """
-    wikidata_id  = getargvalue(getarg(options.args, 0), "Wikidata ID: ")
-    wikidata_rdf = get_wikidata_id_data(wikidata_id)
-    print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
-    return GAD_SUCCESS
+# def do_get_wikidata_place_data(gadroot, options):
+#     """
+#     Get Wikidata RDF for a place
+#     """
+#     wikidata_id  = getargvalue(getarg(options.args, 0), "Wikidata ID: ")
+#     wikidata_rdf = get_wikidata_id_data(wikidata_id)
+#     print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+#     return GAD_SUCCESS
 
-def do_get_wikidata_place_text(gadroot, options):
-    """
-    Get Wikidata descrioption text for a place, as EMPlaces format RDF.
-    """
-    wikidata_id  = getargvalue(getarg(options.args, 0), "Wikidata ID: ")
-    wikidata_rdf = get_wikidata_id_text(wikidata_id)
-    print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
-    return GAD_SUCCESS
+# def do_get_wikidata_place_text(gadroot, options):
+#     """
+#     Get Wikidata descrioption text for a place, as EMPlaces format RDF.
+#     """
+#     wikidata_id  = getargvalue(getarg(options.args, 0), "Wikidata ID: ")
+#     wikidata_rdf = get_wikidata_id_text(wikidata_id)
+#     print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+#     return GAD_SUCCESS
 
 #   ===================================================================
 
@@ -750,10 +749,10 @@ def run(userhome, userconfig, options, progname):
         return do_get_source_place_data(gadroot, options)
     if options.command.startswith("resource"):
         return do_get_resource_data(gadroot, options)
-    if options.command.startswith("getwikid"):
-        return do_get_wikidata_place_data(gadroot, options)
-    if options.command.startswith("getwikit"):
-        return do_get_wikidata_place_text(gadroot, options)
+    # if options.command.startswith("getwikid"):
+    #     return do_get_wikidata_place_data(gadroot, options)
+    # if options.command.startswith("getwikit"):
+    #     return do_get_wikidata_place_text(gadroot, options)
     if options.command.startswith("ver"):
         return show_version(gadroot, userhome, options)
     if options.command.startswith("help"):
