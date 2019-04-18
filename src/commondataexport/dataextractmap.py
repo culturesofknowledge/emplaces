@@ -343,7 +343,7 @@ class DataExtractMap(object):
         return prop_nsne_sel
 
     @classmethod
-    def stmt_gen(cls, uri, obj=None):
+    def stmt_gen(cls, prop_uri, obj=None):
         """
         Returns generator for a single statement with the supplied property and object.
 
@@ -360,7 +360,21 @@ class DataExtractMap(object):
                 obj_node = Literal(obj)
         #@@@ obj_node = URIRef(obj) if obj else BNode()
         def stmt_gen_sel(src, base):
-            yield (base, URIRef(uri), obj_node)
+            yield (base, URIRef(prop_uri), obj_node)
+            return
+        return stmt_gen_sel
+
+    @classmethod
+    def stmt_gen_link(cls, prop_uri, obj_url):
+        """
+        Returns generator for a single statement with the supplied property and 
+        URL object vaue.  If the supplied objkect value is None, no statement is generated.
+
+        If no object value is supplied, a blank node is allocated and used.
+        """
+        def stmt_gen_sel(src, base):
+            if isinstance(obj_url, str):
+                yield (base, URIRef(prop_uri), URIRef(obj_url))
             return
         return stmt_gen_sel
 
@@ -467,8 +481,7 @@ class DataExtractMap(object):
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
-            # print("@@@ link to subgraph; %s"%((gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or o),))
-            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or o)
+            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or URIRef(subgraph_url))
             return
         return loc_subgraph_gen
 
@@ -503,15 +516,14 @@ class DataExtractMap(object):
                 assert false, "@@@@ URL error"
             subgraph_rdf = Rdf_graph_cache.get_graph(subgraph_url)
             # Map and emit subgraph
-            sub_subgraph_map = (
+            sub_subgraph_map = DataExtractMap(
                 subgraph_url, 
                 subgraph_rdf, 
                 self._tgt
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
-            # print("@@@ link to subgraph; %s"%((gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or o),))
-            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or o)
+            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or URIRef(subgraph_url))
             return
         return ref_subgraph_gen
 
@@ -600,9 +612,9 @@ class DataExtractMap(object):
     # Value generator methods
     # -----------------------
     #
-    # These are unbound object methods, or class methods that return an unbound 
-    # object method, which are invoked with a data extract map instance and the 
-    # subject, predicate and object of a matched source statement.
+    # These are object methods, or class methods that return an unbound 
+    # object method, which are invoked with a data extract map instance and 
+    # the subject, predicate and object of a matched source statement.
 
     def src_subj(self, s, p, o):
         """
@@ -640,10 +652,43 @@ class DataExtractMap(object):
         """
         Value generator that returns a supplied node value.
 
-        NOTE: unlike some other value generators, this is invoked as a function.
+        NOTE: unlike some other value generators, this is invoked as a function call.
         """
         def val(self, s, p, o):
             return value
+        return val
+
+    @classmethod
+    def const_uri(cls, uri):
+        """
+        Value generator that returns a node named using the supplied URI.
+        """
+        return cls.const(URIRef(uri))
+
+    @classmethod
+    def const_gen_literal(cls, template):
+        """
+        Value generator that interpolates statement values in a template 
+        to yield a new literal node.
+
+        Template may contain '%(subj)s', '%(prop)s' and/or '%(obj)s' to refer to statement
+        subject, property or object respectively
+        """
+        def val(self, s, p, o):
+            return Literal(template%{'subj': str(s), 'prop': str(p), 'obj': str(o)})
+        return val
+
+    @classmethod
+    def const_gen_uri(cls, template):
+        """
+        Value generator that interpolates statement values in a template 
+        to yield a new UROI node
+
+        Template may contain '%(subj)s', '%(prop)s' and/or '%(obj)s' to refer to statement
+        subject, property or object respectively
+        """
+        def val(self, s, p, o):
+            return URIRef(template%{'subj': str(s), 'prop': str(p), 'obj': str(o)})
         return val
 
     @classmethod

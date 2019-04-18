@@ -101,23 +101,22 @@ Wrapping up EMPlaces:
     - ...
 - [ ] Publish EMPlaces vocabulary as RDF schema and/or OWL ontology (curently in Annalist).
 - [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This could be about a curation model that can be applied to create a consistent view of data.
-- [ ] GK add licence information to Opole example data and data extractor
-    - Done for GeoNames in sample data.
-- [ ] GK think about licence representation: need another level of indirection so we can add local label?
+- [x] GK add licence information to Opole example data and data extractor
+- [x] GK think about licence representation: need another level of indirection so we can add local label?
     - possible model change
     - Need to update GeoNames extractor.
 - [ ] GK source information in example data should be URI-labeled and refenced (like periods, etc.).  Also ensure extractor does likewise.
 - [ ] GK consider how alternative to single-point representation of location_value (e.g. bounding polygons)  (Maybve later when we have actual data) 
     - e.g. https://histogis.acdh.oeaw.ac.at/shapes/shape/detail/8004
-- [ ] GK em:editorialNote becomes em:description/rdfs:comment.  Applicable to (say) name attestations.  Distinct from description of process: note em:editorialNote becomes more about the curation and creation of a record.  Update geonames extractor here. Note em:description and em:editorialNote may both be kinds of rdfs:comment - about the described place and (curation) process.
+- [x] GK em:editorialNote becomes em:description/rdfs:comment.  Applicable to (say) name attestations.  Distinct from description of process: note em:editorialNote becomes more about the curation and creation of a record.  Update geonames extractor here. Note em:description and em:editorialNote may both be kinds of rdfs:comment - about the described place and (curation) process.
 - [ ] AB add more authorities to Opole example
-- [ ] GK update model diagrams:
+- [x] GK update model diagrams:
     - page 2: note the model as described privileges EMPLaces place data (cf. "propose how place label and type label are derived from merged data" above).
     - page 6: ???
 
 - [ ] GK Note that qualified relation could be modeled as an annotation: is this an inconsistency of style?
 - [ ] GK think about RDF semantics of multiple name attestations and multiple languages.
-- [ ] GK Note that em:Source_desc rdfs:comment is for curatorial/editorial notes
+- [x] GK Note that em:Source_desc rdfs:comment is for curatorial/editorial notes
 
 - [ ] Update crosswalk??
 
@@ -131,24 +130,40 @@ Urgent Tasks?
     - [x] Time spans (diagram p6)
     - [x] Add diagram page for Location
 2. Update Geonames extractor
-    - [ ] Update common definitions (copy from example)
-    - [ ] Add licencing data (see notes below)
+    - [x] Update common definitions (copy from example)
+    - [x] Add licencing data (see notes below)
     - [ ] Update shape-shifter patterns (see notes below)
 3. [ ] Flesh out workflow details and script support
+    - AB loooking at this (2019-04-18)
 4. [x] Generation of URI-identified resources where these might be shared
-5. [ ] Place identifiers (_contra_. record identifiers)
-6. [ ] Generate URIs for source data descriptions
+5. [x] Place identifiers (_contra_, record identifiers)
+    - punt for now, but maintain awareness
+    - note that if place id is available, can use foaf:primaryTopic to link it
+6. [x] Generate URIs for source data descriptions
 
 Notes for updating get_geonames_data:
 - [x] em:licence: related resource (p1), alternate authority (p1), source (p8)
     - added indirection to reference URI:  --em:licence--> [] --em:link--> 
 - [x] ems:EMPlaces -> ems:CofK
-- [ ] added foaf:primaryTopic to em:Place_merged diagram (could also apply to any em:Place)
+- [x] added foaf:primaryTopic to em:Place_merged diagram (could also apply to any em:Place)
 - [x] added em:accessed to source descriptions
 - [x] em:editorialNote -> em:description (applied to place).  em:description is subproperty of rdfs:comment. (used with wiki text)
-- [-] em:editorialNote on em:Place / em:Source_desc is curational information.  em:editorialNote is subproperty of rdfs:comment.
-- [ ] MISSING: map wikidata to EMPlaces (alternate authority, etc.); add licence.
-    - note: getwikitext gets this right.  Note Id generation applied.
+- [x] em:editorialNote on em:Place / em:Source_desc is curational information.  em:editorialNote is subproperty of rdfs:comment.
+- [x] MISSING: map wikidata to EMPlaces (alternate authority, etc.); add licence.
+- [ ] Need to connect generated place data from geonames with alternate authority data from wikidata
+
+## 20190418 telecon
+
+- AB: place type labels 
+- AB: add authorities to Opole sample
+- AB: licence for Rumsey maps
+- AB: Looking at workflow details (e.g. how information is assembled from various sources)
+- GK: sorting out 'alternateAuthority' construction in get_geonames_data
+
+Later:
+- AB: dealing with conflicting contributions (editorial)
+    - dates need to be "just one truth" for EMDates
+    - historical hierarchies: need one true definitive hierarchy for adding contributions
 
 
 ### Preparing for EMPeople:
@@ -174,4 +189,3 @@ Prosopographical workshop 2019-05-16/17
 - [ ] Update `src/commondataexport/README.md` (documentation)
 - [ ] Create capability to import EMPLaces data into Annalist, based on existing data (e.g., a new option for "get_annalist_data").
 - [ ] Test suite for data wrangling utilities
-

@@ -1,0 +1,73 @@
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix em: <http://id.emplaces.info/vocab/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix p: <http://www.wikidata.org/prop/> .
+@prefix place: <http://id.emplaces.info/place/> .
+@prefix pq: <http://www.wikidata.org/prop/qualifier/> .
+@prefix pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/> .
+@prefix pqv: <http://www.wikidata.org/prop/qualifier/value/> .
+@prefix pr: <http://www.wikidata.org/prop/reference/> .
+@prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix prv: <http://www.wikidata.org/prop/reference/value/> .
+@prefix ps: <http://www.wikidata.org/prop/statement/> .
+@prefix psn: <http://www.wikidata.org/prop/statement/value-normalized/> .
+@prefix psv: <http://www.wikidata.org/prop/statement/value/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdata: <https://www.wikidata.org/wiki/Special:EntityData/> .
+@prefix wdno: <http://www.wikidata.org/prop/novalue/> .
+@prefix wdref: <http://www.wikidata.org/reference/> .
+@prefix wds: <http://www.wikidata.org/entity/statement/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
+@prefix wdv: <http://www.wikidata.org/value/> .
+@prefix wikibase: <http://wikiba.se/ontology#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+place:Q90942_wikidata rdfs:label "Екло"@bg,
+        "Arondisamant Eeklo"@br,
+        "Arrondissement Eeklo"@ceb,
+        "Arrondissement Eeklo"@cs,
+        "Arrondissement Eeklo"@de,
+        "Arrondissement Eeklo"@de-ch,
+        "Arrondissement of Eeklo"@en,
+        "Arrondissement of Eeklo"@en-ca,
+        "Arrondissement of Eeklo"@en-gb,
+        "Arrondissement de Eeklo"@es,
+        "Eeklo ringkond"@et,
+        "شهرستان اکلو"@fa,
+        "arrondissement administratif d'Eeklo"@fr,
+        "Eeklo"@hu,
+        "Էելքլո"@hy,
+        "Arrondissement di Eeklo"@it,
+        "Arrondissement Eeklo"@lb,
+        "Eeklo"@li,
+        "Arrondissement Eeklo"@nl,
+        "Экло"@ru,
+        "Arrondissement Eeklo"@sv,
+        "Eeklo"@vi,
+        "埃克洛區"@zh ;
+    em:alternateAuthority <http://id.emplaces.info/source/120375035_bnf>,
+        <http://id.emplaces.info/source/2798986_geonames> .
+
+<http://id.emplaces.info/source/120375035_bnf> a em:Authority,
+        em:Source_desc ;
+    rdfs:label "BnF identifier" ;
+    em:editorialNote "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268." ;
+    em:short_label "BnF" .
+
+<http://id.emplaces.info/source/2798986_geonames> a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames identifier" ;
+    em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:short_label "GeoNames" .
+
+

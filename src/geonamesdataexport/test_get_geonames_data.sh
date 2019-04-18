@@ -14,6 +14,7 @@ TO="0002"
 SELECT="$FROM-$TO"
 DATADIR=data-$DATE
 DATADIR=data-test
+DATADIR=data-test-alternate-authorities
 
 # # Write GeoNames IDs to new file
 

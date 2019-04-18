@@ -1,0 +1,467 @@
+@prefix agent: <http://id.emplaces.info/agent/> .
+@prefix annal: <http://purl.org/annalist/2014/#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix em: <http://id.emplaces.info/vocab/> .
+@prefix emc: <http://id.emplaces.info/calendar/> .
+@prefix eml: <http://id.emplaces.info/language/> .
+@prefix emp: <http://id.emplaces.info/timeperiod/> .
+@prefix ems: <http://id.emplaces.info/source/> .
+@prefix emt: <http://id.emplaces.info/timespan/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geonames: <http://sws.geonames.org/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix place: <http://id.emplaces.info/place/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ref: <http://id.emplaces.info/reference/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+em:Authority a rdfs:Class ;
+    rdfs:label "Authoritative information source" ;
+    rdfs:comment """
+            Describes a source of information that is considered to be authoritative in some sense
+            """ ;
+    rdfs:subClassOf em:Source_desc .
+
+em:Bib_entry a rdfs:Class ;
+    rdfs:label "Bibliographic item" ;
+    rdfs:comment """
+            Bibliographic item description, based on BIBO.
+
+            This is a superclass of the variou BIBO entity types, such as bibo:Book.
+            """ .
+
+em:Competence_value a rdfs:Class ;
+    rdfs:label "Information competence (certainty) indicator" .
+
+em:Language_value a rdfs:Class ;
+    rdfs:label "Language identifier" ;
+    rdfs:comment """
+            Identifies a language, such as may be appliucable to a place name, etc.
+            """ .
+
+em:Licence_desc a rdfs:Class ;
+    rdfs:label "Licence description" ;
+    rdfs:comment """
+            A description of a licence for use of some data.
+            """ .
+
+em:Map_resource a rdfs:Class ;
+    rdfs:label "Map resource" ;
+    rdfs:comment """
+            Describes a map resource.
+            """ .
+
+em:Place a rdfs:Class ;
+    rdfs:label "Place" ;
+    rdfs:comment """
+            A resource that provides information about a place (which is 
+            considered in the sense of being "constructed by human experience").
+            """ .
+
+em:Place_name a rdfs:Class ;
+    rdfs:label "Place name" ;
+    rdfs:comment """
+            A name by which a place may be known or designated in some language.
+            """ .
+
+em:Place_sourced a rdfs:Class ;
+    rdfs:label "Place information from single source" ;
+    rdfs:comment """
+            A resource that provides information about a place that comes from 
+            a single source.  Property `em:source` references a description of 
+            that source.
+            """ ;
+    rdfs:subClassOf em:Place .
+
+em:Qualified_relation a rdfs:Class ;
+    rdfs:label "Relationship between two places" ;
+    rdfs:comment """
+            A relationship between two places, which may be qualified in various ways.  
+            The type of relationship is specified by a 'em:relationType' property on the 
+            qualified relation.
+            """ .
+
+em:Relation_type a rdfs:Class ;
+    rdfs:label "Relationship type identifier" .
+
+em:Setting a rdfs:Class ;
+    rdfs:label "Spatial and temporal extent" ;
+    rdfs:comment """
+            A spatial and temporal extent that a place may occupy or lie within.
+            """ .
+
+em:Source_desc a rdfs:Class ;
+    rdfs:label "Information source" ;
+    rdfs:comment """
+            Describes a source of information.
+            """ .
+
+em:Time_period a rdfs:Class ;
+    rdfs:label "Time period" ;
+    rdfs:comment """
+            Identified (historical) time period, whose temporal extent may or may not be known.
+            """ .
+
+em:Time_span a rdfs:Class ;
+    rdfs:label "Time span" ;
+    rdfs:comment """
+            A time span specified in terms of its temporal extent.  
+            Some or all of the bounds of the temporal extent may be unknown or approximate.
+            """ .
+
+eml:de a em:Language_value ;
+    rdfs:label "German" ;
+    em:tag_639_1 "de" ;
+    em:tag_639_2 "deu" ;
+    rdfs:comment "# German" .
+
+eml:en a em:Language_value ;
+    rdfs:label "English" ;
+    em:tag_639_1 "en" ;
+    em:tag_639_2 "eng" ;
+    rdfs:comment "# English" .
+
+eml:la a em:Language_value ;
+    rdfs:label "Latin" ;
+    em:tag_639_1 "la" ;
+    em:tag_639_2 "lat" ;
+    rdfs:comment "# Latin" .
+
+eml:pl a em:Language_value ;
+    rdfs:label "Polish" ;
+    em:tag_639_1 "pl" ;
+    em:tag_639_2 "pol" ;
+    rdfs:comment "# Polish" .
+
+emp:Current a em:Time_period ;
+    rdfs:label "Current, as of 2018" ;
+    em:timespan [ a em:Time_span ;
+            <http://id.emplaces.info/vocab/earliestEnd:> "2018" ;
+            <http://id.emplaces.info/vocab/latestStart:> "2018" ] ;
+    rdfs:comment """
+            For ease of retrieval, use this specific resource to label any current information
+            (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated 
+            if required to convey more specific information.
+            """ .
+
+em:AH_PART_OF_AH a em:Relation_type ;
+    rdfs:label "Former part of" ;
+    em:fromType em:P_OR_A ;
+    em:toType gn:A ;
+    rdfs:comment """
+            Records a historical relationship between a historical place or administrative division 
+            and its parent division.
+            """ .
+
+em:APPROXIMATE a em:Competence_value ;
+    rdfs:label "Approximate" ;
+    rdfs:comment """
+            The associated value is a date whose value is only approximately known.  
+
+            @@NOTE: this value may prove spurious, as timespan already has a way to 
+            represent approximation ranges."
+            """ .
+
+em:ASSUMED a em:Competence_value ;
+    rdfs:label "Assumed" ;
+    rdfs:comment """
+            The associated value is assumed from context.
+            """ .
+
+em:A_PART_OF_A a em:Relation_type ;
+    rdfs:label "Subdivision of" ;
+    em:fromType gn:A ;
+    em:toType gn:A ;
+    rdfs:comment """
+            Relates a subdivision of an administrative division to its parent division.
+            """ .
+
+em:CALENDAR_IN_USE rdfs:label "Calendar in use" ;
+    rdfs:comment """
+            References a historical calendar used in a place, with source and compenence information.
+            """ .
+
+em:DEDICATED_TO a oa:Motivation ;
+    rdfs:label "Dedicated to" ;
+    rdfs:comment """
+            Generally used with a related place that is a church or a place or worship, 
+            to indicate a person or historical figure to whom the place has been dedicated.  
+            The annotation body directly references a resource for the dedicatee, which is 
+            assumed to have an 'rdfs:label' value that can be used for display purposes.
+            """ .
+
+em:INFERRED a em:Competence_value ;
+    rdfs:label "Inferred" ;
+    rdfs:comment """
+            The associated value has been inferred from (preferably?) definitive informaton.
+            """ .
+
+em:NAME_ATTESTATION rdfs:label "Name attestation" ;
+    rdfs:comment """
+            References a historical name attestation for a place, with source and compenence information.
+            """ .
+
+em:S_PART_OF_P a em:Relation_type ;
+    rdfs:label "Located within" ;
+    em:fromType gn:S ;
+    em:toType gn:P ;
+    rdfs:comment """
+            Relates a spot feature to a populated place within which it may be found.
+            """ .
+
+em:UNCERTAIN a em:Competence_value ;
+    rdfs:label "Uncertain" ;
+    rdfs:comment """
+            The associated value is uncertain."
+            """ .
+
+em:USED_FOR a oa:Motivation ;
+    rdfs:label "Used for" ;
+    rdfs:comment """
+            Generally used with a related place that is a building or site for some activity, 
+            to indicate a purpose for which the place was used.  The annotation body directly 
+            references a resource describing the purpose, which is assumed to have an 'rdfs:label'
+            value that can be used for display purposes.  The annotation itself may carry a 
+            temporal constraint ('em:where') that gives some indication of when the place was 
+            used for that purpose.
+            """ .
+
+em:competence a rdf:Property ;
+    rdfs:label "Certainty, or quality, of information" ;
+    rdfs:comment """
+            Records the quality or certaintly of some information.  
+            Note that in the absence of an explicit value, no competence should be assumed.
+            """ ;
+    rdfs:range em:Competence_value .
+
+gn:A.ADM1 a skos:Concept ;
+    rdfs:label "First-order admin division" ;
+    rdfs:comment """
+        A primary administrative division of a country, such as a state in the United States.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.ADM1H a skos:Concept ;
+    rdfs:label "Former first-order admin division" ;
+    rdfs:comment """
+        A former first-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.ADM2 a skos:Concept ;
+    rdfs:label "Second-order admin division" ;
+    rdfs:comment """
+        A subdivision of a first-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.ADM2H a skos:Concept ;
+    rdfs:label "Former second-order admin division" ;
+    rdfs:comment """
+        A former first-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.ADM3H a skos:Concept ;
+    rdfs:label "Former Third-order admin division" ;
+    rdfs:comment """
+        A former third-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.PCLH a skos:Concept ;
+    rdfs:label "Former independent political entity" ;
+    rdfs:comment """
+        A former independent political entity, typically a country.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.PCLI a skos:Concept ;
+    rdfs:label "Independent political entity" ;
+    rdfs:comment """
+        An independent political entity, typically a country.
+        """ ;
+    skos:narrower gn:A .
+
+gn:P.PPL a skos:Concept ;
+    rdfs:label "Populated place" ;
+    rdfs:comment """
+        A populated place (town, city, village, etc.).
+        """ ;
+    skos:narrower gn:P .
+
+gn:P.PPLA a skos:Concept ;
+    rdfs:label "Seat of 1st-order admin div" ;
+    rdfs:comment """
+        Populated place that is a seat of a first-order administrative division.
+        """ ;
+    skos:narrower gn:P .
+
+gn:P.PPLH a skos:Concept ;
+    rdfs:label "Former populated place" ;
+    rdfs:comment """
+        A former populated place that no longer exists.
+        """ ;
+    skos:narrower gn:P .
+
+gn:S.CH a skos:Concept ;
+    rdfs:label "Church" ;
+    rdfs:comment """
+        A church; a building for public Christian worship.
+        """ ;
+    skos:narrower gn:S .
+
+emt:Current_2018 a em:Time_span ;
+    rdfs:label "Current, as of 2018" ;
+    em:earliestEnd "2018" ;
+    em:latestStart "2018" ;
+    em:short_label "2018" ;
+    rdfs:comment "Timespan starting no later than 2018, and ending no sooner than 2018" .
+
+em:MAP_RESOURCE a oa:Motivation ;
+    rdfs:label "Map resource" ;
+    rdfs:comment """
+            References a current or historical map resource associated with a place.
+            """ .
+
+em:P_OR_A a skos:Concept ;
+    rdfs:label "Former populated place or admin division" ;
+    rdfs:comment """
+            Former populated place or administrative division, 
+            used in historical administrative relations
+            """ ;
+    skos:broader gn:A,
+        gn:P .
+
+em:P_PART_OF_A a em:Relation_type ;
+    rdfs:label "Administered by" ;
+    em:fromType gn:P ;
+    em:toType gn:A ;
+    rdfs:comment """
+            Relates a populated place to its administrative division.
+            """ .
+
+em:Place_merged rdfs:label "Place information merged from multiple sources" ;
+    rdfs:comment """
+            A resource that provides information about a place that comes from 
+            multiple sources.  One or more em:place_data properties reference 
+            single-sourced information about the place.
+            """ ;
+    rdfs:subClassOf em:Place .
+
+<http://sws.geonames.org/2798986/> a em:Place,
+        em:Place_merged ;
+    rdfs:label "Arrondissement Eeklo (City   (A.ADM3))" ;
+    em:alternateName "Ecklo",
+        "Eecloo",
+        "Arrondissement d’Eeklo"@fr,
+        "Arrondissement Eeklo"@nl,
+        "Eeklo"@nl ;
+    em:alternateURI <N6cbcab83a243450c89a9916aa89bf8eb> ;
+    em:canonicalURI place:Arrondissement_Eeklo_ADM3_2798986 ;
+    em:displayName "Arrondissement Eeklo",
+        "Arrondissement d’Eeklo",
+        "Ecklo",
+        "Eecloo",
+        "Eeklo" ;
+    em:hasAnnotation <N5a1e8ac87ac94f99b9b5e20d2508f93d> ;
+    em:hasRelation <N80c0240bec8244ea9455c467bc992172> ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM3 ;
+    em:place_data place:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+    em:preferredName "Arrondissement Eeklo" ;
+    em:setting <Nef008b34d5b74cbda554c16933cd3b6c> ;
+    em:source ems:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+    gn:countryCode "BE" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/2798986/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Arrondissement_of_Eeklo>,
+        <https://en.wikipedia.org/wiki/Arrondissement_of_Eeklo> .
+
+gn:A.ADM3 a skos:Concept ;
+    rdfs:label "Third-order admin division" ;
+    rdfs:comment """
+        A subdivision of a second-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+em:DEFINITIVE a em:Competence_value ;
+    rdfs:label "Definitive" ;
+    rdfs:comment """
+            The associated value is definitively true for the purposes of EMPlaces.  
+            Such information should ideally be backup up be appropiate source references.
+            """ .
+
+gn:S a skos:Concept ;
+    rdfs:label "Spot feature" ;
+    rdfs:comment """
+        Spot feature (spot, building, farm).
+        """ .
+
+emp:Current_2018 a em:Time_period ;
+    rdfs:label "Current, as of 2018" ;
+    em:short_label "2018" ;
+    em:timespan emt:Current_2018 ;
+    rdfs:comment "Time period including the year 2018" .
+
+ems:Arrondissement_Eeklo_ADM3_2798986_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Arrondissement Eeklo (City   (A.ADM3))" ;
+    em:accessed "2019-04-18" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2798986/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/2798986/about.rdf> ;
+    em:short_label "GeoNames" .
+
+gn:P a skos:Concept ;
+    rdfs:label "Populated place" ;
+    rdfs:comment """
+        Populated place - from GeoNames (feature class).
+        """ .
+
+gn:A a skos:Concept ;
+    rdfs:label "Administrative division" ;
+    rdfs:comment """
+        Administrative division - from GeoNames (feature class).
+        """ .
+
+[] a oa:Annotation ;
+    em:competence em:DEFINITIVE ;
+    em:source ems:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+    em:when emp:Current_2018 ;
+    oa:hasBody <Nd936af9af1d24387b2060f21f3b33994> ;
+    oa:hasTarget place:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+    oa:motivatedBy em:MAP_RESOURCE .
+
+[] rdfs:label "GeoNames URI for Arrondissement Eeklo" ;
+    em:link <http://sws.geonames.org/2798986/> .
+
+[] a em:Qualified_relation ;
+    em:competence em:DEFINITIVE ;
+    em:relationTo place:East_Flanders_ADM2_2789733_geonames ;
+    em:relationType em:P_PART_OF_A ;
+    em:source ems:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+    em:when emp:Current_2018 .
+
+[] rdfs:label "Current map for Arrondissement Eeklo" ;
+    em:link <http://www.geonames.org/2798986/arrondissement-eeklo.html> ;
+    em:preview <http://www.geonames.org/2798986/arrondissement-eeklo.html> ;
+    em:short_label "Current" ;
+    rdfs:comment "Current map for Arrondissement Eeklo" .
+
+[] wgs84_pos:lat 5.123106e+01 ;
+    wgs84_pos:long 3.60952e+00 .
+
+[] a em:Setting ;
+    em:location <Ne2a6e73424784d11ae0da13fa4597b38> ;
+    em:source ems:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+    em:when emp:Current_2018 .
+
+

@@ -1163,18 +1163,100 @@ def get_wikidata_id_data(wikidata_id, result_rdf=None):
     use_namespaces = dict(wikidata_rdf.namespaces())
     for prefix, ns_uri in wikidata_rdf.namespaces():
         result_rdf.bind(prefix, ns_uri)
-    WDT = Namespace(use_namespaces["wdt"])
+    result_rdf.bind("em",    EM.term(""))
+    result_rdf.bind("place", PLACE.term(""))
     # ----- mapping table -----
+    WDT = Namespace(use_namespaces["wdt"])
+    emp_id, emp_uri, emp_node = get_emplaces_uri_node(wikidata_id, suffix="_wikidata")
+    # def wikidata_stmt(prop, obj):
+    #     return M.stmt(M.tgt_subj, M.const_uri(prop), obj)
+    def alt_authority(auth_uri_template, auth_tag, auth_label, auth_descr, auth_link=None):
+        return M.loc_subgraph(
+            M.tgt_subj, M.const_uri(EM.alternateAuthority), M.const_gen_uri(auth_uri_template),
+            [ M.emit(M.stmt_gen(RDF.type,         EM.Source_desc),      M.stmt_copy())
+            , M.emit(M.stmt_gen(RDF.type,         EM.Authority),        M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.short_label,   Literal(auth_tag)),   M.stmt_copy())
+            , M.emit(M.stmt_gen(RDFS.label,       Literal(auth_label)), M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.editorialNote, Literal(auth_descr)), M.stmt_copy())
+            , M.emit(M.stmt_gen_link(EM.link,     auth_link),           M.stmt_copy())
+            ])
     wikidata_data_mapping = (
-        [ M.emit(M.prop_eq(RDFS.label), M.stmt_copy())
-        , M.emit(M.prop_eq(WDT.P227),  M.stmt_copy())   # GND ID
-        , M.emit(M.prop_eq(WDT.P268),  M.stmt_copy())   # BnF ID
-        , M.emit(M.prop_eq(WDT.P1566), M.stmt_copy())   # Geonames ID
-        , M.emit(M.prop_eq(WDT.P1667), M.stmt_copy())   # Getty TGN ID
-        , M.emit(M.prop_eq(WDT.P2503), M.stmt_copy())   # GOV ID
-        , M.emit(M.prop_eq(WDT.P1871), M.stmt_copy())   # CERL ID
-        , M.emit(M.prop_eq(WDT.P6060), M.stmt_copy())   # MoEML ID
+        [ M.set_subj(M.stmt_gen(EM.dummy_prop), M.const(emp_node))
+        , M.emit(M.prop_eq(RDFS.label), M.stmt_copy())
+        , M.emit(M.prop_eq(WDT.P268),   
+            alt_authority(
+                EMS["%(obj)s_bnf"], 
+                "BnF", 
+                "BnF identifier",
+                "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P227),   
+            alt_authority(
+                EMS["%(obj)s_gnd"], 
+                "GND", 
+                "GND identifier",
+                "Deutsche Nationalbibliothek Identifier. See: https://www.wikidata.org/wiki/Property:P227.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P1566),   
+            alt_authority(
+                EMS["%(obj)s_geonames"], 
+                "GeoNames", 
+                "GeoNames identifier",
+                "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P1667),   
+            alt_authority(
+                EMS["%(obj)s_tgn"], 
+                "TGN", 
+                "TGN identifier",
+                "TGN (Getty Thesaurus of Geographic Names) identfier. See: https://www.wikidata.org/wiki/Property:P1667.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P1871),   
+            alt_authority(
+                EMS["%(obj)s_cerl"], 
+                "CERL", 
+                "CERL identifier",
+                "CERL (Consortium of European Research Libraries thesaurus) identifier. See: https://www.wikidata.org/wiki/Property:P1871.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P2503),   
+            alt_authority(
+                EMS["%(obj)s_gov"], 
+                "GOV", 
+                "GOV identifier",
+                "Historical Gazetteer (GOV) identifier. See: https://www.wikidata.org/wiki/Property:P2503.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P6060),   
+            alt_authority(
+                EMS["%(obj)s_moeml"], 
+                "MoEML", 
+                "MoEML identifier",
+                "MoEML ( Map of Early Modern London) identifier. See: https://www.wikidata.org/wiki/Property:P6060.",
+                auth_link=None
+                )
+            )
         ])
+    # wikidata_data_mapping = (
+    #     [ M.emit(M.prop_eq(RDFS.label), M.stmt_copy())
+    #     , M.emit(M.prop_eq(WDT.P227),  M.stmt_copy())   # GND ID
+    #     , M.emit(M.prop_eq(WDT.P268),  M.stmt_copy())   # BnF ID
+    #     , M.emit(M.prop_eq(WDT.P1566), M.stmt_copy())   # Geonames ID
+    #     , M.emit(M.prop_eq(WDT.P1667), M.stmt_copy())   # Getty TGN ID
+    #     , M.emit(M.prop_eq(WDT.P2503), M.stmt_copy())   # GOV ID
+    #     , M.emit(M.prop_eq(WDT.P1871), M.stmt_copy())   # CERL ID
+    #     , M.emit(M.prop_eq(WDT.P6060), M.stmt_copy())   # MoEML ID
+    #     ])
     # -----
     m = DataExtractMap(wikidata_uri, wikidata_rdf, result_rdf)
     m.extract_map(wikidata_data_mapping)
