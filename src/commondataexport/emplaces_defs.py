@@ -36,6 +36,7 @@ log = logging.getLogger(__name__)
 SKOS      = Namespace("http://www.w3.org/2004/02/skos/core#")
 XSD       = Namespace("http://www.w3.org/2001/XMLSchema#")
 
+SCHEMA    = Namespace("http://schema.org/")
 OA        = Namespace("http://www.w3.org/ns/oa#")
 CC        = Namespace("http://creativecommons.org/ns#")
 DCTERMS   = Namespace("http://purl.org/dc/terms/")
@@ -97,13 +98,15 @@ COMMON_PREFIX_DEFS = (
 
 COMMON_EMPLACES_DEFS = (
     """
+    # ===== Classes =====
+
     em:Place a rdfs:Class ;
         rdfs:label "Place" ;
         rdfs:comment
             '''
             A resource that provides information about a place (which is 
             considered in the sense of being "constructed by human experience").
-            '''
+            ''' ;
         .
 
     em:Place_sourced a rdfs:Class ;
@@ -114,7 +117,7 @@ COMMON_EMPLACES_DEFS = (
             A resource that provides information about a place that comes from 
             a single source.  Property `em:source` references a description of 
             that source.
-            '''
+            ''' ;
         .
 
     em:Place_merged
@@ -125,19 +128,135 @@ COMMON_EMPLACES_DEFS = (
             A resource that provides information about a place that comes from 
             multiple sources.  One or more em:place_data properties reference 
             single-sourced information about the place.
-            '''
+            ''' ;
         .
+
+    em:Time_period a rdfs:Class ;
+        rdfs:label   "Time period" ;
+        rdfs:comment 
+            '''
+            Identified (historical) time period, whose temporal extent may or may not be known.
+            ''' ;
+        .
+
+    em:Time_span a rdfs:Class ;
+        rdfs:label   "Time span" ;
+        rdfs:comment 
+            '''
+            A time span specified in terms of its temporal extent.  
+            Some or all of the bounds of the temporal extent may be unknown or approximate.
+            '''  ;
+        .
+
+    em:Licence_desc a rdfs:Class ;
+        rdfs:label   "Licence description" ;
+        rdfs:comment 
+            '''
+            A description of a licence for use of some data.
+            ''' ;
+        .
+
+    em:Language_value a rdfs:Class ;
+        rdfs:label   "Language identifier" ;
+        rdfs:comment 
+            '''
+            Identifies a language, such as may be appliucable to a place name, etc.
+            ''' ;
+        .
+
+    em:Source_desc a rdfs:Class ;
+        rdfs:label   "Information source" ;
+        
+        rdfs:comment 
+            '''
+            Describes a source of information.
+            ''' ;
+        .
+
+    em:Authority a rdfs:Class ;
+        rdfs:subClassOf em:Source_desc ;
+        rdfs:label   "Authoritative information source" ;
+        rdfs:comment 
+            '''
+            Describes a source of information that is considered to be authoritative in some sense
+            ''' ;
+        .
+
+    em:Qualified_relation a rdfs:Class ;
+        rdfs:label   "Relationship between two places" ;
+        rdfs:comment 
+            '''
+            A relationship between two places, which may be qualified in various ways.  
+            The type of relationship is specified by a 'em:relationType' property on the 
+            qualified relation.
+            '''  ;
+        .
+
+    em:Relation_type a rdfs:Class ;
+        rdfs:label "Relationship type identifier" ;
+        .
+
+    em:Competence_value a rdfs:Class ;
+        rdfs:label "Information competence (certainty) indicator" ;
+        .
+
+    em:Setting a rdfs:Class ;
+        rdfs:label   "Spatial and temporal extent" ;
+        rdfs:comment 
+            '''
+            A spatial and temporal extent that a place may occupy or lie within.
+            ''' ;
+        .
+
+    em:Map_resource a rdfs:Class ;
+        rdfs:label   "Map resource" ;
+        rdfs:comment 
+            '''
+            Describes a map resource.
+            ''' ;
+        .
+
+    em:Place_name a rdfs:Class ;
+        rdfs:label   "Place name" ;
+        rdfs:comment 
+            '''
+            A name by which a place may be known or designated in some language.
+            ''' ;
+        .
+
+    em:Bib_entry a rdfs:Class ;
+        rdfs:label   "Bibliographic item" ;
+        rdfs:comment 
+            '''
+            Bibliographic item description, based on BIBO.
+
+            This is a superclass of the variou BIBO entity types, such as bibo:Book.
+            ''' ;
+        .
+
+
+    # ===== Predefined time periods =====
 
     # Time period for "current" data
     emp:Current a em:Time_period ;
         rdfs:label   "Current, as of 2018" ;
-        rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
+        rdfs:comment
+            '''
+            For ease of retrieval, use this specific resource to label any current information
+            (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated 
+            if required to convey more specific information.
+            ''' ;
         em:timespan
           [ a em:Time_span ;
             em:latestStart: "2018" ;
             em:earliestEnd: "2018" ;
           ]
         .
+
+    # ===== Additional place types =====
+    #
+    #   Place type identifiers used are generally taken directly from GeoNames,
+    #   but additional values may be used.
 
     #   Combined place type to avoid having to create extra historical places 
     #   corresponding to a current P.  References GeoNames place types.
@@ -146,38 +265,59 @@ COMMON_EMPLACES_DEFS = (
         skos:broader gn:A ;
         skos:broader gn:P ;
         rdfs:label    "Former populated place or admin division" ;
-        rdfs:comment  "Former populated place or administrative division, used in historical administrative relations" 
+        rdfs:comment  
+            '''
+            Former populated place or administrative division, 
+            used in historical administrative relations
+            ''' ;
         .
 
-    # Place relations
+    # ===== Place relation types =====
+
     em:P_PART_OF_A a em:Relation_type ;
         em:fromType   gn:P ;
         em:toType     gn:A ;
         rdfs:label    "Administered by" ;
-        rdfs:comment  "Relates a populated place to its administrative division." 
+        rdfs:comment  
+            '''
+            Relates a populated place to its administrative division.
+            ''' ; 
         .
+
     em:A_PART_OF_A a em:Relation_type ;
         em:fromType   gn:A ;
         em:toType     gn:A ;
         rdfs:label    "Subdivision of" ;
-        rdfs:comment  "Relates a subdivision of an administrative division to its parent division." 
+        rdfs:comment  
+            '''
+            Relates a subdivision of an administrative division to its parent division.
+            ''' ; 
         .
+
     em:AH_PART_OF_AH a em:Relation_type ;
         em:fromType   em:P_OR_A ;
         em:toType     gn:A ;
         rdfs:label    "Former part of" ;
-        rdfs:comment  "Records a historical relationship between a historical place or administrative division and its parent division." 
+        rdfs:comment
+            '''
+            Records a historical relationship between a historical place or administrative division 
+            and its parent division.
+            ''' ;
         .
+
+    #@@NOTE: this is quite specific - we may later want to allow for 
+    #        a looser style of relationship; e.g. `em:S_PART_OF_PA`
     em:S_PART_OF_P a em:Relation_type ;
         em:fromType   gn:S ;
         em:toType     gn:P ;
         rdfs:label    "Located within" ;
-        rdfs:comment  "Relates a spot feature to a populated place within which it may be found."
-        #@@NOTE: this is quite specific - we may later want to allow for 
-        #        a looser style of relationship; e.g. `em:S_PART_OF_PA`
+        rdfs:comment
+            '''
+            Relates a spot feature to a populated place within which it may be found.
+            ''' ;
         .
 
-    # Information competence (certainty)
+    # ===== Information competence (certainty) =====
     #
     # Information in a qualified relation or annotation may be uncertain.  These properties and 
     # values are used to qualify these claims.  Information that is directly attached to an 
@@ -188,150 +328,258 @@ COMMON_EMPLACES_DEFS = (
     #
     # Approximate date ranges are represented by range values in the corresponding 
     # Timespan value.
+
     em:competence a rdf:Property ;
         rdfs:label "Certainty, or quality, of information" ;
-        rdfs:comment "Records the quality or certaintly of some information.  Note that in the absence of an explicit value, no competence should be assumed." ;
+        rdfs:comment
+            '''
+            Records the quality or certaintly of some information.  
+            Note that in the absence of an explicit value, no competence should be assumed.
+            ''' ;
         rdfs:range em:Competence_value ;
         .
+
     em:DEFINITIVE a em:Competence_value ;
         rdfs:label   "Definitive" ;
-        rdfs:comment "The associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be appropiate source references."
+        rdfs:comment
+            '''
+            The associated value is definitively true for the purposes of EMPlaces.  
+            Such information should ideally be backup up be appropiate source references.
+            ''' ;
         .
+
     em:INFERRED a em:Competence_value ;
         rdfs:label   "Inferred" ;
-        rdfs:comment "The associated value has been inferred from (preferably?) definitive informaton."
+        rdfs:comment
+            '''
+            The associated value has been inferred from (preferably?) definitive informaton.
+            ''' ;
         .
+
     em:ASSUMED a em:Competence_value ;
         # Assumed data is like uncertain, but maybe with better foundation?
         rdfs:label   "Assumed" ;
-        rdfs:comment "The associated value is assumed from context."
+        rdfs:comment
+            '''
+            The associated value is assumed from context.
+            ''' ;
         .
+
     em:UNCERTAIN a em:Competence_value ;
         rdfs:label   "Uncertain" ;
-        rdfs:comment "The associated value is uncertain."
+        rdfs:comment
+            '''
+            The associated value is uncertain."
+            ''' ;
         .
+
     em:APPROXIMATE a em:Competence_value ;
         rdfs:label   "Approximate" ;
-        rdfs:comment "The associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges."
+        rdfs:comment
+            '''
+            The associated value is a date whose value is only approximately known.  
+
+            @@NOTE: this value may prove spurious, as timespan already has a way to 
+            represent approximation ranges."
+            ''' ;
         .
 
-    # Use em:corePlaceType for place type info that is obtained, and 
-    # may be refreshed,from the reference gazetteer(s)
-    em:corePlaceType rdfs:subPropertyOf em:placeType .
+    # ===== Annotation motivations =====
 
-    # em:coreDataRef indicates source (reference gazetteer) for core data
-    # Use em:source for other gazetteer references
-    em:coreDataRef rdfs:subPropertyOf em:source .
-
-    # Annotation motivations
     em:MAP_RESOURCE a oa:Motivation ;
         rdfs:label "Map resource" ;
-        rdfs:comment "References a current or historical map resource associated with a place." ;
+        rdfs:comment
+            '''
+            References a current or historical map resource associated with a place.
+            ''' ;
         .
+
     em:NAME_ATTESTATION
         rdfs:label "Name attestation" ;
-        rdfs:comment "References a historical name attestation for a place, with source and compenence information." ;
+        rdfs:comment
+            '''
+            References a historical name attestation for a place, with source and compenence information.
+            ''' ;
         .
+
     em:CALENDAR_IN_USE
         rdfs:label "Calendar in use" ;
-        rdfs:comment "References a historical calendar used in a place, with source and compenence information." ;
+        rdfs:comment
+            '''
+            References a historical calendar used in a place, with source and compenence information.
+            ''' ;
         .
+
     em:DEDICATED_TO a oa:Motivation ;
         rdfs:label "Dedicated to" ;
-        rdfs:comment "Generally used with a related place that is a church or a place or worship, to indicate a person or historical figure to whom the place has been dedicated.  The annotation body directly references a resource for the dedicatee, which is assumed to have an rdfs:label value that can be used for display purposes." ;
+        rdfs:comment
+            '''
+            Generally used with a related place that is a church or a place or worship, 
+            to indicate a person or historical figure to whom the place has been dedicated.  
+            The annotation body directly references a resource for the dedicatee, which is 
+            assumed to have an 'rdfs:label' value that can be used for display purposes.
+            ''' ;
         .
+
     em:USED_FOR a oa:Motivation ;
         rdfs:label "Used for" ;
-        rdfs:comment "Generally used with a related place that is a building or site for some activity, to indicate a purpose for which the place was used.  The annotation body directly references a resource describing the purpose, which is assumed to have an rdfs:label value that can be used for display purposes.  The annotation itself may carry a temporal constraint (`em:where`) that gives some indication of when the place was used for that purpose." ;
+        rdfs:comment
+            '''
+            Generally used with a related place that is a building or site for some activity, 
+            to indicate a purpose for which the place was used.  The annotation body directly 
+            references a resource describing the purpose, which is assumed to have an 'rdfs:label'
+            value that can be used for display purposes.  The annotation itself may carry a 
+            temporal constraint ('em:where') that gives some indication of when the place was 
+            used for that purpose.
+            ''' ;
         .
     """)
 
 COMMON_GEONAMES_DEFS = (
     """
-    # Place categories
+
+    # ===== Place categories =====
+
     gn:P a skos:Concept ; 
         rdfs:label "Populated place" ;
-        rdfs:comment "Populated place - from GeoNames (feature class)." 
+        rdfs:comment 
+        '''
+        Populated place - from GeoNames (feature class).
+        ''' ;
         .
     gn:A  a skos:Concept ; 
         rdfs:label   "Administrative division" ;
-        rdfs:comment "Administrative division - from GeoNames (feature class)." 
+        rdfs:comment 
+        '''
+        Administrative division - from GeoNames (feature class).
+        ''' ;
         .
 
     gn:S a skos:Concept ; 
         rdfs:label "Spot feature" ;
-        rdfs:comment "Spot feature (spot, building, farm)." 
+        rdfs:comment 
+        '''
+        Spot feature (spot, building, farm).
+        ''' ;
         .
 
-    # Place types
+    # ===== Place types =====
+
     gn:P.PPL a skos:Concept ;
         skos:narrower gn:P ;
         rdfs:label    "Populated place" ;
-        rdfs:comment  "A populated place (town, city, village, etc.)." 
+        rdfs:comment 
+        '''
+        A populated place (town, city, village, etc.).
+        ''' ;
         .
+
     gn:P.PPLA a skos:Concept ;
         skos:narrower gn:P ;
         rdfs:label    "Seat of 1st-order admin div" ;
-        rdfs:comment  "Populated place that is a seat of a first-order administrative division." 
+        rdfs:comment 
+        '''
+        Populated place that is a seat of a first-order administrative division.
+        ''' ;
         .
+
     gn:P.PPLH a skos:Concept ;
         skos:narrower gn:P ;
         rdfs:label    "Former populated place" ;
-        rdfs:comment  "A former populated place that no longer exists." 
+        rdfs:comment 
+        '''
+        A former populated place that no longer exists.
+        ''' ;
         .
+
     gn:A.PCLI a skos:Concept ;
         skos:narrower gn:A ;
         rdfs:label    "Independent political entity" ;
-        rdfs:comment  "An independent political entity, typically a country."
+        rdfs:comment 
+        '''
+        An independent political entity, typically a country.
+        ''' ;
         .
+
     gn:A.ADM1 a skos:Concept ;
         skos:narrower gn:A ;
         rdfs:label    "First-order admin division" ;
-        rdfs:comment  "A primary administrative division of a country, such as a state in the United States."
+        rdfs:comment 
+        '''
+        A primary administrative division of a country, such as a state in the United States.
+        ''' ;
         .
+
     gn:A.ADM2 a skos:Concept ;
         skos:narrower gn:A ;
         rdfs:label    "Second-order admin division" ;
-        rdfs:comment  "A subdivision of a first-order administrative division."
+        rdfs:comment 
+        '''
+        A subdivision of a first-order administrative division.
+        ''' ;
         .
+
     gn:A.ADM3 a skos:Concept ;
         skos:narrower gn:A ;
         rdfs:label    "Third-order admin division" ;
-        rdfs:comment  "A subdivision of a second-order administrative division."
+        rdfs:comment 
+        '''
+        A subdivision of a second-order administrative division.
+        ''' ;
         .
+
     gn:A.PCLH a skos:Concept ;
         skos:narrower gn:A ;
         rdfs:label    "Former independent political entity" ;
-        rdfs:comment  "A former independent political entity, typically a country."
+        rdfs:comment 
+        '''
+        A former independent political entity, typically a country.
+        ''' ;
         .
+
     gn:A.ADM1H a skos:Concept ;
         skos:narrower gn:A ;
         rdfs:label    "Former first-order admin division" ;
-        rdfs:comment  "A former first-order administrative division."
+        rdfs:comment 
+        '''
+        A former first-order administrative division.
+        ''' ;
         .
+
     gn:A.ADM2H a skos:Concept ;
         skos:narrower gn:A ;
         rdfs:label    "Former second-order admin division" ;
-        rdfs:comment  "A former first-order administrative division."
+        rdfs:comment 
+        '''
+        A former first-order administrative division.
+        ''' ;
         .
+
     gn:A.ADM3H a skos:Concept ;
         skos:narrower gn:A ;
         rdfs:label    "Former Third-order admin division" ;
-        rdfs:comment  "A former third-order administrative division."
+        rdfs:comment 
+        '''
+        A former third-order administrative division.
+        ''' ;
         .
 
     gn:S.CH a skos:Concept ;
         skos:narrower gn:S ;
         rdfs:label    "Church" ;
-        rdfs:comment  "A church; a building for public Christian worship." 
+        rdfs:comment 
+        '''
+        A church; a building for public Christian worship.
+        ''' ;
         .
-
-    #@@ more to add here
     """)
 
 COMMON_LANGUAGE_DEFS = (
     """
-    # Language resources @@TODO: generate as-needed@@
+    # ===== Language resources -----
+    #
+    # @@TODO: generate as-needed@@
+
     eml:en a em:Language_value ;
         # em:tag "en" ; 
         em:tag_639_1 "en" ;

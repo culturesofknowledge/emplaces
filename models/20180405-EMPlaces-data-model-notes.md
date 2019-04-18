@@ -89,6 +89,8 @@ Supplied by underlying system, covers:
 
 ## Description
 
+(aka "Editorial Note")
+
 A description of a place.
 
 The description may be initially populated from the reference gazeteer entry, but is editorialy controlled by EMPlaces.  Its focus is on the historical existence and context of the place, and may diverge from the gazetteer description.  As such, it is not intended to be updated when the other core data obtained from the reference gazetteer entry is refreshed.
@@ -158,7 +160,7 @@ Example:
 
 A time period represents a period of time, by reference to a specific timespan, or to some identified but maybe unspecified period (cf. PeriodO).
 
-A timespan represents an temporal intervalby reference to a specific calendar dates.
+A timespan represents an temporal interval by reference to a specific calendar dates.
 
 Example:
 
@@ -174,11 +176,11 @@ Example:
 
 Possible timespan properties:
 
-- em:start: start of span contained within year (or other calendar period)
-- em:end: end of span contained within year (or other calendar period)
-- em:latestStart: start of span no later than given year (or other calendar period)
-- em:earliestEnd: end of span no earlier than given year (or other calendar period)
-- _&more?_
+- `em:start`: start of span contained within year (or other calendar interval)
+- `em:end`: end of span contained within year (or other calendar interval)
+- `em:latestStart`: start of span no later than given year (or other calendar interval)
+- `em:earliestEnd`: end of span is no earlier than given year (or other calendar interval)
+- _&more?_  (e.g. `em:year` for timespan that starts and ends within a given year/calendar interval?; LPIF might use this IIRC)
 
 ## Location
 
@@ -273,13 +275,34 @@ The purpose of the annotation type is to make it easy to find particiular annota
 
 The Annotation body conveys specific information associated with the associated place.  The expected structure of this information is defined by the corresponding Annotation type value.
 
-## `em:when` Timespan
+### `em:when` Timespan
 
 Temporal qualification of association described by the annotation.
 
 ### `em:source` Source
 
 Indicates the source of information for the claim represented by this annotation.
+
+### `em:competence` Quality of information
+
+Information in a qualified relation or annotation may be uncertain.  These properties and values are used to qualify these claims.  Note that in the absence of an explicit value, no competence should be assumed.
+
+Information that is directly attached to an em:Place (i.e. not as a qualified relation or annotation) is considered to be definitive.  
+
+Specifically, annotations for calendar-in-use and alternate name attestations should have associated competence values.  Approximate date ranges are represented by range values in the corresponding Timespan value.
+
+Possible values
+
+- `em:DEFINITIVE`: Definitive; the associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be appropiate source references.
+
+- `em:INFERRED`: Inferred; the associated value has been inferred from (preferably?) definitive information.
+
+- `em:ASSUMED`: Assumed; the associated value is assumed from context.  (Assumed data is like uncertain, but maybe with better foundation?)
+
+- `em:UNCERTAIN`: Uncertain; the associated value is uncertain, maybe a best guess or informed opinoon but without good evidence.
+
+- `em:APPROXIMATE`: Approximate;  the associated value is a date whose value is only approximately known.  @@NOTE: this value may prove spurious, as timespan already has a way to represent approximation ranges.
+
 
 # Specific Annotation details
 

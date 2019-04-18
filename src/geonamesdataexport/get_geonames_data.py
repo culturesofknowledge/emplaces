@@ -16,9 +16,12 @@ import os
 import os.path
 import re
 import argparse
+import urlparse
 import logging
 import errno
 import json
+import requests
+import datetime
 
 from rdflib         import Graph, Namespace, URIRef, Literal, BNode, RDF, RDFS
 from rdflib.paths   import Path
@@ -33,10 +36,10 @@ sys.path.insert(0, comroot)
 
 from commondataexport.getargvalue    import getargvalue, getarg
 from commondataexport.dataextractmap import (
-    DataExtractMap, make_query_url, http_get_json
+    DataExtractMap, find_entity_url, make_query_url, http_get_json
     )
 from commondataexport.emplaces_defs  import (
-    SKOS, XSD, OA, CC, DCTERMS, FOAF, BIBO,
+    SKOS, XSD, SCHEMA, OA, CC, DCTERMS, FOAF, BIBO,
     ANNAL, GN, GEONAMES, WGS84_POS, 
     EM, EMP, EMT, EML, EMS, EMC,
     PLACE, AGENT, REF,
@@ -49,7 +52,7 @@ from commondataexport.emplaces_defs  import (
 
 from commondataexport.rdf_data_utils import (
     progname, show_error,
-    get_emplaces_id_uri_node, get_many_inputs,
+    get_emplaces_id, get_emplaces_id_uri_node, get_emplaces_uri_node, get_many_inputs,
     get_rdf_graph, get_geonames_graph_data,
     add_turtle_data, add_resource_attributes,
     get_geonames_place_type_id, get_geonames_place_type_label, 
@@ -81,6 +84,197 @@ GCD_MANY_WIKIDATA_IDS   = 10        # Multiple Wikidata Ids for GeoNames ID
 
 #   ===================================================================
 #
+#   RDF mapping data
+#
+#   ===================================================================
+
+M = DataExtractMap
+
+def get_geonames_source_reference_mapping(emp_id_sourced, geonames_url, place_label):
+    geonames_link_node      = URIRef(geonames_url)
+    geonames_source_node    = URIRef(EMS[emp_id_sourced])
+    geonames_source_label   = Literal("GeoNames data for %s"%(place_label,))
+    geonames_source_tag     = Literal("GeoNames")
+    geonames_source_descr   = Literal("Data from GeoNames URL %s"%(geonames_url,))
+    geonames_access_date    = Literal(datetime.date.today().isoformat())
+    geonames_source_mapping = M.emit(
+        M.stmt_gen(EM.source, geonames_source_node), M.loc_subgraph(
+            M.tgt_subj, M.src_prop, M.src_obj,
+            [ M.emit(M.stmt_gen(RDF.type, EM.Source_desc),                M.stmt_copy())
+            , M.emit(M.stmt_gen(RDF.type, EM.Authority),                  M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.short_label, geonames_source_tag),     M.stmt_copy())
+            , M.emit(M.stmt_gen(RDFS.label, geonames_source_label),       M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.editorialNote, geonames_source_descr), M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.link, geonames_link_node),             M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.licence, EMS.GeoNames_licence),        M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.accessed, geonames_access_date),       M.stmt_copy())
+            ])
+        )
+    return geonames_source_mapping
+
+def get_when_current_mapping(place_year):
+    period_id        = "Current_%d"%place_year
+    period_label     = Literal("Current, as of %d"%place_year)
+    short_label      = Literal(str(place_year))
+    year_node        = Literal(str(place_year))
+    period_node      = URIRef(EMP[period_id])
+    period_comment   = Literal("Time period including the year %d"%place_year)
+    timespan_node    = URIRef(EMT[period_id])
+    timespan_comment = Literal(
+        ("Timespan starting no later than %d, "%place_year) +
+        ("and ending no sooner than %d"%place_year)
+        )
+    when_current_mapping = M.emit(
+        M.stmt_gen(EM.when, period_node), M.loc_subgraph(
+            M.tgt_subj, M.src_prop, M.src_obj,
+            [ M.emit(M.stmt_gen(RDF.type, EM.Time_period),     M.stmt_copy())
+            , M.emit(M.stmt_gen(RDFS.label, period_label),     M.stmt_copy())
+            , M.emit(M.stmt_gen(RDFS.comment, period_comment), M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.short_label, short_label),  M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.timespan, timespan_node),   M.loc_subgraph(
+                M.tgt_subj, M.src_prop, M.src_obj,
+                [ M.emit(M.stmt_gen(RDF.type, EM.Time_span),         M.stmt_copy())
+                , M.emit(M.stmt_gen(RDFS.label, period_label),       M.stmt_copy())
+                , M.emit(M.stmt_gen(RDFS.comment, timespan_comment), M.stmt_copy())
+                , M.emit(M.stmt_gen(EM.short_label, short_label),    M.stmt_copy())
+                , M.emit(M.stmt_gen(EM.latestStart, year_node),      M.stmt_copy())
+                , M.emit(M.stmt_gen(EM.earliestEnd, year_node),      M.stmt_copy())
+                ]))
+            ])
+        )
+    return when_current_mapping
+
+def get_geonames_merged_place_mapping(
+    emp_id_merged, emp_id_sourced, source_uri, place_name
+    ):
+    emp_node_merged  = URIRef(PLACE[emp_id_merged])
+    emp_node_sourced = URIRef(PLACE[emp_id_sourced])
+    source_uri_node  = URIRef(source_uri)
+    source_uri_label = Literal("GeoNames URI for %s"%(place_name,))
+    merged_place_mapping = (
+        [ M.emit(M.stmt_gen(RDF.type, EM.Place),               M.stmt_copy())
+        , M.emit(M.stmt_gen(RDF.type, EM.Place_merged),        M.stmt_copy())
+        , M.emit(M.stmt_gen(EM.canonicalURI, emp_node_merged), M.stmt_copy())
+        , M.emit(M.stmt_gen(EM.alternateURI), M.loc_subgraph(
+            M.tgt_subj, M.src_prop, M.src_obj, # M.src_obj -> BNode from M.stmt_gen  
+            [ M.emit(M.stmt_gen(RDFS.label, source_uri_label), M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.link,    source_uri_node),  M.stmt_copy())
+            ]
+            ))
+        , M.emit(M.stmt_gen(EM.place_data, emp_node_sourced),  M.stmt_copy())
+        ])
+    return merged_place_mapping
+
+def get_geonames_sourced_place_mapping(
+    emp_id_sourced, geonames_url, 
+    place_category, place_type, place_name, place_label, place_country,
+    place_altnames, place_displaynames, place_seeAlso
+    ):
+    geonames_link_node     = URIRef(geonames_url)
+    geonames_source_node   = URIRef(EMS[emp_id_sourced])
+    geonames_source_label  = Literal("GeoNames data for %s"%(place_name,))
+    geonames_source_tag    = Literal("GeoNames")
+    geonames_place_mapping = (
+        [ M.emit(M.stmt_gen(RDF.type, EM.Place),                   M.stmt_copy())
+        , M.emit(M.stmt_gen(RDFS.label, place_label),              M.stmt_copy())
+        , M.emit(M.stmt_gen(RDFS.isDefinedBy, geonames_link_node), M.stmt_copy())
+        , M.emit(M.stmt_gen(EM.placeCategory, place_category),     M.stmt_copy())
+        , M.emit(M.stmt_gen(EM.placeType, place_type),             M.stmt_copy())
+        , M.emit(M.stmt_gen(EM.preferredName, place_name),         M.stmt_copy())
+        , M.emit(M.stmt_gen(GN.countryCode, place_country),        M.stmt_copy())
+        , get_geonames_source_reference_mapping(emp_id_sourced, geonames_url, place_label)
+        ] +
+        [ M.emit(M.stmt_gen(EM.alternateName, an), M.stmt_copy())
+          for an in place_altnames
+        ] +
+        [ M.emit(M.stmt_gen(EM.displayName, dn), M.stmt_copy())
+          for dn in place_displaynames
+        ] +
+        [ M.emit(M.stmt_gen(RDFS.seeAlso, sa), M.stmt_copy())
+          for sa in place_seeAlso
+        ])
+    return geonames_place_mapping
+
+def get_geonames_setting_mapping(
+    emp_id_sourced, geonames_url, place_label,
+    place_lat, place_long, place_year
+    ):
+    place_lat_node  = Literal(str(place_lat),  datatype=XSD.double)
+    place_long_node = Literal(str(place_long), datatype=XSD.double)
+    geonames_setting_mapping = (
+        [ M.emit(M.stmt_gen(EM.setting), M.loc_subgraph(
+            M.tgt_subj, M.src_prop, M.src_obj, # M.src_obj -> BNode from M.stmt_gen 
+            [ M.emit(M.stmt_gen(RDF.type, EM.Setting),                 M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.location), M.loc_subgraph(
+                M.tgt_subj, M.src_prop, M.src_obj, # M.src_obj -> BNode from M.stmt_gen 
+                [ M.emit(M.stmt_gen(WGS84_POS.lat,  place_lat_node),   M.stmt_copy())
+                , M.emit(M.stmt_gen(WGS84_POS.long, place_long_node),  M.stmt_copy())
+                ]
+                ))
+            # Qualifications
+            , get_when_current_mapping(place_year)
+            , get_geonames_source_reference_mapping(emp_id_sourced, geonames_url, place_label)
+            ]))
+        ])
+    return geonames_setting_mapping
+
+def get_geonames_place_relation_mapping(
+    emp_id_geonames, geonames_url, place_label,
+    relation_type, parent_geonames_uri, 
+    relation_year, relation_competence
+    ):
+    parent_geonames_id = get_geonames_id(str(parent_geonames_uri))
+    parent_gn_node, parent_gn_rdf = get_geonames_place_rdf(parent_geonames_id)
+    parent_type = parent_gn_rdf[parent_gn_node:GN.featureCode:].next()
+    parent_name = parent_gn_rdf[parent_gn_node:GN.name:].next()
+    emp_parent_id = get_emplaces_id(
+        parent_name, parent_type, parent_geonames_id, suffix="_geonames"
+        )
+    emp_parent_node = URIRef(PLACE[emp_parent_id])
+    place_relation_mapping = (
+        [ M.emit(M.stmt_gen(EM.hasRelation), M.loc_subgraph(
+            M.tgt_subj, M.src_prop, M.src_obj, # M.src_obj -> BNode from M.stmt_gen 
+            [ M.emit(M.stmt_gen(RDF.type, EM.Qualified_relation),     M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.relationType, relation_type),      M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.relationTo, emp_parent_node),      M.stmt_copy())
+            # Qualifications
+            , M.emit(M.stmt_gen(EM.competence, relation_competence),  M.stmt_copy())
+            , get_when_current_mapping(relation_year)
+            , get_geonames_source_reference_mapping(emp_id_geonames, geonames_url, place_label)
+            ]))
+        ])
+    return place_relation_mapping
+
+def get_place_map_resource_mapping(
+    emp_id_geonames, geonames_url, place_label,
+    map_short_label, map_label, map_url, map_preview_url,
+    map_year, map_competence
+    ):
+    emp_node_geonames = URIRef(PLACE[emp_id_geonames])
+    place_map_resource_mapping = (
+        [ M.emit(M.stmt_gen(EM.hasAnnotation), M.loc_subgraph(
+            M.tgt_subj, M.src_prop, M.src_obj, # M.src_obj -> BNode from M.stmt_gen 
+            [ M.emit(M.stmt_gen(RDF.type, OA.Annotation), M.stmt_copy())
+            , M.emit(M.stmt_gen(OA.motivatedBy, EM.MAP_RESOURCE),  M.stmt_copy())
+            , M.emit(M.stmt_gen(OA.hasTarget, emp_node_geonames),  M.stmt_copy())
+            , M.emit(M.stmt_gen(OA.hasBody), M.loc_subgraph(
+                M.tgt_subj, M.src_prop, M.src_obj, # M.src_obj -> BNode from M.stmt_gen 
+                [ M.emit(M.stmt_gen(RDFS.label,     map_label),       M.stmt_copy())
+                , M.emit(M.stmt_gen(RDFS.comment,   map_label),       M.stmt_copy())
+                , M.emit(M.stmt_gen(EM.short_label, map_short_label), M.stmt_copy())
+                , M.emit(M.stmt_gen(EM.preview,     map_url),         M.stmt_copy())
+                , M.emit(M.stmt_gen(EM.link,        map_preview_url), M.stmt_copy())
+                ]))
+            # Qualifications
+            , M.emit(M.stmt_gen(EM.competence, map_competence),  M.stmt_copy())
+            , get_when_current_mapping(map_year)
+            , get_geonames_source_reference_mapping(emp_id_geonames, geonames_url, place_label)
+            ]))
+        ])
+    return place_map_resource_mapping
+
+#   ===================================================================
+#
 #   Command line parsing and help
 #
 #   ===================================================================
@@ -96,6 +290,8 @@ command_summary_help = ("\n"+
     "  %(prog)s geonamesid URL [REGEXP]\n"
     "  %(prog)s manygeonamesids [REGEXP]\n"
     "  %(prog)s wikidataid GEONAMESID\n"+
+    "  %(prog)s getwikidata WIKIDATAID\n"+
+    "  %(prog)s getwikitext WIKIDATAID\n"+
     "  %(prog)s version\n"+
     "")
 
@@ -196,9 +392,9 @@ def show_help(options, progname):
             "\n"+
             "  %(prog)s --help\n"+
             "")
-    elif options.args[0].startswith("manyget"):
+    elif options.args[0].startswith("manygetg"):
         help_text = ("\n"+
-            "  %(prog)s manyget\n"+
+            "  %(prog)s manygetgeonames\n"+
             "\n"+
             "\n"+
             "Reads GeoNames place Ids from stdin, one per line, retrieves data\n"+
@@ -210,9 +406,9 @@ def show_help(options, progname):
             "and '--include-language-defs'.\n"+
             "\n"+
             "")
-    elif options.args[0].startswith("get"):
+    elif options.args[0].startswith("getg"):
         help_text = ("\n"+
-            "  %(prog)s get GEONAMESID\n"+
+            "  %(prog)s getgeonamesdata GEONAMESID\n"+
             "\n"+
             "Gets data about a specified place from GeoNames, and sends corresponding\n"+
             "EMPlaces data in Turtle format to standard output.\n"+
@@ -296,6 +492,22 @@ def show_help(options, progname):
             "Determines a Wikidata Id corresponding to the supplied Geonames Id,\n"+
             "and writes it to stdout, or a diagnostic message is output to stderr\n"+
             "along with an exit status of %d or %d\n"%(GCD_NO_WIKIDATA_IDS, GCD_MANY_WIKIDATA_IDS)+
+            "\n"+
+            "")
+    elif options.args[0].startswith("getwikid"):
+        help_text = ("\n"+
+            "  %(prog)s getwikidata WIKIDATAID\n"+
+            "\n"+
+            "Gets data about a referenced place from Wikidata, and sends \n"+
+            "data in Turtle format to standard output.\n"+
+            "\n"+
+            "")
+    elif options.args[0].startswith("getwikit"):
+        help_text = ("\n"+
+            "  %(prog)s getwikitext WIKIDATAID\n"+
+            "\n"+
+            "Gets summary text about a referenced place from Wikipedia, and sends \n"+
+            "data in Turtle format to standard output.\n"+
             "\n"+
             "")
     elif options.args[0].startswith("ver"):
@@ -442,6 +654,113 @@ def add_place_relation(emp_rdf, reltype, relto, relwhen, relcompetence, source):
     emp_rdf.add((b_relation, EM.source,       source               ))
     return b_relation
 
+def get_emplaces_geonames_data(
+    geonames_id, geonames_uri, geonames_url, 
+    geonames_rdf, geo_ont_rdf,
+    emplaces_rdf=None
+    ):
+    """
+    Constructs EMPlaces RDF data from supplied GeoNames place data.
+
+    Returns tuple of:
+        0. EMPlaces Id for place
+        1. EMPlaces URI for place
+        2. Graph of EMPlaces data
+    """
+    if geonames_rdf is None:
+        msg = "No RDF data for %s"%(geonames_url,)
+        log.error(msg)
+        raise ValueError(msg)
+
+    try:
+        geonames_node      = URIRef(geonames_uri)
+        place_name         = geonames_rdf[geonames_node:GN.name:].next()
+        place_altnames     = list(geonames_rdf[geonames_node:GN.alternateName:])
+        place_displaynames = list(set([Literal(unicode(n)) for n in place_altnames]))
+        place_category     = geonames_rdf[geonames_node:GN.featureClass:].next()
+        place_type         = geonames_rdf[geonames_node:GN.featureCode:].next()
+        place_map          = geonames_rdf[geonames_node:GN.locationMap:].next()
+        place_parent       = geonames_rdf[geonames_node:GN.parentFeature:].next()
+        place_country      = geonames_rdf[geonames_node:GN.countryCode:].next()
+        place_seeAlso      = list(geonames_rdf[geonames_node:(RDFS.seeAlso|GN.wikipediaArticle):])
+        place_lat          = geonames_rdf[geonames_node:WGS84_POS.lat:].next()
+        place_long         = geonames_rdf[geonames_node:WGS84_POS.long:].next()
+        place_type_label   = get_geonames_place_type_label(place_type, geo_ont_rdf)
+        place_label        = Literal("%s (%s)"%(place_name, place_type_label))
+    except Exception as e:
+        log.error("Problem accessing data for %s"%(geonames_url,), exc_info=True)
+        raise
+    log.debug("get_emplaces_geonames_data: geonames_uri    %r"%(geonames_uri))
+    log.debug("get_emplaces_geonames_data: place_name:     %r"%(place_name))
+    log.debug("get_emplaces_geonames_data: place_altnames: %r"%(place_altnames))
+    log.debug("get_emplaces_geonames_data: place_category: %r"%(place_category))
+    log.debug("get_emplaces_geonames_data: place_type:     %r"%(place_type))
+    log.debug("get_emplaces_geonames_data: place_map:      %r"%(place_map))
+    log.debug("get_emplaces_geonames_data: place_parent:   %r"%(place_parent))
+    log.debug("get_emplaces_geonames_data: place_seeAlso:  %r"%(place_seeAlso))
+    log.debug("get_emplaces_geonames_data: lat, long:      %r, %r"%(place_lat, place_long))
+    log.debug("get_emplaces_geonames_data: place_label:    %r"%(place_label))
+    log.debug("get_emplaces_geonames_data: display_names:  %s"%(",".join(place_displaynames)))
+    log.debug("get_emplaces_geonames_data: GeoNames graph:")
+    log.debug(geonames_rdf.serialize(format='turtle', indent=4))
+
+    # for gn_pre, gn_uri in geonames_rdf.namespaces():
+    #     emplaces_rdf.bind(gn_pre, gn_uri)
+    # lit_geonames_data = Literal("GeoNames data for %s"%(place_name,))
+    # lit_geonames_uri  = Literal("GeoNames URI for %s"%(place_name,))
+    # Allocate URIs and nodes for merged and geonames data
+    emp_id_merged, emp_uri_merged, _ = get_emplaces_id_uri_node(
+        place_name, place_type, geonames_id
+        )
+    emp_id_geonames = get_emplaces_id(
+        place_name, place_type, geonames_id, suffix="_geonames"
+        )
+    log.debug("get_emplaces_geonames_data: emp_id_merged   %s"%emp_id_merged)
+    log.debug("get_emplaces_geonames_data: emp_uri_merged  %s"%emp_uri_merged)
+    log.debug("get_emplaces_geonames_data: emp_id_geonames %s"%emp_id_geonames)
+
+    # Initial empty graph
+    if emplaces_rdf is None:
+        emplaces_rdf = Graph()
+        add_emplaces_common_namespaces(emplaces_rdf, local_namespaces={})
+    # Assemble mapping tables...
+    merged_place_mapping = get_geonames_merged_place_mapping(
+        emp_id_merged, emp_id_geonames, geonames_uri, place_name
+        )
+    sourced_place_mapping = get_geonames_sourced_place_mapping(
+        emp_id_geonames, geonames_url,
+        place_category, place_type, place_name, place_label, place_country,
+        place_altnames, place_displaynames, place_seeAlso
+        )
+    place_setting_mapping = get_geonames_setting_mapping(
+        emp_id_geonames, geonames_url, place_label,
+        place_lat, place_long, 2018,
+        )
+    place_relation_mapping = get_geonames_place_relation_mapping(
+        emp_id_geonames, geonames_url, place_label,
+        EM.P_PART_OF_A, place_parent, 
+        2018, EM.DEFINITIVE
+        )
+    place_map_resource_mapping = get_place_map_resource_mapping(
+        emp_id_geonames, geonames_url, place_label,
+        Literal("Current"), 
+        Literal("Current map for %s"%(place_name)), 
+        place_map, place_map,
+        2018, EM.DEFINITIVE
+        )
+
+    # Apply mapping tables...
+    log.debug("get_emplaces_geonames_data: geonames_uri   %s"%geonames_uri)
+    m = DataExtractMap(geonames_node, geonames_rdf, emplaces_rdf)
+    m.extract_map(merged_place_mapping)
+    m.extract_map(sourced_place_mapping)
+    m.extract_map(place_setting_mapping)
+    m.extract_map(place_relation_mapping)
+    m.extract_map(place_relation_mapping)
+    m.extract_map(place_map_resource_mapping)
+
+    return (emp_id_merged, emp_uri_merged, emplaces_rdf)
+
 def get_emplaces_core_data(
     geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf,
     emplaces_rdf=None
@@ -500,7 +819,7 @@ def get_emplaces_core_data(
     # for gn_pre, gn_uri in geonames_rdf.namespaces():
     #     emplaces_rdf.bind(gn_pre, gn_uri)
     lit_geonames_data = Literal("GeoNames data for %s"%(place_name,))
-    lit_geonames_uri  = Literal("GeoNames URI for %s"%(place_name,))
+    lit_geonames_uri  = Literal("(GeoNames URI) for %s"%(place_name,))
 
     # Allocate URIs and nodes for merged and geonames data
     emp_id_merged, emp_uri_merged, emp_node_merged = get_emplaces_id_uri_node(
@@ -547,7 +866,7 @@ def get_emplaces_core_data(
     b_location = add_place_location(emplaces_rdf, place_lat, place_long)
     b_setting  = add_place_setting(emplaces_rdf, 
         b_location, 
-        EMT.Current, 
+        EMP.Current, 
         ems_node_geonames_source
         )
     emplaces_rdf.add((emp_node_geonames, EM.where, b_setting))
@@ -565,7 +884,7 @@ def get_emplaces_core_data(
         )
     b_relation = add_place_relation(emplaces_rdf, 
         EM.P_PART_OF_A, parent_node,
-        EMT.Current, 
+        EMP.Current, 
         EM.DEFINITIVE,
         ems_node_geonames_source
         )
@@ -581,7 +900,7 @@ def get_emplaces_core_data(
         , OA.motivatedBy:   EM.MAP_RESOURCE
         , OA.hasTarget:     emp_node_geonames
         , OA.hasBody:       b_body
-        , EM.when:          EMT.Current
+        , EM.when:          EMP.Current
         , EM.source:        ems_node_geonames_source
         })
     emplaces_rdf.add((emp_node_geonames, EM.hasAnnotation, b_annotation))
@@ -594,7 +913,12 @@ def get_geonames_id_data(gcdroot, geonames_id, emplaces_rdf=None):
     geonames_uri, geonames_url = get_geonames_uri(geonames_id)
     geonames_rdf = get_geonames_place_data(geonames_url)
     geo_ont_rdf  = get_geonames_ontology()
-    emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_core_data(
+    # emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_core_data(
+    #     geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf,
+    #     emplaces_rdf=emplaces_rdf
+    #     )
+    # @@@@ This version uses common shape shifting libraries
+    emplaces_id, emplaces_uri, emplaces_rdf = get_emplaces_geonames_data(
         geonames_id, geonames_uri, geonames_url, geonames_rdf, geo_ont_rdf,
         emplaces_rdf=emplaces_rdf
         )
@@ -804,6 +1128,15 @@ def do_extract_many_geonames_ids(gcdroot, options):
             status = GCD_SUCCESS
     return status
 
+def get_wikidata_uri(wikidata_id):
+    """
+    Returns Wikidata place URI, given Wikidata ID (e.g. "Q92212")
+    """
+    wikidata_base_uri = "http://www.wikidata.org/entity/"
+    wikidata_uri     = urlparse.urljoin(wikidata_base_uri, wikidata_id)
+    wikidata_url     = find_entity_url(wikidata_uri, "text/turtle")
+    return (wikidata_uri, wikidata_url)
+
 def get_wikidata_id(wikidata_uri):
     """
     Returns Wikidata ID (e.g. "Q92212") given Wikidata entity URI, or None.
@@ -814,6 +1147,179 @@ def get_wikidata_id(wikidata_uri):
     else:
         wikidata_id = None
     return wikidata_id
+
+def get_wikidata_id_data(wikidata_id, result_rdf=None):
+    """
+    Get Wikidata place data for a given wikidata id
+    """
+    wikidata_uri, wikidata_url = get_wikidata_uri(wikidata_id)
+    print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
+    print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
+    wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
+    # Initial empty graph
+    if result_rdf is None:
+        result_rdf = Graph()
+    # ----- Copy prefixes -----
+    use_namespaces = dict(wikidata_rdf.namespaces())
+    for prefix, ns_uri in wikidata_rdf.namespaces():
+        result_rdf.bind(prefix, ns_uri)
+    result_rdf.bind("em",    EM.term(""))
+    result_rdf.bind("place", PLACE.term(""))
+    # ----- mapping table -----
+    WDT = Namespace(use_namespaces["wdt"])
+    emp_id, emp_uri, emp_node = get_emplaces_uri_node(wikidata_id, suffix="_wikidata")
+    # def wikidata_stmt(prop, obj):
+    #     return M.stmt(M.tgt_subj, M.const_uri(prop), obj)
+    def alt_authority(auth_uri_template, auth_tag, auth_label, auth_descr, auth_link=None):
+        return M.loc_subgraph(
+            M.tgt_subj, M.const_uri(EM.alternateAuthority), M.const_gen_uri(auth_uri_template),
+            [ M.emit(M.stmt_gen(RDF.type,         EM.Source_desc),      M.stmt_copy())
+            , M.emit(M.stmt_gen(RDF.type,         EM.Authority),        M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.short_label,   Literal(auth_tag)),   M.stmt_copy())
+            , M.emit(M.stmt_gen(RDFS.label,       Literal(auth_label)), M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.editorialNote, Literal(auth_descr)), M.stmt_copy())
+            , M.emit(M.stmt_gen_link(EM.link,     auth_link),           M.stmt_copy())
+            ])
+    wikidata_data_mapping = (
+        [ M.set_subj(M.stmt_gen(EM.dummy_prop), M.const(emp_node))
+        , M.emit(M.prop_eq(RDFS.label), M.stmt_copy())
+        , M.emit(M.prop_eq(WDT.P268),   
+            alt_authority(
+                EMS["%(obj)s_bnf"], 
+                "BnF", 
+                "BnF identifier",
+                "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P227),   
+            alt_authority(
+                EMS["%(obj)s_gnd"], 
+                "GND", 
+                "GND identifier",
+                "Deutsche Nationalbibliothek Identifier. See: https://www.wikidata.org/wiki/Property:P227.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P1566),   
+            alt_authority(
+                EMS["%(obj)s_geonames"], 
+                "GeoNames", 
+                "GeoNames identifier",
+                "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P1667),   
+            alt_authority(
+                EMS["%(obj)s_tgn"], 
+                "TGN", 
+                "TGN identifier",
+                "TGN (Getty Thesaurus of Geographic Names) identfier. See: https://www.wikidata.org/wiki/Property:P1667.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P1871),   
+            alt_authority(
+                EMS["%(obj)s_cerl"], 
+                "CERL", 
+                "CERL identifier",
+                "CERL (Consortium of European Research Libraries thesaurus) identifier. See: https://www.wikidata.org/wiki/Property:P1871.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P2503),   
+            alt_authority(
+                EMS["%(obj)s_gov"], 
+                "GOV", 
+                "GOV identifier",
+                "Historical Gazetteer (GOV) identifier. See: https://www.wikidata.org/wiki/Property:P2503.",
+                auth_link=None
+                )
+            )
+        , M.emit(M.prop_eq(WDT.P6060),   
+            alt_authority(
+                EMS["%(obj)s_moeml"], 
+                "MoEML", 
+                "MoEML identifier",
+                "MoEML ( Map of Early Modern London) identifier. See: https://www.wikidata.org/wiki/Property:P6060.",
+                auth_link=None
+                )
+            )
+        ])
+    # wikidata_data_mapping = (
+    #     [ M.emit(M.prop_eq(RDFS.label), M.stmt_copy())
+    #     , M.emit(M.prop_eq(WDT.P227),  M.stmt_copy())   # GND ID
+    #     , M.emit(M.prop_eq(WDT.P268),  M.stmt_copy())   # BnF ID
+    #     , M.emit(M.prop_eq(WDT.P1566), M.stmt_copy())   # Geonames ID
+    #     , M.emit(M.prop_eq(WDT.P1667), M.stmt_copy())   # Getty TGN ID
+    #     , M.emit(M.prop_eq(WDT.P2503), M.stmt_copy())   # GOV ID
+    #     , M.emit(M.prop_eq(WDT.P1871), M.stmt_copy())   # CERL ID
+    #     , M.emit(M.prop_eq(WDT.P6060), M.stmt_copy())   # MoEML ID
+    #     ])
+    # -----
+    m = DataExtractMap(wikidata_uri, wikidata_rdf, result_rdf)
+    m.extract_map(wikidata_data_mapping)
+    return result_rdf
+
+def get_wikidata_id_text(wikidata_id, result_rdf=None):
+    """
+    Returns Wikidata short text description as an RDF graph.
+    """
+    article_root = "https://en.wikipedia.org/wiki/"
+    summary_root = "https://en.wikipedia.org/api/rest_v1/page/summary/"
+    wiki_root    = "https://en.wikipedia.org/"
+    # Get wikidata data
+    wikidata_uri, wikidata_url = get_wikidata_uri(wikidata_id)
+    print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
+    print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
+    wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
+    # print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+    summary_url  = None
+    summary_data = None
+    place_article = None
+    if wikidata_rdf:
+        # Find reference to english Wikipedia article
+        #
+        # <https://en.wikipedia.org/wiki/Opole> a schema:Article ;
+        # schema:about wd:Q92212 ;
+        # schema:inLanguage "en" ;
+        # schema:isPartOf <https://en.wikipedia.org/> ;
+        # schema:name "Opole"@en .
+        #
+        place_articles = list(wikidata_rdf[:RDF.type:SCHEMA.Article])
+        for a in place_articles:
+            if ( (URIRef(wikidata_uri) in wikidata_rdf[a:SCHEMA.about:])    and
+                 (URIRef(wiki_root)    in wikidata_rdf[a:SCHEMA.isPartOf:]) and
+                 (Literal("en")        in wikidata_rdf[a:SCHEMA.inLanguage:]) ):
+                place_article = a
+    print("place_article: %s"%(place_article,), file=sys.stderr)
+    if place_article:
+        # Construct URI of summary page (use path segment from wikipedia page)
+        if place_article and place_article.toPython().startswith(article_root):
+            article_name = place_article[len(article_root):]
+            summary_url  = summary_root + article_name
+    if summary_url:
+        # Read Summary as JSON, extract 
+        # Content-Type: application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Summary/1.4.0"
+        # "extract": "Opole (listen) is a city located in southern Poland on the Oder River and the historical capital of Upper Silesia. With a population of approximately 127,792, it is currently the capital of the Opole Voivodeship and, also the seat of Opole County. With its long history dating back to the 8th century, Opole is one of the oldest cities in Poland.",
+        # "extract_html": "<p><b>Opole</b> <span class=\"nowrap\" style=\"font-size:85%;\">(<span class=\"unicode haudio\"><span class=\"fn\"><span><figure-inline><span><img src=\"//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/11px-Loudspeaker.svg.png\" height=\"11\" width=\"11\" srcset=\"//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/22px-Loudspeaker.svg.png 2x, //upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/17px-Loudspeaker.svg.png 1.5x\" /></span></figure-inline></span>listen</span></span>)</span> is a city located in southern Poland on the Oder River and the historical capital of Upper Silesia. With a population of approximately 127,792, it is currently the capital of the Opole Voivodeship and, also the seat of Opole County. With its long history dating back to the 8th century, Opole is one of the oldest cities in Poland.</p>"
+        req_headers = (
+            { "accept":     "application/json" 
+            })
+        response = requests.get(summary_url, headers=req_headers)
+        response.raise_for_status()  # raise an error on unsuccessful status codes
+        summary_data = json.loads(response.text)
+    if summary_data:
+        # Assemble result graph (using EMPlaces structure)
+        emp_id, emp_uri, emp_node = get_emplaces_uri_node(wikidata_id, suffix="_wikidata")
+        if result_rdf is None:
+            result_rdf = Graph()
+            result_rdf.bind("em", EM.term(""))
+            result_rdf.bind("place", PLACE.term(""))
+        summary_text = summary_data["extract"]
+        result_rdf.add((emp_node, EM.description, Literal(summary_text)))
+    return result_rdf
 
 def wikidata_sparql_query(query, endpoint="https://query.wikidata.org/sparql"):
     query_url      = make_query_url(endpoint, query=query)
@@ -834,11 +1340,6 @@ def do_extract_wikidata_id(gcdroot, options):
         }
         """)%(geo_id,)
     query_response_dict = wikidata_sparql_query(wikidata_query)
-    # print("@@@ query_response_dict:\n--\n%s\n--"%
-    #     (json.dumps(query_response_dict, sort_keys=True, indent=4),), 
-    #     file=sys.stderr
-    #     )
-    # @@@@@ print(format_id_text(geo_id, url), file=sys.stdout)
     result_bindings = query_response_dict["results"]["bindings"]
     ids_uris_labels = (
         [ ( get_wikidata_id(b["item"]["value"])
@@ -857,6 +1358,24 @@ def do_extract_wikidata_id(gcdroot, options):
     print(ids_uris_labels[0][0], file=sys.stdout)
     return GCD_SUCCESS
 
+def do_get_wikidata_place_data(gcdroot, options):
+    """
+    Get Wikidata RDF for a place
+    """
+    wikidata_id  = getargvalue(getarg(options.args, 0), "Wikidata ID: ")
+    wikidata_rdf = get_wikidata_id_data(wikidata_id)
+    print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+    return GCD_SUCCESS
+
+def do_get_wikidata_place_text(gcdroot, options):
+    """
+    Get Wikidata descrioption text for a place, as EMPlaces format RDF.
+    """
+    wikidata_id  = getargvalue(getarg(options.args, 0), "Wikidata ID: ")
+    wikidata_rdf = get_wikidata_id_text(wikidata_id)
+    print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
+    return GCD_SUCCESS
+
 #   ===================================================================
 
 def do_zzzzzz(gcdroot, options):
@@ -871,9 +1390,9 @@ def run(userhome, userconfig, options, progname):
     """
     if options.command.startswith("@@@"):
         return do_zzzzzz(gcdroot, options)
-    if options.command.startswith("get"):
+    if options.command.startswith("getg"):
         return do_get_geonames_place_data(gcdroot, options)
-    if options.command.startswith("manyget"):
+    if options.command.startswith("manygetg"):
         return do_get_many_geonames_place_data(gcdroot, options)
     if options.command.startswith("placeh"):
         return do_get_place_hierarchy(gcdroot, options)
@@ -885,6 +1404,10 @@ def run(userhome, userconfig, options, progname):
         return do_extract_many_geonames_ids(gcdroot, options)
     if options.command.startswith("wikidataid"):
         return do_extract_wikidata_id(gcdroot, options)
+    if options.command.startswith("getwikid"):
+        return do_get_wikidata_place_data(gcdroot, options)
+    if options.command.startswith("getwikit"):
+        return do_get_wikidata_place_text(gcdroot, options)
     if options.command.startswith("ver"):
         return show_version(gcdroot, userhome, options)
     if options.command.startswith("help"):

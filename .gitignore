@@ -6,3 +6,4 @@ gcdenv
 *.pyc
 *.log
 *.tmp
+data-test

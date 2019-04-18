@@ -145,12 +145,28 @@ class DataExtractMap(object):
         prop_ne(<URI>)      matches statements whose property is different than <URI>
         prop_nseq(<URI>)    matches statements whose property starts with <URI>
         prop_nsne(<URI>)    matches statements whose property does not start with <URI>
+        stmt_gen(<URI>,<obj>)
+                            generate and return a single statement whose subject is the
+                            current base URI, property is <URI> and object is <obj>.
+                            Use this with 'stmt_copy' to synthesize new statements that 
+                            don't appear in the source graph.
 
     <subgraph> may be:
         stmt(<value>, <value>, <value>)
                             a single statement with subject, object, pedicate
-        ref_subgraph(<value>, <value>, <value>, <subgraph_ref>, <subgraph_map>)
-                            a subgraph that is mapped and referenced.
+        stmt_copy()         a short form for 'stmt(tgt_subj, src_prop, src_obj)'
+        ref_subgraph(<value>, <value>, <subgraph_ref>, <subgraph_map>)
+                            a subgraph that is mapped and referenced by a statement for
+                            which subject and property generators are supplied.  A new
+                            node is created as subject for the subgraph satements, and 
+                            the URI is dereferenced as RDF, and used as a new source graph 
+                            from which statements are scanned.
+        loc_subgraph(<value>, <value>, <subgraph_ref>, <subgraph_map>)
+                            a subgraph that is mapped and referenced by a statement for
+                            which subject and property generators are supplied.  A new
+                            node is created as subject for the subgraph satements.  
+                            Unlike 'ref_subgraph', statements about the new subject are
+                            scanned from the current source graph.
 
     <value> may be any of the following, which are evaluated by calling
     with a selected statement:
@@ -159,6 +175,11 @@ class DataExtractMap(object):
         src_subj            subject from selected source statement.
         src_prop            property from selected source statement
         src_obj             object from selected source statement
+        const(val)          specified value
+        src_obj_or_val(prop) property of referenced resource (obj), or just the 
+                            referenced resource.  (Use this for resources that may
+                            indicate alternate reference URIs, e.g. using owl:sameAs.)
+
     """
 
     def __init__(self, base, src, tgt):
@@ -321,6 +342,42 @@ class DataExtractMap(object):
             return
         return prop_nsne_sel
 
+    @classmethod
+    def stmt_gen(cls, prop_uri, obj=None):
+        """
+        Returns generator for a single statement with the supplied property and object.
+
+        If no object value is supplied, a blank node is allocated and used.
+        """
+        obj_node = obj      # Assume already prsented as RDF node
+        if obj is None:
+            obj_node = BNode()
+        elif isinstance(obj, str):
+            # Heuristic for kind of graph node
+            if obj.startswith("http:") or obj.startswith("https:") or obj.startswith("file:"):
+                obj_node = URIRef(obj)
+            else:
+                obj_node = Literal(obj)
+        #@@@ obj_node = URIRef(obj) if obj else BNode()
+        def stmt_gen_sel(src, base):
+            yield (base, URIRef(prop_uri), obj_node)
+            return
+        return stmt_gen_sel
+
+    @classmethod
+    def stmt_gen_link(cls, prop_uri, obj_url):
+        """
+        Returns generator for a single statement with the supplied property and 
+        URL object vaue.  If the supplied objkect value is None, no statement is generated.
+
+        If no object value is supplied, a blank node is allocated and used.
+        """
+        def stmt_gen_sel(src, base):
+            if isinstance(obj_url, str):
+                yield (base, URIRef(prop_uri), URIRef(obj_url))
+            return
+        return stmt_gen_sel
+
 
     # Result subgraph generator methods
     # ---------------------------------
@@ -392,7 +449,45 @@ class DataExtractMap(object):
         return gen
 
     @classmethod
+    def loc_subgraph(cls, gen_s, gen_p, subgraph_ref, subgraph_map):
+        """
+        Returns a subgraph-generator function that emits a link to a subgraph, 
+        then scans and maps the referenced subgraph and also emits that.
+
+        The subgraph-generator is called with subject, predicate and object 
+        from a source statement, and returns an iterator of statements that 
+        are to be added to the target graph.
+
+        gen_s
+        gen_p   are generators for subject and property of a statement that references 
+                the generated subgraph. These are called at the point of emiting data 
+                with the source statement components as arguments, and return 
+                corresponding values for the subgraph reference statement.
+                (They may also access local variables of the current object.)
+        subgraph_ref
+                a function that returns a reference to the base of a subgraph
+                to be scanned and emited.
+        subgraph_map
+                a mapping table that drived generation of the emited subgraph.
+        """
+        def loc_subgraph_gen(self, s, p, o):
+            # Get copy of graph
+            subgraph_url = subgraph_ref(self, s, p, o)
+            # Map and emit subgraph
+            sub_subgraph_map = DataExtractMap(
+                subgraph_url, 
+                self._src, 
+                self._tgt
+                )
+            subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
+            # Link to subgraph
+            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or URIRef(subgraph_url))
+            return
+        return loc_subgraph_gen
+
+    @classmethod
     def ref_subgraph(cls, gen_s, gen_p, subgraph_ref, subgraph_map):
+        # @@TODO: refactor common logic in gen_subgraph and ref_subgraph
         """
         Returns a subgraph-generator function that emits a link to a subgraph, 
         then scans and maps the referenced subgraph and also emits that.
@@ -416,9 +511,9 @@ class DataExtractMap(object):
         def ref_subgraph_gen(self, s, p, o):
             # Get copy of graph
             subgraph_url = str(subgraph_ref(self, s, p, o))
-            # print("@@@ subgraph_url %s, link from %s, %s"%(subgraph_url,gen_s(self, s, p, o), gen_p(self, s, p, o)))
-            # if subgraph_url.startswith("#"):
-            #     assert false, "@@@@ URL error"
+            print("@@@ subgraph_url %s, link from %s, %s"%(subgraph_url,gen_s(self, s, p, o), gen_p(self, s, p, o)))
+            if subgraph_url.startswith("#"):
+                assert false, "@@@@ URL error"
             subgraph_rdf = Rdf_graph_cache.get_graph(subgraph_url)
             # Map and emit subgraph
             sub_subgraph_map = DataExtractMap(
@@ -428,8 +523,7 @@ class DataExtractMap(object):
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
-            # print("@@@ link to subgraph; %s"%((gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or o),))
-            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or o)
+            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or URIRef(subgraph_url))
             return
         return ref_subgraph_gen
 
@@ -453,7 +547,7 @@ class DataExtractMap(object):
                 corresponding values for the subgraph reference statement.
                 (They may also access local variables of the current object.)
         list_head
-                a functiomn that returns a reference to the head of a list of subgraphs 
+                a function that returns a reference to the head of a list of subgraphs 
                 to be extracted and emited.
         subgraph_map
                 a mapping table that drived generation of the emited subgraphs.
@@ -518,20 +612,9 @@ class DataExtractMap(object):
     # Value generator methods
     # -----------------------
     #
-    # These are class methods that return an unbound object method which is
-    # invoked with a data extract map instance and the subject, predicate and 
-    # object of a matched source statement.
-
-    @classmethod
-    def const(cls, value):
-        """
-        Value generator that returns a supplied node value.
-
-        NOTE: unlike some other value generators, this is invoked as a function.
-        """
-        def val(self, s, p, o):
-            return value
-        return val
+    # These are object methods, or class methods that return an unbound 
+    # object method, which are invoked with a data extract map instance and 
+    # the subject, predicate and object of a matched source statement.
 
     def src_subj(self, s, p, o):
         """
@@ -551,25 +634,6 @@ class DataExtractMap(object):
         """
         return o
 
-    @classmethod
-    def src_obj_or_val(cls, prop):
-        """
-        If the object of matched statement is a resource with an indicated
-        property, return the value of that property, otherwise return the 
-        object of the current statement.
-
-        (This allows resources to indiocated alternate values or aliases
-        with which they should be referenced.)
-
-        NOTE: unlike some other value generators, this is invoked as a function.
-        """
-        def val(self, s, p, o):
-            value = self._src.value(subject=o, predicate=prop, any=False)
-            if value is None:
-                value = o
-            return value
-        return val
-
     def src_base(self, s, p, o):
         """
         Returns the base node from the source graph that is being processed.
@@ -582,5 +646,68 @@ class DataExtractMap(object):
         by `set_subj`, or from the currently matched statement.
         """
         return self._tgt_subj or s
+
+    @classmethod
+    def const(cls, value):
+        """
+        Value generator that returns a supplied node value.
+
+        NOTE: unlike some other value generators, this is invoked as a function call.
+        """
+        def val(self, s, p, o):
+            return value
+        return val
+
+    @classmethod
+    def const_uri(cls, uri):
+        """
+        Value generator that returns a node named using the supplied URI.
+        """
+        return cls.const(URIRef(uri))
+
+    @classmethod
+    def const_gen_literal(cls, template):
+        """
+        Value generator that interpolates statement values in a template 
+        to yield a new literal node.
+
+        Template may contain '%(subj)s', '%(prop)s' and/or '%(obj)s' to refer to statement
+        subject, property or object respectively
+        """
+        def val(self, s, p, o):
+            return Literal(template%{'subj': str(s), 'prop': str(p), 'obj': str(o)})
+        return val
+
+    @classmethod
+    def const_gen_uri(cls, template):
+        """
+        Value generator that interpolates statement values in a template 
+        to yield a new UROI node
+
+        Template may contain '%(subj)s', '%(prop)s' and/or '%(obj)s' to refer to statement
+        subject, property or object respectively
+        """
+        def val(self, s, p, o):
+            return URIRef(template%{'subj': str(s), 'prop': str(p), 'obj': str(o)})
+        return val
+
+    @classmethod
+    def src_obj_or_val(cls, prop):
+        """
+        If the object of matched statement is a resource with an indicated
+        property, return the value of that property, otherwise return the 
+        object of the current statement.
+
+        (This allows resources to indicate alternate values or aliases
+        with which they should be referenced.)
+
+        NOTE: unlike some other value generators, this is invoked as a function.
+        """
+        def val(self, s, p, o):
+            value = self._src.value(subject=o, predicate=prop, any=False)
+            if value is None:
+                value = o
+            return value
+        return val
 
 # End.

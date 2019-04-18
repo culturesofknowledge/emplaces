@@ -1,4 +1,4 @@
-python get_geonames_data.py get 3090048 >a1.tmp
+python get_geonames_data.py get 3090048 >a1.tmp --debug
 diff -s a1.tmp data-test/a1.ttl
   
 python get_geonames_data.py placehierarchy 3090048 >a2.tmp

@@ -52,26 +52,7 @@
 #
 # 5. GeoNames includes multiple parent links which have not been included here.
 #
-# 6. The handling of Timespan values for current values (e.g. current hierarchy)
-#    has not been fully decided.  At least three approaches are possible:
-#    (a) use a semantically vacuous "Current" timespan (i.e. from which no formal 
-#        inferences may be drawn because no specific date information is provided,
-#        but which may still be useful for information retrieval purposes).
-#        (Or maybe we can infer that the claim holds at some time after all the 
-#        historical places, and with higj probability still holds at the time the
-#        data is inspected.)
-#    (b) use a current date value based on the date the trecord is created; over
-#        time, the value may need to be updated if it is to be of any use.
-#    (c) say nothing (i.e. omit the em:when property altogether).  We cannot draw 
-#        any formal inference from such absence of information because of the RDF
-#        open-world model.
-#    On balance, I favour (a), which is represented below as emp:Current.
-#
-# 7. The representation of Timespan information needs to be fixed.  I favour using
-#    something that aligns with the linked pasts network, but it's not clear if that 
-#    will include linked data representations in the foreseeable future.
-#
-# 8. I am using SKOS concepts to represent various type values, e.g. place types 
+# 6. I am using SKOS concepts to represent various type values, e.g. place types 
 #    and categories.  This allows for some structuring of type information.
 #    An alternative was to use RDF types, but Rob Sanderson observed [1] that using 
 #    subtypes with annotations could cause difficulties for some implementations,
@@ -87,14 +68,12 @@ em:Place a rdfs:Class ;
         """
         A resource that provides information about a place (which is considered in the sense of being "constructed by human experience").
 
-        @@TODO: is this a generic superclass of all place types?
-
-        @@TODO: need to be clear about place vs info about place.
+        Note that the place URI denotes a description of thge....
         """
     .
 
 em:Place_sourced a rdfs:Class ;
-    rdfs:subClassOf em:Place ;  #@@TODO: review this
+    rdfs:subClassOf em:Place ;
     rdfs:label "Place information from single source" ;
     rdfs:comment
         """
@@ -102,8 +81,8 @@ em:Place_sourced a rdfs:Class ;
         """
     .
 
-em:Place_merged
-    rdfs:subClassOf em:Place ;  #@@TODO: review this
+em:Place_merged a rdfs:Class ;
+    rdfs:subClassOf em:Place ;
     rdfs:label "Place information merged from multiple sources" ;
     rdfs:comment
         """
@@ -111,9 +90,11 @@ em:Place_merged
         """
     .
 
-# Time period for "current" data
+# Time period for "current" place
+# The intent is to generate or use a time period instance that is determined by available information 
+# from the place record, with a fallback of using the year of ingest.
 
-emp:Current a em:Time_period ;
+emp:Current_2018 a em:Time_period ;
     rdfs:label   "Current, as of 2018" ;
     rdfs:comment "For ease of retrieval, use this specific resource to label any current information (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated if required to convey more specific information." ;
     em:timespan
@@ -436,7 +417,7 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "50.67211"^^xsd:double ;
             wgs84_pos:long "17.92533"^^xsd:double ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             em:short_label "GeoNames" ;
@@ -469,7 +450,7 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/3090048/opole.html> ;
             em:preview     <http://www.geonames.org/3090048/opole.html> ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             em:short_label "GeoNames" ;
@@ -1138,7 +1119,7 @@ place:Opole_ADM3_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/7532413/opole.html> ;
             em:preview     <http://www.geonames.org/7532413/opole.html> ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;    # from gn:locationMap
@@ -1197,7 +1178,7 @@ place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "50.65622"^^xsd:double ;
             wgs84_pos:long "17.93066"^^xsd:double ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1228,7 +1209,7 @@ place:Opole_ADM2_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/7530818/opole.html> ;
             em:preview     <http://www.geonames.org/7530818/opole.html> ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1311,7 +1292,7 @@ place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "50.66667"^^xsd:double ;
             wgs84_pos:long "17.9"^^xsd:double ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1342,7 +1323,7 @@ place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
             em:preview     <http://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1540,7 +1521,7 @@ place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
             wgs84_pos:lat  "52"^^xsd:double ;
             wgs84_pos:long "20"^^xsd:double ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
@@ -1559,7 +1540,7 @@ place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
             em:link        <http://www.geonames.org/798544/republic-of-poland.html> ;
             em:preview     <http://www.geonames.org/798544/republic-of-poland.html> ;
           ] ;
-        em:when emp:Current ;
+        em:when emp:Current_2018 ;
         em:source
           [ a em:Authority ;
             rdfs:label "GeoNames data" ;
