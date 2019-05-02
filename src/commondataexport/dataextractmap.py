@@ -472,16 +472,16 @@ class DataExtractMap(object):
         """
         def loc_subgraph_gen(self, s, p, o):
             # Get copy of graph
-            subgraph_url = subgraph_ref(self, s, p, o)
+            subgraph_node = subgraph_ref(self, s, p, o)
             # Map and emit subgraph
             sub_subgraph_map = DataExtractMap(
-                subgraph_url, 
+                subgraph_node, 
                 self._src, 
                 self._tgt
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
-            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or URIRef(subgraph_url))
+            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or subgraph_node)
             return
         return loc_subgraph_gen
 
@@ -510,20 +510,21 @@ class DataExtractMap(object):
         """
         def ref_subgraph_gen(self, s, p, o):
             # Get copy of graph
-            subgraph_url = str(subgraph_ref(self, s, p, o))
+            subgraph_node = subgraph_ref(self, s, p, o)
+            subgraph_url  = str(subgraph_node)
             print("@@@ subgraph_url %s, link from %s, %s"%(subgraph_url,gen_s(self, s, p, o), gen_p(self, s, p, o)))
             if subgraph_url.startswith("#"):
                 assert false, "@@@@ URL error"
             subgraph_rdf = Rdf_graph_cache.get_graph(subgraph_url)
             # Map and emit subgraph
             sub_subgraph_map = DataExtractMap(
-                subgraph_url, 
+                subgraph_node, 
                 subgraph_rdf, 
                 self._tgt
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
-            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or URIRef(subgraph_url))
+            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or subgraph_node)
             return
         return ref_subgraph_gen
 

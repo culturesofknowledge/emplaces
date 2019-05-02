@@ -47,6 +47,9 @@ ANNAL     = Namespace("http://purl.org/annalist/2014/#")    # Annalist ontology
 GN        = Namespace("http://www.geonames.org/ontology#")  # GeoNames ontology
 GEONAMES  = Namespace("http://sws.geonames.org/")           # GeoNames place 
 WGS84_POS = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
+WDT       = Namespace("http://www.wikidata.org/prop/direct/")
+WD        = Namespace("http://www.wikidata.org/entity/")
+
 EM        = Namespace("http://id.emplaces.info/vocab/")
 EMP       = Namespace("http://id.emplaces.info/timeperiod/")
 EMT       = Namespace("http://id.emplaces.info/timespan/")
@@ -120,7 +123,7 @@ COMMON_EMPLACES_DEFS = (
             ''' ;
         .
 
-    em:Place_merged
+    em:Place_merged a rdfs:Class ;
         rdfs:subClassOf em:Place ;  #@@TODO: review this
         rdfs:label "Place information merged from multiple sources" ;
         rdfs:comment

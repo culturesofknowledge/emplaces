@@ -152,6 +152,7 @@ Notes for updating get_geonames_data:
 - [x] MISSING: map wikidata to EMPlaces (alternate authority, etc.); add licence.
 - [ ] Need to connect generated place data from geonames with alternate authority data from wikidata
 
+
 ## 20190418 telecon
 
 - AB: place type labels 

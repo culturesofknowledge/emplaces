@@ -1,0 +1,10 @@
+Q90942           # Arrondissement of Eeklo
+Q145             # United Kingdom
+Q9337            # Flemish Region
+Q1114            # East Flanders
+Q545862          # Rostherne
+Q12896           # Maldegem
+Q545862          # Rostherne
+Q1070590         # Cheshire East
+Q31              # Belgium
+Q21              # England
