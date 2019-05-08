@@ -171,8 +171,8 @@ Later:
 
 ## 20190508 telecon
 
-[ ] GK: Ask Karl about status of LPIF: planning to look at conversion.  Maybe tackle at hackathon.  Also ask about how to get bounding box data from Genomes.  Other sources
-[ ] GK: next activity into look at postal data per Arno email 2019-03-22
+- [ ] GK: Ask Karl about status of LPIF: planning to look at conversion.  Maybe tackle at hackathon.  Also ask about how to get bounding box data from Genomes.  Other sources
+- [ ] GK: next activity into look at postal data per Arno email 2019-03-22
 
 
 ### Preparing for EMPeople:
