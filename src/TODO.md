@@ -10,10 +10,10 @@ See also `src/annalistdataexport/TODO.md`
     - this was intended to be a face-to-face session, but was previously stymied by an Annalist login bug.  This has been fixed.
     - See: https://demo.annalist.net/annalist/c/EMPlaces_defs/
 
-- [ ] Push ahead on Wikidata cross-referencing for alternate authorities
+- [x] Push ahead on Wikidata cross-referencing for alternate authorities
     - [x] find wikidata Id for given Geonames Id
     - [x] Logic to extract selected place data from wikidata
-    - [ ] Finalize data to be extracted from Wikidata
+    - [x] Finalize data to be extracted from Wikidata
         - Most of the required data extraction logic is now in place, but we need to agree the workflows to be used for creating/managing EMPlaces data to wrap up loose ends (specifically, id generation for source data obtained from Annalist, Wikidata and GeoNames).
     - see: 
         - models/wikidata-opole.ttl
@@ -33,12 +33,13 @@ See also `src/annalistdataexport/TODO.md`
             - https://www.wikidata.org/wiki/Property:P1871 (CERL)
             - https://www.wikidata.org/wiki/Property:P6060 (MoEML)
 
-    - [ ] Provide extra pieces as required for data gathering and management workflows.
+    - [x] Provide extra pieces as required for data gathering and management workflows.
         - This rather depends on what form it is decided that the workflows should take.
         - See: https://github.com/culturesofknowledge/emplaces/blob/master/design/edit.md
 
 - [ ] Create capability to import EMPLaces data into Annalist, based on existing data (e.g., a new option for "get_annalist_data").
     - This would be used, for example, importing Geonames data in an Annalist collectiobn, via get_geonames_data.
+
 
 ### From 2018-11-23 meeting (20181123-EMPlaces-meeting-Oxford):
 
@@ -65,7 +66,7 @@ Wrapping up EMPlaces:
     - 
     - ...
     - it appears to me that the current preference is to use http: in namespace URIs, and let the infrastructure handle upgrading to HTTPS for secure data transmission.
-- [ ] GK+AB continue review of Opole example data (by Skype)
+- [x] GK+AB continue review of Opole example data (by Skype) (ongoing)
 - [x] GK check about licence information in data model: the multi source diagram should have license links.
     - em:Source_desc entity has em:licence property.  Intent is that the target URI both identifies the license, and locates a description of it.
     - Still need to review and check needed cases are covered.
@@ -74,7 +75,7 @@ Wrapping up EMPlaces:
     - Model change and extractor software affected?
 - [x] Time_span: rethink properties used; particularly with reference to applicability of map deduced from publication date.  What are semantics of em:start, em:end
     - See: [models/notes/20190325-current-place-time-period.md](../models/notes/20190325-current-place-time-period.md).
-- [ ] Update GeoNames extractor to reflect model changes (cf. models/20190329-opole-example-multisourced.ttl)
+- [x] Update GeoNames extractor to reflect model changes (cf. models/20190329-opole-example-multisourced.ttl)
 
 
 ### Later, and 2019-03-28/29 telecons:
@@ -96,29 +97,30 @@ Wrapping up EMPlaces:
     - generation of em:Source_desc/em:Authority entity for data added
     - generation of em:Time_period entity for each place
     - introduction of new kinds of annotation
-    - explicitly cover how wikidata imnformation is incorporated.
+    - explicitly cover how wikidata information is incorporated.
     - explicitly cover how EMPlaces data may be initialized from other sources
     - ...
-- [ ] Publish EMPlaces vocabulary as RDF schema and/or OWL ontology (curently in Annalist).
-- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This could be about a curation model that can be applied to create a consistent view of data.
+    - (leave open)
+- [ ] Publish EMPlaces vocabulary as RDF schema and/or OWL ontology (curently in Annalist). (leave open)
+- [ ] GK think about trust models and how they can be applied to EMPlaces model when displaying a curated view on the data.  Specifically, how to deal with competing/inconsistent claims?  This could be about a curation model that can be applied to create a consistent view of data. (leave open)
 - [x] GK add licence information to Opole example data and data extractor
 - [x] GK think about licence representation: need another level of indirection so we can add local label?
     - possible model change
     - Need to update GeoNames extractor.
-- [ ] GK source information in example data should be URI-labeled and refenced (like periods, etc.).  Also ensure extractor does likewise.
-- [ ] GK consider how alternative to single-point representation of location_value (e.g. bounding polygons)  (Maybve later when we have actual data) 
+- [ ] GK source information in example data should be URI-labeled and refenced (like periods, etc.).  Also ensure extractor does likewise. (done in extractor; leave open in sample data)
+- [ ] GK consider how alternative to single-point representation of location_value (e.g. bounding polygons)  (Maybe later when we have actual data; need to find out about possible spources; see also: http://www.geonames.org/products/premium-data-polygons.html)
     - e.g. https://histogis.acdh.oeaw.ac.at/shapes/shape/detail/8004
 - [x] GK em:editorialNote becomes em:description/rdfs:comment.  Applicable to (say) name attestations.  Distinct from description of process: note em:editorialNote becomes more about the curation and creation of a record.  Update geonames extractor here. Note em:description and em:editorialNote may both be kinds of rdfs:comment - about the described place and (curation) process.
-- [ ] AB add more authorities to Opole example
+- [ ] AB add more authorities to Opole example.
 - [x] GK update model diagrams:
     - page 2: note the model as described privileges EMPLaces place data (cf. "propose how place label and type label are derived from merged data" above).
     - page 6: ???
 
-- [ ] GK Note that qualified relation could be modeled as an annotation: is this an inconsistency of style?
-- [ ] GK think about RDF semantics of multiple name attestations and multiple languages.
+- [x] GK Note that qualified relation could be modeled as an annotation: is this an inconsistency of style?
+- [ ] GK think about RDF semantics of multiple name attestations and multiple languages. (open)
 - [x] GK Note that em:Source_desc rdfs:comment is for curatorial/editorial notes
 
-- [ ] Update crosswalk??
+- [ ] Update crosswalk?? (on hold unless needed)
 
 Urgent Tasks?
 
@@ -132,7 +134,7 @@ Urgent Tasks?
 2. Update Geonames extractor
     - [x] Update common definitions (copy from example)
     - [x] Add licencing data (see notes below)
-    - [ ] Update shape-shifter patterns (see notes below)
+    - [x] Update shape-shifter patterns (see notes below)
 3. [ ] Flesh out workflow details and script support
     - AB loooking at this (2019-04-18)
 4. [x] Generation of URI-identified resources where these might be shared
@@ -150,7 +152,7 @@ Notes for updating get_geonames_data:
 - [x] em:editorialNote -> em:description (applied to place).  em:description is subproperty of rdfs:comment. (used with wiki text)
 - [x] em:editorialNote on em:Place / em:Source_desc is curational information.  em:editorialNote is subproperty of rdfs:comment.
 - [x] MISSING: map wikidata to EMPlaces (alternate authority, etc.); add licence.
-- [ ] Need to connect generated place data from geonames with alternate authority data from wikidata
+- [x] Need to connect generated place data from geonames with alternate authority data from wikidata
 
 
 ## 20190418 telecon
@@ -165,6 +167,12 @@ Later:
 - AB: dealing with conflicting contributions (editorial)
     - dates need to be "just one truth" for EMDates
     - historical hierarchies: need one true definitive hierarchy for adding contributions
+
+
+## 20190508 telecon
+
+[ ] GK: Ask Karl about status of LPIF: planning to look at conversion.  Maybe tackle at hackathon.  Also ask about how to get bounding box data from Genomes.  Other sources
+[ ] GK: next activity into look at postal data per Arno email 2019-03-22
 
 
 ### Preparing for EMPeople:
@@ -183,10 +191,12 @@ Prosopographical workshop 2019-05-16/17
     - See meeting notes from 2019-03-25 (20190325-EMLO-oxford-meeting)
 - [x] Clean up documentation.  Move superseded documents to "historic" subfolder.
 - [ ] Test wrangled data with Timbuctoo
-    - with data at `src/geonamesdataexport/data-20190322`
+    - with data at `https://github.com/culturesofknowledge/emplaces/tree/develop/src/geonamesdataexport/data-test-alternate-authorities`
 
 ## Technical debt and unscheduled:
 
 - [ ] Update `src/commondataexport/README.md` (documentation)
 - [ ] Create capability to import EMPLaces data into Annalist, based on existing data (e.g., a new option for "get_annalist_data").
 - [ ] Test suite for data wrangling utilities
+
+
