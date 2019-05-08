@@ -5,6 +5,22 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+place:Q1070590_wikidata em:description "Cheshire East is a unitary authority area with borough status in the ceremonial county of Cheshire, England. The local authority is Cheshire East Council." .
+
+place:Q1114_wikidata em:description "East Flanders is a province of Belgium. It borders the Netherlands and the Belgian provinces of Antwerp, Flemish Brabant, Hainaut and West Flanders. It has an area of 2,991 km², divided into six administrative districts containing 60 municipalities, and a population of 1,408,484. The capital is Ghent." .
+
+place:Q12896_wikidata em:description "Maldegem is a municipality located in the Belgian province of East Flanders. The municipality comprises the villages of Maldegem, Adegem and Middelburg. Kleit and Donk have always been separate hamlets of Maldegem. On January 1, 2006, Maldegem had a total population of 22,289. The total area is 94.64 square kilometres (36.54 sq mi) which gives a population density of 236 inhabitants per km²." .
+
+place:Q145_wikidata em:description "The United Kingdom (UK), officially the United Kingdom of Great Britain and Northern Ireland, and sometimes referred to as Britain, is a sovereign country located off the north-western coast of the European mainland. The United Kingdom includes the island of Great Britain, the north-eastern part of the island of Ireland, and many smaller islands. Northern Ireland is the only part of the United Kingdom that shares a land border with another sovereign state, the Republic of Ireland. Apart from this land border, the United Kingdom is surrounded by the Atlantic Ocean, with the North Sea to the east, the English Channel to the south and the Celtic Sea to the south-west, giving it the 12th-longest coastline in the world. The Irish Sea lies between Great Britain and Ireland. With an area of 242,500 square kilometres (93,600 sq mi), the United Kingdom is the 78th-largest sovereign state in the world. It is also the 22nd-most populous country, with an estimated 66.0 million inhabitants in 2017." .
+
+place:Q21_wikidata em:description "England is a country that is part of the United Kingdom. It shares land borders with Wales to the west and Scotland to the north-northwest. The Irish Sea lies west of England and the Celtic Sea lies to the southwest. England is separated from continental Europe by the North Sea to the east and the English Channel to the south. The country covers five-eighths of the island of Great Britain, which lies in the North Atlantic, and includes over 100 smaller islands, such as the Isles of Scilly and the Isle of Wight." .
+
+place:Q31_wikidata em:description "Belgium, officially the Kingdom of Belgium, is a country in Western Europe. It is bordered by the Netherlands to the north, Germany to the east, Luxembourg to the southeast, France to the southwest, and the North Sea to the northwest. It covers an area of 30,688 square kilometres (11,849 sq mi) and has a population of more than 11.4 million. The capital and largest city is Brussels; other major cities are Antwerp, Ghent, Charleroi and Liège." .
+
+place:Q545862_wikidata em:description "Rostherne is a civil parish and village in the unitary authority of Cheshire East and the ceremonial county of Cheshire, England." .
+
 place:Q90942_wikidata em:description "The Arrondissement of Eeklo is one of the six administrative arrondissements in the Province of East Flanders, Belgium. It is one of the two arrondissements that form the Judicial Arrondissement of Ghent." .
+
+place:Q9337_wikidata em:description "The Flemish Region is one of the three regions of the Kingdom of Belgium—alongside the Walloon Region and the Brussels-Capital Region. Colloquially, it is usually simply referred to as Flanders. It occupies the northern part of Belgium and covers an area of 13,522 km2. It is one of the most densely populated regions of Europe with around 480 inhabitants per square kilometer." .
 
 

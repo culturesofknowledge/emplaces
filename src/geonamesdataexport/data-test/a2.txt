@@ -1,5 +1,0 @@
-3090048   # Opole (Populated place (P.PPLA))
-798544    # Poland (Country)
-3337495   # Opole Voivodeship (Region (A.ADM1))
-7532413   # Opole (City   (A.ADM3))
-7530818   # Opole (County (A.ADM2))

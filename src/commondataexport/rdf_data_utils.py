@@ -75,10 +75,13 @@ def get_emplaces_id(place_name, place_type, unique_id, suffix=""):
     Given a place name, place type, Id and optional suffix,
     returns a place Id, URI and Node.
     """
-    type_id       = get_geonames_place_type_id(place_type)
-    name_slug     = place_name.replace(" ", "_")
-    name_slug     = name_slug[:40]
-    emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
+    if place_name and place_type:
+        type_id       = get_geonames_place_type_id(place_type)
+        name_slug     = place_name.replace(" ", "_")
+        name_slug     = name_slug[:40]
+        emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
+    else:
+        emplaces_id   = "place_%s%s"%(unique_id, suffix)
     return emplaces_id
 
 def get_emplaces_uri_node(emplaces_id, suffix=""):
@@ -96,10 +99,12 @@ def get_emplaces_id_uri_node(place_name, place_type, unique_id, suffix=""):
     Given a place name, place type, Id and optional suffix,
     returns a place Id, URI and Node.
     """
+    #@@
     # type_id       = get_geonames_place_type_id(place_type)
     # name_slug     = place_name.replace(" ", "_")
     # name_slug     = name_slug[:40]
     # emplaces_id   = "%s_%s_%s%s"%(name_slug, type_id, unique_id, suffix)
+    #@@
     emplaces_id   = get_emplaces_id(place_name, place_type, unique_id, suffix)
     emplaces_uri  = PLACE[emplaces_id]
     emplaces_node = URIRef(emplaces_uri)
