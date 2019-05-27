@@ -1083,7 +1083,7 @@ place:Belgium_PCLI_2802361_geonames a em:Place,
             oa:motivatedBy em:MAP_RESOURCE ] ;
     em:hasRelation [ a em:Qualified_relation ;
             em:competence em:DEFINITIVE ;
-            em:relationTo place:European_Union_ZN_6695072_geonames ;
+            em:relationTo place:Western_Europe_RGN_9408659_geonames ;
             em:relationType em:P_PART_OF_A ;
             em:source ems:Belgium_PCLI_2802361_geonames ;
             em:when emp:Current_2018 ] ;
@@ -1661,7 +1661,7 @@ place:United_Kingdom_PCLI_2635167_geonames a em:Place,
 ems:Adegem_PPL_2803347_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for Adegem (Populated place (P.PPL))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2803347/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/2803347/about.rdf> ;
@@ -1670,7 +1670,7 @@ ems:Adegem_PPL_2803347_geonames a em:Authority,
 ems:Arrondissement_Eeklo_ADM3_2798986_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for Arrondissement Eeklo (City   (A.ADM3))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2798986/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/2798986/about.rdf> ;
@@ -1679,7 +1679,7 @@ ems:Arrondissement_Eeklo_ADM3_2798986_geonames a em:Authority,
 ems:Belgium_PCLI_2802361_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for Belgium (Country)" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2802361/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/2802361/about.rdf> ;
@@ -1688,7 +1688,7 @@ ems:Belgium_PCLI_2802361_geonames a em:Authority,
 ems:Cheshire_East_ADM2_7290536_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for Cheshire East (County (A.ADM2))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/7290536/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/7290536/about.rdf> ;
@@ -1697,7 +1697,7 @@ ems:Cheshire_East_ADM2_7290536_geonames a em:Authority,
 ems:East_Flanders_ADM2_2789733_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for East Flanders (County (A.ADM2))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2789733/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/2789733/about.rdf> ;
@@ -1706,7 +1706,7 @@ ems:East_Flanders_ADM2_2789733_geonames a em:Authority,
 ems:England_ADM1_6269131_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for England (Region (A.ADM1))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/6269131/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/6269131/about.rdf> ;
@@ -1715,7 +1715,7 @@ ems:England_ADM1_6269131_geonames a em:Authority,
 ems:Flanders_ADM1_3337388_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for Flanders (Region (A.ADM1))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/3337388/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/3337388/about.rdf> ;
@@ -1724,7 +1724,7 @@ ems:Flanders_ADM1_3337388_geonames a em:Authority,
 ems:Maldegem_ADM4_2791858_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for Maldegem (City   (A.ADM4))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2791858/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/2791858/about.rdf> ;
@@ -1733,7 +1733,7 @@ ems:Maldegem_ADM4_2791858_geonames a em:Authority,
 ems:Rostherne_ADM3_7299920_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for Rostherne (City   (A.ADM3))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/7299920/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/7299920/about.rdf> ;
@@ -1742,7 +1742,7 @@ ems:Rostherne_ADM3_7299920_geonames a em:Authority,
 ems:Rostherne_PPL_2639108_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for Rostherne (Populated place (P.PPL))" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2639108/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/2639108/about.rdf> ;
@@ -1751,7 +1751,7 @@ ems:Rostherne_PPL_2639108_geonames a em:Authority,
 ems:United_Kingdom_PCLI_2635167_geonames a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames data for United Kingdom (Country)" ;
-    em:accessed "2019-05-02" ;
+    em:accessed "2019-05-27" ;
     em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2635167/about.rdf" ;
     em:licence ems:GeoNames_licence ;
     em:link <http://sws.geonames.org/2635167/about.rdf> ;

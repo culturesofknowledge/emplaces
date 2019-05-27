@@ -1578,6 +1578,7 @@ def do_get_many_wikidata_place_data(gcdroot, options):
     wikidata_rdf.bind("em",    EM.term(""))
     wikidata_rdf.bind("place", PLACE.term(""))
     for wikidata_id in wids:
+        print("wikidata_id: %s"%(wikidata_id,), file=sys.stderr)
         wikidata_rdf = get_wikidata_id_data(wikidata_id, result_rdf=wikidata_rdf)
     print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GCD_SUCCESS
