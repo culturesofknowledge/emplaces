@@ -281,8 +281,9 @@ em:competence a rdf:Property ;
     .
 
 em:DEFINITIVE a em:Competence_value ;
+    # Assertion is obtained directly from a trusted source
     rdfs:label   "Definitive" ;
-    rdfs:comment "The associated value is definitively true for the purposes of EMPlaces.  Such information should ideally be backup up be appropiate source references."
+    rdfs:comment "The associated value is definitively true for the purposes of EMPlaces.  It should be obtained directly from a trusted source.  Such information should ideally be backed up by appropiate source references."
     .
 
 em:INFERRED a em:Competence_value ;
