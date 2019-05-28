@@ -10,6 +10,7 @@
 - [x] get_geonames_data.py:  Pull text about place from Wikipedia (1st paragraph of text)
 - [x] Using 'commondataexport', 'ref_subgraph' assumes that a new resource is retrievable at the provided URI.  'loc_subgraph' is an alternative that continues scanning in the current graph at a designated node.
 - [x] clean out dead code from initial implementation
+- [ ] think about templates for generating link value for alternate authorities.
 
 Maybe later:
 

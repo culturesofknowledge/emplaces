@@ -301,9 +301,10 @@ def get_wikidata_merged_place_mapping(
 
 def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
     def alt_authority(
-        auth_uri_template, auth_tag, auth_label, auth_descr, 
+        auth_ref_template, auth_tag, auth_label, auth_descr, 
         auth_id=None, auth_link=None
         ):
+        auth_uri_template = str(EMS.term(""))+auth_ref_template
         return M.loc_subgraph(
             M.tgt_subj, M.const_uri(EM.alternateAuthority), M.const_gen_uri(auth_uri_template),
             [ M.emit(M.stmt_gen(RDF.type,         EM.Source_desc),      M.stmt_copy())
@@ -322,7 +323,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
         , M.emit(M.prop_eq(RDFS.label),                    M.stmt_copy())
         , M.emit(M.prop_eq(WDT.P244),
             alt_authority(
-                EMS["%(obj)s_lcnaf"], 
+                "lcnaf_%(obj)s", 
                 "LCNAF", 
                 "LCNAF identifier",
                 "LoC (Library of Congress) identifier - used for LoC Name Authority File. See: https://www.wikidata.org/wiki/Property:P244.",
@@ -331,7 +332,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             )
         , M.emit(M.prop_eq(WDT.P268),   
             alt_authority(
-                EMS["%(obj)s_bnf"], 
+                "bnf_%(obj)s", 
                 "BnF", 
                 "BnF identifier",
                 "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268.",
@@ -340,7 +341,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             )
         , M.emit(M.prop_eq(WDT.P227),   
             alt_authority(
-                EMS["%(obj)s_gnd"], 
+                "gnd_%(obj)s", 
                 "GND", 
                 "GND identifier",
                 "Deutsche Nationalbibliothek Identifier. See: https://www.wikidata.org/wiki/Property:P227.",
@@ -349,7 +350,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             )
         , M.emit(M.prop_eq(WDT.P1566),   
             alt_authority(
-                EMS["%(obj)s_geonames"], 
+                "geonames_%(obj)s", 
                 "GeoNames", 
                 "GeoNames identifier",
                 "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566.",
@@ -358,7 +359,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             )
         , M.emit(M.prop_eq(WDT.P1667),   
             alt_authority(
-                EMS["%(obj)s_tgn"], 
+                "tgn_%(obj)s", 
                 "TGN", 
                 "TGN identifier",
                 "TGN (Getty Thesaurus of Geographic Names) identfier. See: https://www.wikidata.org/wiki/Property:P1667.",
@@ -367,7 +368,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             )
         , M.emit(M.prop_eq(WDT.P1871),   
             alt_authority(
-                EMS["%(obj)s_cerl"], 
+                "cerl_%(obj)s", 
                 "CERL", 
                 "CERL identifier",
                 "CERL (Consortium of European Research Libraries thesaurus) identifier. See: https://www.wikidata.org/wiki/Property:P1871.",
@@ -376,7 +377,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             )
         , M.emit(M.prop_eq(WDT.P2503),   
             alt_authority(
-                EMS["%(obj)s_gov"], 
+                "gov_%(obj)s", 
                 "GOV", 
                 "GOV identifier",
                 "Historical Gazetteer (GOV) identifier. See: https://www.wikidata.org/wiki/Property:P2503.",
@@ -385,7 +386,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             )
         , M.emit(M.prop_eq(WDT.P6060),   
             alt_authority(
-                EMS["%(obj)s_moeml"], 
+                "moeml_%(obj)s", 
                 "MoEML", 
                 "MoEML identifier",
                 "MoEML (Map of Early Modern London) identifier. See: https://www.wikidata.org/wiki/Property:P6060.",
@@ -1131,10 +1132,7 @@ def get_wikidata_id_data(wikidata_id, result_rdf=None):
     print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
     print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
     wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
-    # Initial empty graph
-    if result_rdf is None:
-        result_rdf = Graph()
-    # Get identifiers, URIs and other values from wikidata RDFD
+    # Get identifiers, URIs and other values from wikidata RDF
     # (Geonames Id is needed to connect with EMPlaces merged data)
     emp_id_wikidata, emp_uri_wikidata, emp_node_wikidata = get_emplaces_uri_node(
         wikidata_id, suffix="_wikidata"
@@ -1149,12 +1147,16 @@ def get_wikidata_id_data(wikidata_id, result_rdf=None):
     emp_id_merged, emp_uri_merged, _ = get_emplaces_id_uri_node(
         None, None, geonames_id
         )
+    # ----- Initial result graph -----
+    if result_rdf is None:
+        result_rdf = Graph()
+        result_rdf.bind("em",    EM.term(""))
+        result_rdf.bind("ems",   EMS.term(""))
+        result_rdf.bind("place", PLACE.term(""))
     # ----- Copy prefixes -----
     for prefix, ns_uri in wikidata_rdf.namespaces():
         result_rdf.bind(prefix, ns_uri)
-    result_rdf.bind("em",    EM.term(""))
-    result_rdf.bind("place", PLACE.term(""))
-    # ----- mapping tables -----
+    # ----- Map required data to result graph -----
     merged_place_mapping = get_wikidata_merged_place_mapping(
         emp_id_merged, emp_id_wikidata, wikidata_url, place_name
         )
@@ -1303,6 +1305,7 @@ def do_get_many_wikidata_place_data(gcdroot, options):
     wids         = get_many_geonames_ids()
     wikidata_rdf = Graph()
     wikidata_rdf.bind("em",    EM.term(""))
+    wikidata_rdf.bind("ems",   EMS.term(""))
     wikidata_rdf.bind("place", PLACE.term(""))
     for wikidata_id in wids:
         print("wikidata_id: %s"%(wikidata_id,), file=sys.stderr)
@@ -1321,7 +1324,7 @@ def do_get_wikidata_place_text(gcdroot, options):
 
 def do_get_many_wikidata_place_text(gcdroot, options):
     """
-    Get Wikidata descrioption text for a place, as EMPlaces format RDF.
+    Get Wikidata (Wikipedia) description text for a place, as EMPlaces format RDF.
     """
     wids         = get_many_geonames_ids()
     wikidata_rdf = Graph()
