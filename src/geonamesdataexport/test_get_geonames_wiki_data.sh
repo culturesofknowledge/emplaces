@@ -22,12 +22,12 @@ mkdir $DATADIR
 echo "Extracting data for EMLO place references $FROM-$TO from geonames" > $DATADIR/geonames-ids-from-EMLO.log
 echo "Data extraction starts: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
-# python get_geonames_data.py manygeonamesids \
-#     <20181008-geonames-urls-from-EMLO.txt \
-#     >$DATADIR/geonames-ids-from-EMLO.txt
+python get_geonames_data.py manygeonamesids \
+    <20181008-geonames-urls-from-EMLO.txt \
+    >$DATADIR/geonames-ids-from-EMLO.txt
 
-# echo "Created $DATADIR/geonames-ids-from-EMLO.txt: $(date)"
-# echo "Created $DATADIR/geonames-ids-from-EMLO.txt: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
+echo "Created $DATADIR/geonames-ids-from-EMLO.txt: $(date)"
+echo "Created $DATADIR/geonames-ids-from-EMLO.txt: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
 # Extract selected range of ids:
 

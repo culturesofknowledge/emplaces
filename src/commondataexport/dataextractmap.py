@@ -158,13 +158,13 @@ class DataExtractMap(object):
         ref_subgraph(<value>, <value>, <subgraph_ref>, <subgraph_map>)
                             a subgraph that is mapped and referenced by a statement for
                             which subject and property generators are supplied.  A new
-                            node is created as subject for the subgraph satements, and 
+                            node is created as subject for the subgraph statements, and 
                             the URI is dereferenced as RDF, and used as a new source graph 
                             from which statements are scanned.
         loc_subgraph(<value>, <value>, <subgraph_ref>, <subgraph_map>)
                             a subgraph that is mapped and referenced by a statement for
                             which subject and property generators are supplied.  A new
-                            node is created as subject for the subgraph satements.  
+                            node is created as subject for the subgraph statements.  
                             Unlike 'ref_subgraph', statements about the new subject are
                             scanned from the current source graph.
 
@@ -175,24 +175,36 @@ class DataExtractMap(object):
         src_subj            subject from selected source statement.
         src_prop            property from selected source statement
         src_obj             object from selected source statement
+        srv_val             additional value from the source data
         const(val)          specified value
         src_obj_or_val(prop) property of referenced resource (obj), or just the 
                             referenced resource.  (Use this for resources that may
                             indicate alternate reference URIs, e.g. using owl:sameAs.)
-
     """
 
-    def __init__(self, base, src, tgt):
+    def __init__(self, base, src, tgt, ref_src_subj=None, ref_tgt_subj=None, ref_src_obj=None):
         """
         base    is a node in the source graph
         src     source graph, from which data is extracted
         tgt     target graph, to which data is added
-        """
+        ref_src_subj 
+                if specified, is the subject of a source graph statement 
+                that triggers this mapping.
+        ref_tgt_subj 
+                if specified, is a target graph subject for which the triggering
+                statement is defining properties.
+        ref_src_obj 
+                if specified, is the object of a source graph statement 
+                that triggers this mapping.
+         """
         # print("@@@ DataExtractMap, base %s"%(base,))
         self._base      = base
         self._src       = src
         self._tgt       = tgt
         self._tgt_subj  = None
+        self._ref_src_subj = ref_src_subj
+        self._ref_tgt_subj = ref_tgt_subj
+        self._ref_src_obj  = ref_src_obj
         return
 
     # Helpers
@@ -258,7 +270,7 @@ class DataExtractMap(object):
                 s, p, o = self._select_single(selector)
                 subj = value(self, s, p, o)
                 if subj:
-                    self._tgt_subj = value(self, s, p, o)
+                    self._tgt_subj = subj #@@ value(self, s, p, o)
                 # print("@@@ tgt_subj %s"%(self._tgt_subj))
             except EmptySelection:
                 pass # No subject to save
@@ -349,7 +361,7 @@ class DataExtractMap(object):
 
         If no object value is supplied, a blank node is allocated and used.
         """
-        obj_node = obj      # Assume already prsented as RDF node
+        obj_node = obj      # Assume already presented as RDF node
         if obj is None:
             obj_node = BNode()
         elif isinstance(obj, str):
@@ -368,9 +380,7 @@ class DataExtractMap(object):
     def stmt_gen_link(cls, prop_uri, obj_url):
         """
         Returns generator for a single statement with the supplied property and 
-        URL object vaue.  If the supplied objkect value is None, no statement is generated.
-
-        If no object value is supplied, a blank node is allocated and used.
+        URL object vaue.  If the supplied object value is None, no statement is generated.
         """
         def stmt_gen_sel(src, base):
             if isinstance(obj_url, str):
@@ -415,6 +425,15 @@ class DataExtractMap(object):
         possibly with the subject replaced according to a previous "set_subj".
         """
         return cls.stmt(cls.tgt_subj, cls.src_prop, cls.src_obj)
+
+    @classmethod
+    def stmt_copy_val(cls, obj_val):
+        """
+        Returns a subgraph generator that emits a copy of the current statement,
+        but with the object value replaced by the value returned by the supplied
+        obj_val function.
+        """
+        return cls.stmt(cls.tgt_subj, cls.src_prop, obj_val)
 
     @classmethod
     def stmt_copy_not_blank(cls):
@@ -477,11 +496,15 @@ class DataExtractMap(object):
             sub_subgraph_map = DataExtractMap(
                 subgraph_node, 
                 self._src, 
-                self._tgt
+                self._tgt,
+                ref_src_subj=s, 
+                ref_tgt_subj=self._tgt_subj, 
+                ref_src_obj=o
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
-            # Link to subgraph
-            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or subgraph_node)
+            # Link to subgraph (if subject/property supplied)
+            if gen_s and gen_p:
+                yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or subgraph_node)
             return
         return loc_subgraph_gen
 
@@ -520,7 +543,10 @@ class DataExtractMap(object):
             sub_subgraph_map = DataExtractMap(
                 subgraph_node, 
                 subgraph_rdf, 
-                self._tgt
+                self._tgt,
+                ref_src_subj=s, 
+                ref_tgt_subj=self._tgt_subj, 
+                ref_src_obj=o
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
@@ -648,6 +674,33 @@ class DataExtractMap(object):
         """
         return self._tgt_subj or s
 
+    def ref_src_subj(self, s, p, o):
+        """
+        Returns the source subject of the referring statement that triggers the
+        current mapping.
+        """
+        return self._ref_src_subj
+
+    def ref_tgt_subj(self, s, p, o):
+        """
+        Returns the target subject of the referring statement that triggers the
+        current mapping.  I.e. `tgt_subj` for the referring statement.
+
+        This can be used in a set_subj in the subgraph to continue defining values
+        for the same target, effectively flattening the graph by a level.
+        """
+        return self._ref_tgt_subj
+
+    def ref_src_obj(self, s, p, o):
+        """
+        Returns the source object of the referring statement that triggers the
+        current mapping.
+
+        This can be used to carry a value down a level from the referring graph to
+        a generated subgraph.
+        """
+        return self._ref_src_obj
+
     @classmethod
     def const(cls, value):
         """
@@ -683,7 +736,7 @@ class DataExtractMap(object):
     def const_gen_uri(cls, template):
         """
         Value generator that interpolates statement values in a template 
-        to yield a new UROI node
+        to yield a new URI node
 
         Template may contain '%(subj)s', '%(prop)s' and/or '%(obj)s' to refer to statement
         subject, property or object respectively

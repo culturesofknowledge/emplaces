@@ -35,18 +35,22 @@ log = logging.getLogger(__name__)
 
 SKOS      = Namespace("http://www.w3.org/2004/02/skos/core#")
 XSD       = Namespace("http://www.w3.org/2001/XMLSchema#")
+OA        = Namespace("http://www.w3.org/ns/oa#")
+TIME      = Namespace("http://www.w3.org/2006/time#")
+PROV      = Namespace("http://www.w3.org/ns/prov#")
+WGS84_POS = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
 
 SCHEMA    = Namespace("http://schema.org/")
-OA        = Namespace("http://www.w3.org/ns/oa#")
 CC        = Namespace("http://creativecommons.org/ns#")
 DCTERMS   = Namespace("http://purl.org/dc/terms/")
 FOAF      = Namespace("http://xmlns.com/foaf/0.1/")
 BIBO      = Namespace("http://purl.org/ontology/bibo/")
+CITO      = Namespace("http://purl.org/spar/cito#")
+CRM       = Namespace("http://erlangen-crm.org/current/")
 
 ANNAL     = Namespace("http://purl.org/annalist/2014/#")    # Annalist ontology
 GN        = Namespace("http://www.geonames.org/ontology#")  # GeoNames ontology
 GEONAMES  = Namespace("http://sws.geonames.org/")           # GeoNames place 
-WGS84_POS = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
 WDT       = Namespace("http://www.wikidata.org/prop/direct/")
 WD        = Namespace("http://www.wikidata.org/entity/")
 

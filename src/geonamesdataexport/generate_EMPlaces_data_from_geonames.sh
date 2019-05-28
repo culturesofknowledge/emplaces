@@ -46,7 +46,7 @@ echo "Created $DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt: $(da
 echo "Created $DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt: $(date)" >> $DATADIR/geonames-ids-from-EMLO.log
 
 # Retrieve GeoNames data and reformat for EMPlaces
-python get_geonames_data.py manyget \
+python get_geonames_data.py manygetgeo \
     --include-common-defs --include-emplaces-defs \
     --include-geonames-defs --include-language-defs \
     <$DATADIR/geonames-ids-from-EMLO-with-hierarchy-${SELECT}.txt \

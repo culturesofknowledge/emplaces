@@ -1,0 +1,1799 @@
+@prefix agent: <http://id.emplaces.info/agent/> .
+@prefix annal: <http://purl.org/annalist/2014/#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix em: <http://id.emplaces.info/vocab/> .
+@prefix emc: <http://id.emplaces.info/calendar/> .
+@prefix eml: <http://id.emplaces.info/language/> .
+@prefix emp: <http://id.emplaces.info/timeperiod/> .
+@prefix ems: <http://id.emplaces.info/source/> .
+@prefix emt: <http://id.emplaces.info/timespan/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geonames: <http://sws.geonames.org/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix place: <http://id.emplaces.info/place/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ref: <http://id.emplaces.info/reference/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+em:Authority a rdfs:Class ;
+    rdfs:label "Authoritative information source" ;
+    rdfs:comment """
+            Describes a source of information that is considered to be authoritative in some sense
+            """ ;
+    rdfs:subClassOf em:Source_desc .
+
+em:Bib_entry a rdfs:Class ;
+    rdfs:label "Bibliographic item" ;
+    rdfs:comment """
+            Bibliographic item description, based on BIBO.
+
+            This is a superclass of the variou BIBO entity types, such as bibo:Book.
+            """ .
+
+em:Competence_value a rdfs:Class ;
+    rdfs:label "Information competence (certainty) indicator" .
+
+em:Language_value a rdfs:Class ;
+    rdfs:label "Language identifier" ;
+    rdfs:comment """
+            Identifies a language, such as may be appliucable to a place name, etc.
+            """ .
+
+em:Licence_desc a rdfs:Class ;
+    rdfs:label "Licence description" ;
+    rdfs:comment """
+            A description of a licence for use of some data.
+            """ .
+
+em:Map_resource a rdfs:Class ;
+    rdfs:label "Map resource" ;
+    rdfs:comment """
+            Describes a map resource.
+            """ .
+
+em:Place a rdfs:Class ;
+    rdfs:label "Place" ;
+    rdfs:comment """
+            A resource that provides information about a place (which is 
+            considered in the sense of being "constructed by human experience").
+            """ .
+
+em:Place_merged a rdfs:Class ;
+    rdfs:label "Place information merged from multiple sources" ;
+    rdfs:comment """
+            A resource that provides information about a place that comes from 
+            multiple sources.  One or more em:place_data properties reference 
+            single-sourced information about the place.
+            """ ;
+    rdfs:subClassOf em:Place .
+
+em:Place_name a rdfs:Class ;
+    rdfs:label "Place name" ;
+    rdfs:comment """
+            A name by which a place may be known or designated in some language.
+            """ .
+
+em:Place_sourced a rdfs:Class ;
+    rdfs:label "Place information from single source" ;
+    rdfs:comment """
+            A resource that provides information about a place that comes from 
+            a single source.  Property `em:source` references a description of 
+            that source.
+            """ ;
+    rdfs:subClassOf em:Place .
+
+em:Qualified_relation a rdfs:Class ;
+    rdfs:label "Relationship between two places" ;
+    rdfs:comment """
+            A relationship between two places, which may be qualified in various ways.  
+            The type of relationship is specified by a 'em:relationType' property on the 
+            qualified relation.
+            """ .
+
+em:Relation_type a rdfs:Class ;
+    rdfs:label "Relationship type identifier" .
+
+em:Setting a rdfs:Class ;
+    rdfs:label "Spatial and temporal extent" ;
+    rdfs:comment """
+            A spatial and temporal extent that a place may occupy or lie within.
+            """ .
+
+em:Source_desc a rdfs:Class ;
+    rdfs:label "Information source" ;
+    rdfs:comment """
+            Describes a source of information.
+            """ .
+
+em:Time_period a rdfs:Class ;
+    rdfs:label "Time period" ;
+    rdfs:comment """
+            Identified (historical) time period, whose temporal extent may or may not be known.
+            """ .
+
+em:Time_span a rdfs:Class ;
+    rdfs:label "Time span" ;
+    rdfs:comment """
+            A time span specified in terms of its temporal extent.  
+            Some or all of the bounds of the temporal extent may be unknown or approximate.
+            """ .
+
+eml:de a em:Language_value ;
+    rdfs:label "German" ;
+    em:tag_639_1 "de" ;
+    em:tag_639_2 "deu" ;
+    rdfs:comment "# German" .
+
+eml:en a em:Language_value ;
+    rdfs:label "English" ;
+    em:tag_639_1 "en" ;
+    em:tag_639_2 "eng" ;
+    rdfs:comment "# English" .
+
+eml:la a em:Language_value ;
+    rdfs:label "Latin" ;
+    em:tag_639_1 "la" ;
+    em:tag_639_2 "lat" ;
+    rdfs:comment "# Latin" .
+
+eml:pl a em:Language_value ;
+    rdfs:label "Polish" ;
+    em:tag_639_1 "pl" ;
+    em:tag_639_2 "pol" ;
+    rdfs:comment "# Polish" .
+
+emp:Current a em:Time_period ;
+    rdfs:label "Current, as of 2018" ;
+    em:timespan [ a em:Time_span ;
+            <http://id.emplaces.info/vocab/earliestEnd:> "2018" ;
+            <http://id.emplaces.info/vocab/latestStart:> "2018" ] ;
+    rdfs:comment """
+            For ease of retrieval, use this specific resource to label any current information
+            (e.g. data extracted from GeoNames).  Additional Timespan values could be indicated 
+            if required to convey more specific information.
+            """ .
+
+em:AH_PART_OF_AH a em:Relation_type ;
+    rdfs:label "Former part of" ;
+    em:fromType em:P_OR_A ;
+    em:toType gn:A ;
+    rdfs:comment """
+            Records a historical relationship between a historical place or administrative division 
+            and its parent division.
+            """ .
+
+em:APPROXIMATE a em:Competence_value ;
+    rdfs:label "Approximate" ;
+    rdfs:comment """
+            The associated value is a date whose value is only approximately known.  
+
+            @@NOTE: this value may prove spurious, as timespan already has a way to 
+            represent approximation ranges."
+            """ .
+
+em:ASSUMED a em:Competence_value ;
+    rdfs:label "Assumed" ;
+    rdfs:comment """
+            The associated value is assumed from context.
+            """ .
+
+em:A_PART_OF_A a em:Relation_type ;
+    rdfs:label "Subdivision of" ;
+    em:fromType gn:A ;
+    em:toType gn:A ;
+    rdfs:comment """
+            Relates a subdivision of an administrative division to its parent division.
+            """ .
+
+em:CALENDAR_IN_USE rdfs:label "Calendar in use" ;
+    rdfs:comment """
+            References a historical calendar used in a place, with source and compenence information.
+            """ .
+
+em:DEDICATED_TO a oa:Motivation ;
+    rdfs:label "Dedicated to" ;
+    rdfs:comment """
+            Generally used with a related place that is a church or a place or worship, 
+            to indicate a person or historical figure to whom the place has been dedicated.  
+            The annotation body directly references a resource for the dedicatee, which is 
+            assumed to have an 'rdfs:label' value that can be used for display purposes.
+            """ .
+
+em:INFERRED a em:Competence_value ;
+    rdfs:label "Inferred" ;
+    rdfs:comment """
+            The associated value has been inferred from (preferably?) definitive informaton.
+            """ .
+
+em:NAME_ATTESTATION rdfs:label "Name attestation" ;
+    rdfs:comment """
+            References a historical name attestation for a place, with source and compenence information.
+            """ .
+
+em:S_PART_OF_P a em:Relation_type ;
+    rdfs:label "Located within" ;
+    em:fromType gn:S ;
+    em:toType gn:P ;
+    rdfs:comment """
+            Relates a spot feature to a populated place within which it may be found.
+            """ .
+
+em:UNCERTAIN a em:Competence_value ;
+    rdfs:label "Uncertain" ;
+    rdfs:comment """
+            The associated value is uncertain."
+            """ .
+
+em:USED_FOR a oa:Motivation ;
+    rdfs:label "Used for" ;
+    rdfs:comment """
+            Generally used with a related place that is a building or site for some activity, 
+            to indicate a purpose for which the place was used.  The annotation body directly 
+            references a resource describing the purpose, which is assumed to have an 'rdfs:label'
+            value that can be used for display purposes.  The annotation itself may carry a 
+            temporal constraint ('em:where') that gives some indication of when the place was 
+            used for that purpose.
+            """ .
+
+em:competence a rdf:Property ;
+    rdfs:label "Certainty, or quality, of information" ;
+    rdfs:comment """
+            Records the quality or certaintly of some information.  
+            Note that in the absence of an explicit value, no competence should be assumed.
+            """ ;
+    rdfs:range em:Competence_value .
+
+gn:A.ADM1H a skos:Concept ;
+    rdfs:label "Former first-order admin division" ;
+    rdfs:comment """
+        A former first-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.ADM2H a skos:Concept ;
+    rdfs:label "Former second-order admin division" ;
+    rdfs:comment """
+        A former first-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.ADM3H a skos:Concept ;
+    rdfs:label "Former Third-order admin division" ;
+    rdfs:comment """
+        A former third-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.PCLH a skos:Concept ;
+    rdfs:label "Former independent political entity" ;
+    rdfs:comment """
+        A former independent political entity, typically a country.
+        """ ;
+    skos:narrower gn:A .
+
+gn:P.PPLA a skos:Concept ;
+    rdfs:label "Seat of 1st-order admin div" ;
+    rdfs:comment """
+        Populated place that is a seat of a first-order administrative division.
+        """ ;
+    skos:narrower gn:P .
+
+gn:P.PPLH a skos:Concept ;
+    rdfs:label "Former populated place" ;
+    rdfs:comment """
+        A former populated place that no longer exists.
+        """ ;
+    skos:narrower gn:P .
+
+gn:S.CH a skos:Concept ;
+    rdfs:label "Church" ;
+    rdfs:comment """
+        A church; a building for public Christian worship.
+        """ ;
+    skos:narrower gn:S .
+
+place:place_2635167 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for United Kingdom" ;
+            em:link <http://sws.geonames.org/2635167/> ] ;
+    em:canonicalURI place:place_2635167 ;
+    em:place_data place:United_Kingdom_PCLI_2635167_geonames .
+
+place:place_2639108 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Rostherne" ;
+            em:link <http://sws.geonames.org/2639108/> ] ;
+    em:canonicalURI place:place_2639108 ;
+    em:place_data place:Rostherne_PPL_2639108_geonames .
+
+place:place_2789733 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for East Flanders" ;
+            em:link <http://sws.geonames.org/2789733/> ] ;
+    em:canonicalURI place:place_2789733 ;
+    em:place_data place:East_Flanders_ADM2_2789733_geonames .
+
+place:place_2791858 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Maldegem" ;
+            em:link <http://sws.geonames.org/2791858/> ] ;
+    em:canonicalURI place:place_2791858 ;
+    em:place_data place:Maldegem_ADM4_2791858_geonames .
+
+place:place_2798986 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Arrondissement Eeklo" ;
+            em:link <http://sws.geonames.org/2798986/> ] ;
+    em:canonicalURI place:place_2798986 ;
+    em:place_data place:Arrondissement_Eeklo_ADM3_2798986_geonames .
+
+place:place_2802361 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Belgium" ;
+            em:link <http://sws.geonames.org/2802361/> ] ;
+    em:canonicalURI place:place_2802361 ;
+    em:place_data place:Belgium_PCLI_2802361_geonames .
+
+place:place_2803347 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Adegem" ;
+            em:link <http://sws.geonames.org/2803347/> ] ;
+    em:canonicalURI place:place_2803347 ;
+    em:place_data place:Adegem_PPL_2803347_geonames .
+
+place:place_3337388 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Flanders" ;
+            em:link <http://sws.geonames.org/3337388/> ] ;
+    em:canonicalURI place:place_3337388 ;
+    em:place_data place:Flanders_ADM1_3337388_geonames .
+
+place:place_6269131 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for England" ;
+            em:link <http://sws.geonames.org/6269131/> ] ;
+    em:canonicalURI place:place_6269131 ;
+    em:place_data place:England_ADM1_6269131_geonames .
+
+place:place_7290536 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Cheshire East" ;
+            em:link <http://sws.geonames.org/7290536/> ] ;
+    em:canonicalURI place:place_7290536 ;
+    em:place_data place:Cheshire_East_ADM2_7290536_geonames .
+
+place:place_7299920 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Rostherne" ;
+            em:link <http://sws.geonames.org/7299920/> ] ;
+    em:canonicalURI place:place_7299920 ;
+    em:place_data place:Rostherne_ADM3_7299920_geonames .
+
+emt:Current_2018 a em:Time_span ;
+    rdfs:label "Current, as of 2018" ;
+    em:earliestEnd "2018" ;
+    em:latestStart "2018" ;
+    em:short_label "2018" ;
+    rdfs:comment "Timespan starting no later than 2018, and ending no sooner than 2018" .
+
+em:P_OR_A a skos:Concept ;
+    rdfs:label "Former populated place or admin division" ;
+    rdfs:comment """
+            Former populated place or administrative division, 
+            used in historical administrative relations
+            """ ;
+    skos:broader gn:A,
+        gn:P .
+
+place:Adegem_PPL_2803347_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Adegem (Populated place (P.PPL))" ;
+    em:alternateName "Adegem" ;
+    em:displayName "Adegem" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Adegem_PPL_2803347_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Adegem" ;
+                    em:link <http://www.geonames.org/2803347/adegem.html> ;
+                    em:preview <http://www.geonames.org/2803347/adegem.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Adegem" ] ;
+            oa:hasTarget place:Adegem_PPL_2803347_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Maldegem_ADM4_2791858_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Adegem_PPL_2803347_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:P ;
+    em:placeType gn:P.PPL ;
+    em:preferredName "Adegem" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.120509e+01 ;
+                    wgs84_pos:long 3.4954e+00 ] ;
+            em:source ems:Adegem_PPL_2803347_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Adegem_PPL_2803347_geonames ;
+    gn:countryCode "BE" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/2803347/about.rdf> .
+
+place:England_ADM1_6269131_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "England (Region (A.ADM1))" ;
+    em:alternateName "Anglia",
+        "Inggréh"@ace,
+        "Engeland"@af,
+        "Ngyiresi"@ak,
+        "ኢንግላንድ"@am,
+        "Anglaterra"@an,
+        "Englaland"@ang,
+        "إنجلترا"@ar,
+        "انجلترا"@arz,
+        "ইংলেণ্ড"@as,
+        "Inglaterra"@ast,
+        "İngiltərə"@az,
+        "اینگیلیس"@azb,
+        "Англия"@ba,
+        "Inglatera"@bcl,
+        "Англія"@be,
+        "Англия"@bg,
+        "इंग्लैण्ड"@bh,
+        "ইংল্যান্ড"@bn,
+        "Engleska"@bs,
+        "Англи"@bxr,
+        "Anglaterra"@ca,
+        "Ĭng-gáik-làng"@cdo,
+        "Англи"@ce,
+        "Inglatera"@ceb,
+        "ئینگلتەرا"@ckb,
+        "Anglie"@cs,
+        "Англи"@cv,
+        "Lloegr"@cy,
+        "İngıltere"@diq,
+        "Engelska"@dsb,
+        "އިނގިރޭސިވިލާތް"@dv,
+        "Αγγλία"@el,
+        "Anglio"@eo,
+        "Anglujo"@eo,
+        "Inglaterra"@es,
+        "Inglismaa"@et,
+        "Ingalaterra"@eu,
+        "Ingalaterra"@ext,
+        "انگلستان"@fa,
+        "Englanti"@fi,
+        "Ongland"@fo,
+        "Angleterre"@fr,
+        "Ingelun"@frr,
+        "Anglie"@fur,
+        "Ingelân"@fy,
+        "Sasana"@ga,
+        "Sasainn"@gd,
+        "Inglaterra"@gl,
+        "Ingyaterra"@gn,
+        "इंग्लंड"@gom,
+        "Sostyn"@gv,
+        "Engleska"@hbs,
+        "אנגליה"@he,
+        "इंग्लैण्ड"@hi,
+        "Engleska"@hr,
+        "Jendźelska"@hsb,
+        "Angletè"@ht,
+        "Անգլիա"@hy,
+        "Anglaterra"@ia,
+        "Inggris"@id,
+        "Inglatera"@ilo,
+        "Inghilterra"@it,
+        "イングランド"@ja,
+        "Inggris"@jv,
+        "ინგლისი"@ka,
+        "Angliya"@kaa,
+        "Ngeretha"@ki,
+        "Англия"@kk,
+        "អង់គ្លេស"@km,
+        "ಇಂಗ್ಲೆಂಡ್"@kn,
+        "잉글랜드"@ko,
+        "Îngilistan"@ku,
+        "Pow Sows"@kw,
+        "Англия"@ky,
+        "Inglaterra"@lad,
+        "Англия"@lez,
+        "Ingeland"@li,
+        "Inghiltæra"@lij,
+        "Inghiltèra"@lmo,
+        "Ingɛlandi"@ln,
+        "ປະເທດອັງກິດ"@lo,
+        "Anglija"@lt,
+        "Anglija"@lv,
+        "英格蘭"@lzh,
+        "Ingarangi"@mi,
+        "Inggirih"@min,
+        "Англија"@mk,
+        "ഇംഗ്ലണ്ട്"@ml,
+        "Англи"@mn,
+        "इंग्लंड"@mr,
+        "Ingilterra"@mt,
+        "အင်္ဂလန်နိုင်ငံ"@my,
+        "Inglatlalpan"@nah,
+        "Eng-tē"@nan,
+        "Ngreterra"@nap,
+        "इङ्ल्यान्ड"@ne,
+        "Angliétèrre"@nrm,
+        "Anglatèrra"@oc,
+        "ଇଂଲଣ୍ଡ"@or,
+        "Англис"@os,
+        "ਇੰਗਲੈਂਡ"@pa,
+        "Inglaterra"@pam,
+        "Inglatera"@pap,
+        "Ingueltière"@pcd,
+        "Ingland"@pih,
+        "Anglia"@pl,
+        "Anghiltèra"@pms,
+        "انگلستان"@pnb,
+        "انګلېنډ"@ps,
+        "Inglaterra"@pt,
+        "Inlatirra"@qu,
+        "Engalterra"@rm,
+        "Англия"@ru,
+        "इङ्ग्लेण्ड्"@sa,
+        "Inghilterra"@sc,
+        "Nglaterra"@scn,
+        "Ingland"@sco,
+        "Englánda"@se,
+        "Onglėjė"@sgs,
+        "Anglicko"@sk,
+        "Anglija"@sl,
+        "Ingiriiska"@so,
+        "Енглеска"@sr,
+        "Ngilandi"@ss,
+        "Engelane"@st,
+        "Änglound"@stq,
+        "Inggris"@su,
+        "England"@sv,
+        "Uingereza"@sw,
+        "Yngland"@szl,
+        "இங்கிலாந்து"@ta,
+        "ఇంగ్లాండు"@te,
+        "Inglaterra"@tet,
+        "Англия"@tg,
+        "ประเทศอังกฤษ"@th,
+        "Angliýa"@tk,
+        "Inglatera"@tl,
+        "ʻIngilani"@to,
+        "Inglan"@tpi,
+        "İngiltere"@tr,
+        "Англия"@tt,
+        "Англія"@uk,
+        "انگلستان"@ur,
+        "Angliya"@uz,
+        "Inghiltera"@vec,
+        "Anglii"@vep,
+        "Anh"@vi,
+        "Iengeland"@vls,
+        "Linglän"@vo,
+        "Inglaterra"@war,
+        "英格兰"@wuu,
+        "Инглишин Таңһч"@xal,
+        "INgesi"@xh,
+        "ინგლისი"@xmf,
+        "ענגלאנד"@yi,
+        "Ilẹ̀gẹ̀ẹ́sì"@yo,
+        "英倫"@yue,
+        "Iengeland"@zea,
+        "英格兰"@zh,
+        "INgilandi"@zu ;
+    em:displayName "Anghiltèra",
+        "Anglaterra",
+        "Anglatèrra",
+        "Angleterre",
+        "Angletè",
+        "Anglia",
+        "Anglicko",
+        "Anglie",
+        "Anglii",
+        "Anglija",
+        "Anglio",
+        "Angliya",
+        "Angliétèrre",
+        "Angliýa",
+        "Anglujo",
+        "Anh",
+        "Eng-tē",
+        "Engalterra",
+        "Engeland",
+        "Engelane",
+        "Engelska",
+        "Englaland",
+        "England",
+        "Englanti",
+        "Engleska",
+        "Englánda",
+        "INgesi",
+        "INgilandi",
+        "Iengeland",
+        "Ilẹ̀gẹ̀ẹ́sì",
+        "Ingalaterra",
+        "Ingarangi",
+        "Ingeland",
+        "Ingelun",
+        "Ingelân",
+        "Inggirih",
+        "Inggris",
+        "Inggréh",
+        "Inghiltera",
+        "Inghilterra",
+        "Inghiltæra",
+        "Inghiltèra",
+        "Ingilterra",
+        "Ingiriiska",
+        "Inglan",
+        "Ingland",
+        "Inglatera",
+        "Inglaterra",
+        "Inglatlalpan",
+        "Inglismaa",
+        "Ingueltière",
+        "Ingyaterra",
+        "Ingɛlandi",
+        "Inlatirra",
+        "Jendźelska",
+        "Linglän",
+        "Lloegr",
+        "Ngeretha",
+        "Ngilandi",
+        "Nglaterra",
+        "Ngreterra",
+        "Ngyiresi",
+        "Ongland",
+        "Onglėjė",
+        "Pow Sows",
+        "Sasainn",
+        "Sasana",
+        "Sostyn",
+        "Uingereza",
+        "Yngland",
+        "Änglound",
+        "Îngilistan",
+        "Ĭng-gáik-làng",
+        "İngiltere",
+        "İngiltərə",
+        "İngıltere",
+        "ʻIngilani",
+        "Αγγλία",
+        "Англи",
+        "Англис",
+        "Англия",
+        "Англија",
+        "Англія",
+        "Енглеска",
+        "Инглишин Таңһч",
+        "Անգլիա",
+        "אנגליה",
+        "ענגלאנד",
+        "إنجلترا",
+        "ئینگلتەرا",
+        "انجلترا",
+        "انګلېنډ",
+        "انگلستان",
+        "اینگیلیس",
+        "އިނގިރޭސިވިލާތް",
+        "इंग्लंड",
+        "इंग्लैण्ड",
+        "इङ्ग्लेण्ड्",
+        "इङ्ल्यान्ड",
+        "ইংলেণ্ড",
+        "ইংল্যান্ড",
+        "ਇੰਗਲੈਂਡ",
+        "ଇଂଲଣ୍ଡ",
+        "இங்கிலாந்து",
+        "ఇంగ్లాండు",
+        "ಇಂಗ್ಲೆಂಡ್",
+        "ഇംഗ്ലണ്ട്",
+        "ประเทศอังกฤษ",
+        "ປະເທດອັງກິດ",
+        "အင်္ဂလန်နိုင်ငံ",
+        "ინგლისი",
+        "ኢንግላንድ",
+        "អង់គ្លេស",
+        "イングランド",
+        "英倫",
+        "英格兰",
+        "英格蘭",
+        "잉글랜드" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:England_ADM1_6269131_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for England" ;
+                    em:link <http://www.geonames.org/6269131/england.html> ;
+                    em:preview <http://www.geonames.org/6269131/england.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for England" ] ;
+            oa:hasTarget place:England_ADM1_6269131_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:United_Kingdom_PCLI_2635167_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:England_ADM1_6269131_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM1 ;
+    em:preferredName "England" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.216045e+01 ;
+                    wgs84_pos:long -7.0312e-01 ] ;
+            em:source ems:England_ADM1_6269131_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:England_ADM1_6269131_geonames ;
+    gn:countryCode "GB" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/6269131/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/England>,
+        <https://en.wikipedia.org/wiki/England> .
+
+place:Rostherne_PPL_2639108_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Rostherne (Populated place (P.PPL))" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Rostherne_PPL_2639108_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Rostherne" ;
+                    em:link <http://www.geonames.org/2639108/rostherne.html> ;
+                    em:preview <http://www.geonames.org/2639108/rostherne.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Rostherne" ] ;
+            oa:hasTarget place:Rostherne_PPL_2639108_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Rostherne_ADM3_7299920_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Rostherne_PPL_2639108_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:P ;
+    em:placeType gn:P.PPL ;
+    em:preferredName "Rostherne" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.334633e+01 ;
+                    wgs84_pos:long -2.386e+00 ] ;
+            em:source ems:Rostherne_PPL_2639108_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Rostherne_PPL_2639108_geonames ;
+    gn:countryCode "GB" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/2639108/about.rdf> .
+
+gn:A.ADM1 a skos:Concept ;
+    rdfs:label "First-order admin division" ;
+    rdfs:comment """
+        A primary administrative division of a country, such as a state in the United States.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.ADM2 a skos:Concept ;
+    rdfs:label "Second-order admin division" ;
+    rdfs:comment """
+        A subdivision of a first-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.ADM3 a skos:Concept ;
+    rdfs:label "Third-order admin division" ;
+    rdfs:comment """
+        A subdivision of a second-order administrative division.
+        """ ;
+    skos:narrower gn:A .
+
+gn:A.PCLI a skos:Concept ;
+    rdfs:label "Independent political entity" ;
+    rdfs:comment """
+        An independent political entity, typically a country.
+        """ ;
+    skos:narrower gn:A .
+
+gn:P.PPL a skos:Concept ;
+    rdfs:label "Populated place" ;
+    rdfs:comment """
+        A populated place (town, city, village, etc.).
+        """ ;
+    skos:narrower gn:P .
+
+gn:S a skos:Concept ;
+    rdfs:label "Spot feature" ;
+    rdfs:comment """
+        Spot feature (spot, building, farm).
+        """ .
+
+place:Arrondissement_Eeklo_ADM3_2798986_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Arrondissement Eeklo (City   (A.ADM3))" ;
+    em:alternateName "Ecklo",
+        "Eecloo",
+        "Arrondissement d’Eeklo"@fr,
+        "Arrondissement Eeklo"@nl,
+        "Eeklo"@nl ;
+    em:displayName "Arrondissement Eeklo",
+        "Arrondissement d’Eeklo",
+        "Ecklo",
+        "Eecloo",
+        "Eeklo" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Arrondissement Eeklo" ;
+                    em:link <http://www.geonames.org/2798986/arrondissement-eeklo.html> ;
+                    em:preview <http://www.geonames.org/2798986/arrondissement-eeklo.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Arrondissement Eeklo" ] ;
+            oa:hasTarget place:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:East_Flanders_ADM2_2789733_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM3 ;
+    em:preferredName "Arrondissement Eeklo" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.123106e+01 ;
+                    wgs84_pos:long 3.60952e+00 ] ;
+            em:source ems:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+    gn:countryCode "BE" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/2798986/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Arrondissement_of_Eeklo>,
+        <https://en.wikipedia.org/wiki/Arrondissement_of_Eeklo> .
+
+place:Belgium_PCLI_2802361_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Belgium (Country)" ;
+    em:alternateName "Belgien",
+        "Belgium",
+        "België"@af,
+        "ቤልጄም"@am,
+        "ቤልጅግ"@am,
+        "Belchica"@an,
+        "Belgium"@ang,
+        "بلجيكا"@ar,
+        "ܒܠܓܝܟܐ"@arc,
+        "Bélxica"@ast,
+        "Belgien"@bar,
+        "Бэльгія"@be,
+        "Белгия"@bg,
+        "বেলজিয়াম"@bn,
+        "বেল্জিয়ম"@bn,
+        "པེར་ཅིན"@bo,
+        "Belgia"@br,
+        "Belgija"@bs,
+        "Bèlgica"@ca,
+        "بەلژیک"@ckb,
+        "Belgie"@cs,
+        "Бельги"@cv,
+        "Gwlad Belg"@cy,
+        "Belgien"@da,
+        "Königreich Belgien"@de,
+        "བེལ་ཇིཡམ"@dz,
+        "Βέλγιο"@el,
+        "Kingdom of Belgium"@en,
+        "Belgio"@eo,
+        "Belgujo"@eo,
+        "Belgia"@et,
+        "Belgika"@eu,
+        "بلژیک"@fa,
+        "Belgia"@fi,
+        "Belgia"@fo,
+        "Royaume de Belgique"@fr,
+        "Bèlg·ique"@frp,
+        "Belgjo"@fur,
+        "Belgje"@fy,
+        "An Bheilg"@ga,
+        "A'Bheilg"@gd,
+        "Bélxica - België"@gl,
+        "Yn Velg"@gv,
+        "Belgija"@hbs,
+        "בלגיה"@he,
+        "बेल्जियम"@hi,
+        "Belgija"@hr,
+        "Belgiska"@hsb,
+        "Bèljik"@ht,
+        "Belgium"@hu,
+        "Բելգիա"@hy,
+        "Belgica"@ia,
+        "Belgia"@id,
+        "Belgium"@ilo,
+        "Belgia"@io,
+        "Belgía"@is,
+        "Belgio"@it,
+        "ベルギー"@ja,
+        "gugdrbelgi"@jbo,
+        "Belgia"@jv,
+        "ბელგია"@ka,
+        "បែលហ្ស៉ិក"@km,
+        "벨기에"@ko,
+        "Belçîka"@ku,
+        "Pow Belg"@kw,
+        "Belgia"@la,
+        "Belsch"@lb,
+        "Belsj"@li,
+        "Bɛ́ljika"@ln,
+        "ເບວຢຽມ"@lo,
+        "Belgija"@lt,
+        "Beļģija"@lv,
+        "Белгија"@mk,
+        "बेल्जियम"@mr,
+        "Belgium"@ms,
+        "Belġju"@mt,
+        "Belgium"@na,
+        "Belgia"@nb,
+        "Belgien"@nds,
+        "बेल्जियम"@ne,
+        "Koninkrijk België"@nl,
+        "Belgia"@nn,
+        "Belgia"@no,
+        "Belgia"@nov,
+        "Belgique"@nrm,
+        "Belgica"@oc,
+        "Bel’gii"@olo,
+        "ବେଲଜିୟମ୍"@or,
+        "Бельги"@os,
+        "Belgium"@pam,
+        "Belgia"@pl,
+        "Belgio"@pms,
+        "بلجيم"@ps,
+        "Bélgica"@pt,
+        "Bilgasuyu"@qu,
+        "Bilhika"@qu,
+        "Belgia"@rm,
+        "Belgia"@ro,
+        "Бельгия"@ru,
+        "बेल्जियम"@sa,
+        "Belgiu"@scn,
+        "Belgia"@se,
+        "Belgicko"@sk,
+        "Belgija"@sl,
+        "Belgjika"@sq,
+        "Belgjikë"@sq,
+        "Белгија"@sr,
+        "Belgien"@sv,
+        "Ubelgiji"@sw,
+        "பெல்ஜியம்"@ta,
+        "Béljika"@tet,
+        "Белгия"@tg,
+        "ประเทศเบลเยียม"@th,
+        "เบลเยียม"@th,
+        "ቤልጄም"@ti,
+        "Belhika"@tl,
+        "Belsum"@tpi,
+        "Belçika"@tr,
+        "Бельгія"@uk,
+        "Бельґія"@uk,
+        "Bỉ"@vi,
+        "Belgje"@vls,
+        "Beldjike"@wa,
+        "Belhika"@war,
+        "België"@zea,
+        "比利时"@zh ;
+    em:displayName "A'Bheilg",
+        "An Bheilg",
+        "Belchica",
+        "Beldjike",
+        "Belgia",
+        "Belgica",
+        "Belgicko",
+        "Belgie",
+        "Belgien",
+        "Belgija",
+        "Belgika",
+        "Belgio",
+        "Belgique",
+        "Belgiska",
+        "Belgiu",
+        "Belgium",
+        "België",
+        "Belgje",
+        "Belgjika",
+        "Belgjikë",
+        "Belgjo",
+        "Belgujo",
+        "Belgía",
+        "Belhika",
+        "Belsch",
+        "Belsj",
+        "Belsum",
+        "Belçika",
+        "Belçîka",
+        "Belġju",
+        "Bel’gii",
+        "Beļģija",
+        "Bilgasuyu",
+        "Bilhika",
+        "Bèlgica",
+        "Bèlg·ique",
+        "Bèljik",
+        "Bélgica",
+        "Béljika",
+        "Bélxica",
+        "Bélxica - België",
+        "Bɛ́ljika",
+        "Bỉ",
+        "Gwlad Belg",
+        "Kingdom of Belgium",
+        "Koninkrijk België",
+        "Königreich Belgien",
+        "Pow Belg",
+        "Royaume de Belgique",
+        "Ubelgiji",
+        "Yn Velg",
+        "gugdrbelgi",
+        "Βέλγιο",
+        "Белгия",
+        "Белгија",
+        "Бельги",
+        "Бельгия",
+        "Бельгія",
+        "Бельґія",
+        "Бэльгія",
+        "Բելգիա",
+        "בלגיה",
+        "بلجيكا",
+        "بلجيم",
+        "بلژیک",
+        "بەلژیک",
+        "ܒܠܓܝܟܐ",
+        "बेल्जियम",
+        "বেলজিয়াম",
+        "বেল্জিয়ম",
+        "ବେଲଜିୟମ୍",
+        "பெல்ஜியம்",
+        "ประเทศเบลเยียม",
+        "เบลเยียม",
+        "ເບວຢຽມ",
+        "པེར་ཅིན",
+        "བེལ་ཇིཡམ",
+        "ბელგია",
+        "ቤልጄም",
+        "ቤልጅግ",
+        "បែលហ្ស៉ិក",
+        "ベルギー",
+        "比利时",
+        "벨기에" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Belgium_PCLI_2802361_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Belgium" ;
+                    em:link <http://www.geonames.org/2802361/kingdom-of-belgium.html> ;
+                    em:preview <http://www.geonames.org/2802361/kingdom-of-belgium.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Belgium" ] ;
+            oa:hasTarget place:Belgium_PCLI_2802361_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:European_Union_ZN_6695072_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Belgium_PCLI_2802361_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.PCLI ;
+    em:preferredName "Belgium" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.075e+01 ;
+                    wgs84_pos:long 4.5e+00 ] ;
+            em:source ems:Belgium_PCLI_2802361_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Belgium_PCLI_2802361_geonames ;
+    gn:countryCode "BE" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/2802361/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Belgium>,
+        <https://en.wikipedia.org/wiki/Belgium>,
+        <https://ru.wikipedia.org/wiki/%D0%91%D0%B5%D0%BB%D1%8C%D0%B3%D0%B8%D1%8F> .
+
+place:Cheshire_East_ADM2_7290536_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Cheshire East (County (A.ADM2))" ;
+    em:alternateName "Восточный Чешир"@ru,
+        "Східний Чешир"@uk,
+        "چیشائر مشرقی"@ur,
+        "東柴郡"@zh ;
+    em:displayName "Восточный Чешир",
+        "Східний Чешир",
+        "چیشائر مشرقی",
+        "東柴郡" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Cheshire_East_ADM2_7290536_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Cheshire East" ;
+                    em:link <http://www.geonames.org/7290536/cheshire-east.html> ;
+                    em:preview <http://www.geonames.org/7290536/cheshire-east.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Cheshire East" ] ;
+            oa:hasTarget place:Cheshire_East_ADM2_7290536_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Cheshire_RGN_2653234_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Cheshire_East_ADM2_7290536_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM2 ;
+    em:preferredName "Cheshire East" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.316702e+01 ;
+                    wgs84_pos:long -2.36245e+00 ] ;
+            em:source ems:Cheshire_East_ADM2_7290536_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Cheshire_East_ADM2_7290536_geonames ;
+    gn:countryCode "GB" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7290536/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Cheshire_East>,
+        <https://en.wikipedia.org/wiki/Cheshire_East> .
+
+place:East_Flanders_ADM2_2789733_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "East Flanders (County (A.ADM2))" ;
+    em:alternateName "East Flanders",
+        "Ost-Flandern",
+        "Province de Flandre Orientale",
+        "Ost-Flandern"@de,
+        "Provinz Ostflandern"@de,
+        "East Flanders"@en,
+        "East Flanders Province"@en,
+        "Flandre Orientale"@fr,
+        "Province de Flandre Orientale"@fr,
+        "Øst-Flandern"@nb,
+        "Oost-Vlaanderen"@nl,
+        "Provincie Oost-Vlaanderen"@nl,
+        "Aust-Flandern"@nn,
+        "Flandres Oriental"@pt,
+        "Östflandern"@sv ;
+    em:displayName "Aust-Flandern",
+        "East Flanders",
+        "East Flanders Province",
+        "Flandre Orientale",
+        "Flandres Oriental",
+        "Oost-Vlaanderen",
+        "Ost-Flandern",
+        "Province de Flandre Orientale",
+        "Provincie Oost-Vlaanderen",
+        "Provinz Ostflandern",
+        "Östflandern",
+        "Øst-Flandern" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:East_Flanders_ADM2_2789733_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for East Flanders" ;
+                    em:link <http://www.geonames.org/2789733/provincie-oost-vlaanderen.html> ;
+                    em:preview <http://www.geonames.org/2789733/provincie-oost-vlaanderen.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for East Flanders" ] ;
+            oa:hasTarget place:East_Flanders_ADM2_2789733_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Flanders_ADM1_3337388_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:East_Flanders_ADM2_2789733_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM2 ;
+    em:preferredName "East Flanders" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.1e+01 ;
+                    wgs84_pos:long 3.75e+00 ] ;
+            em:source ems:East_Flanders_ADM2_2789733_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:East_Flanders_ADM2_2789733_geonames ;
+    gn:countryCode "BE" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/2789733/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/East_Flanders>,
+        <https://en.wikipedia.org/wiki/East_Flanders> .
+
+place:Flanders_ADM1_3337388_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Flanders (Region (A.ADM1))" ;
+    em:alternateName "Flandre",
+        "Vlaanderen",
+        "Flandes"@ca,
+        "Flämische Region"@de,
+        "Flemish Region"@en,
+        "Flandes"@es,
+        "Région Flamande"@fr,
+        "Flóndras"@ga,
+        "Flandres"@pt ;
+    em:displayName "Flandes",
+        "Flandre",
+        "Flandres",
+        "Flemish Region",
+        "Flämische Region",
+        "Flóndras",
+        "Région Flamande",
+        "Vlaanderen" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Flanders_ADM1_3337388_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Flanders" ;
+                    em:link <http://www.geonames.org/3337388/flanders.html> ;
+                    em:preview <http://www.geonames.org/3337388/flanders.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Flanders" ] ;
+            oa:hasTarget place:Flanders_ADM1_3337388_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Belgium_PCLI_2802361_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Flanders_ADM1_3337388_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM1 ;
+    em:preferredName "Flanders" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.1e+01 ;
+                    wgs84_pos:long 4.5e+00 ] ;
+            em:source ems:Flanders_ADM1_3337388_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Flanders_ADM1_3337388_geonames ;
+    gn:countryCode "BE" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337388/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Flemish_Region>,
+        <https://en.wikipedia.org/wiki/Flemish_Region> .
+
+place:Maldegem_ADM4_2791858_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Maldegem (City   (A.ADM4))" ;
+    em:alternateName "Maldegem",
+        "Moaldegem"@vls ;
+    em:displayName "Maldegem",
+        "Moaldegem" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Maldegem_ADM4_2791858_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Maldegem" ;
+                    em:link <http://www.geonames.org/2791858/maldegem.html> ;
+                    em:preview <http://www.geonames.org/2791858/maldegem.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Maldegem" ] ;
+            oa:hasTarget place:Maldegem_ADM4_2791858_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Arrondissement_Eeklo_ADM3_2798986_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Maldegem_ADM4_2791858_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM4 ;
+    em:preferredName "Maldegem" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.120146e+01 ;
+                    wgs84_pos:long 3.44716e+00 ] ;
+            em:source ems:Maldegem_ADM4_2791858_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Maldegem_ADM4_2791858_geonames ;
+    gn:countryCode "BE" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/2791858/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Maldegem>,
+        <https://en.wikipedia.org/wiki/Maldegem> .
+
+place:Rostherne_ADM3_7299920_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Rostherne (City   (A.ADM3))" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Rostherne_ADM3_7299920_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Rostherne" ;
+                    em:link <http://www.geonames.org/7299920/rostherne.html> ;
+                    em:preview <http://www.geonames.org/7299920/rostherne.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Rostherne" ] ;
+            oa:hasTarget place:Rostherne_ADM3_7299920_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Cheshire_East_ADM2_7290536_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Rostherne_ADM3_7299920_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM3 ;
+    em:preferredName "Rostherne" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.335338e+01 ;
+                    wgs84_pos:long -2.38077e+00 ] ;
+            em:source ems:Rostherne_ADM3_7299920_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Rostherne_ADM3_7299920_geonames ;
+    gn:countryCode "GB" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7299920/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Rostherne>,
+        <https://en.wikipedia.org/wiki/Rostherne> .
+
+place:United_Kingdom_PCLI_2635167_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "United Kingdom (Country)" ;
+    em:alternateName "Britain",
+        "United Kingdom"@aa,
+        "Groot-Brittanje"@af,
+        "Verenigde Koninkryk"@af,
+        "እንግሊዝ"@am,
+        "ዩናይትድ ኪንግደም"@am,
+        "Reino Unito"@an,
+        "Geāned Cynerīce"@ang,
+        "المملكة المتحدة"@ar,
+        "ܡܠܟܘܬܐ ܡܚܝܕܬܐ"@arc,
+        "Reinu Uníu"@ast,
+        "Reinu Xuníu"@ast,
+        "Böyük Britaniya"@az,
+        "Vaeinigts Kinireich"@bar,
+        "Велікабрытанія"@be,
+        "Вялікабрытанія"@be,
+        "Обединено кралство"@bg,
+        "Обединено кралство Великобритания и Северна Ирландия"@bg,
+        "গ্রেটবৃটেন"@bn,
+        "যুক্তরাজ্য"@bn,
+        "Rouantelezh Unanet Breizh-Veur ha Norzhiwerzhon"@br,
+        "Ujedinjeno Kraljevstvo"@bs,
+        "Ĭng-guók"@cdo,
+        "شانشینی یەکگرتوو"@ckb,
+        "Regnu Unitu"@co,
+        "Spojené království"@cs,
+        "Velká Británie"@cs,
+        "Prydain Fawr"@cy,
+        "Det Forenede Kongerige"@da,
+        "Det Forenede Kongerige Storbritannien og Nordirland"@da,
+        "Storbritannien"@da,
+        "Großbritannien"@de,
+        "Großbritannien und Nordirland"@de,
+        "ཡུ་ནའི་ཊེཊ་ཀིང་ཌམ"@dz,
+        "Ηνωμένο Βασίλειο"@el,
+        "Britain"@en,
+        "U.K."@en,
+        "UK"@en,
+        "United Kingdom of Great Britain and Northern Ireland"@en,
+        "Unuiĝinta Reĝlando"@eo,
+        "Suurbritannia"@et,
+        "Ühendkuningriik"@et,
+        "Erresuma Batua"@eu,
+        "بریتانیا"@fa,
+        "پادشاهی متحد بریتانیای کبیر و ایرلند شمالی"@fa,
+        "پادشاهی متحده"@fa,
+        "Yhdistynyt kuningaskunta"@fi,
+        "Stóra Bretland"@fo,
+        "Grande-Bretagne"@fr,
+        "Royômo-Uni"@frp,
+        "Grut-Brittanje"@fy,
+        "An Ríocht Aontaithe"@ga,
+        "An Rìoghachd Aonaichte"@gd,
+        "Reino Unido - United Kingdom"@gl,
+        "Reeriaght Unnaneysit"@gv,
+        "Rywvaneth Unys"@gv,
+        "Ujedinjeno Kraljevstvo"@hbs,
+        "בריטניה"@he,
+        "הממלכה המאוחדת"@he,
+        "संयुक्त राजशाही"@hi,
+        "Ujedinjena Kraljevina"@hr,
+        "Ujedinjeno Kraljevstvo"@hr,
+        "Zjednoćene kralestwo"@hsb,
+        "Wayòm Ini"@ht,
+        "Egyesült Királyság"@hu,
+        "Մեծ Բրիտանիա"@hy,
+        "Միավորված Թագավորություն"@hy,
+        "Regno Unite"@ia,
+        "Britania Raya"@id,
+        "Inggris Raya"@id,
+        "Nagkaykaysa a Pagarian"@ilo,
+        "Unionita Rejio"@io,
+        "Bretland"@is,
+        "Regno Unito"@it,
+        "イギリス"@ja,
+        "გაერთიანებული სამეფო"@ka,
+        "დიდი ბრიტანეთი"@ka,
+        "영국"@ko,
+        "Keyaniya Yekbûyî"@ku,
+        "Keyatiya Yekbûyî ya Brîtaniya Mezin û Îrlanda"@ku,
+        "Rywvaneth Unys"@kw,
+        "Britanniarum Regnum"@la,
+        "Regnum Unitum"@la,
+        "Groussbritannien"@lb,
+        "Groussbritannien an Nordirland"@lb,
+        "Vereineg Keuninkriek"@li,
+        "Regno Unïo"@lij,
+        "ສະຫະລາດຊະອານາຈັກ"@lo,
+        "Didžioji Britanija"@lt,
+        "Jungtinė Didžiosios Britanijos ir Šiaurės Airijos Karalystė"@lt,
+        "Apvienotā Karaliste"@lv,
+        "Lielbritānija"@lv,
+        "Kīngitanga Kotahi"@mi,
+        "Велика Британија"@mk,
+        "Обединето Кралство"@mk,
+        "United Kingdom"@ms,
+        "Ingilterra"@mt,
+        "Renju Unit"@mt,
+        "Storbritannia"@nb,
+        "Vereenigt Königriek vun Grootbritannien un Noordirland"@nds,
+        "Groot-Brittannië"@nl,
+        "Verenigd Koninkrijk"@nl,
+        "Storbritannia"@nn,
+        "Det forente kongerike Storbritannia og Nord-Irland"@no,
+        "Rouoyaume Unni"@nrm,
+        "Reialme Unit"@oc,
+        "Yhtys Kuningaskundu"@olo,
+        "United Kingdom"@om,
+        "Стыр Британи"@os,
+        "Pisanmetung a Ka-arian"@pam,
+        "Wielka Brytania"@pl,
+        "Regn Unì"@pms,
+        "برتانیه"@ps,
+        "بريتانيا"@ps,
+        "Reino Unido"@pt,
+        "Hukllachasqa Qhapaq Suyu"@qu,
+        "Reginavel Unì da la Gronda Britannia ed Irlanda dal Nord"@rm,
+        "Phandlo Thagaripen la Bare Britaniyako thai le Nordutne Irlandesko"@rmy,
+        "Marea Britanie"@ro,
+        "Regatul Unit al Marii Britanii și al Irlandei de Nord"@ro,
+        "Великобритания"@ru,
+        "Соединенное Королевство"@ru,
+        "Regnu Unitu"@scn,
+        "Unitit Kinrick"@sco,
+        "Spojené kráľovstvo"@sk,
+        "Velika Britanija"@sl,
+        "Združeno kraljestvo Velike Britanije in Severne Irske"@sl,
+        "United Kingdom"@so,
+        "Mbretëria e Bashkuar"@sq,
+        "Mbretëria e Bashkuar e Britanisë së Madhe dhe Irlandës së Veriut"@sq,
+        "Велика Британија"@sr,
+        "Уједињено Краљевство"@sr,
+        "Storbritannien"@sv,
+        "Uingereza"@sw,
+        "ஐக்கிய இராச்சியம்"@ta,
+        "பிரிடிஷ் கூட்டரசு"@ta,
+        "బ్రిటన్"@te,
+        "Reinu Naklibur"@tet,
+        "Подшоҳии Муттаҳида"@tg,
+        "สหราชอาณาจักร"@th,
+        "Nagkakaisang Kaharain"@tl,
+        "Nagkakaisang Kaharian"@tl,
+        "Birleşik Krallık"@tr,
+        "Paratāne"@ty,
+        "بۈيۈك بېرىتانىيە"@ug,
+        "Велика Британія"@uk,
+        "Великобританія"@uk,
+        "برطانیہ"@ur,
+        "Бирлашган Қироллик"@uz,
+        "Vương quốc Anh"@vi,
+        "Vương quốc Liên hiệp Anh và Bắc Ireland"@vi,
+        "פאראייניגטע קעניגרייך"@yi,
+        "英国"@zh ;
+    em:displayName "An Rìoghachd Aonaichte",
+        "An Ríocht Aontaithe",
+        "Apvienotā Karaliste",
+        "Birleşik Krallık",
+        "Bretland",
+        "Britain",
+        "Britania Raya",
+        "Britanniarum Regnum",
+        "Böyük Britaniya",
+        "Det Forenede Kongerige",
+        "Det Forenede Kongerige Storbritannien og Nordirland",
+        "Det forente kongerike Storbritannia og Nord-Irland",
+        "Didžioji Britanija",
+        "Egyesült Királyság",
+        "Erresuma Batua",
+        "Geāned Cynerīce",
+        "Grande-Bretagne",
+        "Groot-Brittanje",
+        "Groot-Brittannië",
+        "Groussbritannien",
+        "Groussbritannien an Nordirland",
+        "Großbritannien",
+        "Großbritannien und Nordirland",
+        "Grut-Brittanje",
+        "Hukllachasqa Qhapaq Suyu",
+        "Inggris Raya",
+        "Ingilterra",
+        "Jungtinė Didžiosios Britanijos ir Šiaurės Airijos Karalystė",
+        "Keyaniya Yekbûyî",
+        "Keyatiya Yekbûyî ya Brîtaniya Mezin û Îrlanda",
+        "Kīngitanga Kotahi",
+        "Lielbritānija",
+        "Marea Britanie",
+        "Mbretëria e Bashkuar",
+        "Mbretëria e Bashkuar e Britanisë së Madhe dhe Irlandës së Veriut",
+        "Nagkakaisang Kaharain",
+        "Nagkakaisang Kaharian",
+        "Nagkaykaysa a Pagarian",
+        "Paratāne",
+        "Phandlo Thagaripen la Bare Britaniyako thai le Nordutne Irlandesko",
+        "Pisanmetung a Ka-arian",
+        "Prydain Fawr",
+        "Reeriaght Unnaneysit",
+        "Regatul Unit al Marii Britanii și al Irlandei de Nord",
+        "Reginavel Unì da la Gronda Britannia ed Irlanda dal Nord",
+        "Regn Unì",
+        "Regno Unite",
+        "Regno Unito",
+        "Regno Unïo",
+        "Regnu Unitu",
+        "Regnum Unitum",
+        "Reialme Unit",
+        "Reino Unido",
+        "Reino Unido - United Kingdom",
+        "Reino Unito",
+        "Reinu Naklibur",
+        "Reinu Uníu",
+        "Reinu Xuníu",
+        "Renju Unit",
+        "Rouantelezh Unanet Breizh-Veur ha Norzhiwerzhon",
+        "Rouoyaume Unni",
+        "Royômo-Uni",
+        "Rywvaneth Unys",
+        "Spojené království",
+        "Spojené kráľovstvo",
+        "Storbritannia",
+        "Storbritannien",
+        "Stóra Bretland",
+        "Suurbritannia",
+        "U.K.",
+        "UK",
+        "Uingereza",
+        "Ujedinjena Kraljevina",
+        "Ujedinjeno Kraljevstvo",
+        "Unionita Rejio",
+        "United Kingdom",
+        "United Kingdom of Great Britain and Northern Ireland",
+        "Unitit Kinrick",
+        "Unuiĝinta Reĝlando",
+        "Vaeinigts Kinireich",
+        "Velika Britanija",
+        "Velká Británie",
+        "Vereenigt Königriek vun Grootbritannien un Noordirland",
+        "Vereineg Keuninkriek",
+        "Verenigd Koninkrijk",
+        "Verenigde Koninkryk",
+        "Vương quốc Anh",
+        "Vương quốc Liên hiệp Anh và Bắc Ireland",
+        "Wayòm Ini",
+        "Wielka Brytania",
+        "Yhdistynyt kuningaskunta",
+        "Yhtys Kuningaskundu",
+        "Združeno kraljestvo Velike Britanije in Severne Irske",
+        "Zjednoćene kralestwo",
+        "Ühendkuningriik",
+        "Ĭng-guók",
+        "Ηνωμένο Βασίλειο",
+        "Бирлашган Қироллик",
+        "Велика Британија",
+        "Велика Британія",
+        "Великобритания",
+        "Великобританія",
+        "Велікабрытанія",
+        "Вялікабрытанія",
+        "Обединено кралство",
+        "Обединено кралство Великобритания и Северна Ирландия",
+        "Обединето Кралство",
+        "Подшоҳии Муттаҳида",
+        "Соединенное Королевство",
+        "Стыр Британи",
+        "Уједињено Краљевство",
+        "Մեծ Բրիտանիա",
+        "Միավորված Թագավորություն",
+        "בריטניה",
+        "הממלכה המאוחדת",
+        "פאראייניגטע קעניגרייך",
+        "المملكة المتحدة",
+        "برتانیه",
+        "برطانیہ",
+        "بريتانيا",
+        "بریتانیا",
+        "بۈيۈك بېرىتانىيە",
+        "شانشینی یەکگرتوو",
+        "پادشاهی متحد بریتانیای کبیر و ایرلند شمالی",
+        "پادشاهی متحده",
+        "ܡܠܟܘܬܐ ܡܚܝܕܬܐ",
+        "संयुक्त राजशाही",
+        "গ্রেটবৃটেন",
+        "যুক্তরাজ্য",
+        "ஐக்கிய இராச்சியம்",
+        "பிரிடிஷ் கூட்டரசு",
+        "బ్రిటన్",
+        "สหราชอาณาจักร",
+        "ສະຫະລາດຊະອານາຈັກ",
+        "ཡུ་ནའི་ཊེཊ་ཀིང་ཌམ",
+        "გაერთიანებული სამეფო",
+        "დიდი ბრიტანეთი",
+        "እንግሊዝ",
+        "ዩናይትድ ኪንግደም",
+        "イギリス",
+        "英国",
+        "영국" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:United_Kingdom_PCLI_2635167_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for United Kingdom" ;
+                    em:link <http://www.geonames.org/2635167/united-kingdom-of-great-britain-and-northern-ireland.html> ;
+                    em:preview <http://www.geonames.org/2635167/united-kingdom-of-great-britain-and-northern-ireland.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for United Kingdom" ] ;
+            oa:hasTarget place:United_Kingdom_PCLI_2635167_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Commonwealth_of_Nations_ZN_11812257_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:United_Kingdom_PCLI_2635167_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.PCLI ;
+    em:preferredName "United Kingdom" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.475844e+01 ;
+                    wgs84_pos:long -2.69531e+00 ] ;
+            em:source ems:United_Kingdom_PCLI_2635167_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:United_Kingdom_PCLI_2635167_geonames ;
+    gn:countryCode "GB" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/2635167/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/United_Kingdom>,
+        <https://en.wikipedia.org/wiki/United_Kingdom>,
+        <https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BB%D0%B8%D0%BA%D0%BE%D0%B1%D1%80%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D1%8F> .
+
+ems:Adegem_PPL_2803347_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Adegem (Populated place (P.PPL))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2803347/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/2803347/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Arrondissement_Eeklo_ADM3_2798986_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Arrondissement Eeklo (City   (A.ADM3))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2798986/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/2798986/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Belgium_PCLI_2802361_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Belgium (Country)" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2802361/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/2802361/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Cheshire_East_ADM2_7290536_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Cheshire East (County (A.ADM2))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/7290536/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/7290536/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:East_Flanders_ADM2_2789733_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for East Flanders (County (A.ADM2))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2789733/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/2789733/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:England_ADM1_6269131_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for England (Region (A.ADM1))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/6269131/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/6269131/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Flanders_ADM1_3337388_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Flanders (Region (A.ADM1))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/3337388/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/3337388/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Maldegem_ADM4_2791858_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Maldegem (City   (A.ADM4))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2791858/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/2791858/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Rostherne_ADM3_7299920_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Rostherne (City   (A.ADM3))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/7299920/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/7299920/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Rostherne_PPL_2639108_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Rostherne (Populated place (P.PPL))" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2639108/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/2639108/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:United_Kingdom_PCLI_2635167_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for United Kingdom (Country)" ;
+    em:accessed "2019-05-27" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/2635167/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/2635167/about.rdf> ;
+    em:short_label "GeoNames" .
+
+gn:P a skos:Concept ;
+    rdfs:label "Populated place" ;
+    rdfs:comment """
+        Populated place - from GeoNames (feature class).
+        """ .
+
+em:MAP_RESOURCE a oa:Motivation ;
+    rdfs:label "Map resource" ;
+    rdfs:comment """
+            References a current or historical map resource associated with a place.
+            """ .
+
+em:P_PART_OF_A a em:Relation_type ;
+    rdfs:label "Administered by" ;
+    em:fromType gn:P ;
+    em:toType gn:A ;
+    rdfs:comment """
+            Relates a populated place to its administrative division.
+            """ .
+
+em:DEFINITIVE a em:Competence_value ;
+    rdfs:label "Definitive" ;
+    rdfs:comment """
+            The associated value is definitively true for the purposes of EMPlaces.  
+            Such information should ideally be backup up be appropiate source references.
+            """ .
+
+gn:A a skos:Concept ;
+    rdfs:label "Administrative division" ;
+    rdfs:comment """
+        Administrative division - from GeoNames (feature class).
+        """ .
+
+emp:Current_2018 a em:Time_period ;
+    rdfs:label "Current, as of 2018" ;
+    em:short_label "2018" ;
+    em:timespan emt:Current_2018 ;
+    rdfs:comment "Time period including the year 2018" .
+
+

@@ -119,8 +119,10 @@ Wrapping up EMPlaces:
 - [x] GK Note that qualified relation could be modeled as an annotation: is this an inconsistency of style?
 - [ ] GK think about RDF semantics of multiple name attestations and multiple languages. (open)
 - [x] GK Note that em:Source_desc rdfs:comment is for curatorial/editorial notes
+- [ ] GK udate model diagrams and docs to reflect addition of em:id property to em:Source_desc/em:Authority (for when link is unknown).
+- [ ] GK think about templates for generating link value for alternate authorities.
 
-- [ ] Update crosswalk?? (on hold unless needed)
+- [ ] GK Update crosswalk?? (on hold unless needed)
 
 Urgent Tasks?
 
@@ -171,18 +173,19 @@ Later:
 
 ## 20190508 telecon
 
-- [ ] GK: Ask Karl about status of LPIF: planning to look at conversion.  Maybe tackle at hackathon.  Also ask about how to get bounding box data from Genomes.  Other sources
-- [ ] GK: next activity into look at postal data per Arno email 2019-03-22
+- [x] GK: Ask Karl about status of LPIF: planning to look at conversion.  Maybe tackle at hackathon.  Also ask about how to get bounding box data from Genomes, or Other sources
+- [ ] GK: next activity look at postal data per Arno email 2019-03-22
 
 
 ### Preparing for EMPeople:
 
 Prosopographical workshop 2019-05-16/17
-(Hotel from 15th)
 
-- [ ] GK read prosopography data model (e.g. end April) (Arno to provide)
-- [ ] GK research other prosopographical data models (Arno to provide list)
-- [ ] GK review prosopographical workshop notes (what are we aiming to get out of this?)
+- [x] GK research other prosopographical data models (Arno to provide list)
+- [x] GK review prosopographical workshop notes (what are we aiming to get out of this?)
+- [x] GK read through Oxford prosopography data model (Arno has provided)
+- [ ] Crosswalk SNAP/SwissArtReseatch person data model/Factoid ontology/Schema.org
+- [ ] Synthesize (or adopt?) model for EMPeople
 
 
 ## Other:
@@ -191,7 +194,7 @@ Prosopographical workshop 2019-05-16/17
     - See meeting notes from 2019-03-25 (20190325-EMLO-oxford-meeting)
 - [x] Clean up documentation.  Move superseded documents to "historic" subfolder.
 - [ ] Test wrangled data with Timbuctoo
-    - with data at `https://github.com/culturesofknowledge/emplaces/tree/develop/src/geonamesdataexport/data-test-alternate-authorities`
+    - with data at [emplaces/tree/develop/src/geonamesdataexport/data-test-alternate-authorities](https://github.com/culturesofknowledge/emplaces/tree/develop/src/geonamesdataexport/data-test-alternate-authorities)
 
 ## Technical debt and unscheduled:
 
