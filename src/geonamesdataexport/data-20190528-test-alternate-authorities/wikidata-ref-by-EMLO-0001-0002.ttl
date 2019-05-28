@@ -1133,15 +1133,6 @@ place:place_2635167 a em:Place,
     em:canonicalURI place:place_2635167 ;
     em:place_data place:Q145_wikidata .
 
-place:place_2639108 a em:Place,
-        em:Place_merged ;
-    em:alternateURI [ rdfs:label "WikiData URI for Rostherne" ;
-            em:link wdata:Q545862.ttl ],
-        [ rdfs:label "WikiData URI for Rostherne" ;
-            em:link wdata:Q545862.ttl ] ;
-    em:canonicalURI place:place_2639108 ;
-    em:place_data place:Q545862_wikidata .
-
 place:place_2789733 a em:Place,
         em:Place_merged ;
     em:alternateURI [ rdfs:label "WikiData URI for East Flanders" ;
@@ -1191,172 +1182,209 @@ place:place_7290536 a em:Place,
     em:canonicalURI place:place_7290536 ;
     em:place_data place:Q1070590_wikidata .
 
+place:place_7299920 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "WikiData URI for Rostherne" ;
+            em:link wdata:Q545862.ttl ],
+        [ rdfs:label "WikiData URI for Rostherne" ;
+            em:link wdata:Q545862.ttl ] ;
+    em:canonicalURI place:place_7299920 ;
+    em:place_data place:Q545862_wikidata .
+
 <http://id.emplaces.info/source/1000063_tgn> a em:Authority,
         em:Source_desc ;
     rdfs:label "TGN identifier" ;
     em:editorialNote "TGN (Getty Thesaurus of Geographic Names) identfier. See: https://www.wikidata.org/wiki/Property:P1667." ;
+    em:id "1000063" ;
     em:short_label "TGN" .
 
 <http://id.emplaces.info/source/11872746v_bnf> a em:Authority,
         em:Source_desc ;
     rdfs:label "BnF identifier" ;
     em:editorialNote "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268." ;
+    em:id "11872746v" ;
     em:short_label "BnF" .
 
 <http://id.emplaces.info/source/11930575r_bnf> a em:Authority,
         em:Source_desc ;
     rdfs:label "BnF identifier" ;
     em:editorialNote "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268." ;
+    em:id "11930575r" ;
     em:short_label "BnF" .
 
 <http://id.emplaces.info/source/11931584z_bnf> a em:Authority,
         em:Source_desc ;
     rdfs:label "BnF identifier" ;
     em:editorialNote "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268." ;
+    em:id "11931584z" ;
     em:short_label "BnF" .
 
 <http://id.emplaces.info/source/120375035_bnf> a em:Authority,
         em:Source_desc ;
     rdfs:label "BnF identifier" ;
     em:editorialNote "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268." ;
+    em:id "120375035" ;
     em:short_label "BnF" .
 
 <http://id.emplaces.info/source/15238382r_bnf> a em:Authority,
         em:Source_desc ;
     rdfs:label "BnF identifier" ;
     em:editorialNote "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268." ;
+    em:id "15238382r" ;
     em:short_label "BnF" .
 
 <http://id.emplaces.info/source/15238574p_bnf> a em:Authority,
         em:Source_desc ;
     rdfs:label "BnF identifier" ;
     em:editorialNote "BNF (Bibliothèque nationale de France) identifier. See: https://www.wikidata.org/wiki/Property:P268." ;
+    em:id "15238574p" ;
     em:short_label "BnF" .
 
 <http://id.emplaces.info/source/2635167_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "2635167" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/2639108_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "2639108" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/2789733_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "2789733" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/2791858_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "2791858" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/2798986_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "2798986" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/2802361_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "2802361" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/3337388_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "3337388" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/4005406-8_gnd> a em:Authority,
         em:Source_desc ;
     rdfs:label "GND identifier" ;
     em:editorialNote "Deutsche Nationalbibliothek Identifier. See: https://www.wikidata.org/wiki/Property:P227." ;
+    em:id "4005406-8" ;
     em:short_label "GND" .
 
 <http://id.emplaces.info/source/4014770-8_gnd> a em:Authority,
         em:Source_desc ;
     rdfs:label "GND identifier" ;
     em:editorialNote "Deutsche Nationalbibliothek Identifier. See: https://www.wikidata.org/wiki/Property:P227." ;
+    em:id "4014770-8" ;
     em:short_label "GND" .
 
 <http://id.emplaces.info/source/4022153-2_gnd> a em:Authority,
         em:Source_desc ;
     rdfs:label "GND identifier" ;
     em:editorialNote "Deutsche Nationalbibliothek Identifier. See: https://www.wikidata.org/wiki/Property:P227." ;
+    em:id "4022153-2" ;
     em:short_label "GND" .
 
 <http://id.emplaces.info/source/6269131_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "6269131" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/7002445_tgn> a em:Authority,
         em:Source_desc ;
     rdfs:label "TGN identifier" ;
     em:editorialNote "TGN (Getty Thesaurus of Geographic Names) identfier. See: https://www.wikidata.org/wiki/Property:P1667." ;
+    em:id "7002445" ;
     em:short_label "TGN" .
 
 <http://id.emplaces.info/source/7003457_tgn> a em:Authority,
         em:Source_desc ;
     rdfs:label "TGN identifier" ;
     em:editorialNote "TGN (Getty Thesaurus of Geographic Names) identfier. See: https://www.wikidata.org/wiki/Property:P1667." ;
+    em:id "7003457" ;
     em:short_label "TGN" .
 
 <http://id.emplaces.info/source/7008591_tgn> a em:Authority,
         em:Source_desc ;
     rdfs:label "TGN identifier" ;
     em:editorialNote "TGN (Getty Thesaurus of Geographic Names) identfier. See: https://www.wikidata.org/wiki/Property:P1667." ;
+    em:id "7008591" ;
     em:short_label "TGN" .
 
 <http://id.emplaces.info/source/7018236_tgn> a em:Authority,
         em:Source_desc ;
     rdfs:label "TGN identifier" ;
     em:editorialNote "TGN (Getty Thesaurus of Geographic Names) identfier. See: https://www.wikidata.org/wiki/Property:P1667." ;
+    em:id "7018236" ;
     em:short_label "TGN" .
 
 <http://id.emplaces.info/source/7290536_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "7290536" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/7299920_geonames> a em:Authority,
         em:Source_desc ;
     rdfs:label "GeoNames identifier" ;
     em:editorialNote "GeoNames identifier. See: https://www.wikidata.org/wiki/Property:P1566." ;
+    em:id "7299920" ;
     em:short_label "GeoNames" .
 
 <http://id.emplaces.info/source/7521127-0_gnd> a em:Authority,
         em:Source_desc ;
     rdfs:label "GND identifier" ;
     em:editorialNote "Deutsche Nationalbibliothek Identifier. See: https://www.wikidata.org/wiki/Property:P227." ;
+    em:id "7521127-0" ;
     em:short_label "GND" .
 
 <http://id.emplaces.info/source/n79023147_lcnaf> a em:Authority,
         em:Source_desc ;
     rdfs:label "LCNAF identifier" ;
     em:editorialNote "LoC (Library of Congress) identifier - used for LoC Name Authority File. See: https://www.wikidata.org/wiki/Property:P244." ;
+    em:id "n79023147" ;
     em:short_label "LCNAF" .
 
 <http://id.emplaces.info/source/n80126041_lcnaf> a em:Authority,
         em:Source_desc ;
     rdfs:label "LCNAF identifier" ;
     em:editorialNote "LoC (Library of Congress) identifier - used for LoC Name Authority File. See: https://www.wikidata.org/wiki/Property:P244." ;
+    em:id "n80126041" ;
     em:short_label "LCNAF" .
 
 <http://id.emplaces.info/source/n82068148_lcnaf> a em:Authority,
         em:Source_desc ;
     rdfs:label "LCNAF identifier" ;
     em:editorialNote "LoC (Library of Congress) identifier - used for LoC Name Authority File. See: https://www.wikidata.org/wiki/Property:P244." ;
+    em:id "n82068148" ;
     em:short_label "LCNAF" .
 
 

@@ -300,7 +300,10 @@ def get_wikidata_merged_place_mapping(
     return merged_place_mapping
 
 def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
-    def alt_authority(auth_uri_template, auth_tag, auth_label, auth_descr, auth_link=None):
+    def alt_authority(
+        auth_uri_template, auth_tag, auth_label, auth_descr, 
+        auth_id=None, auth_link=None
+        ):
         return M.loc_subgraph(
             M.tgt_subj, M.const_uri(EM.alternateAuthority), M.const_gen_uri(auth_uri_template),
             [ M.emit(M.stmt_gen(RDF.type,         EM.Source_desc),      M.stmt_copy())
@@ -308,6 +311,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             , M.emit(M.stmt_gen(EM.short_label,   Literal(auth_tag)),   M.stmt_copy())
             , M.emit(M.stmt_gen(RDFS.label,       Literal(auth_label)), M.stmt_copy())
             , M.emit(M.stmt_gen(EM.editorialNote, Literal(auth_descr)), M.stmt_copy())
+            , M.emit(M.stmt_gen(EM.id),                                 M.stmt_copy_val())
             , M.emit(M.stmt_gen_link(EM.link,     auth_link),           M.stmt_copy())
             ])
     emp_node_sourced = URIRef(PLACE[emp_id_sourced])
@@ -316,7 +320,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
         , M.emit(M.stmt_gen(RDF.type,   EM.Place),         M.stmt_copy())
         , M.emit(M.stmt_gen(RDF.type,   EM.Place_sourced), M.stmt_copy())
         , M.emit(M.prop_eq(RDFS.label),                    M.stmt_copy())
-        , M.emit(M.prop_eq(WDT.P244),   
+        , M.emit(M.prop_eq(WDT.P244),
             alt_authority(
                 EMS["%(obj)s_lcnaf"], 
                 "LCNAF", 

@@ -175,6 +175,7 @@ class DataExtractMap(object):
         src_subj            subject from selected source statement.
         src_prop            property from selected source statement
         src_obj             object from selected source statement
+        srv_val             additional value from the source data
         const(val)          specified value
         src_obj_or_val(prop) property of referenced resource (obj), or just the 
                             referenced resource.  (Use this for resources that may
@@ -182,16 +183,21 @@ class DataExtractMap(object):
 
     """
 
-    def __init__(self, base, src, tgt):
+    def __init__(self, base, src, tgt, val=None):
         """
         base    is a node in the source graph
         src     source graph, from which data is extracted
         tgt     target graph, to which data is added
+        val     is an optional additional value which is returned by value
+                generator function `src_val`.  This is used by subgraph emitters 
+                to inject additional values from the source graph into the
+                generated graph.
         """
         # print("@@@ DataExtractMap, base %s"%(base,))
         self._base      = base
         self._src       = src
         self._tgt       = tgt
+        self._val       = val
         self._tgt_subj  = None
         return
 
@@ -349,7 +355,7 @@ class DataExtractMap(object):
 
         If no object value is supplied, a blank node is allocated and used.
         """
-        obj_node = obj      # Assume already prsented as RDF node
+        obj_node = obj      # Assume already presented as RDF node
         if obj is None:
             obj_node = BNode()
         elif isinstance(obj, str):
@@ -368,9 +374,7 @@ class DataExtractMap(object):
     def stmt_gen_link(cls, prop_uri, obj_url):
         """
         Returns generator for a single statement with the supplied property and 
-        URL object vaue.  If the supplied objkect value is None, no statement is generated.
-
-        If no object value is supplied, a blank node is allocated and used.
+        URL object vaue.  If the supplied object value is None, no statement is generated.
         """
         def stmt_gen_sel(src, base):
             if isinstance(obj_url, str):
@@ -415,6 +419,14 @@ class DataExtractMap(object):
         possibly with the subject replaced according to a previous "set_subj".
         """
         return cls.stmt(cls.tgt_subj, cls.src_prop, cls.src_obj)
+
+    @classmethod
+    def stmt_copy_val(cls):
+        """
+        Returns a subgraph generator that emits a copy of the current statement,
+        but with the object value replaced by the additional value from the source graph
+        """
+        return cls.stmt(cls.tgt_subj, cls.src_prop, cls.src_val)
 
     @classmethod
     def stmt_copy_not_blank(cls):
@@ -477,7 +489,8 @@ class DataExtractMap(object):
             sub_subgraph_map = DataExtractMap(
                 subgraph_node, 
                 self._src, 
-                self._tgt
+                self._tgt,
+                val=o
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
@@ -520,7 +533,8 @@ class DataExtractMap(object):
             sub_subgraph_map = DataExtractMap(
                 subgraph_node, 
                 subgraph_rdf, 
-                self._tgt
+                self._tgt,
+                val=o
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
@@ -641,6 +655,13 @@ class DataExtractMap(object):
         """
         return self._base
 
+    def src_val(self, s, p, o):
+        """
+        Returns the additional valuye that was provided when the mapping object was
+        initialized.
+        """
+        return self._val
+
     def tgt_subj(self, s, p, o):
         """
         Returns a subject for a target statement, either previously specified
@@ -683,7 +704,7 @@ class DataExtractMap(object):
     def const_gen_uri(cls, template):
         """
         Value generator that interpolates statement values in a template 
-        to yield a new UROI node
+        to yield a new URI node
 
         Template may contain '%(subj)s', '%(prop)s' and/or '%(obj)s' to refer to statement
         subject, property or object respectively

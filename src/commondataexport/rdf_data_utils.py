@@ -130,11 +130,13 @@ def get_rdf_graph(url, format="turtle"):
     Return RDF graph at given location.
     """
     # e.g. http://sws.geonames.org/3090048/about.rdf
-    g = Graph()
-    try:
-        g.parse(location=url, format=format)
-    except Exception as e:
-        print("RDF parse error '%s' (%s)"%(url, e), file=sys.stderr)
+    for retries in range(0, 3):
+        g = Graph()
+        try:
+            g.parse(location=url, format=format)
+            break
+        except Exception as e:
+            print("RDF parse error '%s' (%s) (retries=%d)"%(url, e, retries), file=sys.stderr)
     # result = g.parse(data=r.content, publicID=u, format="turtle")
     # result = g.parse(source=s, publicID=b, format="json-ld")
     return g
