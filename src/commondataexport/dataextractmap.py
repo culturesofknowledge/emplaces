@@ -158,13 +158,13 @@ class DataExtractMap(object):
         ref_subgraph(<value>, <value>, <subgraph_ref>, <subgraph_map>)
                             a subgraph that is mapped and referenced by a statement for
                             which subject and property generators are supplied.  A new
-                            node is created as subject for the subgraph satements, and 
+                            node is created as subject for the subgraph statements, and 
                             the URI is dereferenced as RDF, and used as a new source graph 
                             from which statements are scanned.
         loc_subgraph(<value>, <value>, <subgraph_ref>, <subgraph_map>)
                             a subgraph that is mapped and referenced by a statement for
                             which subject and property generators are supplied.  A new
-                            node is created as subject for the subgraph satements.  
+                            node is created as subject for the subgraph statements.  
                             Unlike 'ref_subgraph', statements about the new subject are
                             scanned from the current source graph.
 
@@ -180,25 +180,31 @@ class DataExtractMap(object):
         src_obj_or_val(prop) property of referenced resource (obj), or just the 
                             referenced resource.  (Use this for resources that may
                             indicate alternate reference URIs, e.g. using owl:sameAs.)
-
     """
 
-    def __init__(self, base, src, tgt, val=None):
+    def __init__(self, base, src, tgt, ref_src_subj=None, ref_tgt_subj=None, ref_src_obj=None):
         """
         base    is a node in the source graph
         src     source graph, from which data is extracted
         tgt     target graph, to which data is added
-        val     is an optional additional value which is returned by value
-                generator function `src_val`.  This is used by subgraph emitters 
-                to inject additional values from the source graph into the
-                generated graph.
-        """
+        ref_src_subj 
+                if specified, is the subject of a source graph statement 
+                that triggers this mapping.
+        ref_tgt_subj 
+                if specified, is a target graph subject for which the triggering
+                statement is defining properties.
+        ref_src_obj 
+                if specified, is the object of a source graph statement 
+                that triggers this mapping.
+         """
         # print("@@@ DataExtractMap, base %s"%(base,))
         self._base      = base
         self._src       = src
         self._tgt       = tgt
-        self._val       = val
         self._tgt_subj  = None
+        self._ref_src_subj = ref_src_subj
+        self._ref_tgt_subj = ref_tgt_subj
+        self._ref_src_obj  = ref_src_obj
         return
 
     # Helpers
@@ -264,7 +270,7 @@ class DataExtractMap(object):
                 s, p, o = self._select_single(selector)
                 subj = value(self, s, p, o)
                 if subj:
-                    self._tgt_subj = value(self, s, p, o)
+                    self._tgt_subj = subj #@@ value(self, s, p, o)
                 # print("@@@ tgt_subj %s"%(self._tgt_subj))
             except EmptySelection:
                 pass # No subject to save
@@ -421,12 +427,13 @@ class DataExtractMap(object):
         return cls.stmt(cls.tgt_subj, cls.src_prop, cls.src_obj)
 
     @classmethod
-    def stmt_copy_val(cls):
+    def stmt_copy_val(cls, obj_val):
         """
         Returns a subgraph generator that emits a copy of the current statement,
-        but with the object value replaced by the additional value from the source graph
+        but with the object value replaced by the value returned by the supplied
+        obj_val function.
         """
-        return cls.stmt(cls.tgt_subj, cls.src_prop, cls.src_val)
+        return cls.stmt(cls.tgt_subj, cls.src_prop, obj_val)
 
     @classmethod
     def stmt_copy_not_blank(cls):
@@ -490,11 +497,14 @@ class DataExtractMap(object):
                 subgraph_node, 
                 self._src, 
                 self._tgt,
-                val=o
+                ref_src_subj=s, 
+                ref_tgt_subj=self._tgt_subj, 
+                ref_src_obj=o
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
-            # Link to subgraph
-            yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or subgraph_node)
+            # Link to subgraph (if subject/property supplied)
+            if gen_s and gen_p:
+                yield (gen_s(self, s, p, o), gen_p(self, s, p, o), subgraph_res or subgraph_node)
             return
         return loc_subgraph_gen
 
@@ -534,7 +544,9 @@ class DataExtractMap(object):
                 subgraph_node, 
                 subgraph_rdf, 
                 self._tgt,
-                val=o
+                ref_src_subj=s, 
+                ref_tgt_subj=self._tgt_subj, 
+                ref_src_obj=o
                 )
             subgraph_res = sub_subgraph_map.extract_map(subgraph_map)
             # Link to subgraph
@@ -655,19 +667,39 @@ class DataExtractMap(object):
         """
         return self._base
 
-    def src_val(self, s, p, o):
-        """
-        Returns the additional valuye that was provided when the mapping object was
-        initialized.
-        """
-        return self._val
-
     def tgt_subj(self, s, p, o):
         """
         Returns a subject for a target statement, either previously specified
         by `set_subj`, or from the currently matched statement.
         """
         return self._tgt_subj or s
+
+    def ref_src_subj(self, s, p, o):
+        """
+        Returns the source subject of the referring statement that triggers the
+        current mapping.
+        """
+        return self._ref_src_subj
+
+    def ref_tgt_subj(self, s, p, o):
+        """
+        Returns the target subject of the referring statement that triggers the
+        current mapping.  I.e. `tgt_subj` for the referring statement.
+
+        This can be used in a set_subj in the subgraph to continue defining values
+        for the same target, effectively flattening the graph by a level.
+        """
+        return self._ref_tgt_subj
+
+    def ref_src_obj(self, s, p, o):
+        """
+        Returns the source object of the referring statement that triggers the
+        current mapping.
+
+        This can be used to carry a value down a level from the referring graph to
+        a generated subgraph.
+        """
+        return self._ref_src_obj
 
     @classmethod
     def const(cls, value):

@@ -119,8 +119,10 @@ Wrapping up EMPlaces:
 - [x] GK Note that qualified relation could be modeled as an annotation: is this an inconsistency of style?
 - [ ] GK think about RDF semantics of multiple name attestations and multiple languages. (open)
 - [x] GK Note that em:Source_desc rdfs:comment is for curatorial/editorial notes
+- [ ] GK udate model diagrams and docs to reflect addition of em:id property to em:Source_desc/em:Authority (for when link is unknown).
+- [ ] GK think about templates for generating link value for alternate authorities.
 
-- [ ] Update crosswalk?? (on hold unless needed)
+- [ ] GK Update crosswalk?? (on hold unless needed)
 
 Urgent Tasks?
 
@@ -181,7 +183,7 @@ Prosopographical workshop 2019-05-16/17
 
 - [x] GK research other prosopographical data models (Arno to provide list)
 - [x] GK review prosopographical workshop notes (what are we aiming to get out of this?)
-- [ ] GK read through Oxford prosopography data model (Arno has provided)
+- [x] GK read through Oxford prosopography data model (Arno has provided)
 - [ ] Crosswalk SNAP/SwissArtReseatch person data model/Factoid ontology/Schema.org
 - [ ] Synthesize (or adopt?) model for EMPeople
 

@@ -312,7 +312,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
             , M.emit(M.stmt_gen(EM.short_label,   Literal(auth_tag)),   M.stmt_copy())
             , M.emit(M.stmt_gen(RDFS.label,       Literal(auth_label)), M.stmt_copy())
             , M.emit(M.stmt_gen(EM.editorialNote, Literal(auth_descr)), M.stmt_copy())
-            , M.emit(M.stmt_gen(EM.id),                                 M.stmt_copy_val())
+            , M.emit(M.stmt_gen(EM.id), M.stmt_copy_val(M.ref_src_obj))
             , M.emit(M.stmt_gen_link(EM.link,     auth_link),           M.stmt_copy())
             ])
     emp_node_sourced = URIRef(PLACE[emp_id_sourced])
