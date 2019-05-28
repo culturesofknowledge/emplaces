@@ -77,7 +77,7 @@ GCD_BADCMD              = 2         # Command error
 GCD_UNKNOWNCMD          = 3         # Unknown command
 GCD_UNIMPLEMENTED       = 4         # Unimplemented command or feature
 GCD_UNEXPECTEDARGS      = 5         # Unexpected arguments supplied
-GCD_NO_PLACE_IDS        = 6         # No place ids given
+GCD_NO_GEONAMES_IDS     = 6         # No place ids given
 GCD_NO_GEONAMES_URL     = 7         # No GeoNames URL
 GCD_SOME_GEONAMES_URLS  = 8         # Some but not all all URLs matched GeoNames IDs
 GCD_NO_WIKIDATA_IDS     = 9         # No Wikidata Ids for GeoNames ID
@@ -316,6 +316,15 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
         , M.emit(M.stmt_gen(RDF.type,   EM.Place),         M.stmt_copy())
         , M.emit(M.stmt_gen(RDF.type,   EM.Place_sourced), M.stmt_copy())
         , M.emit(M.prop_eq(RDFS.label),                    M.stmt_copy())
+        , M.emit(M.prop_eq(WDT.P244),   
+            alt_authority(
+                EMS["%(obj)s_lcnaf"], 
+                "LCNAF", 
+                "LCNAF identifier",
+                "LoC (Library of Congress) identifier - used for LoC Name Authority File. See: https://www.wikidata.org/wiki/Property:P244.",
+                auth_link=None
+                )
+            )
         , M.emit(M.prop_eq(WDT.P268),   
             alt_authority(
                 EMS["%(obj)s_bnf"], 
@@ -910,7 +919,7 @@ def do_get_many_geonames_place_data(gcdroot, options):
     emplaces_rdf = None     # Graph created on first loop below
     geonames_ids = get_many_geonames_ids()
     if not geonames_ids:
-        return GCD_NO_PLACE_IDS
+        return GCD_NO_GEONAMES_IDS
     for geonames_id in geonames_ids:
         try:
             emplaces_rdf = get_geonames_id_data(
@@ -1010,7 +1019,7 @@ def do_get_many_place_hierarchy(gcdroot, options):
     geo_ont_rdf = get_geonames_ontology()
     place_ids   = get_many_geonames_ids()
     if not place_ids:
-        return GCD_NO_PLACE_IDS
+        return GCD_NO_GEONAMES_IDS
     #@@ follow parentFeature links: results are inconsistent.
     # hier_id_name_types = get_places_hierarchy(place_ids, {})
     #@@
