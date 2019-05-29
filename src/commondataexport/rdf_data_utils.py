@@ -14,9 +14,11 @@ __license__     = "MIT (http://opensource.org/licenses/MIT)"
 import sys
 import os
 import os.path
+import errno
 import re
 import urlparse
 import logging
+import requests
 
 from rdflib         import Graph, Namespace, URIRef, Literal, BNode, RDF, RDFS
 from rdflib.paths   import Path
@@ -125,7 +127,72 @@ def get_many_inputs():
 #
 #   ===================================================================
 
+def http_get_json(url, req_headers={}):
+    """
+    Issue an HTTP GET request to the supplied URL, and return the result data.
+    """
+    return http_get(url, copy_update_dict(req_headers, accept="application/json"))
+
+def http_get_turtle(url, req_headers={}):
+    """
+    Issue an HTTP GET request to the supplied URL, and return the result data.
+    """
+    return http_get(url, copy_update_dict(req_headers, accept="text/turtle"))
+
+def http_get(url, req_headers={}):
+    """
+    Issue an HTTP GET request to the supplied URL, and return the result data.
+    """
+    response = requests.get(url, headers=req_headers)
+    response.raise_for_status()  # raise an error on unsuccessful status codes
+    return response.text
+
+def get_rdf_resource(url, format):
+    """
+    Retrieve a web resource, negotiating for a specific content-type
+    """
+    cache_dir  = os.path.join(os.getcwd(), "./_rdf_data_cache", format)
+    cache_key  = url.split("://", 1)[1]
+    cache_key  = cache_key.replace("/", ".")
+    cache_file = os.path.join(cache_dir, cache_key)
+    try:
+        os.makedirs(cache_dir)
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
+    if os.path.exists(cache_file):
+        # Return cached file
+        with open(cache_file, "r") as f:
+            text = f.read().decode("utf-8")
+    else:
+        content_types = (
+            { "turtle":     "text/turtle"
+            , "xml":        "application/rdf+xml"
+            , "json":       "application/json"
+            , "jsonld":     "application/ld+json"
+            })
+        content_type = content_types.get(format, content_types["turtle"])
+        text = http_get(url, {"accept": content_type})
+        # Save to cache..
+        with open(cache_file, "w") as f:
+            f.write(text.encode("utf-8"))
+    return text
+
 def get_rdf_graph(url, format="turtle"):
+    """
+    Return RDF graph at given location.
+    """
+    # e.g. http://sws.geonames.org/3090048/about.rdf
+    rdftext = get_rdf_resource(url, format)
+    g = Graph()
+    try:
+        g.parse(data=rdftext, format=format)
+    except Exception as e:
+        print("RDF parse error '%s' (%s)"%(url, e), file=sys.stderr)
+        raise e
+    return g
+
+def get_rdf_graph_old(url, format="turtle"):
     """
     Return RDF graph at given location.
     """
@@ -189,52 +256,6 @@ def add_resource_attributes(emp_rdf, attributes, subject=None):
     for prop in attributes:
         emp_rdf.add((subject, prop, attributes[prop]))
     return subject
-
-# def get_annalist_resource_data(gadroot, annalist_ref, resource_rdf=None):
-#     """
-#     Extract direct resource statements for a specified Annalist reference.
-#     """
-#     annalist_uri, annalist_url = get_annalist_uri(annalist_ref)
-#     annalist_rdf = get_annalist_graph_data(annalist_url)
-#     # Initial empty graph
-#     if resource_rdf is None:
-#         resource_rdf = Graph()
-#         add_emplaces_common_namespaces(resource_rdf)
-#     M = DataExtractMap
-#     # ----- mapping table -----
-#     annalist_data_mapping = (
-#         [ M.set_subj(M.prop_eq(ANNAL.uri), M.src_obj)
-#         , M.emit(M.prop_ne(ANNAL.uri), M.stmt_copy())
-#         ])
-#     # -----
-#     m = DataExtractMap(annalist_uri, annalist_rdf, resource_rdf)
-#     m.extract_map(annalist_data_mapping)
-#     return resource_rdf
-
-# def get_annalist_ref_data(gadroot, annalist_ref, mapping, emplaces_rdf=None):
-#     """
-#     Build EMPlaces place data for a specified Annalist place reference,
-#     using an indicated mapping table.
-#     """
-#     annalist_uri, annalist_url = get_annalist_uri(annalist_ref)
-#     annalist_rdf = get_annalist_graph_data(annalist_url)
-#     # Initial empty graph
-#     if emplaces_rdf is None:
-#         emplaces_rdf = Graph()
-#         add_emplaces_common_namespaces(emplaces_rdf)
-#     # -----
-#     m = DataExtractMap(annalist_uri, annalist_rdf, emplaces_rdf)
-#     m.extract_map(mapping)
-#     return emplaces_rdf
-
-# def get_common_defs(options, emplaces_rdf):
-#     if options.emplaces_defs or options.common_defs:
-#         add_turtle_data(emplaces_rdf, COMMON_EMPLACES_DEFS)
-#     if options.geonames_defs or options.common_defs:
-#         add_turtle_data(emplaces_rdf, COMMON_GEONAMES_DEFS)
-#     if options.language_defs or options.common_defs:
-#         add_turtle_data(emplaces_rdf, COMMON_LANGUAGE_DEFS)
-#     return emplaces_rdf
 
 def get_geonames_place_type_id(place_type):
     """
