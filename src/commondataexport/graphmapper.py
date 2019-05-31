@@ -152,9 +152,10 @@ class GraphMatchResult(object):
         return (seq[-1] for seq in self)
 
     def leaf(self):
-        result = self.next()
+        results = iter(self)
+        result  = results.next()
         try:
-            more = self.next()
+            more = results.next()
             raise ValueError("GraphMatchResult.leaf: Single result expected")
         except StopIteration:
             pass
@@ -180,9 +181,9 @@ class GraphMatchSequenceResult(GraphMatchResult):
     def __iter__(self):
         next_elem  = self._match_elems[0]
         tail_elems = self._match_elems[1:]
-        log.debug("GraphMatchSequenceResult %r, %r, %r"%(self._start_node, next_elem, tail_elems))
+        # log.debug("GraphMatchSequenceResult %r, %r, %r"%(self._start_node, next_elem, tail_elems))
         for next_match in next_elem.match(self._src_graph, self._start_node):
-            log.debug("GraphMatchSequenceResult next_match %r"%(next_match))
+            # log.debug("GraphMatchSequenceResult next_match %r"%(next_match))
             if tail_elems:
                 tail_matches = GraphMatchSequenceResult(self._src_graph, next_match[-1], tail_elems)
                 for tail_match in tail_matches:
@@ -401,7 +402,7 @@ class GraphMapper(object):
         s, p and o may be RDFLib node values, or 
         URI strings that are treated as URIRef nodes.
         """        
-        raise "@@ GraphMapper.repeat: not implemented"
+        self._tgt_graph.add((s, p, o))
 
 
 #   ===================================================================

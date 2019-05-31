@@ -119,8 +119,8 @@ Wrapping up EMPlaces:
 - [x] GK Note that qualified relation could be modeled as an annotation: is this an inconsistency of style?
 - [ ] GK think about RDF semantics of multiple name attestations and multiple languages. (open)
 - [x] GK Note that em:Source_desc rdfs:comment is for curatorial/editorial notes
-- [ ] GK udate model diagrams and docs to reflect addition of em:id property to em:Source_desc/em:Authority (for when link is unknown).
-- [ ] GK think about templates for generating link value for alternate authorities.
+- [ ] GK update model diagrams and docs to reflect addition of em:id property to em:Source_desc/em:Authority (for when link is unknown).
+- [ ] GK think about templates for generating link value for alternate authorities.  Or look at wikidata "wdtn:" property values.
 
 - [ ] GK Update crosswalk?? (on hold unless needed)
 
@@ -195,6 +195,8 @@ Prosopographical workshop 2019-05-16/17
 - [x] Clean up documentation.  Move superseded documents to "historic" subfolder.
 - [ ] Test wrangled data with Timbuctoo
     - with data at [emplaces/tree/develop/src/geonamesdataexport/data-test-alternate-authorities](https://github.com/culturesofknowledge/emplaces/tree/develop/src/geonamesdataexport/data-test-alternate-authorities)
+- [ ] LPIF data export from EMPlaces
+
 
 ## Technical debt and unscheduled:
 
