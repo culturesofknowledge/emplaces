@@ -151,31 +151,38 @@ def get_rdf_resource(url, format):
     """
     Retrieve a web resource, negotiating for a specific content-type
     """
-    cache_dir  = os.path.join(os.getcwd(), "./_rdf_data_cache", format)
-    cache_key  = url.split("://", 1)[1]
-    cache_key  = cache_key.replace("/", ".")
-    cache_file = os.path.join(cache_dir, cache_key)
-    try:
-        os.makedirs(cache_dir)
-    except OSError as e:
-        if e.errno != errno.EEXIST:
-            raise
-    if os.path.exists(cache_file):
-        # Return cached file
-        with open(cache_file, "r") as f:
+    if url.startswith("file://"):
+        # Local file
+        filename = url[7:]
+        with open(filename, "r") as f:
             text = f.read().decode("utf-8")
     else:
-        content_types = (
-            { "turtle":     "text/turtle"
-            , "xml":        "application/rdf+xml"
-            , "json":       "application/json"
-            , "jsonld":     "application/ld+json"
-            })
-        content_type = content_types.get(format, content_types["turtle"])
-        text = http_get(url, {"accept": content_type})
-        # Save to cache..
-        with open(cache_file, "w") as f:
-            f.write(text.encode("utf-8"))
+        # HTTP
+        cache_dir  = os.path.join(os.getcwd(), "./_rdf_data_cache", format)
+        cache_key  = url.split("://", 1)[1]
+        cache_key  = cache_key.replace("/", ".")
+        cache_file = os.path.join(cache_dir, cache_key)
+        try:
+            os.makedirs(cache_dir)
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+        if os.path.exists(cache_file):
+            # Return cached file
+            with open(cache_file, "r") as f:
+                text = f.read().decode("utf-8")
+        else:
+            content_types = (
+                { "turtle":     "text/turtle"
+                , "xml":        "application/rdf+xml"
+                , "json":       "application/json"
+                , "jsonld":     "application/ld+json"
+                })
+            content_type = content_types.get(format, content_types["turtle"])
+            text = http_get(url, {"accept": content_type})
+            # Save to cache..
+            with open(cache_file, "w") as f:
+                f.write(text.encode("utf-8"))
     return text
 
 def get_rdf_graph(url, format="turtle"):
