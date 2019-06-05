@@ -389,12 +389,13 @@ def convert_where_description(m, src_node):
             m.emit(lpif_geometry_node, RDF.type, GEOJSON.GeometryCollection)
         em_location_results = m.match(em_where_node, [EM.location])
         for loc_result in em_location_results:
+            em_location_node = loc_result[-1]
             loc_lat  = None
             loc_long = None
-            for lat_result in m.match(em_where_node, [WGS84_POS.lat]):
+            for lat_result in m.match(em_location_node, [WGS84_POS.lat]):
                 loc_lat = lat_result[-1]
                 break
-            for long_result in m.match(em_where_node, [WGS84_POS.long]):
+            for long_result in m.match(em_location_node, [WGS84_POS.long]): 
                 loc_long = long_result[-1]
                 break
             if loc_lat and loc_long:
@@ -466,7 +467,7 @@ def convert_to_lpif(emplaces_rdf, place_curie, lpif_rdf):
         # where
         lpif_geometry_node = convert_where_description(m, src_place)
         if lpif_geometry_node:
-            m.emit(lpif_place_uri, LPO.when, lpif_geometry_node)
+            m.emit(lpif_place_uri, LPO.setting, lpif_geometry_node)
 
 
 
