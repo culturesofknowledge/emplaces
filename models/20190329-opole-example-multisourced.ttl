@@ -1513,16 +1513,16 @@ place:Opole_Voivodeship_ADM1_Geonames a em:Place, em:Place_sourced ;
 #   ==========================================================================
 #   ==========================================================================
 
-place:Poland_PCLI_ADM1 a em:Place, em:Place_merged ;
-    em:canonicalURI place:Poland_PCLI_ADM1 ;
+place:Poland_PCLI a em:Place, em:Place_merged ;
+    em:canonicalURI place:Poland_PCLI ;
     em:alternateURI
       [ rdfs:label "GeoNames URI" ;
         em:link <http://sws.geonames.org/798544/>
       ] ;
-    em:place_data place:Poland_PCLI_ADM1_Geonames ;
+    em:place_data place:Poland_PCLI_Geonames ;
     .
 
-place:Poland_PCLI_ADM1_Geonames a em:Place, em:Place_sourced ;
+place:Poland_PCLI_Geonames a em:Place, em:Place_sourced ;
     rdfs:label       "Poland (country)" ;
     rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
     em:source ems:GeoNames_Poland_PCLI_2018 ;

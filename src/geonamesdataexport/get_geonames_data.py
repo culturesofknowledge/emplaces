@@ -320,7 +320,7 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
         [ M.set_subj(M.stmt_gen(EM.dummy_prop),            M.const(emp_node_sourced))
         , M.emit(M.stmt_gen(RDF.type,   EM.Place),         M.stmt_copy())
         , M.emit(M.stmt_gen(RDF.type,   EM.Place_sourced), M.stmt_copy())
-        , M.emit(M.prop_eq(RDFS.label),                    M.stmt_copy())
+        # , M.emit(M.prop_eq(RDFS.label),                    M.stmt_copy())
         , M.emit(M.prop_eq(WDT.P244),
             alt_authority(
                 "lcnaf_%(obj)s", 
@@ -1129,8 +1129,8 @@ def get_wikidata_id_data(wikidata_id, result_rdf=None):
     Get Wikidata place data for a given wikidata id
     """
     wikidata_uri, wikidata_url = get_wikidata_uri(wikidata_id)
-    print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
-    print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
+    # print("wikidata_uri: %s"%(wikidata_uri,), file=sys.stderr)
+    # print("wikidata_url: %s"%(wikidata_url,), file=sys.stderr)
     wikidata_rdf = get_rdf_graph(wikidata_url, format="turtle")
     # Get identifiers, URIs and other values from wikidata RDF
     # (Geonames Id is needed to connect with EMPlaces merged data)
@@ -1310,6 +1310,7 @@ def do_get_many_wikidata_place_data(gcdroot, options):
     for wikidata_id in wids:
         print("wikidata_id: %s"%(wikidata_id,), file=sys.stderr)
         wikidata_rdf = get_wikidata_id_data(wikidata_id, result_rdf=wikidata_rdf)
+    print(".", file=sys.stderr)
     print(wikidata_rdf.serialize(format='turtle', indent=4), file=sys.stdout)
     return GCD_SUCCESS
 

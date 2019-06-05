@@ -7,3 +7,4 @@ gcdenv
 *.log
 *.tmp
 data-test
+_rdf_data_cache

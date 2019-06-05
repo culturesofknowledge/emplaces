@@ -26,8 +26,6 @@ import urlparse
 from rdflib         import Graph, Namespace, URIRef, Literal, BNode, RDF, RDFS
 from rdflib.paths   import Path
 
-from getargvalue    import getargvalue, getarg
-
 log = logging.getLogger(__name__)
 
 def merge_two_dicts(x, y):
@@ -419,12 +417,19 @@ class DataExtractMap(object):
         return gen
 
     @classmethod
-    def stmt_copy(cls):
+    def stmt_copy(cls, s=None, p=None, o=None):
         """
         Returns a subgraph generator that emits a copy of the current statement,
         possibly with the subject replaced according to a previous "set_subj".
+
+        The subject, property or object may be overridden by supplied 
+        `s`, `p` or `o` parameters.
         """
-        return cls.stmt(cls.tgt_subj, cls.src_prop, cls.src_obj)
+        s = s or cls.tgt_subj
+        p = p or cls.src_prop
+        o = o or cls.src_obj
+        return cls.stmt(s, p, o)
+        # return cls.stmt(cls.tgt_subj, cls.src_prop, cls.src_obj)
 
     @classmethod
     def stmt_copy_val(cls, obj_val):
@@ -433,6 +438,7 @@ class DataExtractMap(object):
         but with the object value replaced by the value returned by the supplied
         obj_val function.
         """
+        #@@deprecate this: use `stmt_copy` instead
         return cls.stmt(cls.tgt_subj, cls.src_prop, obj_val)
 
     @classmethod
