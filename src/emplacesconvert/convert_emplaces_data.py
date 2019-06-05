@@ -306,6 +306,112 @@ def add_lpif_common_namespaces(lpif_graph, local_namespaces=None):
 #
 #   ===================================================================
 
+def make_rdf_list(m, items):
+    head_node = None
+    prev_node = None
+    for item in items:
+        next_node = BNode()
+        m.emit(next_node, RDF.first, item)
+        if prev_node:
+            m.emit(prev_node, RDF.rest, next_node)
+        else:
+            head_node = next_node
+        prev_node = next_node
+    if prev_node:
+        m.emit(prev_node, RDF.rest, RDF.nil)
+    else:
+        # empty list
+        head_node = RDF.nil
+    return head_node
+
+def convert_source_descriptions(m, src_node):
+    lpif_citations_nodes = []
+    em_source_results = m.match(src_node, [EM.source])
+    for result in em_source_results:
+        em_source_node = result[-1]
+        em_link_node  = None
+        em_label_node = None
+        for link_result in m.match(em_source_node, [EM.link]):
+            em_link_node = link_result[-1]
+            break
+        for label_result in m.match(em_source_node, [RDFS.label]):
+            em_label_node = label_result[-1]
+            break
+        if em_link_node and em_label_node:
+            m.emit(em_link_node, RDFS.label, em_label_node)
+            lpif_citations_nodes.append(em_link_node)
+    return lpif_citations_nodes
+
+def convert_when_description(m, src_node):
+        # when (periods)
+        lpif_when_node = None
+        place_match_period_results = m.match(
+            src_node,
+            [ EM.when, m.filter([RDF.type], EM.Time_period), EM.link 
+            ])
+        for result in place_match_period_results:
+            if not lpif_when_node:
+                lpif_when_node = BNode()
+            lpif_period = result[-1]
+            m.emit(lpif_when_node, LPO.period, lpif_period)
+        # when (timespans)
+        place_match_timespan_results = m.match(src_node, [EM.when, EM.timespan])
+        for result in place_match_timespan_results:
+            if not lpif_when_node:
+                lpif_when_node = BNode()
+            em_timespan_node   = result[-1]
+            lpif_timespan_node = BNode()
+            m.emit(lpif_when_node, LPO.timespan, lpif_timespan_node)
+            timespan_paths = (
+                [ ( [EM.earliestStart], [LPO.has_start, LPO.earliest]   )
+                , ( [EM.latestStart],   [LPO.has_start, LPO.latest]     )
+                , ( [EM.start],         [LPO.has_start, LPO.term("in")] )
+                , ( [EM.earliestEnd],   [LPO.has_end,   LPO.earliest]   )
+                , ( [EM.latestEnd],     [LPO.has_end,   LPO.latest]     )
+                , ( [EM.end],           [LPO.has_end,   LPO.term("in")] )
+                ])
+            for em_path, lpif_path in timespan_paths:
+                place_match_timespan_value_results = m.match(em_timespan_node, em_path)
+                for result in place_match_timespan_value_results:
+                    lpif_timespan_value_node = BNode()
+                    lpif_timespan_value      = result[-1]
+                    m.emit(lpif_timespan_node,       lpif_path[0], lpif_timespan_value_node)
+                    m.emit(lpif_timespan_value_node, lpif_path[1], lpif_timespan_value)
+        return lpif_when_node
+
+def convert_where_description(m, src_node):
+    lpif_geometry_node        = None
+    place_match_where_results = m.match(src_node, [EM.where])
+    for result in place_match_where_results:
+        em_where_node = result[-1]
+        if not lpif_geometry_node:
+            lpif_geometry_node = BNode()
+            m.emit(lpif_geometry_node, RDF.type, GEOJSON.GeometryCollection)
+        em_location_results = m.match(em_where_node, [EM.location])
+        for loc_result in em_location_results:
+            loc_lat  = None
+            loc_long = None
+            for lat_result in m.match(em_where_node, [WGS84_POS.lat]):
+                loc_lat = lat_result[-1]
+                break
+            for long_result in m.match(em_where_node, [WGS84_POS.long]):
+                loc_long = long_result[-1]
+                break
+            if loc_lat and loc_long:
+                lpif_location_node = BNode()
+                m.emit(lpif_geometry_node, LPO.setting, lpif_location_node)
+                m.emit(lpif_location_node, RDF.type, GEOJSON.Point)
+                lpif_point_node = make_rdf_list(m, [loc_lat, loc_long])
+                m.emit(lpif_location_node, GEOJSON.coordinates, lpif_point_node)
+        place_match_when_node = convert_when_description(m, em_where_node)
+        if place_match_when_node:
+            m.emit(lpif_geometry_node, LPO.when, place_match_when_node)
+        place_match_source_nodes = convert_source_descriptions(m, em_where_node)
+        for source in place_match_source_nodes:
+            m.emit(lpif_geometry_node, CITO.cites, source)
+        # @@TODO: certainty??  e.g. "certainty": "uncertain" (  "certainty": "lpo:has_certainty" )
+    return lpif_geometry_node
+
 def convert_to_lpif(emplaces_rdf, place_curie, lpif_rdf):
     """
     Extract and convert place data from supplied RDF graph, and return a new
@@ -343,15 +449,41 @@ def convert_to_lpif(emplaces_rdf, place_curie, lpif_rdf):
     for src_place in m.match(place_uri, [EM.place_data]).leaves():
         log.debug("src_place %r"%(src_place))
         lpif_place_label = m.match(src_place, [RDFS.label]).leaf()
-        lpif_place_match_result = m.match(
+        # country
+        place_match_cc_results = m.match(
             src_place, 
             [ EM.hasRelation, m.filter([EM.relationType], EM.P_PART_OF_A), EM.relationTo, EM.place_data
             , m.repeat([EM.hasRelation, m.filter([EM.relationType], EM.A_PART_OF_A), EM.relationTo, EM.place_data])
             , m.filter([EM.placeType], GN.term("A.PCLI")), GN.countryCode
             ])
-        for result in lpif_place_match_result:
+        for result in place_match_cc_results:
             lpif_place_cc = result[-1]
             m.emit(lpif_place_properties, GN.countryCode, lpif_place_cc)
+        # when
+        lpif_when_properties_node = convert_when_description(m, src_place)
+        if lpif_when_properties_node:
+            m.emit(lpif_place_uri, LPO.when, lpif_when_properties_node)
+        # where
+        lpif_geometry_node = convert_where_description(m, src_place)
+        if lpif_geometry_node:
+            m.emit(lpif_place_uri, LPO.when, lpif_geometry_node)
+
+
+
+
+
+
+        # place_match_relation_results = m.match(
+        #     src_place,
+        #     [ @@@
+        #     ])
+        # place_match_name_results = m.match(
+        #     src_place,
+        #     [ @@@
+        #     ])
+
+        # place_match_map_results = ...
+        # place_match_cal_results = ...
 
         # ...
 
