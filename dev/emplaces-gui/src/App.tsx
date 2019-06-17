@@ -1,26 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import HcHeaderTimbuctoo from './components/HcHeaderTimbuctoo';
+import './css/huc-connect-sets.css'
+import './css/huc-data-entry.css'
+import './css/huc-search.css'
+import './css/remote.scss'
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <HcHeaderTimbuctoo></HcHeaderTimbuctoo>
   );
 }
 
 export default App;
+  
+document.title = "EMPlaces";

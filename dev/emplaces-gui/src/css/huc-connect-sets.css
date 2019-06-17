@@ -1,0 +1,85 @@
+.huc-ConnectSets {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+}
+.rootList {
+  width: 50%;
+
+}
+
+.list-container {
+  height: 280px;
+  overflow: scroll;
+}
+
+.col2 {
+  width: calc(50% - 1.5em);
+  margin: 1.5em 0 0 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.dependList table{
+  background-color: #c3ef87;
+}
+
+
+.huc-ConnectSets table{
+  width: 100%;
+}
+
+.huc-list-active {
+  background-color: #c3ef87 !important;
+  font-weight: 700;
+}
+
+.huc-console {
+  height: 100px;
+  background-color: #f1f1f1;
+  margin: 0 -.5em;
+  padding: .5em;
+  display: flex;
+}
+
+.huc-console-action {
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.huc-console-message {
+  width: 80%;
+
+}
+
+.huc-ConnectSets-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .5em;
+  font-size: 1.2em;
+}
+.huc-ConnectSets-title {
+  width: 50%;
+}
+.huc-ConnectSets-filter {
+  width: 50%;
+}
+
+.huc-ConnectSets-filter >*{
+  width: 100%;
+}
+
+.list-filter {
+  padding: .5em;
+}
+
+button {
+  background-color: #60b9f1;
+  padding: .8em;
+  border: none;
+  border-radius: 3px;
+  font-size: 1em;
+}
