@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React from "react"
 
 export default class HcFacetBasic extends React.Component<{ facetName: String }> {
   render() {
