@@ -1,17 +1,18 @@
 import React from 'react'
 import HcResultItemEmPlaces from "./emplaces/HCResultItemEmPlaces"
 
-export class HcResultListHeader extends React.Component <{totalResults: String}>{
+export class HcResultListHeader extends React.Component<{ totalResults: string }>{
+  
   render() {
     return (
       <div className="hcResultsHeader hcMarginBottom1">
-              <div>{this.props.totalResults} Results</div>
-              <div>
-                <select className="" name="">
-                  <option value="">**Order options**</option>
-                </select>
-              </div>
-            </div>
+        <div>{this.props.totalResults} Results</div>
+        <div>
+          <select className="" name="">
+            <option value="">**Order options**</option>
+          </select>
+        </div>
+      </div>
     );
   }
 }
@@ -22,11 +23,11 @@ export class HcResultList extends React.Component {
     return (
       <div className="hcList hcMarginBottom2">
         <HcResultItemEmPlaces
-            resultItemName="Opole"
-            resultItemAdministration="Poland, Opole Voivodeship"
-            resultItemType="Inhabited place"
-            resultItemAltNames={[{"altName":"Opolė"}, {"altName":"Òpòle"}, {"altName":"Opolí"}, {"altName":"Oppein"}, {"altName":"Oppeln"}]}
-          />
+          resultItemName="Opole"
+          resultItemAdministration="Poland, Opole Voivodeship"
+          resultItemType="Inhabited place"
+          resultItemAltNames={[{ "altName": "Opolė" }, { "altName": "Òpòle" }, { "altName": "Opolí" }, { "altName": "Oppein" }, { "altName": "Oppeln" }]}
+        />
       </div>
     );
   }
@@ -41,18 +42,18 @@ export class HcResultSelectedFacets extends React.Component {
           selectedFacetType="Fields of interest"
           selectedFacetValue="mathematics"
         />
-    </div>
+      </div>
     );
   }
 }
 
-export class HcResultSelectedFacetsItem extends React.Component<{selectedFacetType: String, selectedFacetValue: String}> {
+export class HcResultSelectedFacetsItem extends React.Component<{ selectedFacetType: String, selectedFacetValue: String }> {
   render() {
     return (
-        <span className="hcSelectedFacet">
-          <span className="hcSelectedFacetType">{this.props.selectedFacetType}</span>
-          {this.props.selectedFacetValue}
-        </span>
+      <span className="hcSelectedFacet">
+        <span className="hcSelectedFacetType">{this.props.selectedFacetType}</span>
+        {this.props.selectedFacetValue}
+      </span>
     );
   }
 }
@@ -75,7 +76,7 @@ export class HcResultListPaging extends React.Component {
   render() {
     return (
       <div className="hcPagination">
-      {/* eslint-disable-next-line */}
+        {/* eslint-disable-next-line */}
         <div><a href="#">← Previous</a></div>
         {/* eslint-disable-next-line */}
         <div><a href="#">1</a></div>

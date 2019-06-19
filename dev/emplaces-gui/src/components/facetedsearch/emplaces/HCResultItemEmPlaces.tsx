@@ -14,7 +14,7 @@ export default class HcResultItemEmPlaces extends React.Component<ResultItem> {
             {/* { this.props.resultItemAltNames} */}
 
             {this.props.resultItemAltNames.map(apartment => (
-              <span>{apartment.altName}</span>
+              <span key={apartment.altName}>{apartment.altName}</span>
             ))}
 
           </div>
@@ -26,8 +26,8 @@ export default class HcResultItemEmPlaces extends React.Component<ResultItem> {
 }
 
 class ResultItem { 
-  "resultItemName": String;
-  "resultItemAdministration": String;
-  "resultItemType": String;
-  "resultItemAltNames": {"altName": String}[];
+  "resultItemName": string;
+  "resultItemAdministration": string;
+  "resultItemType": string;
+  "resultItemAltNames": {"altName": string}[];
 }
