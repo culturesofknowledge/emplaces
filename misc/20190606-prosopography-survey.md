@@ -65,9 +65,11 @@ Source:
 Tech provenance and editorial notes
 
 ## Places:
+
 - @@assume we’ll have EM Places ref?
 
 ## Sources:
+
 - @@encode this data into EM Places source model?
 
 ## Roles:
@@ -241,10 +243,50 @@ This section is quite sketchy, but may be of particular future interest to CofK 
 - Well known events: E21 -> P11i -> E5
 
 
-# Factoid ontology
+# Factoid ontology (FPO)
+
+(John Bradley, KCL)
+
+see:
+- https://factoid-dighum.kcl.ac.uk/
+- http://factoid-dighum.kcl.ac.uk/fpo-factoid-prosopography-ontology/
+- https://factoid-dighum.kcl.ac.uk/fpo-factoid-prosopography-ontology/fpo-overall-concepts/ (useful overview diagram)
+    -- @@ I'm puzzled that :Institution appears to be a subclass of :Person - maybe that's just the terminology used?
+- https://github.com/johnBradley501/FPO
+
+Generally, the ontology appears to be quite general, and applicable to fields beyond prosopography.  The prosopographical aspects seem to be concentrated in a number of "reference" types that specifically refer to people (or agents).
+
+The factoid model for prosoporaphy attempts to focus of claims made in sources, rather than (of itself) appealing to some higher notion of truth about people and their activities and relationships.  (e.g. similar to the way that PeriodO deals with time periods?)
+
+Key ideas in the ontology seem to be:
+
+- person/actor
+- place/location
+- sources (e.g., documents, etc.)
+- assertions (factoids)
+- references (a reification of a referring relation)
+- date ranges
+
+It appears (and is ackowldged) that the factoid ontology could be represented using CRM terms used to describe documentation, but this would require further investigation to verify.
 
 
 # CIDOC-CRM BIO, etc
 
+See:
+- https://seco.cs.aalto.fi/publications/2018/tuominen-et-al-bio-crm-2018.pdf
+
+"Bio CRM extends CIDOC CRM by introducing role-centric modeling."
+
+The paper suggests the formal description is at http://ldf.fi/schema/bioc/, but I could not retrieve that URL (as of 2019-06-19).  "The namespace of the Bio CRM schema is [http://ldf.fi/schema/bioc/](http://ldf.fi/schema/bioc/), here used with the prefix `bioc`. The full specification of Bio CRM (class and property listing) is available in the namespace URI."
+
+`bioc:bearer_of` seems to overlap with `crm:P2_has_type`.
+
+There's also some overlap here wit the SNAP approach to handling roles/relations.
+
+The class `bioc:Actore_role` appears to represent a "specialization" of a person in a particlar role, rather than reify the reklationship - this is implied by the use of `cidoc:P11_had_participant`, whose range is an actor, not some other thing.  See also `prov:specializationOf`.  It's not stated explcitly, but I think `bioc:Actore_role` is a subclass of `bioc:Actor`.
+
+@@CHECK: Suggested use of `owl:AllValuesFrom` looks suspect to me.  Subsequent text implies this would be applied to an appropriate subclass of `bioc:Event`, which I think is fine.  But the sparql query in section 3 suggests the intended meaning of `bioc:Actor_role` is as a reification of a role relation, which I think is incompatible with the use of `cidoc:P11_had_participant`.
+
 
 # Schema.org
+

@@ -1,4 +1,4 @@
-# Annalist data exporter for EMPlaces
+# LPIF data exporter for EMPlaces
 
 ## TODO
 
@@ -12,4 +12,10 @@
 Maybe later:
 
 - [ ] Installation script (setup.py). Worth doing?
+- [ ] LPIF to EMPlaces conversion
+- [ ] LPIF to EMPlaces JSon format
 
+
+Other links:
+
+- https://www.npmjs.com/package/jldc (JSON-LD command line tool)
