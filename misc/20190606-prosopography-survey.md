@@ -11,6 +11,8 @@ NOTE: this should probably be moved to a different GitHub repo.  I'm parking it 
 
 (Could we put the spreadsheet and notes in GitHub?)
 
+I note that the CRM BIO model (below) seems also to be based on Cultures of Knowledge work, maybe with some overlap.
+
 @@TODO: look at reviews too
 
 ## People
@@ -27,6 +29,7 @@ NOTE: this should probably be moved to a different GitHub repo.  I'm parking it 
 - type
 - @@rather like EM Places place typography?
 - @@spreadsheet has lots of event types listed and organized
+    -@@do these align with CRM BIO work? (see below)
 - @@See also Roles, Glossary tabs
 
 ## Activity
@@ -40,7 +43,7 @@ Primary participant:
 
 Secondary participant:
 -  (as primary)
-@@NOTE: I think CRM has some material in this area, but role-in-event representation is not well handled)
+@@NOTE: I think CRM has some material in this area, but role-in-event representation is not well handled.  See also CRM-BIO below)
 
 Time:
 
@@ -82,7 +85,6 @@ Tech provenance and editorial notes
 - descriptions of roles
 
 
-
 # SNAP
 
 http://snapdrgn.net/ontology
@@ -106,7 +108,7 @@ Ontology Imports:
 
 Also seems to have some occasional CIDOC CRM references.
 
-@@NOTE: Interesting structure: seems to use lots of classes to represent relationships, with relatively few properties.  So, effectively, a reified relationship structure?  Compare with our places work, uses OWL classes rather than SKOS concepts.
+Interesting structure: uses multiple classes to represent relationships, with relatively few properties.  So, effectively, a reified relationship structure.  (Compared with our places work, uses OWL classes rather than SKOS concepts to qualify relationships.  As such, the structure used is similar to the [Qualified terms](https://www.w3.org/TR/prov-o/#description-qualified-terms) defined by the PROV-O ontology.
 
 See ontology visualizations:
 
@@ -143,6 +145,32 @@ See ontology visualizations:
 @@confused by apparent overlap between KinOf and QualifiedRelationship
 
 @@Need to find more relationship instance documentation
+
+
+# CIDOC-CRM BIO, etc
+
+See:
+- https://seco.cs.aalto.fi/publications/2018/tuominen-et-al-bio-crm-2018.pdf
+
+"Bio CRM extends CIDOC CRM by introducing role-centric modeling."
+
+The paper suggests the formal description is at [http://ldf.fi/schema/bioc/](http://ldf.fi/schema/bioc/), but I could not retrieve that URL (as of 2019-06-19).  "The namespace of the Bio CRM schema is http://ldf.fi/schema/bioc/, here used with the prefix `bioc`. The full specification of Bio CRM (class and property listing) is available in the namespace URI."
+
+`bioc:bearer_of` seems to overlap with `crm:P2_has_type`.
+
+There's also some overlap here with the SNAP approach to handling roles/relations.
+
+The class `bioc:Actore_role` represents a "specialization" of a person in a particlar role, rather than reifying the relationship - this is implied by the use of `cidoc:P11_had_participant`, whose range is an actor, not some other thing.  See also `prov:specializationOf`.  It's not stated explcitly, but I think `bioc:Actore_role` is a subclass of `bioc:Actor` and `crm:E39_Actor`.
+
+
+Another paper on CRM-BIO:
+- https://seco.cs.aalto.fi/projects/biographies/biocrm-2016-08-19.pdf
+
+This describes `bioc:Actor_role` as the root of a hierarchy of "classes for representing people in roles for personal relations", which reinforces the reading that CRM-BIO is based on a specialization model.  Examples in this paper are consistent with this interpretation.
+
+## Relationship with SNAP
+
+This model shares with SNAP an effort to reify diverse relationships as distinct classes, but differs in how that reification is achieved: in SNAP, the relations themselves are reified, similar in structure to the [Qualified terms](https://www.w3.org/TR/prov-o/#description-qualified-terms) that are defined by the PROV-O ontology.
 
 
 # SwissArtResearch: Person Reference Data Model
@@ -270,23 +298,33 @@ Key ideas in the ontology seem to be:
 It appears (and is ackowldged) that the factoid ontology could be represented using CRM terms used to describe documentation, but this would require further investigation to verify.
 
 
-# CIDOC-CRM BIO, etc
+# Schema.org
+
+There are a wide range of schema.org terms that can associate with people, many of which are quite idiosyncratic or specialized to particular applications (commonly, popular web activities).  As such, schema.org may not be a particul;arly sound basis for constrtucting hiustorical information where concerns might be quite different, but (given it's piopularity on the Web) it does make sense to see where there may be useful overlaps.
 
 See:
-- https://seco.cs.aalto.fi/publications/2018/tuominen-et-al-bio-crm-2018.pdf
 
-"Bio CRM extends CIDOC CRM by introducing role-centric modeling."
+- https://schema.org/agent (property, not entity)
+    - https://schema.org/Organization
+    - https://schema.org/Person
+- https://schema.org/Action
+    - https://schema.org/docs/actions.html
+    - http://blog.schema.org/2014/04/announcing-schemaorg-actions.html
 
-The paper suggests the formal description is at http://ldf.fi/schema/bioc/, but I could not retrieve that URL (as of 2019-06-19).  "The namespace of the Bio CRM schema is [http://ldf.fi/schema/bioc/](http://ldf.fi/schema/bioc/), here used with the prefix `bioc`. The full specification of Bio CRM (class and property listing) is available in the namespace URI."
+The schema.org terms `agent` and `Action` seem to be related to CRM notions of `E39_Actor` and `E5_Event` (or maybe, more closely, `E7_Activity`?).  Also similar to PROV notions of Agent and Activity?  
+@@NOTE: I also notice `schema:sameAs`, which I judge to be a safer alternatiuve to `owl:sameAs` for connecting different identifiers, without all the additional inferential baggage (and scope for error) that `owl:sameAs` must carry
 
-`bioc:bearer_of` seems to overlap with `crm:P2_has_type`.
+## Action
 
-There's also some overlap here wit the SNAP approach to handling roles/relations.
+A schema.org `Action` differs from a PROV `Activity` in that PROV is retrospective in intent, where schema.org actions may to potential future actions.  Maybe there's also a relationship to [P-PLAN](http://www.opmw.org/model/p-plan/) here?
 
-The class `bioc:Actore_role` appears to represent a "specialization" of a person in a particlar role, rather than reify the reklationship - this is implied by the use of `cidoc:P11_had_participant`, whose range is an actor, not some other thing.  See also `prov:specializationOf`.  It's not stated explcitly, but I think `bioc:Actore_role` is a subclass of `bioc:Actor`.
+Actions were introduced later into the schema.org framework, and as such don't appear to be integrated into an overall ontological structure in the way that activities and events have been in PROV and CRM.  The emphasis seems to be on actions that can be invoked against web resources (at least for potential future actions).
 
-@@CHECK: Suggested use of `owl:AllValuesFrom` looks suspect to me.  Subsequent text implies this would be applied to an appropriate subclass of `bioc:Event`, which I think is fine.  But the sparql query in section 3 suggests the intended meaning of `bioc:Actor_role` is as a reification of a role relation, which I think is incompatible with the use of `cidoc:P11_had_participant`.
+## Person, Organization
 
+Unlike PROV andf CRM, there is no single class covering Organizations, People and other kinds of agent: instead the `agent` property (applied to an `Action`) can be used to indicate a value of type `Organization` or `Person`.
 
-# Schema.org
+There are a number of schema.org terms that apear to be closely related to CODOC CRM descriptions of people (e.g. name, birth, death, organizational association, occupation, social connections, limited family rekationships.  See SwissArtResearch belowm for examples of CRM to describe people.
+
+My sense is that any crosswalk between histotical prosopographical data is ikely to be quite lossy in both directions; so what we might hope for here is some common core teminology that can connect historically-oriented datasets and other web applications.  But it's not clear to me that there is a lot of value in this for scholars of history.
 
