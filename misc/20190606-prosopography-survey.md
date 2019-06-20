@@ -177,11 +177,11 @@ This model shares with SNAP an effort to reify diverse relationships as distinct
 
 https://docs.swissartresearch.net/et/person/
 
-My initial impression is thgat this is a carefully thought out and comprehensive reference model for describing people, based primnarily on CIDOC CRM, with some selected extensions (including to handle the infamous "rtole-in-activity" problem when usiong CIDOC CRM with RDF).
+My initial impression is thgat this is a carefully thought out and comprehensive reference model for describing people, based primnarily on CIDOC CRM, with some selected extensions (including to handle the infamous "role-in-activity" problem when usiong CIDOC CRM with RDF).
 
-My concern is that this may prove too complex for some applications to deal with directly.  But I think it could form a useful basis for mapping appliucation-specific person ontologies.
+My concern is that this may prove too complex for some applications to deal with directly.  But I think it could form a useful basis for mapping application-specific person ontologies.
 
-Aniother cobncern is that the "Qualified properties" problem doesn't seem to be fully worked out for family relations (cf. [Qualified properties](https://github.com/gklyne/notes/blob/master/20180307-qualified-property-links.md)).
+Another concern is that the "Qualified properties" problem doesn't seem to be fully worked out for family relations and activities (cf. [Qualified properties](https://github.com/gklyne/notes/blob/master/20180307-qualified-property-links.md)).  E.g., I'm not seeing any description of terms used to capture role-in-activity.
 
 
 ## Names and classifications

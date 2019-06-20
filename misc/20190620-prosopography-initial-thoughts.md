@@ -14,7 +14,7 @@ The major ontologies that appear to have significant traction in the prosopograp
 
 - CIDOC CRM
 - SNAP (Standards for Networking Ancient Prosopographies)
-- FPO (Factoid Prosopography)
+- FPO (Factoid Prosopography Ontology)
 
 It turns out there is less overlap between these than I first anticipated, so the idea of preparing a crosswalk between them is probably not so helpful.  I expand on this below.
 
@@ -58,7 +58,7 @@ There are a whole hierachy of subclasses of `Bond` that appear to denote differe
 The ontology itself is mostly free-standing, in that it does not extend some other ontology, though it does make reference to a number of other ontologies (e.g. LAWD, PROV, FOAF, etc.).  As far as I can tell, these references are mainly for ontology alignment purposes, and are not central to SNAP.
 
 
-### FPO (Factoid Prosopography)
+### FPO (Factoid Prosopography Ontology)
 
 Rather than attempting to model domain information about people directly, FPO focuses on assertions about people that are found in primary sources (or other literature?).
 
@@ -73,10 +73,56 @@ FPO also defines subclasses of CIDOC CRM people and places (e.g., female, male, 
 
 ### Swiss Art Research Person Reference Data Model
 
-This is a "profile" of CIDOC CRM for describing people, using some extension terms to capture roles in activities.  It appears to be quite comprehensive and well thought through using CIDOC CRM terms wherever possible.
+This is a "profile" of CIDOC CRM for describing people, using some extension terms to capture roles in activities.  It appears to be quite comprehensive and well thought through, using CIDOC CRM terms wherever possible.
 
 One known area of weaknes of CIDOC CRM is in the representation of a person's role in an activity, particularly when the desired representation is RDF linked data on the Web.  The problem is that CRM uses a direct property (`crm:P12_occurred_in_the_presence_of`, `crm:P11_had_participant` and subproperties) to relate people to an event, a use of which cannot be further qualified using RDF.
 
-Apart from the issue of modelling roles in activities, this work looks like a good startiong point for representing exchangeable Prosopographical data.  I return to this topic later.
+For relationship modeling, the Swiss Art Research profile uses a CRM extension (`SRP3_in_family_relation` and `SRP3.1_had_family_relation_type`), but the data pattern described isn't making any sense to me.  I am not seeing any structures for describing role-in-activity.
+
+Apart from the issue of modelling relationships and roles in activities, this work looks like a good starting point for representing exchangeable Prosopographical data.  I return to this topic later.
+
+
+### CRM BIO
+
+This work describes a CRM extension that explicitly attempts to tackle the person relationship and role-in-activity challenges in using CRM with RDF that have been noted.
+
+Most proposals I have seen for addressing this problem involve introducing a new class to represent a relationship between entities, to which additional qualifying information about the relation can be attached.  For example, the W3C PROV ontology uses this pattern in a form known as [Qualified terms](https://www.w3.org/TR/prov-o/#description-qualified-terms).  This pattern can be described as "reifying a relationship".
+
+(It may be worth noting that "property graph" implementations generally do not have this limitation, and allow qualifying information to be added to any relationship between entities.  There are experiments under way to address this issue generically in RDF.)
+
+CRM BIO, however, takes a philosophically quite different approach (though the effect in practice is quite similar).  Rather than reifying the relationshiop between (say) an activity and a person, it takes the approach of defining a "specialization" of the person
+that quite specifically denotes them as a participant in the event.  This pattern can be described as "specializing an entity".   The W3C PROV ontology defines a general term [prov:specializationOf](https://www.w3.org/TR/prov-o/#specializationOf) that can be used for this.  This approach allows all existing properties of an ontology to be used with unchanged semantics; it is the entities to which they refer that are changed to reflect the context of an activity or a relationship.
+
+
+### W3C PROV
+
+The W3C PROV ontology is used sporadically in existing prosopography ontology work.  There is a good deal of overlap between PROV and the CRM event model.  But PROV also defines patterns for refiying relations between activities and agents, and for defining specialized (of contextualized) instances of a perspon (or any entity).
+
+Given the degree of overlap with CRM, and the extent of existing prosopographical work that already uses CRM, I don't propose to explore PROV further in this context.  I also note that its descriptopn as a "provenance" ontology may be jarring for some in the academic historical and cultural heritage communities, since it only partially aligns with other uses of that term.
+
+
+# Dealing with relationships and roles
+
+The central question:
+
+- reificaton of relations (ala SNAP)
+
+OR
+
+- specilization of entities (ala CRM BIO)
+
+@@@@
+
+
+# Tentative proposal for ongoing work
+
+(((swissartresearch, minus CRM extensions)))
+
+(((CRM BIO role modeling)))
+
+(((Something based on SNAP for relationship types)))
+
+(((Something based on FPO for separating assertions from interpretations?  Or map to CRM documentation/assignment terms?)))
+
 
 
