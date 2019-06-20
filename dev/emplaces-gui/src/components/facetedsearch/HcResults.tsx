@@ -1,8 +1,9 @@
 import React from 'react'
 import HcResultItemEmPlaces from "./emplaces/HCResultItemEmPlaces"
+import { ResultItem } from './SearchResult';
 
-export class HcResultListHeader extends React.Component<{ totalResults: string }>{
-  
+export class HcResultListHeader extends React.Component<{ totalResults: number }>{
+
   render() {
     return (
       <div className="hcResultsHeader hcMarginBottom1">
@@ -18,16 +19,19 @@ export class HcResultListHeader extends React.Component<{ totalResults: string }
 }
 
 
-export class HcResultList extends React.Component {
+export class HcResultList extends React.Component<{ data: ResultItem[] }> {
   render() {
     return (
       <div className="hcList hcMarginBottom2">
-        <HcResultItemEmPlaces
-          resultItemName="Opole"
-          resultItemAdministration="Poland, Opole Voivodeship"
-          resultItemType="Inhabited place"
-          resultItemAltNames={[{ "altName": "Opolė" }, { "altName": "Òpòle" }, { "altName": "Opolí" }, { "altName": "Oppein" }, { "altName": "Oppeln" }]}
-        />
+        {this.props.data.map(result => {
+          return <HcResultItemEmPlaces
+            key={Math.random()}
+            resultItemName={result.property1.asString()}
+            resultItemAdministration=""
+            resultItemType={result.property2.asString()}
+            resultItemAltNames={result.property3.asArray()}
+          />
+        })}
       </div>
     );
   }

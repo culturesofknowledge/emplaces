@@ -13,8 +13,8 @@ export default class HcResultItemEmPlaces extends React.Component<ResultItem> {
           }}>
             {/* { this.props.resultItemAltNames} */}
 
-            {this.props.resultItemAltNames.map(apartment => (
-              <span key={apartment.altName}>{apartment.altName}</span>
+            {this.props.resultItemAltNames.map(altName => (
+              <span key={Math.random()}>{altName}</span>
             ))}
 
           </div>
@@ -29,5 +29,5 @@ class ResultItem {
   "resultItemName": string;
   "resultItemAdministration": string;
   "resultItemType": string;
-  "resultItemAltNames": {"altName": string}[];
+  "resultItemAltNames": string[];
 }
