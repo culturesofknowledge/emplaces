@@ -3,7 +3,7 @@
 These discussion notes have been prepared as part of an activity with 2 related goals:
 
 1. proposals for a linked data format to be used by the EM People activity, which aims to present  data about People collected by the Cultures of Knowledge (CofK) Early Modern Letters Online (EMLO) project as separate linked data resource.
-2. an action accepted at a Prosopography workshop in London held in Mayn 2019 to compare and attempt to crosswalk various ontologies used by prosopographical research projects.
+2. an action accepted at a Prosopography workshop in London held in May 2019 to compare and attempt to crosswalk various ontologies used by prosopographical research projects.
 
 See also [Prosopography vocabulary survey](./20190606-prosopography-survey.md).
 
@@ -24,23 +24,27 @@ There is also related work:
 - CRM-BIO (also based on CRM, focused on relationship and role modelling)
 - W3C PROV: a W3C standard ontology for recording "provenance": structured information about the processes, actors and entities ivolved in the production of some entity.
 
-I also looked at schema.org, but feel it doesn't really address the kinds of representational issues that are of concern to prosopographical researchers (that's not to say it's not relevant, but that its approach doesn't lend itself to being a basis model exchange).
+I also looked at schema.org, but feel it doesn't really address the kinds of representational issues that are of concern to prosopographical researchers (that's not to say it's not relevant, but that its approach doesn't lend itself to being a basis model for exchange).
 
 
 ### CIDOC CRM
 
-This is a well-developed ISO-standard ontology that has widespread adoptionin the cultural heritage community, and beyond, for many years.  It's roots are in museum catalog data, with highly developed capabilities in the area of describing historical artifacts and assessments of their provenance.  It provides a well-organized and rich (but not overwhelming) vocabulary for describing artifacts, entities, people, locations, activities and events.
+See: http://www.cidoc-crm.org/use_and_learn
+
+This is a well-developed ISO-standard ontology that has widespread adoption in the cultural heritage community, and beyond, for many years.  Its roots are in museum catalog data, with highly developed capabilities in the area of describing historical artifacts and assessments of their provenance.  It provides a well-organized and rich (but not overwhelming) vocabulary for describing artifacts, entities, people, locations, activities and events.
 
 A key feature of CRM (which it shares with W3C PROV) is that it is event- (or activity-) centric.  The provenance of an artifact is described in terms of the events/activites that led to its production and subsequent states.  The other entities, people, places, and more that provide related information are for the most part connected by these event descriptions.
 
-This model is capable of describing a wide range of information, but there are some topics tghat are not captured so well.  Notably the details of relationships between people and events (e.g. role), particularly for CRM represented as linked data on the web based on RDF.  This limitation is highlighted by the extensions to CRM that are introduced by the Swiss Art Research Person Reference Model, and the CRM-BIO work.  But these projects take quite different approach to how they capture this information (more on this later).
+This model is capable of describing a wide range of information, but there are some topics that are not captured so well.  Notably the details of relationships between people and events (e.g. role), particularly for CRM represented as linked data on the web using RDF.  This limitation is highlighted by the extensions to CRM that are introduced by the Swiss Art Research Person Reference Model, and the CRM-BIO work.  But these projects take quite different approaches to how they capture this information (more on this later).
 
 
 ### SNAP (Standards for Networking Ancient Prosopographies)
 
+See: http://snapdrgn.net/ontology
+
 The SNAP ontology focuses on relationships between people.
 
-In particular, it defines and organizes a number of classes to represent different kinds relationship between people.  As such, it might be described as relationship-centric.
+In particular, it defines and organizes a number of classes to represent different kinds relationship between people.  As such, it might be described as "relationship-centric".
 
 The primary structure adopted by SNAP is a hierarchy of classes that reify relationships between people.  The top-level classes and relations are:
 
@@ -60,6 +64,8 @@ The ontology itself is mostly free-standing, in that it does not extend some oth
 
 ### FPO (Factoid Prosopography Ontology)
 
+See: https://factoid-dighum.kcl.ac.uk/
+
 Rather than attempting to model domain information about people directly, FPO focuses on assertions about people that are found in primary sources (or other literature?).
 
 The central structral idea is a `Factoid`, which is an assertion that appears in some source expression (a `frbroo:F2_Expression`), and may make reference to a person (`crm:E39_Actor`), a place (`crm:E53_Place`) and a date of occurrence.  There are a number of subclasses of `Factoid` for representing different kinds of assertion about a person.
@@ -73,6 +79,8 @@ FPO also defines subclasses of CIDOC CRM people and places (e.g., female, male, 
 
 ### Swiss Art Research Person Reference Data Model
 
+See: https://docs.swissartresearch.net/et/person/
+
 This is a "profile" of CIDOC CRM for describing people, using some extension terms to capture roles in activities.  It appears to be quite comprehensive and well thought through, using CIDOC CRM terms wherever possible.
 
 One known area of weaknes of CIDOC CRM is in the representation of a person's role in an activity, particularly when the desired representation is RDF linked data on the Web.  The problem is that CRM uses a direct property (`crm:P12_occurred_in_the_presence_of`, `crm:P11_had_participant` and subproperties) to relate people to an event, a use of which cannot be further qualified using RDF.
@@ -83,6 +91,8 @@ Apart from the issue of modelling relationships and roles in activities, this wo
 
 
 ### CRM BIO
+
+See: https://seco.cs.aalto.fi/publications/2018/tuominen-et-al-bio-crm-2018.pdf
 
 This work describes a CRM extension that explicitly attempts to tackle the person relationship and role-in-activity challenges in using CRM with RDF that have been noted.
 
@@ -96,12 +106,16 @@ that quite specifically denotes them as a participant in the event.  This patter
 
 ### W3C PROV
 
+See: https://www.w3.org/TR/prov-o/
+
 The W3C PROV ontology is used sporadically in existing prosopography ontology work.  There is a good deal of overlap between PROV and the CRM event model.  But PROV also defines patterns for refiying relations between activities and agents, and for defining specialized (of contextualized) instances of a perspon (or any entity).
 
 Given the degree of overlap with CRM, and the extent of existing prosopographical work that already uses CRM, I don't propose to explore PROV further in this context.  I also note that its descriptopn as a "provenance" ontology may be jarring for some in the academic historical and cultural heritage communities, since it only partially aligns with other uses of that term.
 
 
 # Dealing with relationships and roles
+
+@@@@
 
 The central question:
 
@@ -116,13 +130,15 @@ OR
 
 # Tentative proposal for ongoing work
 
+@@@@
+
 (((swissartresearch, minus CRM extensions)))
 
 (((CRM BIO role modeling)))
 
 (((Something based on SNAP for relationship types)))
 
-(((Something based on FPO for separating assertions from interpretations?  Or map to CRM documentation/assignment terms?)))
+(((Something based on FPO for separating recorded assertions from interpretations/claims?  Or map to CRM documentation/assignment terms?)))
 
-
+@@@@
 
