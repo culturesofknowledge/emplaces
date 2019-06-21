@@ -190,7 +190,7 @@ Now we can say:
 
 ## Discussion
 
-Putting the pieces together, wer have the following alternative representations:
+Putting the pieces together, we have the following alternative representations:
 
 1. Using reified relation:
 
@@ -245,7 +245,7 @@ Putting the pieces together, wer have the following alternative representations:
 
 In both cases, I've retained the original (unqualified) participation information, so that it remains accessible to applications that don't understand the extension vocabularies used.
 
-In terms of complexity of representation, there's not much to choose between them: they use the same number lof RDF triples.
+In terms of complexity of representation, there's not much to choose between them: they use the same number of RDF triples.
 
 I feel the use of the original types (`:Pianist`, `:BassGuitarist`) sits more comfortably with the second approach (specialized person), but this is very much a value judgement.
 
@@ -253,13 +253,13 @@ The second approach (specialized person) requires only one new vocabulary term t
 
 Both approaches require the creation of two new instance nodes to represent the additional information.  For (1) it is the reified relation nodes, which must be generated for each act of participation.  For (2), it is the specialized person nodes, which might be re-used over  participation in mutiple activities - which suggests an advantage for this approach.
 
-Possibly set across the previous advantages in favour of (2) are:  the reification pattern is one that seems to be more widely understood and used, and I suspect it might be slightly easier to add additional contextual information to any act of particpation because each such act is reified separately.  (E.g. adding the track times during which musician played a partocular instrument:  this could be done using the person specialization, but would require creation of a different specialization for each act of participation.)
+Possibly set against the previous advantages in favour of (2) are:  the reification pattern is one that seems to be more widely understood and used, and I suspect it might be slightly easier to add additional contextual information to any act of particpation because each such act is reified separately.  (E.g. adding the track times during which musician played a particular instrument:  this could be done using the person specialization, but would require creation of a different specialization for each act of participation.)
 
 I feel the choice is finely balanced.  I lean toward the person specialization:
 
 - it introduces fewer new vocabulary terms (and might simply use the existing `prov:specializationOf` term).
 - it provides greater opportunity for sharing role information between activities.
-- new role information can be introducedincrementally through new specializations and participation.
+- new role information can be introduced incrementally through new specializations and participation.
 - it feels in some sense "closer" to the original CRM structures that it aims to refine; e.g. it uses the same `crm:P11_had_participant` property.
 
 But none of these are overwhelming, or even unarguable reasons.
@@ -269,7 +269,7 @@ But none of these are overwhelming, or even unarguable reasons.
 
 Next, I consider how the above patterns apply to relationships.  I note that SNAP uses an approach following the "reified relation" pattern, which clearly works there.
 
-CRM-BIO explores using the "specialized person" approach for relations; this is a Turtle representationfor one of the diagrams in [one of the CRM-BIO papers](https://seco.cs.aalto.fi/publications/2018/tuominen-et-al-bio-crm-2018.pdf):
+CRM-BIO explores using the "specialized person" approach for relations; this is a Turtle representation for one of the diagrams in [one of the CRM-BIO papers](https://seco.cs.aalto.fi/publications/2018/tuominen-et-al-bio-crm-2018.pdf):
 
     :john_kennedy a bioc:Person ;
         bioc:has_family_relation
@@ -287,7 +287,7 @@ I think my root objection here is that it introduces an asymmetric structure, at
 
 There's a further example of John F Kennedy as President of US that models the relationship as an activity in which there are multiple particpants.  This looks fine to me, but would be covered by the previous discussion.
 
-So, I'm not seeing a convincing case that the person-specialization approach is working well for relationships between people and/or organizations, except to the extent that they are modeled as an activity.
+So, I'm not seeing a convincing case that the person-specialization approach on its own is working well for relationships between people and/or organizations, except to the extent that they are modeled as an activity.  (But see next section.)
 
 (See also what https://linked.art/model/profile/class_analysis.html has to say about "relationship".)
 
@@ -296,13 +296,13 @@ So, I'm not seeing a convincing case that the person-specialization approach is 
 
 If a prosopographical ontology is to be based on CIDOC CRM (as is the Swiss Art Research Peson Reference Model), then what are the options provided by CIDOC CRM?
 
-Looking through the CIDOC CRM core documenation, there are no properties that correspond directly to relationships between people.  Where a relationship is expressed, it by way of some event (e.g. [crm:P97_from_father](http://www.cidoc-crm.org/sites/default/files/Documents/cidoc_crm_version_5.0.4.html#_Toc310250884)).
+Looking through the CIDOC CRM core documentation, there are no properties that correspond directly to relationships between people.  Where a relationship is expressed, it by way of some event (e.g. [crm:P97_from_father](http://www.cidoc-crm.org/sites/default/files/Documents/cidoc_crm_version_5.0.4.html#_Toc310250884)).
 
-However, in separate discussions (e.g., [here](http://www.cidoc-crm.org/Issue/ID-256-groups-and-relations-between-persons), it is noted that the "CRM way" to describe relationships is via [crm:E74_Group](http://www.cidoc-crm.org/sites/default/files/Documents/cidoc_crm_version_5.0.4.html#_Toc310250783), together witj a membership property [P107 has current or former member](http://www.cidoc-crm.org/sites/default/files/Documents/cidoc_crm_version_5.0.4.html#P107).  But subsequent discussion exposes that there are relationships that don't fit neatly into this idea of a group.  Work is under way to define a CRM extension class that an capture a wider range of relationships, such as those that appear in prosopographical data.
+However, in separate discussions (e.g., [here](http://www.cidoc-crm.org/Issue/ID-256-groups-and-relations-between-persons), it is noted that the "CRM way" is currently to describe relationships is via [crm:E74_Group](http://www.cidoc-crm.org/sites/default/files/Documents/cidoc_crm_version_5.0.4.html#_Toc310250783), together witj a membership property [P107 has current or former member](http://www.cidoc-crm.org/sites/default/files/Documents/cidoc_crm_version_5.0.4.html#P107).  But subsequent discussion exposes that there are relationships that don't fit neatly into this idea of a group.  Work is under way to define a CRM extension class that an capture a wider range of relationships, such as those that appear in prosopographical data.
 
 Also: "The question of social relations that are explored in the question of prosopography were argued to go beyond the scope of CRMBase." - [here](http://www.cidoc-crm.org/Issue/ID-256-groups-and-relations-between-persons) (towards end of page).
 
-I would observe that a group might be conceived as a reification of a relationship, though the CRM structures don't distingush directly between the different roles (this is handled by role assignments on the membership property, which cannot be directly encoded in RDF).  This notion sits well with SNAP, which defines a fair number of relationships.
+I observe that a group might be conceived as a reification of a relationship, though the CRM structures don't distingush directly between the different roles (this is handled by role assignments on the membership property, which cannot be directly encoded in RDF).  This notion sits well with SNAP, which defines a fair number of relationships.
 
 Using (for now) the `crm:E74_Group` class to reify a group, and `crm:P107_has_current_or_former_member` to describe membershp, it seems to me that the person-specialization model of CRM-BIO could also be used to capture role information.
 
@@ -323,7 +323,7 @@ Thus, returning to the previous example of John Kennedy from CRM-BIO, we might g
 
 This introduces a Group entity to represent the union, and specializations of the participants to represent their roles.
 
-Compared with the SNAP approach, which effectively reifies a relationship property applied between two people, this approach can generalize to any number of members in a relationship.  Or even a role like President that is filled by just one person at a time.
+Compared with the SNAP approach, which effectively reifies a relationship property applied between two people, this approach can generalize to any number of members in a relationship.  Or even a role like President that is filled by just one person at a time.  I think the SNAP relationship classes could be used to sub-class the base type (`crm:E74_Group`), and the role classes used might be derived from these.  A disadvantage of this approach is that it involves introducing a fair number of new terms (compared with, say, SNAP).
 
 
 # Tentative proposal for ongoing work
