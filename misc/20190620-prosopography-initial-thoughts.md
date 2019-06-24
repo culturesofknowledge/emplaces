@@ -326,13 +326,91 @@ This introduces a Group entity to represent the union, and specializations of th
 Compared with the SNAP approach, which effectively reifies a relationship property applied between two people, this approach can generalize to any number of members in a relationship.  Or even a role like President that is filled by just one person at a time.  I think the SNAP relationship classes could be used to sub-class the base type (`crm:E74_Group`), and the role classes used might be derived from these.  A disadvantage of this approach is that it involves introducing a fair number of new terms (compared with, say, SNAP).
 
 
+# Outline of information to be captured
+
+Mostly synthesized from existing ontologies.  This list here is intended to indicate possible coverage, not to imply any particular structuring of the information.
+
+General/summary:
+
+- id
+    - Identifier provider
+    - Identifier source
+- name parts (e.g. components: first, last, salutation/honorific; but niote different cultures use different structures.)
+    - name language
+- name composite (rendering of combined name)
+- label (descriptive: name or name+other information)
+- description
+- aliases
+- date of birth
+- date of death
+- primary occupation/roles in life (e.g. scientist, teacher, etc.)
+    - (not linked to specific time perod; see also: activities)
+- source(s) of information
+
+Relationships:
+
+- id
+- label
+- description
+- type/category of relationship (cf. SNAP)
+- ref other person(s)
+- time (period?) of relationship
+- associated date (per SNAP?)
+- associated place (per SNAP?)
+- occupation (per SNAP?)
+- Less obvious examples from SAR:
+    - National affiliation
+    - Cultural afiliation
+    - Institutional afiliation
+    - Associate: P11i Participated in - E5 Event - P11i - E21 (@@Eh?)
+- knowledge/skills/specialization
+    - e.g. languages used (SAR)
+
+
+@@Q: allow for binary relationships, or multi-way?
+
+Life events (including more details of birth and death):
+
+- id
+- label
+- description
+- type/category of event
+- time (period?) of event
+- other people involved (e.g. parents for birth)
+- location of event
+- source(s) of information about event
+
+Activities (combine with life events?):
+
+(include life-roles)
+
+- id
+- label
+- type/category of activity
+- role(s) in activity
+- other participants
+- time period of activity
+    - floruit - period of greatest activity/flourishing
+- location of activity
+- field of activity
+    - cf. SAR, FRBRoo "R59 had typical subject"
+- source(s) of information about activity
+
+
+It's not immediately clear how to best include the factoid onology elements: I can see two possible approaches:
+
+1. A factoid structure is treated as an overarching structure, such that parts of this model can be treated as "assertions", and hence used to distinguish primary source claims from interpretive claims.
+
+2. Use the person structure as an overall organizing structure, and incorporate factoid information into the source descriptions.
+
+@@NOTE: It's conceivable that the "multi-source" structure we developed for EM Places might be re-applied to people to capture factoid type information, possibly extended to distinguish primary sources from other sources and authorities (using an approach similar the the source/authority distinction)
+
+
+
 # Tentative proposal for ongoing work
 
 @@@@review reviews
-
-Nothing much there at the level of modeling.  But there are criticisms of the presentation of the model.  I think we should separate the modelmused for exchange/interoperability from the model used for presentation (i.e. streamline the latter for user convenience - I'm noticing something similar in my work with Annalist).
-
-
+Nothing much there at the level of data modeling.  But there are criticisms of the presentation of the model.  I think we should separate the model used for exchange/interoperability from the model used for presentation (i.e. streamline the latter for user convenience - I'm noticing something similar in my work with Annalist).
 @@@@
 
 (((swissartresearch, minus CRM extensions)))

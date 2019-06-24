@@ -184,8 +184,9 @@ Prosopographical workshop 2019-05-16/17
 - [x] GK research other prosopographical data models (Arno to provide list)
 - [x] GK review prosopographical workshop notes (what are we aiming to get out of this?)
 - [x] GK read through Oxford prosopography data model (Arno has provided)
-- [ ] Crosswalk SNAP/SwissArtReseatch person data model/Factoid ontology/Schema.org
-- [ ] Synthesize (or adopt?) model for EMPeople
+- [x] Crosswalk SNAP/SwissArtReseatch person data model/Factoid ontology/Schema.org
+    - (Not crosswalk: not enough common ground for that)
+- [.] Synthesize (or adopt?) model for EMPeople
 
 
 ## Other:
@@ -195,7 +196,7 @@ Prosopographical workshop 2019-05-16/17
 - [x] Clean up documentation.  Move superseded documents to "historic" subfolder.
 - [ ] Test wrangled data with Timbuctoo
     - with data at [emplaces/tree/develop/src/geonamesdataexport/data-test-alternate-authorities](https://github.com/culturesofknowledge/emplaces/tree/develop/src/geonamesdataexport/data-test-alternate-authorities)
-- [ ] LPIF data export from EMPlaces
+- [.] LPIF data export from EMPlaces
 
 
 ## Technical debt and unscheduled:
