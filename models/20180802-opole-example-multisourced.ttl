@@ -330,6 +330,36 @@ em:USED_FOR a oa:Motivation ;
     rdfs:comment "Generally used with a related place that is a building or site for some activity, to indicate a purpose for which the place was used.  The annotation body directly references a resource describing the purpose, which is assumed to have an rdfs:label value that can be used for display purposes.  The annotation itself may carry a temporal constraint (`em:where`) that gives some indication of when the place was used for that purpose." ;
     .
 
+# Calendar descriptions
+
+emc:Gregorian a em:Calendar ;
+    rdfs:label "Gregorian calendar" ;
+    em:link emc:Gregorian ;
+    annal:id "Gregorian" ;
+    annal:type_id "Calendar" ;
+    rdfs:comment """# Gregorian calendar\r
+\r
+Calendar generally in use in Europe from about 23 Feb 1584.""" .
+
+emc:Julian_old a em:Calendar ;
+    rdfs:label "Julian calendar (25 Mar)" ;
+    em:link emc:Julian_old ;
+    annal:id "Julian_old" ;
+    annal:type_id "Calendar" ;
+    rdfs:comment """# Julian calendar (Old)\r
+\r
+"Old style" Julian calendar, year begins on 25-Mar.""" .
+
+emc:Julian_new a em:Calendar ;
+    rdfs:label "Julian calendar (1 Jan)" ;
+    em:link emc:Julian_old ;
+    annal:id "Julian_new" ;
+    annal:type_id "Calendar" ;
+    rdfs:comment """# Julian calendar (New)\r
+\r
+"New style" Julian calendar, year begins on 01-Jan.""" .
+
+
 
 #   ==========================================================================
 #   ==========================================================================
