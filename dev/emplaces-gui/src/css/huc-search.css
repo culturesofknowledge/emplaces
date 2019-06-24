@@ -16,3 +16,7 @@
 
 .huc-list li .huc-list-selected {
   background-color: #bababa !important; }
+
+  .hcFacetItem {
+    cursor: pointer;
+  }

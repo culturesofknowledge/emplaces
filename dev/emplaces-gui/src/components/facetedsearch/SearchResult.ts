@@ -1,9 +1,13 @@
+import { Facet } from "./Facet";
+
 export class SearchResult {
+  facets: Facet[];
   results: ResultItem[];
   total: number;
-  constructor(total: number, data: ResultItem[]) {
+  constructor(total: number, data: ResultItem[], facets: Facet[]) {
     this.total = total;
     this.results = data;
+    this.facets = facets;
   }
 }
 
@@ -34,7 +38,7 @@ export class Property {
     }
     return this.value;
   }
-  
+
   asArray(): string[] {
     if (this.value instanceof Array) {
       return this.value;
