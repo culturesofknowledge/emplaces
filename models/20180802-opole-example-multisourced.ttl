@@ -830,7 +830,7 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           [ a em:Calendar ;
             # Old style (OS) begins year on 25-Mar
             # New style (NS) begins year on 01-Jan
-            rdfs:label   "Julian (25 Mar)" ;  # assumed old style
+            rdfs:label   "Julian (1 Jan)" ;  # new style
             em:link      emc:Julian_old ;
           ] ;
         em:when 
@@ -845,8 +845,9 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           [ rdfs:label   "Bláhová, Marie. /Historická Chronologie./ 1. vyd. Praha: 2001" ;
             # em:link      <@@@> ;
           ] ;
-        rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
-        em:competence em:ASSUMED ;
+        rdfs:comment "Julian (N.S.) until 19-Jan-1584 adoption of Gregorian (inferred date based on adoption 
+    of Gregorian by other towns in the Duchy of Opole)." ;
+        em:competence em:INFERRED ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
@@ -868,8 +869,9 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           [ rdfs:label   "Bláhová, Marie. /Historická Chronologie./ 1. vyd. Praha: 2001" ;
             # em:link      <@@@> ;
           ] ;
-        rdfs:comment "Gregorian since 19-Jan-1584." ;
-        em:competence em:DEFINITIVE ;
+        rdfs:comment "Gregorian sinced 19-Jan-1584 (inferred date based on adoption 
+    of Gregorian by other towns in the Duchy of Opole)." ;
+        em:competence em:INFERRED ;
       ] ;
 
     # Historical map data
