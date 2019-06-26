@@ -5,6 +5,7 @@ import { HcLayoutFacetResults } from './components/facetedsearch/HcLayoutFacetRe
 import fetch from 'node-fetch'
 import { SearchResult, ResultItem, Property } from './components/facetedsearch/SearchResult';
 import { instanceOfFacetData, Facet, FacetData } from './components/facetedsearch/Facet';
+import { instanceOfEMPlace } from './EMPlace';
 
 export default class FacetedSearch extends React.Component {
   dataSetId = "ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places";
@@ -96,9 +97,9 @@ export default class FacetedSearch extends React.Component {
           const collection = dataSet[this.collectionName];
           if (collection["items"]) {
             for (let item of collection["items"]) {
-              if (this.instanceOfEMPlace(item)) {
+              if (instanceOfEMPlace(item)) {
                 const property1 = new Property("PLACE", item.title.value);
-                const property2 = new Property("PLACE TYPE", item.em_placeType.title.value ? item.em_placeType.title.value : "");
+                const property2 = new Property("PLACE TYPE", item.em_placeType && item.em_placeType.title && item.em_placeType.title.value ? item.em_placeType.title.value : "");
                 const property3 = new Property("ALTERNATIVE NAMES", item.em_alternateNameList.items.map(value => value.value ? value.value : ""));
                 resultData.push(new ResultItem(property1, property2, property3));
               }
@@ -127,32 +128,7 @@ export default class FacetedSearch extends React.Component {
 
     return 0;
   }
-
-  instanceOfEMPlace(object: any): object is EMPlace {
-    return object["title"] && object["title"]["value"]
-      && object["em_placeType"] && object["em_placeType"]["title"] && object["em_placeType"]["title"]["value"]
-      && object["em_alternateNameList"] && object["em_alternateNameList"]["items"]
-      ;
-  }
 }
-
-class EMPlace {
-  "title": {
-    "value": string;
-  }
-  "em_placeType": {
-    "title": Value;
-  }
-  "em_alternateNameList": {
-    "items": Value[];
-  }
-}
-
-class Value {
-  "value": string | null;
-}
-
-
 
 class GraphQlData {
   "data": {
