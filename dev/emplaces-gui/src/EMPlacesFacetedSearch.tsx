@@ -41,7 +41,7 @@ export default class FacetedSearch extends React.Component {
         "query": this.query,
         "operationName": "emplaces",
         "variables": {
-          "esQuery": "{\"aggs\":{\"Place type\":{\"filter\":{},\"aggs\":{\"name\":{\"terms\":{\"field\":\"em_placeType.title.value.raw\"}}}},\"Calendars\":{\"filter\":{},\"aggs\":{\"name\":{\"terms\":{\"field\":\"em_hasAnnotationList.items.oa_hasBody.title.value.raw\"}}}}}}"
+          "esQuery": "{\"aggs\":{\"Place type\":{\"filter\":{},\"aggs\":{\"name\":{\"terms\":{\"field\":\"em_placeType.title.value.raw\"}}}},\"Calendars\":{\"filter\":{},\"aggs\":{\"name\":{\"terms\":{\"field\":\"em_hasAnnotationList.items.oa_hasBody.title.value.raw\"}}}},\"Authority\":{\"filter\":{},\"aggs\":{\"name\":{\"terms\":{\"field\":\"em_alternateAuthorityList.items.title.value.raw\"}}}}}}"
         }
       }),
       headers: { 'Content-Type': 'application/json' }
