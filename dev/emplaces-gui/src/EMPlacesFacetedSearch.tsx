@@ -25,16 +25,37 @@ export default class FacetedSearch extends React.Component {
         facets: []
       }
     };
-    this.query = "query emplaces($esQuery: String) {\n  dataSets {\n    ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places {\n      em_PlaceList(elasticsearch: $esQuery) {\n        total\n        facets {\n          caption\n          options {\n            name\n            count\n          }\n        }\n        items {\n          title {\n            value\n          }\n          em_placeType {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_skos_Concept {\n              title {\n                value\n              }\n            }\n          }\n          em_alternateNameList {\n            items {\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_value_xsd_string {\n                value\n              }\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_value_rdf_langString {\n                value\n              }\n            }\n          }\n          em_hasRelationList {\n            items {\n              em_relationType {\n                em_toType {\n                  title {\n                    value\n                  }\n                }\n              }\n              em_relationTo {\n                ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_em_Place {\n                  em_hasRelationList {\n                    items {\n                      em_relationType {\n                        em_toType {\n                          title {\n                            value\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+    this.query = "query emplaces($esQuery: String) {\n  dataSets {\n    ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places {\n      em_PlaceList(elasticsearch: $esQuery) {\n        total\n        facets {\n          caption\n          options {\n            name\n            count\n          }\n        }\n        items {\n          uri\n          title {\n            value\n          }\n          em_placeType {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_skos_Concept {\n              title {\n                value\n              }\n            }\n          }\n          em_alternateNameList {\n            items {\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_value_xsd_string {\n                value\n              }\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_value_rdf_langString {\n                value\n              }\n            }\n          }\n          em_hasRelationList {\n            items {\n              em_relationType {\n                em_toType {\n                  title {\n                    value\n                  }\n                }\n              }\n              em_relationTo {\n                ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_em_Place {\n                  em_hasRelationList {\n                    items {\n                      em_relationType {\n                        em_toType {\n                          title {\n                            value\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
   }
 
   componentDidMount() {
-   this.executeQuery();
+    this.executeQuery();
   }
 
   executeQuery() {
+    const esQuery: any = {
+      "aggs": {
+        "Place type": new ESAggregation("em_placeType.title.value.raw"),
+        "Calendars": new ESAggregation("em_hasAnnotationList.items.oa_hasBody.title.value.raw"),
+        "Authority": new ESAggregation("em_alternateAuthorityList.items.title.value.raw")
+      }
+    }
 
-    
+    this.state.data.facets.forEach(facet => {
+      if (facet.selectedOptions.length > 0 && esQuery.aggs[facet.caption]) {
+        const fieldOfFacet = esQuery.aggs[facet.caption].aggs.name.terms.field;
+        esQuery["post_filter"] = new EsShouldMatchFilter(fieldOfFacet, facet.selectedOptions);
+        Object.keys(esQuery.aggs).forEach((key, index) => {
+          if (esQuery.aggs.hasOwnProperty(key)) {
+            const agg = esQuery.aggs[key];
+            if (key !== facet.caption) {
+              agg.filter = new EsShouldMatchFilter(fieldOfFacet, facet.selectedOptions);
+            }
+          }
+        });
+      }
+    });
+
 
     fetch("https://repository.huygens.knaw.nl/v5/graphql", {
       "method": "POST",
@@ -42,7 +63,7 @@ export default class FacetedSearch extends React.Component {
         "query": this.query,
         "operationName": "emplaces",
         "variables": {
-          "esQuery": "{\"aggs\":{\"Place type\":{\"filter\":{},\"aggs\":{\"name\":{\"terms\":{\"field\":\"em_placeType.title.value.raw\"}}}},\"Calendars\":{\"filter\":{},\"aggs\":{\"name\":{\"terms\":{\"field\":\"em_hasAnnotationList.items.oa_hasBody.title.value.raw\"}}}},\"Authority\":{\"filter\":{},\"aggs\":{\"name\":{\"terms\":{\"field\":\"em_alternateAuthorityList.items.title.value.raw\"}}}}}}"
+          "esQuery": JSON.stringify(esQuery)
         }
       }),
       headers: { 'Content-Type': 'application/json' }
@@ -77,8 +98,19 @@ export default class FacetedSearch extends React.Component {
 
         if (dataSet[this.collectionName]) {
           const collection = dataSet[this.collectionName];
+          const oldfacets: any = {};
+          this.state.data.facets.forEach(facet => {
+            oldfacets[facet.caption] = facet;
+          });
+          console.log("old facets: ", oldfacets);
           if (collection["facets"] instanceof Array && collection["facets"].every((item: any) => instanceOfFacetData(item))) {
-            return collection["facets"].map((facetData: FacetData) => new Facet(facetData, () => this.executeQuery()));
+            const facets: Facet[] = collection["facets"].map((facetData: FacetData) => new Facet(facetData, () => this.executeQuery()));
+            facets.forEach(facet => {
+              if (oldfacets[facet.caption]) {
+                facet.selectedOptions = oldfacets[facet.caption].selectedOptions;
+              }
+            });
+            return facets;
           }
         }
       }
@@ -133,6 +165,40 @@ export default class FacetedSearch extends React.Component {
 class GraphQlData {
   "data": {
     "dataSets": any;
+  }
+}
+
+class ESAggregation {
+  filter: {};
+  aggs: {};
+  constructor(fieldPath: string) {
+    this.filter = {};
+    this.aggs = {
+      name: {
+        terms: {
+          field: fieldPath
+        }
+      }
+    };
+  }
+}
+
+class EsShouldMatchFilter {
+  bool: any;
+  constructor(fieldPath: string, values: string[]) {
+    this.bool = {
+      must: [{
+        bool: {
+          should: []
+        }
+      }]
+    }
+
+    values.forEach(value => {
+      const match: any = {};
+      match[fieldPath] = value;
+      this.bool["must"][0].bool.should.push({ match: match })
+    });
   }
 }
 
