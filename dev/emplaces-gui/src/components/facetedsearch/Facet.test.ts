@@ -1,10 +1,10 @@
 import {instanceOfOption, instanceOfFacetData, instanceOfOptionList} from './Facet'
 
-test('is valid option', () => {
+it('is valid option', () => {
   expect(instanceOfOption({name: "name", count: 2})).toBe(true);
 });
 
-test('is valid option[]', () => {
+it('is valid option[]', () => {
   expect(instanceOfOptionList([{name: "name", count: 2}])).toBe(true);
 });
 
