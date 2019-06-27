@@ -33,23 +33,28 @@ export default class FacetedSearch extends React.Component {
   }
 
   executeQuery() {
+    const postFilter = new EsFilter();
     const esQuery: any = {
       "aggs": {
         "Place type": new ESAggregation("em_placeType.title.value.raw"),
         "Calendars": new ESAggregation("em_hasAnnotationList.items.oa_hasBody.title.value.raw"),
         "Authority": new ESAggregation("em_alternateAuthorityList.items.title.value.raw")
-      }
+      },
+      "post_filter": postFilter
     }
+
+
 
     this.state.data.facets.forEach(facet => {
       if (facet.selectedOptions.length > 0 && esQuery.aggs[facet.caption]) {
         const fieldOfFacet = esQuery.aggs[facet.caption].aggs.name.terms.field;
-        esQuery["post_filter"] = new EsShouldMatchFilter(fieldOfFacet, facet.selectedOptions);
+        postFilter.addShouldMatchFilter(fieldOfFacet, facet.selectedOptions);
+
         Object.keys(esQuery.aggs).forEach((key, index) => {
           if (esQuery.aggs.hasOwnProperty(key)) {
-            const agg = esQuery.aggs[key];
+            const agg: ESAggregation = esQuery.aggs[key];
             if (key !== facet.caption) {
-              agg.filter = new EsShouldMatchFilter(fieldOfFacet, facet.selectedOptions);
+              agg.addShouldMatchFilter(fieldOfFacet, facet.selectedOptions);
             }
           }
         });
@@ -102,7 +107,6 @@ export default class FacetedSearch extends React.Component {
           this.state.data.facets.forEach(facet => {
             oldfacets[facet.caption] = facet;
           });
-          console.log("old facets: ", oldfacets);
           if (collection["facets"] instanceof Array && collection["facets"].every((item: any) => instanceOfFacetData(item))) {
             const facets: Facet[] = collection["facets"].map((facetData: FacetData) => new Facet(facetData, () => this.executeQuery()));
             facets.forEach(facet => {
@@ -169,10 +173,10 @@ class GraphQlData {
 }
 
 class ESAggregation {
-  filter: {};
+  filter: EsFilter;
   aggs: {};
   constructor(fieldPath: string) {
-    this.filter = {};
+    this.filter = new EsFilter();
     this.aggs = {
       name: {
         terms: {
@@ -181,23 +185,38 @@ class ESAggregation {
       }
     };
   }
+  addShouldMatchFilter(fieldPath: string, values: string[]): void {
+    this.filter.bool.must.push(new EsShouldMatchFilter(fieldPath, values));
+  }
+}
+
+class EsFilter {
+  bool: {
+    must: EsShouldMatchFilter[]
+  }
+
+  constructor() {
+    this.bool = {
+      must: []
+    };
+  }
+
+  addShouldMatchFilter(fieldPath: string, values: string[]): void {
+    this.bool.must.push(new EsShouldMatchFilter(fieldPath, values));
+  }
 }
 
 class EsShouldMatchFilter {
   bool: any;
   constructor(fieldPath: string, values: string[]) {
     this.bool = {
-      must: [{
-        bool: {
-          should: []
-        }
-      }]
+      should: []
     }
 
     values.forEach(value => {
       const match: any = {};
       match[fieldPath] = value;
-      this.bool["must"][0].bool.should.push({ match: match })
+      this.bool.should.push({ match: match })
     });
   }
 }
