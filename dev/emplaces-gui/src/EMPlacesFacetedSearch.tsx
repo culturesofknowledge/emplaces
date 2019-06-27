@@ -24,7 +24,7 @@ export default class FacetedSearch extends React.Component {
         total: 0,
         results: [],
         facets: [],
-        fullTextSearch: new FullTextSearch(this.executeQuery)
+        fullTextSearch: new FullTextSearch(() => this.executeQuery)
       }
     };
     this.query = "query emplaces($esQuery: String) {\n  dataSets {\n    ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places {\n      em_PlaceList(elasticsearch: $esQuery) {\n        total\n        facets {\n          caption\n          options {\n            name\n            count\n          }\n        }\n        items {\n          uri\n          title {\n            value\n          }\n          em_placeType {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_skos_Concept {\n              title {\n                value\n              }\n            }\n          }\n          em_alternateNameList {\n            items {\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_value_xsd_string {\n                value\n              }\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_value_rdf_langString {\n                value\n              }\n            }\n          }\n          em_hasRelationList {\n            items {\n              em_relationType {\n                em_toType {\n                  title {\n                    value\n                  }\n                }\n              }\n              em_relationTo {\n                ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_em_Place {\n                  em_hasRelationList {\n                    items {\n                      em_relationType {\n                        em_toType {\n                          title {\n                            value\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -45,16 +45,9 @@ export default class FacetedSearch extends React.Component {
       "post_filter": postFilter
     }
 
-    if(this.state.data.fullTextSearch.term !== ""){
+    if (this.state.data.fullTextSearch.term !== "") {
       const filter = new ESTextFilter(this.state.data.fullTextSearch.term)
-      postFilter.addFilter(filter);
-
-      Object.keys(esQuery.aggs).forEach((key, index) => {
-        if (esQuery.aggs.hasOwnProperty(key)) {
-          const agg: ESAggregation = esQuery.aggs[key];
-            agg.addFilter(filter);
-        }
-      });
+      esQuery["query"] = filter;
     }
 
     this.state.data.facets.forEach(facet => {
@@ -74,7 +67,6 @@ export default class FacetedSearch extends React.Component {
       }
     });
 
-
     fetch("https://repository.huygens.knaw.nl/v5/graphql", {
       "method": "POST",
       "body": JSON.stringify({
@@ -88,7 +80,7 @@ export default class FacetedSearch extends React.Component {
     }).then(resp => resp.json())
       .then(json => {
         if (this.instanceOfGraphQlData(json)) {
-          this.setState({ data: new SearchResult(this.getTotal(json), this.getData(json), this.getFacets(json), new FullTextSearch(() => this.executeQuery())) });
+          this.setState({ data: new SearchResult(this.getTotal(json), this.getData(json), this.getFacets(json), this.state.data.fullTextSearch.term !== "" ? this.state.data.fullTextSearch : new FullTextSearch(() => this.executeQuery())) });
         }
       });
   }
@@ -219,20 +211,22 @@ class EsFilter {
   }
 }
 
-interface PropertyFilter {}
+interface PropertyFilter { }
 
 class ESTextFilter implements PropertyFilter {
   query_string: {
+    fields: string[]
     query: string
   }
   constructor(term: string) {
     this.query_string = {
+      fields: ["em_preferredName.value.fulltext^4", "em_alternateNameList.items.value.fulltext^60"],
       query: term
     };
   }
 }
 
-class EsShouldMatchFilter implements PropertyFilter{
+class EsShouldMatchFilter implements PropertyFilter {
   bool: any;
   constructor(fieldPath: string, values: string[]) {
     this.bool = {

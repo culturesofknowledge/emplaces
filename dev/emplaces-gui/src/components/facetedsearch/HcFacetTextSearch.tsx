@@ -12,7 +12,6 @@ export default class HcFacetTextSearch extends React.Component<{ facetName: Stri
   }
 
   handleChange(event: ChangeEvent<HTMLInputElement>) {
-    console.log(event.target.value)
     this.setState({term: event.target.value});
   }
 
