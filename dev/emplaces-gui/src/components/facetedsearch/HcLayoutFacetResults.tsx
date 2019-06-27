@@ -24,6 +24,7 @@ export class HcLayoutFacetResults extends React.Component<{ pageName: String, da
             <div className="hcLayoutFacetsToggel" id="hcLayoutFacetsToggel">
               <HcFacetTextSearch
                 facetName="Text search"
+                search={this.props.data.fullTextSearch}
               />
 
               {this.props.data.facets.map(facet => { return <HcFacetBasic key={Math.random()} facet={facet}/> })}

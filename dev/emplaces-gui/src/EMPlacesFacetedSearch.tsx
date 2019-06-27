@@ -6,6 +6,7 @@ import fetch from 'node-fetch'
 import { SearchResult, ResultItem, Property } from './components/facetedsearch/SearchResult';
 import { instanceOfFacetData, Facet, FacetData } from './components/facetedsearch/Facet';
 import { instanceOfEMPlace } from './EMPlace';
+import FullTextSearch from './components/facetedsearch/FullTextSearch';
 
 export default class FacetedSearch extends React.Component {
   dataSetId = "ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places";
@@ -22,7 +23,8 @@ export default class FacetedSearch extends React.Component {
       data: {
         total: 0,
         results: [],
-        facets: []
+        facets: [],
+        fullTextSearch: new FullTextSearch(this.executeQuery)
       }
     };
     this.query = "query emplaces($esQuery: String) {\n  dataSets {\n    ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places {\n      em_PlaceList(elasticsearch: $esQuery) {\n        total\n        facets {\n          caption\n          options {\n            name\n            count\n          }\n        }\n        items {\n          uri\n          title {\n            value\n          }\n          em_placeType {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_skos_Concept {\n              title {\n                value\n              }\n            }\n          }\n          em_alternateNameList {\n            items {\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_value_xsd_string {\n                value\n              }\n              ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_value_rdf_langString {\n                value\n              }\n            }\n          }\n          em_hasRelationList {\n            items {\n              em_relationType {\n                em_toType {\n                  title {\n                    value\n                  }\n                }\n              }\n              em_relationTo {\n                ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emdates_places_em_Place {\n                  em_hasRelationList {\n                    items {\n                      em_relationType {\n                        em_toType {\n                          title {\n                            value\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -43,18 +45,29 @@ export default class FacetedSearch extends React.Component {
       "post_filter": postFilter
     }
 
+    if(this.state.data.fullTextSearch.term !== ""){
+      const filter = new ESTextFilter(this.state.data.fullTextSearch.term)
+      postFilter.addFilter(filter);
 
+      Object.keys(esQuery.aggs).forEach((key, index) => {
+        if (esQuery.aggs.hasOwnProperty(key)) {
+          const agg: ESAggregation = esQuery.aggs[key];
+            agg.addFilter(filter);
+        }
+      });
+    }
 
     this.state.data.facets.forEach(facet => {
       if (facet.selectedOptions.length > 0 && esQuery.aggs[facet.caption]) {
         const fieldOfFacet = esQuery.aggs[facet.caption].aggs.name.terms.field;
-        postFilter.addShouldMatchFilter(fieldOfFacet, facet.selectedOptions);
+        const filter = new EsShouldMatchFilter(fieldOfFacet, facet.selectedOptions)
+        postFilter.addFilter(filter);
 
         Object.keys(esQuery.aggs).forEach((key, index) => {
           if (esQuery.aggs.hasOwnProperty(key)) {
             const agg: ESAggregation = esQuery.aggs[key];
             if (key !== facet.caption) {
-              agg.addShouldMatchFilter(fieldOfFacet, facet.selectedOptions);
+              agg.addFilter(new EsShouldMatchFilter(fieldOfFacet, facet.selectedOptions));
             }
           }
         });
@@ -75,7 +88,7 @@ export default class FacetedSearch extends React.Component {
     }).then(resp => resp.json())
       .then(json => {
         if (this.instanceOfGraphQlData(json)) {
-          this.setState({ data: new SearchResult(this.getTotal(json), this.getData(json), this.getFacets(json)) });
+          this.setState({ data: new SearchResult(this.getTotal(json), this.getData(json), this.getFacets(json), new FullTextSearch(() => this.executeQuery())) });
         }
       });
   }
@@ -185,14 +198,14 @@ class ESAggregation {
       }
     };
   }
-  addShouldMatchFilter(fieldPath: string, values: string[]): void {
-    this.filter.bool.must.push(new EsShouldMatchFilter(fieldPath, values));
+  addFilter(filter: PropertyFilter): void {
+    this.filter.addFilter(filter);
   }
 }
 
 class EsFilter {
   bool: {
-    must: EsShouldMatchFilter[]
+    must: PropertyFilter[]
   }
 
   constructor() {
@@ -201,12 +214,25 @@ class EsFilter {
     };
   }
 
-  addShouldMatchFilter(fieldPath: string, values: string[]): void {
-    this.bool.must.push(new EsShouldMatchFilter(fieldPath, values));
+  addFilter(filter: PropertyFilter): void {
+    this.bool.must.push(filter);
   }
 }
 
-class EsShouldMatchFilter {
+interface PropertyFilter {}
+
+class ESTextFilter implements PropertyFilter {
+  query_string: {
+    query: string
+  }
+  constructor(term: string) {
+    this.query_string = {
+      query: term
+    };
+  }
+}
+
+class EsShouldMatchFilter implements PropertyFilter{
   bool: any;
   constructor(fieldPath: string, values: string[]) {
     this.bool = {
@@ -216,7 +242,7 @@ class EsShouldMatchFilter {
     values.forEach(value => {
       const match: any = {};
       match[fieldPath] = value;
-      this.bool.should.push({ match: match })
+      this.bool.should.push({ match: match });
     });
   }
 }

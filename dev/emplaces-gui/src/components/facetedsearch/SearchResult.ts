@@ -1,13 +1,16 @@
 import { Facet } from "./Facet";
+import FullTextSearch from "./FullTextSearch"
 
 export class SearchResult {
   facets: Facet[];
+  fullTextSearch: FullTextSearch;
   results: ResultItem[];
   total: number;
-  constructor(total: number, data: ResultItem[], facets: Facet[]) {
+  constructor(total: number, data: ResultItem[], facets: Facet[], fullTextSearch: FullTextSearch) {
     this.total = total;
     this.results = data;
     this.facets = facets;
+    this.fullTextSearch = fullTextSearch;
   }
 }
 
