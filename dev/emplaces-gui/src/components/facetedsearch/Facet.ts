@@ -26,6 +26,10 @@ export class Facet {
     this.selectedOptions.push(option);
     this.updateListener();
   }
+
+  isSelected(option: string): boolean {
+    return this.selectedOptions.includes(option);
+  }
 }
 
 export function instanceOfFacetData(object: any): object is FacetData {

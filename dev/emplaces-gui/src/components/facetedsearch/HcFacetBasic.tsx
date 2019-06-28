@@ -18,7 +18,9 @@ export default class HcFacetBasic extends React.Component<{ facet: Facet }> {
 
 
         <div className="hcFacetItems">
-          {this.props.facet.options.map(option => { return <HcFacetItem key={Math.random()} facetItemName={option.name} facetItemAmount={ option.count} onclick={() => this.props.facet.optionSelected(option.name)} /> })}
+          {this.props.facet.options.map(option => { 
+            return <HcFacetItem isSelected = {(name:string) => this.props.facet.isSelected(name) } key={Math.random()} facetItemName={option.name} facetItemAmount={option.count} onclick={() => this.props.facet.optionSelected(option.name)} /> 
+          })}
           {/* eslint-disable-next-line */}
           {/* <a href="#">More</a> */}
         </div>
@@ -27,10 +29,10 @@ export default class HcFacetBasic extends React.Component<{ facet: Facet }> {
   }
 }
 
-class HcFacetItem extends React.Component<{ facetItemName: string, facetItemAmount: number, onclick: MouseEventHandler }> {
+class HcFacetItem extends React.Component<{ facetItemName: string, facetItemAmount: number, onclick: MouseEventHandler, isSelected: Function }> {
   render() {
     return (
-      <div className="hcFacetItem" onClick={this.props.onclick}>
+      <div className={this.props.isSelected(this.props.facetItemName) ? "hcFacetItem hcFacetItemSelected" : "hcFacetItem"} onClick={this.props.onclick}>
         {this.props.facetItemName} <span className="hcFacetCount">{this.props.facetItemAmount}</span>
       </div>
     );
