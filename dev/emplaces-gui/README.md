@@ -1,11 +1,14 @@
 # EMPlaces GUI
 
+Based on: https://github.com/knaw-huc/GUI-timbuctoo-emlo
+
 ## About this version
 This GUI is tested with `opole.ttl`. 
 You can find the file in the same directory that contains this file. 
 We are aware the dataset is limited.
 The data is the richest we could find.
-We are happy to make it work with more extended datasets, that comply to the [EMPlaces model](https://github.com/culturesofknowledge/emplaces/blob/emplaces-gui/models/PDFs/20180802-EMPlaces-data-model-multisource.pdf).
+We are happy to make it work with more extended data sets, that comply to the [EMPlaces model](https://github.com/culturesofknowledge/emplaces/blob/emplaces-gui/models/PDFs/20180802-EMPlaces-data-model-multisource.pdf).
+Feel welcome to share your RDF data set with us.
 
 
 ## Used versions
