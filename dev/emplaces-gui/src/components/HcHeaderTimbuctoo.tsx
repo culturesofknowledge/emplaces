@@ -4,7 +4,7 @@ export default class HcHeaderTimbuctoo extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="hcContentContainer bgColorBrand1 hcMarginBottom1">
+        <div className="hcContentContainer bgColorBrand1 hcMarginBottom5">
           <header className="hcPageHeaderSimple hcBasicSideMargin">
             {/* eslint-disable-next-line */}
             <a href="#" className="hcBrand">
@@ -21,7 +21,7 @@ export default class HcHeaderTimbuctoo extends React.Component {
             </nav>
           </header>
         </div>
-        <div className="hcContentContainer hcMarginBottom5 hcBorderBottom">
+        {/* <div className="hcContentContainer hcMarginBottom5 hcBorderBottom">
           <div className="hcBarDataset hcBasicSideMargin">
             <span>
               <span className="hcSmallTxt hcTxtColorGreyMid">Dataset</span>
@@ -37,7 +37,7 @@ export default class HcHeaderTimbuctoo extends React.Component {
               </select>
             </span>
           </div>
-        </div>
+        </div> */}
       </React.Fragment>
     );
   }
