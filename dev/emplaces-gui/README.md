@@ -1,9 +1,17 @@
+# EMPlaces GUI
+
+## About this version
+This GUI is tested with `opole.ttl`. 
+You can find the file in the same directory that contains this file. 
+We are aware the dataset is limited.
+The data is the richest we could find.
+We are happy to make it work with more extended datasets, that comply to the [EMPlaces model](https://github.com/culturesofknowledge/emplaces/blob/emplaces-gui/models/PDFs/20180802-EMPlaces-data-model-multisource.pdf).
+
+
 ## Used versions
 node: v10.16.0
 npm: 6.9.0
 typescript: 3.5.2
-
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
