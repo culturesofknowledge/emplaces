@@ -65,6 +65,16 @@ PLACE     = Namespace("http://id.emplaces.info/place/")
 AGENT     = Namespace("http://id.emplaces.info/agent/")
 REF       = Namespace("http://id.emplaces.info/reference/")
 
+# Added for prosopographical work...
+PERSON               = Namespace("http://id.emplaces.info/person/")
+RELATIONSHIP         = Namespace("http://id.emplaces.info/person_relationship/")
+RELATIONSHIP_TYPE    = Namespace("http://id.emplaces.info/person_relationship_type/")
+PERSON_EVENT         = Namespace("http://id.emplaces.info/person_event/")
+PERSON_EVENT_TYPE    = Namespace("http://id.emplaces.info/person_event_type/")
+PERSON_ACTIVITY      = Namespace("http://id.emplaces.info/person_activity/")
+PERSON_ACTIVITY_TYPE = Namespace("http://id.emplaces.info/person_activity_type/")
+PERSON_ACTIVITY_ROLE = Namespace("http://id.emplaces.info/person_activity_role/")
+
 #   ===================================================================
 #
 #   Common definitions for EMPlaces data
