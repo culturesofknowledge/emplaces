@@ -27,7 +27,7 @@ export class HcLayoutFacetResults extends React.Component<{ pageName: String, da
                 search={this.props.data.fullTextSearch}
               />
 
-              {this.props.data.facets.map(facet => { return <HcFacetBasic key={Math.random()} facet={facet}/> })}
+              {this.props.data.facets.map(facet => { return <HcFacetBasic key={Math.random()} facet={facet} /> })}
 
             </div>
           </div>
@@ -37,11 +37,8 @@ export class HcLayoutFacetResults extends React.Component<{ pageName: String, da
             <HcResultSelectedFacets />
             <HcResultListLegend />
             <HcResultList data={this.props.data.results} />
-            <HcResultListPaging />
-
-
+            <HcResultListPaging data={this.props.data.cursors} />
           </div>
-
 
         </div>
       </div>

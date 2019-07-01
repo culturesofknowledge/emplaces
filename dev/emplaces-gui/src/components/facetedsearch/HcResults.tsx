@@ -1,6 +1,6 @@
 import React from 'react'
 import HcResultItemEmPlaces from "./emplaces/HCResultItemEmPlaces"
-import { ResultItem } from './SearchResult';
+import { ResultItem, Cursors } from './SearchResult';
 
 export class HcResultListHeader extends React.Component<{ totalResults: number }>{
 
@@ -76,26 +76,14 @@ export class HcResultListLegend extends React.Component {
   }
 }
 
-export class HcResultListPaging extends React.Component {
+export class HcResultListPaging extends React.Component<{ data: Cursors }> {
   render() {
     return (
       <div className="hcPagination">
         {/* eslint-disable-next-line */}
-        <div><a href="#">← Previous</a></div>
+        <div><a className={ this.props.data.prevCursor ? "" : "disabled" } href="#" onClick={() => this.props.data.prev()}>← Previous</a></div>
         {/* eslint-disable-next-line */}
-        <div><a href="#">1</a></div>
-        {/* eslint-disable-next-line */}
-        <div className="bgColorBrand2"><a href="#">2</a></div>
-        {/* eslint-disable-next-line */}
-        <div><a href="#">3</a></div>
-        {/* eslint-disable-next-line */}
-        <div><a href="#">4</a></div>
-        {/* eslint-disable-next-line */}
-        <div><a href="#">5</a></div>
-        {/* eslint-disable-next-line */}
-        <div><a href="#">6</a></div>
-        {/* eslint-disable-next-line */}
-        <div><a href="#">Next →</a></div>
+        <div><a className={ this.props.data.nextCursor ? "" : "disabled" } href="#" onClick={() => this.props.data.next()}>Next →</a></div>
       </div>
     );
   }

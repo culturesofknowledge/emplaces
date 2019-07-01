@@ -6,11 +6,13 @@ export class SearchResult {
   fullTextSearch: FullTextSearch;
   results: ResultItem[];
   total: number;
-  constructor(total: number, data: ResultItem[], facets: Facet[], fullTextSearch: FullTextSearch) {
+  cursors: Cursors;
+  constructor(total: number, data: ResultItem[], facets: Facet[], fullTextSearch: FullTextSearch, cursors: Cursors) {
     this.total = total;
     this.results = data;
     this.facets = facets;
     this.fullTextSearch = fullTextSearch;
+    this.cursors = cursors;
   }
 }
 
@@ -47,6 +49,29 @@ export class Property {
       return this.value;
     }
     return [this.value];
+  }
+}
+
+export class Cursors {
+  prevCursor: string | null;
+  nextCursor: string | null;
+  updateListener: (cursor: string | null) => void;
+  
+  constructor(prevCursor: string | null, nextCursor:string| null, updateListener: (cursor: string | null) => void) {
+    this.prevCursor = prevCursor;
+    this.nextCursor = nextCursor;
+    this.updateListener = updateListener;
+
+    this.prev= this.prev.bind(this);
+    this.prev= this.next.bind(this);
+  }
+
+  prev(): void {
+    this.updateListener(this.prevCursor);
+  }
+
+  next(): void {
+    this.updateListener(this.nextCursor);
   }
 }
 
