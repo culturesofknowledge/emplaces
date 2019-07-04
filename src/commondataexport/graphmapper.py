@@ -401,8 +401,10 @@ class GraphMapper(object):
 
         s, p and o may be RDFLib node values, or 
         URI strings that are treated as URIRef nodes.
-        """        
+        """
+        log.debug("GraphMapper.emit: %r %r %r"%(s, p, o))
         self._tgt_graph.add((s, p, o))
+        return
 
 
 #   ===================================================================

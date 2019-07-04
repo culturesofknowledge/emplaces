@@ -172,10 +172,10 @@ emp:Current_2018 a em:Time_period ; # Identified period in time
     .
 
 emt:Current_2018 a em:Time_span ;
-    rdfs:label      "Current, as of 2018" ;
-    rdfs:comment    "Time span starting no later than 2018, and ending no sooner than 2018" ;
-    em:latestStart: "2018" ;
-    em:earliestEnd: "2018" ;
+    rdfs:label     "Current, as of 2018" ;
+    rdfs:comment   "Time span starting no later than 2018, and ending no sooner than 2018" ;
+    em:latestStart "2018" ;
+    em:earliestEnd "2018" ;
     .
 
 # Map dates, covering year of original map publication
@@ -898,6 +898,8 @@ place:Opole_P_GeoNames a em:Place, em:Place_sourced ;
         "オポーレ",
         "奥波莱",
         "오폴레" ;
+
+    em:when emp:Current_2018 ;
 
     em:where
       [ a em:Setting ; # combination of location and period

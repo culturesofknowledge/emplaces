@@ -65,6 +65,16 @@ PLACE     = Namespace("http://id.emplaces.info/place/")
 AGENT     = Namespace("http://id.emplaces.info/agent/")
 REF       = Namespace("http://id.emplaces.info/reference/")
 
+# Added for prosopographical work...
+PERSON               = Namespace("http://id.emplaces.info/person/")
+RELATIONSHIP         = Namespace("http://id.emplaces.info/person_relationship/")
+RELATIONSHIP_TYPE    = Namespace("http://id.emplaces.info/person_relationship_type/")
+PERSON_EVENT         = Namespace("http://id.emplaces.info/person_event/")
+PERSON_EVENT_TYPE    = Namespace("http://id.emplaces.info/person_event_type/")
+PERSON_ACTIVITY      = Namespace("http://id.emplaces.info/person_activity/")
+PERSON_ACTIVITY_TYPE = Namespace("http://id.emplaces.info/person_activity_type/")
+PERSON_ACTIVITY_ROLE = Namespace("http://id.emplaces.info/person_activity_role/")
+
 #   ===================================================================
 #
 #   Common definitions for EMPlaces data
@@ -440,6 +450,42 @@ COMMON_EMPLACES_DEFS = (
             used for that purpose.
             ''' ;
         .
+
+    # ===== Calendar descriptions =====
+    #
+    # These are placeholders.  The intent is that calendar-in-use data
+    # contains a reference to some external authority or description.
+
+    emc:Gregorian a em:Calendar ;
+        rdfs:label "Gregorian calendar" ;
+        em:link emc:Gregorian ;
+        rdfs:comment 
+            '''# Gregorian calendar
+
+            Calendar generally in use in Europe from about 23 Feb 1584.
+            ''' ;
+        .
+
+    emc:Julian_old a em:Calendar ;
+        rdfs:label "Julian calendar (25 Mar)" ;
+        em:link emc:Julian_old ;
+        rdfs:comment 
+            '''# Julian calendar (Old)
+
+            "Old style" Julian calendar, year begins on 25-Mar.
+            ''' ;
+        .
+
+    emc:Julian_new a em:Calendar ;
+        rdfs:label "Julian calendar (1 Jan)" ;
+        em:link emc:Julian_new ;
+        rdfs:comment 
+            '''# Julian calendar (New)
+
+            "New style" Julian calendar, year begins on 01-Jan.
+            ''' ;
+        .
+
     """)
 
 COMMON_GEONAMES_DEFS = (

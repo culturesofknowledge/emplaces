@@ -9,8 +9,8 @@
 # NOTE: sed (on MacOS) fails silently if the first line number is zero.
 
 DATE=$(date "+%Y%m%d")
-FROM="0001"
-TO="0002"
+FROM="0201"
+TO="0300"
 SELECT="$FROM-$TO"
 DATADIR=data-$DATE
 

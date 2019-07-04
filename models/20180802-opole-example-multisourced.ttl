@@ -330,6 +330,30 @@ em:USED_FOR a oa:Motivation ;
     rdfs:comment "Generally used with a related place that is a building or site for some activity, to indicate a purpose for which the place was used.  The annotation body directly references a resource describing the purpose, which is assumed to have an rdfs:label value that can be used for display purposes.  The annotation itself may carry a temporal constraint (`em:where`) that gives some indication of when the place was used for that purpose." ;
     .
 
+# Calendar descriptions
+
+emc:Gregorian a em:Calendar ;
+    rdfs:label "Gregorian calendar" ;
+    em:link emc:Gregorian ;
+    rdfs:comment """# Gregorian calendar\r
+\r
+Calendar generally in use in Europe from about 23 Feb 1584.""" .
+
+emc:Julian_old a em:Calendar ;
+    rdfs:label "Julian calendar (25 Mar)" ;
+    em:link emc:Julian_old ;
+    rdfs:comment """# Julian calendar (Old)\r
+\r
+"Old style" Julian calendar, year begins on 25-Mar.""" .
+
+emc:Julian_new a em:Calendar ;
+    rdfs:label "Julian calendar (1 Jan)" ;
+    em:link emc:Julian_new ;
+    rdfs:comment """# Julian calendar (New)\r
+\r
+"New style" Julian calendar, year begins on 01-Jan.""" .
+
+
 
 #   ==========================================================================
 #   ==========================================================================
@@ -806,24 +830,24 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           [ a em:Calendar ;
             # Old style (OS) begins year on 25-Mar
             # New style (NS) begins year on 01-Jan
-            rdfs:label   "Julian (OS)" ;  # assumed old style
+            rdfs:label   "Julian (1 Jan)" ;  # new style
             em:link      emc:Julian_old ;
           ] ;
         em:when 
           [ a em:Time_period ;
-            rdfs:label   "Until 1584" ;
+            rdfs:label   "Until 19-Jan-1584" ;
             em:timespan
               [ # em:start  "@@@@" ;
-                em:end    "1584" ;
+                em:end    "1584-01-19" ;
               ]
           ] ;
         em:source
-          [ rdfs:label   "Assumed from adoption of Papal Bull (Gregorian) in 1584" ;
-            rdfs:comment "Assumed from adoption of Papal Bull (Gregorian) in 1584" ;
-            em:link      <@@@> ;
+          [ rdfs:label   "Bláhová, Marie. /Historická Chronologie./ 1. vyd. Praha: 2001" ;
+            # em:link      <@@@> ;
           ] ;
-        rdfs:comment "Julian until 23/02/1584 adoption of Gregorian" ;
-        em:competence em:ASSUMED ;
+        rdfs:comment "Julian (N.S.) until 19-Jan-1584 adoption of Gregorian (inferred date based on adoption 
+    of Gregorian by other towns in the Duchy of Opole)." ;
+        em:competence em:INFERRED ;
       ],
       [ a oa:Annotation ;
         oa:motivatedBy em:CALENDAR_IN_USE ;
@@ -835,21 +859,19 @@ place:Opole_P_EMPlaces a em:Place, em:Place_sourced ;
           ] ;
         em:when 
           [ a em:Time_period ;
-            rdfs:label   "Since 23-Feb-1584" ;
+            rdfs:label   "Since 19-Jan-1584" ;
             em:timespan
-              [ em:start  "1584-02-23" ;
+              [ em:start  "1584-01-19" ;
                 # em:end    "@@@@" ;
               ]
           ] ;
         em:source
-          [ rdfs:label   "Tomsa, Jan: Počìtánì času (Základy teorie kalendáře). Praha 1995" ;
-            # em:link      <@@@> ;
-          ],
-          [ rdfs:label   "Bláhová, Marie: Historická chronologie. Praha 2001" ;
+          [ rdfs:label   "Bláhová, Marie. /Historická Chronologie./ 1. vyd. Praha: 2001" ;
             # em:link      <@@@> ;
           ] ;
-        rdfs:comment "Gregorian since 23/02/1584. The actual switch took place on 12.2.1584. The next day then became the 23.2.1584." ;
-        em:competence em:DEFINITIVE ;
+        rdfs:comment "Gregorian sinced 19-Jan-1584 (inferred date based on adoption 
+    of Gregorian by other towns in the Duchy of Opole)." ;
+        em:competence em:INFERRED ;
       ] ;
 
     # Historical map data
