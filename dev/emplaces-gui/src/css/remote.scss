@@ -1,0 +1,11 @@
+@import url('https://huc-css-util.netlify.com/css/huc-util-emlo.css');
+
+.hcFacetItemSelected {
+  font-weight: bold;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  color: gray;
+}

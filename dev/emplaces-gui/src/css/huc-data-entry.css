@@ -1,0 +1,132 @@
+.huc-form {
+  max-width: 500px;
+  padding: 0 1.5em; }
+
+.huc-form-element {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 3em 0; }
+
+.huc-form-description {
+  margin: 0 0 .5em 0;
+  color: #b8b8b8;
+  font-size: 0.8em;
+  font-style: italic; }
+
+.huc-form-label {
+  font-weight: bold;
+  margin: 0 0 0 0; }
+
+.huc-fieldgroup {
+  display: flex;
+  flex-direction: row;
+  width: 100%; }
+
+.huc-fieldgroup-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%; }
+
+.huc-fieldgroup label {
+  color: #b8b8b8;
+  font-size: 0.8em; }
+
+input {
+  padding: .6em;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  margin-right: .5em;
+  width: calc(100% - .5em);
+  background-color: #fff; }
+
+input::placeholder {
+  font-style: italic;
+  color: #b8b8b8;
+  font-size: 0.8em; }
+
+.button {
+  background-color: #ccc;
+  padding: .6em;
+  border-radius: 2px;
+  font-size: 1em;
+  border: none; }
+
+.button-save {
+  background-color: #39ec85; }
+
+.huc-connect-elements {
+  display: flex;
+  align-content: center; }
+
+.huc-connect-elements > * {
+  margin: 0;
+  height: 46px;
+  border-radius: 0; }
+
+.huc-connect-elements > *:first-child {
+  border-radius: 2px 0 0 2px; }
+
+.huc-connect-elements > *:last-child {
+  border-radius: 0 2px 2px 0; }
+
+.huc-connect-elements button {
+  margin-top: -0px; }
+
+.huc-notification {
+  width: 100%;
+  padding: .2em .5em;
+  background-color: #fafafa;
+  font-size: 0.8em; }
+
+.huc-form-nBrows {
+  width: 100%;
+  border: 1px solid #e6e6e6; }
+
+.huc-form-nBrows-head {
+  font-weight: bold;
+  padding: .5em; }
+
+.huc-form-nBrows-window {
+  display: flex;
+  flex-direction: row; }
+
+.huc-form-nBrows-window > *:first-child {
+  width: calc(33% - 1.5em);
+  margin-right: 1.5em;
+  border-right: 1px solid #e6e6e6; }
+
+.huc-form-nBrows-window > *:last-child {
+  width: 66%; }
+
+.huc-list-view {
+  display: flex;
+  flex-direction: column; }
+
+.huc-action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-end; }
+
+.huc-action-bar > * {
+  width: calc(100% - 1px);
+  text-align: center;
+  padding: .1em;
+  margin-right: 1px; }
+
+.huc-action-bar input {
+  width: 100%;
+  margin-right: 0;
+  text-align: left; }
+
+.icon {
+  min-width: 50px;
+  background-size: 66% 66%;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.iconDate {
+  background-image: url("../images/icons/datePicker.svg"); }
+
+.iconSearch {
+  background-image: url("../images/icons/searchGlass.svg"); }

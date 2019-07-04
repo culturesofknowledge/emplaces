@@ -1,0 +1,22 @@
+.huc-list li, .huc-list tr  {
+  list-style: none;
+  margin: 0 0 0px 0;
+  background-color: #fafafa;
+  padding: .2em .5em;
+  cursor: pointer;
+  border-bottom: 1px solid #e6e6e6;
+  width: 100%;
+}
+
+.huc-list li:nth-child(even), .huc-list tr:nth-child(even) {
+  background-color: #f2f2f2; }
+
+.huc-list li:hover {
+  background-color: #e1e1e1; }
+
+.huc-list li .huc-list-selected {
+  background-color: #bababa !important; }
+
+  .hcFacetItem {
+    cursor: pointer;
+  }
