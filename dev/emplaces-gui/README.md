@@ -3,10 +3,7 @@
 Based on: https://github.com/knaw-huc/GUI-timbuctoo-emlo
 
 ## About this version
-This GUI is tested with `opole.ttl`. 
-You can find the file in the same directory that contains this file. 
-We are aware the dataset is limited.
-The data is the richest we could find.
+This GUI is tested with `https://github.com/culturesofknowledge/emplaces/blob/master/src/geonamesdataexport/data-20190527-test-alternate-authorities/geonames-data-ref-by-EMLO-0001-0002.ttl` and `https://github.com/culturesofknowledge/emplaces/blob/master/src/geonamesdataexport/data-20190527-test-alternate-authorities/wikidata-ref-by-EMLO-0001-0002.ttl` and `https://github.com/culturesofknowledge/emplaces/blob/master/src/geonamesdataexport/data-20190527-test-alternate-authorities/wikitext-ref-by-EMLO-0001-0002.ttl`
 We are happy to make it work with more extended data sets, that comply to the [EMPlaces model](https://github.com/culturesofknowledge/emplaces/blob/emplaces-gui/models/PDFs/20180802-EMPlaces-data-model-multisource.pdf).
 Feel welcome to share your RDF data set with us.
 
