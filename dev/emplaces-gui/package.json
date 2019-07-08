@@ -9,10 +9,12 @@
     "@types/react": "16.8.20",
     "@types/react-dom": "16.8.4",
     "lodash.template": "4.5.0",
+    "@types/react-router-dom": "^4.3.4",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "typescript": "3.5.2"
   },

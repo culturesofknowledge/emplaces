@@ -1,6 +1,4 @@
 import React from 'react';
-import HcHeaderTimbuctoo from './components/HcHeaderTimbuctoo';
-import HcFooterTimbuctoo from './components/HcFooterTimbuctoo'
 import { HcLayoutFacetResults } from './components/facetedsearch/HcLayoutFacetResults';
 import fetch from 'node-fetch'
 import { SearchResult, ResultItem, Property, Cursors } from './components/facetedsearch/SearchResult';
@@ -93,9 +91,7 @@ export default class FacetedSearch extends React.Component {
   render() {
     return (
       <div className="App">
-        <HcHeaderTimbuctoo></HcHeaderTimbuctoo>
         <HcLayoutFacetResults pageName="Place search" data={this.state.data}></HcLayoutFacetResults>
-        <HcFooterTimbuctoo></HcFooterTimbuctoo>
       </div>
     );
   }
