@@ -24,11 +24,11 @@ export default class HcEmTable extends React.Component<{ title: string, data: [{
         <div className="hcEmplList">
           <div className="hcEmplListHeader">
             {this.keys.map(key => {
-              return <div>{key.charAt(0).toLocaleUpperCase() + key.slice(1)}</div>;
+              return <div key={Math.random()}>{key.charAt(0).toLocaleUpperCase() + key.slice(1)}</div>;
             })}
           </div>
           {this.props.data.map(row => {
-            return <HcEmPlaceListRow data={row} keys={this.keys} />;
+            return <HcEmPlaceListRow key={Math.random()} data={row} keys={this.keys} />;
           })}
         </div>
       </div>
@@ -41,7 +41,7 @@ export class HcEmPlaceListRow extends React.Component<{ data: { [key: string]: s
     return (
       <div className="hcEmplListRow">
         {this.props.keys.map( key => {
-          return <div>{this.props.data.hasOwnProperty(key) ? this.props.data[key] : ""}</div>
+          return <div key={Math.random()}>{this.props.data.hasOwnProperty(key) ? this.props.data[key] : ""}</div>
         })}
       </div>
     );
