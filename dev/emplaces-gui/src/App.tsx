@@ -7,7 +7,7 @@ import './css/remote.scss'
 import EMPlacesFacetedSearch from './EMPlacesFacetedSearch';
 import HcHeaderTimbuctoo from './components/HcHeaderTimbuctoo';
 import HcFooterTimbuctoo from './components/HcFooterTimbuctoo';
-import HcLayoutEmplacesDetail from './components/details/HcLayoutEmplacesDetail';
+import EmPlacesDetail from './EMPlacesDetail';
 
 
 const App: React.FC = () => {
@@ -15,7 +15,7 @@ const App: React.FC = () => {
    return <Router>
       <HcHeaderTimbuctoo />
       <Route exact path="/" component={EMPlacesFacetedSearch} />
-      <Route path="/:uri" component={HcLayoutEmplacesDetail} />
+      <Route path="/:uri" component={EmPlacesDetail} />
       <HcFooterTimbuctoo />
     </Router>;
 }

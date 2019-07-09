@@ -3,6 +3,7 @@ import { instanceOfEMPlace } from "./EMPlace";
 it('is an EMPlace when all properties have a value', () => {
   expect(instanceOfEMPlace(
     {
+      "uri": "http://id.emplaces.info/place/United_Kingdom_PCLI_2635167_geonames",
       "title": {
         "value": "Opole Voivodeship (ADM1)"
       },
@@ -28,6 +29,7 @@ it('is an EMPlace when all properties have a value', () => {
 it('is an EMPlace if the title has a value', () => {
   expect(instanceOfEMPlace(
     {
+      "uri": "http://id.emplaces.info/place/United_Kingdom_PCLI_2635167_geonames",
       "title": {
         "value": "Duchy of Opole"
       },
@@ -39,9 +41,39 @@ it('is an EMPlace if the title has a value', () => {
   )).toBe(true);
 });
 
+it('is not a valid EMPlace if it has no uri property', () => {
+  expect(instanceOfEMPlace(
+    {
+      "title": {
+        "value": "Duchy of Opole"
+      },
+      "em_placeType": null,
+      "em_alternateNameList": {
+        "items": []
+      }
+    }
+  )).toBe(false);
+});
+
+it('is not a valid EMPlace if uri is null', () => {
+  expect(instanceOfEMPlace(
+    {
+      "uri": null,
+      "title": {
+        "value": "Duchy of Opole"
+      },
+      "em_placeType": null,
+      "em_alternateNameList": {
+        "items": []
+      }
+    }
+  )).toBe(false);
+});
+
 it("is not a valid EMPlace without placeType property", () => {
   expect(instanceOfEMPlace(
     {
+      "uri": "http://id.emplaces.info/place/United_Kingdom_PCLI_2635167_geonames",
       "title": {
         "value": "Duchy of Opole"
       },
@@ -55,6 +87,7 @@ it("is not a valid EMPlace without placeType property", () => {
 it('is not a valid EMPlace without em_alternateNameList property', () => {
   expect(instanceOfEMPlace(
     {
+      "uri": "http://id.emplaces.info/place/United_Kingdom_PCLI_2635167_geonames",
       "title": {
         "value": "Duchy of Opole"
       },
@@ -66,6 +99,7 @@ it('is not a valid EMPlace without em_alternateNameList property', () => {
 it('is not a valid EMPlace without em_alternateNameList items property', () => {
   expect(instanceOfEMPlace(
     {
+      "uri": "http://id.emplaces.info/place/United_Kingdom_PCLI_2635167_geonames",
       "title": {
         "value": "Duchy of Opole"
       },
@@ -79,6 +113,7 @@ it('is not a valid EMPlace without em_alternateNameList items property', () => {
 it('is not a valid EMPlace without em_alternateNameList items property, that is null', () => {
   expect(instanceOfEMPlace(
     {
+      "uri": "http://id.emplaces.info/place/United_Kingdom_PCLI_2635167_geonames",
       "title": {
         "value": "Duchy of Opole"
       },

@@ -3,40 +3,23 @@ import HcEmPlaceItemHeader from './HcEmPlaceItemHeader';
 import HcEmTable from './HcEmTable';
 import HcEmPlaceCalendar from "./HcEmPlaceCalendar";
 import HcEmPlaceHierarchy from './HcEmPlaceHierarchy';
+import { match } from 'react-router';
+import {SinglePlace} from '../../EMPlace';
+import HcEmplaceCurrentHierchy from './HcEmPlaceCurrentHierarchy';
 
-export default class HcLayoutEmplacesDetail extends React.Component {
+export default class HcLayoutEmplacesDetail extends React.Component<{ data: SinglePlace }> {
+
   render() {
     return <React.Fragment>
       <div className="hcContentContainer">
         <div className="hcEmpl2Col hcMarginBottom5">
           <div className="hcEmpl2Col1 basicSideMargin">
             <div className="hcEmplDataBlock hcMarginBottom3">
-              <HcEmPlaceItemHeader title="Opole" isH1={true} hasProv={true} />
-              <span> Opolė, Òpòle, Opolí, Oppein, Oppeln, Uopole, Горад Аполе, Ополе, ออปอเล, 오폴레 ,אופולה , أبولوسكي, اوپول, اوپوله </span>
+              <HcEmPlaceItemHeader title={this.props.data.title} isH1={true} hasProv={true} />
+              <span>{this.props.data.alternateNameList.join(", ")}</span>
             </div>
             <div className="hcEmplDataBlock hcMarginBottom3">
-              <HcEmPlaceItemHeader title="Administrative hierarchy" isH1={false} hasProv={false} />
-              <div className="hcEmplHierarchy">
-                <ul>
-                  <li>Poland Country
-                    <ul>
-                      <li>Opole VoioVodeship
-                        <ul>
-                          <li>Opole (AMD2)
-                            <ul>
-                              <li>Opole (AMD3)
-                                <ul>
-                                  <li>Opole (Populated place)</li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
+              <HcEmplaceCurrentHierchy data={this.props.data.currentHierarchy} />
             </div>
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Location" isH1={false} hasProv={false} />
