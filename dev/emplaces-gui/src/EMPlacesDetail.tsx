@@ -71,7 +71,11 @@ export default class EmPlacesDetail extends React.Component<{ match: match<{ uri
   }
 
   getTitle(collection: any): string {
-    return collection["em_preferredName"] ? collection["em_preferredName"]["value"] : "";
+    if(collection["em_preferredName"]) {
+      return collection["em_preferredName"]["value"];
+    } 
+    
+    return collection["title"]["value"];
   }
 
   getCurrentHierarchy(collection: any) {
