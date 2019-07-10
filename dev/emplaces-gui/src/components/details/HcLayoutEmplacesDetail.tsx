@@ -4,7 +4,7 @@ import HcEmTable from './HcEmTable';
 import HcEmPlaceCalendar from "./HcEmPlaceCalendar";
 import HcEmPlaceHierarchy from './HcEmPlaceHierarchy';
 import { match } from 'react-router';
-import {SinglePlace} from '../../EMPlace';
+import { SinglePlace } from '../../EMPlace';
 import HcEmplaceCurrentHierchy from './HcEmPlaceCurrentHierarchy';
 
 export default class HcLayoutEmplacesDetail extends React.Component<{ data: SinglePlace }> {
@@ -23,20 +23,17 @@ export default class HcLayoutEmplacesDetail extends React.Component<{ data: Sing
             </div>
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Location" isH1={false} hasProv={false} />
-              Greenwich Meridian: 50.67211, 17.92533 (N 50°40′20′′ E 17°55′31′′)
-              </div>
+              <DataNotInSet />
+            </div>
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Citation" isH1={false} hasProv={false} />
-              <a href="#">Chicago Manual of Style</a>, <a href="#">MLA</a>, <a href="#">BibTeX</a>, <a href="#">RIS</a>
+              <DataNotInSet />
             </div>
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Persistent URI" isH1={false} hasProv={false} />
-              https://emplaces.info/ark:/12345/abc67890
-              </div>
-            <div className="hcEmplDataBlock hcMarginBottom3">
-              <HcEmPlaceItemHeader title="Authorities" isH1={false} hasProv={false} />
-              <a href="#">GeoNames</a>, <a href="#">Getty TGN</a>, <a href="#">WikiData</a>, <a href="#">GND</a>
+              <DataNotInSet />
             </div>
+            <ExternalLinks title="Authorities" links={this.props.data.alternateAuths} />
             <HcEmTable title="Name Attestations" data={[{ name: "Oppol", language: "(ger, lat)", date: "1226-1487", source: "Liber fundationis episcopatus Vratislaviensis" }]} />
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Calanders" isH1={false} hasProv={true} />
@@ -106,5 +103,25 @@ export default class HcLayoutEmplacesDetail extends React.Component<{ data: Sing
         </div>
       </div>
     </React.Fragment>;
+  }
+}
+
+class DataNotInSet extends React.Component {
+  render() {
+    return <span>{"{Data not in dataset}"}</span>
+  }
+}
+
+class ExternalLinks extends React.Component<{ title: string, links: { label: string, uri: string }[] }> {
+  render() {
+    return (
+    <div className="hcEmplDataBlock hcMarginBottom3">
+      <HcEmPlaceItemHeader title={this.props.title} isH1={false} hasProv={false} />
+      {
+        this.props.links.map(link => {
+        return <a href={link.uri}>{link.label} </a>;
+      })}
+    </div>
+    );
   }
 }

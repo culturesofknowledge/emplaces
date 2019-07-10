@@ -19,7 +19,7 @@ export class EMPlace {
   }
 }
 
-class Value {
+export class Value {
   "value": string;
 }
 
@@ -28,11 +28,13 @@ export class SinglePlace {
   alternateNameList: string[];
   title: string;
   currentHierarchy: string[];
+  alternateAuths: Link[];
 
-  constructor(title: string, alternateNameList: string[], hierarchy: QualifiedRelation | {}) {
+  constructor(title: string, alternateNameList: string[], hierarchy: QualifiedRelation | {}, alternateAuths: Link[]) {
     this.title = title;
     this.alternateNameList = alternateNameList;
     this.currentHierarchy = instanceOfQualifiedRelation(hierarchy) ? createCurrentHierarchy(title, hierarchy) : [];
+    this.alternateAuths = alternateAuths;
   }
 }
 
@@ -71,6 +73,15 @@ function instanceOfQualifiedRelation(object: any) : object is QualifiedRelation 
 function instanceOfWhen(object: any) : object is When {
  return object.hasOwnProperty("rdfs_label") 
  && object.hasOwnProperty("em_timespan") && object["em_timespan"].hasOwnProperty("em_latestStart_") && object["em_timespan"].hasOwnProperty("em_earliestEnd_");
+}
+
+export class Link {
+  label: string;
+  uri: string;
+  constructor(label: string, uri: string) {
+    this.label = label;
+    this.uri = uri;
+  }
 }
 
 export class QualifiedRelation {
