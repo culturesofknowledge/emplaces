@@ -119,7 +119,7 @@ class ExternalLinks extends React.Component<{ title: string, links: { label: str
       <HcEmPlaceItemHeader title={this.props.title} isH1={false} hasProv={false} />
       {
         this.props.links.map(link => {
-        return <a href={link.uri}>{link.label} </a>;
+        return <a key={Math.random()} href={link.uri}>{link.label} </a>;
       })}
     </div>
     );
