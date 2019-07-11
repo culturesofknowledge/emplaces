@@ -3,7 +3,6 @@ import HcEmPlaceItemHeader from './HcEmPlaceItemHeader';
 import HcEmTable from './HcEmTable';
 import HcEmPlaceCalendar from "./HcEmPlaceCalendar";
 import HcEmPlaceHierarchy from './HcEmPlaceHierarchy';
-import { match } from 'react-router';
 import { SinglePlace } from '../../EMPlace';
 import HcEmplaceCurrentHierchy from './HcEmPlaceCurrentHierarchy';
 
