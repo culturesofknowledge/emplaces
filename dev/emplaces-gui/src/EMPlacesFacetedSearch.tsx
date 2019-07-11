@@ -137,7 +137,7 @@ export default class FacetedSearch extends React.Component {
           const property1 = new Property("PLACE", item.title.value);
           const property2 = new Property("PLACE TYPE", item.em_placeType && item.em_placeType.title && item.em_placeType.title.value ? item.em_placeType.title.value : "");
           const property3 = new Property("ALTERNATIVE NAMES", item.em_alternateNameList.items.map(value => value.value ? value.value : ""));
-          resultData.push(new ResultItem(property1, property2, property3));
+          resultData.push(new ResultItem(item["uri"], property1, property2, property3));
         }
       }
     }

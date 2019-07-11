@@ -1,10 +1,33 @@
 import React from "react";
+import { Redirect } from "react-router";
 
 export default class HcResultItemEmPlaces extends React.Component<ResultItem> {
+  state = {
+    redirect: false
+  }
+  
+  constructor(props: ResultItem) {
+    super(props);
+    this.setRedirect = this.setRedirect.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
+  }
+  
+
+  setRedirect() {
+    this.setState({redirect:true});
+  }
+
+  renderRedirect() {
+    if(this.state.redirect) {
+      return <Redirect to={this.props.id}/>
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
-        <div className="hcListBasicResult">
+        {this.renderRedirect()}
+        <div className="hcListBasicResult" onClick={this.setRedirect}>
           <div className="hcListItemLong"><strong>{this.props.resultItemName}</strong><br />{this.props.resultItemAdministration}</div>
           <div>{this.props.resultItemType}</div>
           <div style={{
@@ -30,4 +53,5 @@ class ResultItem {
   "resultItemAdministration": string;
   "resultItemType": string;
   "resultItemAltNames": string[];
+  "id": string;
 }

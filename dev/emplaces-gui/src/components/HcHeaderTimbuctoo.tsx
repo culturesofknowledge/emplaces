@@ -7,7 +7,7 @@ export default class HcHeaderTimbuctoo extends React.Component {
         <div className="hcContentContainer bgColorBrand1 hcMarginBottom5">
           <header className="hcPageHeaderSimple hcBasicSideMargin">
             {/* eslint-disable-next-line */}
-            <a href="#" className="hcBrand">
+            <a href="/" className="hcBrand">
               <div className="hcBrandLogo">
                 <img src="https://d33wubrfki0l68.cloudfront.net/f268c733451856e103a2959ba15ffdaec6334ea4/d34d8/images/emlo-logo.png" className="logo" alt="EM Places" />
               </div>

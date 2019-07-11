@@ -30,6 +30,7 @@ export class HcResultList extends React.Component<{ data: ResultItem[] }> {
             resultItemAdministration=""
             resultItemType={result.property2.asString()}
             resultItemAltNames={result.property3.asArray()}
+            id={encodeURIComponent(result.uri)}
           />
         })}
       </div>

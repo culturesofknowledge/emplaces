@@ -20,8 +20,10 @@ export class ResultItem {
   property1: Property;
   property2: Property;
   property3: Property;
+  uri: string;
 
-  constructor(property1: Property, property2: Property, property3: Property) {
+  constructor(uri: string, property1: Property, property2: Property, property3: Property) {
+    this.uri = uri;
     this.property1 = property1;
     this.property2 = property2;
     this.property3 = property3;

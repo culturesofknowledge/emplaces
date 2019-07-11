@@ -30,29 +30,41 @@ export default class HcLayoutEmplacesDetail extends React.Component<{ data: Sing
               <DataNotInSet />
             </div>
             <ExternalLinks title="Authorities" links={this.props.data.alternateAuths} />
-            <HcEmTable title="Name Attestations" data={[{ name: "Oppol", language: "(ger, lat)", date: "1226-1487", source: "Liber fundationis episcopatus Vratislaviensis" }]} />
+            <div className="hcEmplDataBlock hcMarginBottom3">
+              <HcEmPlaceItemHeader title="Name Attestations" isH1={false} hasProv={false} />
+              <DataNotInSet />
+            </div>
+            {/* <HcEmTable title="Name Attestations" data={[{ name: "Oppol", language: "(ger, lat)", date: "1226-1487", source: "Liber fundationis episcopatus Vratislaviensis" }]} /> */}
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Calanders" isH1={false} hasProv={true} />
-              <HcEmPlaceCalendar percent="23%" date="1584.01.28" />
+              <DataNotInSet />
+              {/* <HcEmPlaceCalendar percent="23%" date="1584.01.28" /> */}
             </div>
-            <HcEmTable title="Connections" data={[{ name: "St. Adalbert", type: "Church", relation: "Located within" }]} />
+            <div className="hcEmplDataBlock hcMarginBottom3">
+              <HcEmPlaceItemHeader title="Connections" isH1={false} hasProv={false} />
+              <DataNotInSet />
+            </div>
+            {/* <HcEmTable title="Connections" data={[{ name: "St. Adalbert", type: "Church", relation: "Located within" }]} /> */}
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Related Resources" isH1={false} hasProv={false} />
-              <ul>
+              <DataNotInSet />
+              {/* <ul>
                 <li>Herder Institute: Historical-Topographical Atlas of Silesian Towns</li>
                 <li>ARTFL: Diderot and d’Alembert, Encyclopédie (Opole)</li>
-              </ul>
+              </ul> */}
             </div>
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Bibliography" isH1={false} hasProv={false} />
-              There are 16 publications associated with Opole.
-                </div>
+              <DataNotInSet />
+              {/* There are 16 publications associated with Opole. */}
+            </div>
           </div>
 
           <div className="hcEmpl2Col2">
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Description" isH1={false} hasProv={false} />
-              Opole is a city located in southern Poland on the Oder River (Odra). With a population of approximately 127,792 (January 2017), it is the capital of the Opole Voivodeship and also the seat of Opole County. With it long history dating back to the ninth century, Opole is considered to be one of the oldest towns in Poland.
+              <DataNotInSet />
+              {/* Opole is a city located in southern Poland on the Oder River (Odra). With a population of approximately 127,792 (January 2017), it is the capital of the Opole Voivodeship and also the seat of Opole County. With it long history dating back to the ninth century, Opole is considered to be one of the oldest towns in Poland. */}
             </div>
             <div className="hcEmplDataBlock hcMarginBottom3">
               <div className="hcEmplDataBlock hcMarginBottom3">
@@ -133,8 +145,8 @@ class CurrentLocation extends React.Component<{ data: MapLocation | undefined }>
   }
 
   locationAsString(data: MapLocation | undefined): string {
-    if(data instanceof MapLocation) {
-      if(data.lat && data.lon) {
+    if (data instanceof MapLocation) {
+      if (data.lat && data.lon) {
         return data.lat.value + ", " + data.lon.value;
       }
     }
