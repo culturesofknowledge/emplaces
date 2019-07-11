@@ -25,17 +25,25 @@ export class Value {
 
 
 export class SinglePlace {
+  
   alternateNameList: string[];
   title: string;
   currentHierarchy: string[];
   alternateAuths: Link[];
+  currentLocation: MapLocation | undefined;
 
-  constructor(title: string, alternateNameList: string[], hierarchies: QualifiedRelation[], alternateAuths: Link[]) {
+  constructor(title: string, alternateNameList: string[], hierarchies: QualifiedRelation[], alternateAuths: Link[], locations: MapLocation[]) {
     this.title = title;
     this.alternateNameList = alternateNameList;
     this.currentHierarchy = getFirstCurrentHierarchy(title, hierarchies);
     this.alternateAuths = alternateAuths;
+    this.currentLocation = getCurrentLocation(locations);
   }
+}
+
+function getCurrentLocation(locations: MapLocation[]): MapLocation | undefined {
+  console.log("locations: ", locations);
+  return locations.find(loc => loc.periods.filter(period => period.end != null && period.end.value == null).length > 0);
 }
 
 function getFirstCurrentHierarchy(title:string , hierarchies: QualifiedRelation[]): string[] {
@@ -89,6 +97,28 @@ export class Link {
   constructor(label: string, uri: string) {
     this.label = label;
     this.uri = uri;
+  }
+}
+
+export class MapLocation {
+  lat: Value | null;
+  lon: Value | null;
+  periods: Period[];
+
+  constructor(lat:Value | null, lon: Value | null, periods: Period[]) {
+    this.lat = lat;
+    this.lon = lon;
+    this.periods = periods;
+  }
+}
+
+export class Period {
+  start: Value | null;
+  end: Value | null;
+
+  constructor(start: Value | null, end: Value | null) {
+    this.start = start;
+    this.end = end;
   }
 }
 

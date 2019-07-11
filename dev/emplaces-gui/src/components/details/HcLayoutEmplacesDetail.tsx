@@ -3,7 +3,7 @@ import HcEmPlaceItemHeader from './HcEmPlaceItemHeader';
 import HcEmTable from './HcEmTable';
 import HcEmPlaceCalendar from "./HcEmPlaceCalendar";
 import HcEmPlaceHierarchy from './HcEmPlaceHierarchy';
-import { SinglePlace } from '../../EMPlace';
+import { SinglePlace, MapLocation } from '../../EMPlace';
 import HcEmplaceCurrentHierchy from './HcEmPlaceCurrentHierarchy';
 
 export default class HcLayoutEmplacesDetail extends React.Component<{ data: SinglePlace }> {
@@ -20,10 +20,7 @@ export default class HcLayoutEmplacesDetail extends React.Component<{ data: Sing
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmplaceCurrentHierchy data={this.props.data.currentHierarchy} />
             </div>
-            <div className="hcEmplDataBlock hcMarginBottom3">
-              <HcEmPlaceItemHeader title="Location" isH1={false} hasProv={false} />
-              <DataNotInSet />
-            </div>
+            <CurrentLocation data={this.props.data.currentLocation} />
             <div className="hcEmplDataBlock hcMarginBottom3">
               <HcEmPlaceItemHeader title="Citation" isH1={false} hasProv={false} />
               <DataNotInSet />
@@ -114,13 +111,33 @@ class DataNotInSet extends React.Component {
 class ExternalLinks extends React.Component<{ title: string, links: { label: string, uri: string }[] }> {
   render() {
     return (
-    <div className="hcEmplDataBlock hcMarginBottom3">
-      <HcEmPlaceItemHeader title={this.props.title} isH1={false} hasProv={false} />
-      {
-        this.props.links.map(link => {
-        return <a key={Math.random()} href={link.uri}>{link.label} </a>;
-      })}
-    </div>
+      <div className="hcEmplDataBlock hcMarginBottom3">
+        <HcEmPlaceItemHeader title={this.props.title} isH1={false} hasProv={false} />
+        {
+          this.props.links.map(link => {
+            return <a key={Math.random()} href={link.uri}>{link.label} </a>;
+          })}
+      </div>
     );
+  }
+}
+
+class CurrentLocation extends React.Component<{ data: MapLocation | undefined }> {
+  render() {
+    return (
+      <div className="hcEmplDataBlock hcMarginBottom3">
+        <HcEmPlaceItemHeader title="Location" isH1={false} hasProv={false} />
+        <span>{this.locationAsString(this.props.data)}</span>
+      </div>
+    );
+  }
+
+  locationAsString(data: MapLocation | undefined): string {
+    if(data instanceof MapLocation) {
+      if(data.lat && data.lon) {
+        return data.lat.value + ", " + data.lon.value;
+      }
+    }
+    return "";
   }
 }

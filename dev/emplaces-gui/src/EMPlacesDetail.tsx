@@ -1,7 +1,7 @@
 import React from 'react';
 import { match } from 'react-router';
 import HcLayoutEmplacesDetail from './components/details/HcLayoutEmplacesDetail';
-import {SinglePlace, Link, QualifiedRelation} from './EMPlace';
+import {SinglePlace, Link, QualifiedRelation, MapLocation, Period} from './EMPlace';
 import { instanceOfGraphQlData, GraphQlData } from './GraphQlData';
 
 export default class EmPlacesDetail extends React.Component<{ match: match<{ uri: string }> }> {
@@ -48,11 +48,23 @@ export default class EmPlacesDetail extends React.Component<{ match: match<{ uri
       if (dataSet[this.collection]) {
         const collection = dataSet[this.collection];
 
-        return new SinglePlace(this.getTitle(collection), this.getAlternateNames(collection), this.getHierarchies(collection), this.getAuthorities(collection));
+        return new SinglePlace(this.getTitle(collection), this.getAlternateNames(collection), this.getHierarchies(collection), this.getAuthorities(collection), this.getLocations(collection));
       }
     }
 
     return this.dummySinglePlace();
+  }
+
+  getLocations(collection: any): MapLocation[] {
+    if(collection["em_settingList"]) {
+      return collection["em_settingList"]["items"].map((setting:any) => {
+        const location = setting["em_location"];
+        const when = setting["em_when"]["em_timespanList"]["items"];
+        return new MapLocation(location["wgs84_pos_lat"], location["wgs84_pos_long"], when.map((span:any) => new Period(span["em_latestStart"], span["em_earliestEnd"])))
+      })
+    }
+
+    return  []
   }
 
   getAuthorities(collection: any): Link[] {
@@ -85,7 +97,8 @@ export default class EmPlacesDetail extends React.Component<{ match: match<{ uri
       title: "{title}",
       alternateNameList: ["{alternateNames}"],
       currentHierarchy: [], 
-      alternateAuths: []
+      alternateAuths: [],
+      currentLocation: undefined,
     };
   }
 
