@@ -1,7 +1,7 @@
 import React from 'react';
 import { match } from 'react-router';
 import HcLayoutEmplacesDetail from './components/details/HcLayoutEmplacesDetail';
-import {SinglePlace, Link, Value, QualifiedRelation} from './EMPlace';
+import {SinglePlace, Link, QualifiedRelation} from './EMPlace';
 import { instanceOfGraphQlData, GraphQlData } from './GraphQlData';
 
 export default class EmPlacesDetail extends React.Component<{ match: match<{ uri: string }> }> {
