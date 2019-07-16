@@ -3,13 +3,13 @@ import HcEmPlaceItemHeader from './HcEmPlaceItemHeader';
 
 export default class HcEmplaceCurrentHierchy extends React.Component<{ data: string[] }> {
   state: {
-    hierarchy: HTMLElement
+    hierarchy: HTMLElement | null
   }
 
   constructor(props: { data: string[] }) {
     super(props);
     this.state = {
-      hierarchy: React.createElement("br", null, null)
+      hierarchy: null
     }
   }
 
