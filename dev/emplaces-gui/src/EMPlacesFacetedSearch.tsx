@@ -8,11 +8,12 @@ import FullTextSearch from './components/facetedsearch/FullTextSearch';
 import { GraphQLCollection, GraphQlData, instanceOfGraphQlData } from './GraphQlData';
 
 export default class FacetedSearch extends React.Component {
-  dataSetId = "ue85b462c027ef2b282bf87b44e9670ebb085715d__emplaces20190710";
+  dataSetId = "ue85b462c027ef2b282bf87b44e9670ebb085715d__emplaces_opole20190715";
+  private readonly query= "query emplaces($esQuery: String, $cursor: ID) {\n  dataSets {\n    ue85b462c027ef2b282bf87b44e9670ebb085715d__emplaces_opole20190715 {\n      em_PlaceList(elasticsearch: $esQuery, cursor: $cursor, count: 36) {\n        prevCursor\n        nextCursor\n        total\n        facets {\n          caption\n          options {\n            name\n            count\n          }\n        }\n        items {\n          uri\n          em_preferredName {\n            value\n          }\n          title {\n            value\n          }\n          em_placeType {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emplaces_opole20190715_skos_Concept {\n              title {\n                value\n              }\n            }\n          }\n          em_alternateNameList {\n            items {\n              ... on Value {\n                value\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
   state: {
     data: SearchResult
   }
-  query: string;
+  
 
   private readonly collectionName = "em_PlaceList";
 
@@ -27,7 +28,6 @@ export default class FacetedSearch extends React.Component {
         cursors: new Cursors(null, null, () => {})
       }
     };
-    this.query = "query emplaces($esQuery:String, $cursor: ID) {\n  dataSets {\n    ue85b462c027ef2b282bf87b44e9670ebb085715d__emplaces20190710 {\n      em_PlaceList(elasticsearch:$esQuery, cursor: $cursor, count: 36) {\n        prevCursor\n        nextCursor\n        total\n        facets {\n          caption\n          options {\n            name\n            count\n          }\n        }\n        items {\n          uri\n          em_preferredName {\n            value\n          }\n          title {\n            value\n          }\n          em_placeType {\n            ... on ue85b462c027ef2b282bf87b44e9670ebb085715d__emplaces20190710_skos_Concept {\n              title {\n                value\n              }\n            }\n          }\n          em_alternateNameList {\n            items {\n              ... on Value {\n                value\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
   }
 
   componentDidMount() {
@@ -40,7 +40,7 @@ export default class FacetedSearch extends React.Component {
       "aggs": {
         "Place type": new ESAggregation("em_placeType.title.value.raw"),
         "Calendars": new ESAggregation("em_hasAnnotationList.items.oa_hasBody.title.value.raw"),
-        "Authority": new ESAggregation("em_alternateAuthorityList.items.title.value.raw")
+        "Authorities": new ESAggregation("em_source.em_short_label.value.raw")
       },
       "post_filter": postFilter
     }

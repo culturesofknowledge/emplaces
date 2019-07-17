@@ -78,7 +78,7 @@ function createHierarchyArray(start: QualifiedRelation, coll: QualifiedRelation[
 
 function instanceOfQualifiedRelation(object: any) : object is QualifiedRelation {
   return object["em_relationType"] && object["em_relationType"]["title"]
-  && object.hasOwnProperty("em_when") && instanceOfWhen(object["em_when"])
+  && object.hasOwnProperty("em_when") && (object["em_when"] == null || instanceOfWhen(object["em_when"]))
   && object.hasOwnProperty("em_relationTo"); 
 }
 
