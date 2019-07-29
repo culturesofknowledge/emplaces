@@ -396,6 +396,10 @@ def get_wikidata_sourced_place_mapping(emp_id_sourced, wikidata_url):
         ])
     return wikidata_data_mapping
 
+# @@NOTE: Pleides missing; see: 
+#   http://pleiades.stoa.org/places/442810/darmc-location-18693
+#   https://www.wikidata.org/wiki/Property:P1584
+
 #   ===================================================================
 #
 #   Command line parsing and help
@@ -406,8 +410,8 @@ command_summary_help = ("\n"+
     "Commands:\n"+
     "\n"+
     "  %(prog)s help [command]\n"+
-    "  %(prog)s get GEONAMESID\n"+
-    "  %(prog)s manygetgeonames\n"+
+    "  %(prog)s getgeonamesdata GEONAMESID\n"+
+    "  %(prog)s manygetgeonamesdata\n"+
     "  %(prog)s placehierarchy GEONAMESID\n"+
     "  %(prog)s manyplacehierarchy\n"+
     "  %(prog)s geonamesid URL [REGEXP]\n"

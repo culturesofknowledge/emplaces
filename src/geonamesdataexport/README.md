@@ -92,11 +92,16 @@ Get RDF Turtle data for all members of the administrative hierarchy covering the
     Commands:
 
       get_geonames_data.py help [command]
-      get_geonames_data.py get GEONAMESID
-      get_geonames_data.py manyget
+      get_geonames_data.py getgeonamesdata GEONAMESID
+      get_geonames_data.py manygetgeonamesdata
       get_geonames_data.py placehierarchy GEONAMESID
       get_geonames_data.py manyplacehierarchy
       get_geonames_data.py geonamesid URL [REGEXP]
       get_geonames_data.py manygeonamesids [REGEXP]
+      get_geonames_data.py wikidataid GEONAMESID
+      get_geonames_data.py many wikidataid
+      get_geonames_data.py getwikidata WIKIDATAID
+      get_geonames_data.py manygetwikidata
+      get_geonames_data.py getwikitext WIKIDATAID
+      get_geonames_data.py manygetwikitext WIKIDATAID
       get_geonames_data.py version
-
