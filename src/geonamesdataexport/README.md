@@ -22,11 +22,10 @@ Recommended to create and activate a new Python "virtualenv", thus:
     virtualenv gcdenv
     source gcdenv/bin/activate
 
-Install `rdflib` dependency
+Install `rdflib` and `requests` dependencies
 
     cd src/geonamesdataexport
-    pip install rdflib==4.2.2
-
+    pip install rdflib==4.2.2 requests
 
 ## Example usage
 
