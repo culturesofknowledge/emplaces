@@ -1,0 +1,613 @@
+@prefix agent: <http://id.emplaces.info/agent/> .
+@prefix annal: <http://purl.org/annalist/2014/#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix em: <http://id.emplaces.info/vocab/> .
+@prefix emc: <http://id.emplaces.info/calendar/> .
+@prefix eml: <http://id.emplaces.info/language/> .
+@prefix emp: <http://id.emplaces.info/timeperiod/> .
+@prefix ems: <http://id.emplaces.info/source/> .
+@prefix emt: <http://id.emplaces.info/timespan/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geonames: <http://sws.geonames.org/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix place: <http://id.emplaces.info/place/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ref: <http://id.emplaces.info/reference/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+place:place_3090048 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Opole" ;
+            em:link <http://sws.geonames.org/3090048/> ] ;
+    em:canonicalURI place:place_3090048 ;
+    em:place_data place:Opole_PPLA_3090048_geonames .
+
+place:place_3337495 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Opole Voivodeship" ;
+            em:link <http://sws.geonames.org/3337495/> ] ;
+    em:canonicalURI place:place_3337495 ;
+    em:place_data place:Opole_Voivodeship_ADM1_3337495_geonames .
+
+place:place_7530818 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Opole" ;
+            em:link <http://sws.geonames.org/7530818/> ] ;
+    em:canonicalURI place:place_7530818 ;
+    em:place_data place:Opole_ADM2_7530818_geonames .
+
+place:place_7532413 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Opole" ;
+            em:link <http://sws.geonames.org/7532413/> ] ;
+    em:canonicalURI place:place_7532413 ;
+    em:place_data place:Opole_ADM3_7532413_geonames .
+
+place:place_798544 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Poland" ;
+            em:link <http://sws.geonames.org/798544/> ] ;
+    em:canonicalURI place:place_798544 ;
+    em:place_data place:Poland_PCLI_798544_geonames .
+
+emt:Current_2018 a em:Time_span ;
+    rdfs:label "Current, as of 2018" ;
+    em:earliestEnd "2018" ;
+    em:latestStart "2018" ;
+    em:short_label "2018" ;
+    rdfs:comment "Timespan starting no later than 2018, and ending no sooner than 2018" .
+
+place:Opole_PPLA_3090048_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Opole (Populated place (P.PPLA))" ;
+    em:alternateName "Opole",
+        "Oppein",
+        "Oppeln",
+        "أبولوسكي"@ar,
+        "Горад Аполе"@be,
+        "Ополе"@bg,
+        "Opolí"@cs,
+        "Òpòle"@csb,
+        "Opole"@da,
+        "Oppeln"@de,
+        "Opole"@en,
+        "Opole"@eo,
+        "اوپوله"@fa,
+        "Opole"@fi,
+        "Opole"@fr,
+        "אופולה"@he,
+        "Opole"@hu,
+        "Opole"@id,
+        "Opole"@it,
+        "オポーレ"@ja,
+        "Opole"@jv,
+        "오폴레"@ko,
+        "Opolė"@lt,
+        "Opole"@lv,
+        "Opole"@na,
+        "Oppeln"@nds,
+        "Opole"@nl,
+        "Opole"@pl,
+        "اوپول"@pnb,
+        "Opole"@pt,
+        "Opole"@ro,
+        "Ополе"@ru,
+        "Opole"@sl,
+        "Ополе"@sr,
+        "Opole"@sv,
+        "Uopole"@szl,
+        "ออปอเล"@th,
+        "Ополе"@uk,
+        "奥波莱"@zh ;
+    em:displayName "Opole",
+        "Opolí",
+        "Opolė",
+        "Oppein",
+        "Oppeln",
+        "Uopole",
+        "Òpòle",
+        "Горад Аполе",
+        "Ополе",
+        "אופולה",
+        "أبولوسكي",
+        "اوپول",
+        "اوپوله",
+        "ออปอเล",
+        "オポーレ",
+        "奥波莱",
+        "오폴레" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Opole_PPLA_3090048_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <https://www.geonames.org/3090048/opole.html> ;
+                    em:preview <https://www.geonames.org/3090048/opole.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Opole" ] ;
+            oa:hasTarget place:Opole_PPLA_3090048_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Opole_ADM3_7532413_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Opole_PPLA_3090048_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:P ;
+    em:placeType gn:P.PPLA ;
+    em:preferredName "Opole" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.067211e+01 ;
+                    wgs84_pos:long 1.792533e+01 ] ;
+            em:source ems:Opole_PPLA_3090048_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Opole_PPLA_3090048_geonames ;
+    gn:countryCode "PL" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;
+    rdfs:seeAlso <https://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> .
+
+place:Opole_Voivodeship_ADM1_3337495_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Opole Voivodeship (Region (A.ADM1))" ;
+    em:alternateName "Województwo Opolskie",
+        "Voivodat d'Opole"@ca,
+        "Opolské vojvodství"@cs,
+        "Òpòlsczé wòjewództwò"@csb,
+        "Woiwodschaft Oppeln"@de,
+        "Opole Voivodeship"@en,
+        "Opolio"@eo,
+        "Opole"@es,
+        "Opole vojevoodkond"@et,
+        "Voïvodie d'Opole"@fr,
+        "Provinsi Opole"@id,
+        "Voivodato di Opole"@it,
+        "オポーレ県"@ja,
+        "Opolės vaivadija"@lt,
+        "Opole"@nl,
+        "Województwo opolskie"@pl,
+        "Província de Opole"@pt,
+        "Voivodia de Opole"@pt,
+        "Voievodatul Opole"@ro,
+        "Опольское воеводство"@ru,
+        "Opolské vojvodstvo"@sk,
+        "Opole vojvodskap"@sv,
+        "Opplen"@sv ;
+    em:displayName "Opole",
+        "Opole Voivodeship",
+        "Opole vojevoodkond",
+        "Opole vojvodskap",
+        "Opolio",
+        "Opolské vojvodstvo",
+        "Opolské vojvodství",
+        "Opolės vaivadija",
+        "Opplen",
+        "Provinsi Opole",
+        "Província de Opole",
+        "Voievodatul Opole",
+        "Voivodat d'Opole",
+        "Voivodato di Opole",
+        "Voivodia de Opole",
+        "Voïvodie d'Opole",
+        "Woiwodschaft Oppeln",
+        "Województwo Opolskie",
+        "Województwo opolskie",
+        "Òpòlsczé wòjewództwò",
+        "Опольское воеводство",
+        "オポーレ県" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Opole_Voivodeship_ADM1_3337495_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Opole Voivodeship" ;
+                    em:link <https://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
+                    em:preview <https://www.geonames.org/3337495/wojewodztwo-opolskie.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Opole Voivodeship" ] ;
+            oa:hasTarget place:Opole_Voivodeship_ADM1_3337495_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Poland_PCLI_798544_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Opole_Voivodeship_ADM1_3337495_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM1 ;
+    em:preferredName "Opole Voivodeship" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.066667e+01 ;
+                    wgs84_pos:long 1.79e+01 ] ;
+            em:source ems:Opole_Voivodeship_ADM1_3337495_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Opole_Voivodeship_ADM1_3337495_geonames ;
+    gn:countryCode "PL" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3337495/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole_Voivodeship>,
+        <https://en.wikipedia.org/wiki/Opole_Voivodeship>,
+        <https://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5_%D0%B2%D0%BE%D0%B5%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE> .
+
+place:Opole_ADM2_7530818_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Opole (County (A.ADM2))" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Opole_ADM2_7530818_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <https://www.geonames.org/7530818/opole.html> ;
+                    em:preview <https://www.geonames.org/7530818/opole.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Opole" ] ;
+            oa:hasTarget place:Opole_ADM2_7530818_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Upper_Silesia_RGN_3082777_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Opole_ADM2_7530818_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM2 ;
+    em:preferredName "Opole" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.065622e+01 ;
+                    wgs84_pos:long 1.793066e+01 ] ;
+            em:source ems:Opole_ADM2_7530818_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Opole_ADM2_7530818_geonames ;
+    gn:countryCode "PL" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7530818/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <https://en.wikipedia.org/wiki/Opole> .
+
+place:Opole_ADM3_7532413_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Opole (City   (A.ADM3))" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Opole_ADM3_7532413_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <https://www.geonames.org/7532413/opole.html> ;
+                    em:preview <https://www.geonames.org/7532413/opole.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Opole" ] ;
+            oa:hasTarget place:Opole_ADM3_7532413_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Opole_ADM2_7530818_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Opole_ADM3_7532413_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.ADM3 ;
+    em:preferredName "Opole" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.06562e+01 ;
+                    wgs84_pos:long 1.79306e+01 ] ;
+            em:source ems:Opole_ADM3_7532413_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Opole_ADM3_7532413_geonames ;
+    gn:countryCode "PL" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/7532413/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Opole>,
+        <https://en.wikipedia.org/wiki/Opole> .
+
+place:Poland_PCLI_798544_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Poland (Country)" ;
+    em:alternateName "Lengyelország",
+        "Lenkija",
+        "Poland",
+        "Polen",
+        "Polija",
+        "Polish People’s Republic",
+        "Pologne",
+        "Polonia",
+        "Polsha",
+        "Polska",
+        "Polska Rzeczpospolita Ludowa",
+        "Polsko",
+        "Poola",
+        "Pole"@af,
+        "ፖላንድ"@am,
+        "Polonia"@an,
+        "Polaland"@ang,
+        "بولندا"@ar,
+        "ܦܘܠܢܕ"@arc,
+        "Polonia"@ast,
+        "Polşa"@az,
+        "Польша"@be,
+        "Полша"@bg,
+        "পোল্যাণ্ড"@bn,
+        "Polonia"@br,
+        "Poljska"@bs,
+        "Polònia"@ca,
+        "Polsko"@cs,
+        "Pòlskô"@csb,
+        "Пол҄ьска"@cu,
+        "Польша"@cv,
+        "Gwlad Pwyl"@cy,
+        "Polen"@da,
+        "Polen"@de,
+        "Polonya"@diq,
+        "Πολωνία"@el,
+        "Republic of Poland"@en,
+        "Polio"@eo,
+        "Pollando"@eo,
+        "Polujo"@eo,
+        "Poola"@et,
+        "Polonia"@eu,
+        "لهستان"@fa,
+        "Puola"@fi,
+        "Pólland"@fo,
+        "Pologne"@frp,
+        "Polonie"@fur,
+        "Poalen"@fy,
+        "An Pholainn"@ga,
+        "A Phòlainn"@gd,
+        "Polonia - Polska"@gl,
+        "Polóña"@gn,
+        "Yn Pholynn"@gv,
+        "Poljska"@hbs,
+        "פולין"@he,
+        "पोलैंड"@hi,
+        "Poljska"@hr,
+        "Pólska"@hsb,
+        "Lengyelország"@hu,
+        "Լեհաստան"@hy,
+        "Polonia"@ia,
+        "Polandia"@id,
+        "Polandia"@ilo,
+        "Polonia"@io,
+        "Pólland"@is,
+        "Polonia"@it,
+        "ポーランド"@ja,
+        "polskas"@jbo,
+        "Polandia"@jv,
+        "პოლონეთი"@ka,
+        "ប៉ូលូញ"@km,
+        "폴란드"@ko,
+        "Polonya"@ku,
+        "Poloni"@kw,
+        "Polonia"@la,
+        "Polen"@lb,
+        "Pole"@li,
+        "Polonia"@lij,
+        "ໂປແລນ"@lo,
+        "Lenkija"@lt,
+        "Polija"@lv,
+        "Полска"@mk,
+        "Poland"@ms,
+        "Polonja"@mt,
+        "Poran"@na,
+        "Pulonnia"@nap,
+        "Polen"@nb,
+        "Polen"@nds,
+        "Polen"@nl,
+        "Polen"@nn,
+        "Polen"@no,
+        "Polonia"@nov,
+        "Polongne"@nrm,
+        "Polonha"@oc,
+        "Pol’šu"@olo,
+        "Польшæ"@os,
+        "Polonya"@pam,
+        "Rzeczpospolita Polska"@pl,
+        "Polònia"@pms,
+        "پولنډ"@ps,
+        "Polónia"@pt,
+        "Polônia"@pt,
+        "Pulska"@qu,
+        "Pulunya"@qu,
+        "Polonia"@ro,
+        "Полония"@ro,
+        "Польша"@ru,
+        "Polonia"@sc,
+        "Pulonia"@scn,
+        "Poland"@sco,
+        "Polen"@se,
+        "Poľsko"@sk,
+        "Poljska"@sl,
+        "Booland"@so,
+        "Poloni"@sq,
+        "Polonia"@sq,
+        "Пољска"@sr,
+        "Polen"@sv,
+        "Poland"@sw,
+        "போலந்து"@ta,
+        "Polónia"@tet,
+        "Лаҳистон"@tg,
+        "ประเทศโปแลนด์"@th,
+        "โปแลนด์"@th,
+        "Polonya"@tl,
+        "poland"@tl,
+        "Polonya"@tr,
+        "لەھىستان"@ug,
+        "Польща"@uk,
+        "Polsha"@uz,
+        "Ba Lan"@vi,
+        "Pooln"@vls,
+        "Polän"@vo,
+        "Polonya"@war,
+        "פוילן"@yi,
+        "波兰"@zh ;
+    em:displayName "A Phòlainn",
+        "An Pholainn",
+        "Ba Lan",
+        "Booland",
+        "Gwlad Pwyl",
+        "Lengyelország",
+        "Lenkija",
+        "Poalen",
+        "Polaland",
+        "Poland",
+        "Polandia",
+        "Pole",
+        "Polen",
+        "Polija",
+        "Polio",
+        "Polish People’s Republic",
+        "Poljska",
+        "Pollando",
+        "Pologne",
+        "Polongne",
+        "Polonha",
+        "Poloni",
+        "Polonia",
+        "Polonia - Polska",
+        "Polonie",
+        "Polonja",
+        "Polonya",
+        "Polsha",
+        "Polska",
+        "Polska Rzeczpospolita Ludowa",
+        "Polsko",
+        "Polujo",
+        "Polän",
+        "Polònia",
+        "Polónia",
+        "Polóña",
+        "Polônia",
+        "Polşa",
+        "Pol’šu",
+        "Poola",
+        "Pooln",
+        "Poran",
+        "Poľsko",
+        "Pulonia",
+        "Pulonnia",
+        "Pulska",
+        "Pulunya",
+        "Puola",
+        "Pòlskô",
+        "Pólland",
+        "Pólska",
+        "Republic of Poland",
+        "Rzeczpospolita Polska",
+        "Yn Pholynn",
+        "poland",
+        "polskas",
+        "Πολωνία",
+        "Лаҳистон",
+        "Полония",
+        "Полска",
+        "Полша",
+        "Польшæ",
+        "Польша",
+        "Польща",
+        "Пол҄ьска",
+        "Пољска",
+        "Լեհաստան",
+        "פוילן",
+        "פולין",
+        "بولندا",
+        "لهستان",
+        "لەھىستان",
+        "پولنډ",
+        "ܦܘܠܢܕ",
+        "पोलैंड",
+        "পোল্যাণ্ড",
+        "போலந்து",
+        "ประเทศโปแลนด์",
+        "โปแลนด์",
+        "ໂປແລນ",
+        "პოლონეთი",
+        "ፖላንድ",
+        "ប៉ូលូញ",
+        "ポーランド",
+        "波兰",
+        "폴란드" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Poland_PCLI_798544_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Poland" ;
+                    em:link <https://www.geonames.org/798544/republic-of-poland.html> ;
+                    em:preview <https://www.geonames.org/798544/republic-of-poland.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Poland" ] ;
+            oa:hasTarget place:Poland_PCLI_798544_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:European_Union_ZN_6695072_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Poland_PCLI_798544_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:A ;
+    em:placeType gn:A.PCLI ;
+    em:preferredName "Poland" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.2e+01 ;
+                    wgs84_pos:long 2e+01 ] ;
+            em:source ems:Poland_PCLI_798544_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Poland_PCLI_798544_geonames ;
+    gn:countryCode "PL" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/798544/about.rdf> ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Poland>,
+        <https://en.wikipedia.org/wiki/Poland>,
+        <https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BE%D0%BD%D0%B8%D1%8F>,
+        <https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8C%D1%88%D0%B0> .
+
+ems:Opole_ADM2_7530818_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Opole (County (A.ADM2))" ;
+    em:accessed "2019-07-30" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/7530818/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/7530818/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Opole_ADM3_7532413_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Opole (City   (A.ADM3))" ;
+    em:accessed "2019-07-30" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/7532413/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/7532413/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Opole_PPLA_3090048_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Opole (Populated place (P.PPLA))" ;
+    em:accessed "2019-07-30" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/3090048/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/3090048/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Opole_Voivodeship_ADM1_3337495_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Opole Voivodeship (Region (A.ADM1))" ;
+    em:accessed "2019-07-30" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/3337495/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/3337495/about.rdf> ;
+    em:short_label "GeoNames" .
+
+ems:Poland_PCLI_798544_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Poland (Country)" ;
+    em:accessed "2019-07-30" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/798544/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/798544/about.rdf> ;
+    em:short_label "GeoNames" .
+
+emp:Current_2018 a em:Time_period ;
+    rdfs:label "Current, as of 2018" ;
+    em:short_label "2018" ;
+    em:timespan emt:Current_2018 ;
+    rdfs:comment "Time period including the year 2018" .
+
+

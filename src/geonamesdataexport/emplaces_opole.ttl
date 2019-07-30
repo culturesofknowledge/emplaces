@@ -1,0 +1,143 @@
+@prefix agent: <http://id.emplaces.info/agent/> .
+@prefix annal: <http://purl.org/annalist/2014/#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix em: <http://id.emplaces.info/vocab/> .
+@prefix emc: <http://id.emplaces.info/calendar/> .
+@prefix eml: <http://id.emplaces.info/language/> .
+@prefix emp: <http://id.emplaces.info/timeperiod/> .
+@prefix ems: <http://id.emplaces.info/source/> .
+@prefix emt: <http://id.emplaces.info/timespan/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geonames: <http://sws.geonames.org/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix place: <http://id.emplaces.info/place/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ref: <http://id.emplaces.info/reference/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+place:place_3090048 a em:Place,
+        em:Place_merged ;
+    em:alternateURI [ rdfs:label "GeoNames URI for Opole" ;
+            em:link <http://sws.geonames.org/3090048/> ] ;
+    em:canonicalURI place:place_3090048 ;
+    em:place_data place:Opole_PPLA_3090048_geonames .
+
+emt:Current_2018 a em:Time_span ;
+    rdfs:label "Current, as of 2018" ;
+    em:earliestEnd "2018" ;
+    em:latestStart "2018" ;
+    em:short_label "2018" ;
+    rdfs:comment "Timespan starting no later than 2018, and ending no sooner than 2018" .
+
+place:Opole_PPLA_3090048_geonames a em:Place,
+        em:Place_sourced ;
+    rdfs:label "Opole (Populated place (P.PPLA))" ;
+    em:alternateName "Opole",
+        "Oppein",
+        "Oppeln",
+        "أبولوسكي"@ar,
+        "Горад Аполе"@be,
+        "Ополе"@bg,
+        "Opolí"@cs,
+        "Òpòle"@csb,
+        "Opole"@da,
+        "Oppeln"@de,
+        "Opole"@en,
+        "Opole"@eo,
+        "اوپوله"@fa,
+        "Opole"@fi,
+        "Opole"@fr,
+        "אופולה"@he,
+        "Opole"@hu,
+        "Opole"@id,
+        "Opole"@it,
+        "オポーレ"@ja,
+        "Opole"@jv,
+        "오폴레"@ko,
+        "Opolė"@lt,
+        "Opole"@lv,
+        "Opole"@na,
+        "Oppeln"@nds,
+        "Opole"@nl,
+        "Opole"@pl,
+        "اوپول"@pnb,
+        "Opole"@pt,
+        "Opole"@ro,
+        "Ополе"@ru,
+        "Opole"@sl,
+        "Ополе"@sr,
+        "Opole"@sv,
+        "Uopole"@szl,
+        "ออปอเล"@th,
+        "Ополе"@uk,
+        "奥波莱"@zh ;
+    em:displayName "Opole",
+        "Opolí",
+        "Opolė",
+        "Oppein",
+        "Oppeln",
+        "Uopole",
+        "Òpòle",
+        "Горад Аполе",
+        "Ополе",
+        "אופולה",
+        "أبولوسكي",
+        "اوپول",
+        "اوپوله",
+        "ออปอเล",
+        "オポーレ",
+        "奥波莱",
+        "오폴레" ;
+    em:hasAnnotation [ a oa:Annotation ;
+            em:competence em:DEFINITIVE ;
+            em:source ems:Opole_PPLA_3090048_geonames ;
+            em:when emp:Current_2018 ;
+            oa:hasBody [ rdfs:label "Current map for Opole" ;
+                    em:link <https://www.geonames.org/3090048/opole.html> ;
+                    em:preview <https://www.geonames.org/3090048/opole.html> ;
+                    em:short_label "Current" ;
+                    rdfs:comment "Current map for Opole" ] ;
+            oa:hasTarget place:Opole_PPLA_3090048_geonames ;
+            oa:motivatedBy em:MAP_RESOURCE ] ;
+    em:hasRelation [ a em:Qualified_relation ;
+            em:competence em:DEFINITIVE ;
+            em:relationTo place:Opole_ADM3_7532413_geonames ;
+            em:relationType em:P_PART_OF_A ;
+            em:source ems:Opole_PPLA_3090048_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:placeCategory gn:P ;
+    em:placeType gn:P.PPLA ;
+    em:preferredName "Opole" ;
+    em:setting [ a em:Setting ;
+            em:location [ wgs84_pos:lat 5.067211e+01 ;
+                    wgs84_pos:long 1.792533e+01 ] ;
+            em:source ems:Opole_PPLA_3090048_geonames ;
+            em:when emp:Current_2018 ] ;
+    em:source ems:Opole_PPLA_3090048_geonames ;
+    gn:countryCode "PL" ;
+    rdfs:isDefinedBy <http://sws.geonames.org/3090048/about.rdf> ;
+    rdfs:seeAlso <https://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D0%BE%D0%BB%D0%B5> .
+
+emp:Current_2018 a em:Time_period ;
+    rdfs:label "Current, as of 2018" ;
+    em:short_label "2018" ;
+    em:timespan emt:Current_2018 ;
+    rdfs:comment "Time period including the year 2018" .
+
+ems:Opole_PPLA_3090048_geonames a em:Authority,
+        em:Source_desc ;
+    rdfs:label "GeoNames data for Opole (Populated place (P.PPLA))" ;
+    em:accessed "2019-07-30" ;
+    em:editorialNote "Data from GeoNames URL http://sws.geonames.org/3090048/about.rdf" ;
+    em:licence ems:GeoNames_licence ;
+    em:link <http://sws.geonames.org/3090048/about.rdf> ;
+    em:short_label "GeoNames" .
+
+
