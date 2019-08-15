@@ -22,7 +22,7 @@ Recommended to create and activate a new Python "virtualenv", thus:
     virtualenv gcdenv
     source gcdenv/bin/activate
 
-Install `rdflib` dependency
+Install `rdflib` and `requests` dependencies
 
     cd src/geonamesdataexport
     pip install rdflib==4.2.2
@@ -33,11 +33,11 @@ Install `rdflib` dependency
 
 Run the extractor for Opole ("3090048" is the GeoNames id for the City of Opole):
 
-    python get_geonames_data.py get 3090048
+    python get_geonames_data.py getgeonamesdata 3090048
 
 Turtle data is sent to stdout, and may be redirected to a file, thus:
 
-    python get_geonames_data.py get 3090048 >emplaces_opole.ttl
+    python get_geonames_data.py getgeonamesdata 3090048 > emplaces_opole.ttl
 
 Get list of place Ids in administrative hierarchy:
 
@@ -46,7 +46,7 @@ Get list of place Ids in administrative hierarchy:
 Get Turtle data for all places in administrative hierarchy:
 
     python get_geonames_data.py placehierarchy 3090048 | \
-    python get_geonames_data.py manyget >emplaces_opole_hierarchy.ttl
+    python get_geonames_data.py manygetgeonamesdata > emplaces_opole_hierarchy.ttl
 
 Get all members of the administrative hierarchy covering a supplied list of places:
 
@@ -56,7 +56,7 @@ Get RDF Turtle data for all members of the administrative hierarchy covering the
 
     cat Opole_nearby_places.txt | \
     python get_geonames_data.py manyplacehierarchy | \
-    python get_geonames_data.py manyget > Opole_extracted_data.ttl
+    python get_geonames_data.py manygetgeonamesdata > Opole_extracted_data.ttl
 
 
 ## Command line usage
