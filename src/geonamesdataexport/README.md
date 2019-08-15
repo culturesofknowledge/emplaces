@@ -26,6 +26,7 @@ Install `rdflib` dependency
 
     cd src/geonamesdataexport
     pip install rdflib==4.2.2
+    pip install requests==2.21.0
 
 
 ## Example usage

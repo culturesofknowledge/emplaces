@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2019-04-16 17:36:11 +0000</string>
+	<string>2019-08-15 13:35:51 +0000</string>
 	<key>Modifier</key>
 	<string>Graham Klyne</string>
 	<key>NotesVisible</key>
@@ -3991,8 +3991,8 @@ Place category \
 					<integer>35</integer>
 					<key>Points</key>
 					<array>
-						<string>{976.02572834911723, 539.59403806188459}</string>
-						<string>{889.68107230976932, 605.79864078013804}</string>
+						<string>{976.02572834909984, 539.5940380618656}</string>
+						<string>{889.68107230973305, 605.79864078009837}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4105,8 +4105,8 @@ Place category \
 					<integer>37</integer>
 					<key>Points</key>
 					<array>
-						<string>{1075.948308150595, 562.60175032858956}</string>
-						<string>{1083.6050429773125, 594.78879193653586}</string>
+						<string>{1075.9053949175882, 562.61026040022659}</string>
+						<string>{1083.5429726787354, 594.78891006462993}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -8041,8 +8041,9 @@ Description\
 
 \f0\fs24 \cf0 \expnd0\expndtw0\kerning0
 em:description\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f1 \uc0\u8834  
+\f1 \cf0 \uc0\u8834  
 \f0 rdfs:comment}</string>
 						<key>VerticalPad</key>
 						<integer>1</integer>
@@ -13496,8 +13497,9 @@ em:place_data}</string>
 
 \f0\fs24 \cf0 \expnd0\expndtw0\kerning0
 em:editorialNote\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f1 \uc0\u8834 
+\f1 \cf0 \uc0\u8834 
 \f0  rdfs:comment}</string>
 						<key>VerticalPad</key>
 						<integer>1</integer>
@@ -14743,8 +14745,9 @@ em:Place}</string>
 
 \f0\fs28 \cf0 \expnd0\expndtw0\kerning0
 Source\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f1 [\uc0\u8594 
+\f1 \cf0 [\uc0\u8594 
 \f0  8]}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
@@ -25808,7 +25811,7 @@ em:short_label}</string>
 {\colortbl;\red255\green255\blue255;\red128\green64\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f0\fs48 \cf2 4. EMPlaces map resource day model (draft 2019-04-16)}</string>
+\f0\fs48 \cf2 4. EMPlaces map resource data model (draft 2019-04-16)}</string>
 					</dict>
 				</dict>
 				<dict>
@@ -29388,7 +29391,7 @@ oa:hasTarget}</string>
 \pard\tx560\tx1120\tx1680\tx1740\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs28 \cf0 \expnd0\expndtw0\kerning0
-Map resource annotation}</string>
+Calendar in use annotation}</string>
 					</dict>
 				</dict>
 				<dict>
@@ -42467,8 +42470,9 @@ Short label (e.g, for tabs)}</string>
 
 \f0\fs24 \cf0 \expnd0\expndtw0\kerning0
 em:editorialNote\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f1 \uc0\u8834 
+\f1 \cf0 \uc0\u8834 
 \f0  rdfs:comment}</string>
 						<key>VerticalPad</key>
 						<integer>1</integer>
@@ -47421,7 +47425,7 @@ Location}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>0</integer>
+		<integer>3</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
@@ -47439,7 +47443,7 @@ Location}</string>
 		<key>SidebarWidth</key>
 		<integer>126</integer>
 		<key>VisibleRegion</key>
-		<string>{{0, 167}, {1047, 616}}</string>
+		<string>{{0, 0}, {1047, 616}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
