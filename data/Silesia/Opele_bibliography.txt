@@ -1,0 +1,221 @@
+# Opele_bibliography
+
+### Chicago 17th Ed. Note:
+
+Bláhová, Marie. Historická Chronologie. Prague: Libri, 2001.
+Dziewulski, Wladyslaw, and Hawranek, Franciszek. Opole: Monografia Miasta. Opole: Instytut Śląski, 1975.
+Emmerling, Ryszard, and Zajaczkowska, Urszula. Oppeln/Opole. Die Hauptstadt Der Wojewodschaft Oppeln. Opole: Schlesischer, 2003.
+Gediga, Bogusław. ‘Oppeln/Opole Im 11. Und 12. Jahrhundert Als Beispiel Eines Frühstädtischen Zentrums in Oberschlesien’. Stadtgeschichte Oberschlesiens: Studien Zur Städtischen Entwicklung Und Kultur Einer Ostmitteleuropäischen Region Vom Mittelalter Bis Zum Vorabend Der Industrialisierung, Tagungsreihe der Stiftung Haus Oberschlesien, 1995.
+Hefner, Krystian, and Kreft, Wolfgang. ‘Opole/Oppeln, Marburg’. In Historisch-Topographischer Atlas Schlesischer Städte 2. Marburg: Herder Institute, 2011.
+Idzikowski, Franz. Geschichte Der Stadt Oppeln. Oppeln, 1863. http://books.google.com/books?id=Jt4AAAAAcAAJ.
+Linek, Bernhard. Opole Na Przestrzeni Wieków Historiografia Wobec Nowych Metod Badania Dziejów Miasta. Opole: Stowarzyszenie Institut Śla̜ski, 2008.
+Szafran-Szadkowska, Lucyna. Najstarsze Dzieje Opola: Tajemnice Wydarte Ziemi. Opele: IŚ. Wydaw, 1995.
+Tomsa, Jan. Počítání Času: (Základy Teorie Kalendáře). Scripta Astronomica 7. Prague: KLP, n.d.
+Veldtrup, Dieter. Prosopographische Studien Zur Geschichte Oppelns Als Herzoglicher Residenzstadt Im Mittelalter. Vol. 7. Stiftung Haus Oberschlesien. Berlin: Gebrüder Mann, 1995.
+
+
+### MLA 8th Ed.
+
+Bláhová, Marie. Historická Chronologie. Libri, 2001.
+Dziewulski, Wladyslaw, and Hawranek, Franciszek. Opole: Monografia Miasta. Instytut Śląski, 1975.
+Emmerling, Ryszard, and Zajaczkowska, Urszula. Oppeln/Opole. Die Hauptstadt Der Wojewodschaft Oppeln. Schlesischer, 2003.
+Gediga, Bogusław. ‘Oppeln/Opole Im 11. Und 12. Jahrhundert Als Beispiel Eines Frühstädtischen Zentrums in Oberschlesien’. Stadtgeschichte Oberschlesiens: Studien Zur Städtischen Entwicklung Und Kultur Einer Ostmitteleuropäischen Region Vom Mittelalter Bis Zum Vorabend Der Industrialisierung, 1995.
+Hefner, Krystian, and Kreft, Wolfgang. ‘Opole/Oppeln, Marburg’. Historisch-Topographischer Atlas Schlesischer Städte 2, Herder Institute, 2011.
+Idzikowski, Franz. Geschichte Der Stadt Oppeln. 1863, http://books.google.com/books?id=Jt4AAAAAcAAJ.
+Linek, Bernhard. Opole Na Przestrzeni Wieków Historiografia Wobec Nowych Metod Badania Dziejów Miasta. Stowarzyszenie Institut Śla̜ski, 2008.
+Szafran-Szadkowska, Lucyna. Najstarsze Dzieje Opola: Tajemnice Wydarte Ziemi. IŚ. Wydaw, 1995.
+Tomsa, Jan. Počítání Času: (Základy Teorie Kalendáře). KLP.
+Veldtrup, Dieter. Prosopographische Studien Zur Geschichte Oppelns Als Herzoglicher Residenzstadt Im Mittelalter. Vol. 7, Gebrüder Mann, 1995.
+
+
+### BibTeX
+
+
+@book{emmerling_ryszard_oppeln/opole._2003,
+	address = {Opole},
+	title = {Oppeln/{Opole}. {Die} {Hauptstadt} der {Wojewodschaft} {Oppeln}},
+	isbn = {978-83-915371-3-8},
+	publisher = {Schlesischer},
+	author = {{Emmerling, Ryszard} and {Zajaczkowska, Urszula}},
+	year = {2003}
+}
+
+@book{dziewulski_wladyslaw_opole:_1975,
+	address = {Opole},
+	title = {Opole: monografia miasta},
+	publisher = {Instytut Śląski},
+	author = {{Dziewulski, Wladyslaw} and {Hawranek, Franciszek}},
+	year = {1975}
+}
+
+@article{gediga_boguslaw_oppeln/opole_1995,
+	title = {Oppeln/{Opole} im 11. und 12. {Jahrhundert} als {Beispiel} eines frühstädtischen {Zentrums} in {Oberschlesien}},
+	journal = {Stadtgeschichte Oberschlesiens: Studien zur städtischen Entwicklung und Kultur einer ostmitteleuropäischen Region vom Mittelalter bis zum Vorabend der Industrialisierung},
+	author = {{Gediga, Bogusław}},
+	year = {1995}
+}
+
+@incollection{hefner_krystian_opole/oppeln_2011,
+	address = {Marburg},
+	title = {Opole/{Oppeln}, {Marburg}},
+	booktitle = {Historisch-topographischer {Atlas} schlesischer {Städte} 2},
+	publisher = {Herder Institute},
+	author = {{Hefner, Krystian} and {Kreft, Wolfgang}},
+	year = {2011}
+}
+
+@book{idzikowski_franz_geschichte_1863,
+	address = {Oppeln},
+	title = {Geschichte der {Stadt} {Oppeln}},
+	url = {http://books.google.com/books?id=Jt4AAAAAcAAJ},
+	author = {{Idzikowski, Franz}},
+	year = {1863}
+}
+
+@book{linek_bernhard_opole_2008,
+	address = {Opole},
+	title = {Opole na przestrzeni wieków historiografia wobec nowych metod badania dziejów miasta},
+	isbn = {978-83-7126-241-8 83-7126-241-8},
+	publisher = {Stowarzyszenie Institut Śla̜ski},
+	author = {{Linek, Bernhard}},
+	year = {2008}
+}
+
+@book{szafran-szadkowska_lucyna_najstarsze_1995,
+	address = {Opele},
+	title = {Najstarsze dzieje {Opola}: tajemnice wydarte ziemi},
+	isbn = {8386708069 978838670806},
+	publisher = {IŚ. Wydaw},
+	author = {{Szafran-Szadkowska, Lucyna}},
+	year = {1995}
+}
+
+@book{veldtrup_dieter_prosopographische_1995,
+	address = {Berlin},
+	series = {Stiftung {Haus} {Oberschlesien}},
+	title = {Prosopographische {Studien} zur {Geschichte} {Oppelns} als herzoglicher {Residenzstadt} im {Mittelalter}},
+	volume = {7},
+	publisher = {Gebrüder Mann},
+	author = {{Veldtrup, Dieter}},
+	year = {1995}
+}
+
+@book{tomsa_jan_pocitani_nodate,
+	address = {Prague},
+	series = {Scripta astronomica},
+	title = {Počítání času: (základy teorie kalendáře)},
+	isbn = {80-85917-11-4 978-80-85917-11-6},
+	number = {7},
+	publisher = {KLP},
+	author = {{Tomsa, Jan}}
+}
+
+@book{blahova_marie_historicka_2001,
+	address = {Prague},
+	title = {Historická chronologie},
+	publisher = {Libri},
+	author = {{Bláhová, Marie}},
+	year = {2001}
+}
+
+
+### RIS
+
+TY  - BOOK
+TI  - Oppeln/Opole. Die Hauptstadt der Wojewodschaft Oppeln
+AU  - Emmerling, Ryszard
+AU  - Zajaczkowska, Urszula
+CY  - Opole
+DA  - 2003///
+PY  - 2003
+PB  - Schlesischer
+SN  - 978-83-915371-3-8
+ER  - 
+
+TY  - BOOK
+TI  - Opole: monografia miasta
+AU  - Dziewulski, Wladyslaw
+AU  - Hawranek, Franciszek
+CY  - Opole
+DA  - 1975///
+PY  - 1975
+PB  - Instytut Śląski
+ER  - 
+
+TY  - JOUR
+TI  - Oppeln/Opole im 11. und 12. Jahrhundert als Beispiel eines frühstädtischen Zentrums in Oberschlesien
+AU  - Gediga, Bogusław
+T2  - Stadtgeschichte Oberschlesiens: Studien zur städtischen Entwicklung und Kultur einer ostmitteleuropäischen Region vom Mittelalter bis zum Vorabend der Industrialisierung
+DA  - 1995///
+PY  - 1995
+ER  - 
+
+TY  - CHAP
+TI  - Opole/Oppeln, Marburg
+AU  - Hefner, Krystian
+AU  - Kreft, Wolfgang
+T2  - Historisch-topographischer Atlas schlesischer Städte 2
+CY  - Marburg
+DA  - 2011///
+PY  - 2011
+PB  - Herder Institute
+ER  - 
+
+TY  - BOOK
+TI  - Geschichte der Stadt Oppeln
+AU  - Idzikowski, Franz
+CY  - Oppeln
+DA  - 1863///
+PY  - 1863
+UR  - http://books.google.com/books?id=Jt4AAAAAcAAJ
+ER  - 
+
+TY  - BOOK
+TI  - Opole na przestrzeni wieków historiografia wobec nowych metod badania dziejów miasta
+AU  - Linek, Bernhard
+CY  - Opole
+DA  - 2008///
+PY  - 2008
+PB  - Stowarzyszenie Institut Śla̜ski
+SN  - 978-83-7126-241-8 83-7126-241-8
+ER  - 
+
+TY  - BOOK
+TI  - Najstarsze dzieje Opola: tajemnice wydarte ziemi
+AU  - Szafran-Szadkowska, Lucyna
+CY  - Opele
+DA  - 1995///
+PY  - 1995
+PB  - IŚ. Wydaw
+SN  - 8386708069 978838670806
+ER  - 
+
+TY  - BOOK
+TI  - Prosopographische Studien zur Geschichte Oppelns als herzoglicher Residenzstadt im Mittelalter
+AU  - Veldtrup, Dieter
+T2  - Stiftung Haus Oberschlesien
+CY  - Berlin
+DA  - 1995///
+PY  - 1995
+VL  - 7
+PB  - Gebrüder Mann
+ER  - 
+
+TY  - BOOK
+TI  - Počítání času: (základy teorie kalendáře)
+AU  - Tomsa, Jan
+T2  - Scripta astronomica
+CY  - Prague
+M1  - 7
+PB  - KLP
+SN  - 80-85917-11-4 978-80-85917-11-6
+ER  - 
+
+TY  - BOOK
+TI  - Historická chronologie
+AU  - Bláhová, Marie
+CY  - Prague
+DA  - 2001///
+PY  - 2001
+PB  - Libri
+ER  - 
