@@ -33,18 +33,6 @@ An draft of the [proposed data model][11] for EM Places and a set of data model 
 
 **March - June 2018**: Private drafts of the gazetter's design document and data model.
 
-## Upcoming ToDo Items
-- Collect and incorporate community feedback [underway]
-- ~~Fix the main v.1 features of the gazetteer~~; revise documentation
-- ~~Test data model with sample record~~
-- ~~Generate 4-6K core data places from [EMLO][27]~~
-- Prepare webform editor [underway]
-- ~~Collect sample full data records~~
-- ~~Finalize the proposed record detail interface, create interface mockup~~
-- ~~Finalize the proposed search interface, create interface mockup [underway]~~
-- Discuss proposed editorial workflow, create interface mockup [underway]
-- ~~Prepare API, test interconnection with [EM Dates][26]~~
-
 ## Feedback and Comments
 We are keen to get your comments and feedback on EM Places. Please get in touch by contacting Arno Bosse (Digital Project Manager, [Cultures of Knowledge][12]) by email [arno.bosse@history.ox.ac.uk][13] via [@kintopp][14] on Twitter or by creating a new GitHub issue in the repository with your comment/question.
 
@@ -54,7 +42,7 @@ Arno Bosse (Oxford - Project Management), Howard Hotson (Oxford - Director), Gra
 ## Acknowledgements
 We would like to acknowledge the inspiration we drew, and the help we received from several related projects, including the [COST Action 'Reassembling the Republic of Letters'][22], [GeoNames][17], [Das Geschichtliche Orts-Verzeichnis (GOV)][15], the [Getty TGN][16], the [Herder Institute for Historical Research on East Central Europe][20], the [Pelagios Project][8], [WikiData][18], and the [World Historical Gazetteer][19]. Particular thanks are due to [Dariusz Gierczak][23] for providing us with sample historical gazetteer data on Silesia.
 
-EM Places, EM People, and EM Dates are [funded by a grant][2] to the University of Oxford from the Andrew W. Mellon Foundation.
+EM Places, EM People, and EM Dates were [funded 2017-2019 by a grant][2] to the University of Oxford from the Andrew W. Mellon Foundation.
 
 [1]:	culturesofknowledge.org
 [2]:	http://www.culturesofknowledge.org/?p=8455
