@@ -20,6 +20,9 @@ The draft [design documents][10] (display, search, edit) offer an informal descr
 ## Data Model
 An draft of the [proposed data model][11] for EM Places and a set of data model diagrams. More details will be added here as the data model is refined.
 
+## Sample Data
+Historical [sample data][30] from Silesia (c. 1500-1900) including information on administrative, ecclesiastical, judicial and military hierarchies, calendrical transition dates, toponyms, map references, and associated resources.
+
 ## Status
 **June 2019**: Data model complete, sample data created, search/results & record detail interfaces refined; development sprints now underway; first beta scheduled for end of August. 
 
@@ -73,3 +76,4 @@ EM Places, EM People, and EM Dates were [funded 2017-2019 by a grant][2] to the 
 [27]: http://emlo.bodleian.ox.ac.uk
 [28]: https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation
 [29]: https://openrefine.org
+[30]: /data
