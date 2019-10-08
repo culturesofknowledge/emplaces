@@ -1,0 +1,51 @@
+PhD cultural history @IISH: labour migration in early-modern Europe.
+Postdoc @Cambridge: history of population and social structures.
+Compared two migrations systems: English (particularly London) and Dutch (particularly Amsterdam).
+
+ArcGIS mostly.
+
+Can you give some examples of some searches you dit to some historical places. Prize papers. Privateering.
+
+What was the information you had about this place?
+--------------------------------------------------
+
+Where were you born (captured seaman)? Could be extremely specific or general. Usually really specific. They ofte use the English version or a transription of the "sound" in English.
+
+Place name. Many variants. Gazetter built based on that.
+Location. Added from GeoNames and standardized to FGMaps by Lodeweg.
+
+Do you wish you had additional information you couldn't find in GN or other non-historical gazetteers? 
+
+Variants
+Location
+Feature
+
+Non eistent places/uncertain. The most problematic is to make a choice. Historical apopulation size can help disambiguate (usually assign to the biggest place).
+Something like 20% unknown/uncertain on average, depending on the project.
+
+Spatial analysis ArcGIS:
+
+- Heatmaps
+- Buffer analysis (distance to coasts, distance to river, ...)
+
+Spatial distribution/concentration
+
+Other sources. Specific interst in variants that help with the reconciliation process. Dutch historical gazzetteer he cannot remember the name of. Dates are essential.
+
+Maps/cartograms
+---------------
+
+Completely nonsense when people get stressed out about a particular border being drawn precisely. Borders do not really matter that much. Maps more about communication.
+More in general making a map is useful fo storytelling. Borders are ot that important.
+
+========================================================================================================================================================================================================	
+
+Name?
+Location?
+What was the information you needed about this place?
+
+How and where dit you find the answer?
+
+Examples
+Websites?
+How was the answer to your question used in your research or project
