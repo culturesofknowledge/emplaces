@@ -1,6 +1,8 @@
 # EM Places
 Early Modern Places (EM Places) is a collaboratively curated, historical geo-gazetteer for the sixteenth- to eighteenth-century under development by the [Cultures of Knowledge][1] project at Oxford University. It is the first of what will eventually become [three Linked Open Data resources][2] also comprising EM People and [EM Dates][26] built on a [shared humanities infrastructure platform][3] in collaboration with the [Humanities Cluster][5] of the Royal Dutch Academy of Arts and Sciences (KNAW) in Amsterdam. 
 
+You can read an overview of EM Places in the 'Places' chapter of Hotson & Wallnig (eds.) _[Reassembling the Republic of Letters in the Digital Age: Standards, Systems, Scholarship][31]_ (Göttingen, 2019).
+
 ## Goals
 EM Places is being designed to meet four goals: 
 
@@ -77,3 +79,4 @@ EM Places, EM People, and EM Dates were [funded 2017-2019 by a grant][2] to the 
 [28]: https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation
 [29]: https://openrefine.org
 [30]: /data
+[31]: https://www.univerlag.uni-goettingen.de/handle/3/isbn-978-3-86395-403-1?locale-attribute=en
