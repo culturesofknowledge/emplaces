@@ -26,7 +26,7 @@ An draft of the [proposed data model][11] for EM Places and a set of data model 
 Historical [sample data][30] from Silesia (c. 1500-1900) including information on administrative, ecclesiastical, judicial and military hierarchies, calendrical transition dates, toponyms, map references, and associated resources.
 
 ## Status
-**June 2019**: Data model complete, sample data created, search/results & record detail interfaces refined; development sprints now underway; first beta scheduled for end of August. 
+**June 2019**: Data model sufficiently complete for pilot, sample data created, search/results & record detail interfaces refined; development sprints now underway; first beta scheduled for end of August. 
 
 **December 2018**: Second revision of internal tool for creating core metadata for place records from reference gazetteers; created sample dataset from EMLO places; reviewed Timbuctoo infratructure dependancies; defined basic editorial workflows; 
 
